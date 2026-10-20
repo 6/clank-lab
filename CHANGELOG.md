@@ -14,6 +14,7 @@ Zenodo records.
   says that #{k <= N : a(k) > k} is Lean-checked only in the form
   #{k <= N : a(k) > k}/N -> 1, and removes a stale comment about
   native_decide. Tag `ekg-sequence-v3`.
+- Zenodo: [10.5281/zenodo.23493113](https://doi.org/10.5281/zenodo.23493113)
 
 ## ekg-sequence v2 (October 20, 2026)
 

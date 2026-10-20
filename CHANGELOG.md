@@ -8,3 +8,9 @@ Zenodo records.
 
 - First version: the second-order growth of the EKG sequence,
   b(n) = n + n/(3 log n) + o(n/log n). Paper, Lean proof and checks.
+
+## uniform-5-polytopes v1 (October 20, 2026)
+
+- First version: completeness of the known list of convex uniform
+  5-polytopes, conditional on the 3- and 4-dimensional classifications.
+  Paper, Lean formalization and certificate checkers.

@@ -1,0 +1,27 @@
+[
+  {
+    "file": "u2_classes_p6.json.gz",
+    "decompressed_sha256": "ba926f489958405630dbec0dabd6599bdf59a84b075e9bf6e4328766fe1e52a1",
+    "source_manifest_path": "producer-p6/u2_classes_p6.json"
+  },
+  {
+    "file": "u2_classes_p10.json.gz",
+    "decompressed_sha256": "aeed07f721b9eea3e4cde4dd37bfb69163794a50a87ea3a89ba4aae640ddd216",
+    "source_manifest_path": "producer-p10/u2_classes_p10.json"
+  },
+  {
+    "file": "u3_known_p10.json.gz",
+    "decompressed_sha256": "41cd786b2e30fdf732b4dd4ced35c77a1271866b59c42d062abf81d20ed1e904",
+    "source_manifest_path": "producer-p10/u3_known_p10.json"
+  },
+  {
+    "file": "u2_classes_p16.json.gz",
+    "decompressed_sha256": "6455eb063dd179b80361259c7beb757f4f74c31636cac68507ce3099b436f327",
+    "source_manifest_path": "producer-p16/u2_classes_p16.json"
+  },
+  {
+    "file": "u3_known_p16.json.gz",
+    "decompressed_sha256": "2fc862a8495a554e9fb323eab8168177a015119a56ba16d0fc9d10cc5448ac49",
+    "source_manifest_path": "producer-p16/u3_known_p16.json"
+  }
+]

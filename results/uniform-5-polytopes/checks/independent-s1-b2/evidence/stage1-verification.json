@@ -1,0 +1,30 @@
+{
+  "comparison": {
+    "containment_bijection": 7291,
+    "disagreements": 0,
+    "independent_sha256": "0962147eb2146cb1c4bacc8249583762f7faf8364f3f1bbeb1f77d97cb15b978",
+    "recorded_sha256": "c7773fab6fff9110ea94b8c79debf887b3667396503e317ecd8cc54a3c89bc33",
+    "triples": 7291
+  },
+  "corruptions_rejected": [
+    "missing root",
+    "shifted root",
+    "unbounded root",
+    "altered cycle status"
+  ],
+  "full_stage1_replay": {
+    "counts": {
+      "DEGENERATE": 57,
+      "FLAT": 7080,
+      "NO_ROOT": 537,
+      "ROOT": 7291
+    },
+    "cycles": 14965,
+    "elapsed_seconds": 14.239075507000052,
+    "omega_intervals": 7291,
+    "omega_sha256": "0962147eb2146cb1c4bacc8249583762f7faf8364f3f1bbeb1f77d97cb15b978",
+    "undecided": 0,
+    "words": 558
+  },
+  "status": "CERTIFIED"
+}

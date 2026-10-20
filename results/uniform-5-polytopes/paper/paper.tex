@@ -1,0 +1,3104 @@
+% Manuscript source.
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,longtable,array}
+\usepackage{enumitem}
+\usepackage[obeyspaces,spaces,hyphens]{url}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{xcolor}
+\usepackage[no-math]{fontspec}
+\usepackage{fvextra}
+\usepackage{etoolbox}
+\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem*{maintheorem}{Main Theorem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{computation}[theorem]{Certified computation}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\VF}{\mathrm{VF}}
+\newcommand{\aff}{\operatorname{aff}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\relint}{\operatorname{relint}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\ch}{\operatorname{ch}}
+\makeatletter
+% amsart sets the byline in capitals, which would also capitalize the ORCID link.
+\patchcmd{\@setauthors}{\MakeUppercase{\authors}}{\authors}{}{\PackageError{paper}{byline patch failed}{}}
+\g@addto@macro\UrlBreaks{\do\_\do\-\do\,\do\;\do\.\do\=\do\/}
+\makeatother
+\newcommand{\file}[1]{\path{#1}}
+\setlength{\emergencystretch}{3em}
+
+\title{The convex uniform 5-polytopes:\\ a computer-assisted classification}
+\author[P. Graham]{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\hypersetup{pdfauthor={P. Graham},
+  pdftitle={The convex uniform 5-polytopes: a computer-assisted classification}}
+\date{October 19, 2026}
+\thanks{This work is licensed under Apache-2.0; embedded fonts retain their own licences, listed in \file{THIRD_PARTY.md}.}
+
+\begin{document}
+
+\begin{abstract}
+A convex polytope is uniform if its symmetries act transitively on its
+vertices and its facets are uniform, down to regular polygons.
+We give a computer-assisted completeness proof for the known convex
+uniform 5-polytopes: Wythoff constructions of types $A_5$, $B_5$ and $D_5$,
+prisms over convex uniform 4-polytopes, and products of regular polygons
+with convex uniform polyhedra.
+The theorem holds conditional on the cited 3-D and Conway--Guy--Möller
+4-D classifications, the correctness of the written reductions in
+Sections~\ref{sec:prelim}--\ref{sec:caseB}, and the correctness of the
+certificate checkers.
+For faces with at most 16 sides, enumeration covers all possible vertex
+neighbourhoods, identifies 628 known polytopes and rules out one additional
+candidate; a face with at least 17 sides forces a product.
+This extends Möller's method to dimension five and produces no new examples.
+\end{abstract}
+
+\maketitle
+
+\paragraph{AI production.}
+The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction. The automated checks described below have been
+run; no human expert review of the written reductions has taken place.
+
+\paragraph{Scope of verification.}
+This is a computer-assisted classification. The Lean project checks a
+conditional implication and selected geometric lemmas; the complete theorem
+is not formalized in Lean. The computational hypotheses and their connection
+to the certificates remain outside Lean. This work has not been
+expert-reviewed. Section~\ref{sec:verification} gives the replay and
+Section~\ref{sec:lean} states the formalization's scope.
+
+\tableofcontents
+
+%======================================================================
+\section{Introduction}\label{sec:intro}
+%======================================================================
+
+\subsection{Uniform polytopes}
+
+All polytopes are convex. A \emph{polygon} is uniform if it is regular.
+For $d\ge3$, a $d$-polytope $P$ is \emph{uniform} if its symmetry group
+$\Sym(P)$ acts transitively on its vertices and each of its facets is a
+uniform $(d-1)$-polytope. Then every face of $P$ is uniform (faces of
+facets are faces), and all edges have the same length: the edges of a
+uniform polytope have one length by induction on the dimension, two facets
+sharing a ridge share its edges, and the facet graph (facets adjacent
+through ridges) is connected. We always scale to \emph{unit edges}.
+Uniform 3-polytopes are the uniform polyhedra, uniform 4-polytopes are
+also called uniform polychora, and uniform 5-polytopes uniform polytera.
+The Lean predicates \texttt{Uniform5.Composition.Uniform} and
+\texttt{UnitUniform} in
+\file{lean/Uniform5/CompositionGeometry.lean} use this same geometric
+definition and unit-edge normalization.
+
+Notation used throughout:
+\begin{itemize}[leftmargin=2em]
+\item $\{p\}$ is the regular $p$-gon with unit edges, of circumradius
+  $r_p = 1/(2\sin(\pi/p))$; the distance between the two neighbours of a
+  vertex of $\{p\}$ is $\ch_p:= 2\cos(\pi/p)$.
+\item $P_q=\{q\}\times[0,1]$ is the $q$-gonal prism ($P_4$ is the cube) and
+  $A_q$ the $q$-gonal antiprism ($A_3$ is the octahedron), with unit edges.
+  The height of $A_q$ is $h_A(q)$ with
+  $h_A(q)^2 = 1-\frac{1}{4\cos^2(\pi/(2q))}$, and its circumradius is
+  $R_{A_q}$ with $R_{A_q}^2=r_q^2+h_A(q)^2/4$.
+\item For polytopes $X\subset\R^a$, $Y\subset\R^b$ the product
+  $X\times Y\subset\R^{a+b}$ is again a polytope; $\{p\}\times\{q\}$ is a
+  \emph{duoprism}, $K\times\{\}:=K\times[0,1]$ a \emph{prism}. A product of
+  uniform polytopes with unit edges is uniform with unit edges.
+\item $\Sym$, $\Stab$, $\aff$, $\conv$, $\relint$ have their usual
+  meanings; $\VF$ denotes a vertex figure (Section~\ref{sec:prelim}).
+\end{itemize}
+
+\begin{definition}[Wythoffian polytopes {\cite{Wythoff1918,Coxeter1935}}]\label{def:wythoff}
+Let $W$ be a finite irreducible Coxeter group of rank $k$ acting on
+$\R^k$, with simple roots $\alpha_0,\dots,\alpha_{k-1}$ (nodes of the
+Coxeter diagram), and let $\emptyset\ne J\subseteq\{0,\dots,k-1\}$ (the
+\emph{ringed} nodes). Let $x_J$ be the point at distance $1/2$ from the
+mirrors of the ringed nodes and on the mirrors of the others, on the
+positive side of all of them. The \emph{Wythoffian polytope}
+$W_J=\conv(W x_J)$ is uniform with unit edges. We name it by the group and
+the ring pattern, e.g.\ $B_5$ \texttt{00001}; node orders are those of
+Table~\ref{tab:names} in Appendix~\ref{app:names}.
+\end{definition}
+
+The two non-Wythoffian non-prismatic convex uniform 4-polytopes are the
+\emph{snub 24-cell} (the 600-cell minus the vertices of an inscribed
+24-cell) and the \emph{grand antiprism} (the 600-cell minus two great
+decagons in orthogonal planes) \cite{ConwayGuy1965}.
+
+\subsection{The theorem}
+
+This paper presents a completeness statement with explicit computational
+lemmas and reproduction commands. It is a specialist classification
+result about the known five-dimensional list, not a classification in
+arbitrary dimension or a new general method. It is a
+computer-assisted result conditional on the cited 3-D and 4-D
+classifications (Facts~\ref{fact:3d} and~\ref{fact:4d}); the separate Lean
+composition checks an implication from named inputs, with the limits
+stated in Section~\ref{sec:lean}.
+
+\begin{maintheorem}\label{thm:main}
+Assume Facts~\ref{fact:3d} and~\ref{fact:4d}.
+Every convex uniform 5-polytope is congruent, after scaling to unit edges,
+to one of the following:
+\begin{enumerate}[label=\textup{(K\arabic*)},leftmargin=3em]
+\item a Wythoffian polytope $W_J$ of one of the Coxeter groups $A_5$,
+  $B_5$, $D_5$ (19 distinct $A_5$ forms, 31 $B_5$ forms
+  and 8 further $D_5$ forms);
+\item a prism $K\times\{\}$ over a convex uniform 4-polytope $K$;
+  45 Wythoffian bases, plus the snub 24-cell and grand antiprism, give 47
+  prisms, of which 46 are not already in (K1), since the tesseract prism
+  is the 5-cube;
+\item a product $\{p\}\times Q$ of a regular polygon, $p\ge3$, with a
+  convex uniform polyhedron $Q$: a Platonic or Archimedean solid, a prism
+  $P_q$ (giving the \emph{duoprism prisms}
+  $\{p\}\times\{q\}\times\{\}$), or an antiprism $A_q$.
+\end{enumerate}
+\end{maintheorem}
+
+The descriptions overlap (the 5-cube is a $B_5$ Wythoffian, the prism over
+the tesseract and $\{4\}\times$cube; prisms over polyhedral prisms,
+antiprism prisms and duoprisms are of the form (K3)). The theorem asserts
+coverage, not disjointness. Counting the Coxeter--Johnson constructions
+\cite{Coxeter1935,CoxeterRP,Johnson1966} with the four-dimensional bases
+of \cite{Moller2004} gives $19+31+8+(47-1)=104$ in this convention:
+the tesseract prism is counted once as the 5-cube. The older Open Problem
+Garden total of 105 \cite{OPG} has not been reconciled with that convention;
+it is not used by the proof. The proof instead generates every ring pattern
+and product and tests congruence (Section~\ref{sec:known}). Every polytope in (K1)--(K3)
+is convex and uniform, so the theorem is a classification. It is the
+union of two theorems, proved in Sections~\ref{sec:caseA}
+and~\ref{sec:caseB}:
+
+\begin{theorem}[Case A]\label{thm:A}
+Every convex uniform 5-polytope all of whose 2-faces have at most 16 sides
+is congruent to one of the 628 distinct polytopes of the list $\mathcal
+K_{16}$ of Section~\ref{sec:known} (all members of (K1)--(K3) whose
+polygons have at most 16 sides).
+\end{theorem}
+
+\begin{theorem}[Case B]\label{thm:B}
+Every convex uniform 5-polytope with a 2-face of at least 17 sides is
+congruent to $\{n\}\times Q$ with $Q$ a convex uniform polyhedron, or to
+$\{q\}\times A_n$, for integers $n\ge17$ and $q\ge3$.
+\end{theorem}
+
+Both conclusions of Theorem~\ref{thm:B} are of type (K3). So
+Theorems~\ref{thm:A} and~\ref{thm:B} give the Main Theorem.
+
+\subsection{History and status}
+
+Gosset \cite{Gosset1900} enumerated the semiregular polytopes (regular
+facets) in all dimensions; G.~Blind and R.~Blind \cite{Blind1991}
+proved that list complete. Elte's 1912 monograph \cite{Elte1912} is another
+early treatment of higher-dimensional semiregular polytopes. Coxeter developed the Wythoff construction and the theory of
+uniform polytopes \cite{CoxeterRP,CoxeterLHM1954}, and Johnson's thesis
+\cite{Johnson1966} set up the general theory. The convex uniform polyhedra
+are the Platonic and Archimedean solids, prisms and antiprisms; the list of
+all uniform polyhedra, convex or not, was shown complete by Sopov
+\cite{Sopov1970} and Skilling \cite{Skilling1975}. In dimension four Conway and Guy announced in 1965 a
+computer-assisted completeness proof, finding one new non-Wythoffian
+polytope, the grand antiprism \cite{ConwayGuy1965}; a complete account
+of a computer-assisted proof is Möller's thesis
+\cite{Moller2004thesis,Moller2004}: 1000
+edge neighbourhoods, each with a forced circumradius, and 64 vertex
+neighbourhoods, each matched with a known polychoron, with the prism and
+antiprism families treated by hand.
+
+The present proof builds directly on Möller's classification and its
+edge-neighbourhood, forced-radius and vertex-neighbourhood enumeration
+strategy. The published three-dimensional classification supplies the
+possible polyhedral faces, and Conway--Guy and Möller supply the possible
+four-dimensional facets. Coxeter's and Johnson's constructions supply the
+known families whose completeness is at issue here. These foundational
+classifications and constructions are credited inputs; the contribution of
+this paper is the conditional five-dimensional completeness argument and
+its checked computations.
+
+Schulte's 2017 Handbook chapter states that ``a complete list is known
+only for $d=4$'' \cite{Schulte2017}. Winter's Appendix E.3 states:
+``it is unknown whether there exist non-prismatic non-Wythoffian uniform
+polytopes in dimension five or above.'' \cite[p.~167]{Winter2021}
+The Open Problem Garden and community catalogues also record the question
+as open \cite{OPG,PolytopeWiki}. These sources support the status of the
+problem; they are not completeness premises.
+
+Johnson's 1966 thesis \cite{Johnson1966} develops constructions in
+arbitrary dimension, including dimension five; its discussion of known
+enumeration (pp.~226, 291--296) does not establish completeness of the
+convex five-dimensional list.
+Johnson's unpublished 1991 manuscript \cite{Johnson1991} is cited by
+Schulte for the four-dimensional list; its full text is unavailable, so
+no five-dimensional completeness claim is attributed to it here.
+Bowers's and Klitzing's catalogues \cite{Bowers,Klitzing} document known
+examples and nomenclature; Bowers's search includes nonconvex polytera
+and is not presented here as an exhaustive search of convex examples.
+Neither catalogue is a completeness premise, and the construction lists
+used here are generated from Wythoff and Cartesian-product recipes.
+
+\paragraph{Related verification design.}
+The verification design was developed with Càllisto's honeycomb work
+\cite{CallistoUniform} as a known methodological precedent, including its
+division between Lean arguments and external finite certificate checks;
+none of its theorems or certificates is a premise here.
+The geometric enumeration method used here is Möller's.
+
+\subsection{Dependence on the 3- and 4-dimensional classifications}
+\label{sec:inputs}
+
+The proof uses two classifications as cited inputs. They enter only
+through the following two facts.
+
+\begin{fact}[3-D classification {\cite[Section 18.5]{Schulte2017}, \cite{Grunbaum2009}}]\label{fact:3d}
+A convex uniform polyhedron is a Platonic solid, one of the 13
+Archimedean solids, a prism $P_q$ ($q\ge3$) or an antiprism $A_q$
+($q\ge4$). It is determined up to congruence by its vertex configuration
+(the cyclic sequence of polygon sizes around a vertex). In particular a
+convex uniform polyhedron with a $q$-gonal face, $q\notin\{3,4,5,6,8,10\}$,
+is $P_q$ or $A_q$.
+\end{fact}
+
+\begin{fact}[4-D classification {\cite{ConwayGuy1965,Moller2004thesis}}]\label{fact:4d}
+A convex uniform 4-polytope is one of: the Wythoffians of $A_4$, $B_4$,
+$D_4$, $F_4$, $H_4$; the snub 24-cell; the grand antiprism; a prism
+$Q\times\{\}$ over a convex uniform polyhedron $Q$; a duoprism
+$\{p\}\times\{q\}$. In particular a convex uniform 4-polytope with a
+$q$-gonal 2-face, $q\notin\{3,4,5,6,8,10\}$, is a duoprism
+$\{q\}\times\{p\}$ (including $P_q\times\{\}=\{q\}\times\{4\}$) or the
+antiprism prism $A_q\times\{\}$.
+\end{fact}
+
+The vertex-transitivity in our definition matters: the
+pseudo-rhombicuboctahedron (elongated square gyrobicupola) has congruent
+vertex configurations but is not vertex-transitive, and is not uniform
+\cite{Grunbaum2009}. Fact~\ref{fact:4d} is itself computer-assisted. As a
+check of the method, the certified shared pipeline in dimension four
+recovers all 152 known objects at family cutoff 14, including the grand
+antiprism and snub 24-cell (Section~\ref{sec:control}). This bounded positive control is
+not a link of the 5-D proof or a proof of the cited all-parameter 4-D
+classification.
+
+\subsection{Strategy}
+
+Let $P$ be a convex uniform 5-polytope with unit edges and circumradius
+$R$. Section~\ref{sec:prelim} proves the reduction: $P$ is inscribed in a
+sphere; around every 2-face $G$ the facets form a cycle, and $R$ is a root
+of an explicit \emph{closure equation} of that cycle; at a vertex $v$ the
+neighbours of $v$ span the vertex figure $\VF$, a 4-polytope inscribed in
+a 3-sphere whose facets are the vertex figures of the facets of $P$ at
+$v$; two distinct vertices are at least one edge apart (the separation
+lemma), which lets interval enclosures decide vertex identity when they
+are narrow enough (and report it as undecided otherwise);
+and the star of one vertex, if it forces the stars of its neighbours,
+forces $P$.
+
+\emph{Case A} (Section~\ref{sec:caseA}): all polygons have at most 16
+sides. Then every facet belongs to a finite library of 181 congruence
+classes of uniform 4-polytopes. Stage~1 enumerates every cycle of library
+facets around a polygon and certifies all roots of its closure equation
+(14,965 cycles); radii that can occur together form 563 \emph{radius
+classes} after a combinatorial filter. Stage~2 enumerates candidate
+signatures covering every actual vertex figure in each class (629 in
+total). Stage~3 covers every actual star by retained encodings, certifies
+the scalar-root assertion, and proves identification and forcing
+conditional on realization. For 628 encodings, any represented actual
+star is identified with that of a separately constructed known polytope
+$Q$ and forces $P\cong Q$. The one extra candidate is excluded from every
+convex uniform polytope by a development that gets stuck; no exact local
+realization of that candidate is asserted.
+
+Here \textbf{181 counts four-dimensional facet types}, not
+five-dimensional polytopes. At the same polygon cutoff the known 5-D
+list has 890 names representing 628 congruence classes
+(Section~\ref{sec:known}); without the cutoff it includes infinite
+families. The facet library is checked by exact construction and incidence
+checks and by a separate rebuild in \file{checks/independent-s1-b2/}
+(Computation~\ref{comp:link}). Neither rebuild proves Möller's
+classification anew.
+
+\emph{Case B} (Section~\ref{sec:caseB}): some polygon $F$ has $n\ge17$
+sides. Around $F$ only three cycle types are possible, each forcing $R$ by
+a formula in $n$ and finitely many parameters. A certified computation
+(B2) shows that this $R$ is never a root of any Case-A cycle, so every
+polygon at a vertex lies in a facet containing a large polygon. A written
+structural argument, with two more certified computations ((P1) and (W)),
+then forces $P$ to be a product.
+
+\paragraph{Why the cutoff is 16/17.}\label{par:cutoff}
+Seventeen is a sufficient, not an optimal, threshold: it exceeds every
+exceptional polygon size in the lower-dimensional classifications and
+satisfies $2\sin(2\pi/17)<1$ (Lemma~\ref{lem:long}). The B2, P1 and W
+certificates cover the entire remaining range. The small-face radius cover
+has $\max\Omega=63.2195709614\ldots$; it includes closure roots that need
+not extend to any polytope, so this is not the largest radius of a known
+polytope with at most 16-sided faces. B2 checks $17\le n\le397$ and the
+corresponding auxiliary parameters, then uses
+$r_{398}>63.344>\max\Omega$ and monotonicity for the tails
+(Section~\ref{sec:radii}).
+
+The computations state the finite or interval claims they check and the
+written arguments needed to interpret them. Section~\ref{sec:computations}
+records shared dependencies; Section~\ref{sec:lean} states the formal scope.
+
+\paragraph{What independence means here.}
+Separate implementations share mathematical constructions, some input lists,
+model certificates and arithmetic libraries. The exact-exclusion checks
+also share the stage-1 construction code. P1's sampled tails are non-proof
+checks; its proof uses written angle, chord and monotonicity arguments.
+Section~\ref{sec:computations} specifies these dependencies.
+
+\paragraph{Why this does not yet classify dimension six.}
+In dimension six, the facets would be the five-dimensional families proved
+complete here, but completeness of that input list alone does not supply a
+finite search. The codimension-three faces are now polyhedra rather than
+polygons; their neighbourhoods require new incidence and metric data, and
+the five-dimensional vertex figures make assembly and forcing larger.
+Most importantly, the large-polygon fan argument of Case B does not classify
+all unbounded families in dimension six. A new parameter reduction and
+certified bounds would be needed before a finite replay could prove
+completeness there.
+
+%======================================================================
+\section{The reduction}\label{sec:prelim}
+%======================================================================
+
+Throughout this section $P$ is a convex uniform $d$-polytope with unit
+edges, $d\ge3$ (we use $d=5$ from Section~\ref{sec:closure} on), with
+vertex set $V$.
+
+\subsection{Inscribed sphere and face centres}
+
+\begin{lemma}\label{lem:sphere}
+Let $c$ be the centroid of $V$. Then all vertices lie on the sphere of some
+radius $R$ about $c$, and $c$ lies in the interior of $P$. For every face
+$\Phi$ of $P$ the orthogonal projection $o_\Phi$ of $c$ onto $\aff\Phi$ is
+the circumcentre of $\Phi$, and lies in the relative interior of $\Phi$.
+If $\Phi$ has circumradius $R_\Phi$, then
+$|c-o_\Phi|=\sqrt{R^2-R_\Phi^2}$.
+\end{lemma}
+
+\begin{proof}
+Every symmetry permutes $V$ and so fixes $c$; by vertex-transitivity all
+vertices are equidistant from $c$. The centroid of the vertices of a
+full-dimensional polytope is an interior point. The vertices of $\Phi$ lie
+on the intersection of the sphere with $\aff\Phi$, a sphere in $\aff\Phi$
+about $o_\Phi$; they affinely span $\aff\Phi$, so $o_\Phi$ is the unique
+circumcentre of $\Phi$. Since $\Phi$ is uniform, applying the first part to
+$\Phi$ shows that its circumcentre is its vertex centroid, which is
+relatively interior. The last formula is Pythagoras.
+\end{proof}
+
+\subsection{The separation lemma}
+
+\begin{lemma}[Separation lemma]\label{lem:sep}
+Let $X$ be a convex polytope inscribed in a sphere, with at least three
+vertices, let $v$ be a vertex and $w$ a vertex nearest to $v$ among the
+other vertices. Then $[v,w]$ is an edge of $X$. Consequently, in a convex
+uniform polytope with unit edges any two distinct vertices are at distance
+at least $1$.
+\end{lemma}
+
+\begin{proof}
+Let $B$ be the closed ball with diameter $[v,w]$, centre $m$ and radius
+$\rho=|v-w|/2$. If a vertex $x\notin\{v,w\}$ lay in $B$, the angle
+$\angle vxw$ would be at least $90^\circ$, so
+$|v-w|^2\ge|v-x|^2+|x-w|^2>|v-x|^2$, contradicting the choice of $w$. Let
+$S$ be the circumsphere, with centre $c$ and radius $R$, and consider the
+difference of powers
+$f(x)=(|x-m|^2-\rho^2)-(|x-c|^2-R^2)$, an affine function. It vanishes at
+$v$ and $w$, and at every other vertex $x$ we have $|x-c|=R$ and
+$|x-m|>\rho$, so $f(x)>0$. In particular $f$ is not constant, so
+$H=\{f=0\}$ is a hyperplane, $X\subseteq\{f\ge0\}$, and $X\cap H$ is the
+face $\conv\{v,w\}$. So $[v,w]$ is an edge. If all edges have length 1,
+the nearest other vertex of any vertex is at distance 1, so all distances
+between distinct vertices are at least 1.
+\end{proof}
+
+\begin{corollary}[Decision rule]\label{cor:decide}
+Let $x,y$ be two vertices of one convex uniform polytope with unit edges
+(possibly hypothetical), and let $[\ell,u]$ be a rigorous enclosure of
+$|x-y|^2$. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item if $\ell\le0$ and $u<1$, then $x=y$;
+\item if $0<\ell$ and $u<1$, we have a contradiction (the configuration
+  does not occur);
+\item if $0<\ell$ (and $u\ge1$), then $x\ne y$;
+\item if $\ell\le0$ and $u\ge1$, nothing is concluded: $x=y$ and $x\ne y$
+  both remain possible.
+\end{enumerate}
+\end{corollary}
+
+Case (d) is \emph{undecided}. A search that meets it must either refine
+the enclosure, keep both possibilities, or stop and report the branch as
+open; treating the two points as distinct (or as equal) would not be
+conservative. Every search used by the proof
+handles (d) as undecided, and the full replays recorded below met it
+zero times (Sections~\ref{sec:S2}, \ref{sec:U2} and~\ref{sec:U3}):
+\texttt{cert\_vf.py} (\texttt{identify}) raises \texttt{Undecided}, counts
+it, and refuses to return a complete class; \texttt{check\_u2} raises
+\texttt{PrecisionError} and exits nonzero; \file{checks/check_u3} uses the
+stricter equality bound $u<1/4$ and turns undecided cases into \texttt{OPEN},
+never into a refutation.
+
+\subsection{Vertex figures}
+
+\begin{lemma}\label{lem:vf}
+Let $P$ be a convex uniform $d$-polytope with unit edges and circumradius
+$R$, centred at $0$, and $v$ a vertex. The neighbours of $v$ (the other
+ends of the edges at $v$) are exactly the vertices at distance $1$ from
+$v$. They lie on the hyperplane $H=\{x: x\cdot v=R^2-\tfrac12\}$, every other
+vertex except $v$ lies strictly on the side $x\cdot v<R^2-\frac12$, and
+$\VF:=H\cap P=\conv(\text{neighbours of }v)$ is a $(d-1)$-polytope
+inscribed in a sphere of radius $r=\sqrt{1-1/(4R^2)}$ about
+$o_{\VF}=(1-\frac{1}{2R^2})v$. The faces of $\VF$ correspond to the faces
+of $P$ containing $v$ (a $j$-face $\Phi\ni v$ gives the $(j-1)$-face
+$H\cap\Phi$). For a facet $K\ni v$ of circumradius $R_K$, $\VF(K):=H\cap K$
+is inscribed in a sphere of radius $r_K=\sqrt{1-1/(4R_K^2)}$ in a
+hyperplane of $H$ at distance $\sqrt{r^2-r_K^2}$ from $o_{\VF}$. An edge of
+$\VF$ coming from a $p$-gon has length $\ch_p=2\cos(\pi/p)$. The point
+$o_{\VF}$ lies in the relative interior of $\VF$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:sep} the vertices at distance 1 from $v$ are neighbours,
+and conversely neighbours are at distance 1. For a vertex $x$,
+$|x-v|^2=2R^2-2x\cdot v$, so $|x-v|=1$ iff $x\cdot v=R^2-\frac12$, and
+$|x-v|>1$ (every other vertex $\ne v$) iff $x\cdot v<R^2-\frac12$. Hence $H$
+separates $v$ from all non-neighbours, and $H\cap P$ is the convex hull of
+the neighbours; this is the standard vertex figure, whose face lattice is
+that of the faces through $v$. A neighbour $x$ makes an angle $\theta$
+with $v$ at the centre with $2R\sin(\theta/2)=1$, so its distance from
+the axis $\R v$ is $R\sin\theta=\cos(\theta/2)=\sqrt{1-1/(4R^2)}$. The
+same computation inside $K$ gives $r_K$; the circumcentre of $\VF(K)$ is
+the projection of $o_{\VF}$, which gives the distance. In a regular
+$p$-gon the two neighbours of a vertex are $\ch_p$ apart. Finally, write
+$o_{\VF}=t_0v$ with $t_0=1-1/(2R^2)$. Since $0$ is the centroid of the $N$
+vertices, $q:=-v/(N-1)$ is the centroid of the vertices other than $v$, so
+$q\in P$, and $q\cdot v\le R^2-\frac12$, since every other vertex $x$ has
+$x\cdot v\le R^2-\frac12$, with equality exactly for the neighbours. If some
+vertex other than $v$ is not a neighbour, the inequality is strict, i.e.\
+$-1/(N-1)<t_0$; also $t_0<1$. Then $o_{\VF}$ lies on the open segment from
+$q$ to $v$, which passes through the interior point $0$; every point of
+this open segment is interior to $P$ (it lies strictly between the
+interior point $0$ and a point of $P$, or is $0$). Hence $o_{\VF}$ is an
+interior point of $P$ lying in $H$, i.e.\ a relative interior point of
+$\VF=H\cap P$. If every vertex other than $v$ is a neighbour (as in the
+5-simplex), then $\VF$ is the convex hull of all other vertices, $t_0=-1/(N-1)$
+and $o_{\VF}=q$ is the centroid of the vertices of $\VF$, which is a
+relative interior point of $\VF$.
+\end{proof}
+
+\begin{remark}
+The centre of the vertex figure need not lie on the segment from $v$
+to the centre of $P$: when $R<1/\sqrt2$, $t_0<0$; for the 5-simplex,
+$R^2=5/12$ and $t_0=-1/5$. The centroid argument above handles both
+cases, including 4-simplex facets when applied in Lemma~\ref{lem:D}.
+\end{remark}
+
+\subsection{Cycles around a polygon and the closure equation}
+\label{sec:closure}
+
+From now on $d=5$. Let $G$ be a 2-face of $P$, a $p$-gon with circumcentre
+$o_G$ and circumradius $\rho=r_p$, and let $N$ be the 3-dimensional
+orthogonal complement of the direction space of $\aff G$. The faces of $P$
+containing $G$ are cells (3-faces) and facets; modulo $\aff G$ the tangent
+cone of $P$ at $G$ is a pointed polyhedral 3-cone in $N$, whose extreme
+rays correspond to the cells $C\supset G$ and whose 2-faces correspond to
+the facets $K\supset G$. Going around the cone gives a cyclic sequence
+$(K_1,C_1,K_2,C_2,\dots,K_k,C_k)$, $k\ge3$, where facet $K_i$ contains the
+cells $C_{i-1}$ and $C_i$ (indices mod $k$). Let $u_C\in N$ be the unit
+vector of the ray of $C$ and $\alpha_i$ the dihedral angle of the
+4-polytope $K_i$ at its 2-face $G$, between the cells $C_{i-1}$ and $C_i$;
+this is the angle between $u_{C_{i-1}}$ and $u_{C_i}$. We call
+$(p;K_1,C_1,\dots,K_k,C_k)$ the \emph{cycle} of $G$; cycles are taken up to
+rotation and reversal.
+
+\begin{lemma}[Closure equation]\label{lem:closure}
+With this notation, let $w=c-o_G\in N$, $h=|w|=\sqrt{R^2-\rho^2}$, and for
+each cell $C\supset G$ of circumradius $R_C$ let
+$d_C=\sqrt{R_C^2-\rho^2}>0$. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\sum_i\alpha_i<2\pi$;
+\item $w\cdot u_C=d_C$, so the angle $\delta_C$ between $w$ and $u_C$
+  satisfies $\cos\delta_C=d_C/h$;
+\item $w$ lies strictly inside the cone spanned by the $u_C$, and with
+  $\theta_i\in(0,\pi)$ the angle at $\hat w=w/h$ of the spherical triangle
+  $(\hat w,u_{C_{i-1}},u_{C_i})$,
+  \[
+  \cos\theta_i=\frac{\cos\alpha_i-\cos\delta_{C_{i-1}}\cos\delta_{C_i}}
+  {\sin\delta_{C_{i-1}}\sin\delta_{C_i}},\qquad
+  \sum_{i=1}^k\theta_i=2\pi;
+  \]
+\item $R>R_{K}$ for every facet $K\supset G$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) The intersection of a pointed polyhedral 3-cone with the unit sphere
+is a convex spherical polygon in an open hemisphere, whose side lengths
+are the face angles $\alpha_i$; its perimeter is less than $2\pi$.
+(b) By Lemma~\ref{lem:sphere} applied to $C$, $o_C$ is the projection of
+$c$ on $\aff C$ and $o_G$ the projection of $o_C$ on $\aff G$; so
+$o_C-o_G\in N$ points along the ray of $C$ (as $o_C\in\relint C$), has
+length $d_C>0$, and $w-(o_C-o_G)$ is orthogonal to $\aff C$, hence to
+$u_C$. (c) The tangent cone of $P$ at $G$ is the sum of the direction
+space of $\aff G$ and a pointed cone $T_N\subset N$, and the interior of
+$P$ lies in $o_G$ plus its interior; since $c$ is interior and $w=c-o_G\in
+N$, $w$ lies in the interior of $T_N$, the cone spanned by the $u_C$. The triangles $(\hat w,u_{C_{i-1}},u_{C_i})$ are then
+non-degenerate, their angles at $\hat w$ fill the full angle around
+$\hat w$, and the formula is the spherical law of cosines for the side
+$\alpha_i$ opposite $\hat w$. (d) $|c-o_K|=\sqrt{R^2-R_K^2}$ is the
+distance from the interior point $c$ to the hyperplane of $K$, which is
+positive.
+\end{proof}
+
+In the variable $s=1/R$ the cosines become
+$\cos\delta_C(s)=d_C\,s/\sqrt{1-\rho^2s^2}$, increasing in $s$, and the
+\emph{closure function} of the cycle is
+\[
+g(s)=\sum_{i=1}^k\theta_i(s)-2\pi,\qquad 0\le s\le 1/R_{\max},
+\]
+where $R_{\max}=\max_iR_{K_i}$ and $s=0$ stands for $R=\infty$.
+\begin{remark}\label{rem:clip}
+On this domain $\delta_{C_{i-1}}+\delta_{C_i}\ge\alpha_i$, so the argument
+of the arccosine is at least $-1$: at $s=1/R_{K_i}$ the point $\hat w$ is
+the direction of $o_{K_i}-o_G$, which lies on the arc from $u_{C_{i-1}}$
+to $u_{C_i}$ (equality), and the $\delta$'s decrease in $s$. If instead
+$|\delta_{C_{i-1}}-\delta_{C_i}|>\alpha_i$ the triangle does not exist; on
+such $s$ the configuration is impossible. The implementations clip the
+lower end at $-1$ (sound by this remark) and discard boxes on which a
+triangle is certified impossible.
+\end{remark}
+
+\paragraph{Why the closure equation is not an identity.}
+For an admissible cycle, $\theta_i(0)=\alpha_i$ and hence
+$g(0)=\sum_i\alpha_i-2\pi<0$ by Lemma~\ref{lem:closure}(a).
+Thus the closure equation cannot hold identically on its radius domain.
+For the finite library we have the stronger, checked monotonicity that
+also rules out an accumulation of roots at an endpoint. Put
+$a=d_A^2$, $b=d_B^2$, $D=R_K^2-\rho^2$ and $c=\cos\alpha$ for a word,
+and let $u=1/(R^2-\rho^2)$. Its closure-angle cosine is
+\[
+ f(u)=\frac{c-\sqrt{ab}\,u}{\sqrt{(1-au)(1-bu)}}.
+\]
+Since $D>a,b>0$, the sign of $f'(u)$ on $[0,1/D]$ is the sign of
+\[
+ -\sqrt{ab}+\tfrac12c(a+b)
+ +u\bigl(\tfrac12\sqrt{ab}(a+b)-cab\bigr).
+\]
+This is affine in $u$. The independent stage-1 certificate checks strict
+negativity at both endpoints for all 558 library words; hence every
+closure angle, and their sum, increases strictly in $u$ on the
+nondegenerate domain. Each Case-A cycle has at most one admissible finite
+root (Computation~\ref{comp:S1}). A flat cycle has $g(0)=0$ but its
+closure function is still not identically zero: the same strict
+monotonicity makes the closure sum exceed $2\pi$ for $u>0$. Flat cycles are excluded in any
+event by convexity. For Case B, Section~\ref{sec:radii} gives the explicit
+radius formulas and finite root equations. The finite-radius conclusion
+therefore uses more than an appeal to analyticity alone.
+
+Two kinds of cycles satisfy the closure equation only
+spuriously and are excluded exactly:
+
+\begin{lemma}[Exact exclusions]\label{lem:exclusions}
+\textup{(Flat.)} A cycle with $\sum\alpha_i=2\pi$ exactly is not the cycle
+of a 2-face of a convex 5-polytope. \textup{(Degenerate.)} A root at
+$R=R_{\max}$ exactly does not give a convex uniform polytope.
+\end{lemma}
+\begin{proof}
+Lemma~\ref{lem:closure}(a) and (d).
+\end{proof}
+
+For a flat cycle, $g(0)=0$, the formal infinite-radius limit.
+Degenerate roots put the centre on a facet hyperplane. Interval
+arithmetic cannot certify these equalities; they are proved exactly
+(Computations~\ref{comp:S1} and~\ref{comp:exact}). A local angle-sum identity alone does not give a global honeycomb.
+
+\subsection{Faces, simple vertices}
+
+\begin{lemma}[Face lemma]\label{lem:face}
+Let $X$ be a polytope, $\Phi$ a face of $X$ and $p,q$ vertices of
+$\Phi$. If $[p,q]$ is an edge of $X$, it is an edge of $\Phi$. Conversely
+every edge of $\Phi$ is an edge of $X$.
+\end{lemma}
+\begin{proof}
+$[p,q]\subseteq\Phi$ by convexity, and $[p,q]=[p,q]\cap\Phi$ is an
+intersection of two faces of $X$, hence a face of $X$ contained in
+$\Phi$, hence a face of $\Phi$. The converse holds because a face of a
+face is a face.
+\end{proof}
+
+\begin{lemma}[Simple vertices]\label{lem:simple}
+A vertex $x$ of degree 4 in a 4-polytope is simple: each facet containing
+$x$ contains exactly three of the four edges at $x$, and each 3-subset of
+the edges at $x$ is the set of edges at $x$ of exactly one facet.
+\end{lemma}
+\begin{proof}
+The vertex figure of $x$ is a 3-polytope with four vertices, a
+tetrahedron; its facets (all four triangles) correspond to the facets
+through $x$.
+\end{proof}
+
+\subsection{Stars and local uniqueness}
+
+The \emph{star} of a vertex $v$ is the set of facets of $P$ containing
+$v$, each with its full vertex set.
+
+\begin{lemma}[Local uniqueness gives global uniqueness]\label{lem:induction}
+Let $S$ be the star of $v_0$ in some convex uniform 5-polytope, and
+suppose: for every convex uniform 5-polytope $P$ with star $S$ at $v_0$
+and every neighbour $w$ of $v_0$, the star of $P$ at $w$ is one and the
+same set $\Sigma_w$, independent of $P$. Then any two convex uniform
+5-polytopes $P_1$, $P_2$ with star $S$ at $v_0$ are equal.
+\end{lemma}
+\begin{proof}
+We show by induction on the edge distance from $v_0$ that $P_1$ and $P_2$
+have the same vertices and the same stars there. Suppose $P_1$ and $P_2$
+have the same star $\Sigma$ at a vertex $w$. By vertex-transitivity of
+$P_1$ there is an isometry $g_1$ with $g_1(v_0)=w$ and $g_1(S)=\Sigma$.
+Then $g_1^{-1}(P_1)$ and $g_1^{-1}(P_2)$ are convex uniform 5-polytopes
+with star $S$ at $v_0$; by hypothesis they have the same star at every
+neighbour $u'$ of $v_0$. Applying $g_1$, $P_1$ and $P_2$ have the same
+star at every neighbour $u=g_1(u')$ of $w$ (the neighbours of $w$ are
+read off the common star $\Sigma$). The edge graph of a polytope is
+connected (Balinski \cite{Balinski1961}), and a polytope is the convex
+hull of its vertices, so $P_1=P_2$.
+\end{proof}
+
+The induction is written out here because a symmetry of $P_1$ mapping
+$v_0$ to $w$ need not be a symmetry of $P_2$; the hypothesis is applied to
+$g_1^{-1}(P_i)$, not to $P_i$.
+
+\subsection{The case split}
+
+A 2-face is \emph{large} if it has at least 17 sides. \emph{Case A}: $P$
+has no large 2-face. \emph{Case B}: $P$ has a large 2-face. The cases are
+disjoint and exhaustive. Polygon sizes $7,9,11,\dots,16$ (which occur only
+in prisms, antiprisms and duoprisms) belong to Case A, together with the
+sizes $3,4,5,6,8,10$ of the non-prismatic polyhedra and 4-polytopes.
+
+%======================================================================
+\section{The finite library and the known list}\label{sec:known}
+%======================================================================
+
+\subsection{The facet library}\label{sec:library}
+
+For $3\le P\le16$ let $\mathcal L_P$ be the following list of names of convex
+uniform 4-polytopes all of whose 2-faces have at most $P$ sides. For
+$P=16$ it has 214 names:
+\begin{itemize}[leftmargin=2em]
+\item the Wythoffians \texttt{A4}$abcd$, \texttt{B4}$abcd$, \texttt{D4}$abcd$,
+  \texttt{F4}$abcd$, \texttt{H4}$abcd$ ($abcd\in\{0,1\}^4\setminus\{0000\}$;
+  75 names; their 2-faces have at most 10 sides);
+\item \texttt{sadi} (snub 24-cell) and \texttt{gap} (grand antiprism);
+\item \texttt{pr-}$X$, the prism over $X$, for the 18 Platonic and
+  Archimedean solids $X$;
+\item \texttt{antiprism-prism-}$n=A_n\times\{\}$, $3\le n\le16$ (14 names);
+\item \texttt{duoprism-}$p$\texttt{-}$q=\{p\}\times\{q\}$, $3\le p\le q\le16$
+  (105 names; the prisms $P_q\times\{\}$ are \texttt{duoprism-4-}$q$).
+\end{itemize}
+Names, diagrams and cell labels are listed in Appendix~\ref{app:names}.
+For smaller $P$, the definition of $\mathcal L_P$ retains exactly the names
+in this list whose every 2-face has at most $P$ sides.
+
+\paragraph{The small control.}\label{sec:control-library}
+The $P=6$ quick control $\mathcal H_6$ retains fixed 8- and 10-gon facets
+and has 136 classes rather than the literal cutoff's 129, whereas
+$\mathcal H_{10}=\mathcal L_{10}$ and $\mathcal H_{16}=\mathcal L_{16}$;
+we write $P_{\mathrm{ctl}}$ for its family-parameter bound.
+
+\begin{lemma}[Library completeness]\label{lem:A7}
+Every convex uniform 4-polytope all of whose 2-faces have at most 16
+sides is congruent to the polytope of some name in $\mathcal L_{16}$.
+\end{lemma}
+\begin{proof}
+Fact~\ref{fact:4d}: the Wythoffians and the two snub-type polytopes have
+only 3-, 4-, 5-, 6-, 8- and 10-gons; the prisms over polyhedra $X$ with at
+most 16-gonal faces are the \texttt{pr-}$X$, the duoprisms
+\texttt{duoprism-4-}$q$ and the antiprism prisms (Fact~\ref{fact:3d}); and
+the duoprisms are listed for $p,q\le16$.
+\end{proof}
+
+Several names denote congruent polytopes (e.g.\ \texttt{A40001} and
+\texttt{A41000} are both the 5-cell, and \texttt{B40001}, \texttt{pr-cube}
+and \texttt{duoprism-4-4} are the tesseract). The enumeration keeps one
+\emph{canonical} name per congruence class: 181 classes, with 33 aliases
+(Table~\ref{tab:aliases}). The canonical types are 45 Wythoffians, the two
+snub-type polytopes, 17 polyhedral prisms, 13 antiprism prisms and 104
+duoprisms. A wrong merge would silently drop a facet type, so the merges
+are proved exactly.
+
+\begin{computation}[MERGE: exact congruence of the 33 aliases]\label{comp:merge}
+Each of the 33 aliases is congruent to its canonical name.
+\end{computation}
+
+\noindent\emph{What is checked.} \texttt{merge.py} builds both
+vertex sets exactly in $\Q(\sqrt2,\sqrt3)$ (elements stored as four
+rationals in the basis $1,\sqrt2,\sqrt3,\sqrt6$): Wythoffians from explicit
+simple roots, first checked exactly against the Coxeter diagram; the point
+$x_J$ by an exact rational Gram solve, rechecked; the orbit by exact
+breadth-first search; the products in closed form. A floating-point
+search proposes a bijection; it is accepted only if the vertex counts
+agree and every pairwise squared distance is preserved exactly. By
+polarisation the image vectors then have the same Gram matrix, so the
+bijection extends to an affine isometry of the affine hulls. The program
+also checks that its alias list equals the alias list of the shared facet
+file \file{checks/check_u1/inputs/u1_facets_p16.json} (option \texttt{--facets}).
+Result: 33/33 congruences proved; four corruptions rejected (two false
+pairs, one vertex moved by $10^{-12}$, two images swapped).
+\emph{Second implementation.} \file{checks/independent-merge-filter/} independently derives the Wythoff and product coordinates in
+$\Q(\sqrt2,\sqrt3)$ and certifies all 33 aliases by vertex bijections
+preserving 465,206 unordered squared distances. A separate affine checker
+agrees; both reject seven semantic corruptions. The alias list is a
+shared input; the later library reconstructions still take it as input.
+\subsection{Facet data}\label{sec:facetdata}
+
+For every library type $K$ the computations need: its circumradius $R_K$;
+for each orbit of 2-faces under $\Sym(K)$, the polygon size $p$, the two
+cells at the polygon and the dihedral angle $\alpha$ between them; and the
+\emph{model} of $K$: a base vertex $K[0]$, its neighbours $K[1],\dots$ (the
+vertex figure $X_K$), its full vertex set, and the list of 2-faces of
+$X_K$ (the cells at $K[0]$) with their cyclic orders and cell labels. Every
+polygon orbit has a member through $K[0]$ by vertex-transitivity, so all
+of this is local data at one vertex.
+
+\begin{computation}[LIB: facet data]\label{comp:lib}
+For each of the 181 canonical types, the circumradius and the dihedral
+angles of all polygon orbits are enclosed in balls, and the model is
+constructed with all coordinates enclosed in balls.
+\end{computation}
+
+\noindent\emph{What is computed.} \texttt{cert\_facets4.py},
+\texttt{cert\_star.py}, \texttt{cert\_full.py} (python-flint/Arb,
+200 bits): Wythoffians from rigorous Wythoff coordinates
+(\texttt{cert\_wythoff.py}); prisms and antiprism prisms from the
+vertex-configuration data of the polyhedra (\texttt{cert\_poly3.py},
+below); duoprisms in closed form; the snub 24-cell and the grand
+antiprism from exact $\Q(\sqrt5)$ coordinates of the 600-cell; full
+vertex sets as orbits under exact reflections or (for the snub cube and
+snub dodecahedron) under their rotation groups, moved into the model
+frame by isometries verified on balls. \texttt{cert\_poly3.py} computes a
+uniform polyhedron's circumradius and edge angles from its vertex
+configuration alone: the neighbours of a vertex lie on a circle, the
+central angles of the chords $\ch_{q_i}$ sum to $2\pi$, and the unique
+solution is enclosed. Exact values: \texttt{exact\_angles.py} computes
+$\cos\alpha$ exactly for every non-snub facet angle ($\cos^2\alpha$ lies
+in $\Q(\sqrt d)$, $d\in\{1,2,5\}$, computed in the root basis; exact
+$\Q(\sqrt5)$ coordinates for \texttt{sadi} and \texttt{gap}; closed forms
+for products), and all agree with the balls.
+
+The following certificate supplies a certified correspondence from cells
+and labels to every polygon-orbit and angle entry used by stage 1,
+including the word-angle property.
+
+\begin{lemma}[A word determines its angle]\label{lem:wordangle}
+Let $G$ be a $p$-gon of a uniform 4-polytope $K$ (circumradius $R_K$),
+between cells $A$, $B$ of circumradii $R_A$, $R_B$, and let $\rho=r_p$.
+Then the dihedral angle of $K$ at $G$ is
+\[
+\alpha=\arccos\sqrt{\frac{R_A^2-\rho^2}{R_K^2-\rho^2}}
+      +\arccos\sqrt{\frac{R_B^2-\rho^2}{R_K^2-\rho^2}} .
+\]
+In particular the word $(K,p,A,B)$ determines $\alpha$, even when its
+polygon occurrences lie in different orbits of $\Sym(K)$.
+\end{lemma}
+\begin{proof}
+In the plane through the centre $f$ of $G$ perpendicular to $G$, the two
+cells give rays $u_A,u_B$ bounding a convex wedge of angle $\alpha$, and
+the centre $O$ of $K$ projects strictly inside it (Lemma~\ref{lem:sphere}
+applied to $K$, and Lemma~\ref{lem:closure}(b),(c) one dimension down).
+With $D=|O-f|^2=R_K^2-\rho^2$ we have $(O-f)\cdot u_A=\sqrt{R_A^2-\rho^2}>0$
+and likewise for $B$, since the projection of $O$ on each cell is its
+relatively interior circumcentre. The direction of $O-f$ lies between the
+rays, so the two angles to it add to $\alpha$.
+\end{proof}
+
+\begin{computation}[LINK: certified stage-1 input]\label{comp:link}
+For each of the 181 canonical types (assuming the construction properties
+of Section~\ref{sec:models}), the list of polygon occurrences at the base
+vertex, with their two cells and labels, is complete and correct (1,277
+occurrences, 558 distinct words $(K,p,A,B)$); the exported circumradius
+encloses $R_K$ and each exported angle encloses the angle of
+Lemma~\ref{lem:wordangle}. Every radius and angle entry of the
+stage-1 input tables at $P_{\mathrm{ctl}}=6$, 10 and 16 contains these rigorous
+enclosures, and each table lists exactly the words of its corresponding
+control library $\mathcal H_P$.
+\end{computation}
+
+\noindent\emph{What is checked}.
+Wythoff neighbours are generated in exact $\Q$, $\Q(\sqrt2)$ or
+$\Q(\sqrt5)$ coordinates; \texttt{sadi} and \texttt{gap} from all 120
+vertices of the 600-cell in exact $\Q(\sqrt5)$ arithmetic; prisms,
+antiprism prisms and duoprisms from their exact product identities (which
+replace the small-value zero tests that \file{checks/check_u1} uses for these
+types). Floating-point hulls only propose faces; every face then passes
+the ridge certificate (Computation~\ref{comp:ridges}: exact coplanarity or
+the product identity, strict supporting signs, strict cyclic order, chord
+labels, two faces per edge), and closure of the face graph proves the
+list complete. Two separately written link checkers (one reading
+adjacency from the sides of the certified faces, one from pairwise face
+intersections and an independent dihedral computation) accept every
+occurrence and each rejects 15 semantic corruptions. The input-table
+containment check (\texttt{compare\_legacy.py}, both checkers)
+passes at $P_{\mathrm{ctl}}=6$ (76 radii, 243 words, 627 occurrences), 10
+(106/333/815) and 16 (181/558/1,277), each rejecting six further
+corruptions; the 558 words are also exactly those used by the independent
+stage-1 checker's cycle file. \emph{Second implementation.} The independent library of
+\file{checks/independent-s1-b2/} (Section~\ref{sec:indep}), written from this
+paper's statements,
+reconstructs the 181 canonical types by exact parabolic Coxeter
+combinatorics, exact supporting planes for \texttt{sadi} and \texttt{gap}
+and product identities, and obtains the same 558 words and 1,277
+occurrences; all 181 radius and 558 angle enclosures lie inside the
+recorded input enclosures.
+The two link checkers above share the ridge certificate and the
+constructions; the independent library shares the alias table, the
+construction theorem of Section~\ref{sec:models} and the written
+exceptional-model proofs, as well as the Arb and SymPy arithmetic libraries.
+In particular, \file{checks/independent-s1-b2/library.py},
+\file{checks/independent-s1-b2/parabolic.py} and
+\file{checks/independent-s1-b2/exceptional.py} rebuild the geometry;
+\file{checks/independent-s1-b2/library_verify.py} checks its local incidence
+complex and the comparison checks containment in the consumer intervals.
+The construction proofs and the external 4-D classification remain common
+mathematical premises. The alias list is a common inventory input, though
+all 33 merges have separate exact congruence checks. Arithmetic-library
+errors and a common misinterpretation of the recursive-uniform definition
+are also not eliminated by matching counts. The independent rebuild
+reduces dependence on the original construction program; it does not
+make every upstream premise independent.
+
+With Computation~\ref{comp:link}, the stage-1 proof uses certified input tables
+and the two implementations described in Section~\ref{sec:S1}.
+
+\paragraph{Exact inputs of the exclusions.} LINK certifies interval
+enclosures. The exact exclusions of stage 1 (Lemma~\ref{lem:exclusions})
+need more: the algebraic cosine and radius used in each exclusion must be
+\emph{exactly} the geometric quantity of the named incident word. A floating-point reconstruction or numerical recognition of a cosine
+does not prove this exact correspondence. By
+Lemma~\ref{lem:wordangle}, with $\rho=r_p$, $D=R_K^2-\rho^2$,
+$a=R_A^2-\rho^2$ and $b=R_B^2-\rho^2$, the cosine of the word's angle is
+\[
+\cos\alpha=\frac{\sqrt{ab}-\sqrt{(D-a)(D-b)}}{D},
+\]
+with the positive square roots fixed by the geometry ($0<a,b<D$). So exact
+radii and exact cell labels determine every exact cosine.
+
+\begin{computation}[EXACT: certified exact exclusion inputs]\label{comp:exact}
+The squared circumradii of the 181 canonical types and of the 44 named
+cell types and, for each of the 558 incident words, the algebraic cosine
+used by the exclusions, are exactly the values
+of the constructions of Section~\ref{sec:models}; each cosine equals the
+displayed expression with positive square roots.
+\end{computation}
+
+\noindent\emph{What is checked}. The exact proposals
+ are rebuilt by both checkers from
+exact constructions (the exact parabolic, quadratic-field, 600-cell and
+product routines of \file{checks/independent-s1-b2/}); neither accepts the file by
+digest or by numerical agreement. Checker A requires the exact residual
+$Dc^2-2c\sqrt{ab}+a+b-D=0$, decided by an exact minimal-polynomial test,
+together with $\sqrt{ab}-Dc>0$, strict positivity of $a$, $b$, $D-a$,
+$D-b$ by outward arithmetic, and an exact residual for every radius
+against its construction. Checker B squares once more, verifies
+$4c^2ab=(Dc^2+a+b-D)^2$, restores the sign, authenticates the radii by its
+own exact Gram solves and product identities (for the snub factors, a
+Sturm count isolating the unique admissible root of the eliminated
+polynomial), projects the incident word labels from cell intersections,
+and decides zero by exact number-field embedding. Neither accepts an
+interval containing zero as an equality; \texttt{nsimplify} and
+rational-angle guesses are only proposals and need an exact zero
+residual. The live stage-1 facet table is then authenticated against
+these values: complete names, aliases and words, containment of every
+exact radius and angle after the stage-1 parser, and the depth bound
+$9\alpha>2\pi$. \texttt{exact\_angles.py} takes its operands only
+from this certified source (\texttt{exact\_inputs.py}). The flat
+identities are proved using positive sines,
+the exact product $\prod(c_j+i\,s_j)=1$, and a certified sum in $(\pi,3\pi)$; the
+degenerate exclusions use only that the three-ray Gram matrix is
+nonsingular and the opposite Cramer numerator is exactly zero, which
+already rules out a strictly interior centre. The consumer
+entry point \texttt{authenticate\_exclusions} rechecks every requested
+deletion on the actual cycle's words and exact operands and rejects
+duplicate, overlapping, unproved or out-of-range indices.
+\emph{Result.} Both checkers accept 181 facet radii, 44 cell radii and 558
+cosines; a separate direct sweep of the normal-cosine residual passes all
+558 words. The exclusions at the three bounds are 790/1,703/7,080 flat cycles and 23/39/57 degenerate roots
+at $P_{\mathrm{ctl}}=6/10/16$. \emph{Corruptions.} Twelve test methods pass, rejecting
+in both checkers perturbations of a facet radius, a cell radius or a cosine
+by $10^{-40}$, the wrong square-root branch, a lost sign, wrong labels,
+polygons and multiplicities, missing and duplicate words and facets,
+floating operands, false flat and degenerate claims (four near-right angles,
+a $4\pi$ winding, a singular Gram matrix), malformed exclusion lists and
+root records, and $\sqrt2+10^{-40}$ replaced by $\sqrt2$.
+\emph{Shared input and second implementation.} Both
+\texttt{check\_inputs.py} and
+\texttt{check\_inputs\_b.py} import
+\texttt{exact\_source.py}. That bridge calls
+\file{checks/independent-s1-b2/library.py} and
+\file{checks/independent-s1-b2/library_verify.py}, with the parabolic,
+exceptional and product constructions behind them. This is one shared
+construction implementation, not two independent library reconstructions.
+Checker B supplies its own radius solve in
+\texttt{radii\_b.py} and incidence projection; it does
+not thereby make the common constructions independent. A common error
+in that construction layer could survive both input checks; their
+agreement alone does not rule it out. The exclusions themselves are
+proved twice: by \texttt{exact\_angles.py} with the independent
+certificate check \texttt{check\_exclusions\_b.py}, and by
+the separately written stage 1 of \file{checks/independent-s1-b2/}, which finds the
+same 7,080 flat cycles and 57 degenerate roots with its own exact Gram
+matrices and exact phase products (it uses the same construction code).
+
+\subsection{Model constructions}\label{sec:models}
+
+The computations use explicit constructions (``models'') of the library
+facets and of the known 5-polytopes. It is not enough that these are \emph{named} correctly: the proof uses that
+each constructed point set is the vertex set of a uniform polytope with
+unit edges, with the stated facet types and complete vertex orbits, since
+the separation lemma is applied to model vertices. These properties are
+supplied as follows (\file{checks/model_audit/}).
+\begin{itemize}[leftmargin=2em]
+\item \emph{Wythoff constructions, antiprisms and products}
+  (\file{checks/model_audit/wythoff_proof.md}): a written proof, from standard
+  facts on finite Coxeter groups, of the supporting-face theorem, unit
+  edges and recursive uniformity of $W_J$ for every binary ring pattern of
+  the groups used, of the product and antiprism constructions, of the
+  facet rule and of the named aliases; and an explicit contract under
+  which an indexed interval orbit enumeration returns exactly the orbit,
+  index by index.
+\item \emph{Snub 24-cell and grand antiprism}: full convex-hull uniformity of
+  the 96- and 100-vertex subsets of the 600-cell and containment of the
+  actual indexed coordinates, checked by two independent implementations
+  (rational-pair and number-field), each rejecting eight corruptions.
+\item \emph{Snub cube and snub dodecahedron}: complete algebraic
+  constructions with exact generator and index identities and coordinate
+  containment, checked independently with interval/Krawczyk and
+  rational-dyadic arithmetic, each rejecting nine corruptions.
+\item \emph{Runtime guard}: \texttt{model\_guard.py} enforces in
+  every run the midpoint, width and grid conditions of that contract for
+  every point-set and lookup query, using exact rational endpoints. It is
+  installed before any model is built in the independent stage-2 and
+  stage-3 drivers, the equivalence checkers and the template auditor, and
+  kept through their searches; a guard failure is reported as \texttt{OPEN},
+  never as an exclusion. All 181 facet models (79,445 vertices; 273,802
+  point-set and 2,066 lookup queries) pass, and every final stage-2 and
+  stage-3 run below records the guard active with zero failures.
+\end{itemize}
+Conventional names matter
+only for reporting. The two independent packages of Section~\ref{sec:indep}
+build their own models in exact number fields (Coxeter orbits by exact
+reflections without rounding, products and antiprisms from exact
+recurrences, the snub factors from isolated algebraic roots, the two
+600-cell deletions from the 120 exact points, recovered from certificate
+data and checked against them in \file{checks/independent-s23/}). Both rely on the
+same written construction theorem and exceptional-model proofs
+\file{checks/model_audit/snub_PROOF.md} and
+\file{checks/model_audit/q5_PROOF.md};
+\file{checks/independent-s23/} also uses the two exceptional model certificates.
+
+\subsection{The known list}\label{sec:knownlist}
+
+For $P\le 16$, $\mathcal K_P$ is the list of names
+\begin{itemize}[leftmargin=2em]
+\item \texttt{A5}$abcde$, \texttt{B5}$abcde$, \texttt{D5}$abcde$, all 31 ring
+  patterns each (93 names);
+\item \texttt{prism-}$K$ for the canonical types $K$ of $\mathcal L_P$;
+\item $\{p\}\times X$ for $3\le p\le P$ and $X$ a Platonic or Archimedean
+  solid, $P_q$ or $A_q$, all of whose faces have at most $P$ sides.
+\end{itemize}
+For $P=16$ this gives $93+181+14\cdot44=890$ names. They denote 628
+pairwise non-congruent polytopes: the stage-3 identification
+(Section~\ref{sec:U3}) assigns every one of the 890 names to one of 628
+vertex-figure signatures with verdict \texttt{KNOWN}. Names with the same
+signature are congruent, because actual stars with that signature have
+the same rooted encoding and radius, and their star forces the polytope
+(Proposition~\ref{prop:u3}); existence comes from the named constructions,
+not from retaining a search row;
+names with different signatures are not, because the signature of a
+vertex figure is a congruence invariant. This count is not taken from the
+literature. By construction $\mathcal K_{16}$ contains every
+polytope of (K1)--(K3) whose 2-faces have at most 16 sides: the
+Wythoffians have only 3-, 4-, 5-, 6-, 8- and 10-gons, a prism over a
+prismatic 4-polytope is of the form (K3), and every (K2) prism over a
+non-prismatic 4-polytope is a \texttt{prism-}$K$.
+
+%======================================================================
+\section{Case A: every 2-face has at most 16 sides}\label{sec:caseA}
+%======================================================================
+
+In this section $P$ is a convex uniform 5-polytope with unit edges,
+circumradius $R$, centre $c$, all of whose 2-faces have at most 16 sides.
+By Lemma~\ref{lem:A7} every facet of $P$ is congruent to a canonical type
+of $\mathcal L_{16}$, and every cell is a uniform polyhedron with at most
+16-gonal faces (Fact~\ref{fact:3d}). We write $P_{\max}=16$; the same
+pipeline was also run with $P_{\mathrm{ctl}}=6$ and $10$ as controls, with the
+counts of Table~\ref{tab:counts}.
+
+\subsection{Stage 1: cycles and their radii}\label{sec:S1}
+
+A \emph{library cycle} is a cycle $(p;K_1,C_1,\dots,K_k,C_k)$ with
+$p\le16$, $k\ge3$, each $K_i$ a canonical type having a $p$-gon orbit
+between cells of types $C_{i-1}$, $C_i$ (dihedral angle $\alpha_i$), and
+$\sum\alpha_i$ not certified to exceed $2\pi$. By Lemma~\ref{lem:closure},
+the cycle of every 2-face of $P$ is a library cycle. By
+Lemma~\ref{lem:wordangle} the word $(K,p,A,B)$ of a polygon orbit
+determines its dihedral angle, so the word $(p;K_1,C_1,\dots,K_k,C_k)$
+determines the angles and the closure function; stage 2 and stage 3 treat
+cycles as such words.
+
+\begin{computation}[S1: stage 1]\label{comp:S1}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The list $\mathcal C_{16}$ of library cycles, up to rotation and
+  reversal, has 14,965 elements, and it is complete.
+\item For each cycle the zeros of its closure function $g$ on
+  $[0,1/R_{\max}]$ (with the domain extended to the upper end of the ball
+  enclosing $1/R_{\max}$) lie in a listed finite set of \emph{root
+  intervals}, formed by merging retained leaves of width below
+  $10^{-20}$ in $s$; this threshold does not bound the width of a merged
+  interval. Of the cycles, 14,428 have at
+  least one root interval, 537 have none, and none is undecided.
+\item Exactly 7,080 cycles have $\sum\alpha_i=2\pi$ exactly (flat), and
+  exactly 57 root intervals are the root $R=R_{\max}$ exactly
+  (degenerate); each is proved by exact algebra.
+\end{enumerate}
+\end{computation}
+
+\noindent\emph{What is computed.} \texttt{cert\_stage1\_5d.py} (Arb,
+160--200 bits) enumerates cycles as closed walks in the multigraph whose
+vertices are cell types and whose edges are the $p$-gon orbits of the
+facet types, pruning when the certified angle sum exceeds $2\pi$. The
+smallest facet angle in the library is $\pi/3$ (in $\{3\}\times\{q\}$ at
+its $q$-gons, the interior angle of the triangle), so a non-flat cycle has
+at most 5 facets and a library cycle at most 6 (six angles $\pi/3$ are
+flat); the search goes to 8.
+On $[0,1/R_{\max}]$ the closure function is evaluated on boxes by ball
+arithmetic, using the monotonicity of $\cos\delta_C(s)$ for the range of
+each $\delta_C$ and the clipping of Remark~\ref{rem:clip}; a box is
+discarded when the enclosure of $g$ excludes $0$ or a triangle is
+certified impossible, and the remaining boxes are bisected below width
+$10^{-20}$ and merged into root intervals. Adjacent retained leaves can
+produce a merged interval wider than $10^{-20}$; no upper bound of that
+size is needed for coverage or the later whole-class root check.
+Root intervals are written as
+outward-rounded 45-digit decimal bounds with a margin of $10^{-32}$; the
+merge of adjacent boxes is exact.
+\texttt{exact\_angles.py} proves flatness, on the exact cosines of
+Computation~\ref{comp:exact} only: angles that are rational
+multiples of $\pi$ are verified as such exactly (a rational-angle guess is
+accepted only after an exact cosine identity), the others are combined
+into the claim $\exp(i\sum\alpha_j)=1$, which is verified by an exact
+minimal-polynomial zero test (sympy), and the ball of $\sum\alpha_j$
+lies in $(\pi,3\pi)$; so $\sum\alpha_j=2\pi$. The output records 30/31/32 proved cosine tuples at
+$P_{\mathrm{ctl}}=6/10/16$, including
+$2\arccos(-\sqrt6/4)+\arccos(-1/4)=2\pi$, and
+$\arccos(-\sqrt{1/3-2\sqrt5/15})+\arccos(-\sqrt{1/3+2\sqrt5/15})+\arccos(-1/\sqrt5)=2\pi$
+(pentagonal antiprism, icosidodecahedron and dodecahedron angles). All
+degenerate roots occur in 3-cycles. For a 3-cycle the link is a rigid
+spherical triangle and the closure has one explicit solution: with $\Gamma$
+the Gram matrix of the three cell rays ($\Gamma_{ij}=\cos\alpha$) and
+$d_i=\sqrt{R_{C_i}^2-\rho^2}$, the unnormalised centre offset is
+$w=\sum\lambda_iu_i$ with $\lambda=\Gamma^{-1}d$ (for the unit direction
+$\hat w$ multiply by the positive scale $1/|w|$); the centre lies on the
+hyperplane of facet $K$ iff the coefficient of the ray opposite $K$
+vanishes, a Cramer determinant, which is proved exactly zero. Since $\Gamma$
+is nonsingular, the centre offset is unique, and an exactly zero
+coefficient already excludes a strictly interior centre, whatever the signs
+of the other two; the exclusion uses nothing more. A positive
+rescaling of the centre does not change the vanishing determinant.
+
+\emph{Proof route.} The stage-1 run uses input tables certified by
+Computation~\ref{comp:link}, with the exclusions on the exact inputs of
+Computation~\ref{comp:exact}. \emph{Second implementation.} The stage 1 of
+\file{checks/independent-s1-b2/} (Section~\ref{sec:indep}) enumerates all closed
+walks of length three to six on its own library (every angle is at least
+$\pi/3$, so longer walks exceed $2\pi$ and length six is flat), and isolates
+roots using a strict monotonicity proved for each word: in the variable
+$u=1/(R^2-\rho^2)$ the derivative of the cosine of each closure angle has
+the sign of an affine function of $u$, certified strictly negative at both
+ends of the admissible interval, so each angle increases strictly in $u$
+(decreases in $R$) and every non-flat cycle has at most one root. It reproduces the 14,965
+cycles with identical words and statuses, the 7,080 flat cycles, 57
+degenerate roots and 537 cycles without roots, and 7,291 retained roots,
+each contained in the recorded interval of the same cycle; its root
+intervals are narrower. \emph{Shared with the proof route:} the alias
+table, the construction theorem and, for the exclusions, the exact
+construction code of Computation~\ref{comp:exact}; both use Arb
+(python-flint) and SymPy.
+
+\begin{definition}\label{def:omega}
+$\Omega$ is the set of root intervals of all cycles in $\mathcal C_{16}$
+other than the flat cycles and the degenerate roots: 7,291 intervals, all
+bounded, with $\min\Omega=0.6454972\ldots$ (the 5-simplex) and
+$\max\Omega=63.2195709614\ldots$.
+\end{definition}
+
+The export (\texttt{export\_omega.py}, function
+\texttt{project\_intervals}, shared by both loaders) removes a flat cycle
+as a whole, as Lemma~\ref{lem:exclusions} allows, but Lemma~\ref{lem:exclusions}
+excludes only the degenerate \emph{root}, not the whole cycle. The export
+therefore removes a cycle carrying a degenerate root only after checking
+that it has exactly one finite, positive certified root interval, and
+raises otherwise. All 23/39/57 degenerate cycles at
+$P_{\mathrm{ctl}}=6/10/16$ pass this check; the exports contain
+1,629/3,516/7,291 intervals, and
+an added second root on an actual excluded cycle is rejected by both
+loaders at each $P_{\mathrm{ctl}}$. The export entry
+point validates the records structurally before exporting, regenerates the complete
+cycle inventory against the actual facet table, and calls the exact
+authentication of Computation~\ref{comp:exact} on the actual excluded
+cycles, requiring the returned index sets to equal the requested ones;
+\texttt{project\_intervals} implements the structural step. Nine
+entry-point controls (malformed authentication results and failing guards)
+are rejected at all three bounds.
+
+\begin{corollary}\label{cor:omega}
+Let $X$ be any convex uniform 5-polytope with unit edges and circumradius
+$R_X$, and $G$ a 2-face of $X$ all of whose facets (around $G$) belong to
+$\mathcal L_{16}$, with $G$ at most 16-gonal. Then $R_X$ lies in a root
+interval of the cycle of $G$, and that interval belongs to $\Omega$.
+\end{corollary}
+\begin{proof}
+The cycle of $G$ is a library cycle (Lemma~\ref{lem:closure}(a)), hence
+in $\mathcal C_{16}$; it is not flat (Lemma~\ref{lem:exclusions});
+$1/R_X$ is a zero of $g$ in $[0,1/R_{\max})$ by
+Lemma~\ref{lem:closure}(c),(d), so it lies in a root interval, which is not
+a degenerate one (Lemma~\ref{lem:exclusions}).
+\end{proof}
+
+The facets around $G$ need not be in $\mathcal L_{16}$ when $X$ has larger
+polygons elsewhere; Corollary~\ref{cor:omega} is stated for any $X$
+because Case B uses it.
+
+\paragraph{Radius classes and the closure filter.}
+A \emph{radius class} is a connected component of the overlap graph of
+the intervals of $\Omega$ (closed intervals that meet are joined); its
+hull is the class interval. A class carries the set of cycles with an
+interval in it. The \emph{closure filter} then removes, repeatedly until
+nothing changes, every cycle of a class containing a facet type $K$ such
+that some polygon orbit $(p,C_a,C_b)$ of $K$ is not a side
+($K$ between $C_a$ and $C_b$ at a $p$-gon) of any remaining cycle of the
+class. A class \emph{survives} if cycles remain.
+
+\begin{lemma}\label{lem:filter}
+All cycles of the 2-faces of $P$ at a vertex $v$ lie in one radius class,
+the class containing $R$, and none of them is removed by the closure
+filter.
+\end{lemma}
+\begin{proof}
+By Corollary~\ref{cor:omega} each of these cycles has a root interval in
+$\Omega$ containing $R$, so all these intervals lie in the class of $R$.
+Let $K$ be a facet of $P$ at $v$ and $(p,C_a,C_b)$ a polygon orbit of $K$.
+Since $K$ is vertex-transitive, the orbit has a member $G\ni v$, a 2-face
+of $P$ whose cycle contains $K$ between $C_a$ and $C_b$; this cycle is in
+the class of $R$. So the set of cycles of $P$'s 2-faces at $v$ is never
+touched by the filter (by induction over the iterations).
+\end{proof}
+
+\begin{computation}[FILTER]\label{comp:filter}
+The intervals of $\Omega$ form 4,224 radius classes, of which 563 survive
+the closure filter.
+\end{computation}
+\noindent The program \texttt{class\_filter.py} applies this
+combinatorial filter to the stage-1 output.
+The program rejects unresolved, unknown, missing or malformed statuses,
+malformed or non-finite surviving intervals, and invalid, duplicate or
+overlapping exclusion lists; it reconstructs the complete canonical cycle
+inventory from the facet table and compares it with the input (so a dropped
+record of either status is detected); it compares endpoints and forms
+class hulls in exact decimal arithmetic; and before forming classes it runs
+both LINK checkers on the actual table and the exact authentication of
+Computation~\ref{comp:exact}. Rerun on the pinned stage-1 roots with
+regenerated exact exclusions, it gives
+760/1,790/4,224 radius classes and 136/278/563 surviving classes at
+$P_{\mathrm{ctl}}=6/10/16$, with all class files byte-identical to their pins; 23 controls pass.
+\emph{Second implementation.} \file{checks/independent-merge-filter/} independently computes exact rational interval components and
+fixed-point deletions, with explicit missing-word witnesses. Its separate
+certificate checker imports no search code; both checkers reject the same
+three semantic corruptions. Complete surviving class cycle sets match the
+$\mathcal H_6$, $\mathcal H_{10}$ and $\mathcal H_{16}$ controls
+(136/278/563); the literal $\mathcal L_6$ result is 129
+(Section~\ref{sec:control-library}). The certified stage-1 intervals,
+statuses, facet words and aliases are supplied inputs, not re-proved by
+FILTER. The stage-1 checker \file{checks/check_u1} also finds the same 4,224
+classes and 563 survivors from its own roots, but its inputs carry the
+uncertified decisions listed in Section~\ref{sec:computations}. The independent stage-2 and stage-3 programs of
+\file{checks/independent-s23/} take these classes as input and do not recompute
+them.
+
+\subsection{Stage 2: vertex figures}\label{sec:S2}
+
+Let $I$ be a surviving class with interval $[R_{\rm lo},R_{\rm hi}]$. By
+Lemmas~\ref{lem:vf} and~\ref{lem:filter}, if $R\in I$ then the vertex
+figure $\VF$ of $P$ at $v$ satisfies:
+\begin{enumerate}[label=(\alph*)]
+\item $\VF$ is a convex 4-polytope inscribed in the 3-sphere of radius
+  $r=\sqrt{1-1/(4R^2)}$; each facet is $\VF(K)$ for a facet type $K$ that
+  occurs in a cycle of $I$, lying in a hyperplane at distance
+  $\sqrt{r^2-r_K^2}$ from the centre, with the centre on its inner side;
+\item every ridge (2-face) of $\VF$ is the vertex figure of a cell and lies
+  in exactly two facets of $\VF$, with the same cell label;
+\item around every edge of $\VF$ (a polygon of $P$ at $v$) the facets and
+  ridge labels, read cyclically, form a cycle of $I$;
+\item distinct vertices of $\VF$ are at distance at least 1
+  (Lemma~\ref{lem:sep}).
+\end{enumerate}
+A \emph{signature} of a vertex figure is its multiset of facet types
+together with the multiset of canonical cyclic words around its edges.
+
+\begin{computation}[S2: stage 2]\label{comp:S2}
+For each of the 563 surviving classes, an exhaustive search, sound for
+every $R$ in the class interval, outputs a finite list of complete
+candidate encodings; their signatures are 629 in total (one class, the class at
+$R=1.0505014948\ldots$ formed by a cycle of three 5-cells and a 16-cell
+around a triangle, has none). For every $R$ in the class and every vertex
+figure satisfying (a)--(d), its signature is one of the signatures listed
+for the class. This is a coverage statement: retaining an encoding does
+not prove that all its assembly equations have a simultaneous exact
+solution. Existence of the known models is supplied separately by
+Section~\ref{sec:models} and their named constructions.
+\end{computation}
+
+\noindent\emph{Why such a search is exhaustive.} Fix the least facet type
+$t_0$ present: the first facet is $X_{t_0}$ in a fixed position, which is
+no loss of generality after an isometry. Repeatedly take an open ridge (a
+ridge in only one placed facet). In the true vertex figure exactly one
+other facet contains it (by (b)). Trying every facet type $\ge t_0$, every
+ridge of that type with the same label and size, every cyclic and reversed
+correspondence of the ridge polygon, and both positions of the hinge (the
+two hyperplanes through the ridge at the right distance from the centre;
+only the one on the side opposite the existing facet can occur, by step 2
+of the proof of Lemma~\ref{lem:D}) therefore includes the true facet. A branch may be cut only for a
+certified violation of (a)--(d): a vertex certified strictly outside a
+facet hyperplane; two vertices at a certified distance in $(0,1)$; three
+facets at a ridge or a label clash; a closed cycle around a VF-edge that is
+not a cycle of the class. These rejection rules are exhaustive. Rounded or approximately
+symmetric equivalences are insufficient for this purpose. The
+proof route below removes candidates only by \emph{exact} equivalences.
+
+\begin{lemma}[Exact equivalence of placements]\label{lem:equiv}
+Let $g$ be an exact isometry of the model vertex figure $X_K$ fixing its
+centre, preserving its labelled ridges and VF-edge polygon sizes, and
+mapping an ordered source ridge correspondence $o$ to another one $o'$
+(that is, $g(o_i)=o'_i$). Then for every admissible $R$ in the class
+($R>R_K$) the facets placed over a given target ridge by $o$ and by $o'$,
+with the hinge on the side opposite to the existing facet, coincide as
+labelled point sets.
+\end{lemma}
+\begin{proof}
+$g$ fixes the template centre, so it preserves the distance of the source
+ridge from it and carries its outward normal to that of $o'$. With the
+hinge on the opposite side, the new facet's normal is computed from
+$d_K(R)$, that distance and the target ridge alone, so it is the same for
+both options. If $A_o$, $A_{o'}$ are the two gluing maps, $A_{o'}\circ g$
+and $A_o$ have the same ordered ridge images and the same outward normal;
+they agree on three non-collinear ridge vertices and on the facet centre,
+which is not in their affine plane, and so they are equal on the facet
+hyperplane. Hence the placed facets coincide as functions of $R$, whether
+or not $g$ reverses orientation, and $g$ preserves the adjacent labels
+used by later filters.
+\end{proof}
+
+\noindent\emph{Proof route} (\texttt{check\_u2} with \texttt{stage2}; see). The independent stage-2 search
+(Section~\ref{sec:U2}) builds every $\VF(K)$ directly from the
+guarded exact construction models of Section~\ref{sec:models}
+(\texttt{exact\_types.py}): metric constants by directed interval
+operations, cell lists, cyclic orders and labels from the model-backed
+cell certificates, no inverse cosine. The only reductions are exact
+stabiliser permutations of the construction model, restricted to the
+neighbours of the base vertex and checked to preserve labelled ridges and
+polygon sizes; a subgroup suffices, since fewer symmetries only retain more
+options. The \emph{equivalence certificate}
+\texttt{equivalences-p16.json} lists, for each of the 181 types, every
+ordered ridge correspondence (cyclic and reversed): 5,108 in total, 1,437
+retained and 3,671 discarded, each discarded one with an explicit exact
+permutation carrying it to a retained one, so that Lemma~\ref{lem:equiv}
+applies. Two checkers (\texttt{audit\_certificates.py} and the
+separately written \texttt{check\_equivalences.py}, which imports
+neither the search nor the certificate producer) check ordered
+correspondence, labels, edge types, the hinge flag, full coverage of the
+options, exact group membership and that every representative is retained;
+each accepts all 5,108 correspondences and rejects all 905 deliberate
+corruptions (five per type). Vertex identity uses the stricter bound
+$u<1/4$ and an undecided distance raises \texttt{PrecisionError}, so the
+class is reported undecided and the run exits nonzero (a control widens a
+radius interval deliberately and checks this). \emph{Result.} On the
+certified stage-1 class intervals the guarded searches complete every
+class with zero undecided, error or non-strict outputs: $P_{\mathrm{ctl}}=6$: 136
+classes, 168 signatures, 2,081 nodes; $P_{\max}=10$: 278, 332, 3,556;
+$P_{\max}=16$: 563, 629, 5,869 nodes (no node cap). The same 629 signatures are found on the independent
+stage-1 checker's broader class intervals. Both certificate checkers accept all 5,108 correspondences and reject
+all 905 corruptions. They share template, interval and model-guard code,
+so they check one certificate without providing two independent proofs
+of the model library. The replay driver \texttt{replay\_all.py} requires
+zero non-strict completions, checks every per-figure strict flag and the
+complete class accounting, and rejects 18 corruptions of its evidence; the
+full strict replays at $P_{\mathrm{ctl}}=6,10,16$ cover all 977 classes.
+
+\noindent\emph{Second implementation} (\file{checks/independent-s23/},
+Section~\ref{sec:indep}). The implementation uses exact
+number-field models, Arb at 320 bits, the opposite hinge of
+Lemma~\ref{lem:D}, its own exact equivalence certificate (all 181 models
+and 5,108 ordered options, checked by a separate checker), cuts only for
+certified separation, supporting planes, ridge multiplicity, labels,
+polygon sizes or a partial edge link that extends no allowed cycle, and no
+search cap (finiteness from a packing bound). On the same class intervals
+it completes 136/278/563 classes for $\mathcal H_6$, $\mathcal H_{10}$
+and $\mathcal H_{16}$ with 168/332/629 signatures, equal to the
+proof route's, with no undecided class. \emph{Shared with the proof
+route:} the stage-1 classes, the facet-name table and alias table, the
+construction theorem, the exceptional model certificates and the separation
+lemma.
+
+\subsection{Model ridge lists}\label{sec:ridges}
+
+\begin{computation}[RIDGES: certified ridge lists]\label{comp:ridges}
+For each of the 181 canonical types $K$, the list of 2-faces of the model
+vertex figure $X_K$ (which point sets, their cyclic order, their cell
+labels) is correct.
+\end{computation}
+
+\noindent\emph{What is checked} (\texttt{cert\_ridges.py}), ridge by
+ridge:
+\begin{enumerate}[leftmargin=2em]
+\item \emph{Face.} A plane through three consecutive points of the ridge;
+  every other point of $X_K$ certified strictly on one side; the ridge's
+  remaining points on the plane \emph{exactly}: for Wythoffian types the
+  neighbours of $K[0]$ are recomputed in exact arithmetic ($\Q$ for $A_4$,
+  $D_4$; $\Q(\sqrt2)$ for $B_4$, $F_4$; $\Q(\sqrt5)$ for $H_4$), matched to
+  the model points by the separation lemma inside $K$, and the differences
+  have exact affine rank 2; \texttt{sadi} and \texttt{gap} likewise in
+  $\Q(\sqrt5)$; the polyhedral base ridge of a prism or antiprism prism lies
+  in a plane by construction (its points and $K[0]$ have last coordinate
+  exactly $1/2$, and lie on two spheres); all other ridges are triangles.
+\item \emph{Cyclic order.} For consecutive points $a,b$ every other ridge
+  point is certified strictly on one side of the line $ab$ in the ridge
+  plane; so consecutive pairs are sides, hence edges of $X_K$.
+\item \emph{Completeness.} Every side lies in exactly two listed ridges and
+  every point in a listed ridge; since the face graph of a 3-polytope is
+  connected, the list contains every 2-face.
+\item \emph{Label.} A side of the ridge of a cell is the vertex figure of a
+  $q$-gon, of length $\ch_q$; $q$ is pinned by the certified bracket
+  $4\cos^2(\pi/(q-1))<|a-b|^2<4\cos^2(\pi/(q+1))$ (the function
+  $4\cos^2(\pi/q)$ increases with $q$). The cyclic sequence of sizes is the
+  cell's vertex configuration, which determines the cell
+  (Fact~\ref{fact:3d}); it must match exactly one label.
+\end{enumerate}
+Result: 181/181 types certified; 823 ridges (747 triangles, 55 exactly
+coplanar by exact arithmetic, 21 by construction), 1,277 VF-edges, each in
+exactly two ridges. Five wrong
+lists (a wrong label, a dropped ridge, a wrong cyclic order, a square split
+into two triangles, a non-coplanar four-point set) are rejected, and a
+non-coplanar set has exact affine rank 3.
+This certifies the local data of the models; that the model points are the
+vertex figure of a uniform polytope with unit edges is supplied by
+Section~\ref{sec:models}, and the correspondence of these certified cells
+and labels with every stage-1 input entry by Computation~\ref{comp:link}.
+\emph{Independent replay:} the stage-3 checker certifies its own templates
+(cells, neighbours and symmetries) from exact models
+(Section~\ref{sec:U3}).
+\subsection{Stage 3: from vertex figures to polytopes}\label{sec:S3}
+
+Stage 3 is checked by \file{checks/check_u3/}
+(Section~\ref{sec:U3}; Proposition~\ref{prop:u3}) and
+\file{checks/independent-s23/} (Section~\ref{sec:indep}). Both certify
+a unique radius on the whole class interval, cover every actual star
+by candidate encodings, identify known polytopes by elimination, and
+refute the remaining encoding by the development of
+Computation~\ref{comp:dev}.
+
+\subsubsection{The exact radius}
+
+\begin{computation}[ROOT: unique radius]\label{comp:root}
+For every one of the 629 vertex-figure signatures, one of its edge cycles
+has a closure function $g$ with exactly one zero on the \emph{whole} class
+interval $[1/R_{\rm hi},1/R_{\rm lo}]$ of the surviving stage-1 class:
+$g$ has certified nonzero values of opposite signs at the two ends, and
+$g'$, enclosed over the whole interval, excludes $0$.
+\end{computation}
+
+\noindent\emph{Proof route} (\texttt{closure.py}, step 2 of
+Section~\ref{sec:U3}): sign change at $R_{\rm lo}$ and $R_{\rm hi}$ and a
+forward-mode derivative excluding $0$ on the whole exported stage-1 class
+interval, evaluated with certified template angles. The inverse cosine
+used there (\file{checks/check_u3/ivla.py}, \texttt{iacos}) is a proved
+enclosure: for an input interval $[a,b]\subseteq[-1,1]$,
+an ordinary \texttt{mp.acos} evaluation only \emph{proposes} bounds
+$l\le u$, and each is returned only after the outward-rounded interval
+cosine certifies $0\le l\le\pi$, $\cos l\ge b$ and $0\le u\le\pi$,
+$\cos u\le a$; since cosine decreases on $[0,\pi]$ this gives
+$l\le\arccos b\le\arccos a\le u$. A proposal that cannot be certified is
+replaced by the safe domain bound $0$ or $\pi$, which can only make a
+caller report uncertainty, never a false sign. \emph{Coverage}: the audit
+\texttt{audit\_radius\_route.py} checks, by exact decimal comparison,
+that every surviving stage-1 class is exported, that each exported
+interval contains its certified input interval and equals the interval the run
+used, and that every signature is accounted for with zero radius,
+verdict and development uncertainty. In the final guarded runs all
+168/332/629 radii at $P_{\mathrm{ctl}}=6/10/16$ are unique on their whole classes;
+a separate check confirms these outputs.
+\emph{Second implementation:} \file{checks/independent-s23/} (\texttt{s3\_radius.py},
+Section~\ref{sec:indep}) proves a unique root on the same whole class
+intervals for all 629 signatures, with Arb inverse cosine and its own
+closure constants from the exact models.
+\subsubsection{Congruence from discrete data}
+
+\emph{Discrete data.} A vertex figure's data are, for each of its facets,
+the facet's point set, its library type $K$, and a correspondence $c$ (model
+point $t\mapsto$ VF point $c(t)$). Correspondences are taken modulo a set
+$E_K$ of \emph{exact} isometries of $X_K$ fixing $K[0]$: the permutations
+induced by generators of $\Stab_K(K[0])$ (exact reflections and diagram
+automorphisms, matched by the separation lemma inside $K$), and, for prisms
+over polyhedra, the relabellings $t\mapsto s\pm t$ of the polyhedron's
+vertex-figure polygon that preserve its vertex configuration (a rotation or
+reflection of the circle, exactly; this adds the mirror symmetry of the
+snub vertex figures, which $\Stab$ does not contain). Elements that do not
+map labelled ridges to ridges with the same label are dropped. A missing
+element of $E_K$ can only make the check below fail, never pass.
+
+\begin{lemma}[Congruence from discrete data]\label{lem:D}
+Let $X$, $X'$ be convex uniform 5-polytopes with the same circumradius $R$
+and vertex figures $V$, $V'$ indexed by the same set, with the same facets:
+the same index sets, the same types, and correspondences that agree
+modulo $E_K$. Then a linear isometry $A$ with $AV_i=V'_i$ for all $i$
+exists.
+\end{lemma}
+\begin{proof}
+(1) Take a facet $f$ with $V[S_f]=g(X_K)$ and $V'[S_f]=g'(X_K)$ and
+$c'=c\circ e$ with $e\in E_K$ realised by the isometry $\varepsilon$. Then
+$V[c(t)]\mapsto V'[c(t)]$ is $g'\varepsilon^{-1}g^{-1}$, an isometry. Both
+facet sets lie in hyperplanes at the same distance $\sqrt{r^2-r_K^2}$ from
+the centre $O$, so it extends to a linear isometry $A$ of $\R^4$.
+(2) Let $f'$ share a ridge $\rho$ (at least three non-collinear points)
+with $f$. Project to the 2-plane $W$ orthogonal to the directions of
+$\rho$: $\rho$ becomes a point $p$, and the hyperplanes through $\rho$
+become lines through $p$, tangent at their feet $T=dn$ to circles about
+$O$. The centre $O$ is interior to the vertex figure (Lemma~\ref{lem:vf}),
+so it lies in the open wedge at $p$ bounded by the two facet lines (angle
+below $\pi$). Each facet's circumcentre lies on its ray; it is relatively
+interior to the facet (the facet is the vertex figure of a uniform
+4-polytope), so $T\ne p$. Hence the two feet lie strictly on opposite
+sides of the line $pO$, and the hyperplane of $f'$ is the tangent line from
+$p$ at distance $d_{K_{f'}}$ on the side opposite to $f$'s foot; it is the
+same for $AV$ and $V'$. (3) Inside that hyperplane $AV[S_{f'}]$ and
+$V'[S_{f'}]$ are related by an index-preserving isometry, as in (1), which
+fixes $\rho$ pointwise and the common circumcentre, which is not in the
+plane of $\rho$; so it is the identity. (4) The facet graph of $V$ through
+ridges is connected, so $AV=V'$.
+\end{proof}
+
+\begin{lemma}[Coset comparison]\label{lem:coset}
+Let $S$ be the full star at $v_0$ of a hypothetical convex uniform
+polytope of circumradius $R$, centred at the origin, and let $T$ be a
+group of exact linear isometries fixing $S$. At a neighbour $w$, let $g_1,\ldots,g_k$ be a complete,
+nonempty list of candidate linear isometries for its star, with a true
+congruence $g_i$ among them. Suppose that for every $j$ there is
+$\tau_j\in T$ and a certified Frobenius-norm bound
+$\|g_1\tau_j-g_j\|_F\le\varepsilon_j$, and
+$2R\max_j\varepsilon_j<1/2$. Suppose each $g_j$ has anchor vertices
+$a$ in $S$ spanning $\mathbb R^5$, and every image $g_j(a)$ belongs
+to a known facet through $w$. Then every candidate gives the same full
+star at $w$.
+\end{lemma}
+\begin{proof}
+The identity
+\[
+g_i\tau_i^{-1}\tau_j-g_j
+=(g_i-g_1\tau_i)\tau_i^{-1}\tau_j+(g_1\tau_j-g_j)
+\]
+bounds the operator norm by $\varepsilon_i+\varepsilon_j$.
+On an anchor of norm $R$, the two images are less than $1/2$ apart.
+Both are vertices of the hypothetical polytope: one lies in the true
+star $g_i(S)$, the other in the known facet. By Lemma~\ref{lem:sep}
+they coincide. The spanning anchors determine the isometry, so
+$g_j=g_i\tau_i^{-1}\tau_j$ and $g_j(S)=g_i(S)$.
+\end{proof}
+
+\subsubsection{The one other vertex figure}\label{sec:extra}
+
+
+In the class whose scalar root is $R=1$, with interval
+\[[0.99999999999999999999206,\ 1.00000000000000000000867],\]
+the class has
+two candidate vertex-figure signatures with the same facet multiset: two 5-cells
+(\texttt{A40001}), six $\{3\}\times\{3\}$ and eight tetrahedral prisms
+(\texttt{pr-tet}), 8 vertices. One is the vertex figure of the stericated
+5-simplex \texttt{A510001}; the other is the only candidate signature in
+Case A not identified with a known polytope. No exact star with the latter encoding is asserted to
+exist; the refutation below applies to any hypothetical actual star it
+represents throughout the class interval.
+
+\begin{computation}[DEV: the extra vertex figure is refuted]\label{comp:dev}
+No convex uniform 5-polytope has an actual star represented by this extra
+candidate encoding in its class interval.
+\end{computation}
+
+\noindent\emph{What is checked} (independent checker,
+\texttt{develop.py}, Section~\ref{sec:U3}). A \emph{development}:
+starting from the star of $v_0$ (all facets with their full vertex sets),
+at the next vertex $w$ without a star every congruence $g$ with
+$g(v_0)=w$ mapping a facet of the star onto a known facet through $w$ is
+tried (all of them: a star facet of the right type composed with every
+certified template symmetry taking the base to the right vertex); $g$ is
+kept unless a known facet through $w$ is certified not to lie in
+$g(\text{star})$ or adding $g(\text{star})$ gives a certified violation
+(separation, convexity, a cell in three facets, two facets with five
+affinely independent common vertices). Kept stars are compared by exact
+encodings, not by interval overlap; distinct stars give branches. Result:
+the signature has one retained rooted encoding. Any actual star represented by it, if one
+existed, would force its neighbours; it matches no listed
+polytope (\texttt{A510001}, with the same facet multiset, is excluded for
+all 48 frames; the other names of the class have 12 or 6 neighbours), the
+development fixes the star at the first neighbour, and at the second
+neighbour none of the 48 candidate congruences contains every facet already
+known there (a certified mismatch of a facet centre or of a template map).
+So the vertex figure is \texttt{REFUTED}. \emph{Uncertainty.} The development raises a distinct exception for an undecided
+identity, which contributes \texttt{OPEN} (also when another candidate
+survives) and is counted with its reason, so it can never yield
+\texttt{REFUTED}; candidate-point lookup tests every potentially matching point. The final guarded runs refute this
+vertex figure at $P_{\mathrm{ctl}}=6$, 10 and 16 with zero search, development and
+model-guard uncertainty.
+\emph{Second implementation:} \file{checks/independent-s23/} refutes the same
+signature at $P_{\mathrm{ctl}}=6$, 10 and 16 by a finite development tree in which
+every branch dies (Section~\ref{sec:indep}); its restricted $R=1$ control
+(5-cell, $\{3\}\times\{3\}$ and tetrahedral prism only) identifies the other
+signature with \texttt{A510001} and refutes this one.
+
+\subsection{Independent replays}\label{sec:replays}
+
+The implementations use the shared geometric specifications and inputs
+listed in Section~\ref{sec:computations}. The stage-2 and stage-3
+checkers below use mpmath\texttt{.iv}; the second implementation uses Arb.
+Agreement therefore checks distinct code and arithmetic paths, subject
+to those shared mathematical premises.
+
+\subsubsection{Stage 1}\label{sec:U1}
+The stage-1 proof is replayed by \file{checks/independent-s1-b2/},
+using exact constructions and certified closure bounds as described in
+Section~\ref{sec:indep}.
+
+\subsubsection{Stage 2: \texorpdfstring{\texttt{check\_u2/}}{check_u2/}}\label{sec:U2}
+The proof route of Computation~\ref{comp:S2}. An orthogonal-frame gluing
+search with fail-first ridge choice in \texttt{mpmath.iv} at 200 bits.
+Each $\VF(K)$ is built from the guarded exact construction model
+(\texttt{exact\_types.py}, Section~\ref{sec:models}); reductions are
+only the exact equivalences of Lemma~\ref{lem:equiv}, certified by
+\texttt{equivalences-p16.json} (Section~\ref{sec:S2}). Branches are
+cut only for certified separation ($0<|x-y|^2<1$), certified convexity
+violations or combinatorial contradictions; two points are identified only
+when $|x-y|^2<1/4$ is certified, and an enclosure that permits both
+equality and distinctness stops the class as undecided; a facet type is
+dropped when $R_K\ge R$ is certified. Every completed figure is rechecked
+(every ridge paired, every edge cycle allowed, every point not on a facet
+certified strictly inside: 0 exceptions). Result: 168, 332 and 629
+signatures at $P_{\mathrm{ctl}}=6$, 10 and 16, with
+zero undecided classes (Section~\ref{sec:S2}). Corruptions: deleting an allowed cycle removes exactly the vertex
+figure using it; substituting a facet type in a cycle adds no vertex
+figure; 905 equivalence-certificate corruptions (Section~\ref{sec:S2}).
+
+\subsubsection{Stage 3: \texorpdfstring{\texttt{check\_u3/}}{check_u3/}}\label{sec:U3}
+The stage-3 checker (Proposition~\ref{prop:u3} below) compares stars by exact
+encodings; the following lemma says what an
+encoding records and why equal encodings give equal stars.
+
+\begin{lemma}[Rooted determinism]\label{lem:rooted}
+Fix a common circumcentre $c$ and an admissible radius $R$ (a radius in the class interval with
+$R>R_K$ for every facet type $K$ used). A \emph{rooted encoding} of a star
+at $v_0$ records the full template type of an initial facet and its root
+frame (the images of the template's base vertex and its neighbours), and,
+along a connected traversal of the facet adjacency graph of the vertex
+figure (facets adjacent through cells containing $v_0$), the type of each
+further facet and the ordered correspondence of its model neighbour
+indices, taken modulo the exact stabiliser of the base vertex in the
+\emph{full} template. If two stars at the same $R$ have equal rooted
+encodings in root frames whose identification also identifies $c$, they
+are equal as sets of full facets.
+\end{lemma}
+\begin{proof}
+The root frame fixes the template map on the base vertex and its
+neighbours, which affinely span the facet hyperplane, so it fixes the full
+root facet. Suppose a facet $F$ is fixed and $C\ni v_0$ is a cell of $F$
+at which the traversal reaches the next facet $F'$ of type $K'$. The affine
+hull of $C$ is fixed. The centre of $F'$ is at distance
+$\sqrt{R^2-R_{K'}^2}>0$ from the fixed common centre $c$, so the hyperplane
+of $F'$ is one of the two hyperplanes through $\aff C$ at that distance,
+and, as in step (2) of the proof of Lemma~\ref{lem:D} one dimension up
+(the centre of the polytope is interior, the facet centres are relatively
+interior by Lemma~\ref{lem:sphere}), it is the one whose foot lies on the
+side opposite to that of $F$. The ordered correspondence fixes the images
+of $v_0$ and of the vertex-figure points of $C$; together with the centre
+of $F'$, which is not in $\aff C$, they affinely span the hyperplane of
+$F'$, so the isometric template map, and hence the full facet $F'$, is
+unique. Changing a correspondence by an element of the full-template base
+stabiliser does not change the placed full facet. The facet graph of the
+vertex figure is connected, so induction reaches every facet. If the
+stars are given as functions of $R$ on an interval, the conclusion is
+equality of the placement functions at each common admissible $R$; the
+unique-root step then selects one value.
+\end{proof}
+
+Neither the coarse signature nor the larger group $E_K$ of isometries of
+the vertex figure $X_K$ would do here: for the snub-cube prism a mirror
+fixes the vertex figure but not the full facet (after
+reflecting one snub-cube-prism facet of $\{3\}\times$ snub cube, the two
+facets contain distinct vertices only $0.2956$ apart).
+\file{checks/check_u3} (\texttt{canon.py}, \texttt{search.py}) uses full-template
+stabilisers and records the ordered model-neighbour indices, as the lemma
+requires.
+
+\begin{enumerate}[leftmargin=2em]
+\item \emph{Realisation coverage.} For each signature, every actual star
+  at a radius in the class interval is represented by a retained candidate
+  encoding: facets are
+  placed copies of templates through $v_0$ at the right distance; at an
+  open cell every type with a cell of the same label is glued on the other
+  side (convexity forces the side), under every rotation or reflection of
+  the cell's vertex-figure polygon (reflections give mirror images of
+  chiral facets); options equal under the stabiliser of the base are
+  merged exactly; cuts only for certified reasons (separation, convexity,
+  non-orthogonality, polygon or cell-patch mismatch, cell in three facets,
+  two cells sharing three vertex-figure points, type counts, word
+  multisets). A facet is rejected for a non-positive squared height only
+  when the \emph{upper} end of its enclosure is non-positive; an enclosure
+  straddling zero is undecided. Every undecided exit, at the start or
+  deeper in the search, is counted and makes the class \texttt{OPEN}; a
+  class with an unresolved realisation search cannot be used for
+  identification by elimination. Point resolution tests every candidate
+  enclosure by interval distance.
+  Complete candidate states are grouped by an exact rooted encoding;
+  actual stars with equal encodings in identified root frames are equal
+  at every common admissible radius (Lemma~\ref{lem:rooted}). Result:
+  one retained encoding per signature (629; 633 complete search states).
+  Compatible interval constraints and the final closure/off-facet checks
+  do not prove simultaneous exact satisfaction of all assembly equations.
+  In particular, retaining a row is not an existence theorem.
+\item \emph{Radius.} For one polygon, $f(R_{\rm lo})$ and $f(R_{\rm hi})$
+  have certified opposite signs and $f'$ (forward-mode derivative on the
+  whole class interval) excludes 0: a unique root in the class interval.
+  The template angles and closure values use the proved inverse-cosine
+  enclosure, and the class intervals are the exported stage-1 classes,
+  with the coverage audit of Computation~\ref{comp:root}. This certifies
+  the scalar root, not existence of an assembled star at that root.
+\item \emph{Identification by elimination.} A listed name $Q$ enters a
+  class only if its radius lies in the class interval and every facet type
+  of $Q$, derived from its name by construction rules, is a facet type of
+  the input; otherwise $Q$ is only reported. For each retained encoding
+  $e$ of the class, possible matches to $Q$ are tested: \texttt{NO} if for every
+  frame (isometry fixing the centre with $v_0\mapsto q_0$, fixed by $v_0$
+  and four vertex-figure points sent to every neighbour 4-tuple of $q_0$
+  with the same distances) some star point is certified apart from every
+  vertex of $Q$. A frame is skipped only when an exact interval Gram entry
+  is disjoint from the required one (the double-precision Gram comparison
+  only chooses which entry to test); a star point is certified apart only
+  by coordinate-interval disjointness from every local vertex of $Q$ or a
+  positive interval lower bound on its squared distance; local vertices of
+  $Q$ are discarded only when an interval lower bound exceeds the cutoff;
+  a frame that cannot be inverted or decided is \texttt{UNDECIDED}, never
+  \texttt{NO}. \texttt{NO-COUNT} if $e$ has a number of vertex-figure
+  points different from the exact neighbour count of $q_0$ (an upper bound
+  from enclosures containing 1, a matching lower bound exhibited by the
+  exact model of $Q$'s construction). An actual star represented by $e$
+  is identified with $Q$ when every other encoding of the class is
+  excluded for $Q$: the separately constructed $Q$ has an actual star
+  represented in this class by completeness of stage 2 and step 1, so
+  its encoding must be $e$. Step 2 fixes the common radius and
+  Lemma~\ref{lem:rooted} gives equality in the identified root frames.
+  No interval overlap is used as an equality; the overlap test
+  \texttt{MATCH} is reported as a consistency check only.
+\item \emph{Local uniqueness.} At each neighbour $w$, every congruence
+  $g=[L_{F^*}S\mid\cdot][L_F\mid\cdot]^T$ ($F$ a star facet of the type of a
+  facet $F^*$ through $v_0$ and $w$, $S$ a template symmetry taking the
+  base to $w$'s template vertex, all of them) not certified to miss a
+  facet through $w$ is kept; all kept $g$ must give one exact encoding,
+  hence at most one actual full star at $w$ at the fixed radius
+  (Lemma~\ref{lem:rooted}); an empty kept set is not accepted as forcing.
+  For an actual polytope the star at $w$ supplies existence.
+  Whether the facets of $g(\text{star})$ can match the known facets
+  through $w$ is decided by a perfect matching in the complete bipartite
+  graph of interval-compatible pairs (\texttt{locuniq.py}); a
+  candidate is excluded only if no perfect matching exists.
+\item \emph{Development} for any actual star represented by the
+  unidentified encoding, as in
+  Computation~\ref{comp:dev}.
+\end{enumerate}
+Template facts (neighbours, cells, symmetries of the 181 facet types) are
+certified against exact models of the constructions: symmetries by
+construction, vertices at exact distance 1, exactly flat cell vertex sets,
+\texttt{sadi} and \texttt{gap} in $\Q(\sqrt5)$; all symmetry candidates are
+enumerated and rejected only for certified reasons, and the accepted sets
+equal the exact groups (orders $|\Stab|\cdot|V|$: 120 or 240 for $A_4$
+types, 384 or 1152 for $B_4$, 1152 or 2304 for $F_4$, 14400 for $H_4$,
+$4pq$ or $8p^2$ for duoprisms, $8n$ for antiprism prisms, 48, 96, 120 or
+240 for polyhedral prisms, 400 for \texttt{gap}, 576 for \texttt{sadi}).
+Double precision is used only to propose, except in one place covered by
+a stated error lemma with asserted preconditions (a coordinate lemma: a
+double within $1.1\cdot10^{-6}$ of an exact coordinate of size at most 64,
+used to certify a rejected symmetry candidate's image apart from distant
+template vertices). Frames and local vertices are excluded by interval
+evidence only.
+All models are built and used under the runtime guard of
+Section~\ref{sec:models}. Result at $P_{\max}=16$: 629
+retained encodings, 628 \texttt{KNOWN} (628 distinct constructed polytopes, all 890 names
+matched, none outside the library), 1 \texttt{REFUTED} (the extra
+candidate), 0 \texttt{OPEN}; scalar-root uniqueness and conditional
+forcing for all 629; 230
+\texttt{NO-COUNT} and 32 \texttt{NO} eliminations. Corruptions: shifting every
+class interval by $10^{-12}$ leaves no retained encoding and no \texttt{KNOWN};
+mirroring one snub-cube-prism facet changes \texttt{KNOWN} to
+\texttt{REFUTED}. \emph{Runs with the model guard active}: $P_{\mathrm{ctl}}=6$: 136 classes,
+168 encodings, 167 \texttt{KNOWN}, one \texttt{REFUTED}; $P_{\max}=10$:
+278, 332, 331, one; $P_{\max}=16$: 563, 629, 628, one; all roots and all
+forcing checks certified, and zero \texttt{OPEN}, search, development and
+model-guard uncertainty. The checker's inputs are the
+completeness of stage 2 (Computation~\ref{comp:S2}), the construction
+properties of Section~\ref{sec:models}, the separation lemma, and the
+standard facts used by its certificates.
+
+\begin{proposition}[stage 3, proof route]\label{prop:u3}
+Let $P$ be a convex uniform 5-polytope with all 2-faces at most 16-gonal,
+and let $\sigma$ be the signature of its vertex figure at $v_0$, in the
+surviving class $I$ containing $R$. If $\sigma$ has verdict \texttt{KNOWN}
+with name $Q$, then $P\cong Q$; if $\sigma$ has verdict \texttt{REFUTED},
+$P$ does not exist.
+\end{proposition}
+\begin{proof}
+Let $X$ be the actual star of $P$ at $v_0$. By step 1 it is represented
+by the single retained encoding of $\sigma$;
+by step 2, $R$ is the unique root on the whole class interval. If the
+verdict is \texttt{KNOWN}, then $Q$'s own star is a realisation of a
+signature of the class (stage 2 and step 1 applied to $Q$, whose facets lie
+in the library) and every other encoding of the class is excluded for
+$Q$ (step 3; $Q$ entered the class because its radius lies in $I$).
+Its star therefore has the same encoding as $X$ and, by step 2, the same
+radius; Lemma~\ref{lem:rooted} makes the stars equal in identified root
+frames. Thus after an isometry $P$ and $Q$ have the same star
+$X$ at $v_0$. By step 4 any convex uniform
+5-polytope with star $X$ at $v_0$ has one and the same star at every
+neighbour of $v_0$; Lemma~\ref{lem:induction} gives $P=Q$ after the
+isometry. If the verdict is \texttt{REFUTED}, the development of step 5
+excludes every possibility (Computation~\ref{comp:dev}).
+\end{proof}
+
+\subsubsection{Independently written second implementations}\label{sec:indep}
+The packages \file{checks/independent-s1-b2/} and
+\file{checks/independent-s23/} implement separate algorithms using Arb
+(python-flint) and SymPy. The latter shares stage-1 classes, model
+certificates, known-name lists and the facet-name table with the other
+stage-2/3 implementation; neither package uses \texttt{mpmath.iv}.
+
+\emph{Stage 1 and B2: \file{checks/independent-s1-b2/}.} Library: exact parabolic
+Coxeter combinatorics with rational coefficient-pair keys, exact supporting
+planes for the two 600-cell deletions, product identities; 181 types, 558 words, 1,277 occurrences, all
+enclosures inside the recorded ones. Stage 1: closed walks of length three
+to six, exact Gram matrices for three rays, the two-endpoint monotonicity
+certificate of Section~\ref{sec:S1}, exact phase products for flatness; the same 14,965 cycles and statuses, 7,080 flat,
+57 degenerate, 537 without roots, 7,291 roots each inside the recorded
+interval. B2: Section~\ref{sec:caseB}, Computation~\ref{comp:B2}. The derivative of the closure-angle cosine is checked symbolically and
+its strict sign certified at both ends of the admissible interval for all
+558 words; a synthetic word with a sign change is rejected.
+
+\emph{Stages 2 and 3: \file{checks/independent-s23/}.} Stage 2 as described in
+Section~\ref{sec:S2}. Stage 3:
+closure constants derived from the full exact models; radius uniqueness on
+the whole exported class interval by Arb inverse cosine and forward-mode
+derivatives in $s=1/R$; full five-dimensional stars rebuilt from the base
+and four model neighbours, with every facet expanded by all exact right
+cosets of the full-template base stabiliser in the isometry group of its
+vertex figure (restoring chiral orientation alternatives); candidate states
+grouped only by correspondence isomorphisms whose facet maps are certified
+full-template stabilisers; identification by exhaustive elimination
+(certified Gram disjointness or strict apartness from every vertex of $Q$,
+exact neighbour counts); local uniqueness by all congruences mapping a
+star facet to a known facet through $w$, complete bipartite matching and
+the coset bound of Lemma~\ref{lem:coset} with Arb norms; development
+by a finite tree in which every branch must die; a grid index on exact
+dyadic endpoints that falls back to all points rather than excluding.
+Undecided identities, signs or resource limits make a class \texttt{OPEN}.
+\emph{Result}: at $P_{\mathrm{ctl}}=6$, 10 and 16
+all 136/278/563 classes complete with 168/332/629 signatures; stage 3
+finds 167/331/628 signatures \texttt{KNOWN} (235/455/890 names matched)
+and one wholly refuted signature at each bound (the extra vertex figure),
+with no \texttt{OPEN} class or realisation. Its raw candidate-state counts are
+176/348/657 against \file{checks/check_u3}'s 168/332/629: the restored mirror
+placements (8/16/28) each have a strict full-star separation contradiction;
+all classification conclusions are the same. \emph{Shared with \texttt{check\_u2}/\file{checks/check_u3}:}
+the stage-1 class intervals (regenerated as black boxes and matched to the
+30 input pins), the known-name lists and facet-name table, the construction
+theorem (\file{checks/model_audit/wythoff_proof.md}), the two exceptional model
+certificate files, the alias table and the separation lemma.
+\subsection{Proof of Theorem~\ref{thm:A}}
+
+Let $P$ be a convex uniform 5-polytope with all 2-faces at most 16-gonal,
+scaled to unit edges, with circumradius $R$ and a vertex $v_0$. By
+Lemma~\ref{lem:filter} all cycles at $v_0$ lie in the surviving class $I$
+containing $R$ (Computations~\ref{comp:S1}, on the input certified by
+Computation~\ref{comp:link}, and~\ref{comp:filter}). Its vertex figure
+satisfies (a)--(d) of Section~\ref{sec:S2}, so its signature is one of the
+signatures listed for $I$ (Computation~\ref{comp:S2}, proof route
+\texttt{check\_u2} with the exact equivalence certificate). Each listed
+signature has verdict \texttt{KNOWN} with a name $Q\in\mathcal K_{16}$ or
+is the refuted extra vertex figure, so Proposition~\ref{prop:u3} gives
+$P\cong Q$ or a contradiction. Each of these computations
+has a second rigorous implementation that reaches the same result, sharing
+the inputs listed in the shared-input discussion in Section~\ref{sec:computations}
+(see also Section~\ref{sec:indep}). \qed
+
+\begin{table}[ht]
+\centering\small
+\caption{Counts of the finite computation for the control libraries
+$\mathcal H_6$, $\mathcal H_{10}$ and $\mathcal H_{16}$
+as checked by the full replays. Retained signatures are not
+exact-existence certificates for every row.}
+\label{tab:counts}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+ & $\mathcal H_6$ & $\mathcal H_{10}=\mathcal L_{10}$ & $\mathcal H_{16}=\mathcal L_{16}$\\
+\midrule
+canonical facet types & 76 & 106 & 181\\
+cycles & 2,559 & 5,471 & 14,965\\
+\quad flat (exact) / degenerate roots (exact) & 790 / 23 & 1,703 / 39 & 7,080 / 57\\
+radius classes / surviving the filter & 760 / 136 & 1,790 / 278 & 4,224 / 563\\
+surviving classes with a known radius & 135 & 277 & 562\\
+vertex-figure signatures & 168 & 332 & 629\\
+distinct known polytopes & 167 & 331 & 628\\
+branches of the extra vertex figure (stuck) & 4 & 4 & 4\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Computed coverage}
+The guarded searches at $P_{\mathrm{ctl}}=6,10,16$ give 136/278/563
+surviving classes and 168/332/629 strict vertex figures, with zero
+undecided or non-strict results. The independent stage-1/B2 replay and
+stage-2/3 replays of Section~\ref{sec:indep} agree. The full $P=16$
+computation covers all 563 surviving classes; its 629 candidate figures
+lead to 628 known polytopes and the refuted extra candidate. These are
+coverage statements, not assertions that every retained local encoding
+has an exact realization.
+
+At $P_{\mathrm{ctl}}=6$ ten known radii lie in no surviving class and four known
+facet multisets are not found; all of them have octagons or decagons,
+in facets outside $\mathcal H_6$ (the variable families remain capped),
+so these lists are non-empty by design; at
+$P_{\max}\ge10$ both are empty.
+
+%======================================================================
+\section{Case B: a 2-face with at least 17 sides}\label{sec:caseB}
+%======================================================================
+
+\subsection{Setting}
+
+In this section $P$ is a convex uniform 5-polytope with unit edges,
+circumradius $R$, centre $c$, having a large 2-face (at least 17 sides).
+By vertex-transitivity every vertex lies in a large 2-face. Fix a vertex
+$v$; $\VF$ is its vertex figure, a convex 4-polytope inscribed in a
+3-sphere of radius $r=\sqrt{1-1/(4R^2)}<1$ (Lemma~\ref{lem:vf}). Faces of
+$\VF$ correspond to faces of $P$ at $v$: VF-vertex $=$ edge of $P$ at $v$
+(we identify it with the neighbour), VF-edge $=$ 2-face, VF-ridge $=$
+cell, VF-facet $=$ facet. A VF-edge is \emph{long} if its 2-face is large;
+its length is $\ch_n\ge\ch_{17}=2\cos(\pi/17)=1.96595\ldots$. A facet is
+\emph{large} if it contains a large 2-face. For a large 2-face $F\ni v$
+with VF-edge $e$, the \emph{fan} of $F$ (or of $e$) is the set of
+VF-facets $\VF(K)$ with $K\supset F$, and its vertices are the \emph{fan
+vertices}.
+
+\subsection{Facts about the families}
+
+\begin{fact}[F2]\label{fact:F2}
+Let $q\notin\{3,4,5,6,8,10\}$. A convex uniform polyhedron with a $q$-gonal
+face is $P_q$ or $A_q$; a convex uniform 4-polytope with a $q$-gonal 2-face
+is a duoprism $\{q\}\times\{p\}$ ($p\ge3$, including $P_q\times\{\}=\{q\}\times\{4\}$)
+or $A_q\times\{\}$ (Facts~\ref{fact:3d} and~\ref{fact:4d}). In particular
+this holds for every large $q$, and for $q\in\{7,9,11,\dots,16\}$
+(``family polygons''), which (P1) uses.
+\end{fact}
+
+\begin{fact}[F3]\label{fact:F3}
+In $\{n\}\times\{q\}$ and in $A_n\times\{\}$ every vertex lies on an
+$n$-gon. At a vertex $v$:
+$\VF(\{n\}\times\{q\})$ is the tetrahedron $\conv(a,b,g,g')$, where $a,b$
+are the neighbours on the $n$-gon and $g,g'$ those on the $q$-gon:
+$|ab|=\ch_n$, $|gg'|=\ch_q$, $ab\perp gg'$, and the other four edges have
+length $\sqrt2$. $\VF(A_n\times\{\})$ is the pyramid with apex $z$ (the
+prism edge) over the trapezoid $(a,b,y,x)=\VF(A_n)$: $ab$ is the VF-edge of
+the $n$-gon, $|by|=|yx|=|xa|=1$ (the three triangles at $v$), the diagonals
+$ay$, $bx$ have length $\sqrt{1+\ch_n}$, and the four apex edges have
+length $\sqrt2$.
+\end{fact}
+
+These follow directly from the stated product and antiprism constructions.
+
+\begin{lemma}[F5: cycle types]\label{lem:F5}
+Let $F$ be a 2-face of $P$ with $n\notin\{3,4,5,6,8,10\}$ sides. Then the
+cycle of $F$ is one of
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\{n\}\times\{q_1\},\dots,\{n\}\times\{q_k\}$ (all cells $P_n$), with
+  $k\in\{3,4,5\}$ and $\sum_i(1-2/q_i)<2$;
+\item $A_n\times\{\}$, $A_n\times\{\}$, $\{n\}\times\{q\}$;
+\item $A_n\times\{\}$, $A_n\times\{\}$, $\{n\}\times\{q_1\}$,
+  $\{n\}\times\{q_2\}$ with $\{q_1,q_2\}\in\{\{3,3\},\{3,4\},\{3,5\}\}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+By Fact~\ref{fact:F2} the cells at $F$ are $P_n$ or $A_n$ and the facets
+$\{n\}\times\{q\}$ or $A_n\times\{\}$. The face angles of the tangent cone
+at $F$ (Lemma~\ref{lem:closure}) are $\pi(1-2/q)$ for $\{n\}\times\{q\}$
+(between two $P_n$) and $\pi/2$ for $A_n\times\{\}$ (between $A_n$ and
+$P_n$), with sum below $2\pi$. Both neighbours of an $A_n$ ray are
+$A_n\times\{\}$, each containing one $A_n$ cell at $F$, so $j$ rays of type
+$A_n$ cost $2j$ distinct right angles, and $j\le1$. If $j=0$ we get (i),
+with $k\ge3$ and $k\le5$ since each term is at least $1/3$. If $j=1$ there
+are $m\ge0$ duoprisms between the two $P_n$ rays, and the cycle has $m+2$
+rays. The tangent cone at $F$ is a full-dimensional pointed cone in the
+3-dimensional space $N$, so a section of it by a positive affine functional
+is a convex polygon and the cone has at least three extreme rays; hence
+$m=0$ is impossible. $m=1$ is (ii); $m=2$ needs $1/q_1+1/q_2>1/2$, i.e.\
+(iii); $m\ge3$ gives a sum of at least $\pi+3\pi/3$, too large.
+\end{proof}
+
+\begin{lemma}[Long edges are disjoint]\label{lem:long}
+Two long VF-edges share no vertex.
+\end{lemma}
+\begin{proof}
+A long edge $[a,b]$ subtends at the centre of the VF sphere an angle
+$\theta$ with $\sin(\theta/2)=\cos(\pi/n)/r\ge\cos(\pi/17)$, so
+$\theta\ge\pi-2\pi/17$ ($158.82^\circ$). If $[a,b]$ and $[a,b']$ are both
+long, $b$ and $b'$ lie within $2\pi/17$ ($21.18^\circ$) of the antipode of
+$a$, so $|b-b'|\le2r\sin(2\pi/17)<0.7225<1$, contradicting
+Lemma~\ref{lem:sep}.
+\end{proof}
+
+Lemma~\ref{lem:long} is used in Section~\ref{sec:W}: the Arb
+certificate of (W) leaves out the ends of the long edges themselves, and
+this lemma covers them.
+
+\subsection{The radius forced by a large 2-face}\label{sec:radii}
+
+Let $F$ be an $n$-gon of $P$ at $v$, $n\notin\{3,4,5,6,8,10\}$ (so that
+Lemma~\ref{lem:F5} applies), with centre $o_F$ in the plane
+$L$, and write $c=o_F+W$ with $W\perp L$; so $R^2=r_n^2+|W|^2$. A neighbour
+$v+u$ of $v$ with $u\perp L$ is on the circumsphere iff $u\cdot W=1/2$
+(expand $|v+u-c|^2=R^2$ using $u\cdot(v-o_F)=0$).
+
+\paragraph{Type (i).} The cells at $F$ are $F\times[v,v+u_i]$ with unit
+$u_i\perp L$; consecutive $u_i,u_{i+1}$ span the $q_i$-gon of
+$\{n\}\times\{q_i\}$ at $v$, so $|u_i-u_{i+1}|=\ch_{q_i}$. All $u_i$ satisfy
+$u_i\cdot W=1/2$, so they lie on a circle of radius $S=\sin\alpha$ on the
+cone of half-angle $\alpha$ about $W$, $\cos\alpha=1/(2|W|)$. By
+Lemma~\ref{lem:closure}(c), $W$ is strictly inside the cone spanned by the
+$u_i$, i.e.\ the circle's centre is strictly inside the inscribed polygon of
+the $u_i$: all central angles $2\arcsin(\cos(\pi/q_i)/S)$ are below $\pi$
+and they sum to $2\pi$. Let
+$f_c(S)=\sum_i2\arcsin(\cos(\pi/q_i)/S)$ on $[c_{\max},1]$,
+$c_{\max}=\max_i\cos(\pi/q_i)$; $f_c$ is strictly decreasing and
+$f_c(1)=\sum\pi(1-2/q_i)<2\pi$. Hence:
+
+\begin{lemma}[Type (i) radius and closability]\label{lem:typei}
+A configuration $c=(q_1,\dots,q_k)$ occurs in a type-(i) cycle only if it
+is \emph{closable}: $f_c(c_{\max})>2\pi$. Then $f_c(S)=2\pi$ has a unique
+solution $S\in(c_{\max},1)$, the \emph{configuration radius}
+$R_c=1/(2\sqrt{1-S^2})$ depends only on the multiset $c$, and
+\[R^2=r_n^2+R_c^2.\]
+Moreover $R_c\ge r_{q_{\max}}$. For $k=3$, closability is equivalent to the
+triangle with sides $\ch_{q_1},\ch_{q_2},\ch_{q_3}$ being acute; for $k=4$
+to the circle's centre being strictly inside the inscribed quadrilateral.
+If $f_c(c_{\max})=2\pi$ exactly (\emph{degenerate}), the centre lies on the
+hyperplane of a facet, which is impossible.
+\end{lemma}
+\begin{proof}
+All but the formula $R_c\ge r_{q_{\max}}$ and the triangle criterion is
+above. $S\ge\cos(\pi/q_{\max})$ gives
+$R_c^2=1/(4(1-S^2))\ge1/(4\sin^2(\pi/q_{\max}))$. For three rays: the foot of
+the perpendicular from $0$ to the plane of $u_1u_2u_3$ is the circumcentre
+$o_T$ of the chord triangle, and $o_T\cdot u_i=|o_T|^2$ for each $i$, so
+$W=o_T/(2|o_T|^2)$ (both satisfy the three equations $x\cdot u_i=1/2$, which
+have a unique solution); so $W$ is interior to
+the cone iff $o_T$ is interior to the triangle iff the triangle is acute,
+and a right triangle puts $W$ in the plane of a facet. The same argument
+with the circle gives the $k=4$ form.
+\end{proof}
+
+\begin{remark}[four or five rays]\label{rem:k4}
+For $k\ge4$ a configuration is never degenerate, and it is closable if and
+only if $\sum_i(1-2/q_i)<2$. Indeed, at $S=c_{\max}$ one maximal term of
+$f_c$ equals $\pi$, and each of the other $k-1\ge3$ terms is strictly larger
+than $2\arcsin(\cos(\pi/q_i))=\pi(1-2/q_i)\ge\pi/3$ because $c_{\max}<1$; so
+$f_c(c_{\max})>2\pi$ even when maximal entries are tied. Since $f_c$ is
+strictly decreasing, a root in $(c_{\max},1)$ exists exactly when
+$f_c(1)=\pi\sum(1-2/q_i)<2\pi$ (at equality the only root is $S=1$, which
+gives no finite $R_c$). This makes the closability classification used in
+B2 and (P1) checkable by hand for $k\ge4$. The exact angle condition already
+excludes $k\ge6$, so the finite enumerations need $k=3,4,5$ only; the B2
+checker rejects cycles with fewer than three or more than five entries,
+and the (P1) closure routines reject fewer than three, explicitly.
+\end{remark}
+
+Exactly three configurations with entries at most 16 are degenerate:
+$(3,3,4)$, $(3,4,6)$, $(3,5,10)$, since
+$\ch_3^2+\ch_3^2=\ch_4^2$, $\ch_3^2+\ch_4^2=\ch_6^2$ and
+$\ch_3^2+\ch_5^2=\ch_{10}^2$ (the last is $1+(3+\sqrt5)/2=(5+\sqrt5)/2$). The
+configuration $(3,5,q)$ is not closable for $q\ge11$, since
+$1+\ch_5^2=3.618\ldots<\ch_q^2$; similarly $(3,3,q)$ for $q\ge5$ and $(3,4,q)$
+for $q\ge7$. For $c''$ a sequence such that $(n,c'')$ is closable, write
+\[\delta_{c''}(n):=R_{(n,c'')}^2-r_n^2.\]
+
+\begin{lemma}[closed forms]\label{lem:deltas}
+Let $n\ge17$, $\theta=\pi/n$, $c=\cos\theta$ and $x=c^2$. Then
+\[
+\delta_{(4,4)}(n)=\tfrac14,\qquad
+\delta_{(3,6)}(n)=\frac{x}{4x-1}=\frac{1}{4-\sec^2\theta},\qquad
+\delta_{(3,3,3)}(n)=\frac{2c+1}{8(1+c)}=\frac{h_A(n)^2}{4}.
+\]
+$\delta_{(3,6)}$ decreases and $\delta_{(3,3,3)}$ increases with $n$, so
+for $n\ge17$, including the limit $n=\infty$,
+$\delta_{(3,6)}(n)\in[1/3,\ \delta_{(3,6)}(17)]$ with
+$\delta_{(3,6)}(17)=\cos^2(\pi/17)/(4\cos^2(\pi/17)-1)=0.3372617\ldots<0.337262$,
+and $\delta_{(3,3,3)}(n)\in[h_A(17)^2/4,\ 3/16]$ with
+$h_A(17)^2/4=0.1869633\ldots$; the value $3/16$ is attained only in the
+limit $n=\infty$.
+\end{lemma}
+\begin{proof}
+For a chord triangle with squared sides $A,B,C$ the circumradius satisfies
+$S^2=ABC/((A+B+C)^2-2(A^2+B^2+C^2))$, and $R_c^2=1/(4(1-S^2))$,
+$r_n^2=1/(4(1-x))$. For $(n,3,6)$ the sides are $2c,1,\sqrt3$, which gives
+$S^2=3x/(-1+8x-4x^2)$ and $\delta_{(3,6)}=x/(4x-1)$; the triangle is acute
+since $1/2<x<1$, so this is the closable solution. For $(n,4,4)$ the sides
+are $2c,\sqrt2,\sqrt2$, giving $S^2=1/(2-x)$ and $\delta=1/4$ (the prism
+$P_n$); this triangle is also acute. For $(n,3,3,3)$ put $S^2=1/(3-2c)$
+and $\sin\alpha=1/(2S)$; then $\pi/6<\alpha<\pi/4$, the three unit chords
+subtend $2\alpha$ each, the remaining arc $2\beta=2\pi-6\alpha$ lies in
+$(\pi/2,\pi)$, and $\sin\beta=\sin3\alpha=\sin\alpha(3-4\sin^2\alpha)=2c\sin\alpha$,
+so its chord is $2S\sin\beta=2c$: all four arcs are below $\pi$ and sum to
+$2\pi$. Substitution gives $\delta_{(3,3,3)}=(2c+1)/(8(1+c))
+=\bigl(1-1/(2(1+c))\bigr)/4=h_A(n)^2/4$ (the antiprism $A_n$), using
+$\cos^2(\theta/2)=(1+c)/2$. Finally
+$d\delta_{(3,6)}/dc=-2c/(4c^2-1)^2<0$ and
+$d\delta_{(3,3,3)}/dc=1/(8(1+c)^2)>0$, and $c$ increases to $1$ with $n$.
+\end{proof}
+
+The limiting value $3/16$ is included in the closed range used by (P1).
+The partner filter uses the valid bound $0.3373$ for
+$\delta_{(3,6)}(17)$; the exact rational function, rather than a rounded
+constant, is evaluated throughout the parameter interval.
+
+\paragraph{Type (ii).} The $A_n$ cell has its second $n$-gon at height
+$h_A=h_A(n)$ along a unit vector $\hat h\perp L$, rotated by $\pi/n$. The
+edge condition gives $h_A^2=1-1/(4\cos^2(\pi/(2n)))$, and equidistance from
+the two $n$-gons gives $W\cdot\hat h=h_A/2$, so
+$R_{A_n}^2=r_n^2+h_A^2/4$. The other two rays $z_1,z_2$ (lateral edges of
+the $P_n$ cells) make right angles with $\hat h$ and the angle $\pi(1-2/q)$
+with each other, so they lie in the plane orthogonal to $\hat h$ in
+$L^\perp$; the component $W'$ of $W$ there satisfies $W'\cdot z_j=1/2$ and is
+the centre offset of the $q$-gon, $|W'|=r_q$. Hence
+\[R^2=R_{A_n}^2+r_q^2.\]
+
+\paragraph{Type (iii).} The rays are $\hat h,z_1,w,z_2$. As in (ii),
+$W=(h_A/2)\hat h+W'$ with $W'\in\spn(z_1,z_2)$, $W'\cdot z_j=1/2$, so with
+$\phi$ the angle between $z_1$ and $z_2$ and $\gamma:=\cos\phi$,
+$|W'|^2=1/(2(1+\gamma))$ and $R^2=R_{A_n}^2+1/(2(1+\gamma))$. Writing
+$w=\alpha z_1+\beta z_2+\eta\hat h$ with $w\cdot z_j=c_j:=\cos(\pi(1-2/q_j))$,
+the remaining condition $W\cdot w=1/2$ reads $h_A\eta=1-(\alpha+\beta)$, where
+$\alpha+\beta=(c_1+c_2)/(1+\gamma)$ and $\eta^2=1-|\alpha z_1+\beta z_2|^2$.
+Convexity of the cone $(\hat h,z_1,w,z_2)$ puts $w$ and $\hat h$ on opposite
+sides of $\spn(z_1,z_2)$, so $\eta<0$ (the \emph{geometric} branch).
+Squaring, with $N=1-\gamma^2-c_1^2-c_2^2+2\gamma c_1c_2$ (so that
+$\eta^2=N/(1-\gamma^2)$) and $M=1+\gamma-c_1-c_2$, gives the polynomial
+equation
+\[
+h_A^2\,N\,(1+\gamma)-M^2\,(1-\gamma)=0,
+\]
+to be solved on the domain $-1<\gamma<1$ together with the norm condition
+$N\ge0$ and the unsquared sign $\eta<0$. When $c_1=c_2$ (the pair $(3,3)$)
+the polynomial has the spurious factor $1-\gamma$, which is cancelled,
+leaving a quadratic; otherwise it is a cubic. The radius identity above
+holds at every geometric root. At $n=17$, for instance, the roots in
+$(-1,1)$ are one for $(3,3)$ and two each for $(3,4)$ and $(3,5)$, and exactly one of them is geometric in each case. B2 checks \emph{all roots in $(-1,1)$}
+(Computation~\ref{comp:B2}), so no claim about their number is needed.
+The (W) checker parametrises the type-(iii) fan by $\cos(\phi/2)$
+and recovers $n$ from it, without root finding.
+
+\subsection{Step B2: no large-polygon radius is a Case-A radius}
+
+\begin{computation}[B2]\label{comp:B2}
+Let $n\ge17$. None of the following radii lies in an interval of $\Omega$
+(Definition~\ref{def:omega}):
+\begin{itemize}[leftmargin=2em]
+\item $\sqrt{r_n^2+R_c^2}$ for every closable configuration $c$ (any
+  entries $\ge3$, $k\in\{3,4,5\}$, $\sum(1-2/q_i)<2$);
+\item $\sqrt{R_{A_n}^2+r_q^2}$ for every $q\ge3$;
+\item $\sqrt{R_{A_n}^2+1/(2(1+\gamma))}$ for every root $\gamma\in(-1,1)$
+  of the type-(iii) polynomial equations, geometric or not.
+\end{itemize}
+\end{computation}
+
+\noindent\emph{Reduction to a finite check.} $r_q$ increases with $q$ and
+$r_{398}>63.344>\max\Omega$. Every radius above exceeds $r_n$, so only
+$17\le n\le397$ matter (381 values). For type (i), $R_c\ge r_{q_{\max}}$
+(Lemma~\ref{lem:typei}), so configurations with an entry $\ge398$ give
+$R>\max\Omega$; for type (ii), $R\ge r_q$, so $q\le397$; for type (iii),
+$q_1,q_2\le5$.
+Both \texttt{b2check.py} (\texttt{QMAX=397}, function \texttt{run})
+and \file{checks/independent-s1-b2/b2.py} (function \texttt{run}) certify the
+$r_{398}$ inequality before the enumeration. The boundary certificate
+\file{checks/independent-s1-b2/evidence/b2-comparison.json}, \texttt{cutoff},
+records \texttt{last\_finite\_n=397}, \texttt{first\_tail\_n=398}
+and $r_{397}<\max\Omega<r_{398}$.
+
+\noindent\emph{Proof route} (\texttt{b2check.py}).
+This uses \texttt{mpmath.iv} at 200 bits, with its own derivation of the three radius formulas (as above). Type (i): all
+1,304 closable multisets with entries $3..397$, $k=3,4,5$ and exact
+rational angle sum below 2 (1,316 cyclic arrangements; $R_c$ depends only
+on the multiset), $R_c$ by a verified bracket, for each of the 381 values
+of $n$ (496,824 radii); closability by interval arcsine and the exact
+degenerate cases in $\Q(\sqrt5)$. Type (ii): $q=3,\dots,397$ (150,495
+radii). Type (iii): every root in $(-1,1)$, isolated from certified
+nonzero endpoint values by subdivision; a box is discarded only for a
+nonzero interval polynomial value or a derivative of constant sign with
+equal strict endpoint signs, opposite strict signs with a derivative
+excluding zero certify one root, every split point is certified non-root,
+and an unresolved box is a failure. There is no positive-root or
+geometric-branch prefilter: 1,905 roots (1,143 geometric, 762
+non-geometric), all compared with $\Omega$. The overlap query is complete
+(sorted lower endpoints with a prefix maximum of upper endpoints).
+Result: 649,224 radii, \textbf{0 coincidences, 0 undecided boxes}. The
+closest approach is a relative gap of $1.66\cdot10^{-7}$ (type (i), $n=24$,
+$c=(5,5,8)$, $R=4.8302\ldots$), against interval widths of about
+$10^{-45}$ (radii) and $10^{-20}$ ($\Omega$). The closability
+classification: not closable exactly $(3,3,q)$, $q\ge5$; $(3,4,q)$,
+$q\ge7$; $(3,5,q)$, $q\ge11$; degenerate exactly $(3,3,4)$, $(3,4,6)$,
+$(3,5,10)$; all others closable (Remark~\ref{rem:k4}). \emph{Root
+coverage audit} (\texttt{check\_root\_audit.py}, importing neither
+enumeration program): it reconstructs each quadratic or
+cubic in 320-bit Arb arithmetic, counts its roots in $(-1,1)$ by Sturm
+sequences with all signs certified and no repeated roots, and checks that
+the certified brackets are disjoint, have opposite endpoint signs, the
+right derivative sign and branch label, and are as many as the Sturm
+count; so no root in $(-1,1)$ is omitted. It rejects four corruptions (a
+dropped negative non-geometric root, a duplicate, a changed branch, an
+endpoint bracket). The B2 check also returns zero coincidences against the
+independent stage-1 intervals. \emph{Inverse sine.} The lower-bound proposal loop of \texttt{rasin} uses an explicit guard: for a positive proposal require
+$0\le t_{\rm lo}\le L$, where $L$ is the lower endpoint of the interval
+for $\pi/2$. Hence $t_{\rm lo}$ is in the principal domain before sine
+monotonicity is used; a nonpositive proposal is replaced by the safe lower
+bound zero, and an unproved domain raises an error. The wrong-branch
+proposal $t_{\rm lo}=4$ at $x=1/2$ is rejected.
+
+\noindent\emph{Second implementation}. Written from
+this paper only and run against the independent $\Omega$ of that package
+(its own stage 1): all 381 values $17\le n\le397$, all 1,304 closable
+multisets (1,171 not closable and 3 degenerate, classified exactly),
+$q=3,\dots,397$, and every root in $(-1,1)$ of the three type-(iii)
+polynomials found by exhaustive subdivision and counted by a separate
+Sturm sequence (1,143 geometric, 762 non-geometric); the cutoff
+$r_{397}<\max\Omega<r_{398}$ and the parameter tails are certified.
+Result: 649,224 radii, 0 coincidences, 0 undecided; the smallest absolute
+separation is $7.9977\ldots\cdot10^{-7}$, again at $n=24$, $c=(5,5,8)$.
+Positive controls 1,750/1,750, 196/196, 42/42 geometric and 2/28
+non-geometric; 16 semantic corruptions behave as expected. \emph{Shared with
+\texttt{check\_b2}:} the reductions of this section only (the two use different
+$\Omega$ files, built by different stage-1 implementations).
+
+\noindent\emph{Positive control.} Every type-(i), (ii) and geometric
+type-(iii) radius with $n\le16$ and entries at most 16 is a stage-1 root,
+so it must lie in $\Omega$: 1,750/1,750, 196/196 and 42/42 of them are found
+in $\Omega$. In addition 2 of the 28 non-geometric type-(iii) roots in that
+range also lie in $\Omega$ (44/70 type-(iii) roots in total); these are not
+required. These are non-proof checks of the radius formulas.
+\emph{Corruptions:} three intervals inserted into $\Omega$ around computed
+radii give exactly three coincidences; the slip $r_n=1/(2\sin(2\pi/n))$
+gives 1,000 coincidences (the radii of $\{n/2\}\times Q$).
+\emph{Input identity:} $\Omega$ is exported from the unfiltered stage-1
+output by \texttt{export\_omega.py} with the degenerate-cycle guard
+described after Definition~\ref{def:omega}; the checker refuses an $\Omega$
+whose SHA-256 differs from \texttt{c7773fab\ldots89bc33} and also checks its
+content; all 7,080 infinite upper endpoints belong to flat cycles, so no
+surviving interval is unbounded (an unbounded interval would make B2
+vacuous for large $n$).
+
+\noindent
+\begin{corollary}\label{cor:B2}
+Every 2-face $G$ of $P$ lies in a large facet. Consequently every VF-edge
+at $v$ lies in a VF-facet $\VF(K)$ with $K$ large, and $K$ contains a large
+2-face through $v$.
+\end{corollary}
+\begin{proof}
+If $G$ is large there is nothing to prove. Otherwise, suppose no facet
+around $G$ is large; then all of them have only polygons of at most 16
+sides, so they are in $\mathcal L_{16}$ (Lemma~\ref{lem:A7}) and $R\in\Omega$
+by Corollary~\ref{cor:omega}. But $R$ is also the radius forced by the cycle
+of a large 2-face of $P$, which is of type (i), (ii) or (iii)
+(Lemma~\ref{lem:F5}) with the parameters of Computation~\ref{comp:B2}
+(type (i) configurations are closable by Lemma~\ref{lem:typei}; in type
+(iii), $\gamma=\cos\phi$ is a root of the polynomial in $(-1,1)$, and B2
+covers every such root), so $R\notin\Omega$. For the second part, a large facet $K$ is $\{m\}\times\{q\}$
+or $A_m\times\{\}$ with $m\ge17$ (Fact~\ref{fact:F2}), and every vertex of
+$K$, in particular $v$, lies on an $m$-gon of $K$ (Fact~\ref{fact:F3}).
+\end{proof}
+
+Let $s\ge1$ be the number of large 2-faces at a vertex (the same at every
+vertex).
+
+\subsection{Exactly one large 2-face at each vertex}\label{sec:s1}
+
+\begin{theorem}\label{thm:s1}
+If $s=1$, then $P\cong\{n\}\times Q$ for a convex uniform polyhedron $Q$,
+or $P\cong A_n\times\{q\}$.
+\end{theorem}
+
+Fix $v$, its large 2-face $F$ (an $n$-gon with plane direction $L$) and
+$e=[a,b]$ its VF-edge. By Corollary~\ref{cor:B2} and $s=1$, every VF-edge
+lies in a VF-facet $\VF(K)$ with $K\supset F$; so \emph{every VF-edge, and
+hence every VF-vertex, lies in a facet of the fan of $e$}. The fan is
+given by the cycle type of $F$ (Lemma~\ref{lem:F5}).
+
+\begin{proof}[Type (i)]
+The fan facets are $T_i=\conv(a,b,x_i,x_{i+1})$, where $[v,x_i]$ is the
+lateral edge of the $i$-th cell $F\times[v,x_i]$; so $x_i-v\perp L$, and the
+neighbours of $v$ are exactly $a,b,x_1,\dots,x_k$. The $x_i$ are distinct
+(two $P_n$ cells at $F$ with the same lateral edge span the same 3-space).
+
+\emph{Product lemma.} For a vertex $t$ let $F_t$ be its unique large
+2-face. By vertex-transitivity, the local picture at $t$ is the one at
+$v$ (a symmetry mapping $v$ to $t$ maps $F$ to $F_t$, by uniqueness). For a
+neighbour $t'$ of $t$, either $t'\in F_t$, and then $F_{t'}=F_t$; or $t'-t$
+is a lateral edge, orthogonal to the plane of $F_t$, and the duoprism
+$\{n\}\times\{q_i\}$ containing the edge $tt'$ contains the translate
+$F_t+(t'-t)$, a large 2-face at $t'$, so $F_{t'}=F_t+(t'-t)$. These
+translates come from the actual prism cells at the edge, not from the
+shape of the vertex figure. The edge graph of $P$ is connected
+\cite{Balinski1961}, so every $F_t$ is a translate $F+\tau_t$ with
+$\tau_t\perp L$ (each step adds $0$ or a vector orthogonal to $L$).
+Hence the vertex set is $F_0+X$, with $F_0$ the polygon $F$ centred at the
+origin of $L$ and $X$ a finite set in an affine copy of $L^\perp$, and
+$P=\conv F_0+\conv X\cong\{n\}\times Q$ with $Q=\conv X$, a 3-polytope since
+$\dim P=5$. Every point of $X$ is a vertex of $Q$ (a point $(f,x)$ of a
+product is a vertex iff both factors are vertices). $Q$ has unit edges and
+regular faces, because its edges and 2-faces $G$ give edges and 2-faces
+$\{f\}\times G$ of $P$; a symmetry $g$ of $P$ maps $F_t$ to $F_{g(t)}$, so
+its linear part preserves $L$ and $L^\perp$ and $g$ induces an isometry of
+$Q$; $\Sym(P)$ is transitive on the $F_t$, hence on $X$. So $Q$ is a convex
+uniform polyhedron.
+\end{proof}
+
+\begin{proof}[Type (ii)]
+The fan consists of the pyramids $\Pi_1=(z_1;a,b,y,x)$,
+$\Pi_2=(z_2;a,b,y,x)$ (the two $A_n\times\{\}$ sharing the $A_n$ cell $C$,
+$\VF(C)=(a,b,y,x)$) and $T=\conv(a,b,z_1,z_2)$. The neighbours of $v$ are
+$a,b,x,y$ (in $C$) and $z_1,z_2$, with $z_j-v$ orthogonal to the
+3-space $M$ of $C$. \emph{Cell partition:} for a vertex $t$ let $C_t$ be
+the unique $A_n$ cell containing $F_t$ (one $A_n$ ray per cycle). For
+$t'\in C_t$, $t'$ lies on exactly one of the two $n$-gons of $C_t$ ($n\ge4$),
+which is then $F_{t'}$, so $C_{t'}=C_t$. The other two neighbours $t'$ of
+$t$ satisfy $t'-t\perp M_t$, and the $A_n\times\{\}$ containing $tt'$ gives
+$C_{t'}=C_t+(t'-t)$. So the vertex set is $C_0+X$ with $X$ in a 2-plane
+orthogonal to $M$, $P=A_n\times\conv X$, and $\conv X$ is a
+vertex-transitive equilateral convex polygon with unit edges, i.e.\ a
+regular polygon $\{q\}$.
+\end{proof}
+
+\begin{proof}[Type (iii) does not occur]
+The fan consists of $\Pi_1$, $\Pi_2$ as in (ii) and $T_1=\conv(a,b,z_1,w)$,
+$T_2=\conv(a,b,w,z_2)$, where $w-v$ is the lateral edge of the $P_n$ cell
+between the two duoprisms. The seven points $a,b,x,y,z_1,z_2,w$ are
+distinct: $a-v,b-v\in L$; $x-v$ and $y-v$ are neither in $L$ nor orthogonal
+to $L$ ($x,y$ lie on the other $n$-gon of the antiprism, rotated by $\pi/n$
+and at height $h_A>0$), and $x\ne y$; $w-v$, $z_1-v$, $z_2-v$ are orthogonal
+to $L$ and are the lateral edges of three different $P_n$ cells. Since
+every VF-edge lies in a fan facet, the VF-edges are exactly the edges of
+these four facets:
+\[ab,\ ax,\ xy,\ yb,\ z_ja,\ z_jb,\ z_jx,\ z_jy\ (j=1,2),\ wa,\ wb,\ wz_1,\ wz_2.\]
+In particular $z_1z_2$ is not a VF-edge, and $x$ has exactly the VF-edges
+$xa,xy,xz_1,xz_2$, $y$ exactly $yb,yx,yz_1,yz_2$, and $w$ exactly
+$wa,wb,wz_1,wz_2$; each of $x,y,w$ is simple (Lemma~\ref{lem:simple}). The
+triangle $(x,y,z_1)$ is a 2-face of $\Pi_1$, hence a VF-ridge, lying in
+$\Pi_1$ and exactly one other VF-facet $K'$. At $x$, $\Pi_1$ has the edges
+$\{xa,xy,xz_1\}$, so $K'$ has $\{xy,xz_1,xz_2\}$; thus $xa$ is not an edge of
+$K'$, and by Lemma~\ref{lem:face} $a\notin K'$. Likewise, at $y$, $b\notin
+K'$. If $w$ were in $K'$, its $K'$-edges would be among $wz_1,wz_2$ (the
+others go to $a,b$), degree at most 2 in a 3-polytope, impossible. So
+$K'=\conv(x,y,z_1,z_2)$, a tetrahedron, and its edge $z_1z_2$ is an edge of
+$\VF$ (Lemma~\ref{lem:face}, converse), which it is not.
+\end{proof}
+
+
+\subsection{Two or more large 2-faces at each vertex}\label{sec:s2}
+
+The fan of a large $n$-gon $F$ at $v$ is \emph{paired} if one of its
+facets contains a second large 2-face through $v$: a type-(i) cycle with
+exactly one $q_i=m\ge17$ (two such entries would give an angle sum of at
+least $2(1-2/17)+1/3>2$), or type (ii) with $q=m\ge17$. Otherwise it is
+\emph{unpaired}: type (i) with all $q_i\le16$, type (ii) with $q\le16$, or
+type (iii) ($q_1,q_2\le5$). In a paired fan the second large 2-face's
+VF-edge (the \emph{partner edge}) is $[x_1,x_2]$ in type (i) and
+$[z_1,z_2]$ in type (ii).
+
+The paired type-(i) configurations are, by the angle sum and
+Lemma~\ref{lem:typei}: $(m,4,4)$, $(m,3,3,3)$, $(m,3,6)$ for all $m\ge17$;
+$(m,3,7)$ for $m\le41$; $(m,3,8)$ for $m\le23$; $(17,3,9)$; $(m,4,5)$ for
+$m\le19$; and $(m,3,3)$, $(m,3,4)$, $(m,3,5)$ are not closable.
+
+\subsubsection{(P1): the family-polygon filter}
+
+Let $c$ be an unpaired type-(i) configuration (entries at most 16) around
+$F$ containing a family polygon size $q\in\{7,9,11,\dots,16\}$. The $q$-gon
+$Q_0$ of the fan is a 2-face of $P$ lying in the fan facet
+$\{n\}\times\{q\}$, so its cycle (Lemma~\ref{lem:F5} with $q$ in place of $n$)
+contains $\{q\}\times\{n\}$. Type (iii) would need both duoprisms at $Q_0$ to
+have parameter at most 5, so the cycle of $Q_0$ is of type (i) with a
+configuration $(n,c'')$, or of type (ii) with the duoprism
+$\{q\}\times\{n\}$. Comparing radii with $R^2=r_n^2+R_c^2$:
+\begin{itemize}[leftmargin=2em]
+\item type (ii) at $Q_0$: $R^2=R_{A_q}^2+r_n^2$, so $R_c^2=R_{A_q}^2$, i.e.\
+  $R_c^2-r_q^2=h_A(q)^2/4$;
+\item type (i) at $Q_0$: $R^2=r_q^2+R_{(n,c'')}^2=r_q^2+r_n^2+\delta_{c''}(n)$,
+  so $R_c^2-r_q^2=\delta_{c''}(n)$, where $(n,c'')$ is closable with
+  $(1-2/n)+\sum_{p\in c''}(1-2/p)<2$. For $n\ge17$ the angle sum leaves
+  $c''\in\{(3,3),(3,4),\dots,(3,9),(4,4),(4,5),(3,3,3)\}$ and restricts
+  $(3,7)$ to $n\le41$, $(3,8)$ to $n\le23$, $(3,9)$ to $n=17$ and $(4,5)$ to
+  $n\le19$; closability (Lemma~\ref{lem:typei}) removes $(3,3)$, $(3,4)$,
+  $(3,5)$ (for $(3,5)$: $1+\ch_5^2<\ch_n^2$ for $n\ge11$, so the chord triangle
+  is obtuse), and the remaining ones are closable in these ranges.
+\end{itemize}
+
+\begin{computation}[P1]\label{comp:P1}
+Of the 168 cyclic configurations with entries in $3..16$ and angle sum below
+$2\pi$, 137 are closable, 28 not closable and 3 degenerate. Of the 137, 83
+contain a family polygon. For 67 of these 83 there is a family polygon $q$
+in $c$ such that $X:=R_c^2-r_q^2$ is certified different from $h_A(q)^2/4$,
+from $1/4$ ($c''=(4,4)$), from the range $[0.186963,3/16]$ of
+$\delta_{(3,3,3)}$, from the range $[1/3,0.337262]$ of $\delta_{(3,6)}$, and from
+each of the finitely many values $\delta_{(3,7)}(n)$, $n\le41$,
+$\delta_{(3,8)}(n)$, $n\le23$, $\delta_{(3,9)}(17)$, $\delta_{(4,5)}(n)$,
+$n\le19$. The 16 others are $(4,4,q)$ and $(3,3,3,q)$, $q\in\{7,9,11,\dots,16\}$.
+\end{computation}
+
+\noindent Hence the 67 configurations do not occur as fans in a convex
+uniform 5-polytope. The 16 survivors are genuine ($\{n\}\times P_q$ and
+$\{n\}\times A_q$: $\delta_{(4,4)}=1/4=R_{P_q}^2-r_q^2$, and $(3,3,3,q)$ is the
+vertex configuration of $A_q$). \emph{What is computed.} The first implementation,
+\texttt{caseb\_famfilter.py} (Arb, 200 bits; $R_c$ by certified bisection
+of $f_c$; closability by the sign of $f_c(c_{\max})-2\pi$; the three
+degenerate configurations by the exact right-triangle identities; the $c''$
+list hard-coded with its $n$ ranges, which the program checks against the
+angle sum). Independent checker \file{checks/check_caseb/p1check.py}
+(\texttt{mpmath.iv} at 200 bits, sympy for the exact identities) recomputes
+the $c''$ list from the angle condition with closability tested, uses
+closed forms for $(4,4)$, $(3,6)$, $(3,3,3)$ over all $n\ge17$ including
+$n=\infty$, and gets the same 168/137/28/3/83/67 and the same 16
+survivors, with no sporadic $(c'',n)$ coincidence. The Arb implementation is a
+second rigorous implementation only together with the written rational
+angle and chord arguments above for its hard-coded $c''$ list and $n$
+ranges; its sampled tails are non-proof checks. Corruptions: changing
+$\delta_{(4,4)}$ by $10^{-30}$, or using $h^2/2$ for $h^2/4$ in $R_{A_q}^2$, makes
+the corresponding survivors disappear (75 excluded).
+\subsubsection{(W): the wedge lemma}\label{sec:W}
+
+A point $p$ is \emph{admissible} for a fan if it lies on the VF sphere
+($|p-v|=1$, $|p-c|=R$), on the closed inner side of every fan facet's
+hyperplane, and at distance at least 1 from every fan vertex. Every
+VF-vertex that is not a fan vertex is admissible ($\VF$ is convex and the
+fan facets are VF-facets; Lemma~\ref{lem:sep}). An \emph{allowed} fan
+vertex is a fan vertex other than $a$, $b$ and, for a paired fan, the
+partner ends. The partner ends are distinct from the other fan vertices: in
+type (ii) the apexes satisfy $z_j-v\perp M$ while $x-v,y-v\in M$; in type (i) the $x_i$ are distinct
+lateral edges.
+
+\begin{computation}[W]\label{comp:W}
+For each fan in the list below and every real $n\ge17$, including the
+limit $n=\infty$ (and, in (c), every real $m\ge17$ including $m=\infty$;
+in (d), every \emph{integer} $m$ in the stated range), there are no two
+points $p,p'$ with $|p-p'|\ge\ch_{17}$, each admissible or
+an allowed fan vertex, other than two fan vertices. The list:
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item type (i): the 70 closable configurations with entries at most 16
+  that are not excluded by (P1);
+\item type (ii), $q=3,\dots,16$; type (iii), $(3,3)$, $(3,4)$, $(3,5)$;
+\item paired: $(m,4,4)$, $(m,3,3,3)$, $(m,3,6)$ and type (ii) with $q=m$, all
+  $m\ge17$ and $m=\infty$;
+\item paired, bounded, with $m$ an integer: $(m,3,7)$, $17\le m\le37$;
+  $(m,3,8)$, $17\le m\le22$; $(m,4,5)$, $17\le m\le18$, for all real
+  $n\ge17$; and $(m,3,7)$, $38\le m\le41$, $(23,3,8)$, $(17,3,9)$,
+  $(19,4,5)$ at the integer point $n=m$ only.
+\end{enumerate}
+Moreover, for each fan in the list, every pair of fan vertices other than
+$e$, the partner edge and the diagonals $x_ix_j$ of a type-(i) fan has
+distance below $\ch_{17}$ (the largest is the 16-gon chord $1.961571\ldots$;
+in type (iii) $|z_1-z_2|\le1.943206$).
+\end{computation}
+
+\noindent\emph{Scope of the two implementations.} The Arb
+certificate tests pairs in which each point is admissible or an
+\emph{allowed} fan vertex, so it omits pairs with one end in
+$\{a,b\}$ or at a partner end, and its fan-vertex distance bound covers
+pairs not involving $a$ or $b$; the omitted cases are supplied by
+Lemma~\ref{lem:long} and by the explicit lengths of Fact~\ref{fact:F3}
+(Lemma~\ref{lem:Wuse}). The independent checker tests every fan vertex,
+including $a$, $b$ and the partner ends (its test V), and every pair of fan
+vertices other than $e$ and the partner edge (its test F), and certifies
+them. Its certification flag (\texttt{CERTIFIED}) requires test F only for the
+pairs of the ``Moreover'' clause; the type-(i) diagonals are tested in the
+same run and reported separately, and in the full replays none of them is
+long (``long type-(i) diagonals: none''). The proof does not need that
+supplementary result, since Lemma~\ref{lem:Wuse} excludes diagonals
+geometrically.
+
+\noindent\emph{Parameter domains}.
+The continuous parameter $n$ (and $m$ in (c)) is covered by compact charts
+that include the limits; the bounded families of (d) are generated at the
+36 integer slices $(m,3,7)$, $17\le m\le41$; $(m,3,8)$, $17\le m\le23$;
+$(17,3,9)$; $(m,4,5)$, $17\le m\le19$, and are \emph{not} certified for
+non-integer $m$. Integer $m$ suffices for polytopes. Both
+implementations enforce these 36 integer slices and the seven integer
+points $n=m$ (fractional or out-of-range $m$ is refused before any
+arithmetic, and the checker's output records the parameter domain of every
+row).
+
+\noindent\emph{The seven exceptional fans.} Over the full range of $n$,
+(W) fails for $(m,3,7)$, $m=38,\dots,41$, $(23,3,8)$, $(17,3,9)$, $(19,4,5)$,
+with rigorous interval witnesses at large finite $n$ (e.g.\ $n=547$ for
+$(41,3,7)$ and $(19,4,5)$), and also for the (P1)-excluded configurations
+$(3,11,13)$, $(4,7,9)$, $(5,6,7)$. For the seven paired fans, the partner
+$m$-gon's own cycle restricts $n$:
+
+\begin{lemma}[Partner-radius filter]\label{lem:partner}
+If the fan of $F$ (an $n$-gon) is paired of type (i) with configuration
+$(m,c_1)$, $c_1$ one of $(3,7)$, $(3,8)$, $(3,9)$, $(4,5)$, then the fan of the
+partner $m$-gon is of type (i) with configuration $(n,c_2)$ and
+$\delta_{c_1}(m)=\delta_{c_2}(n)$, or of type (ii) with
+$\delta_{c_1}(m)=h_A(m)^2/4$. For the seven exceptional fans this forces
+$c_2=c_1$ and $n=m$.
+\end{lemma}
+\begin{proof}
+From $F$: $R^2=r_n^2+R_{(m,c_1)}^2=r_n^2+r_m^2+\delta_{c_1}(m)$. The partner's
+cycle contains $\{m\}\times\{n\}$, so it is of type (i) with a configuration
+$(n,c_2)$ or of type (ii) with $q=n$ (type (iii) needs parameters at most
+5); this gives $R^2=r_m^2+r_n^2+\delta_{c_2}(n)$ or $R^2=R_{A_m}^2+r_n^2=r_m^2+h_A(m)^2/4+r_n^2$.
+For the seven fans $\delta_{c_1}(m)>99$ (from $99.67$ for $(17,3,9)$ to
+$1040.7$ for $(41,3,7)$), while $h_A^2/4<1/4$,
+$\delta_{(4,4)}=1/4$, $\delta_{(3,3,3)}<3/16$, $\delta_{(3,6)}\le0.3373$, so $c_2$ is
+one of the bounded families, and a certified comparison of the finitely
+many values (\file{checks/check_caseb/partner.py} and \texttt{wpoint.py}) leaves only
+$c_2=c_1$, $n=m$.
+\end{proof}
+
+\noindent\emph{What is computed.} The first implementation
+(\texttt{caseb\_wedge}, Arb): with $\kappa=1/(2R)$ and $\hat c=c/|c|$ (coordinates with
+$v=0$), a VF-vertex is $p=\kappa\hat c+\sqrt{1-\kappa^2}\sum_js_jf_j$ with
+$s\in S^3$ and $(f_j)$ an orthonormal basis of $\hat c^\perp$; then
+$|p-p'|\ge L$ iff $|s+s'|^2\le4-L^2/r^2$, the separation constraints are
+linear in $s$, and each fan facet is a linear inequality. A dual-tree
+branch-and-bound over dyadic $s$-boxes in $[-1,1]^4$ discards box pairs on
+which $\min|s+s'|^2>4-L^2/r^2$ is certified, or a constraint certainly
+fails, and tests allowed fan vertices against single boxes. Parameters
+($\theta=\pi/n\in[0,\pi/17]$; for unbounded paired families polar
+parameters $(\beta,\rho)$ continuous at $n=m=\infty$; the facet
+inequalities of these families are rescaled by the vanishing factor so that
+they do not degenerate at $m=\infty$) are split until certified. Type (iii)
+roots $\phi$ are enclosed for every $\theta$-box by interval bisection and
+Newton steps. Result (228 fans): 184 \texttt{CERTIFIED}, 31
+\texttt{NOT CLOSABLE}, 3 \texttt{DEGENERATE}, 10 \texttt{FAILED} (the seven
+and the three above, each with a floating witness above $\ch_{17}$); the
+seven certify at $n=m$ (\texttt{wpoint.py}). Independent checker
+\file{checks/check_caseb/} (own outward-rounded
+binary64 interval arithmetic, constants from \texttt{mpmath.iv} at 200
+bits; a different chart: $\xi\in\R^3$ for the $L^\perp$ part, $p_1$ from the
+VF equation, $p_2=\pm\sqrt{\cdot}$ on two branches; tests V (no long edge
+from an admissible point to any fan vertex, including $a$, $b$ and the
+partner ends), P (no long admissible pair, via
+$\sum_i(p_i+p'_i)^2>2-2\cos(2\pi/17)$), F (fan-vertex pairs); a piecewise
+linear chart for the unbounded families; type (iii) parametrised by
+$\cos(\phi/2)\in[2^{-20},1-2^{-40}]$ with $n$ recovered from it, the two
+omitted ends excluded by certified inequalities, without root finding):
+120 fans certified over the full range,
+the same 7 failing (with rigorous interval witnesses at integer $n$), all 7
+certified at $n=m$; the 67 (P1)-excluded configurations: 64 certified,
+$(3,11,13)$, $(4,7,9)$, $(5,6,7)$ fail with rigorous witnesses. The verdicts
+agree fan by fan between the two implementations. Corruptions: in the checker,
+dropping the separation constraints makes $(4,4,7)$ fail; in the Arb implementation,
+dropping them makes $(4,6,10)$ fail, lowering the threshold below a fan's
+float maximum makes it fail, and dropping the fan-facet constraints makes
+type (ii) $q=5$ fail. The interval searches of both implementations are
+rigorous; the independent checker is
+the one that tests every fan vertex directly.
+
+\noindent\emph{Completeness of computed results.} The Arb implementation requires every listed squared fan-vertex distance to be
+strictly below the threshold in Arb before certifying (equality or
+uncertainty splits the box or fails), and converts Arb endpoints to binary64
+in the outward direction at every precision; the independent summary
+requires an explicit inventory (full, supplementary or quick), rejects
+duplicates, omissions, extra fans, wrong domains and missing or pending
+V/P/F tests, and accepts an exceptional fan's point $n=m$ only with the
+partner filter's singleton recomputed. Corruption tests exercise these requirements. The full replay checks
+228 Arb records (184 \texttt{CERTIFIED}, 31 \texttt{NOT CLOSABLE}, 3
+\texttt{DEGENERATE}, 10 expected \texttt{FAILED}) and its seven points;
+independent 127 full-domain fans (120 certified, 7 expected failures), seven
+certified points, 64 of 67 supplementary fans, 1,642 required V/P tests all
+passed. So both implementations prove the
+whole of Computation~\ref{comp:W}, including the ``Moreover'' clause; the
+pairs with an end at $a$, $b$ or a partner end are still left by the
+Arb implementation to Lemma~\ref{lem:long} and Fact~\ref{fact:F3}.
+
+\noindent\emph{The chart box of the unbounded families}.
+In the checker's chart for the unbounded paired families, with
+$s=\sin(\pi/n)$, $\sigma=\sin(\pi/m)$, $\tau=\max(s,\sigma)$,
+$\lambda=\min(1,\vartheta)$, $\omega=\min(1,2-\vartheta)$, $s=\lambda\tau$,
+$\sigma=\omega\tau$ ($0\le\vartheta\le2$), the free coordinate $\Pi$ is
+searched in $[-1.5,1.5]$. This box contains every admissible point: the
+rescaled VF equation is $p_1=\lambda(\tau(1-2\gamma_0\cdot f)-\Pi)$, and
+a unit point has $|p_1|,|f|\le1$; for $\vartheta\le1$, $|\Pi|=|\xi_e|\le1$;
+for $\vartheta\ge1$, $\lambda=1$ and
+$|\Pi|\le1+\tau(1+2|\gamma_0|)<7514/5375<1.41$, using $|\gamma_0|<25/43$
+for all four families and $\tau\le\sin(\pi/17)<23/125$. No fan-facet or
+separation constraint is used, and the bound holds at the endpoint charts
+$\vartheta=0,2$ and $\tau=0$ without division by zero. The certificate
+ rejects
+four corrupted certificates, and an explicit admissible point with
+$\Pi=33/32$ shows that narrowing the box to $[-1,1]$ would lose
+coverage. The live family construction checks the bound before using the
+box.
+
+\begin{lemma}\label{lem:Wuse}
+Let $F$ be a large 2-face at $v$ whose fan is in the list of
+Computation~\ref{comp:W} (with the actual $n$, $m$ of $P$). Then the only
+long VF-edges with an end among the fan vertices or an admissible point
+are $e$ and, for a paired fan, the partner edge. In particular every long
+VF-edge is $e$ or the partner edge.
+\end{lemma}
+\begin{proof}
+Let $[p,p']$ be a long VF-edge other than $e$ and the partner edge. Its ends
+are VF-vertices, each a fan vertex or admissible. Neither end is $a$, $b$ or
+a partner end, by Lemma~\ref{lem:long} (those are already ends of a long
+edge). So both are admissible or allowed fan vertices, and
+Computation~\ref{comp:W} leaves only the case that both are fan vertices.
+Pairs of fan vertices other than diagonals are shorter than $\ch_{17}$
+(Computation~\ref{comp:W}, last part; pairs with $a$ or $b$ have the
+explicit lengths $\sqrt2$, $1$ or $\sqrt{1+\ch_n}<\sqrt3$ of
+Fact~\ref{fact:F3}). A diagonal $x_ix_j$ of a type-(i) fan is not a
+VF-edge: the $x_i$ satisfy $(x_i-v)\perp L$, $|x_i-v|=1$ and lie on the VF
+hyperplane, so they lie on a circle; the fan edges $x_ix_{i+1}$ are
+VF-edges, so the circle order is the fan order (otherwise two fan edges
+would cross in their relative interiors, and a face containing the
+crossing point would contain all four ends); for $k\ge4$ a diagonal crosses
+another diagonal in their relative interiors, so a face containing it would
+contain four vertices; for $k=3$ there are no diagonals. Since every
+VF-vertex is a fan vertex or admissible, the last claim follows.
+\end{proof}
+
+\begin{remark}
+The Arb certificate of (W) does not test pairs in which one
+point is $a$, $b$ or a partner end, and Lemma~\ref{lem:long} supplies
+exactly those cases. The independent checker tests them directly
+(test V over all fan vertices) and certifies them, so (W) as used here
+holds with or without the lemma.
+\end{remark}
+
+\subsubsection{The reduction to two paired 2-faces}
+
+\begin{proposition}\label{prop:reduction}
+If $s\ge2$, then $s=2$ and the two large 2-faces $F_1$ ($n$-gon) and $F_2$
+($m$-gon) at $v$ lie in a common facet $D=\{n\}\times\{m\}$.
+\end{proposition}
+\begin{proof}
+Let $F$ be a large 2-face at $v$. If its fan is unpaired: a type-(i)
+configuration excluded by (P1) cannot occur (Computation~\ref{comp:P1});
+every other unpaired fan is in the list of Computation~\ref{comp:W}, and
+Lemma~\ref{lem:Wuse} shows that $e$ is the only long VF-edge, so $s=1$, a
+contradiction. So every large 2-face at $v$ has a paired fan. By
+Lemma~\ref{lem:partner} the paired fan of $F$ is in the list of
+Computation~\ref{comp:W} at the actual $n$, $m$, and Lemma~\ref{lem:Wuse}
+shows that the long VF-edges are exactly $e$ and the partner edge. So
+$s=2$, and the two large 2-faces lie in the fan facet $\{n\}\times\{m\}$
+that makes the fan paired.
+\end{proof}
+
+\noindent The paired type-(i) configurations not in the list of
+Computation~\ref{comp:W}, $(m,3,3)$, $(m,3,4)$, $(m,3,5)$, are not closable.
+The closability criterion of Lemma~\ref{lem:typei} excludes $(3,5)$:
+a spherical triangle of rays exists for $(n,3,5)$, $n<30$, but the centre
+lies outside it. The paired families are covered by
+Computation~\ref{comp:W}(d) and Lemma~\ref{lem:partner}.
+
+\subsubsection{The paired theorem}
+
+\begin{theorem}\label{thm:paired}
+If every vertex lies in exactly two large 2-faces $F_1$ ($n$-gon) and $F_2$
+($m$-gon), and they lie in a common facet $D=\{n\}\times\{m\}$, then $P$ is
+$\{n\}\times\{m\}\times\{\}$, $A_m\times\{n\}$ or $A_n\times\{m\}$.
+\end{theorem}
+
+\begin{proof}
+Let $e_1=[a,b]$ and $e_2=[c,d]$ be the VF-edges of $F_1$, $F_2$; then
+$\VF(D)=\conv(a,b,c,d)$. By Corollary~\ref{cor:B2} every VF-edge lies in
+$\mathrm{fan}(e_1)$ or $\mathrm{fan}(e_2)$, so every VF-vertex is a vertex of
+one of the two fans. The fan of $F_1$ is of type (i) with configuration
+$(m,q_2,\dots,q_k)$, $x_1=c$, $x_2=d$, or of type (ii) with apexes
+$\{z_1,z_2\}=\{c,d\}$ (as $T=\VF(D)$); likewise for $F_2$ with $n$. The angle
+sum allows only $k=3$, or $k=4$ with configuration $(m,3,3,3)$ (the
+configurations $(m,4,p,p')$ and $(m,3,p,p')\ne(m,3,3,3)$ exceed $2\pi$).
+
+\emph{Simple-vertex step.} A vertex $z$ of $\mathrm{fan}(e_1)$ not in
+$\mathrm{fan}(e_2)$ has all its VF-edges in $\mathrm{fan}(e_1)$. If it has
+degree 4, each 3-subset of its edges spans a VF-facet
+(Lemma~\ref{lem:simple}), and a VF-facet containing $c$ and $d$ contains
+the edge $e_2$ (Lemma~\ref{lem:face}), hence belongs to $\mathrm{fan}(e_2)$.
+
+\emph{(i)/(i), $k=3$.} $z=x_3$ has the VF-edges $za,zb,zc,zd$ in
+$\mathrm{fan}(e_1)$. If $z\notin\mathrm{fan}(e_2)$, the facet spanned by
+$\{za,zc,zd\}$ contains $e_2$, so $z\in\mathrm{fan}(e_2)$ after all. In a
+type-(i) fan of $e_2$ every vertex other than $c,d$ is at distance $\sqrt2$
+from $c$ and $d$ (Fact~\ref{fact:F3}), so
+$\ch_{q_2}=|z-d|=\sqrt2=|z-c|=\ch_{q_3}$: the configuration is $(m,4,4)$. The
+fan of $F_2$ is not of type (ii) (case (i)/(ii) with $k=3$, below) and
+not of type (i) with $k=4$ (case (i)/(i), $k=4$, below, with the roles of
+$F_1$ and $F_2$ exchanged), so by the same argument it is $(n,4,4)$, with the
+same third vertex $z$. \emph{Translate argument:} for a vertex $t$ let $D_t$ be the
+facet containing its two large 2-faces. For $t'\in D_t$, both large 2-faces
+of $D_t$ at $t'$ are large 2-faces of $P$, so $D_{t'}=D_t$. The
+$\{n\}\times\{4\}$ and $\{m\}\times\{4\}$ facets at the edge $vz$ contain
+$F_1+\tau$ and $F_2+\tau$, $\tau=z-v\perp\spn D$, so $D_z=D+\tau$. Hence the
+vertex set is $D_0+X$ with $X$ on a line, every point of $X$ is a vertex, so
+$|X|=2$ and $P=\{n\}\times\{m\}\times\{\}$.
+
+\emph{(i)/(i), $k=4$: both fans of type (i), that of $F_1$ with
+configuration $(m,3,3,3)$.} Here
+$|x_3-d|=|x_4-c|=\ch_3=1\ne\sqrt2$, so neither $x_3$ nor $x_4$ lies in a
+type-(i) fan of $e_2$. Then both are simple with all edges in
+$\mathrm{fan}(e_1)$: $x_3$ has $x_3a,x_3b,x_3d,x_3x_4$ and $x_4$ has
+$x_4a,x_4b,x_4x_3,x_4c$. The facet $G$ at $x_3$ spanned by
+$\{x_3a,x_3d,x_3x_4\}$ contains $x_4$ and $a$, hence the edge $x_4a$
+(Lemma~\ref{lem:face}); it does not contain $b$ (else $x_3b$ would be a
+fourth edge of $G$ at the simple vertex $x_3$). So at $x_4$ its edges are
+$\{x_4a,x_4x_3,x_4c\}$, and $G$ contains $c$ and $d$, so $G\in\mathrm{fan}(e_2)$
+and $x_3\in\mathrm{fan}(e_2)$, a contradiction. Impossible.
+
+\emph{(i)/(ii).} $\mathrm{fan}(e_2)$ is the pair of $A_m\times\{\}$ with
+apexes $a,b$ and trapezoid $(c,d,y',x')$, with $|dy'|=|y'x'|=|x'c|=1$ and
+diagonals $\sqrt{1+\ch_m}\in[1.7222,\sqrt3)$, strictly between $\ch_5$ and
+$\ch_6$, hence not a chord $\ch_q$ of any polygon. If $k=3$, $x_3$ must lie in
+$\mathrm{fan}(e_2)$ (as above) at distances $\ch_{q_2}$, $\ch_{q_3}$ from $d$,
+$c$; but the vertices of $\mathrm{fan}(e_2)$ other than $a,b,c,d$ are $x',y'$,
+each at distance $1$ from one of $c,d$ and at the diagonal distance from the
+other, and the diagonal is not a chord; impossible. If
+$k=4$, $(m,3,3,3)$: by the argument of the previous case one of $x_3,x_4$
+lies in $\mathrm{fan}(e_2)$; by symmetry say $x_3$; $|x_3-d|=1$ forces
+$x_3=y'$. If $x_4\notin\mathrm{fan}(e_2)$, $x_4$ is simple and its facet
+spanned by $\{x_4a,x_4x_3,x_4c\}$ meets the pyramid $\Pi(a;c,d,y',x')$ in a
+face containing $a,c,y'$; since $c,y'$ are opposite vertices of the base, no
+proper face of the pyramid contains these three, so the facet is the
+pyramid and $x_4\in\mathrm{fan}(e_2)$. Hence $\{x_3,x_4\}=\{y',x'\}$ and the
+neighbours of $v$ are those of $\mathrm{fan}(e_2)$. \emph{Cell partition:}
+at every vertex exactly one large 2-face has a type-(ii) fan (symmetries
+preserve fan types; this also holds when $n=m$); let $C_t$ be its $A_m$
+cell. For $t'\in C_t$ the $m$-gon of $C_t$ through $t'$ has $C_t$ in its
+cycle, so it is not of type (i): it is the type-(ii) 2-face at $t'$, and
+$C_{t'}=C_t$. The other neighbours $a,b$ of $v$ are the apexes of
+$\mathrm{fan}(e_2)$, so $a-v$ and $b-v$ are orthogonal to the 3-space of
+$C_v$ and $C_a=C_v+(a-v)$. So $P=A_m\times\conv X$ with $\conv X$ a regular
+polygon, here $F_1$: $P=A_m\times\{n\}$. The case (ii)/(i) gives
+$A_n\times\{m\}$.
+
+\emph{(ii)/(ii).} The trapezoid vertex $x$ of $\mathrm{fan}(e_1)$ (edges
+$xa,xy,xc,xd$ in $\mathrm{fan}(e_1)$, the apexes being $c,d$) must lie in
+$\mathrm{fan}(e_2)$ (otherwise the facet spanned by $\{xy,xc,xd\}$ contains
+$e_2$), so $x\in\{x',y'\}$ at distance $1$ or $\sqrt{1+\ch_m}$ from $c$. But
+$|x-c|=\sqrt2$, since $c$ is an apex of a prism over the $A_n$ cell
+containing $x$. Impossible.
+\end{proof}
+
+
+\subsection{Proof of Theorem~\ref{thm:B}}
+
+Let $P$ have a large 2-face and let $s$ be the number of large 2-faces at a
+vertex. If $s=1$, Theorem~\ref{thm:s1} gives $\{n\}\times Q$ or
+$A_n\times\{q\}=\{q\}\times A_n$. If $s\ge2$, Proposition~\ref{prop:reduction}
+gives $s=2$ with both large 2-faces in one duoprism, and
+Theorem~\ref{thm:paired} gives $\{n\}\times\{m\}\times\{\}$, $\{n\}\times A_m$
+or $\{m\}\times A_n$. \qed
+
+\subsection{Proof of the Main Theorem}
+
+A convex uniform 5-polytope either has all 2-faces with at most 16 sides
+(Theorem~\ref{thm:A}: one of the 628 polytopes of $\mathcal K_{16}$, all of
+type (K1)--(K3)) or has a 2-face with at least 17 sides
+(Theorem~\ref{thm:B}: of type (K3)). \qed
+
+%======================================================================
+\section{Verification and reproducibility}\label{sec:verification}
+%======================================================================
+
+\subsection{Arithmetic and software}\label{sec:arithmetic}
+
+The first implementations use ball arithmetic (Arb through python-flint
+\cite{Johansson2017}) at 200 bits unless stated, and exact algebra in
+$\Q$, $\Q(\sqrt2)$, $\Q(\sqrt5)$ (hand-written fields and SymPy
+minimal polynomials). In the proof routes (Section~\ref{sec:computations}), every
+decision that cuts a branch, excludes a case or identifies two objects is
+either a certified inequality between enclosures, an exact algebraic
+identity, an exact equivalence certified by an explicit permutation, a
+combinatorial fact, or an equality of two vertices of one (possibly
+hypothetical) polytope decided by Corollary~\ref{cor:decide}(a); an
+undecided case stops the computation or is reported \texttt{OPEN}, and the
+final runs report zero such cases. Floating-point arithmetic is used to
+propose (orderings, candidate correspondences, witnesses); the one
+remaining decision made from a double is covered by the proved coordinate
+lemma of Section~\ref{sec:U3}. The \file{checks/check_u3/} geometric and transcendental routines and
+\file{checks/check_caseb/} use \texttt{mpmath.iv}, exact arithmetic or
+outward-rounded binary64 intervals. Those routines avoid Arb, but the
+complete replay also calls exact model and root-audit code using Arb.
+Both \file{checks/independent-s1-b2/} and
+\file{checks/independent-s23/} use Arb and SymPy; their independence is in
+implementation, not arithmetic library. All public stages use the same
+Python environment, specified in \file{checks/requirements.txt}.
+
+\paragraph{Exact angle decisions versus enclosures.}
+Angles are compared exactly through algebraic cosines, positive sines and
+phase products, rather than by equating decimal arccosines. In stage~1,
+flat angle sums $\sum\alpha_i=2\pi$ and degenerate closure roots use the
+exact operands of Computation~\ref{comp:exact} and
+Lemma~\ref{lem:wordangle}: the non-snub squared cosines lie in
+$\Q$, $\Q(\sqrt2)$ or $\Q(\sqrt5)$, with positive square roots and,
+where needed, further algebraic number-field extensions fixed by the
+constructions. The phase identity
+$\prod_j(\cos\alpha_j+i\sin\alpha_j)=1$ is exact; a certified interval
+for the sum in $(\pi,3\pi)$ fixes its winding. In B2, polygon angle-sum
+inequalities $\sum(1-2/q_i)<2$ are rational comparisons, and the three
+right-triangle degeneracies are identities in $\Q(\sqrt5)$
+(\texttt{b2check.py}, \texttt{angle\_ok}, \texttt{exact\_degenerate};
+Lemma~\ref{lem:typei}). General angles, strict sign/branch bounds,
+closure-root isolation, radius separation and continuous parameter ranges
+use outward-rounded Arb balls or certified intervals instead
+(Computations~\ref{comp:lib}, \ref{comp:S1}, \ref{comp:root},
+\ref{comp:B2}, \ref{comp:P1}, \ref{comp:W}). An interval containing zero
+never proves an algebraic equality; exact residuals and sign information
+supply those decisions.
+
+\subsection{Computational evidence and shared dependencies}\label{sec:computations}
+
+The computations consist of exact model checks, the facet-library and
+stage-1 cycle checks, radius separation, the finite stage-2/3 searches,
+and Case B's fan and parameter-domain checks. The packaged commands and
+inputs are described in the bundle's \file{README.md}. Their paths are
+relative to the bundle root.
+
+\paragraph{Shared inputs.}
+Independently written programs do not give fully independent proofs of
+every premise. The exact-exclusion checks share the exact constructions
+used by the independent stage-1 library. The stage-2/3 implementations
+share stage-1 class intervals, facet and known-name lists, exceptional-model
+certificates, the separation lemma and other written geometry. The alias
+table and construction theorems are also shared. The implementations use
+common arithmetic libraries, including Arb and SymPy. P1's second
+implementation depends on the written angle, chord and monotonicity
+arguments for its finite lists and tails.
+
+\paragraph{Written mathematical premises.}
+Facts~\ref{fact:3d} and~\ref{fact:4d} are cited classification theorems,
+not re-proved here. Wythoff and product constructions, the geometric
+reductions, coverage and interpretation of the finite search, and the
+unbounded-parameter reductions use the written arguments in this paper.
+A successful executable check establishes its stated finite or interval
+claims; it does not replace these arguments or establish priority.
+
+\subsection{The four-dimensional control}\label{sec:control}
+A bounded control using the shared interval root solver and certified
+stage-2/3 engines with exact four-dimensional facet adapters completed
+639 classes at family cutoff 14. It recovered all 152 known objects
+(185 construction names), including the grand antiprism and snub 24-cell,
+and refuted 33 other realizations with no unresolved, missing or extra
+object. All 1,476 support witnesses passed the local checker; deletion and
+support corruptions were rejected. This is a bounded non-proof control, separate from the public replay;
+it does not re-prove Möller's all-parameter classification.
+
+\subsection{How to reproduce}
+First follow the Python environment setup in the bundle's
+\file{checks/README.md}, creating the single \texttt{.venv} environment. The checks require Python 3.11 or later and Bash 4.4 or later.
+From the top of the bundle, run
+\begin{verbatim}
+PYTHON="$PWD/.venv/bin/python" bash checks/verify-public.sh full
+\end{verbatim}
+Only \texttt{full} mode checks all computational claims used in the theorem;
+\texttt{quick} mode does not check the theorem. Full mode includes P=16
+stages 2/3, all W fans, certificate authentication and corruption controls.
+Neither mode verifies the written reductions automatically.
+
+%======================================================================
+\section{What is checked in Lean}\label{sec:lean}
+%======================================================================
+
+The directory \file{lean/} is a Lean project with dependencies specified in
+\file{lean/lean-toolchain} and \file{lean/lake-manifest.json}. It contains
+geometric lemmas and a conditional classification of genuine convex
+unit-edge uniform five-dimensional polytopes. The formalization is incomplete: the external numerical data and their geometric
+correspondence have not been jointly instantiated and discharged in Lean.
+
+\paragraph{The conditional composition.}
+With explicit hypotheses as parameters,
+\file{lean/Uniform5/CompositionMainClassification.lean} proves
+\[
+  \forall P:\operatorname{Set}(\operatorname{Space}5),\quad
+  \operatorname{UnitUniform}(5,P)\ \Longrightarrow\
+  K_1(P)\lor K_2(P)\lor K_3(P).
+\]
+Here \texttt{UnitUniform} means a finite convex hull of full affine
+dimension five, ambient vertex transitivity, recursively uniform facets
+and unit exposed edges. The conclusions are the explicit Wythoff orbit
+hulls and two product families, up to intrinsic Euclidean congruence.
+The geometry-equivalence module connects the hull and vertex-set
+formulations. The composition supplies the finite fan realization and
+admissibility needed to apply W and combines the small-face and
+large-face arguments; it does not assume a Case A or Case B conclusion
+in place of that composition.
+
+\paragraph{Assumed inputs.}
+Both \texttt{mainClassification} and
+\texttt{classification\_of\_core\_inputs} take twelve computational
+hypotheses and the two cited classifications, besides their raw data.
+The unused FILTER, RIDGES, QFOLLOW and LU hypotheses and their data
+parameters have been removed. Appendix~\ref{app:lean-inputs} prints the
+twelve declarations verbatim.
+
+Every computational input remains an assumed bound parameter in Lean.
+The external computations and written arguments establish the intended
+numerical and geometric assertions; no full external numerical search is
+discharged by the kernel. Checking report fields does not establish their geometric meaning or
+construct exact placements. Their correspondence to certificates,
+including coverage, canonical rigidity, refutation and forcing, remains
+an external semantic obligation.
+
+The contracts distinguish coverage from existence. S1 asserts coverage
+and statuses without a merged-interval-width bound. S2 and U3 cover every
+actual figure or star, without asserting that every retained encoding is
+realizable. DEV is conditional on the hypothetical polytope's root,
+centre and entire incident-facet star; it excludes that actual star, not
+every star having the same unlabelled figure. W is restricted to finite
+parameters, sufficient for actual polygonal faces, with real/integer
+ranges and exceptional slices explicit. The known models have separate
+existence arguments; the extra candidate needs no existence assertion.
+
+\paragraph{Build and axiom audit.}
+From \file{lean/}, run \texttt{lake exe cache get}, \texttt{lake build}
+and \texttt{lake env lean Audit.lean}. The audit rejects dependencies
+other than \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+These checks prove the stated implications, not their computational premises.
+The supplied modules express the sphere and separation lemmas,
+vertex-figure geometry, the centroid argument, the face lemma, rooted
+rigidity, local-to-global propagation, and conditional Case B arguments.
+
+\paragraph{What remains outside Lean.}
+The following written-to-computation links are not formalized:
+the numerical library/model correspondence
+(Section~\ref{sec:facetdata}); stage-1 enumeration
+and root coverage (Section~\ref{sec:S1}); the coverage of actual vertex
+figures by stage-2 signatures (Section~\ref{sec:S2}); stage-3 encodings,
+identification and neighbour forcing (Section~\ref{sec:S3} and
+Proposition~\ref{prop:u3}); the exhaustive stuck-development refutation
+of the extra candidate (Section~\ref{sec:extra}); and the numerical
+B2, P1, partner-radius and W bounds used by the Case B structural proof
+(Section~\ref{sec:caseB}). The conditional geometric lemmas do not
+establish these hypotheses for the supplied certificates.
+In particular, rooted determinism (Lemma~\ref{lem:rooted}), congruence
+from discrete data (Lemma~\ref{lem:D}) and coset comparison
+(Lemma~\ref{lem:coset}) are not formalized end to end for the concrete
+program encodings and candidate lists. The finite catalogue coverage itself
+is derived conditionally from the cited classifications in
+\texttt{unitUniform4\_smallFaces\_catalogue}.
+No Lean theorem jointly instantiates the raw data and all twelve
+computational hypotheses with the two cited classifications; their joint
+truth rests on these written arguments and the external checkers.
+A kernel proof of their implication alone proves neither their truth nor
+their joint satisfiability. The classification is not a whole-theorem Lean proof.
+
+%======================================================================
+\appendix
+\section{The twelve Lean core hypotheses}\label{app:lean-inputs}
+The following declarations are copied verbatim from the shipped Lean sources.
+Names are in \texttt{Uniform5.Composition}, except B2, P1 and
+PartnerRadiusFilter in \texttt{Uniform5.CaseB}, and W in
+\texttt{Uniform5.Composition.Wedge}. Referenced types and predicates are
+in the cited source files; these declarations are assumptions, not verified
+instances of the certificates. P1 includes finite data as well as proof fields.
+\VerbatimInput[breaklines=true,fontsize=\scriptsize]{../data/core-hypotheses.txt}
+
+\section{Names}\label{app:names}
+%======================================================================
+
+\begin{table}[ht]
+\centering\small
+\caption{Coxeter diagrams and node orders used in the names.}\label{tab:names}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Group & Diagram (nodes $0,1,\dots$)\\
+\midrule
+$A_4$, $A_5$ & linear, all branches 3\\
+$B_4$ & linear $3,3,4$; the 4 between nodes 2 and 3\\
+$B_5$ & linear $3,3,3,4$; the 4 between nodes 3 and 4\\
+$D_4$ & node 1 joined to nodes 0, 2, 3 (all 3)\\
+$D_5$ & node 2 joined to nodes 1, 3, 4; node 0 joined to node 1\\
+$F_4$ & linear $3,4,3$; the 4 between nodes 1 and 2\\
+$H_4$ & linear $5,3,3$; the 5 between nodes 0 and 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A name such as \texttt{B40001} lists the rings on nodes $0,1,2,3$ (here
+the tesseract; \texttt{B41000} is the 16-cell). Cell labels: \texttt{tet},
+\texttt{oct}, \texttt{cube}, \texttt{ico}, \texttt{doe} (Platonic);
+\texttt{tut}, \texttt{co}, \texttt{tic}, \texttt{toe}, \texttt{sirco},
+\texttt{girco}, \texttt{id}, \texttt{tid}, \texttt{ti}, \texttt{srid},
+\texttt{grid}, \texttt{snic}, \texttt{snid} (truncated tetrahedron,
+cuboctahedron, truncated cube, truncated octahedron, rhombicuboctahedron,
+truncated cuboctahedron, icosidodecahedron, truncated icosahedron,
+truncated dodecahedron, rhombicosidodecahedron, truncated
+icosidodecahedron, snub cube, snub dodecahedron, in this order; note that
+\texttt{tid} is the truncated icosahedron and \texttt{ti} the truncated
+dodecahedron, the reverse of Bowers' usual names); \texttt{P}$n$ the
+$n$-gonal prism ($n\ne4$) and \texttt{A}$n$ the $n$-gonal antiprism
+($n\ne3$).
+
+\begin{table}[ht]
+\centering\small
+\caption{The 33 aliases of the facet library and their canonical names
+(Computation~\ref{comp:merge}).}\label{tab:aliases}
+\begin{tabular}{@{}ll@{\qquad}ll@{}}
+\toprule
+Canonical & Aliases & Canonical & Aliases\\
+\midrule
+\texttt{A40001} & \texttt{A41000} & \texttt{B41000} & \texttt{D40001}, \texttt{D40010}, \texttt{D41000}\\
+\texttt{A40010} & \texttt{A40100} & \texttt{B41010} & \texttt{D41011}, \texttt{F40010}, \texttt{F40100}\\
+\texttt{A40011} & \texttt{A41100} & \texttt{B41100} & \texttt{D40101}, \texttt{D40110}, \texttt{D41100}\\
+\texttt{A40101} & \texttt{A41010} & \texttt{B41110} & \texttt{D41111}, \texttt{F40011}, \texttt{F41100}\\
+\texttt{A40111} & \texttt{A41110} & \texttt{F40101} & \texttt{F41010}\\
+\texttt{A41011} & \texttt{A41101} & \texttt{F40111} & \texttt{F41110}\\
+\texttt{B40001} & \texttt{pr-cube}, \texttt{duoprism-4-4} & \texttt{F41011} & \texttt{F41101}\\
+\texttt{B40010} & \texttt{D40011}, \texttt{D41001}, \texttt{D41010} & \texttt{pr-oct} & \texttt{antiprism-prism-3}\\
+\texttt{B40100} & \texttt{D40100}, \texttt{F40001}, \texttt{F41000} & & \\
+\texttt{B40110} & \texttt{D40111}, \texttt{D41101}, \texttt{D41110} & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{thebibliography}{99}
+
+\bibitem{Wythoff1918}
+W.~A.~Wythoff, \emph{A relation between the polytopes of the
+$C_{600}$-family}, Proceedings, Koninklijke Akademie van Wetenschappen
+Amsterdam \textbf{20} (1918), 966--970.
+\bibitem{Coxeter1935}
+H.~S.~M.~Coxeter, \emph{Wythoff's construction for uniform polytopes},
+Proceedings of the London Mathematical Society \textbf{s2-38} (1935),
+327--339. \url{https://doi.org/10.1112/plms/s2-38.1.327}.
+\bibitem{Bowers}
+J.~Bowers, \emph{Uniform polytera}, online catalogue,
+\url{https://www.polytope.net/hedrondude/polytera.htm}.
+
+\bibitem{Klitzing}
+R.~Klitzing, \emph{Polytopes and their relations}, online catalogue,
+\url{https://bendwavy.org/klitzing/home.htm}.
+
+\bibitem{Balinski1961}
+M.~L. Balinski, On the graph structure of convex polyhedra in $n$-space,
+\emph{Pacific J. Math.} 11 (1961), 431--434.
+doi:10.2140/pjm.1961.11.431.
+
+\bibitem{Blind1991}
+G.~Blind and R.~Blind, The semiregular polytopes, \emph{Comment. Math.
+Helv.} 66 (1991), 150--154. doi:10.1007/BF02566640.
+
+\bibitem{CallistoUniform}
+M.~Càllisto, \emph{The 28 convex uniform honeycombs: a completeness
+theorem}, Zenodo, September 21, 2026.
+\href{https://doi.org/10.5281/zenodo.22881686}{doi:10.5281/zenodo.22881686}.
+Lean companion:
+\href{https://doi.org/10.5281/zenodo.22868902}{doi:10.5281/zenodo.22868902}.
+
+\bibitem{ConwayGuy1965}
+J.~H. Conway and M.~J.~T. Guy, Four-dimensional Archimedean polytopes,
+in: \emph{Proc. Colloquium on Convexity, Copenhagen 1965},
+Københavns Univ. Mat. Inst., 1967, pp.~38--39. Zbl 0149.17806.
+
+\bibitem{CoxeterRP}
+H.~S.~M. Coxeter, \emph{Regular Polytopes}, 3rd ed., Dover, New York, 1973.
+
+\bibitem{CoxeterLHM1954}
+H.~S.~M. Coxeter, M.~S. Longuet-Higgins and J.~C.~P. Miller, Uniform
+polyhedra, \emph{Philos. Trans. Roy. Soc. London Ser. A} 246 (1954),
+401--450. doi:10.1098/rsta.1954.0003.
+
+\bibitem{Elte1912}
+E.~L. Elte, \emph{The Semiregular Polytopes of the Hyperspaces},
+Gebroeders Hoitsema, Groningen, 1912.
+\url{https://books.google.com/books?id=_UzAHuloksIC}.
+
+\bibitem{Gosset1900}
+T.~Gosset, On the regular and semi-regular figures in space of $n$
+dimensions, \emph{Messenger of Mathematics} 29 (1900), 43--48.
+
+\bibitem{Grunbaum2009}
+B.~Grünbaum, An enduring error, \emph{Elem. Math.} 64 (2009), 89--101.
+doi:10.4171/EM/120.
+
+\bibitem{Johansson2017}
+F.~Johansson, Arb: efficient arbitrary-precision midpoint-radius interval
+arithmetic, \emph{IEEE Trans. Comput.} 66 (2017), 1281--1292.
+doi:10.1109/TC.2017.2690633.
+
+\bibitem{Johnson1966}
+N.~W. Johnson, \emph{The Theory of Uniform Polytopes and Honeycombs}, Ph.D.
+thesis, University of Toronto, 1966.
+
+\bibitem{Johnson1991}
+N.~W. Johnson, \emph{Uniform Polytopes}, unpublished manuscript, 1991.
+
+\bibitem{Moller2004thesis}
+M.~Möller, \emph{Vierdimensionale Archimedische Polytope}, Dissertation,
+Universität Hamburg, 2004. \url{https://ediss.sub.uni-hamburg.de/handle/ediss/689}.
+
+\bibitem{Moller2004}
+M.~Möller, 4-dimensionale Archimedische Polytope, \emph{Results Math.} 46
+(2004), 271--360. doi:10.1007/BF03322887.
+
+\bibitem{OPG}
+Open Problem Garden, Convex uniform 5-polytopes (posted May 24, 2012),
+\url{http://www.openproblemgarden.org/op/convex_uniform_5_polytopes}.
+
+\bibitem{PolytopeWiki}
+Polytope Wiki, Uniform polytope, section 5D,
+\url{https://polytope.miraheze.org/wiki/Uniform_polytope}.
+
+\bibitem{Schulte2017}
+E.~Schulte, Symmetry of polytopes and polyhedra, Chapter 18 in
+\emph{Handbook of Discrete and Computational Geometry}, 3rd ed.
+(J.~E. Goodman, J.~O'Rourke, C.~D. Tóth, eds.), CRC Press, 2017.
+
+\bibitem{Skilling1975}
+J.~Skilling, The complete set of uniform polyhedra, \emph{Philos. Trans.
+Roy. Soc. London Ser. A} 278 (1975), 111--135. doi:10.1098/rsta.1975.0022.
+
+\bibitem{Sopov1970}
+S.~P. Sopov, A proof of the completeness of the list of elementary
+homogeneous polyhedra, \emph{Ukrain. Geom. Sb.} 8 (1970), 139--156 (in
+Russian).
+
+\bibitem{Winter2021}
+M.~Winter, \emph{Spectral Realizations of Symmetric Graphs, Spectral
+Polytopes and Edge-Transitivity}, Dissertation, TU Chemnitz, 2021,
+Appendix E.3, urn:nbn:de:bsz:ch1-qucosa2-752155.
+
+\end{thebibliography}
+
+\end{document}

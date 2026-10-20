@@ -1,0 +1,36 @@
+{
+  "files": {
+    "arithmetic.py": "34737f5cd50a75cb5782304aae5ee0f7fc8e922c9c8aa49623560bc04fc6643f",
+    "b2.py": "15b8f11679007318158ac5fe83f587a0fb9153a0277ec657e256342567eaf9d8",
+    "check_result.py": "e74a0bb3c7b8aea9129a299f81e6afda3aeaf8df21656364c4383557def7ca3b",
+    "compare.py": "d332160834aecbdc8caf3785aca3b45998aaf52d35f70a7f058adae7150e2376",
+    "evidence/b2-full.json": "bc1cd2e7a72e9940df7429fc1d146f8bfe976a34f206c3c13a962e664868ef39",
+    "evidence/cycles.json.gz": "928d8c18ea3d34d4a13d47d61ac900e6a8e5513325a5ed8466c8cfc579ea3d0f",
+    "evidence/omega.json": "0962147eb2146cb1c4bacc8249583762f7faf8364f3f1bbeb1f77d97cb15b978",
+    "exceptional.py": "369461bb3a25ac6fccb866fd27b413fece292a98e49db315988a4313458a0f9d",
+    "export.py": "7a1ce55a1469ecea83a96abd2825354748fd18dce503ba587ccb86d3f9556742",
+    "library.json": "3b980b248c69ee9bad9027e2fc06964b919665fa053c105fe5421300cd685971",
+    "library.py": "c86a9a9fb0a9731949cb466a8defdd595c8afca57a0225eb1b6f21dad773f53a",
+    "library_compare.py": "99adc69a444c40dad64d7f10f2ba92ab95ba2362a1e24e797b63928e0082ad72",
+    "library_requirements.txt": "7f2e6608da77418fa1d201a307a604aedf1082d0b146119a9f43ce57d37dc166",
+    "library_verify.py": "84bb79ae7897f9968c5366ca06443991eda79d607b8cd19fbd8ce6a78f86d3b6",
+    "parabolic.py": "146b0decb46d0ff8fcfe0c3cafdfda778e58f0434112157485b9d80e0de843c1",
+    "quadratic.py": "af9a1a9410c9b8c2f7c09e6b0c7b25fac6640c4faaf67db668c6d2bc8dfa76d4",
+    "receipt_policy.py": "36f8e46ce684401e6fea22c3d9ad705aa885b77c66cad9e692f9bf99f9657392",
+    "replay.py": "7691cefc4d69a3a3e2099b5d51f2ff4c79b43b6170ad9aef23bb04f9bfaa1f2f",
+    "requirements.txt": "bb4f8aebda388ffdedfb18af388a182858b7b7e3da32432152feb80b654c63a3",
+    "stage1.py": "5263722903647b266e48b6173f43b21295f0a4d8a8d91e909d599d0d1c0be8ae",
+    "test_runtime_inputs.py": "80c241cd9de20cbac090853826e3120ca1c691ddb0819de0db8ce9fdaebe26a3",
+    "test_stage1.py": "f4ef1807f4adfa467697c1e88648edde2bcece81a485153ff1512e40e6f73d96",
+    "verify.sh": "061811daaecd1609bc51c415920a19bda82266b8d0381c238245751cfa987f3b",
+    "verify_b2.sh": "2627d8ea0f2438c6cb2181948df3dafe1ebd353264ceb2983d4e0223d4c97c0f",
+    "verify_identities.py": "faf3dda674e312e63032d679f57804005659a38bdba228c3c09217d77f570e5a",
+    "verify_library.sh": "75dacceceddb2e06f3cf7fc6e3876b4416f60d0a4611bf521cf3662e1b3521c4",
+    "verify_stage1.py": "f27fb347ac72a103c69e7337a25bee88e5247a1828cc6b587a0ed3cfd35c21db"
+  },
+  "inputs": {
+    "acceptance-third/infinite/outputs/enum/u5_omega_p16.json": "c7773fab6fff9110ea94b8c79debf887b3667396503e317ecd8cc54a3c89bc33",
+    "check_u1/cycles_p16.json.gz": "df6e4f2510cbb890a97d9ee692e0b6abee0de7683aa3a0deeba9dec4f44a28cc",
+    "input_link/evidence/s1_facets_p16.json": "f89a74647240180853e223d30000b653c61b38843bd1bf6884a6443dd3168ad7"
+  }
+}

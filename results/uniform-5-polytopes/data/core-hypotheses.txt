@@ -1,0 +1,202 @@
+-- Core hypotheses: verbatim declarations from the accompanying Lean sources.
+
+-- Uniform5.Composition.LIB
+-- Source: lean/Uniform5/CompositionLibraryBalls.lean
+structure LIB (D : LibraryNumericalData) : Prop where
+  model_named : ∀ n, FacetLibraryModel n.val (D.model n)
+  model_hull : ∀ n, D.model n = convexHull ℝ (D.vertexSet n : Set (Space 4))
+  vertices_exact : ∀ n, (D.vertexSet n : Set (Space 4)) = extremePoints ℝ (D.model n)
+  radius_enclosed : ∀ n, ∃ r, HasIntrinsicRadius (D.model n) r ∧
+    (D.radiusBall n).Contains r
+  coordinates_enclosed : ∀ n, ∀ v ∈ D.vertexSet n, ∀ j,
+    (D.coordinateBall n v j).Contains (v j)
+  angles_enclosed : ∀ n (hK : FinitePolytope (D.model n)) (k : ℕ)
+    (G A B : Set (Space 4)) (hG : PolygonFace (D.model n) G k)
+    (hA : Facet (D.model n) A) (hB : Facet (D.model n) B),
+    G ⊆ A → G ⊆ B → A ≠ B → ∀ a b,
+    Congruent A (cellTypeModel a) → Congruent B (cellTypeModel b) →
+    (D.angleBall n k a b).Contains (geometricPolygonAngle hK hG hA hB)
+
+-- Uniform5.Composition.S1
+-- Source: lean/Uniform5/CompositionStageOneInputs.lean
+structure S1 (N : LibraryNumericalData) (D : StageOneNumericalData) : Prop where
+  cycle_count : D.listed.card = 14965
+  listed_admissible : ∀ W ∈ D.listed, W.Admissible N
+  distinct_classes : ∀ U ∈ D.listed, ∀ V ∈ D.listed,
+    U.classCode = V.classCode → U = V
+  complete : ∀ W : LibraryCycleWord, W.Admissible N → ∃ V ∈ D.listed, W.classCode = V.classCode
+  reciprocal_enclosed : ∀ W ∈ D.listed,
+    (D.reciprocalBall W).Contains (1 / W.maxRadius N)
+  roots_cover : ∀ W ∈ D.listed, ∀ s ∈ Icc 0 (D.reciprocalBall W).upper,
+    W.Domain N s → W.closure N s = 0 → ∃ I ∈ D.roots W, s ∈ I.carrier
+  with_roots : D.count (fun W => D.roots W ≠ []) = 14428
+  without_roots : D.count (fun W => D.roots W = []) = 537
+  flat_exact : ∀ W ∈ D.listed, D.flat W = true ↔ W.angleSum N = 2 * Real.pi
+  flat_count : D.count (fun W => D.flat W = true) = 7080
+  degenerate_exact : ∀ W ∈ D.listed, ∀ i,
+    D.degenerate W i = true ↔ D.EndpointInterval N W i
+  degenerate_count : D.degenerateCount = 57
+
+-- Uniform5.Composition.S2
+-- Source: lean/Uniform5/CompositionStageTwoInputs.lean
+structure S2 (N : LibraryNumericalData) (S : StageOneNumericalData)
+    (T : StageTwoNumericalData S) : Prop where
+  signature_count : stageTwoSignatureCount N S T = 629
+  complete : ∀ c : ActiveRootClass S, c.val ∈ survivingRootClasses N S →
+    ∀ R ∈ radiusClassRegion S c, ∀ D (hD : StageTwoFigureConditions N S c.val R D),
+      D.signature hD ∈ T.signatures c
+  empty_class : ∃ c : ActiveRootClass S, c.val ∈ survivingRootClasses N S ∧
+    T.signatures c = ∅ ∧
+    (∀ d : ActiveRootClass S, d.val ∈ survivingRootClasses N S → T.signatures d = ∅ → d = c) ∧
+    ∃ W ∈ rootClassCycles S c.val, emptyStageTwoClassWord W
+
+-- Uniform5.Composition.ROOT
+-- Source: lean/Uniform5/CompositionRootInput.lean
+structure ROOT (N : LibraryNumericalData) (S : StageOneNumericalData)
+    (T : StageTwoNumericalData S) : Prop where
+  edge_root : ∀ c, c.val ∈ survivingRootClasses N S →
+    ∀ (σ : VertexFigureSignature), σ ∈ T.signatures c →
+    ∃ W ∈ σ.edges,
+      W.closure N (reciprocalClassHull S c).lo *
+        W.closure N (reciprocalClassHull S c).hi < 0 ∧
+      (∀ s ∈ (reciprocalClassHull S c).carrier, deriv (W.closure N) s ≠ 0) ∧
+      ∃! s, s ∈ (reciprocalClassHull S c).carrier ∧ W.closure N s = 0
+
+-- Uniform5.Composition.DEV
+-- Source: lean/Uniform5/CompositionU3DevelopmentInput.lean
+structure DEV (N : LibraryNumericalData) (S : StageOneNumericalData)
+    (U : U3RealizationData S) (extra : U3StarData) : Prop where
+  refutation : ∀ X, U3GeometricStar N S (U.rowClass u3RefutedRow).val X →
+    X.radius ∈ radiusClassRegion S (U.rowClass u3RefutedRow) →
+    (U.rowSignature u3RefutedRow).RadiusCompatible N X.radius →
+    U.canonicalEncoding X = U.rowEncoding u3RefutedRow →
+    ∀ P : UnitUniform5, ∀ v ∈ P.val.extremePoints ℝ,
+      X.root = v → X.center = polytopeCenter P →
+      X.star N = facetStar P.val v → False
+
+-- Uniform5.CaseB.B2
+-- Source: lean/Uniform5/CaseBInputs.lean
+structure B2 (Ω : Set ℝ) : Prop where
+  type_i : ∀ (n : ℕ), 17 ≤ n → ∀ c : List ℕ,
+    AngleCondition (realConfig c) → Closable (realConfig c) →
+    Real.sqrt (polygonRadius n ^ 2 + configRadius (realConfig c) ^ 2) ∉ Ω
+  type_ii : ∀ (n q : ℕ), 17 ≤ n → 3 ≤ q →
+    Real.sqrt (antiprismRadiusSq n + polygonRadius q ^ 2) ∉ Ω
+  type_iii : ∀ (n q₁ q₂ : ℕ), 17 ≤ n → TypeIIIPair q₁ q₂ →
+    ∀ γ : ℝ, -1 < γ → γ < 1 → TypeIIIPolynomial n q₁ q₂ γ = 0 →
+    Real.sqrt (antiprismRadiusSq n + 1 / (2 * (1 + γ))) ∉ Ω
+
+-- Uniform5.CaseB.P1
+-- Source: lean/Uniform5/CaseBInputs.lean
+structure P1 where
+  configurations : Finset (List ℕ)
+  closable : Finset (List ℕ)
+  nonclosable : Finset (List ℕ)
+  degenerate : Finset (List ℕ)
+  family : Finset (List ℕ)
+  excluded : Finset (List ℕ)
+  configurations_iff : ∀ c, c ∈ configurations ↔ SmallConfiguration c
+  closable_iff : ∀ c, c ∈ closable ↔ c ∈ configurations ∧ Closable (realConfig c)
+  nonclosable_iff : ∀ c, c ∈ nonclosable ↔ c ∈ configurations ∧
+    configArcSum (realConfig c) (configMax (realConfig c)) < 2 * Real.pi
+  degenerate_iff : ∀ c, c ∈ degenerate ↔ c ∈ configurations ∧
+    configArcSum (realConfig c) (configMax (realConfig c)) = 2 * Real.pi
+  family_iff : ∀ c, c ∈ family ↔ c ∈ closable ∧ ∃ q ∈ c, FamilyPolygon q
+  excluded_subset : excluded ⊆ family
+  configurations_count : configurations.card = 168
+  closable_count : closable.card = 137
+  nonclosable_count : nonclosable.card = 28
+  degenerate_count : degenerate.card = 3
+  family_count : family.card = 83
+  excluded_count : excluded.card = 67
+  separation : ∀ c ∈ excluded, ∃ q ∈ c, FamilyPolygon q ∧ P1Separated c q
+  delta44 : ∀ n : ℕ, 17 ≤ n → delta [4, 4] n = 1 / 4
+  delta333_range : ∀ n : ℕ, 17 ≤ n →
+    delta [3, 3, 3] n ∈ Set.Icc (186963 / 1000000 : ℝ) (3 / 16)
+  delta36_range : ∀ n : ℕ, 17 ≤ n →
+    delta [3, 6] n ∈ Set.Icc (1 / 3 : ℝ) (337262 / 1000000)
+  survivors : ∀ c, c ∈ family ∧ c ∉ excluded ↔
+    ∃ q, FamilyPolygon q ∧ (c = [4, 4, q] ∨ c = [3, 3, 3, q])
+
+-- Uniform5.Composition.Wedge.W
+-- Source: lean/Uniform5/CompositionWedgeInput.lean
+structure W (p1 : CaseB.P1) : Prop where
+  no_long_pair : ∀ n f, CaseB.LargeParameter n → CaseB.WListed p1 n f →
+    ∀ F, RealizesWFan p1 n f F → ∀ p q,
+    (F.Admissible p ∨ F.Allowed p) → (F.Admissible q ∨ F.Allowed q) →
+    CaseB.chord 17 ≤ dist p q → p ∈ F.vertices ∧ q ∈ F.vertices
+  fan_distances : ∀ n f, CaseB.LargeParameter n → CaseB.WListed p1 n f →
+    ∀ F, RealizesWFan p1 n f F → ∀ p ∈ F.vertices, ∀ q ∈ F.vertices,
+    ¬ F.specialPair p q → dist p q < CaseB.chord 17
+
+-- Uniform5.CaseB.PartnerRadiusFilter
+-- Source: lean/Uniform5/CaseBInputs.lean
+structure PartnerRadiusFilter : Prop where
+  exclude_ii : ∀ m c₁, ExceptionalPaired m c₁ →
+    delta c₁ m ≠ antiprismHeightSq m / 4
+  force_equal : ∀ (n m : ℕ) (c₁ c₂ : List ℕ), 17 ≤ n → ExceptionalPaired m c₁ →
+    PartnerTail n c₂ →
+    AngleCondition ((n : ℝ) :: realConfig c₂) → Closable ((n : ℝ) :: realConfig c₂) →
+    delta c₁ m = delta c₂ n → c₂ = c₁ ∧ n = m
+
+-- Uniform5.Composition.U3Realizations
+-- Source: lean/Uniform5/CompositionU3RealizationInputs.lean
+structure U3Realizations (N : LibraryNumericalData) (S : StageOneNumericalData)
+    (T : StageTwoNumericalData S) (U : U3RealizationData S) : Prop where
+  class_valid : ∀ r ∈ u3ReportP16,
+    (U.rowClass r).val ∈ survivingRootClasses N S
+  class_indices : ∀ r ∈ u3ReportP16, ∀ s ∈ u3ReportP16,
+    U.rowClass r = U.rowClass s → r.classIndex = s.classIndex
+  signature_valid : ∀ r ∈ u3ReportP16,
+    U.rowSignature r ∈ T.signatures (U.rowClass r)
+  signature_complete : ∀ c : ActiveRootClass S,
+    c.val ∈ survivingRootClasses N S → ∀ σ ∈ T.signatures c,
+      ∃ r ∈ u3ReportP16, U.rowClass r = c ∧ U.rowSignature r = σ
+  signature_indices : ∀ r ∈ u3ReportP16, ∀ s ∈ u3ReportP16,
+    U.rowClass r = U.rowClass s → U.rowSignature r = U.rowSignature s →
+      r.signatureIndex = s.signatureIndex
+  complete : ∀ (c : ActiveRootClass S), c.val ∈ survivingRootClasses N S →
+    ∀ X (hX : U3GeometricStar N S c.val X), X.radius ∈ radiusClassRegion S c →
+      X.figure.signature hX.figure ∈ T.signatures c →
+      ∃ r ∈ u3ReportP16, U.rowClass r = c ∧
+        U.rowSignature r = X.figure.signature hX.figure ∧
+        U.canonicalEncoding X = U.rowEncoding r
+  encoding_rigid : ∀ (c : ActiveRootClass S), c.val ∈ survivingRootClasses N S →
+    ∀ X Y, U3GeometricStar N S c.val X → U3GeometricStar N S c.val Y →
+      X.radius ∈ radiusClassRegion S c → Y.radius ∈ radiusClassRegion S c →
+      X.radius = Y.radius → U.canonicalEncoding X = U.canonicalEncoding Y →
+        U3StarCongruent N X Y
+
+-- Uniform5.Composition.U3Identification
+-- Source: lean/Uniform5/CompositionU3IdentificationInputs.lean
+structure U3Identification (N : LibraryNumericalData) (S : StageOneNumericalData)
+    (U : U3RealizationData S) (M : U3KnownModelData) : Prop where
+  admitted : ∀ r ∈ u3ReportP16, ∀ n : KnownFiveName,
+    n.sourceName ∈ r.known_names →
+      KnownFiveModel n (M.model n) ∧
+      ∃ hQ : UnitUniform 5 (M.model n),
+        M.root n ∈ (M.model n).extremePoints ℝ ∧
+        M.center n = vertexCentroid (vertices (M.model n) (uniform_finitePolytope hQ.1)) ∧
+        intrinsicRadius (M.model n) ∈ radiusClassRegion S (U.rowClass r) ∧
+        ∀ F, Facet (M.model n) F →
+          ∃ s ∈ u3ReportP16, ∃ k ∈ (U.rowSignature s).facets, Congruent F (N.model k)
+  soundNO : ∀ r ∈ u3ReportP16, ∀ n : KnownFiveName,
+    (n.sourceName, U3EmbeddingVerdict.no) ∈ r.embedding →
+      ∀ X, U3GeometricStar N S (U.rowClass r).val X →
+        X.radius ∈ radiusClassRegion S (U.rowClass r) →
+        U.canonicalEncoding X = U.rowEncoding r → ¬ U3MatchesKnown N M n X
+  soundNOCOUNT : ∀ r ∈ u3ReportP16, ∀ n : KnownFiveName,
+    (n.sourceName, U3EmbeddingVerdict.noCount) ∈ r.embedding →
+      ∀ X, U3GeometricStar N S (U.rowClass r).val X →
+        X.radius ∈ radiusClassRegion S (U.rowClass r) →
+        U.canonicalEncoding X = U.rowEncoding r → ¬ U3MatchesKnown N M n X
+
+-- Uniform5.Composition.U3Forcing
+-- Source: lean/Uniform5/CompositionU3ForcingInputs.lean
+structure U3Forcing (N : LibraryNumericalData) (S : StageOneNumericalData)
+    (U : U3RealizationData S) (D : U3ForcingData) : Prop where
+  checked : ∀ r ∈ u3ReportP16, r.local_uniqueness.forced = true →
+    ∀ X, U3GeometricStar N S (U.rowClass r).val X →
+      X.radius ∈ radiusClassRegion S (U.rowClass r) →
+      U.canonicalEncoding X = U.rowEncoding r →
+      ∀ w, starNeighbor X.root w (X.star N) → U3ForcingCheck N D X w

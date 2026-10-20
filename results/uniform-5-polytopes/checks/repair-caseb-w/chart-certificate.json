@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "families": ["44", "333", "36", "ii"],
+  "tau_bound": [23, 125],
+  "gamma0_norm_bound": [25, 43],
+  "Pi_abs_bound": [141, 100],
+  "free_box": [[-1.5, 1.5], [-1, 1], [-1, 1]]
+}

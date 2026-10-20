@@ -1,0 +1,20 @@
+{
+  "omega": {
+    "recorded_sha256": "c7773fab6fff9110ea94b8c79debf887b3667396503e317ecd8cc54a3c89bc33",
+    "independent_sha256": "0962147eb2146cb1c4bacc8249583762f7faf8364f3f1bbeb1f77d97cb15b978",
+    "triples": 7291,
+    "containment_bijection": 7291,
+    "disagreements": 0
+  },
+  "cycles": {
+    "cycle_words": 14965,
+    "status_counts": {
+      "ROOT": 7291,
+      "FLAT": 7080,
+      "DEGENERATE": 57,
+      "NO_ROOT": 537
+    },
+    "recorded_cycles_sha256": "df6e4f2510cbb890a97d9ee692e0b6abee0de7683aa3a0deeba9dec4f44a28cc",
+    "disagreements": 0
+  }
+}

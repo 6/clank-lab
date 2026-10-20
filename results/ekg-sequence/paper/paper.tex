@@ -42,7 +42,7 @@ $E(t)-t\leq(1/3+o(1))t/\log t$; we prove the lower half and passage to all indic
 For $x=E(t)$ as $t\to\infty$, every $a(i)$ ($1\leq i\leq t$) other than
 $3p$ ($p$ odd prime) is at most $x+o(x/\log x)$, and every unused composite
 $h<x$ satisfies $x-h=o(x/\log x)$ uniformly in $h$.
-The proofs inject selected neighbours of even terms into prime cofactors
+The proofs inject selected neighbors of even terms into prime cofactors
 whose positive density in a common interval contradicts an elementary sieve bound.
 Haver's counting identity and the prime number theorem yield $1/3$.
 The complete Lean formalization imports Haver's estimates and the prime
@@ -232,7 +232,7 @@ $D\leq2\spf(h)F(e)$ and $\spf(h)\leq\sqrt e$ have the same loss.
 Haver already identifies these rough-predecessor and rough-missing-composite
 obstructions in the remark after Corollary 12 \cite{haver}.
 The additional information is sparsity among the forced prime cofactors. Given a putative displacement $D\geq\delta x/\log x$, we
-instead select multiples $2rMj$ and force their distinct neighbours
+instead select multiples $2rMj$ and force their distinct neighbors
 to be products $rq_j$ with $q_j$ prime. There are at least
 $D/(4rM)-O(1)$ such cofactors in an interval of length
 $O(x/(r\log x))$. For each fixed $\delta>0$ their density is bounded
@@ -819,7 +819,7 @@ nine decimal places in Table~\ref{tab:ratio}.
 
 \section{Related work}\label{sec:related}
 
-The argument completes the second-order programme of Haver \cite{haver},
+The argument completes the second-order program of Haver \cite{haver},
 using the structural work of Lagarias, Rains, and Sloane \cite{lrs} and
 Hofman and Pilipczuk \cite{hp}. Haver's Theorem 1(d) and Corollary 12(d)
 already prove the upper half of the frontier clock with sharp constant
@@ -833,12 +833,12 @@ The prime-capacity lemma is an elementary fixed-modulus sieve bound
 \cite{sievebook}, proved here; it does not require a short-interval
 prime number theorem. Haver's cited manuscript is unrefereed.
 
-\section*{Acknowledgement}
+\section*{Acknowledgment}
 The author thanks Tomer Haver for the quantitative estimates, counting
 identity, reduction and accompanying Lean sources that make this
 completion possible.
 
-\section*{Licence}
+\section*{License}
 Copyright \textcopyright\ 2026 the author named in this paper.
 This work is licensed under \mbox{Apache-2.0} (see the repository's LICENSE),
 except for the third-party material listed in \path{THIRD_PARTY.md}.

@@ -28,7 +28,7 @@ Every file under `lean/PrimeNumberTheoremAnd/` is covered by this attribution;
 none has been changed.
 
 Downloaded Lean, mathlib and other dependencies retain their respective
-licences and are not redistributed in this small source bundle.
+licenses and are not redistributed in this small source bundle.
 The following files derive from Haver and retain Haver's CC BY 4.0 notice,
 including the three modified files identified above:
 
@@ -70,4 +70,4 @@ lean/EKG/VerifiedSpans.lean
 
 All other Lean files in `lean/`, except the PNT subtree identified
 above, are new sources covered by the repository's root `LICENSE`. No proof source was changed
-when adding these licence notices.
+when adding these license notices.

@@ -12,25 +12,27 @@
 \newcommand{\file}[1]{\texttt{\detokenize{#1}}}
 \title{A planar graph without four- or nine-cycles\texorpdfstring{\\}{ }that is not three-colorable}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 19, 2026}
+\date{October 20, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-A question of Lu, Wang, Wang, Bu, Montassier and Raspaud, as reproduced
-by Kang, Jin and Wang~\cite{kjw}, asks which integers
-$i\in\{5,6,7,8,9\}$ have the property that every planar graph without cycles
-of length four or $i$ admits a proper three-coloring. We answer the
-explicitly posed $i=9$ case negatively by giving an 82-vertex planar graph
-with 136 edges, no four- or nine-cycles, and no proper three-coloring.
-The witness also has no ten-cycle. It complements the earlier disproof of
-Steinberg's $i=5$ conjecture by Cohen-Addad, Hebdige, Král', Li and Salgado.
-The proof is
-computer-assisted: a supplied rotation system establishes planarity,
-two cycle enumerators check the forbidden lengths, and exact constraint
-elimination and a DRAT unsatisfiability certificate separately establish
-non-colorability. The graph, rotation system, formula, certificate and
-standalone checkers are supplied. The written reductions and executable
-checkers are not formalized in a proof assistant.
+Lu, Wang, Wang, Bu, Montassier and Raspaud asked which integers
+$i\in\{5,6,7,8,9\}$ have the property that every planar graph without
+cycles of length four or $i$ admits a proper three-coloring. To our
+knowledge, the first counterexample to the statement that every planar
+graph without four- or nine-cycles is three-colorable is given here:
+an 82-vertex planar graph with 136 edges and no four- or nine-cycles
+that is not three-colorable. An explicit tree
+expresses the graph as 27 copies of $K_4$ joined by 26 Ore compositions.
+The elementary fact that Ore composition preserves non-three-colorability
+gives an inductive proof requiring no coloring search. Explicit
+three-colorings of all 136 single-edge deletions certify four-criticality.
+As an immediate consequence, it attains the Kostochka--Yancey edge bound
+and has
+the fewest edges among all 82-vertex four-critical graphs; no minimum-order
+claim is made. A standalone checker replays the tree and checks the
+embedding, forbidden cycles and deletion colorings. Planarity is certified
+by a rotation system, and cycle exclusion by finite enumeration.
 \end{abstract}
 
 \noindent The proofs, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
@@ -53,11 +55,15 @@ The $i=5$ case is Steinberg's conjecture. Cohen-Addad, Hebdige, Král',
 Li and Salgado disproved that case in a preprint posted in April 2016,
 published in 2017~\cite{steinberg}. Jin, Kang, Liu and Wang's 2020
 preprint~\cite{jklw} explicitly describes the cases $i\in\{6,7,8,9\}$
-as open. The result here answers $i=9$.
+as open. To our knowledge, the first counterexample to the assertion that every
+planar graph without cycles of length four or nine is properly
+three-colorable is the graph given here.
 
 \begin{theorem}\label{thm:main}
 There exists an 82-vertex planar graph with 136 edges, without cycles of
-length four or nine, that is not properly three-colorable.
+length four or nine, that is four-critical and is not properly three-colorable.
+It is a four-Ore graph and has the fewest edges among all 82-vertex
+four-critical graphs.
 \end{theorem}
 
 This is a negative answer to the explicitly posed $i=9$ case. The
@@ -65,7 +71,9 @@ particular graph also excludes $C_{10}$, an additional checked property
 recorded in the cycle table below. It contains $C_5$, $C_6$, $C_7$ and
 $C_8$, so it gives no information on $\{C_4,C_5,C_9\}$- or
 $\{C_4,C_8,C_9\}$-free planar graphs, nor on the cases $i\in\{6,7,8\}$.
-No assertion about minimum order is made.
+No assertion about minimum order is made. The non-colorability argument
+below is elementary; planarity is certified by a rotation system and
+cycle exclusion by finite enumeration.
 
 The earlier construction does not itself give this exclusion: its $G_1$
 component in Figure 1~\cite{steinberg} contains the nine-cycle
@@ -92,20 +100,19 @@ $d$~\cite{xiao}; it likewise does not assert proper three-colorability.
 The accessible question statement used here is the reproduction in
 \cite{kjw}. The defective and weak DP statements cited above are read
 through publisher abstracts or excerpts rather than their full papers.
-Literature coverage has further gaps: the full texts of Ang--Leo's
-\emph{Exploring the Weak Steinberg's Conjecture}, the updated
-Bu--Wang--Wang survey \emph{On Coloring Problems}, and Li--Niu--Tian's
-\emph{On the strong Bordeaux Conjecture} were unavailable; their
-contents are not ruled out by this account~\cite{ang,survey,bordeaux}.
-The accessible abstract of the first concerns $\{4,5,6\}$. These limits
-could affect priority or attribution; they do not affect the fixed
-witness or its checks.
+The abstract of Ang--Leo's 2026 chapter~\cite{ang} describes two
+nonplanar constructions, the second excluding lengths four, five and six;
+it supplies no planar counterexample to the assertion considered here.
+Its full text, the updated Bu--Wang--Wang survey \emph{On Coloring
+Problems}, and Li--Niu--Tian's \emph{On the strong Bordeaux Conjecture}
+remain unread~\cite{ang,survey,bordeaux}. These reading limits are
+retained in the priority assessment.
 
 The supplied bundle contains the graph and rotation system reproduced
 in Appendix~\ref{app:graph}, with the formula, certificate and checkers
-at the relative paths specified in Sections 4--5. The two embedding and
-cycle implementations are separate Python and C programs. The two
-non-colorability paths are exact constraint elimination over the three
+at the relative paths specified below. The two embedding and
+cycle implementations are separate Python and C programs. The Ore tree gives an elementary non-colorability proof. Two additional
+non-colorability checks are exact constraint elimination over the three
 color values and a DRAT certificate checked by DRAT-trim. The
 mathematical reductions and ordinary executable programs, including the
 CNF generator, remain part of the proof's trust base.
@@ -163,7 +170,96 @@ degree of this input is 10, even the coarse bound $82\cdot10^{14}<2^{63}$
 on raw enumeration counts is below the signed 64-bit limit used in C.
 All Python counts use arbitrary precision integers.
 
-\section{Two checks of non-colorability}
+\section{An elementary Ore-composition proof}\label{sec:ore}
+Take vertex-disjoint graphs $A$ and $B$, an edge $xy$ of $A$, and a
+vertex $z$ of $B$. Partition $N_B(z)$ into two nonempty disjoint sets
+$N_x,N_y$. Delete $xy$ from $A$, replace $z$ in $B$ by two nonadjacent
+vertices, and identify those vertices with $x,y$, respectively, assigning
+neighbors $N_x$ to $x$ and $N_y$ to $y$. The resulting graph is an
+\emph{Ore composition}, also called a Dirac--Haj\'os--Gallai--Ore (DHGO)
+composition~\cite{ky}.
+
+\begin{lemma}\label{lem:ore}
+If neither $A$ nor $B$ is three-colorable, their Ore composition is not
+three-colorable.
+\end{lemma}
+\begin{proof}
+Suppose the composite has a proper three-coloring $f$. Restrict $f$ to
+$V(A)$. If $f(x)\ne f(y)$, restoring the deleted edge $xy$ gives a
+proper three-coloring of $A$, a contradiction. Hence $f(x)=f(y)$.
+Restrict $f$ to $V(B)\setminus\{z\}$ and give $z$ this common color.
+Every neighbor of $z$ belonged to $N_x$ or $N_y$, and therefore has a
+color different from that common color. Edges not incident with $z$
+are unchanged. This is a proper three-coloring of $B$, again a
+contradiction.
+\end{proof}
+
+The explicit tree in \file{data/ore-tree.json}, also printed in
+Appendix~\ref{app:ore}, has 27 leaves and 26 internal nodes. Each leaf
+is a $K_4$; each internal node specifies both operands, the deleted edge,
+the split vertex and its neighborhood partition. Nodes are numbered in
+postorder, so their operands have smaller numbers. Replay uses the
+vertex labels stated in the tree. Its root has vertex set
+$\{0,\ldots,81\}$ and exactly the edge set in \file{data/graph.txt};
+the stated isomorphism is the identity $v\mapsto v$ for every vertex.
+The standalone checker verifies four distinct labels and all six edges
+at each leaf. At each join it checks that both operand indices are
+smaller than the current index, the operand vertex sets are disjoint,
+$xy$ is an edge of the first operand, $z$ is a vertex of the second, and
+$N_x,N_y$ are nonempty and form an exact partition of $N_B(z)$. It then
+performs precisely the deletion, split and identifications just defined.
+Finally it checks root equality under the stated bijection and that every
+non-root node is used exactly once, so every node contributes to the
+induction.
+
+The graph $K_4$ is not three-colorable: four pairwise adjacent vertices
+need four distinct colors. Inducting over this explicit tree with
+Lemma~\ref{lem:ore} proves that $G$ is not three-colorable. This proof
+requires no search for colorings and no unsatisfiability certificate.
+The finite structural replay checks that the displayed construction
+produces the particular published graph. Starting with 27 copies of
+$K_4$, each join reduces the sum of orders and the sum of sizes by one,
+so the root has $27\cdot4-26=82$ vertices and
+$27\cdot6-26=136$ edges.
+
+\subsection{Four-criticality and the edge bound}
+A graph is \emph{four-critical} if it has chromatic number four and
+every proper subgraph is three-colorable. For each of the 136 edges
+$e$, \file{data/deletion-colorings.json} supplies an explicit vector
+$(c_0,\ldots,c_{81})\in\{0,1,2\}^{82}$ properly coloring $G-e$.
+The checker verifies every edge other than $e$, and exact coverage of
+all edges, without solving any coloring problem. The two endpoints of
+$e$ necessarily have equal colors, since otherwise this would color
+$G$. Recoloring one endpoint with a fourth color yields a proper
+four-coloring of $G$. Together with the preceding induction, this proves
+$\chi(G)=4$. The graph has no isolated vertices. Any proper subgraph
+omits some edge of $G$, even if it omits a vertex, and is therefore a
+subgraph of some $G-e$. Restricting that deletion coloring proves its
+three-colorability. Consequently $G$ is four-critical.
+
+A graph obtained from copies of $K_4$ by Ore compositions is called a
+\emph{four-Ore graph}~\cite{ky}; the tree proves this property directly.
+Kostochka and Yancey's bound~\cite{kybound}, reproduced as Theorem 4
+of the cited arXiv version of~\cite{ky}, states
+that every four-critical graph $H$ satisfies
+\[
+ |E(H)|\geq\left\lceil\frac{5|V(H)|-2}{3}\right\rceil.
+\]
+For this graph,
+\[
+ 136=\frac{5\cdot82-2}{3}.
+\]
+Thus, as an immediate consequence of the construction and the bound,
+136 is the minimum possible number of edges of any 82-vertex
+four-critical graph, including graphs without a planarity or
+forbidden-cycle restriction. This is an edge minimum at fixed order.
+Every four-Ore graph of this order shares this edge count; no uniqueness
+is asserted. It does not assert that 82 is the minimum order of a planar
+four-chromatic graph without four- or nine-cycles. The checker verifies
+the equality arithmetic; the general lower bound is the cited theorem.
+
+\section{Two additional checks of non-colorability}
+
 \subsection{Exact constraint elimination}
 For each edge $uv$ start with the relation
 $R_{uv}=\{(a,b)\in\{0,1,2\}^2:a\ne b\}$.
@@ -229,8 +325,12 @@ The complete standalone check is \file{sh checks/check.sh}, run from the
 bundle root. It needs Python 3.10 or later, a C compiler and a POSIX
 shell; there are no third-party Python packages or network downloads.
 It compiles the supplied C sources in a temporary directory, runs both
-embedding checks, both cycle enumerators, elimination, CNF comparison and
-DRAT verification. The DRAT route requires successful termination and
+embedding checks, both cycle enumerators, the Ore replay and all deletion
+colorings, elimination, CNF comparison and DRAT verification. The single
+standard-library script \file{checks/check_ore.py}, given the graph, tree,
+rotation and deletion-coloring files, also checks planarity, all simple
+cycles through length ten, the Ore induction and four-criticality on its
+own. It imports no other bundled code. The DRAT route requires successful termination and
 the exact success status, not just an absent error message.
 
 The same command exercises deliberate corruptions. Deleting edge $(0,1)$
@@ -242,12 +342,12 @@ modified graph. Swapping two neighbors in the rotation at zero changes
 the Euler characteristic to zero and must be rejected by both embedding
 checks. This is rejection of a rotation, not a non-planarity claim for
 the underlying graph. Finally a proper prefix containing only the first
-45 complete proof steps must fail DRAT verification. These are nine
-control outcomes. The certificate checks and the reductions in
-Sections 2--4 establish Theorem~\ref{thm:main}.
+45 complete proof steps must fail DRAT verification. A tenth control repeats a vertex in the first $K_4$ leaf of the tree;
+the standalone checker must reject it. These are ten control outcomes. The certificate checks and the reductions in
+the preceding sections establish Theorem~\ref{thm:main}.
 
 This is a computer-assisted proof, not a proof-assistant formalization.
-The rotation-system argument, enumeration completeness, CNF reduction,
+The rotation-system argument, enumeration completeness, Ore induction, criticality argument, CNF reduction,
 color symmetry and constraint-elimination argument are mathematical
 arguments written here. Their implementations and DRAT-trim run as
 ordinary programs and are not themselves formally verified. The
@@ -261,6 +361,8 @@ no claim of exhaustive search, optimal order or applicability to another
 forbidden pair.
 
 \paragraph{Credits and license.}
+The Ore-composition method and the sharp edge bound are credited to
+the work discussed by Kostochka and Yancey~\cite{ky}.
 Credit for posing and developing the forbidden-cycle questions belongs
 to the researchers cited above, and for the earlier Steinberg disproof
 to Cohen-Addad and coauthors. The SAT certificate uses CaDiCaL and is
@@ -312,6 +414,16 @@ On Coloring Problems.
 On the strong Bordeaux Conjecture.
 \emph{Discrete Math.} 349 (2026), 114818.
 \href{https://doi.org/10.1016/j.disc.2025.114818}{doi:10.1016/j.disc.2025.114818}.
+\bibitem{kybound} A. Kostochka and M. Yancey.
+Ore's Conjecture on color-critical graphs is almost true.
+\emph{J. Combin. Theory Ser. B} 109 (2014), 73--101.
+\href{https://arxiv.org/abs/1209.1050}{arXiv:1209.1050};
+\href{https://doi.org/10.1016/j.jctb.2014.05.002}{doi:10.1016/j.jctb.2014.05.002}.
+\bibitem{ky} A. Kostochka and M. Yancey.
+A Brooks-type result for sparse critical graphs.
+\emph{Combinatorica} 38 (2018), 887--934.
+\href{https://arxiv.org/abs/1408.0846}{arXiv:1408.0846}, version 3 (2017),
+Theorem 4 and the definition of Ore composition.
 \bibitem{drat} N. Wetzler, M. J. H. Heule and W. A. Hunt, Jr.
 DRAT-trim: Efficient checking and trimming using expressive clausal proofs.
 \emph{SAT 2014}, LNCS 8561, 422--429.
@@ -337,4 +449,12 @@ drawing is necessary.
 \begin{multicols}{2}\footnotesize
 \VerbatimInput[firstline=2]{../data/rotation.txt}
 \end{multicols}
+\clearpage
+\section{The explicit Ore tree}\label{app:ore}
+Each leaf row specifies the four vertices of a complete graph. Each join
+row specifies $A,B,xy,z,N_x,N_y$ in the notation of
+Section~\ref{sec:ore}. Labels at least 82 are temporary split vertices;
+none survives at the root, node 52. Operands are disjoint at every join.
+The root-to-published isomorphism is the identity on $0,\ldots,81$.
+\input{../data/ore-tree-table.tex}
 \end{document}

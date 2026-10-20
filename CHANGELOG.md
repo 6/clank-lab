@@ -16,6 +16,7 @@ Zenodo records.
 - Adds a Lean proof of the whole result for the published graph: it is
   planar, has no cycle of length 4 or 9, and has no proper 3-coloring, with
   the coloring certificate checked inside Lean.
+- Zenodo: [10.5281/zenodo.23510448](https://doi.org/10.5281/zenodo.23510448)
 
 ## uniform-5-polytopes v2 (October 20, 2026)
 

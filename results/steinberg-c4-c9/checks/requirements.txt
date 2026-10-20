@@ -1,0 +1,2 @@
+# Python 3.10 or later; standard library only, no pip packages.
+# The entry point also requires a POSIX shell, a C compiler (cc), and mktemp.

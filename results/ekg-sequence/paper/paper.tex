@@ -23,7 +23,7 @@
 \newcommand{\eps}{\varepsilon}
 \title{The second-order asymptotic\\of the EKG sequence}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 19, 2026}
+\date{October 20, 2026}
 \begin{document}
 \maketitle
 
@@ -46,7 +46,14 @@ The proofs inject selected neighbors of even terms into prime cofactors
 whose positive density in a common interval contradicts an elementary sieve bound.
 Haver's counting identity and the prime number theorem yield $1/3$.
 The complete Lean formalization imports Haver's estimates and the prime
-number theorem as proved theorems.
+number theorem as proved theorems, and also checks the following
+consequences. We give, to our knowledge, the first proofs that
+$a(n)>n$ for all large $n$ with $a(n)$ not prime and that
+$\#\{k\leq N:a(k)>k\}/N\to1$ (Ordowski's 2009 conjectures in OEIS
+A064413), and that each of $a(n)=n$, $2a(n)=n$ and $2a(n)=3n$ has only
+finitely many solutions (Jasinski's 2008 conjectures in A152458 and
+A152519). Also $\#\{k\leq N:a(k)<k\}\sim N/(2\log N)$, and the
+permutation has only finitely many cycles of each bounded length.
 \end{abstract}
 
 \paragraph{AI production.}
@@ -108,7 +115,7 @@ values, used values above the least unused even integer, and missing
 composites below it. Haver's Corollary 2(e), in version 3 dated October 4,
 2026, reduces the second-order assertion at these even integers to a
 negligible count of odd used values above them. Haver's Theorem 1(d)
-and Corollary 12(d) already give
+(also stated in his abstract) and Corollary 12(d) already give
 $E(t)-t\leq(1/3+o(1))t/\log t$ and
 $N_p\geq2p-(2/3+o(1))p/\log p$, with sharp constants.
 Our contribution is the lower half of the clock,
@@ -215,7 +222,17 @@ $13n/28\leq a(n)\leq12n/7$ globally, with equality only at $n=28$
 and $n=7$, respectively. It is not settled here; an eventual asymptotic
 does not settle the required finite range. Nor do we address the
 unproved distributional suggestions for higher-order fluctuations in
-LRS Section 4 or their unnumbered cycle questions.
+LRS Section 4 or their unnumbered cycle questions, beyond the bounded
+cycle lengths of Section~\ref{sec:consequences}.
+
+Section~\ref{sec:consequences} derives three consequences. For all
+large $n$, $a(n)>n$ exactly when $a(n)$ is composite, and
+$\#\{k\leq N:a(k)<k\}\sim N/(2\log N)$; this proves two 2009
+conjectures of Thomas Ordowski recorded in OEIS A064413. The equations
+$a(k)=k$, $2a(k)=k$ and $2a(k)=3k$ have finitely many solutions; this
+proves Artur Jasinski's 2008 finiteness conjectures on A152458 and
+A152519. And the permutation has finitely many cycles of each bounded
+length.
 
 The coefficient has the counting heuristic of LRS Section 4 \cite{lrs}:
 \[
@@ -697,6 +714,142 @@ ordinary index; the shifted clock alone covers the prime blocks.
 Increasing the common cutoff to at least $3$ proves the theorem.
 \end{proof}
 
+\section{Consequences: the diagonal, three lines and short cycles}\label{sec:consequences}
+
+Theorem~\ref{thm:main} has the following consequences for questions
+recorded in the OEIS \cite{oeis}. On A064413, Thomas Ordowski
+conjectured on January 23, 2009, ``If $a(n)\neq p$, then almost
+everywhere $a(n)>n$'' and ``$\lim\#(a_n>n)/n=1$''. Artur Jasinski, in
+December 2008, called $a(k)=k$, $2a(k)=3k$ and $2a(k)=k$ the three
+critical lines of the sequence. His entry A152458, the indices with
+$a(k)=k$, records the conjecture that it is finite, and on A152519 (the
+indices with $2a(k)=3k$) he conjectured that the number of points on the
+three lines is finite, asking also whether the listed points are
+complete. We prove the
+finiteness, not the completeness. Below, $p$ denotes a prime.
+
+Only one feature of Theorem~\ref{thm:main} is new for these purposes:
+$b(n)>n$ for all large $n$, the sign of the second-order term. The ratio
+$b(n)/n\to1$ was already known \cite{hp,haver}; it does not decide on
+which side of the diagonal $a(n)$ lies.
+
+\begin{lemma}\label{lem:window}
+For every $\eta>0$ there is $N_0\geq3$ such that $n<b(n)\leq(1+\eta)n$
+for all $n\geq N_0$. For every $n$, exactly one of the following holds:
+$a(n)$ is an odd prime and $b(n)=2a(n)$; $a(n)=3p$ for an odd prime $p$
+and $2a(n)=3b(n)$; or $b(n)=a(n)$.
+\end{lemma}
+\begin{proof}
+Apply \eqref{eq:epsilon} with $\eps=1/6$: for $n\geq N$,
+$b(n)\geq n+n/(6\log n)>n$ and $b(n)\leq n+n/(2\log n)$, which is at
+most $(1+\eta)n$ once $\log n\geq1/(2\eta)$. The second statement is
+the definition \eqref{eq:smooth}.
+\end{proof}
+
+\begin{corollary}[The diagonal]\label{cor:sign}
+For all sufficiently large $n$, $a(n)<n$ if $a(n)$ is prime and
+$a(n)>n$ if $a(n)$ is not prime. Thus, apart from finitely many $n$,
+$a(n)>n$ exactly when $a(n)$ is composite, and $a(n)\neq n$. Moreover,
+as $N\to\infty$,
+\[
+ \#\{k\leq N:a(k)<k\}\sim\frac{N}{2\log N},\qquad
+ \#\{k\leq N:a(k)>k\}=N-\Bigl(\frac12+o(1)\Bigr)\frac{N}{\log N}.
+\]
+In particular $\#\{k\leq N:a(k)>k\}/N\to1$.
+\end{corollary}
+\begin{proof}
+Take $N_0$ from Lemma~\ref{lem:window} with $\eta=1/3$, and let
+$n\geq N_0$. If $a(n)$ is prime, it is not $2$, since $b(n)>n\geq3$;
+so $a(n)=b(n)/2\leq2n/3<n$. If $a(n)$ is not prime, it is not $1$
+(else $b(n)=1<n$), and either $a(n)=b(n)>n$ or $a(n)=3b(n)/2>n$.
+
+For the counts, fix $\eta\in(0,1/3]$ and its $N_0$. For $N\geq N_0$,
+the sets $\{k\leq N:a(k)<k\}$ and $\{k\leq N:a(k)\text{ prime}\}$ agree
+on $[N_0,N]$, and $a(k)=k$ only for $k<N_0$. Let $P(N)$ be the number
+of $k\in[N_0,N]$ with $a(k)$ prime. Each such $k$ has
+$a(k)=b(k)/2\leq(1+\eta)N/2$, and $a$ is injective, so
+$P(N)\leq\pi((1+\eta)N/2)$. Conversely, let
+$M=\max\{a(k):k<N_0\}$. Since $a$ is a permutation, each prime $p$
+with $M<p\leq N/2$ is $a(k)$ for one $k$, and $k\geq N_0$ because
+$p>M$. Then $k<b(k)=2p\leq N$, so $P(N)\geq\pi(N/2)-M$. By the prime
+number theorem $\pi(cN)\sim cN/\log N$ for each fixed $c>0$, hence
+\[
+ 1-o(1)\leq\frac{P(N)}{N/(2\log N)}\leq1+\eta+o(1),
+\]
+and $\eta$ is arbitrary. The second count is $N$ minus the first and
+minus the finitely many $k$ with $a(k)=k$.
+\end{proof}
+
+The first statement proves Ordowski's first conjecture in its strongest
+reading, for all but finitely many $n$; it implies the density-one
+reading of ``almost everywhere''. The last statement is his second
+conjecture. The count of prime values alone,
+$\#\{k\leq N:a(k)\text{ prime}\}\sim N/(2\log N)$, already follows from
+the ratio form; the new content is that these are, with finitely many
+exceptions, exactly the indices below the diagonal.
+
+Two related OEIS entries are also finite sets: Ordowski's ``exceptional
+numbers'' A155549, the $n$ with $a(n)$ not prime and $a(n)\leq n-1$,
+and A064420, the $k$ with $a(k+1)=k$. Both are listed as ``probably
+complete''. The first is finite by Corollary~\ref{cor:sign}. For the
+second, $a(n)=n-1$ fails for large $n$: a prime value has
+$a(n)\leq2n/3$ and any other value has $a(n)>n$. De Vlieger
+\cite{devlieger} remarked that it is ``not surprising'' that A064420
+is finite. As below, completeness is not shown.
+
+\begin{corollary}[Three lines]\label{cor:lines}
+Each of the sets $\{k:2a(k)=k\}$, $\{k:a(k)=k\}$ and $\{k:2a(k)=3k\}$
+is finite.
+\end{corollary}
+\begin{proof}
+Take $N_0$ from Lemma~\ref{lem:window} with $\eta=1/3$, and let
+$n\geq N_0$, so $n<b(n)\leq4n/3$. If $a(n)$ is an odd prime, then
+$2a(n)=b(n)$, so $n<2a(n)\leq4n/3$. If $a(n)=3p$ for an odd prime $p$,
+then $2a(n)=3b(n)>3n$. Otherwise $a(n)=b(n)$ and $2n<2a(n)\leq8n/3$.
+In no case is $2a(n)$ equal to $n$, $2n$ or $3n$, so all three sets
+lie in $[1,N_0)$.
+\end{proof}
+
+In fact the ratios $a(n)/n$ eventually lie in
+$(1/2,2/3]\cup(1,4/3]\cup(3/2,2]$, avoiding $1/2$, $1$ and $3/2$.
+No explicit $N_0$ is extracted, so this does not show that the terms
+listed in A152458 and A152519 are complete; Amiram Eldar recorded in
+2024 that neither sequence has a further term below $10^5$ \cite{oeis}.
+
+Lagarias, Rains and Sloane \cite[Section~7]{lrs} note that the
+permutation appears to have infinitely many finite cycles and
+infinitely many infinite cycles, and expect both to be hard to prove.
+The following does not decide either question, but it shows that
+infinitely many finite cycles, if they exist, have unbounded lengths.
+
+\begin{corollary}[Short cycles]\label{cor:cycles}
+For each $L\geq1$, the permutation $n\mapsto a(n)$ of the positive
+integers has only finitely many cycles of length at most $L$.
+\end{corollary}
+\begin{proof}
+By Lemma~\ref{lem:window}, for each $n$,
+\[
+ 2^{\sigma(n)}a(n)=3^{\tau(n)}b(n),\qquad
+ (\sigma(n),\tau(n))\in\{(0,0),(1,0),(1,1)\}.
+\]
+Choose $\eta>0$ with
+$(1+\eta)^L<2^L/(2^L-1)$, and $N_0$ for this $\eta$. Suppose a cycle
+$x_1,\ldots,x_\ell$, with $a(x_i)=x_{i+1}$ for $i<\ell$,
+$a(x_\ell)=x_1$ and $\ell\leq L$, has every $x_i\geq N_0$. Since $a$ permutes the $x_i$,
+$\prod a(x_i)=\prod x_i$; with $u=\sum\sigma(x_i)$ and
+$v=\sum\tau(x_i)$, so $v\leq u\leq\ell$,
+\[
+ 2^u\prod_{i=1}^{\ell}x_i=3^v\prod_{i=1}^{\ell}b(x_i).
+\]
+As $b(x_i)>x_i$, this forces $3^v<2^u$, so $u\geq1$ and
+$3^v\leq2^u-1$. As $b(x_i)\leq(1+\eta)x_i$, the right side is then at
+most $(2^u-1)(1+\eta)^{\ell}\prod x_i$, which is less than
+$2^u\prod x_i$ because
+$(1+\eta)^\ell<2^L/(2^L-1)\leq2^u/(2^u-1)$. This contradiction shows
+that every cycle of length at most $L$ contains an integer below
+$N_0$. Distinct cycles are disjoint, so there are fewer than $N_0$ of them.
+\end{proof}
+
 \section{Lean formalization and verification}\label{sec:lean}
 
 The project \texttt{lean/} uses Lean 4 \cite{lean} and mathlib
@@ -774,6 +927,29 @@ upstream project. The three-branch corollary is the elementary algebraic
 consequence proved in the text; its separate statement is not included
 as an additional Lean theorem.
 
+The consequences in Section~\ref{sec:consequences} are also
+machine-checked. \path{CorollaryStatements.lean} fixes their statements
+independently of the proofs, for the one-based sequence \texttt{a}:
+\begin{itemize}
+\item \texttt{EventualSignStatement}: the first part of
+  Corollary~\ref{cor:sign};
+\item \texttt{BelowDiagonalCountStatement} and
+  \texttt{OrdowskiDensityStatement}: its two counts;
+\item \texttt{JasinskiFinitenessStatement}: Corollary~\ref{cor:lines},
+  with the lines written $2a(k)=k$, $a(k)=k$ and $2a(k)=3k$ as in the OEIS;
+\item \texttt{ExceptionalFinitenessStatement}: the finiteness of
+  A155549 and A064420;
+\item \texttt{ShortCyclesStatement}: Corollary~\ref{cor:cycles}, a cycle
+  being the orbit of a positive $m$ with $a^{[l]}(m)=m$ for some
+  $1\leq l\leq L$.
+\end{itemize}
+The proofs are in \path{SolutionSign.lean},
+\path{SolutionDensity.lean} and \path{SolutionCycles.lean}; they use
+Theorem~\ref{thm:main}, the permutation property and the prime number
+theorem above. \path{Check.lean} checks each against its statement and
+guards its axioms, which are again exactly
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+
 No human expert has reviewed it.
 
 \section{Numerical illustration}\label{sec:numerics}
@@ -844,7 +1020,8 @@ This work is licensed under \mbox{Apache-2.0} (see the repository's LICENSE),
 except for the third-party material listed in \path{THIRD_PARTY.md}.
 
 \section*{Disclosure}
-The main theorem is formally proved in Lean.
+The main theorem and the consequences in
+Section~\ref{sec:consequences} are formally proved in Lean.
 No human expert has reviewed it.
 
 \begin{thebibliography}{99}
@@ -866,6 +1043,10 @@ Ch.-J. de la Vall\'ee Poussin, Recherches analytiques sur la th\'eorie
 des nombres premiers. Premi\`ere partie: Les nombres premiers en g\'en\'eral,
 \emph{Ann. Soc. Sci. Bruxelles} \textbf{20}, deuxi\`eme partie (1896),
 183--256. \href{https://archive.org/details/recherchesanaly00pousgoog}{Digitized collected offprint}.
+
+\bibitem{devlieger}
+M. De Vlieger, Constitutive analysis of the EKG sequence, 2021,
+\url{https://vincico.com/seq/a064413.html}.
 
 \bibitem{hadamard}
 J. Hadamard, Sur la distribution des z\'eros de la fonction $\zeta(s)$
@@ -897,7 +1078,11 @@ The mathlib Community, The Lean mathematical library, in
 
 \bibitem{oeis}
 OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences},
-entries \href{https://oeis.org/A064413}{A064413} and
+entries \href{https://oeis.org/A064413}{A064413},
+\href{https://oeis.org/A064420}{A064420},
+\href{https://oeis.org/A152458}{A152458},
+\href{https://oeis.org/A152519}{A152519},
+\href{https://oeis.org/A155549}{A155549} and
 \href{https://oeis.org/A256417}{A256417}.
 
 \bibitem{pntcode}
@@ -915,7 +1100,9 @@ Primary 11B83; Secondary 11A05, 68V15.\\
 \emph{Keywords}: EKG sequence, greedy permutation, prime number theorem,
 asymptotic formula, formal verification.\\
 \emph{Concerned with sequences}
-\href{https://oeis.org/A064413}{A064413} and
+\href{https://oeis.org/A064413}{A064413},
+\href{https://oeis.org/A152458}{A152458},
+\href{https://oeis.org/A152519}{A152519} and
 \href{https://oeis.org/A256417}{A256417}.
 
 \end{document}

@@ -4,6 +4,14 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-sequence v2 (October 20, 2026)
+
+- Consequences of the v1 theorem, proved in the paper and in Lean:
+  Ordowski's 2009 conjectures on A064413 (for large n, a(n) > n exactly
+  when a(n) is composite), Jasinski's 2008 finiteness conjectures on
+  A152458 and A152519, finiteness of A155549 and A064420, and finitely
+  many cycles of each bounded length. Tag `ekg-sequence-v2`.
+
 ## steinberg-c4-c9 v2 (October 20, 2026)
 
 - Adds the explicit tree of 27 K4 graphs and 26 Ore compositions and an

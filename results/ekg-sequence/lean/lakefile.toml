@@ -70,4 +70,16 @@ name = "SolutionPNT"
 name = "Statement"
 
 [[lean_lib]]
+name = "CorollaryStatements"
+
+[[lean_lib]]
+name = "SolutionSign"
+
+[[lean_lib]]
+name = "SolutionDensity"
+
+[[lean_lib]]
+name = "SolutionCycles"
+
+[[lean_lib]]
 name = "Check"

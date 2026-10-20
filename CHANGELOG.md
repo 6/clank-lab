@@ -14,3 +14,8 @@ Zenodo records.
 - First version: completeness of the known list of convex uniform
   5-polytopes, conditional on the 3- and 4-dimensional classifications.
   Paper, Lean formalization and certificate checkers.
+
+## density-seven v1 (October 20, 2026)
+
+- First version: the density Hales–Jewett number for length 7 over three
+  letters is 1,302. Paper, witness and certificate checkers.

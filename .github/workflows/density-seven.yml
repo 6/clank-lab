@@ -1,0 +1,44 @@
+name: Density Hales–Jewett 7 checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/density-seven/**'
+      - '.github/workflows/density-seven.yml'
+  pull_request:
+    paths:
+      - 'results/density-seven/**'
+      - '.github/workflows/density-seven.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: density-seven-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Check density-seven
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/density-seven
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Build the checking tools
+        run: python3 checks/build_tools.py "$RUNNER_TEMP/density-tools"
+
+      - name: Quick check
+        run: python3 checks/check.py --quick --tools "$RUNNER_TEMP/density-tools" --work "$RUNNER_TEMP/density-quick"

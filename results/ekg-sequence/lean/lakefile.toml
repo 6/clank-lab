@@ -1,0 +1,73 @@
+name = "EKGAsymptotic"
+defaultTargets = ["Check"]
+
+[leanOptions]
+pp.unicode.fun = true
+pp.proofs.withType = false
+autoImplicit = false
+relaxedAutoImplicit = false
+linter.mathlibStandardSet = true
+linter.style.header = false
+linter.style.openClassical = false
+linter.style.longLine = false
+linter.style.emptyLine = false
+linter.flexible = true
+
+[[require]]
+name = "LeanArchitect"
+git = "https://github.com/hanwenzhu/LeanArchitect.git"
+rev = "468e8f58fb4ad6e6ad672a08da6d0d0531e95a97"
+
+[[require]]
+name = "checkdecls"
+git = "https://github.com/PatrickMassot/checkdecls.git"
+rev = "3d425859e73fcfbef85b9638c2a91708ef4a22d4"
+
+[[require]]
+name = "leancert"
+git = "https://github.com/alerad/leancert.git"
+rev = "6320a15be41a27701fabb3b49e73cc187f76f37d"
+
+[[require]]
+name = "PrimeCert"
+git = "https://github.com/b-mehta/PrimeCert"
+rev = "916ee9c35a57af128d5089a69172415051e700ca"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "5ed2965256430c3649e86755f9576b54eca72435"
+
+
+[[lean_lib]]
+name = "EKG"
+
+[[lean_lib]]
+name = "PrimeNumberTheoremAnd"
+
+[[lean_lib]]
+name = "ControlEndpoint"
+
+[[lean_lib]]
+name = "Solution"
+
+[[lean_lib]]
+name = "SolutionB"
+
+[[lean_lib]]
+name = "SolutionCompatibilityPNT"
+
+[[lean_lib]]
+name = "SolutionCounting"
+
+[[lean_lib]]
+name = "SolutionEndpoint"
+
+[[lean_lib]]
+name = "SolutionPNT"
+
+[[lean_lib]]
+name = "Statement"
+
+[[lean_lib]]
+name = "Check"

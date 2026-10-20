@@ -1,0 +1,71 @@
+name: EKG sequence checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/ekg-sequence/**'
+      - '.github/workflows/ekg-sequence.yml'
+  pull_request:
+    paths:
+      - 'results/ekg-sequence/**'
+      - '.github/workflows/ekg-sequence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ekg-sequence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Check ekg-sequence
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      LEAN_NUM_THREADS: '4'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean
+        working-directory: results/ekg-sequence/lean
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/ekg-sequence/lean/.lake/build
+          key: ekg-sequence-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/ekg-sequence/lean/lean-toolchain', 'results/ekg-sequence/lean/lake-manifest.json', 'results/ekg-sequence/lean/lakefile.toml', 'results/ekg-sequence/lean/**/*.lean', '!results/ekg-sequence/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        working-directory: results/ekg-sequence/lean
+        run: lake exe cache get
+
+      - name: Unit tests
+        working-directory: results/ekg-sequence/lean
+        run: lake build ControlEndpoint
+
+      - name: Build proof
+        working-directory: results/ekg-sequence/lean
+        run: lake build
+
+      - name: Check axioms
+        working-directory: results/ekg-sequence/lean
+        # Check.lean's #guard_msgs fail the build on any axiom beyond the standard three.
+        run: lake env lean Check.lean

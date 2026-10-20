@@ -10,6 +10,8 @@ trap 'rm -rf "$work"' EXIT HUP INT TERM
 "$CC" -O2 -o "$work/cycles" checks/check_cycles.c
 "$CC" -O2 -o "$work/planar" checks/check_planar.c
 
+"$PY" checks/check_ore.py data/graph.txt data/ore-tree.json data/rotation.txt data/deletion-colorings.json
+
 "$work/planar" data/graph.txt data/rotation.txt
 "$PY" checks/check_planar.py data/graph.txt data/rotation.txt
 "$work/cycles" data/graph.txt 14 4 9 10
@@ -68,4 +70,5 @@ reject 'Python cycles on the C9 insertion' "$PY" checks/check_cycles.py "$C/plus
 reject 'C planarity on the swapped rotation' "$work/planar" data/graph.txt "$C/rotation-swapped.txt"
 reject 'Python planarity on the swapped rotation' "$PY" checks/check_planar.py data/graph.txt "$C/rotation-swapped.txt"
 reject_drat 'the truncated proof' "$work/col3.cnf" "$C/col3-truncated.drat"
-echo 'PASS: planar, no C4/C9/C10, not properly 3-colourable; all nine corruption checks passed'
+reject 'Ore tree with a repeated K4 vertex' "$PY" checks/check_ore.py data/graph.txt "$C/ore-tree-invalid.json" data/rotation.txt data/deletion-colorings.json
+echo 'PASS: planar, no C4/C9/C10, 4-critical, 27 K4 leaves and 26 Ore joins; all ten corruption checks passed'

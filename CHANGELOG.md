@@ -4,6 +4,14 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## steinberg-c4-c9 v2 (October 20, 2026)
+
+- Adds the explicit tree of 27 K4 graphs and 26 Ore compositions and an
+  elementary non-three-colorability proof. All 136 edge-deletion colorings
+  certify four-criticality and equality in the Kostochka–Yancey edge bound
+  at order 82; no minimum-order claim is made. A single standalone checker
+  verifies the construction and these certificates. Tag: `steinberg-c4-c9-v2`.
+
 ## ekg-sequence v1 (October 20, 2026)
 
 - First version: the second-order growth of the EKG sequence,

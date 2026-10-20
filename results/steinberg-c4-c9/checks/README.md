@@ -7,8 +7,7 @@ later (standard library only), `cc`, a POSIX shell and `mktemp`; see
 `requirements.txt`. `PYTHON` and `CC` may name alternative executables.
 All builds and generated files go into a temporary directory, removed on
 exit. The check needs no network access, SAT solver, repository checkout,
-environment-specific path or external proof input. The mathematical
-arguments are in Sections 2–5 of the paper.
+environment-specific path or external proof input. The mathematical arguments are in the paper.
 
 `data/graph.txt` begins with `82 136`, followed by the unordered edges on
 vertices 0 through 81. Comments start with `#`. `data/rotation.txt` has one
@@ -33,6 +32,44 @@ with chords, through length 14. Both give:
 | Length | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Count | 27 | 0 | 22 | 55 | 44 | 11 | 0 | 0 | 64 | 320 | 832 | 1824 |
+
+`check_ore.py` is a single independent Python script, requiring only the
+standard library. It checks the full structural theorem and the criticality
+certificates without calling any other bundled program:
+
+```sh
+python3 checks/check_ore.py data/graph.txt data/ore-tree.json data/rotation.txt data/deletion-colorings.json
+```
+
+It traces the supplied rotation and enumerates all simple cycles through
+length ten. It replays `ore-tree.json` from its 27 complete four-vertex
+leaves and 26 Ore joins, checks that every child is used exactly once, and
+compares the root with the input graph through the explicit bijection in
+`isomorphism` (here the identity). The node array is in postorder. A `K4`
+node lists its vertices. An `ore` node names its earlier `left` and `right`
+children, the left edge `edge=[x,y]`, right vertex `split=z`, and the two
+nonempty disjoint sets `x_neighbors` and `y_neighbors` partitioning the
+entire neighborhood of z. The operands must be disjoint. Replay removes
+xy and z, then joins the two specified sets to x and y. The same complete
+tree is displayed in the paper; its table is generated from this JSON.
+
+Non-three-colorability follows by induction: if an Ore composite were
+three-colored, unequal colors at x,y would color the restored left graph;
+equal colors would color the right graph after identifying x,y. Both
+contradict the children's non-three-colorability, starting from K4. This
+checks a finite construction, with no coloring search. The independently
+retained DRAT and elimination paths provide additional checks.
+
+`deletion-colorings.json` has one row for each edge, naming that edge and
+all 82 colors, ordered by the vertex label. The checker verifies colors in
+{0,1,2} on every retained edge and exact coverage of all 136 deletions. It
+also derives and checks a four-coloring by giving one deleted-edge endpoint
+a fourth color. No isolated vertex exists, so every proper subgraph omits
+an edge and inherits a three-coloring. The graph is therefore four-critical.
+The script checks `3*136=5*82-2`; the lower-bound theorem of Kostochka and
+Yancey is a cited mathematical premise, rather than something the script
+proves. The consequence is minimum size among 82-vertex four-critical
+graphs, with no minimum-order assertion.
 
 `check_col_elim.py` works directly over the three-color domain. Each edge
 starts as the six allowed unequal pairs. At an elimination step all
@@ -63,7 +100,7 @@ and the MIT notices. No solver is needed for replay. The entry point
 requires both successful termination and the exact `s VERIFIED` status;
 resource errors or a vanished process do not prove unsatisfiability.
 
-The entry point also checks nine negative-control outcomes, with these
+The entry point also checks ten negative-control outcomes, with these
 actual inputs in `data/controls/`:
 
 - `minus-edge.txt`: deletes `(0,1)`. Elimination must find it colorable;
@@ -79,10 +116,13 @@ actual inputs in `data/controls/`:
   empty clause and the proof's remainder. drat-trim must report
   `s NOT VERIFIED`, with its normal rejection status.
 
-For the cycle and rotation controls the entry point requires explicit
+- `ore-tree-invalid.json`: repeats a vertex in the first K4 leaf. The
+  standalone checker must reject this invalid construction.
+
+For the cycle, tree and rotation controls the entry point requires explicit
 mathematical rejection, rather than accepting crashes as negative results.
-The edge-deletion control is not a claim of edge-criticality: no exhaustive
-edge-deletion result is part of this bundle.
+The complete deletion-coloring file, rather than the single edge-deletion
+control, certifies criticality.
 
 This is a computer-assisted proof. The mathematical reductions, graph
 parsers, enumerators and executable checker are not formalized in a proof

@@ -19,3 +19,8 @@ Zenodo records.
 
 - First version: the density Hales–Jewett number for length 7 over three
   letters is 1,302. Paper, witness and certificate checkers.
+
+## steinberg-c4-c9 v1 (October 20, 2026)
+
+- First version: an 82-vertex planar graph with no 4- or 9-cycles that has
+  no proper 3-colouring. Paper, graph, SAT certificate and checkers.

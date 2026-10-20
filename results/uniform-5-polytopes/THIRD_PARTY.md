@@ -2,19 +2,19 @@
 
 The manuscript PDF embeds subsets of the fonts listed below. The font
 designs are unchanged; typesetting selects and embeds the glyphs used in
-[paper/paper.pdf](paper/paper.pdf). Their licences apply to the font material;
+[paper/paper.pdf](paper/paper.pdf). Their licenses apply to the font material;
 the manuscript text is Apache-2.0.
 
-| Material and source | Licence | Files covered |
+| Material and source | License | Files covered |
 |---|---|---|
 | [Latin Modern](https://ctan.org/pkg/lm), by B. Jackowski and J. M. Nowacki | [GUST Font License](https://ctan.org/license/gfl) | Embedded Latin Modern font subsets in `paper/paper.pdf` |
 | [AMSFonts, including the canonical Type 1 Computer Modern fonts](https://ctan.org/pkg/amsfonts), from the American Mathematical Society | [SIL Open Font License](https://openfontlicense.org/open-font-license-official-text/) | Embedded AMS and Computer Modern font subsets in `paper/paper.pdf` |
-| [DejaVu Sans Mono](https://dejavu-fonts.github.io/), based on Bitstream Vera | [Bitstream Vera font licence](https://dejavu-fonts.github.io/License.html); DejaVu changes are public domain | Embedded DejaVu Sans Mono font subsets in `paper/paper.pdf` |
+| [DejaVu Sans Mono](https://dejavu-fonts.github.io/), based on Bitstream Vera | [Bitstream Vera font license](https://dejavu-fonts.github.io/License.html); DejaVu changes are public domain | Embedded DejaVu Sans Mono font subsets in `paper/paper.pdf` |
 
 The construction lists and certificates are generated from mathematical
-recipes; external catalogue text, artwork and catalogue rows are not
+recipes; external catalog text, artwork and catalog rows are not
 included. Lean, Mathlib and the numerical libraries are installed separately
-and retain their own licences. Prior mathematical work is credited in the
+and retain their own licenses. Prior mathematical work is credited in the
 manuscript and main README.
 
 ## Bitstream Vera notice

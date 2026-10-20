@@ -40,8 +40,8 @@ scope of the checks and a shorter partial check.
 
 ## Credits
 
-Möller's edge-neighbourhood enumeration, forced-radius comparison and
-vertex-neighbourhood completion are the direct methodological foundation
+Möller's edge-neighborhood enumeration, forced-radius comparison and
+vertex-neighborhood completion are the direct methodological foundation
 ([dissertation](https://ediss.sub.uni-hamburg.de/handle/ediss/689),
 [*4-dimensionale Archimedische Polytope*](https://doi.org/10.1007/BF03322887)).
 The proof uses the 3-D classification (see

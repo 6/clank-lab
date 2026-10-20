@@ -39,11 +39,17 @@ def JasinskiFinitenessStatement : Prop :=
   {k : ℕ | 0 < k ∧ a k = k}.Finite ∧
   {k : ℕ | 0 < k ∧ 2 * a k = 3 * k}.Finite
 
-/-- Two related finite sets: Ordowski's exceptional indices A155549
-(a(n) not prime and a(n) ≤ n - 1) and A064420 (a(k + 1) = k). -/
+/-- Two finite index sets: the n with a(n) not prime and a(n) ≤ n - 1
+(A155549 lists their values a(n); see `A155549FinitenessStatement`), and
+A064420, the k with a(k + 1) = k. -/
 def ExceptionalFinitenessStatement : Prop :=
   {n : ℕ | 0 < n ∧ ¬ (a n).Prime ∧ a n ≤ n - 1}.Finite ∧
   {k : ℕ | 0 < k ∧ a (k + 1) = k}.Finite
+
+/-- Ordowski's A155549 (2009), "EKG exceptional numbers": the values a(n)
+with a(n) not prime and a(n) ≤ n - 1. It is finite. -/
+def A155549FinitenessStatement : Prop :=
+  (a '' {n : ℕ | 0 < n ∧ ¬ (a n).Prime ∧ a n ≤ n - 1}).Finite
 
 /-- For each L, the permutation n ↦ a(n) of the positive integers has only
 finitely many cycles of length at most L. A cycle is the orbit

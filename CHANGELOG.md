@@ -4,6 +4,17 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-sequence v3 (October 20, 2026)
+
+- Correction to v2: OEIS A155549 lists the values a(n), not the indices n.
+  v2's paper, Lean README and Lean docstring described it as the indices n
+  with a(n) not prime and a(n) <= n - 1, and its Lean statement was about
+  that index set. v3 describes A155549 correctly and adds a Lean theorem
+  that A155549 itself, the image of that set under a, is finite. It also
+  says that #{k <= N : a(k) > k} is Lean-checked only in the form
+  #{k <= N : a(k) > k}/N -> 1, and removes a stale comment about
+  native_decide. Tag `ekg-sequence-v3`.
+
 ## ekg-sequence v2 (October 20, 2026)
 
 - Consequences of the v1 theorem, proved in the paper and in Lean:

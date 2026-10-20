@@ -187,6 +187,134 @@ def quick_audits(work):
     print('PASS quick reduction, symmetry and witness audits; no main SAT proofs replayed', flush=True)
 
 
+def reduction_steps(work):
+    """reduction.py's audits as independent steps, for --part.
+
+    They mirror its main(): lemmas in order of dimension, each audited with
+    the lemmas before it; the main cases with all three; the cover; and the
+    four controls, each of which must be rejected. Its whole run is the
+    `reduction` step.
+    """
+    import reduction
+    recs = reduction.receipts()
+    lemma_rows = sorted((r for r in recs if r['s0'] is None), key=lambda r: r['n'])
+    main_rows = sorted((r for r in recs if r['s0'] is not None), key=lambda r: -r['s0'])
+    lemmas = {r['n']: r['K'] for r in lemma_rows}
+
+    def lines():
+        for n in sorted({r['n'] for r in recs}):
+            if n not in reduction.LINES:
+                reduction.LINES[n] = set(reduction.Cube(n, {}).lines())
+                assert len(reduction.LINES[n]) == 4 ** n - 3 ** n
+
+    def audit(rec, proved, label, expect_ok=True, **kw):
+        lines()
+        directory = work / ('reduction-' + label.replace(' ', '-'))
+        directory.mkdir()
+        result = reduction.audit(rec, dict(proved), str(directory), **kw)
+        if result['ok'] != expect_ok:
+            raise RuntimeError(('semantic audit failed: ' if expect_ok else 'control not rejected: ') + label)
+        print(label, 'ok' if expect_ok else 'rejected', flush=True)
+
+    def cover():
+        n, K = 7, main_rows[0]['K']
+        if not all(r['n'] == n and r['K'] == K for r in main_rows):
+            raise RuntimeError('main cases differ in dimension or size')
+        c6 = reduction.proved_table(lemmas, n)[6]
+        need = [s for s in range(0, c6 + 1) if 3 * s >= K]
+        if sorted(r['s0'] for r in main_rows) != need:
+            raise RuntimeError('main cases do not cover s0 = %d..%d' % (need[0], need[-1]))
+        print('cover ok: s0 = %d..%d' % (need[0], need[-1]), flush=True)
+
+    def drop_first_line(path):
+        with open(path) as f:
+            hdr = f.readline().split()
+            body = f.readlines()
+        del body[0]
+        with open(path, 'w') as f:
+            f.write('p cnf %s %d\n' % (hdr[2], len(body)))
+            f.writelines(body)
+
+    s440 = next(r for r in main_rows if r['s0'] == 440)
+    L5 = next(r for r in lemma_rows if r['n'] == 5)
+    steps = []
+    for i, r in enumerate(lemma_rows):
+        before = {x['n']: x['K'] for x in lemma_rows[:i]}
+        steps.append(('reduction-' + r['name'], 1, lambda r=r, before=before: audit(r, before, r['name'])))
+    for r in main_rows:
+        steps.append(('reduction-' + r['name'], 12, lambda r=r: audit(r, lemmas, r['name'])))
+    steps.append(('reduction-cover', 1, cover))
+    steps += [
+        ('reduction-control-drop-line', 12, lambda: audit(
+            s440, lemmas, 'drop-line s440', False, cnf_override=drop_first_line)),
+        ('reduction-control-cap-loose', 1, lambda: audit(
+            L5, {1: 3, 4: 54}, 'cap-loose L5 audited with c_4 <= 53', False)),
+        ('reduction-control-s0-shift', 12, lambda: audit(
+            s440, lemmas, 's0-shift s440 audited as s0 = 441', False, as_s0=441)),
+        ('reduction-control-K-low', 12, lambda: audit(
+            s440, lemmas, 'K-low s440 audited as K = 1302', False, as_K=1302)),
+    ]
+    return steps
+
+
+def witness_step(script, work):
+    def run():
+        run_python(script, DATA / 'line-free-1302.txt', 7, 1302)
+        points = [p for p in (DATA / 'line-free-1302.txt').read_text().splitlines() if p and not p.startswith('#')]
+        for label, altered in [('drop', points[:-1]), ('line', ['1111111'] + points[1:])]:
+            path = work / (script + '-' + label + '.txt')
+            path.write_text('\n'.join(altered) + '\n')
+            run_python(script, path, 7, 1302, expected=False)
+    return run
+
+
+# Wall seconds of each full-mode obligation in the accepted independent replay.
+CASE_SECONDS = {'L1': 1, 'L4': 1, 'L5': 1, 'k1303_s450': 78, 'k1303_s449': 428, 'k1303_s448': 736,
+                'k1303_s447': 1371, 'k1303_s446': 1927, 'k1303_s445': 2686, 'k1303_s444': 3575,
+                'k1303_s443': 4533, 'k1303_s442': 6678, 'k1303_s441': 11349, 'k1303_s440': 19414,
+                'k1303_s439': 23986, 'k1303_s438': 28409, 'k1303_s437': 37433, 'k1303_s436': 39081,
+                'k1303_s435': 76928}
+
+
+TOOL_STEPS = {'proof-controls'}
+
+
+def plan(full, tools, work):
+    """Every independent step of a quick (or full) run, in order, with its
+    rough time in seconds on a two-core GitHub-hosted runner."""
+    steps = [('symmetry', 1, lambda: run_python('symmetry.py'))]
+    steps += reduction_steps(work)
+    steps += [('witness', 1, witness_step('witness.py', work)),
+              ('witness-independent', 1, witness_step('witness_independent.py', work)),
+              ('proof-controls', 2, lambda: proof_controls(tools, work))]
+    if full:
+        steps += [('case-' + r['name'], CASE_SECONDS[r['name']], lambda r=r: stream_case(r, tools, work))
+                  for r in cases()]
+    return steps
+
+
+def share(steps, k, n):
+    """Part k of n: longest steps first, each to the part with the least time
+    so far; returned in run order."""
+    load = [0] * (n + 1)
+    owner = {}
+    for i in sorted(range(len(steps)), key=lambda i: (-steps[i][1], i)):
+        best = min(range(1, n + 1), key=lambda p: (load[p], p))
+        owner[i] = best
+        load[best] += steps[i][1]
+    return [step for i, step in enumerate(steps) if owner[i] == k]
+
+
+def part_arg(text):
+    try:
+        k, n = (int(x) for x in text.split('/'))
+    except ValueError:
+        raise argparse.ArgumentTypeError('expected K/N, such as 3/8')
+    if not 1 <= k <= n:
+        raise argparse.ArgumentTypeError('expected 1 <= K <= N')
+    return k, n
+
+
 def main():
     if not __debug__ or os.environ.get('PYTHONOPTIMIZE'):
         raise SystemExit('proof checks require assertions: unset PYTHONOPTIMIZE and do not use -O')
@@ -195,17 +323,44 @@ def main():
     group.add_argument('--quick', action='store_true', help='audits plus small proof/corruption controls')
     group.add_argument('--full', action='store_true', help='audits and all 19 streaming proof replays')
     group.add_argument('--case', choices=[r['name'] for r in cases()], help='one SAT obligation only')
-    ap.add_argument('--tools', type=Path, required=True, help='directory built with build_tools.py')
-    ap.add_argument('--work', type=Path, required=True, help='new empty output directory outside this bundle')
+    ap.add_argument('--part', type=part_arg, metavar='K/N',
+                    help='with --quick or --full, run only share K of N of the independent steps')
+    ap.add_argument('--list', action='store_true', help="print the steps --part would run, and stop")
+    ap.add_argument('--tools', type=Path, help='directory built with build_tools.py (a part with no proof step needs none)')
+    ap.add_argument('--work', type=Path, help='new empty output directory outside this bundle')
     a = ap.parse_args()
-    a.tools = a.tools.resolve()
+    if a.case and (a.part or a.list):
+        ap.error('--part and --list go with --quick or --full')
+    if a.list:
+        k, n = a.part or (1, 1)
+        for name, _, _ in share(plan(a.full, None, None), k, n):
+            print(name)
+        return
+    # A part with no proof step needs no tools.
+    needs_tools = not a.part or any(name in TOOL_STEPS or name.startswith('case-')
+                                    for name, _, _ in share(plan(a.full, None, None), *a.part))
+    if a.work is None or (needs_tools and a.tools is None):
+        ap.error('--work is required, and --tools for any proof step')
     a.work = a.work.resolve()
     a.work.mkdir(parents=True, exist_ok=True)
     if any(a.work.iterdir()):
         ap.error('--work must be empty (each run is independent)')
-    for tool in ('cadical', 'frat-rs', 'lrat-check', 'cake_lpr'):
-        if not os.access(a.tools / tool, os.X_OK):
-            ap.error('missing executable: ' + tool)
+    if needs_tools:
+        a.tools = a.tools.resolve()
+        for tool in ('cadical', 'frat-rs', 'lrat-check', 'cake_lpr'):
+            if not os.access(a.tools / tool, os.X_OK):
+                ap.error('missing executable: ' + tool)
+    if a.part:
+        k, n = a.part
+        mine = share(plan(a.full, a.tools, a.work), k, n)
+        for name, _, run in mine:
+            print('==', name, flush=True)
+            run()
+        print('PASS PART %d/%d ONLY: %s; every part from 1/%d to %d/%d must pass'
+              % (k, n, ' '.join(name for name, _, _ in mine) or 'no steps', n, n, n))
+        if not a.full:
+            print('PASS QUICK ONLY: the full upper-bound proof requires --full')
+        return
     if not a.case:
         quick_audits(a.work)
         proof_controls(a.tools, a.work)

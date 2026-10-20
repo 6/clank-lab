@@ -7,6 +7,10 @@ shopt -s inherit_errexit
 trap 'exit 129' HUP
 trap 'exit 130' INT
 trap 'exit 143' TERM
+# With no argument, run everything; `tests` or `replay` runs only that half,
+# so the two can run on different machines.
+what=${1:-all}
+case "$what" in all|tests|replay) ;; *) echo 'usage: bash verify_s23.sh [tests|replay]' >&2; exit 2 ;; esac
 script_dir=$(dirname "$0")
 cd "$script_dir/independent-s23"
 py=${PYTHON:-python3}
@@ -41,14 +45,22 @@ if sum(len(c['options']) for c in certificates.values()) != 5108:
 print('PASS frozen full-library equivalence certificate identity')
 PY
 "$py" runtime_versions.py
+if [ "$what" != replay ]; then
 "$py" test_runtime_acceptance.py
 "$py" test_core.py
 "$py" test_s3_grid.py
 "$py" test_stage3.py
 "$py" test_handoff.py
 "$py" test_r1_stage3.py
+fi
 "$py" unpack_inputs.py "$work/input" --pmax 6
+if [ "$what" != replay ]; then
 "$py" test_chiral_stage3.py --class "$work/input/u2_classes_p6.json"
+fi
+if [ "$what" = tests ]; then
+    echo 'PASS independent S2/S3 tests half (with the replay half, the whole check)'
+    exit 0
+fi
 "$py" run.py "$work/input/u2_classes_p6.json" "$work/s2.jsonl" --states >"$work/s2.log"
 "$py" stage3.py --states "$work/s2.jsonl" --models models \
     --known "$work/input/u3_known_p6.json" --output "$work/s3.jsonl" \
@@ -61,4 +73,8 @@ PY
 "$py" compare_stage3.py "$work/s3.jsonl" ../check_u3/result_p6.json \
     --reference-signatures ../check_u3/inputs/u3_vfs_p6.json \
     --receipt "$work/s3.jsonl.frozen.json" --output "$work/s3-comparison.json"
-echo 'PASS full P6 independent S2/S3, authenticated coverage, recorded conclusions and corruption controls'
+if [ "$what" = all ]; then
+    echo 'PASS full P6 independent S2/S3, authenticated coverage, recorded conclusions and corruption controls'
+else
+    echo 'PASS independent S2/S3 P6 replay half (with the tests half, the whole check)'
+fi

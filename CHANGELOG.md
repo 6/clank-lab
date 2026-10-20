@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## density-seven v2 (October 20, 2026)
+
+- Correction: the paper and README now credit Polymath1's 2009 bounds
+  1302–1348, recorded by Tao and repeated by O'Bryant, and describe the
+  witness as a realization of the known lower bound.
+
 ## uniform-5-polytopes v2 (October 20, 2026)
 
 - Correction: version 1 left out some programs its proof relies on and the

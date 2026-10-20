@@ -1,0 +1,777 @@
+[
+{
+"name": "A40001",
+"aliases": [
+"A41000"
+]
+},
+{
+"name": "A40010",
+"aliases": [
+"A40100"
+]
+},
+{
+"name": "A40011",
+"aliases": [
+"A41100"
+]
+},
+{
+"name": "A40101",
+"aliases": [
+"A41010"
+]
+},
+{
+"name": "A40110",
+"aliases": []
+},
+{
+"name": "A40111",
+"aliases": [
+"A41110"
+]
+},
+{
+"name": "A41001",
+"aliases": []
+},
+{
+"name": "A41011",
+"aliases": [
+"A41101"
+]
+},
+{
+"name": "A41111",
+"aliases": []
+},
+{
+"name": "B40001",
+"aliases": [
+"pr-cube",
+"duoprism-4-4"
+]
+},
+{
+"name": "B40010",
+"aliases": [
+"D40011",
+"D41001",
+"D41010"
+]
+},
+{
+"name": "B40011",
+"aliases": []
+},
+{
+"name": "B40100",
+"aliases": [
+"D40100",
+"F40001",
+"F41000"
+]
+},
+{
+"name": "B40101",
+"aliases": []
+},
+{
+"name": "B40110",
+"aliases": [
+"D40111",
+"D41101",
+"D41110"
+]
+},
+{
+"name": "B40111",
+"aliases": []
+},
+{
+"name": "B41000",
+"aliases": [
+"D40001",
+"D40010",
+"D41000"
+]
+},
+{
+"name": "B41001",
+"aliases": []
+},
+{
+"name": "B41010",
+"aliases": [
+"D41011",
+"F40010",
+"F40100"
+]
+},
+{
+"name": "B41011",
+"aliases": []
+},
+{
+"name": "B41100",
+"aliases": [
+"D40101",
+"D40110",
+"D41100"
+]
+},
+{
+"name": "B41101",
+"aliases": []
+},
+{
+"name": "B41110",
+"aliases": [
+"D41111",
+"F40011",
+"F41100"
+]
+},
+{
+"name": "B41111",
+"aliases": []
+},
+{
+"name": "F40101",
+"aliases": [
+"F41010"
+]
+},
+{
+"name": "F40110",
+"aliases": []
+},
+{
+"name": "F40111",
+"aliases": [
+"F41110"
+]
+},
+{
+"name": "F41001",
+"aliases": []
+},
+{
+"name": "F41011",
+"aliases": [
+"F41101"
+]
+},
+{
+"name": "F41111",
+"aliases": []
+},
+{
+"name": "H40001",
+"aliases": []
+},
+{
+"name": "H40010",
+"aliases": []
+},
+{
+"name": "H40011",
+"aliases": []
+},
+{
+"name": "H40100",
+"aliases": []
+},
+{
+"name": "H40101",
+"aliases": []
+},
+{
+"name": "H40110",
+"aliases": []
+},
+{
+"name": "H40111",
+"aliases": []
+},
+{
+"name": "H41000",
+"aliases": []
+},
+{
+"name": "H41001",
+"aliases": []
+},
+{
+"name": "H41010",
+"aliases": []
+},
+{
+"name": "H41011",
+"aliases": []
+},
+{
+"name": "H41100",
+"aliases": []
+},
+{
+"name": "H41101",
+"aliases": []
+},
+{
+"name": "H41110",
+"aliases": []
+},
+{
+"name": "H41111",
+"aliases": []
+},
+{
+"name": "pr-tet",
+"aliases": []
+},
+{
+"name": "pr-oct",
+"aliases": [
+"antiprism-prism-3"
+]
+},
+{
+"name": "pr-ico",
+"aliases": []
+},
+{
+"name": "pr-doe",
+"aliases": []
+},
+{
+"name": "pr-tut",
+"aliases": []
+},
+{
+"name": "pr-co",
+"aliases": []
+},
+{
+"name": "pr-tic",
+"aliases": []
+},
+{
+"name": "pr-toe",
+"aliases": []
+},
+{
+"name": "pr-sirco",
+"aliases": []
+},
+{
+"name": "pr-girco",
+"aliases": []
+},
+{
+"name": "pr-id",
+"aliases": []
+},
+{
+"name": "pr-tid",
+"aliases": []
+},
+{
+"name": "pr-ti",
+"aliases": []
+},
+{
+"name": "pr-srid",
+"aliases": []
+},
+{
+"name": "pr-grid",
+"aliases": []
+},
+{
+"name": "pr-snic",
+"aliases": []
+},
+{
+"name": "pr-snid",
+"aliases": []
+},
+{
+"name": "sadi",
+"aliases": []
+},
+{
+"name": "gap",
+"aliases": []
+},
+{
+"name": "duoprism-3-3",
+"aliases": []
+},
+{
+"name": "duoprism-3-4",
+"aliases": []
+},
+{
+"name": "duoprism-3-5",
+"aliases": []
+},
+{
+"name": "duoprism-3-6",
+"aliases": []
+},
+{
+"name": "duoprism-3-7",
+"aliases": []
+},
+{
+"name": "duoprism-3-8",
+"aliases": []
+},
+{
+"name": "duoprism-3-9",
+"aliases": []
+},
+{
+"name": "duoprism-3-10",
+"aliases": []
+},
+{
+"name": "duoprism-3-11",
+"aliases": []
+},
+{
+"name": "duoprism-3-12",
+"aliases": []
+},
+{
+"name": "duoprism-3-13",
+"aliases": []
+},
+{
+"name": "duoprism-3-14",
+"aliases": []
+},
+{
+"name": "duoprism-3-15",
+"aliases": []
+},
+{
+"name": "duoprism-3-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-4",
+"aliases": []
+},
+{
+"name": "duoprism-4-5",
+"aliases": []
+},
+{
+"name": "duoprism-4-6",
+"aliases": []
+},
+{
+"name": "duoprism-4-7",
+"aliases": []
+},
+{
+"name": "duoprism-4-8",
+"aliases": []
+},
+{
+"name": "duoprism-4-9",
+"aliases": []
+},
+{
+"name": "duoprism-4-10",
+"aliases": []
+},
+{
+"name": "duoprism-4-11",
+"aliases": []
+},
+{
+"name": "duoprism-4-12",
+"aliases": []
+},
+{
+"name": "duoprism-4-13",
+"aliases": []
+},
+{
+"name": "duoprism-4-14",
+"aliases": []
+},
+{
+"name": "duoprism-4-15",
+"aliases": []
+},
+{
+"name": "duoprism-4-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-5",
+"aliases": []
+},
+{
+"name": "duoprism-5-5",
+"aliases": []
+},
+{
+"name": "duoprism-5-6",
+"aliases": []
+},
+{
+"name": "duoprism-5-7",
+"aliases": []
+},
+{
+"name": "duoprism-5-8",
+"aliases": []
+},
+{
+"name": "duoprism-5-9",
+"aliases": []
+},
+{
+"name": "duoprism-5-10",
+"aliases": []
+},
+{
+"name": "duoprism-5-11",
+"aliases": []
+},
+{
+"name": "duoprism-5-12",
+"aliases": []
+},
+{
+"name": "duoprism-5-13",
+"aliases": []
+},
+{
+"name": "duoprism-5-14",
+"aliases": []
+},
+{
+"name": "duoprism-5-15",
+"aliases": []
+},
+{
+"name": "duoprism-5-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-6",
+"aliases": []
+},
+{
+"name": "duoprism-6-6",
+"aliases": []
+},
+{
+"name": "duoprism-6-7",
+"aliases": []
+},
+{
+"name": "duoprism-6-8",
+"aliases": []
+},
+{
+"name": "duoprism-6-9",
+"aliases": []
+},
+{
+"name": "duoprism-6-10",
+"aliases": []
+},
+{
+"name": "duoprism-6-11",
+"aliases": []
+},
+{
+"name": "duoprism-6-12",
+"aliases": []
+},
+{
+"name": "duoprism-6-13",
+"aliases": []
+},
+{
+"name": "duoprism-6-14",
+"aliases": []
+},
+{
+"name": "duoprism-6-15",
+"aliases": []
+},
+{
+"name": "duoprism-6-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-7",
+"aliases": []
+},
+{
+"name": "duoprism-7-7",
+"aliases": []
+},
+{
+"name": "duoprism-7-8",
+"aliases": []
+},
+{
+"name": "duoprism-7-9",
+"aliases": []
+},
+{
+"name": "duoprism-7-10",
+"aliases": []
+},
+{
+"name": "duoprism-7-11",
+"aliases": []
+},
+{
+"name": "duoprism-7-12",
+"aliases": []
+},
+{
+"name": "duoprism-7-13",
+"aliases": []
+},
+{
+"name": "duoprism-7-14",
+"aliases": []
+},
+{
+"name": "duoprism-7-15",
+"aliases": []
+},
+{
+"name": "duoprism-7-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-8",
+"aliases": []
+},
+{
+"name": "duoprism-8-8",
+"aliases": []
+},
+{
+"name": "duoprism-8-9",
+"aliases": []
+},
+{
+"name": "duoprism-8-10",
+"aliases": []
+},
+{
+"name": "duoprism-8-11",
+"aliases": []
+},
+{
+"name": "duoprism-8-12",
+"aliases": []
+},
+{
+"name": "duoprism-8-13",
+"aliases": []
+},
+{
+"name": "duoprism-8-14",
+"aliases": []
+},
+{
+"name": "duoprism-8-15",
+"aliases": []
+},
+{
+"name": "duoprism-8-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-9",
+"aliases": []
+},
+{
+"name": "duoprism-9-9",
+"aliases": []
+},
+{
+"name": "duoprism-9-10",
+"aliases": []
+},
+{
+"name": "duoprism-9-11",
+"aliases": []
+},
+{
+"name": "duoprism-9-12",
+"aliases": []
+},
+{
+"name": "duoprism-9-13",
+"aliases": []
+},
+{
+"name": "duoprism-9-14",
+"aliases": []
+},
+{
+"name": "duoprism-9-15",
+"aliases": []
+},
+{
+"name": "duoprism-9-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-10",
+"aliases": []
+},
+{
+"name": "duoprism-10-10",
+"aliases": []
+},
+{
+"name": "duoprism-10-11",
+"aliases": []
+},
+{
+"name": "duoprism-10-12",
+"aliases": []
+},
+{
+"name": "duoprism-10-13",
+"aliases": []
+},
+{
+"name": "duoprism-10-14",
+"aliases": []
+},
+{
+"name": "duoprism-10-15",
+"aliases": []
+},
+{
+"name": "duoprism-10-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-11",
+"aliases": []
+},
+{
+"name": "duoprism-11-11",
+"aliases": []
+},
+{
+"name": "duoprism-11-12",
+"aliases": []
+},
+{
+"name": "duoprism-11-13",
+"aliases": []
+},
+{
+"name": "duoprism-11-14",
+"aliases": []
+},
+{
+"name": "duoprism-11-15",
+"aliases": []
+},
+{
+"name": "duoprism-11-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-12",
+"aliases": []
+},
+{
+"name": "duoprism-12-12",
+"aliases": []
+},
+{
+"name": "duoprism-12-13",
+"aliases": []
+},
+{
+"name": "duoprism-12-14",
+"aliases": []
+},
+{
+"name": "duoprism-12-15",
+"aliases": []
+},
+{
+"name": "duoprism-12-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-13",
+"aliases": []
+},
+{
+"name": "duoprism-13-13",
+"aliases": []
+},
+{
+"name": "duoprism-13-14",
+"aliases": []
+},
+{
+"name": "duoprism-13-15",
+"aliases": []
+},
+{
+"name": "duoprism-13-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-14",
+"aliases": []
+},
+{
+"name": "duoprism-14-14",
+"aliases": []
+},
+{
+"name": "duoprism-14-15",
+"aliases": []
+},
+{
+"name": "duoprism-14-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-15",
+"aliases": []
+},
+{
+"name": "duoprism-15-15",
+"aliases": []
+},
+{
+"name": "duoprism-15-16",
+"aliases": []
+},
+{
+"name": "antiprism-prism-16",
+"aliases": []
+},
+{
+"name": "duoprism-16-16",
+"aliases": []
+}
+]

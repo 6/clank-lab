@@ -1,0 +1,5 @@
+{"independent_incidence_counts": {"occurrences": 1277, "types": 181, "words": 558}, "status": "CERTIFIED"}
+{"frozen_library_sha256": "3b980b248c69ee9bad9027e2fc06964b919665fa053c105fe5421300cd685971", "generation": "exact deterministic replay agrees byte for byte", "status": "CERTIFIED"}
+{"incidence_corruptions_rejected": 4, "labels": ["wrong multiplicity", "missing occurrence", "wrong local cell label", "one cell used twice"], "status": "CERTIFIED"}
+{"multiplicities": "independently reconstructed; not present in reference JSON", "radius_and_angle_relation": "independent rational brackets contained in decoded reference balls", "status": "CERTIFIED", "types": 181, "words": 558}
+{"corruptions_rejected": 10, "labels": ["missing type", "duplicate type", "wrong canonical name", "missing alias", "wrong radius", "missing word", "duplicate word", "wrong polygon", "wrong cell", "wrong angle"], "status": "CERTIFIED"}

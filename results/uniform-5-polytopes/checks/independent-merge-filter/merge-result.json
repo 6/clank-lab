@@ -1,0 +1,242 @@
+{
+  "status": "CERTIFIED",
+  "aliases": 33,
+  "pairwise_distances_checked": 465206,
+  "checks": [
+    {
+      "canonical": "A40001",
+      "alias": "A41000",
+      "vertices": 5,
+      "pairs_checked": 10,
+      "coordinate_denominator": 10
+    },
+    {
+      "canonical": "A40010",
+      "alias": "A40100",
+      "vertices": 10,
+      "pairs_checked": 45,
+      "coordinate_denominator": 10
+    },
+    {
+      "canonical": "A40011",
+      "alias": "A41100",
+      "vertices": 20,
+      "pairs_checked": 190,
+      "coordinate_denominator": 10
+    },
+    {
+      "canonical": "A40101",
+      "alias": "A41010",
+      "vertices": 30,
+      "pairs_checked": 435,
+      "coordinate_denominator": 10
+    },
+    {
+      "canonical": "A40111",
+      "alias": "A41110",
+      "vertices": 60,
+      "pairs_checked": 1770,
+      "coordinate_denominator": 10
+    },
+    {
+      "canonical": "A41011",
+      "alias": "A41101",
+      "vertices": 60,
+      "pairs_checked": 1770,
+      "coordinate_denominator": 10
+    },
+    {
+      "canonical": "B40001",
+      "alias": "duoprism-4-4",
+      "vertices": 16,
+      "pairs_checked": 120,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B40001",
+      "alias": "pr-cube",
+      "vertices": 16,
+      "pairs_checked": 120,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B40010",
+      "alias": "D40011",
+      "vertices": 32,
+      "pairs_checked": 496,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B40010",
+      "alias": "D41001",
+      "vertices": 32,
+      "pairs_checked": 496,
+      "coordinate_denominator": 4
+    },
+    {
+      "canonical": "B40010",
+      "alias": "D41010",
+      "vertices": 32,
+      "pairs_checked": 496,
+      "coordinate_denominator": 4
+    },
+    {
+      "canonical": "B40100",
+      "alias": "D40100",
+      "vertices": 24,
+      "pairs_checked": 276,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B40100",
+      "alias": "F40001",
+      "vertices": 24,
+      "pairs_checked": 276,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B40100",
+      "alias": "F41000",
+      "vertices": 24,
+      "pairs_checked": 276,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B40110",
+      "alias": "D40111",
+      "vertices": 96,
+      "pairs_checked": 4560,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B40110",
+      "alias": "D41101",
+      "vertices": 96,
+      "pairs_checked": 4560,
+      "coordinate_denominator": 4
+    },
+    {
+      "canonical": "B40110",
+      "alias": "D41110",
+      "vertices": 96,
+      "pairs_checked": 4560,
+      "coordinate_denominator": 4
+    },
+    {
+      "canonical": "B41000",
+      "alias": "D40001",
+      "vertices": 8,
+      "pairs_checked": 28,
+      "coordinate_denominator": 4
+    },
+    {
+      "canonical": "B41000",
+      "alias": "D40010",
+      "vertices": 8,
+      "pairs_checked": 28,
+      "coordinate_denominator": 4
+    },
+    {
+      "canonical": "B41000",
+      "alias": "D41000",
+      "vertices": 8,
+      "pairs_checked": 28,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B41010",
+      "alias": "D41011",
+      "vertices": 96,
+      "pairs_checked": 4560,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B41010",
+      "alias": "F40010",
+      "vertices": 96,
+      "pairs_checked": 4560,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B41010",
+      "alias": "F40100",
+      "vertices": 96,
+      "pairs_checked": 4560,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B41100",
+      "alias": "D40101",
+      "vertices": 48,
+      "pairs_checked": 1128,
+      "coordinate_denominator": 4
+    },
+    {
+      "canonical": "B41100",
+      "alias": "D40110",
+      "vertices": 48,
+      "pairs_checked": 1128,
+      "coordinate_denominator": 4
+    },
+    {
+      "canonical": "B41100",
+      "alias": "D41100",
+      "vertices": 48,
+      "pairs_checked": 1128,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B41110",
+      "alias": "D41111",
+      "vertices": 192,
+      "pairs_checked": 18336,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B41110",
+      "alias": "F40011",
+      "vertices": 192,
+      "pairs_checked": 18336,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "B41110",
+      "alias": "F41100",
+      "vertices": 192,
+      "pairs_checked": 18336,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "F40101",
+      "alias": "F41010",
+      "vertices": 288,
+      "pairs_checked": 41328,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "F40111",
+      "alias": "F41110",
+      "vertices": 576,
+      "pairs_checked": 165600,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "F41011",
+      "alias": "F41101",
+      "vertices": 576,
+      "pairs_checked": 165600,
+      "coordinate_denominator": 2
+    },
+    {
+      "canonical": "pr-oct",
+      "alias": "antiprism-prism-3",
+      "vertices": 12,
+      "pairs_checked": 66,
+      "coordinate_denominator": 6
+    }
+  ],
+  "controls": {
+    "square_control_pairs": 6,
+    "corruptions_rejected": 7
+  }
+}

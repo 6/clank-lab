@@ -1,0 +1,1830 @@
+import Uniform5.CompositionU3ReportP16
+
+/-! Class buckets of the same literal report. Equality of their flattened
+projection is checked by the kernel. Class-local exclusion checks inspect
+817 pairs rather than a quadratic scan across unrelated classes. -/
+namespace Uniform5.Composition
+set_option maxRecDepth 10000
+set_option maxHeartbeats 1000000
+
+noncomputable def u3ReportGroupsP16 : List (Nat × List U3ReportRow) := [
+  (0, [
+  ⟨0, 0, 0, 1, 5, 5, true, ⟨5, 5, 600, 600, true, [], []⟩, ["A500001", "A510000"], [("A500001", .match), ("A510000", .match)], .known⟩
+  ]),
+  (1, [
+  ⟨1, 0, 0, 1, 16, 8, true, ⟨8, 8, 3072, 3072, true, [], []⟩, ["B510000", "D510000"], [("B510000", .match), ("D510000", .match)], .known⟩
+  ]),
+  (2, [
+  ⟨2, 0, 0, 1, 10, 10, true, ⟨10, 10, 1200, 1920, true, [], []⟩, ["D500001", "D500010"], [("D500001", .match), ("D500010", .match)], .known⟩
+  ]),
+  (3, [
+  ⟨3, 0, 0, 1, 5, 5, true, ⟨5, 5, 120, 120, true, [], []⟩, ["prism-A40001"], [("prism-A40001", .match)], .known⟩
+  ]),
+  (4, [
+  ⟨4, 0, 0, 1, 6, 8, true, ⟨8, 8, 384, 384, true, [], []⟩, ["A500010", "A501000"], [("A500010", .match), ("A501000", .match)], .known⟩
+  ]),
+  (6, [
+  ⟨6, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{3}xtet"], [("{3}xtet", .match)], .known⟩
+  ]),
+  (7, [
+  ⟨7, 0, 0, 1, 6, 9, true, ⟨9, 9, 648, 648, true, [], []⟩, ["A500100"], [("A500100", .match), ("prism-B41000", .noCount)], .known⟩,
+  ⟨7, 1, 0, 1, 9, 7, true, ⟨7, 7, 336, 336, true, [], []⟩, ["prism-B41000"], [("A500100", .noCount), ("prism-B41000", .match)], .known⟩
+  ]),
+  (9, [
+  ⟨9, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{3}xoct"], [("{3}xoct", .match)], .known⟩
+  ]),
+  (11, [
+  ⟨11, 0, 0, 1, 6, 7, true, ⟨7, 7, 84, 96, true, [], []⟩, ["prism-A40010"], [("prism-A40010", .match)], .known⟩
+  ]),
+  (12, [
+  ⟨12, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-pr-tet", "{4}xtet"], [("prism-pr-tet", .match), ("{4}xtet", .match)], .known⟩
+  ]),
+  (13, [
+  ⟨13, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-3-3", "{3}xP3"], [("prism-duoprism-3-3", .match), ("{3}xP3", .match)], .known⟩
+  ]),
+  (18, [
+  ⟨18, 0, 0, 4, 16, 8, true, ⟨8, 8, 96, 384, true, [], []⟩, [], [("A510001", .no), ("B501000", .noCount), ("D501000", .noCount), ("prism-pr-oct", .noCount), ("{4}xoct", .noCount)], .refuted⟩,
+  ⟨18, 1, 0, 1, 16, 8, true, ⟨8, 8, 384, 384, true, [], []⟩, ["A510001"], [("A510001", .match), ("B501000", .noCount), ("D501000", .noCount), ("prism-pr-oct", .noCount), ("{4}xoct", .noCount)], .known⟩,
+  ⟨18, 2, 0, 1, 10, 12, true, ⟨12, 12, 1152, 1152, true, [], []⟩, ["B501000", "D501000"], [("A510001", .noCount), ("B501000", .match), ("D501000", .match), ("prism-pr-oct", .noCount), ("{4}xoct", .noCount)], .known⟩,
+  ⟨18, 3, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["prism-pr-oct", "{4}xoct"], [("A510001", .noCount), ("B501000", .noCount), ("D501000", .noCount), ("prism-pr-oct", .match), ("{4}xoct", .match)], .known⟩
+  ]),
+  (19, [
+  ⟨19, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA4"], [("{3}xA4", .match)], .known⟩
+  ]),
+  (22, [
+  ⟨22, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-3-4", "{3}xcube", "{4}xP3"], [("prism-duoprism-3-4", .match), ("{3}xcube", .match), ("{4}xP3", .match)], .known⟩
+  ]),
+  (24, [
+  ⟨24, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{5}xtet"], [("{5}xtet", .match)], .known⟩
+  ]),
+  (25, [
+
+  ]),
+  (29, [
+  ⟨29, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-4", "{4}xA4"], [("prism-antiprism-prism-4", .match), ("{4}xA4", .match)], .known⟩
+  ]),
+  (32, [
+  ⟨32, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{5}xoct"], [("{5}xoct", .match)], .known⟩
+  ]),
+  (33, [
+  ⟨33, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA5"], [("{3}xA5", .match), ("{3}xico", .noCount)], .known⟩,
+  ⟨33, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{3}xico"], [("{3}xA5", .noCount), ("{3}xico", .match)], .known⟩
+  ]),
+  (34, [
+  ⟨34, 0, 0, 1, 9, 7, true, ⟨7, 7, 84, 84, true, [], []⟩, ["prism-A41001"], [("B500001", .noCount), ("prism-A41001", .match), ("prism-B40001", .noCount), ("prism-B40100", .noCount), ("{4}xcube", .noCount)], .known⟩,
+  ⟨34, 1, 0, 1, 5, 5, true, ⟨5, 5, 600, 600, true, [], []⟩, ["B500001", "prism-B40001", "{4}xcube"], [("B500001", .match), ("prism-A41001", .noCount), ("prism-B40001", .match), ("prism-B40100", .noCount), ("{4}xcube", .match)], .known⟩,
+  ⟨34, 2, 0, 1, 7, 9, true, ⟨9, 9, 432, 432, true, [], []⟩, ["prism-B40100"], [("B500001", .noCount), ("prism-A41001", .noCount), ("prism-B40001", .noCount), ("prism-B40100", .match), ("{4}xcube", .noCount)], .known⟩
+  ]),
+  (36, [
+  ⟨36, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-5", "{3}xP5", "{5}xP3"], [("prism-duoprism-3-5", .match), ("{3}xP5", .match), ("{5}xP3", .match)], .known⟩
+  ]),
+  (39, [
+  ⟨39, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 64, true, [], []⟩, ["{3}xco"], [("{3}xco", .match)], .known⟩
+  ]),
+  (43, [
+  ⟨43, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{6}xtet"], [("{6}xtet", .match)], .known⟩
+  ]),
+  (45, [
+  ⟨45, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA4"], [("{5}xA4", .match)], .known⟩
+  ]),
+  (46, [
+  ⟨46, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-5", "{4}xA5"], [("prism-antiprism-prism-5", .match), ("prism-pr-ico", .noCount), ("{4}xA5", .match), ("{4}xico", .noCount)], .known⟩,
+  ⟨46, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["prism-pr-ico", "{4}xico"], [("prism-antiprism-prism-5", .noCount), ("prism-pr-ico", .match), ("{4}xA5", .noCount), ("{4}xico", .match)], .known⟩
+  ]),
+  (47, [
+  ⟨47, 0, 0, 1, 9, 9, true, ⟨9, 9, 108, 144, true, [], []⟩, ["A501001", "A510010"], [("A501001", .match), ("A510010", .match)], .known⟩
+  ]),
+  (54, [
+  ⟨54, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-5", "{4}xP5", "{5}xcube"], [("prism-duoprism-4-5", .match), ("{4}xP5", .match), ("{5}xcube", .match)], .known⟩
+  ]),
+  (57, [
+  ⟨57, 0, 0, 1, 7, 12, true, ⟨12, 12, 576, 576, true, [], []⟩, ["B500100", "D500100"], [("B500100", .match), ("D500100", .match), ("prism-pr-co", .noCount), ("{4}xco", .noCount), ("{6}xoct", .noCount)], .known⟩,
+  ⟨57, 1, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["prism-pr-co", "{4}xco"], [("B500100", .noCount), ("D500100", .noCount), ("prism-pr-co", .match), ("{4}xco", .match), ("{6}xoct", .no)], .known⟩,
+  ⟨57, 2, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{6}xoct"], [("B500100", .noCount), ("D500100", .noCount), ("prism-pr-co", .no), ("{4}xco", .no), ("{6}xoct", .match)], .known⟩
+  ]),
+  (58, [
+  ⟨58, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA6"], [("{3}xA6", .match)], .known⟩
+  ]),
+  (68, [
+  ⟨68, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-6", "{3}xP6", "{6}xP3"], [("prism-duoprism-3-6", .match), ("{3}xP6", .match), ("{6}xP3", .match)], .known⟩
+  ]),
+  (69, [
+  ⟨69, 0, 0, 1, 10, 10, true, ⟨10, 10, 240, 384, true, [], []⟩, ["D510001", "D510010"], [("D510001", .match), ("D510010", .match)], .known⟩
+  ]),
+  (71, [
+  ⟨71, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA5"], [("{5}xA5", .match), ("{5}xico", .noCount)], .known⟩,
+  ⟨71, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{5}xico"], [("{5}xA5", .noCount), ("{5}xico", .match)], .known⟩
+  ]),
+  (75, [
+  ⟨75, 0, 0, 1, 6, 7, true, ⟨7, 7, 28, 32, true, [], []⟩, ["prism-A40101"], [("prism-A40101", .match)], .known⟩
+  ]),
+  (78, [
+  ⟨78, 0, 0, 1, 6, 8, true, ⟨8, 8, 96, 96, true, [], []⟩, ["A500101", "A510100"], [("A500101", .match), ("A510100", .match)], .known⟩
+  ]),
+  (79, [
+  ⟨79, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA4"], [("{6}xA4", .match)], .known⟩
+  ]),
+  (80, [
+  ⟨80, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-6", "{4}xA6"], [("prism-antiprism-prism-6", .match), ("{4}xA6", .match)], .known⟩
+  ]),
+  (84, [
+  ⟨84, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-5-5", "{5}xP5"], [("prism-duoprism-5-5", .match), ("{5}xP5", .match)], .known⟩
+  ]),
+  (85, [
+  ⟨85, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{7}xtet"], [("{7}xtet", .match)], .known⟩
+  ]),
+  (87, [
+  ⟨87, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{3}xtut"], [("{3}xtut", .match)], .known⟩
+  ]),
+  (88, [
+  ⟨88, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{5}xco"], [("{5}xco", .match)], .known⟩
+  ]),
+  (93, [
+  ⟨93, 0, 0, 1, 5, 5, true, ⟨5, 5, 120, 120, true, [], []⟩, ["A500011", "A511000"], [("A500011", .match), ("A511000", .match), ("prism-B40010", .noCount), ("prism-duoprism-4-6", .no), ("{4}xP6", .no), ("{6}xcube", .no)], .known⟩,
+  ⟨93, 1, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-6", "{4}xP6", "{6}xcube"], [("A500011", .no), ("A511000", .no), ("prism-B40010", .noCount), ("prism-duoprism-4-6", .match), ("{4}xP6", .match), ("{6}xcube", .match)], .known⟩,
+  ⟨93, 2, 0, 1, 6, 7, true, ⟨7, 7, 84, 84, true, [], []⟩, ["prism-B40010"], [("A500011", .noCount), ("A511000", .noCount), ("prism-B40010", .match), ("prism-duoprism-4-6", .noCount), ("{4}xP6", .noCount), ("{6}xcube", .noCount)], .known⟩
+  ]),
+  (107, [
+  ⟨107, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{7}xoct"], [("{7}xoct", .match)], .known⟩
+  ]),
+  (112, [
+  ⟨112, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA7"], [("{3}xA7", .match)], .known⟩
+  ]),
+  (113, [
+  ⟨113, 0, 0, 1, 5, 5, true, ⟨5, 5, 30, 30, true, [], []⟩, ["prism-A40011"], [("prism-A40011", .match)], .known⟩
+  ]),
+  (117, [
+  ⟨117, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["prism-pr-tut", "{4}xtut"], [("prism-pr-tut", .match), ("{4}xtut", .match)], .known⟩
+  ]),
+  (121, [
+  ⟨121, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA5"], [("{6}xA5", .match), ("{6}xico", .noCount)], .known⟩,
+  ⟨121, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{6}xico"], [("{6}xA5", .noCount), ("{6}xico", .match)], .known⟩
+  ]),
+  (122, [
+  ⟨122, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA6"], [("{5}xA6", .match)], .known⟩
+  ]),
+  (126, [
+  ⟨126, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-7", "{3}xP7", "{7}xP3"], [("prism-duoprism-3-7", .match), ("{3}xP7", .match), ("{7}xP3", .match)], .known⟩
+  ]),
+  (133, [
+  ⟨133, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-6", "{5}xP6", "{6}xP5"], [("prism-duoprism-5-6", .match), ("{5}xP6", .match), ("{6}xP5", .match)], .known⟩
+  ]),
+  (136, [
+  ⟨136, 0, 0, 1, 6, 8, true, ⟨8, 8, 384, 384, true, [], []⟩, ["B500010", "D500011"], [("A501010", .no), ("B500010", .match), ("D500011", .match), ("{6}xco", .noCount)], .known⟩,
+  ⟨136, 1, 0, 1, 6, 8, true, ⟨8, 8, 128, 128, true, [], []⟩, ["A501010"], [("A501010", .match), ("B500010", .no), ("D500011", .no), ("{6}xco", .noCount)], .known⟩,
+  ⟨136, 2, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{6}xco"], [("A501010", .noCount), ("B500010", .noCount), ("D500011", .noCount), ("{6}xco", .match)], .known⟩
+  ]),
+  (137, [
+  ⟨137, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA4"], [("{7}xA4", .match)], .known⟩
+  ]),
+  (138, [
+  ⟨138, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-7", "{4}xA7"], [("prism-antiprism-prism-7", .match), ("{4}xA7", .match)], .known⟩
+  ]),
+  (152, [
+  ⟨152, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-7", "{4}xP7", "{7}xcube"], [("prism-duoprism-4-7", .match), ("{4}xP7", .match), ("{7}xcube", .match)], .known⟩
+  ]),
+  (154, [
+  ⟨154, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{8}xtet"], [("{8}xtet", .match)], .known⟩
+  ]),
+  (158, [
+  ⟨158, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{5}xtut"], [("{5}xtut", .match)], .known⟩
+  ]),
+  (164, [
+  ⟨164, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{3}xsnic"], [("{3}xsnic", .match)], .known⟩
+  ]),
+  (170, [
+  ⟨170, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA6"], [("{6}xA6", .match)], .known⟩
+  ]),
+  (177, [
+  ⟨177, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{8}xoct"], [("{8}xoct", .match)], .known⟩
+  ]),
+  (179, [
+  ⟨179, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA8"], [("{3}xA8", .match)], .known⟩
+  ]),
+  (180, [
+  ⟨180, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA5"], [("{7}xA5", .match), ("{7}xico", .noCount)], .known⟩,
+  ⟨180, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{7}xico"], [("{7}xA5", .noCount), ("{7}xico", .match)], .known⟩
+  ]),
+  (182, [
+  ⟨182, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA7"], [("{5}xA7", .match)], .known⟩
+  ]),
+  (187, [
+  ⟨187, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 40, true, [], []⟩, ["prism-A40110"], [("prism-A40110", .match), ("prism-duoprism-6-6", .no), ("{6}xP6", .no)], .known⟩,
+  ⟨187, 1, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-6-6", "{6}xP6"], [("prism-A40110", .no), ("prism-duoprism-6-6", .match), ("{6}xP6", .match)], .known⟩
+  ]),
+  (194, [
+  ⟨194, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xsirco"], [("prism-duoprism-3-8", .noCount), ("{3}xP8", .noCount), ("{3}xsirco", .match), ("{8}xP3", .noCount)], .known⟩,
+  ⟨194, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-8", "{3}xP8", "{8}xP3"], [("prism-duoprism-3-8", .match), ("{3}xP8", .match), ("{3}xsirco", .noCount), ("{8}xP3", .match)], .known⟩
+  ]),
+  (197, [
+  ⟨197, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{3}xdoe"], [("{3}xdoe", .match)], .known⟩
+  ]),
+  (200, [
+  ⟨200, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-7", "{5}xP7", "{7}xP5"], [("prism-duoprism-5-7", .match), ("{5}xP7", .match), ("{7}xP5", .match)], .known⟩
+  ]),
+  (201, [
+  ⟨201, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["prism-pr-snic", "{4}xsnic"], [("prism-pr-snic", .match), ("{4}xsnic", .match)], .known⟩
+  ]),
+  (205, [
+  ⟨205, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{7}xco"], [("{7}xco", .match)], .known⟩
+  ]),
+  (211, [
+  ⟨211, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{6}xtut"], [("{6}xtut", .match)], .known⟩
+  ]),
+  (213, [
+  ⟨213, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA4"], [("{8}xA4", .match)], .known⟩
+  ]),
+  (217, [
+  ⟨217, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-8", "{4}xA8"], [("prism-antiprism-prism-8", .match), ("{4}xA8", .match)], .known⟩
+  ]),
+  (223, [
+  ⟨223, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["A500110", "A501100"], [("A500110", .match), ("A501100", .match)], .known⟩
+  ]),
+  (229, [
+  ⟨229, 0, 0, 1, 16, 8, true, ⟨8, 8, 192, 192, true, [], []⟩, ["B510001"], [("B510001", .match), ("prism-B41001", .noCount), ("prism-duoprism-4-8", .noCount), ("prism-pr-sirco", .noCount), ("{4}xP8", .noCount), ("{4}xsirco", .noCount), ("{8}xcube", .noCount)], .known⟩,
+  ⟨229, 1, 0, 1, 9, 7, true, ⟨7, 7, 42, 42, true, [], []⟩, ["prism-B41001"], [("B510001", .noCount), ("prism-B41001", .match), ("prism-duoprism-4-8", .noCount), ("prism-pr-sirco", .noCount), ("{4}xP8", .noCount), ("{4}xsirco", .noCount), ("{8}xcube", .noCount)], .known⟩,
+  ⟨229, 2, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-pr-sirco", "{4}xsirco"], [("B510001", .noCount), ("prism-B41001", .noCount), ("prism-duoprism-4-8", .noCount), ("prism-pr-sirco", .match), ("{4}xP8", .noCount), ("{4}xsirco", .match), ("{8}xcube", .noCount)], .known⟩,
+  ⟨229, 3, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-8", "{4}xP8", "{8}xcube"], [("B510001", .noCount), ("prism-B41001", .noCount), ("prism-duoprism-4-8", .match), ("prism-pr-sirco", .noCount), ("{4}xP8", .match), ("{4}xsirco", .noCount), ("{8}xcube", .match)], .known⟩
+  ]),
+  (230, [
+  ⟨230, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-pr-doe", "{4}xdoe"], [("prism-pr-doe", .match), ("{4}xdoe", .match)], .known⟩
+  ]),
+  (238, [
+  ⟨238, 0, 0, 1, 9, 7, true, ⟨7, 7, 336, 336, true, [], []⟩, ["B511000", "D511000"], [("B511000", .match), ("D511000", .match)], .known⟩
+  ]),
+  (241, [
+  ⟨241, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA6"], [("{7}xA6", .match)], .known⟩
+  ]),
+  (242, [
+  ⟨242, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{9}xtet"], [("{9}xtet", .match)], .known⟩
+  ]),
+  (243, [
+  ⟨243, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA7"], [("{6}xA7", .match)], .known⟩
+  ]),
+  (249, [
+  ⟨249, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{5}xsnic"], [("{5}xsnic", .match)], .known⟩
+  ]),
+  (255, [
+  ⟨255, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-7", "{6}xP7", "{7}xP6"], [("prism-duoprism-6-7", .match), ("{6}xP7", .match), ("{7}xP6", .match)], .known⟩
+  ]),
+  (263, [
+  ⟨263, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA5"], [("{8}xA5", .match), ("{8}xico", .noCount)], .known⟩,
+  ⟨263, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{8}xico"], [("{8}xA5", .noCount), ("{8}xico", .match)], .known⟩
+  ]),
+  (265, [
+  ⟨265, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA8"], [("{5}xA8", .match)], .known⟩
+  ]),
+  (268, [
+  ⟨268, 0, 0, 1, 6, 9, true, ⟨9, 9, 108, 144, true, [], []⟩, ["D501001", "D501010"], [("D501001", .match), ("D501010", .match)], .known⟩
+  ]),
+  (271, [
+  ⟨271, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{9}xoct"], [("{9}xoct", .match)], .known⟩
+  ]),
+  (275, [
+  ⟨275, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA9"], [("{3}xA9", .match)], .known⟩
+  ]),
+  (276, [
+  ⟨276, 0, 0, 1, 9, 7, true, ⟨7, 7, 42, 42, true, [], []⟩, ["A510011", "A511001"], [("A510011", .match), ("A511001", .match)], .known⟩
+  ]),
+  (280, [
+  ⟨280, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{5}xsirco"], [("prism-duoprism-5-8", .noCount), ("{5}xP8", .noCount), ("{5}xsirco", .match), ("{8}xP5", .noCount)], .known⟩,
+  ⟨280, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-8", "{5}xP8", "{8}xP5"], [("prism-duoprism-5-8", .match), ("{5}xP8", .match), ("{5}xsirco", .noCount), ("{8}xP5", .match)], .known⟩
+  ]),
+  (282, [
+  ⟨282, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{5}xdoe"], [("{5}xdoe", .match)], .known⟩
+  ]),
+  (286, [
+  ⟨286, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{7}xtut"], [("{7}xtut", .match)], .known⟩
+  ]),
+  (287, [
+  ⟨287, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{8}xco"], [("{8}xco", .match)], .known⟩
+  ]),
+  (288, [
+  ⟨288, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-9", "{3}xP9", "{9}xP3"], [("prism-duoprism-3-9", .match), ("{3}xP9", .match), ("{9}xP3", .match)], .known⟩
+  ]),
+  (293, [
+  ⟨293, 0, 0, 1, 7, 8, true, ⟨8, 8, 64, 64, true, [], []⟩, ["A510101"], [("A510101", .match), ("prism-B41100", .noCount)], .known⟩,
+  ⟨293, 1, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["prism-B41100"], [("A510101", .noCount), ("prism-B41100", .match)], .known⟩
+  ]),
+  (311, [
+  ⟨311, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{6}xsnic"], [("{6}xsnic", .match)], .known⟩
+  ]),
+  (313, [
+  ⟨313, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA4"], [("{9}xA4", .match)], .known⟩
+  ]),
+  (315, [
+  ⟨315, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-9", "{4}xA9"], [("prism-antiprism-prism-9", .match), ("{4}xA9", .match)], .known⟩
+  ]),
+  (316, [
+  ⟨316, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{3}xtoe"], [("{3}xtoe", .match)], .known⟩
+  ]),
+  (318, [
+  ⟨318, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA7"], [("{7}xA7", .match)], .known⟩
+  ]),
+  (320, [
+  ⟨320, 0, 0, 1, 6, 6, true, ⟨6, 6, 12, 14, true, [], []⟩, ["prism-A41011"], [("prism-A41011", .match)], .known⟩
+  ]),
+  (325, [
+  ⟨325, 0, 0, 1, 21, 13, true, ⟨13, 13, 1560, 1560, true, [], []⟩, ["prism-H40001"], [("prism-H40001", .match), ("prism-gap", .noCount), ("prism-sadi", .noCount)], .known⟩,
+  ⟨325, 1, 0, 1, 15, 11, true, ⟨11, 11, 44, 248, true, [], []⟩, ["prism-gap"], [("prism-H40001", .noCount), ("prism-gap", .match), ("prism-sadi", .noCount)], .known⟩,
+  ⟨325, 2, 0, 1, 9, 10, true, ⟨10, 10, 60, 84, true, [], []⟩, ["prism-sadi"], [("prism-H40001", .noCount), ("prism-gap", .noCount), ("prism-sadi", .match)], .known⟩
+  ]),
+  (328, [
+  ⟨328, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-9", "{4}xP9", "{9}xcube"], [("prism-duoprism-4-9", .match), ("{4}xP9", .match), ("{9}xcube", .match)], .known⟩
+  ]),
+  (329, [
+  ⟨329, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA6"], [("{8}xA6", .match)], .known⟩
+  ]),
+  (330, [
+  ⟨330, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA8"], [("{6}xA8", .match)], .known⟩
+  ]),
+  (335, [
+  ⟨335, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-7-7", "{7}xP7"], [("prism-duoprism-7-7", .match), ("{7}xP7", .match)], .known⟩
+  ]),
+  (340, [
+  ⟨340, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{3}xid"], [("{3}xid", .match)], .known⟩
+  ]),
+  (343, [
+  ⟨343, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{6}xsirco"], [("prism-duoprism-6-8", .noCount), ("{6}xP8", .noCount), ("{6}xsirco", .match), ("{8}xP6", .noCount)], .known⟩,
+  ⟨343, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-8", "{6}xP8", "{8}xP6"], [("prism-duoprism-6-8", .match), ("{6}xP8", .match), ("{6}xsirco", .noCount), ("{8}xP6", .match)], .known⟩
+  ]),
+  (346, [
+  ⟨346, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{6}xdoe"], [("{6}xdoe", .match)], .known⟩
+  ]),
+  (355, [
+  ⟨355, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{10}xtet"], [("{10}xtet", .match)], .known⟩
+  ]),
+  (358, [
+  ⟨358, 0, 0, 1, 7, 10, true, ⟨10, 10, 160, 160, true, [], []⟩, ["B510100", "D510100"], [("B510100", .match), ("D510100", .match), ("prism-pr-toe", .noCount), ("{4}xtoe", .noCount)], .known⟩,
+  ⟨358, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["prism-pr-toe", "{4}xtoe"], [("B510100", .noCount), ("D510100", .noCount), ("prism-pr-toe", .match), ("{4}xtoe", .match)], .known⟩
+  ]),
+  (366, [
+  ⟨366, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA5"], [("{9}xA5", .match), ("{9}xico", .noCount)], .known⟩,
+  ⟨366, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{9}xico"], [("{9}xA5", .noCount), ("{9}xico", .match)], .known⟩
+  ]),
+  (368, [
+  ⟨368, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA9"], [("{5}xA9", .match)], .known⟩
+  ]),
+  (381, [
+  ⟨381, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{8}xtut"], [("{8}xtut", .match)], .known⟩
+  ]),
+  (384, [
+  ⟨384, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-9", "{5}xP9", "{9}xP5"], [("prism-duoprism-5-9", .match), ("{5}xP9", .match), ("{9}xP5", .match)], .known⟩
+  ]),
+  (386, [
+  ⟨386, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{10}xoct"], [("prism-pr-id", .no), ("{10}xoct", .match), ("{4}xid", .no)], .known⟩,
+  ⟨386, 1, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["prism-pr-id", "{4}xid"], [("prism-pr-id", .match), ("{10}xoct", .no), ("{4}xid", .match)], .known⟩
+  ]),
+  (393, [
+  ⟨393, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{7}xsnic"], [("{7}xsnic", .match)], .known⟩
+  ]),
+  (396, [
+  ⟨396, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{9}xco"], [("{9}xco", .match)], .known⟩
+  ]),
+  (397, [
+  ⟨397, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA10"], [("{3}xA10", .match)], .known⟩
+  ]),
+  (408, [
+  ⟨408, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-10", "{10}xP3", "{3}xP10"], [("prism-duoprism-3-10", .match), ("{10}xP3", .match), ("{3}xP10", .match)], .known⟩
+  ]),
+  (414, [
+  ⟨414, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA7"], [("{8}xA7", .match)], .known⟩
+  ]),
+  (415, [
+  ⟨415, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA8"], [("{7}xA8", .match)], .known⟩
+  ]),
+  (417, [
+  ⟨417, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{5}xtoe"], [("{5}xtoe", .match)], .known⟩
+  ]),
+  (422, [
+  ⟨422, 0, 0, 1, 6, 7, true, ⟨7, 7, 84, 84, true, [], []⟩, ["prism-B41010"], [("prism-B41010", .match)], .known⟩
+  ]),
+  (432, [
+  ⟨432, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{7}xsirco"], [("prism-duoprism-7-8", .noCount), ("{7}xP8", .noCount), ("{7}xsirco", .match), ("{8}xP7", .noCount)], .known⟩,
+  ⟨432, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-8", "{7}xP8", "{8}xP7"], [("prism-duoprism-7-8", .match), ("{7}xP8", .match), ("{7}xsirco", .noCount), ("{8}xP7", .match)], .known⟩
+  ]),
+  (433, [
+  ⟨433, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{7}xdoe"], [("{7}xdoe", .match)], .known⟩
+  ]),
+  (435, [
+  ⟨435, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA4"], [("{10}xA4", .match)], .known⟩
+  ]),
+  (439, [
+  ⟨439, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-10", "{4}xA10"], [("prism-antiprism-prism-10", .match), ("{4}xA10", .match)], .known⟩
+  ]),
+  (442, [
+  ⟨442, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA6"], [("{9}xA6", .match)], .known⟩
+  ]),
+  (443, [
+  ⟨443, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA9"], [("{6}xA9", .match)], .known⟩
+  ]),
+  (446, [
+  ⟨446, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{5}xid"], [("{5}xid", .match)], .known⟩
+  ]),
+  (453, [
+  ⟨453, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-10", "{10}xcube", "{4}xP10"], [("prism-duoprism-4-10", .match), ("{10}xcube", .match), ("{4}xP10", .match)], .known⟩
+  ]),
+  (457, [
+  ⟨457, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-9", "{6}xP9", "{9}xP6"], [("prism-duoprism-6-9", .match), ("{6}xP9", .match), ("{9}xP6", .match)], .known⟩
+  ]),
+  (467, [
+  ⟨467, 0, 0, 1, 6, 7, true, ⟨7, 7, 28, 32, true, [], []⟩, ["A501011", "A511010"], [("A501011", .match), ("A511010", .match)], .known⟩
+  ]),
+  (489, [
+  ⟨489, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{3}xtic"], [("{3}xtic", .match)], .known⟩
+  ]),
+  (491, [
+  ⟨491, 0, 0, 1, 9, 9, true, ⟨9, 9, 108, 132, true, [], []⟩, ["B510010", "D510011"], [("B510010", .match), ("D510011", .match), ("{6}xtoe", .noCount)], .known⟩,
+  ⟨491, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 32, true, [], []⟩, ["{6}xtoe"], [("B510010", .noCount), ("D510011", .noCount), ("{6}xtoe", .match)], .known⟩
+  ]),
+  (495, [
+  ⟨495, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{9}xtut"], [("{9}xtut", .match)], .known⟩
+  ]),
+  (496, [
+  ⟨496, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{8}xsnic"], [("{8}xsnic", .match)], .known⟩
+  ]),
+  (499, [
+  ⟨499, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA5"], [("{10}xA5", .match), ("{10}xico", .noCount)], .known⟩,
+  ⟨499, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{10}xico"], [("{10}xA5", .noCount), ("{10}xico", .match)], .known⟩
+  ]),
+  (500, [
+  ⟨500, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{11}xtet"], [("{11}xtet", .match)], .known⟩
+  ]),
+  (502, [
+  ⟨502, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA10"], [("{5}xA10", .match)], .known⟩
+  ]),
+  (515, [
+  ⟨515, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-10", "{10}xP5", "{5}xP10"], [("prism-duoprism-5-10", .match), ("{10}xP5", .match), ("{5}xP10", .match)], .known⟩
+  ]),
+  (517, [
+  ⟨517, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA8"], [("{8}xA8", .match)], .known⟩
+  ]),
+  (524, [
+  ⟨524, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{10}xco"], [("{10}xco", .match), ("{6}xid", .no)], .known⟩,
+  ⟨524, 1, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{6}xid"], [("{10}xco", .no), ("{6}xid", .match)], .known⟩
+  ]),
+  (526, [
+  ⟨526, 0, 0, 1, 6, 7, true, ⟨7, 7, 84, 96, true, [], []⟩, ["D500101", "D500110"], [("D500101", .match), ("D500110", .match)], .known⟩
+  ]),
+  (530, [
+  ⟨530, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA7"], [("{9}xA7", .match)], .known⟩
+  ]),
+  (531, [
+  ⟨531, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{11}xoct"], [("{11}xoct", .match)], .known⟩
+  ]),
+  (532, [
+  ⟨532, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 12, true, [], []⟩, ["prism-A40111"], [("prism-A40111", .match)], .known⟩
+  ]),
+  (533, [
+  ⟨533, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA9"], [("{7}xA9", .match)], .known⟩
+  ]),
+  (536, [
+  ⟨536, 0, 0, 1, 9, 9, true, ⟨9, 9, 108, 120, true, [], []⟩, ["B501001"], [("B501001", .match), ("prism-B40101", .noCount), ("prism-F41001", .no), ("prism-duoprism-8-8", .noCount), ("prism-pr-tic", .noCount), ("{4}xtic", .noCount), ("{8}xP8", .noCount), ("{8}xsirco", .noCount)], .known⟩,
+  ⟨536, 1, 0, 1, 6, 7, true, ⟨7, 7, 28, 28, true, [], []⟩, ["prism-B40101"], [("B501001", .noCount), ("prism-B40101", .match), ("prism-F41001", .noCount), ("prism-duoprism-8-8", .noCount), ("prism-pr-tic", .noCount), ("{4}xtic", .noCount), ("{8}xP8", .noCount), ("{8}xsirco", .noCount)], .known⟩,
+  ⟨536, 2, 0, 1, 11, 9, true, ⟨9, 9, 144, 144, true, [], []⟩, ["prism-F41001"], [("B501001", .no), ("prism-B40101", .noCount), ("prism-F41001", .match), ("prism-duoprism-8-8", .noCount), ("prism-pr-tic", .noCount), ("{4}xtic", .noCount), ("{8}xP8", .noCount), ("{8}xsirco", .noCount)], .known⟩,
+  ⟨536, 3, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["prism-pr-tic", "{4}xtic"], [("B501001", .noCount), ("prism-B40101", .noCount), ("prism-F41001", .noCount), ("prism-duoprism-8-8", .no), ("prism-pr-tic", .match), ("{4}xtic", .match), ("{8}xP8", .no), ("{8}xsirco", .noCount)], .known⟩,
+  ⟨536, 4, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{8}xsirco"], [("B501001", .noCount), ("prism-B40101", .noCount), ("prism-F41001", .noCount), ("prism-duoprism-8-8", .noCount), ("prism-pr-tic", .noCount), ("{4}xtic", .noCount), ("{8}xP8", .noCount), ("{8}xsirco", .match)], .known⟩,
+  ⟨536, 5, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-8-8", "{8}xP8"], [("B501001", .noCount), ("prism-B40101", .noCount), ("prism-F41001", .noCount), ("prism-duoprism-8-8", .match), ("prism-pr-tic", .no), ("{4}xtic", .no), ("{8}xP8", .match), ("{8}xsirco", .noCount)], .known⟩
+  ]),
+  (537, [
+  ⟨537, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["A501101", "A510110"], [("A501101", .match), ("A510110", .match)], .known⟩
+  ]),
+  (539, [
+  ⟨539, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA11"], [("{3}xA11", .match)], .known⟩
+  ]),
+  (540, [
+  ⟨540, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{8}xdoe"], [("{8}xdoe", .match)], .known⟩
+  ]),
+  (548, [
+  ⟨548, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-9", "{7}xP9", "{9}xP7"], [("prism-duoprism-7-9", .match), ("{7}xP9", .match), ("{9}xP7", .match)], .known⟩
+  ]),
+  (552, [
+  ⟨552, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-11", "{11}xP3", "{3}xP11"], [("prism-duoprism-3-11", .match), ("{11}xP3", .match), ("{3}xP11", .match)], .known⟩
+  ]),
+  (571, [
+  ⟨571, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA6"], [("{10}xA6", .match)], .known⟩
+  ]),
+  (573, [
+  ⟨573, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA10"], [("{6}xA10", .match)], .known⟩
+  ]),
+  (580, [
+  ⟨580, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA4"], [("{11}xA4", .match)], .known⟩
+  ]),
+  (581, [
+  ⟨581, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{7}xtoe"], [("{7}xtoe", .match)], .known⟩
+  ]),
+  (584, [
+  ⟨584, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-11", "{4}xA11"], [("prism-antiprism-prism-11", .match), ("{4}xA11", .match)], .known⟩
+  ]),
+  (587, [
+  ⟨587, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-10", "{10}xP6", "{6}xP10"], [("prism-duoprism-6-10", .match), ("{10}xP6", .match), ("{6}xP10", .match)], .known⟩
+  ]),
+  (596, [
+  ⟨596, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{5}xtic"], [("{5}xtic", .match)], .known⟩
+  ]),
+  (598, [
+  ⟨598, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-11", "{11}xcube", "{4}xP11"], [("prism-duoprism-4-11", .match), ("{11}xcube", .match), ("{4}xP11", .match)], .known⟩
+  ]),
+  (607, [
+  ⟨607, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{9}xsnic"], [("{9}xsnic", .match)], .known⟩
+  ]),
+  (611, [
+  ⟨611, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{7}xid"], [("{7}xid", .match)], .known⟩
+  ]),
+  (622, [
+  ⟨622, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{10}xtut"], [("{10}xtut", .match)], .known⟩
+  ]),
+  (623, [
+  ⟨623, 0, 0, 1, 5, 5, true, ⟨5, 5, 30, 30, true, [], []⟩, ["A500111", "A511100"], [("A500111", .match), ("A511100", .match)], .known⟩
+  ]),
+  (631, [
+  ⟨631, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA8"], [("{9}xA8", .match)], .known⟩
+  ]),
+  (633, [
+  ⟨633, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA9"], [("{8}xA9", .match)], .known⟩
+  ]),
+  (636, [
+  ⟨636, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA5"], [("{11}xA5", .match), ("{11}xico", .noCount)], .known⟩,
+  ⟨636, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{11}xico"], [("{11}xA5", .noCount), ("{11}xico", .match)], .known⟩
+  ]),
+  (639, [
+  ⟨639, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA11"], [("{5}xA11", .match)], .known⟩
+  ]),
+  (651, [
+  ⟨651, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{9}xsirco"], [("prism-duoprism-8-9", .noCount), ("{8}xP9", .noCount), ("{9}xP8", .noCount), ("{9}xsirco", .match)], .known⟩,
+  ⟨651, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-8-9", "{8}xP9", "{9}xP8"], [("prism-duoprism-8-9", .match), ("{8}xP9", .match), ("{9}xP8", .match), ("{9}xsirco", .noCount)], .known⟩
+  ]),
+  (654, [
+  ⟨654, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{9}xdoe"], [("{9}xdoe", .match)], .known⟩
+  ]),
+  (655, [
+  ⟨655, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{12}xtet"], [("{12}xtet", .match)], .known⟩
+  ]),
+  (660, [
+  ⟨660, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-11", "{11}xP5", "{5}xP11"], [("prism-duoprism-5-11", .match), ("{11}xP5", .match), ("{5}xP11", .match)], .known⟩
+  ]),
+  (662, [
+  ⟨662, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA7"], [("{10}xA7", .match)], .known⟩
+  ]),
+  (663, [
+  ⟨663, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA10"], [("{7}xA10", .match)], .known⟩
+  ]),
+  (667, [
+  ⟨667, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{11}xco"], [("{11}xco", .match)], .known⟩
+  ]),
+  (671, [
+  ⟨671, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{6}xtic"], [("{6}xtic", .match)], .known⟩
+  ]),
+  (679, [
+  ⟨679, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-10", "{10}xP7", "{7}xP10"], [("prism-duoprism-7-10", .match), ("{10}xP7", .match), ("{7}xP10", .match)], .known⟩
+  ]),
+  (686, [
+  ⟨686, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{8}xtoe"], [("{8}xtoe", .match)], .known⟩
+  ]),
+  (694, [
+  ⟨694, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{12}xoct"], [("{12}xoct", .match)], .known⟩
+  ]),
+  (698, [
+  ⟨698, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA12"], [("{3}xA12", .match)], .known⟩
+  ]),
+  (715, [
+  ⟨715, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-12", "{12}xP3", "{3}xP12"], [("prism-duoprism-3-12", .match), ("{12}xP3", .match), ("{3}xP12", .match)], .known⟩
+  ]),
+  (717, [
+  ⟨717, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{8}xid"], [("{8}xid", .match)], .known⟩
+  ]),
+  (718, [
+  ⟨718, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA6"], [("{11}xA6", .match)], .known⟩
+  ]),
+  (720, [
+  ⟨720, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA11"], [("{6}xA11", .match)], .known⟩
+  ]),
+  (741, [
+  ⟨741, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-11", "{11}xP6", "{6}xP11"], [("prism-duoprism-6-11", .match), ("{11}xP6", .match), ("{6}xP11", .match)], .known⟩
+  ]),
+  (744, [
+  ⟨744, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA4"], [("{12}xA4", .match)], .known⟩
+  ]),
+  (746, [
+  ⟨746, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-12", "{4}xA12"], [("prism-antiprism-prism-12", .match), ("{4}xA12", .match)], .known⟩
+  ]),
+  (750, [
+  ⟨750, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{10}xsnic"], [("{10}xsnic", .match)], .known⟩
+  ]),
+  (763, [
+  ⟨763, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA9"], [("{9}xA9", .match)], .known⟩
+  ]),
+  (767, [
+  ⟨767, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-12", "{12}xcube", "{4}xP12"], [("prism-duoprism-4-12", .match), ("{12}xcube", .match), ("{4}xP12", .match)], .known⟩
+  ]),
+  (769, [
+  ⟨769, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{7}xtic"], [("{7}xtic", .match)], .known⟩
+  ]),
+  (772, [
+  ⟨772, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["B501100", "D501100"], [("B501100", .match), ("D501100", .match)], .known⟩
+  ]),
+  (774, [
+  ⟨774, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA8"], [("{10}xA8", .match)], .known⟩
+  ]),
+  (775, [
+  ⟨775, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA10"], [("{8}xA10", .match)], .known⟩
+  ]),
+  (780, [
+  ⟨780, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-9-9", "{9}xP9"], [("prism-duoprism-9-9", .match), ("{9}xP9", .match)], .known⟩
+  ]),
+  (781, [
+  ⟨781, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{11}xtut"], [("{11}xtut", .match)], .known⟩
+  ]),
+  (794, [
+  ⟨794, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{10}xsirco"], [("prism-duoprism-8-10", .noCount), ("{10}xP8", .noCount), ("{10}xsirco", .match), ("{8}xP10", .noCount)], .known⟩,
+  ⟨794, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-8-10", "{10}xP8", "{8}xP10"], [("prism-duoprism-8-10", .match), ("{10}xP8", .match), ("{10}xsirco", .noCount), ("{8}xP10", .match)], .known⟩
+  ]),
+  (795, [
+  ⟨795, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{10}xdoe"], [("{10}xdoe", .match)], .known⟩
+  ]),
+  (805, [
+  ⟨805, 0, 0, 1, 6, 7, true, ⟨7, 7, 42, 42, true, [], []⟩, ["D511001", "D511010"], [("D511001", .match), ("D511010", .match)], .known⟩
+  ]),
+  (807, [
+  ⟨807, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA5"], [("{12}xA5", .match), ("{12}xico", .noCount)], .known⟩,
+  ⟨807, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{12}xico"], [("{12}xA5", .noCount), ("{12}xico", .match)], .known⟩
+  ]),
+  (808, [
+  ⟨808, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{9}xtoe"], [("{9}xtoe", .match)], .known⟩
+  ]),
+  (809, [
+  ⟨809, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA12"], [("{5}xA12", .match)], .known⟩
+  ]),
+  (816, [
+  ⟨816, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA7"], [("{11}xA7", .match)], .known⟩
+  ]),
+  (817, [
+  ⟨817, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA11"], [("{7}xA11", .match)], .known⟩
+  ]),
+  (829, [
+  ⟨829, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-12", "{12}xP5", "{5}xP12"], [("prism-duoprism-5-12", .match), ("{12}xP5", .match), ("{5}xP12", .match)], .known⟩
+  ]),
+  (834, [
+  ⟨834, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-11", "{11}xP7", "{7}xP11"], [("prism-duoprism-7-11", .match), ("{11}xP7", .match), ("{7}xP11", .match)], .known⟩
+  ]),
+  (836, [
+  ⟨836, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{12}xco"], [("{12}xco", .match)], .known⟩
+  ]),
+  (838, [
+  ⟨838, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{13}xtet"], [("{13}xtet", .match)], .known⟩
+  ]),
+  (843, [
+  ⟨843, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 40, true, [], []⟩, ["A501110"], [("A501110", .match), ("prism-B40110", .no)], .known⟩,
+  ⟨843, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["prism-B40110"], [("A501110", .no), ("prism-B40110", .match)], .known⟩
+  ]),
+  (844, [
+  ⟨844, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{9}xid"], [("{9}xid", .match)], .known⟩
+  ]),
+  (868, [
+  ⟨868, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{13}xoct"], [("{13}xoct", .match)], .known⟩
+  ]),
+  (869, [
+  ⟨869, 0, 0, 1, 6, 8, true, ⟨8, 8, 96, 96, true, [], []⟩, ["B500101"], [("B500101", .match), ("prism-B40011", .noCount), ("{8}xtic", .noCount)], .known⟩,
+  ⟨869, 1, 0, 1, 5, 5, true, ⟨5, 5, 30, 30, true, [], []⟩, ["prism-B40011"], [("B500101", .noCount), ("prism-B40011", .match), ("{8}xtic", .no)], .known⟩,
+  ⟨869, 2, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{8}xtic"], [("B500101", .noCount), ("prism-B40011", .no), ("{8}xtic", .match)], .known⟩
+  ]),
+  (871, [
+  ⟨871, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA13"], [("{3}xA13", .match)], .known⟩
+  ]),
+  (881, [
+  ⟨881, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA6"], [("{12}xA6", .match)], .known⟩
+  ]),
+  (883, [
+  ⟨883, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA12"], [("{6}xA12", .match)], .known⟩
+  ]),
+  (892, [
+  ⟨892, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA9"], [("{10}xA9", .match)], .known⟩
+  ]),
+  (893, [
+  ⟨893, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA10"], [("{9}xA10", .match)], .known⟩
+  ]),
+  (896, [
+  ⟨896, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-13", "{13}xP3", "{3}xP13"], [("prism-duoprism-3-13", .match), ("{13}xP3", .match), ("{3}xP13", .match)], .known⟩
+  ]),
+  (898, [
+  ⟨898, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{11}xsnic"], [("{11}xsnic", .match)], .known⟩
+  ]),
+  (906, [
+  ⟨906, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{3}xsnid"], [("{3}xsnid", .match)], .known⟩
+  ]),
+  (907, [
+  ⟨907, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-12", "{12}xP6", "{6}xP12"], [("prism-duoprism-6-12", .match), ("{12}xP6", .match), ("{6}xP12", .match)], .known⟩
+  ]),
+  (913, [
+  ⟨913, 0, 0, 1, 6, 8, true, ⟨8, 8, 64, 64, true, [], []⟩, ["B501010", "D501011"], [("A511011", .noCount), ("B501010", .match), ("D501011", .match)], .known⟩,
+  ⟨913, 1, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["A511011"], [("A511011", .match), ("B501010", .noCount), ("D501011", .noCount)], .known⟩
+  ]),
+  (915, [
+  ⟨915, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-9-10", "{10}xP9", "{9}xP10"], [("prism-duoprism-9-10", .match), ("{10}xP9", .match), ("{9}xP10", .match)], .known⟩
+  ]),
+  (929, [
+  ⟨929, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA8"], [("{11}xA8", .match)], .known⟩
+  ]),
+  (930, [
+  ⟨930, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA4"], [("{13}xA4", .match)], .known⟩
+  ]),
+  (931, [
+  ⟨931, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA11"], [("{8}xA11", .match)], .known⟩
+  ]),
+  (934, [
+  ⟨934, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-13", "{4}xA13"], [("prism-antiprism-prism-13", .match), ("{4}xA13", .match)], .known⟩
+  ]),
+  (953, [
+  ⟨953, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{11}xsirco"], [("prism-duoprism-8-11", .noCount), ("{11}xP8", .noCount), ("{11}xsirco", .match), ("{8}xP11", .noCount)], .known⟩,
+  ⟨953, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-8-11", "{11}xP8", "{8}xP11"], [("prism-duoprism-8-11", .match), ("{11}xP8", .match), ("{11}xsirco", .noCount), ("{8}xP11", .match)], .known⟩
+  ]),
+  (954, [
+  ⟨954, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{12}xtut"], [("{12}xtut", .match)], .known⟩
+  ]),
+  (955, [
+  ⟨955, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{11}xdoe"], [("{11}xdoe", .match)], .known⟩
+  ]),
+  (956, [
+  ⟨956, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-13", "{13}xcube", "{4}xP13"], [("prism-duoprism-4-13", .match), ("{13}xcube", .match), ("{4}xP13", .match)], .known⟩
+  ]),
+  (957, [
+  ⟨957, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{10}xtoe"], [("{10}xtoe", .match)], .known⟩
+  ]),
+  (966, [
+  ⟨966, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["prism-pr-snid", "{4}xsnid"], [("prism-pr-snid", .match), ("{4}xsnid", .match)], .known⟩
+  ]),
+  (992, [
+  ⟨992, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{10}xid"], [("{10}xid", .match)], .known⟩
+  ]),
+  (993, [
+  ⟨993, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA7"], [("{12}xA7", .match)], .known⟩
+  ]),
+  (994, [
+  ⟨994, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA12"], [("{7}xA12", .match)], .known⟩
+  ]),
+  (995, [
+  ⟨995, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 12, true, [], []⟩, ["prism-A41111"], [("prism-A41111", .match)], .known⟩
+  ]),
+  (997, [
+  ⟨997, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA5"], [("{13}xA5", .match), ("{13}xico", .noCount)], .known⟩,
+  ⟨997, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{13}xico"], [("{13}xA5", .noCount), ("{13}xico", .match)], .known⟩
+  ]),
+  (998, [
+  ⟨998, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA13"], [("{5}xA13", .match)], .known⟩
+  ]),
+  (1007, [
+  ⟨1007, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{9}xtic"], [("{9}xtic", .match)], .known⟩
+  ]),
+  (1009, [
+  ⟨1009, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-12", "{12}xP7", "{7}xP12"], [("prism-duoprism-7-12", .match), ("{12}xP7", .match), ("{7}xP12", .match)], .known⟩
+  ]),
+  (1013, [
+  ⟨1013, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xsrid"], [("{3}xsrid", .match)], .known⟩
+  ]),
+  (1019, [
+  ⟨1019, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-13", "{13}xP5", "{5}xP13"], [("prism-duoprism-5-13", .match), ("{13}xP5", .match), ("{5}xP13", .match)], .known⟩
+  ]),
+  (1024, [
+  ⟨1024, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{13}xco"], [("{13}xco", .match)], .known⟩
+  ]),
+  (1027, [
+  ⟨1027, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{5}xsnid"], [("{5}xsnid", .match)], .known⟩
+  ]),
+  (1036, [
+  ⟨1036, 0, 0, 1, 6, 6, true, ⟨6, 6, 12, 14, true, [], []⟩, ["A510111", "A511101"], [("A510111", .match), ("A511101", .match)], .known⟩
+  ]),
+  (1039, [
+  ⟨1039, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA10"], [("{10}xA10", .match)], .known⟩
+  ]),
+  (1040, [
+  ⟨1040, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{14}xtet"], [("{14}xtet", .match)], .known⟩
+  ]),
+  (1052, [
+  ⟨1052, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA9"], [("{11}xA9", .match)], .known⟩
+  ]),
+  (1053, [
+  ⟨1053, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA11"], [("{9}xA11", .match)], .known⟩
+  ]),
+  (1057, [
+  ⟨1057, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-pr-srid", "{4}xsrid"], [("prism-duoprism-10-10", .noCount), ("prism-pr-srid", .match), ("{10}xP10", .noCount), ("{4}xsrid", .match)], .known⟩,
+  ⟨1057, 1, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-10-10", "{10}xP10"], [("prism-duoprism-10-10", .match), ("prism-pr-srid", .noCount), ("{10}xP10", .match), ("{4}xsrid", .noCount)], .known⟩
+  ]),
+  (1075, [
+  ⟨1075, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-9-11", "{11}xP9", "{9}xP11"], [("prism-duoprism-9-11", .match), ("{11}xP9", .match), ("{9}xP11", .match)], .known⟩
+  ]),
+  (1076, [
+  ⟨1076, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{12}xsnic"], [("{12}xsnic", .match)], .known⟩
+  ]),
+  (1078, [
+  ⟨1078, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA6"], [("{13}xA6", .match)], .known⟩
+  ]),
+  (1079, [
+  ⟨1079, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{14}xoct"], [("{14}xoct", .match)], .known⟩
+  ]),
+  (1080, [
+  ⟨1080, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA13"], [("{6}xA13", .match)], .known⟩
+  ]),
+  (1088, [
+  ⟨1088, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA14"], [("{3}xA14", .match)], .known⟩
+  ]),
+  (1103, [
+  ⟨1103, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-13", "{13}xP6", "{6}xP13"], [("prism-duoprism-6-13", .match), ("{13}xP6", .match), ("{6}xP13", .match)], .known⟩
+  ]),
+  (1105, [
+  ⟨1105, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA8"], [("{12}xA8", .match)], .known⟩
+  ]),
+  (1106, [
+  ⟨1106, 0, 0, 1, 6, 7, true, ⟨7, 7, 28, 32, true, [], []⟩, ["D510101", "D510110"], [("D510101", .match), ("D510110", .match)], .known⟩
+  ]),
+  (1107, [
+  ⟨1107, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA12"], [("{8}xA12", .match)], .known⟩
+  ]),
+  (1113, [
+  ⟨1113, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-14", "{14}xP3", "{3}xP14"], [("prism-duoprism-3-14", .match), ("{14}xP3", .match), ("{3}xP14", .match)], .known⟩
+  ]),
+  (1120, [
+  ⟨1120, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{6}xsnid"], [("{6}xsnid", .match)], .known⟩
+  ]),
+  (1122, [
+  ⟨1122, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{11}xtoe"], [("{11}xtoe", .match)], .known⟩
+  ]),
+  (1127, [
+  ⟨1127, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{12}xsirco"], [("prism-duoprism-8-12", .noCount), ("{12}xP8", .noCount), ("{12}xsirco", .match), ("{8}xP12", .noCount)], .known⟩,
+  ⟨1127, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-8-12", "{12}xP8", "{8}xP12"], [("prism-duoprism-8-12", .match), ("{12}xP8", .match), ("{12}xsirco", .noCount), ("{8}xP12", .match)], .known⟩
+  ]),
+  (1130, [
+  ⟨1130, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{12}xdoe"], [("{12}xdoe", .match)], .known⟩
+  ]),
+  (1135, [
+  ⟨1135, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{3}xgirco"], [("{3}xgirco", .match)], .known⟩
+  ]),
+  (1137, [
+  ⟨1137, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xsrid"], [("{5}xsrid", .match)], .known⟩
+  ]),
+  (1141, [
+  ⟨1141, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA4"], [("{14}xA4", .match)], .known⟩
+  ]),
+  (1144, [
+  ⟨1144, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-14", "{4}xA14"], [("prism-antiprism-prism-14", .match), ("{4}xA14", .match)], .known⟩
+  ]),
+  (1146, [
+  ⟨1146, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{13}xtut"], [("{13}xtut", .match)], .known⟩
+  ]),
+  (1155, [
+  ⟨1155, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{11}xid"], [("{11}xid", .match)], .known⟩
+  ]),
+  (1163, [
+  ⟨1163, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{10}xtic"], [("{10}xtic", .match)], .known⟩
+  ]),
+  (1166, [
+  ⟨1166, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-14", "{14}xcube", "{4}xP14"], [("prism-duoprism-4-14", .match), ("{14}xcube", .match), ("{4}xP14", .match)], .known⟩
+  ]),
+  (1184, [
+  ⟨1184, 0, 0, 1, 9, 7, true, ⟨7, 7, 42, 42, true, [], []⟩, ["B511001"], [("B511001", .match), ("prism-B41101", .noCount), ("prism-pr-girco", .noCount), ("{4}xgirco", .noCount)], .known⟩,
+  ⟨1184, 1, 0, 1, 6, 6, true, ⟨6, 6, 12, 12, true, [], []⟩, ["prism-B41101"], [("B511001", .noCount), ("prism-B41101", .match), ("prism-pr-girco", .noCount), ("{4}xgirco", .noCount)], .known⟩,
+  ⟨1184, 2, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["prism-pr-girco", "{4}xgirco"], [("B511001", .noCount), ("prism-B41101", .noCount), ("prism-pr-girco", .match), ("{4}xgirco", .match)], .known⟩
+  ]),
+  (1187, [
+  ⟨1187, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA7"], [("{13}xA7", .match)], .known⟩
+  ]),
+  (1188, [
+  ⟨1188, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA13"], [("{7}xA13", .match)], .known⟩
+  ]),
+  (1203, [
+  ⟨1203, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-13", "{13}xP7", "{7}xP13"], [("prism-duoprism-7-13", .match), ("{13}xP7", .match), ("{7}xP13", .match)], .known⟩
+  ]),
+  (1206, [
+  ⟨1206, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA5"], [("{14}xA5", .match), ("{14}xico", .noCount)], .known⟩,
+  ⟨1206, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{14}xico"], [("{14}xA5", .noCount), ("{14}xico", .match)], .known⟩
+  ]),
+  (1207, [
+  ⟨1207, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA10"], [("{11}xA10", .match)], .known⟩
+  ]),
+  (1208, [
+  ⟨1208, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA11"], [("{10}xA11", .match)], .known⟩
+  ]),
+  (1209, [
+  ⟨1209, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA14"], [("{5}xA14", .match)], .known⟩
+  ]),
+  (1215, [
+  ⟨1215, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{7}xsnid"], [("{7}xsnid", .match)], .known⟩
+  ]),
+  (1217, [
+  ⟨1217, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xsrid"], [("{6}xsrid", .match)], .known⟩
+  ]),
+  (1223, [
+  ⟨1223, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-10-11", "{10}xP11", "{11}xP10"], [("prism-duoprism-10-11", .match), ("{10}xP11", .match), ("{11}xP10", .match)], .known⟩
+  ]),
+  (1225, [
+  ⟨1225, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-14", "{14}xP5", "{5}xP14"], [("prism-duoprism-5-14", .match), ("{14}xP5", .match), ("{5}xP14", .match)], .known⟩
+  ]),
+  (1234, [
+  ⟨1234, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{14}xco"], [("{14}xco", .match)], .known⟩
+  ]),
+  (1237, [
+  ⟨1237, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA9"], [("{12}xA9", .match)], .known⟩
+  ]),
+  (1238, [
+  ⟨1238, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA12"], [("{9}xA12", .match)], .known⟩
+  ]),
+  (1244, [
+  ⟨1244, 0, 0, 1, 5, 5, true, ⟨5, 5, 120, 120, true, [], []⟩, ["B500011"], [("B500011", .match)], .known⟩
+  ]),
+  (1249, [
+  ⟨1249, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{5}xgirco"], [("{5}xgirco", .match)], .known⟩
+  ]),
+  (1262, [
+  ⟨1262, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-9-12", "{12}xP9", "{9}xP12"], [("prism-duoprism-9-12", .match), ("{12}xP9", .match), ("{9}xP12", .match)], .known⟩
+  ]),
+  (1273, [
+  ⟨1273, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{15}xtet"], [("{15}xtet", .match)], .known⟩
+  ]),
+  (1278, [
+  ⟨1278, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{13}xsnic"], [("{13}xsnic", .match)], .known⟩
+  ]),
+  (1293, [
+  ⟨1293, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA6"], [("{14}xA6", .match)], .known⟩
+  ]),
+  (1294, [
+  ⟨1294, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{12}xtoe"], [("{12}xtoe", .match)], .known⟩
+  ]),
+  (1295, [
+  ⟨1295, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA14"], [("{6}xA14", .match)], .known⟩
+  ]),
+  (1305, [
+  ⟨1305, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA8"], [("{13}xA8", .match)], .known⟩
+  ]),
+  (1308, [
+  ⟨1308, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA13"], [("{8}xA13", .match)], .known⟩
+  ]),
+  (1312, [
+  ⟨1312, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{15}xoct"], [("{15}xoct", .match)], .known⟩
+  ]),
+  (1314, [
+  ⟨1314, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-14", "{14}xP6", "{6}xP14"], [("prism-duoprism-6-14", .match), ("{14}xP6", .match), ("{6}xP14", .match)], .known⟩
+  ]),
+  (1315, [
+  ⟨1315, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA15"], [("{3}xA15", .match)], .known⟩
+  ]),
+  (1317, [
+  ⟨1317, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{11}xtic"], [("{11}xtic", .match)], .known⟩
+  ]),
+  (1318, [
+  ⟨1318, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xsrid"], [("{7}xsrid", .match)], .known⟩
+  ]),
+  (1322, [
+  ⟨1322, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{13}xsirco"], [("prism-duoprism-8-13", .noCount), ("{13}xP8", .noCount), ("{13}xsirco", .match), ("{8}xP13", .noCount)], .known⟩,
+  ⟨1322, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-8-13", "{13}xP8", "{8}xP13"], [("prism-duoprism-8-13", .match), ("{13}xP8", .match), ("{13}xsirco", .noCount), ("{8}xP13", .match)], .known⟩
+  ]),
+  (1326, [
+  ⟨1326, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{13}xdoe"], [("{13}xdoe", .match)], .known⟩
+  ]),
+  (1334, [
+  ⟨1334, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{12}xid"], [("{12}xid", .match)], .known⟩
+  ]),
+  (1335, [
+  ⟨1335, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{8}xsnid"], [("{8}xsnid", .match)], .known⟩
+  ]),
+  (1340, [
+  ⟨1340, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-15", "{15}xP3", "{3}xP15"], [("prism-duoprism-3-15", .match), ("{15}xP3", .match), ("{3}xP15", .match)], .known⟩
+  ]),
+  (1341, [
+  ⟨1341, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{6}xgirco"], [("{6}xgirco", .match)], .known⟩
+  ]),
+  (1356, [
+  ⟨1356, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{14}xtut"], [("{14}xtut", .match)], .known⟩
+  ]),
+  (1370, [
+  ⟨1370, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA4"], [("{15}xA4", .match)], .known⟩
+  ]),
+  (1373, [
+  ⟨1373, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-15", "{4}xA15"], [("prism-antiprism-prism-15", .match), ("{4}xA15", .match)], .known⟩
+  ]),
+  (1375, [
+  ⟨1375, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{3}xtid"], [("{3}xtid", .match)], .known⟩
+  ]),
+  (1380, [
+  ⟨1380, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA11"], [("{11}xA11", .match)], .known⟩
+  ]),
+  (1383, [
+  ⟨1383, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["B500110", "D500111"], [("B500110", .match), ("D500111", .match)], .known⟩
+  ]),
+  (1395, [
+  ⟨1395, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-15", "{15}xcube", "{4}xP15"], [("prism-duoprism-4-15", .match), ("{15}xcube", .match), ("{4}xP15", .match)], .known⟩
+  ]),
+  (1397, [
+  ⟨1397, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA10"], [("{12}xA10", .match)], .known⟩
+  ]),
+  (1398, [
+  ⟨1398, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA12"], [("{10}xA12", .match)], .known⟩
+  ]),
+  (1402, [
+  ⟨1402, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-11-11", "{11}xP11"], [("prism-duoprism-11-11", .match), ("{11}xP11", .match)], .known⟩
+  ]),
+  (1404, [
+  ⟨1404, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA7"], [("{14}xA7", .match)], .known⟩
+  ]),
+  (1405, [
+  ⟨1405, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA14"], [("{7}xA14", .match)], .known⟩
+  ]),
+  (1417, [
+  ⟨1417, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-10-12", "{10}xP12", "{12}xP10"], [("prism-duoprism-10-12", .match), ("{10}xP12", .match), ("{12}xP10", .match)], .known⟩
+  ]),
+  (1424, [
+  ⟨1424, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-14", "{14}xP7", "{7}xP14"], [("prism-duoprism-7-14", .match), ("{14}xP7", .match), ("{7}xP14", .match)], .known⟩
+  ]),
+  (1431, [
+  ⟨1431, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["prism-pr-tid", "{4}xtid"], [("prism-pr-tid", .match), ("{4}xtid", .match)], .known⟩
+  ]),
+  (1436, [
+  ⟨1436, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["A501111", "A511110"], [("A501111", .match), ("A511110", .match)], .known⟩
+  ]),
+  (1442, [
+  ⟨1442, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA9"], [("{13}xA9", .match)], .known⟩
+  ]),
+  (1443, [
+  ⟨1443, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA5"], [("{15}xA5", .match), ("{15}xico", .noCount)], .known⟩,
+  ⟨1443, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{15}xico"], [("{15}xA5", .noCount), ("{15}xico", .match)], .known⟩
+  ]),
+  (1444, [
+  ⟨1444, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA13"], [("{9}xA13", .match)], .known⟩
+  ]),
+  (1446, [
+  ⟨1446, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xsrid"], [("{8}xsrid", .match)], .known⟩
+  ]),
+  (1447, [
+  ⟨1447, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA15"], [("{5}xA15", .match)], .known⟩
+  ]),
+  (1450, [
+  ⟨1450, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{7}xgirco"], [("{7}xgirco", .match)], .known⟩
+  ]),
+  (1464, [
+  ⟨1464, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-9-13", "{13}xP9", "{9}xP13"], [("prism-duoprism-9-13", .match), ("{13}xP9", .match), ("{9}xP13", .match)], .known⟩
+  ]),
+  (1467, [
+  ⟨1467, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-15", "{15}xP5", "{5}xP15"], [("prism-duoprism-5-15", .match), ("{15}xP5", .match), ("{5}xP15", .match)], .known⟩
+  ]),
+  (1477, [
+  ⟨1477, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{15}xco"], [("{15}xco", .match)], .known⟩
+  ]),
+  (1478, [
+  ⟨1478, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{9}xsnid"], [("{9}xsnid", .match)], .known⟩
+  ]),
+  (1502, [
+  ⟨1502, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{14}xsnic"], [("{14}xsnic", .match)], .known⟩
+  ]),
+  (1504, [
+  ⟨1504, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{5}xtid"], [("{5}xtid", .match)], .known⟩
+  ]),
+  (1505, [
+  ⟨1505, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{13}xtoe"], [("{13}xtoe", .match)], .known⟩
+  ]),
+  (1513, [
+  ⟨1513, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{12}xtic"], [("{12}xtic", .match)], .known⟩
+  ]),
+  (1522, [
+  ⟨1522, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA8"], [("{14}xA8", .match)], .known⟩
+  ]),
+  (1523, [
+  ⟨1523, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA14"], [("{8}xA14", .match)], .known⟩
+  ]),
+  (1524, [
+  ⟨1524, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{16}xtet"], [("{16}xtet", .match)], .known⟩
+  ]),
+  (1532, [
+  ⟨1532, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA6"], [("{15}xA6", .match)], .known⟩
+  ]),
+  (1534, [
+  ⟨1534, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA15"], [("{6}xA15", .match)], .known⟩
+  ]),
+  (1538, [
+  ⟨1538, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{13}xid"], [("{13}xid", .match)], .known⟩
+  ]),
+  (1544, [
+  ⟨1544, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["B511100", "D511100"], [("B511100", .match), ("D511100", .match)], .known⟩
+  ]),
+  (1549, [
+  ⟨1549, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{14}xsirco"], [("prism-duoprism-8-14", .noCount), ("{14}xP8", .noCount), ("{14}xsirco", .match), ("{8}xP14", .noCount)], .known⟩,
+  ⟨1549, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-8-14", "{14}xP8", "{8}xP14"], [("prism-duoprism-8-14", .match), ("{14}xP8", .match), ("{14}xsirco", .noCount), ("{8}xP14", .match)], .known⟩
+  ]),
+  (1551, [
+  ⟨1551, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{14}xdoe"], [("{14}xdoe", .match)], .known⟩
+  ]),
+  (1555, [
+  ⟨1555, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-15", "{15}xP6", "{6}xP15"], [("prism-duoprism-6-15", .match), ("{15}xP6", .match), ("{6}xP15", .match)], .known⟩
+  ]),
+  (1566, [
+  ⟨1566, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA11"], [("{12}xA11", .match)], .known⟩
+  ]),
+  (1567, [
+  ⟨1567, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA12"], [("{11}xA12", .match)], .known⟩
+  ]),
+  (1568, [
+  ⟨1568, 0, 0, 1, 6, 6, true, ⟨6, 6, 96, 96, true, [], []⟩, ["{16}xoct"], [("{16}xoct", .match)], .known⟩
+  ]),
+  (1569, [
+  ⟨1569, 0, 0, 1, 7, 8, true, ⟨8, 8, 32, 40, true, [], []⟩, ["B510101"], [("B510101", .match), ("prism-B41011", .noCount), ("prism-F40101", .noCount), ("{8}xgirco", .noCount)], .known⟩,
+  ⟨1569, 1, 0, 1, 6, 6, true, ⟨6, 6, 12, 14, true, [], []⟩, ["prism-B41011"], [("B510101", .noCount), ("prism-B41011", .match), ("prism-F40101", .noCount), ("{8}xgirco", .noCount)], .known⟩,
+  ⟨1569, 2, 0, 1, 6, 7, true, ⟨7, 7, 28, 28, true, [], []⟩, ["prism-F40101"], [("B510101", .noCount), ("prism-B41011", .noCount), ("prism-F40101", .match), ("{8}xgirco", .noCount)], .known⟩,
+  ⟨1569, 3, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{8}xgirco"], [("B510101", .noCount), ("prism-B41011", .noCount), ("prism-F40101", .noCount), ("{8}xgirco", .match)], .known⟩
+  ]),
+  (1573, [
+  ⟨1573, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{3}xA16"], [("{3}xA16", .match)], .known⟩
+  ]),
+  (1591, [
+  ⟨1591, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xsrid"], [("{9}xsrid", .match)], .known⟩
+  ]),
+  (1593, [
+  ⟨1593, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-11-12", "{11}xP12", "{12}xP11"], [("prism-duoprism-11-12", .match), ("{11}xP12", .match), ("{12}xP11", .match)], .known⟩
+  ]),
+  (1595, [
+  ⟨1595, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{6}xtid"], [("{6}xtid", .match)], .known⟩
+  ]),
+  (1597, [
+  ⟨1597, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-3-16", "{16}xP3", "{3}xP16"], [("prism-duoprism-3-16", .match), ("{16}xP3", .match), ("{3}xP16", .match)], .known⟩
+  ]),
+  (1598, [
+  ⟨1598, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{15}xtut"], [("{15}xtut", .match)], .known⟩
+  ]),
+  (1602, [
+  ⟨1602, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA10"], [("{13}xA10", .match)], .known⟩
+  ]),
+  (1603, [
+  ⟨1603, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA13"], [("{10}xA13", .match)], .known⟩
+  ]),
+  (1625, [
+  ⟨1625, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-10-13", "{10}xP13", "{13}xP10"], [("prism-duoprism-10-13", .match), ("{10}xP13", .match), ("{13}xP10", .match)], .known⟩
+  ]),
+  (1629, [
+  ⟨1629, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA4"], [("{16}xA4", .match)], .known⟩
+  ]),
+  (1630, [
+  ⟨1630, 0, 0, 1, 5, 5, true, ⟨5, 5, 30, 30, true, [], []⟩, ["prism-B41110"], [("prism-B41110", .match)], .known⟩
+  ]),
+  (1633, [
+  ⟨1633, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["prism-antiprism-prism-16", "{4}xA16"], [("prism-antiprism-prism-16", .match), ("{4}xA16", .match)], .known⟩
+  ]),
+  (1637, [
+  ⟨1637, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{10}xsnid"], [("{10}xsnid", .match)], .known⟩
+  ]),
+  (1641, [
+  ⟨1641, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA7"], [("{15}xA7", .match)], .known⟩
+  ]),
+  (1643, [
+  ⟨1643, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA15"], [("{7}xA15", .match)], .known⟩
+  ]),
+  (1649, [
+  ⟨1649, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["prism-duoprism-4-16", "{16}xcube", "{4}xP16"], [("prism-duoprism-4-16", .match), ("{16}xcube", .match), ("{4}xP16", .match)], .known⟩
+  ]),
+  (1661, [
+  ⟨1661, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-15", "{15}xP7", "{7}xP15"], [("prism-duoprism-7-15", .match), ("{15}xP7", .match), ("{7}xP15", .match)], .known⟩
+  ]),
+  (1667, [
+  ⟨1667, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA9"], [("{14}xA9", .match)], .known⟩
+  ]),
+  (1668, [
+  ⟨1668, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA14"], [("{9}xA14", .match)], .known⟩
+  ]),
+  (1688, [
+  ⟨1688, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-9-14", "{14}xP9", "{9}xP14"], [("prism-duoprism-9-14", .match), ("{14}xP9", .match), ("{9}xP14", .match)], .known⟩
+  ]),
+  (1699, [
+  ⟨1699, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{7}xtid"], [("{7}xtid", .match)], .known⟩
+  ]),
+  (1704, [
+  ⟨1704, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA5"], [("{16}xA5", .match), ("{16}xico", .noCount)], .known⟩,
+  ⟨1704, 1, 0, 1, 7, 7, true, ⟨7, 7, 140, 140, true, [], []⟩, ["{16}xico"], [("{16}xA5", .noCount), ("{16}xico", .match)], .known⟩
+  ]),
+  (1707, [
+  ⟨1707, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{5}xA16"], [("{5}xA16", .match)], .known⟩
+  ]),
+  (1716, [
+  ⟨1716, 0, 0, 1, 6, 7, true, ⟨7, 7, 28, 28, true, [], []⟩, ["B511010", "D511011"], [("B511010", .match), ("D511011", .match)], .known⟩
+  ]),
+  (1720, [
+  ⟨1720, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{9}xgirco"], [("{9}xgirco", .match)], .known⟩
+  ]),
+  (1724, [
+  ⟨1724, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{13}xtic"], [("{13}xtic", .match)], .known⟩
+  ]),
+  (1733, [
+  ⟨1733, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-5-16", "{16}xP5", "{5}xP16"], [("prism-duoprism-5-16", .match), ("{16}xP5", .match), ("{5}xP16", .match)], .known⟩
+  ]),
+  (1735, [
+  ⟨1735, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{14}xtoe"], [("{14}xtoe", .match)], .known⟩
+  ]),
+  (1739, [
+  ⟨1739, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{16}xco"], [("{16}xco", .match)], .known⟩
+  ]),
+  (1747, [
+  ⟨1747, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{15}xsnic"], [("{15}xsnic", .match)], .known⟩
+  ]),
+  (1752, [
+  ⟨1752, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xsrid"], [("{10}xsrid", .match)], .known⟩
+  ]),
+  (1758, [
+  ⟨1758, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["D501101", "D501110"], [("D501101", .match), ("D501110", .match)], .known⟩
+  ]),
+  (1763, [
+  ⟨1763, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA12"], [("{12}xA12", .match)], .known⟩
+  ]),
+  (1771, [
+  ⟨1771, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{14}xid"], [("{14}xid", .match)], .known⟩
+  ]),
+  (1774, [
+  ⟨1774, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA8"], [("{15}xA8", .match)], .known⟩
+  ]),
+  (1775, [
+  ⟨1775, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA15"], [("{8}xA15", .match)], .known⟩
+  ]),
+  (1782, [
+  ⟨1782, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA11"], [("{13}xA11", .match)], .known⟩
+  ]),
+  (1783, [
+  ⟨1783, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA13"], [("{11}xA13", .match)], .known⟩
+  ]),
+  (1785, [
+  ⟨1785, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-12-12", "{12}xP12"], [("prism-duoprism-12-12", .match), ("{12}xP12", .match)], .known⟩
+  ]),
+  (1791, [
+  ⟨1791, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{15}xsirco"], [("prism-duoprism-8-15", .noCount), ("{15}xP8", .noCount), ("{15}xsirco", .match), ("{8}xP15", .noCount)], .known⟩,
+  ⟨1791, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-8-15", "{15}xP8", "{8}xP15"], [("prism-duoprism-8-15", .match), ("{15}xP8", .match), ("{15}xsirco", .noCount), ("{8}xP15", .match)], .known⟩
+  ]),
+  (1793, [
+  ⟨1793, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{15}xdoe"], [("{15}xdoe", .match)], .known⟩
+  ]),
+  (1795, [
+  ⟨1795, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA6"], [("{16}xA6", .match)], .known⟩
+  ]),
+  (1796, [
+  ⟨1796, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{6}xA16"], [("{6}xA16", .match)], .known⟩
+  ]),
+  (1799, [
+  ⟨1799, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-11-13", "{11}xP13", "{13}xP11"], [("prism-duoprism-11-13", .match), ("{11}xP13", .match), ("{13}xP11", .match)], .known⟩
+  ]),
+  (1810, [
+  ⟨1810, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{11}xsnid"], [("{11}xsnid", .match)], .known⟩
+  ]),
+  (1816, [
+  ⟨1816, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-6-16", "{16}xP6", "{6}xP16"], [("prism-duoprism-6-16", .match), ("{16}xP6", .match), ("{6}xP16", .match)], .known⟩
+  ]),
+  (1824, [
+  ⟨1824, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{8}xtid"], [("{8}xtid", .match)], .known⟩
+  ]),
+  (1827, [
+  ⟨1827, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA10"], [("{14}xA10", .match)], .known⟩
+  ]),
+  (1829, [
+  ⟨1829, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA14"], [("{10}xA14", .match)], .known⟩
+  ]),
+  (1853, [
+  ⟨1853, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-10-14", "{10}xP14", "{14}xP10"], [("prism-duoprism-10-14", .match), ("{10}xP14", .match), ("{14}xP10", .match)], .known⟩
+  ]),
+  (1860, [
+  ⟨1860, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{16}xtut"], [("{16}xtut", .match)], .known⟩
+  ]),
+  (1872, [
+  ⟨1872, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{10}xgirco"], [("{10}xgirco", .match)], .known⟩
+  ]),
+  (1894, [
+  ⟨1894, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA7"], [("{16}xA7", .match)], .known⟩
+  ]),
+  (1896, [
+  ⟨1896, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{7}xA16"], [("{7}xA16", .match)], .known⟩
+  ]),
+  (1901, [
+  ⟨1901, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA9"], [("{15}xA9", .match)], .known⟩
+  ]),
+  (1902, [
+  ⟨1902, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA15"], [("{9}xA15", .match)], .known⟩
+  ]),
+  (1907, [
+  ⟨1907, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xsrid"], [("{11}xsrid", .match)], .known⟩
+  ]),
+  (1912, [
+  ⟨1912, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-7-16", "{16}xP7", "{7}xP16"], [("prism-duoprism-7-16", .match), ("{16}xP7", .match), ("{7}xP16", .match)], .known⟩
+  ]),
+  (1918, [
+  ⟨1918, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-9-15", "{15}xP9", "{9}xP15"], [("prism-duoprism-9-15", .match), ("{15}xP9", .match), ("{9}xP15", .match)], .known⟩
+  ]),
+  (1931, [
+  ⟨1931, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{14}xtic"], [("{14}xtic", .match)], .known⟩
+  ]),
+  (1953, [
+  ⟨1953, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{9}xtid"], [("{9}xtid", .match)], .known⟩
+  ]),
+  (1955, [
+  ⟨1955, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{15}xtoe"], [("{15}xtoe", .match)], .known⟩
+  ]),
+  (1956, [
+  ⟨1956, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA12"], [("{13}xA12", .match)], .known⟩
+  ]),
+  (1957, [
+  ⟨1957, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA13"], [("{12}xA13", .match)], .known⟩
+  ]),
+  (1958, [
+  ⟨1958, 0, 0, 1, 9, 7, true, ⟨7, 7, 42, 42, true, [], []⟩, ["B510011"], [("B510011", .match)], .known⟩
+  ]),
+  (1971, [
+  ⟨1971, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-12-13", "{12}xP13", "{13}xP12"], [("prism-duoprism-12-13", .match), ("{12}xP13", .match), ("{13}xP12", .match)], .known⟩
+  ]),
+  (1979, [
+  ⟨1979, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{16}xsnic"], [("{16}xsnic", .match)], .known⟩
+  ]),
+  (1982, [
+  ⟨1982, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{12}xsnid"], [("{12}xsnid", .match)], .known⟩
+  ]),
+  (1983, [
+  ⟨1983, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA11"], [("{14}xA11", .match)], .known⟩
+  ]),
+  (1984, [
+  ⟨1984, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA14"], [("{11}xA14", .match)], .known⟩
+  ]),
+  (1988, [
+  ⟨1988, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{15}xid"], [("{15}xid", .match)], .known⟩
+  ]),
+  (1998, [
+  ⟨1998, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-11-14", "{11}xP14", "{14}xP11"], [("prism-duoprism-11-14", .match), ("{11}xP14", .match), ("{14}xP11", .match)], .known⟩
+  ]),
+  (2001, [
+  ⟨2001, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA8"], [("{16}xA8", .match)], .known⟩
+  ]),
+  (2002, [
+  ⟨2002, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{8}xA16"], [("{8}xA16", .match)], .known⟩
+  ]),
+  (2012, [
+  ⟨2012, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{11}xgirco"], [("{11}xgirco", .match)], .known⟩
+  ]),
+  (2015, [
+  ⟨2015, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 40, true, [], []⟩, ["{16}xsirco"], [("prism-duoprism-8-16", .noCount), ("{16}xP8", .noCount), ("{16}xsirco", .match), ("{8}xP16", .noCount)], .known⟩,
+  ⟨2015, 1, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-8-16", "{16}xP8", "{8}xP16"], [("prism-duoprism-8-16", .match), ("{16}xP8", .match), ("{16}xsirco", .noCount), ("{8}xP16", .match)], .known⟩
+  ]),
+  (2017, [
+  ⟨2017, 0, 0, 1, 5, 5, true, ⟨5, 5, 60, 60, true, [], []⟩, ["{16}xdoe"], [("{16}xdoe", .match)], .known⟩
+  ]),
+  (2032, [
+  ⟨2032, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA10"], [("{15}xA10", .match)], .known⟩
+  ]),
+  (2033, [
+  ⟨2033, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA15"], [("{10}xA15", .match)], .known⟩
+  ]),
+  (2056, [
+  ⟨2056, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-10-15", "{10}xP15", "{15}xP10"], [("prism-duoprism-10-15", .match), ("{10}xP15", .match), ("{15}xP10", .match)], .known⟩
+  ]),
+  (2072, [
+  ⟨2072, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xsrid"], [("{12}xsrid", .match)], .known⟩
+  ]),
+  (2082, [
+  ⟨2082, 0, 0, 2, 5, 5, true, ⟨5, 5, 10, 20, true, [], []⟩, ["A511111"], [("A511111", .match)], .known⟩
+  ]),
+  (2085, [
+  ⟨2085, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{10}xtid"], [("{10}xtid", .match)], .known⟩
+  ]),
+  (2118, [
+  ⟨2118, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA9"], [("{16}xA9", .match)], .known⟩
+  ]),
+  (2120, [
+  ⟨2120, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{9}xA16"], [("{9}xA16", .match)], .known⟩
+  ]),
+  (2123, [
+  ⟨2123, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA13"], [("{13}xA13", .match)], .known⟩
+  ]),
+  (2131, [
+  ⟨2131, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{15}xtic"], [("{15}xtic", .match)], .known⟩
+  ]),
+  (2134, [
+  ⟨2134, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-9-16", "{16}xP9", "{9}xP16"], [("prism-duoprism-9-16", .match), ("{16}xP9", .match), ("{9}xP16", .match)], .known⟩
+  ]),
+  (2136, [
+  ⟨2136, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA12"], [("{14}xA12", .match)], .known⟩
+  ]),
+  (2137, [
+  ⟨2137, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA14"], [("{12}xA14", .match)], .known⟩
+  ]),
+  (2142, [
+  ⟨2142, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-13-13", "{13}xP13"], [("prism-duoprism-13-13", .match), ("{13}xP13", .match)], .known⟩
+  ]),
+  (2151, [
+  ⟨2151, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["B510110", "D510111"], [("B510110", .match), ("D510111", .match)], .known⟩
+  ]),
+  (2153, [
+  ⟨2153, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{13}xsnid"], [("{13}xsnid", .match)], .known⟩
+  ]),
+  (2157, [
+  ⟨2157, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-12-14", "{12}xP14", "{14}xP12"], [("prism-duoprism-12-14", .match), ("{12}xP14", .match), ("{14}xP12", .match)], .known⟩
+  ]),
+  (2170, [
+  ⟨2170, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{16}xtoe"], [("{16}xtoe", .match)], .known⟩
+  ]),
+  (2179, [
+  ⟨2179, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{12}xgirco"], [("{12}xgirco", .match)], .known⟩
+  ]),
+  (2186, [
+  ⟨2186, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA11"], [("{15}xA11", .match)], .known⟩
+  ]),
+  (2187, [
+  ⟨2187, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA15"], [("{11}xA15", .match)], .known⟩
+  ]),
+  (2197, [
+  ⟨2197, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{3}xti"], [("{3}xti", .match)], .known⟩
+  ]),
+  (2207, [
+  ⟨2207, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-11-15", "{11}xP15", "{15}xP11"], [("prism-duoprism-11-15", .match), ("{11}xP15", .match), ("{15}xP11", .match)], .known⟩
+  ]),
+  (2209, [
+  ⟨2209, 0, 0, 1, 6, 6, true, ⟨6, 6, 48, 48, true, [], []⟩, ["{16}xid"], [("{16}xid", .match)], .known⟩
+  ]),
+  (2232, [
+  ⟨2232, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["B501101"], [("B501101", .match), ("prism-B40111", .noCount)], .known⟩,
+  ⟨2232, 1, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["prism-B40111"], [("B501101", .noCount), ("prism-B40111", .match)], .known⟩
+  ]),
+  (2233, [
+  ⟨2233, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{11}xtid"], [("{11}xtid", .match)], .known⟩
+  ]),
+  (2240, [
+  ⟨2240, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["prism-pr-ti", "{4}xti"], [("prism-pr-ti", .match), ("{4}xti", .match)], .known⟩
+  ]),
+  (2251, [
+  ⟨2251, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xsrid"], [("{13}xsrid", .match)], .known⟩
+  ]),
+  (2258, [
+  ⟨2258, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA10"], [("{16}xA10", .match)], .known⟩
+  ]),
+  (2259, [
+  ⟨2259, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{10}xA16"], [("{10}xA16", .match)], .known⟩
+  ]),
+  (2281, [
+  ⟨2281, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-10-16", "{10}xP16", "{16}xP10"], [("prism-duoprism-10-16", .match), ("{10}xP16", .match), ("{16}xP10", .match)], .known⟩
+  ]),
+  (2302, [
+  ⟨2302, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{5}xti"], [("{5}xti", .match)], .known⟩
+  ]),
+  (2312, [
+  ⟨2312, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA13"], [("{14}xA13", .match)], .known⟩
+  ]),
+  (2313, [
+  ⟨2313, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA14"], [("{13}xA14", .match)], .known⟩
+  ]),
+  (2325, [
+  ⟨2325, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-13-14", "{13}xP14", "{14}xP13"], [("prism-duoprism-13-14", .match), ("{13}xP14", .match), ("{14}xP13", .match)], .known⟩
+  ]),
+  (2329, [
+  ⟨2329, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{14}xsnid"], [("{14}xsnid", .match)], .known⟩
+  ]),
+  (2331, [
+  ⟨2331, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA12"], [("{15}xA12", .match)], .known⟩
+  ]),
+  (2332, [
+  ⟨2332, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA15"], [("{12}xA15", .match)], .known⟩
+  ]),
+  (2337, [
+  ⟨2337, 0, 0, 1, 8, 11, true, ⟨11, 11, 220, 240, true, [], []⟩, ["prism-H40010"], [("prism-H40010", .match)], .known⟩
+  ]),
+  (2340, [
+  ⟨2340, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{16}xtic"], [("{16}xtic", .match)], .known⟩
+  ]),
+  (2341, [
+  ⟨2341, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{13}xgirco"], [("{13}xgirco", .match)], .known⟩
+  ]),
+  (2349, [
+  ⟨2349, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-12-15", "{12}xP15", "{15}xP12"], [("prism-duoprism-12-15", .match), ("{12}xP15", .match), ("{15}xP12", .match)], .known⟩
+  ]),
+  (2364, [
+  ⟨2364, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{6}xti"], [("{6}xti", .match)], .known⟩
+  ]),
+  (2378, [
+  ⟨2378, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{12}xtid"], [("{12}xtid", .match)], .known⟩
+  ]),
+  (2388, [
+  ⟨2388, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA11"], [("{16}xA11", .match)], .known⟩
+  ]),
+  (2390, [
+  ⟨2390, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{11}xA16"], [("{11}xA16", .match)], .known⟩
+  ]),
+  (2404, [
+  ⟨2404, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-11-16", "{11}xP16", "{16}xP11"], [("prism-duoprism-11-16", .match), ("{11}xP16", .match), ("{16}xP11", .match)], .known⟩
+  ]),
+  (2417, [
+  ⟨2417, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xsrid"], [("{14}xsrid", .match)], .known⟩
+  ]),
+  (2441, [
+  ⟨2441, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{7}xti"], [("{7}xti", .match)], .known⟩
+  ]),
+  (2468, [
+  ⟨2468, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA14"], [("{14}xA14", .match)], .known⟩
+  ]),
+  (2481, [
+  ⟨2481, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA13"], [("{15}xA13", .match)], .known⟩
+  ]),
+  (2482, [
+  ⟨2482, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA15"], [("{13}xA15", .match)], .known⟩
+  ]),
+  (2486, [
+  ⟨2486, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-14-14", "{14}xP14"], [("prism-duoprism-14-14", .match), ("{14}xP14", .match)], .known⟩
+  ]),
+  (2496, [
+  ⟨2496, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-13-15", "{13}xP15", "{15}xP13"], [("prism-duoprism-13-15", .match), ("{13}xP15", .match), ("{15}xP13", .match)], .known⟩
+  ]),
+  (2500, [
+  ⟨2500, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{14}xgirco"], [("{14}xgirco", .match)], .known⟩
+  ]),
+  (2502, [
+  ⟨2502, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{15}xsnid"], [("{15}xsnid", .match)], .known⟩
+  ]),
+  (2520, [
+  ⟨2520, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA12"], [("{16}xA12", .match)], .known⟩
+  ]),
+  (2521, [
+  ⟨2521, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{12}xA16"], [("{12}xA16", .match)], .known⟩
+  ]),
+  (2524, [
+  ⟨2524, 0, 0, 1, 6, 7, true, ⟨7, 7, 28, 32, true, [], []⟩, ["B501011"], [("B501011", .match)], .known⟩
+  ]),
+  (2528, [
+  ⟨2528, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{13}xtid"], [("{13}xtid", .match)], .known⟩
+  ]),
+  (2533, [
+  ⟨2533, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{8}xti"], [("{8}xti", .match)], .known⟩
+  ]),
+  (2540, [
+  ⟨2540, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-12-16", "{12}xP16", "{16}xP12"], [("prism-duoprism-12-16", .match), ("{12}xP16", .match), ("{16}xP12", .match)], .known⟩
+  ]),
+  (2553, [
+  ⟨2553, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["D511101", "D511110"], [("D511101", .match), ("D511110", .match)], .known⟩
+  ]),
+  (2576, [
+  ⟨2576, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xsrid"], [("{15}xsrid", .match)], .known⟩
+  ]),
+  (2609, [
+  ⟨2609, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{9}xti"], [("{9}xti", .match)], .known⟩
+  ]),
+  (2624, [
+  ⟨2624, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA14"], [("{15}xA14", .match)], .known⟩
+  ]),
+  (2625, [
+  ⟨2625, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA15"], [("{14}xA15", .match)], .known⟩
+  ]),
+  (2634, [
+  ⟨2634, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-14-15", "{14}xP15", "{15}xP14"], [("prism-duoprism-14-15", .match), ("{14}xP15", .match), ("{15}xP14", .match)], .known⟩
+  ]),
+  (2638, [
+  ⟨2638, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA13"], [("{16}xA13", .match)], .known⟩
+  ]),
+  (2639, [
+  ⟨2639, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{13}xA16"], [("{13}xA16", .match)], .known⟩
+  ]),
+  (2645, [
+  ⟨2645, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{15}xgirco"], [("{15}xgirco", .match)], .known⟩
+  ]),
+  (2655, [
+  ⟨2655, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-13-16", "{13}xP16", "{16}xP13"], [("prism-duoprism-13-16", .match), ("{13}xP16", .match), ("{16}xP13", .match)], .known⟩
+  ]),
+  (2659, [
+  ⟨2659, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{14}xtid"], [("{14}xtid", .match)], .known⟩
+  ]),
+  (2661, [
+  ⟨2661, 0, 0, 1, 7, 7, true, ⟨7, 7, 14, 14, true, [], []⟩, ["{16}xsnid"], [("{16}xsnid", .match)], .known⟩
+  ]),
+  (2702, [
+  ⟨2702, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["{10}xti"], [("{10}xti", .match)], .known⟩
+  ]),
+  (2711, [
+  ⟨2711, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["B501110", "D501111"], [("B501110", .match), ("D501111", .match)], .known⟩
+  ]),
+  (2720, [
+  ⟨2720, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xsrid"], [("{16}xsrid", .match)], .known⟩
+  ]),
+  (2751, [
+  ⟨2751, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA15"], [("{15}xA15", .match)], .known⟩
+  ]),
+  (2757, [
+  ⟨2757, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA14"], [("{16}xA14", .match)], .known⟩
+  ]),
+  (2758, [
+  ⟨2758, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{14}xA16"], [("{14}xA16", .match)], .known⟩
+  ]),
+  (2760, [
+  ⟨2760, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-15-15", "{15}xP15"], [("prism-duoprism-15-15", .match), ("{15}xP15", .match)], .known⟩
+  ]),
+  (2771, [
+  ⟨2771, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-14-16", "{14}xP16", "{16}xP14"], [("prism-duoprism-14-16", .match), ("{14}xP16", .match), ("{16}xP14", .match)], .known⟩
+  ]),
+  (2780, [
+  ⟨2780, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 40, true, [], []⟩, ["prism-F40110"], [("prism-F40110", .match)], .known⟩
+  ]),
+  (2784, [
+  ⟨2784, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{15}xtid"], [("{15}xtid", .match)], .known⟩
+  ]),
+  (2787, [
+  ⟨2787, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{16}xgirco"], [("{16}xgirco", .match)], .known⟩
+  ]),
+  (2795, [
+  ⟨2795, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{11}xti"], [("{11}xti", .match)], .known⟩
+  ]),
+  (2874, [
+  ⟨2874, 0, 0, 1, 6, 6, true, ⟨6, 6, 12, 14, true, [], []⟩, ["B511101"], [("B511101", .match), ("prism-B41111", .noCount), ("prism-F41011", .no)], .known⟩,
+  ⟨2874, 1, 0, 1, 5, 5, true, ⟨5, 5, 5, 6, true, [], []⟩, ["prism-B41111"], [("B511101", .noCount), ("prism-B41111", .match), ("prism-F41011", .noCount)], .known⟩,
+  ⟨2874, 2, 0, 1, 6, 6, true, ⟨6, 6, 12, 12, true, [], []⟩, ["prism-F41011"], [("B511101", .no), ("prism-B41111", .noCount), ("prism-F41011", .match)], .known⟩
+  ]),
+  (2877, [
+  ⟨2877, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA15"], [("{16}xA15", .match)], .known⟩
+  ]),
+  (2878, [
+  ⟨2878, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{15}xA16"], [("{15}xA16", .match)], .known⟩
+  ]),
+  (2883, [
+  ⟨2883, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{12}xti"], [("{12}xti", .match)], .known⟩
+  ]),
+  (2888, [
+  ⟨2888, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["prism-duoprism-15-16", "{15}xP16", "{16}xP15"], [("prism-duoprism-15-16", .match), ("{15}xP16", .match), ("{16}xP15", .match)], .known⟩
+  ]),
+  (2903, [
+  ⟨2903, 0, 0, 1, 5, 5, true, ⟨5, 5, 30, 30, true, [], []⟩, ["B500111"], [("B500111", .match)], .known⟩
+  ]),
+  (2904, [
+  ⟨2904, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{16}xtid"], [("{16}xtid", .match)], .known⟩
+  ]),
+  (2975, [
+  ⟨2975, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{13}xti"], [("{13}xti", .match)], .known⟩
+  ]),
+  (2996, [
+  ⟨2996, 0, 0, 1, 6, 6, true, ⟨6, 6, 24, 24, true, [], []⟩, ["{16}xA16"], [("{16}xA16", .match)], .known⟩
+  ]),
+  (3000, [
+  ⟨3000, 0, 0, 1, 5, 5, true, ⟨5, 5, 40, 48, true, [], []⟩, ["prism-duoprism-16-16", "{16}xP16"], [("prism-duoprism-16-16", .match), ("{16}xP16", .match)], .known⟩
+  ]),
+  (3045, [
+  ⟨3045, 0, 0, 1, 6, 6, true, ⟨6, 6, 12, 12, true, [], []⟩, ["B511011"], [("B511011", .match)], .known⟩
+  ]),
+  (3059, [
+  ⟨3059, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{14}xti"], [("{14}xti", .match)], .known⟩
+  ]),
+  (3070, [
+  ⟨3070, 0, 0, 1, 5, 5, true, ⟨5, 5, 120, 120, true, [], []⟩, ["prism-H41000"], [("prism-H41000", .match)], .known⟩
+  ]),
+  (3134, [
+  ⟨3134, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{15}xti"], [("{15}xti", .match)], .known⟩
+  ]),
+  (3156, [
+  ⟨3156, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{3}xgrid"], [("{3}xgrid", .match)], .known⟩
+  ]),
+  (3174, [
+  ⟨3174, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["prism-pr-grid", "{4}xgrid"], [("prism-pr-grid", .match), ("{4}xgrid", .match)], .known⟩
+  ]),
+  (3180, [
+  ⟨3180, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 12, true, [], []⟩, ["B511110", "D511111"], [("B511110", .match), ("D511111", .match)], .known⟩
+  ]),
+  (3205, [
+  ⟨3205, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{5}xgrid"], [("{5}xgrid", .match)], .known⟩
+  ]),
+  (3223, [
+  ⟨3223, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 24, true, [], []⟩, ["{16}xti"], [("{16}xti", .match)], .known⟩
+  ]),
+  (3230, [
+  ⟨3230, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{6}xgrid"], [("{6}xgrid", .match)], .known⟩
+  ]),
+  (3259, [
+  ⟨3259, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{7}xgrid"], [("{7}xgrid", .match)], .known⟩
+  ]),
+  (3269, [
+  ⟨3269, 0, 0, 1, 6, 6, true, ⟨6, 6, 12, 14, true, [], []⟩, ["B510111"], [("B510111", .match)], .known⟩
+  ]),
+  (3288, [
+  ⟨3288, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{8}xgrid"], [("{8}xgrid", .match)], .known⟩
+  ]),
+  (3317, [
+  ⟨3317, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{9}xgrid"], [("{9}xgrid", .match)], .known⟩
+  ]),
+  (3350, [
+  ⟨3350, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{10}xgrid"], [("{10}xgrid", .match)], .known⟩
+  ]),
+  (3385, [
+  ⟨3385, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{11}xgrid"], [("{11}xgrid", .match)], .known⟩
+  ]),
+  (3420, [
+  ⟨3420, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{12}xgrid"], [("{12}xgrid", .match)], .known⟩
+  ]),
+  (3454, [
+  ⟨3454, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["prism-F40111"], [("prism-F40111", .match)], .known⟩
+  ]),
+  (3458, [
+  ⟨3458, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{13}xgrid"], [("{13}xgrid", .match)], .known⟩
+  ]),
+  (3471, [
+  ⟨3471, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["B501111"], [("B501111", .match)], .known⟩
+  ]),
+  (3489, [
+  ⟨3489, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{14}xgrid"], [("{14}xgrid", .match)], .known⟩
+  ]),
+  (3530, [
+  ⟨3530, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{15}xgrid"], [("{15}xgrid", .match)], .known⟩
+  ]),
+  (3558, [
+  ⟨3558, 0, 0, 1, 6, 7, true, ⟨7, 7, 84, 84, true, [], []⟩, ["prism-H40100"], [("prism-H40100", .match)], .known⟩
+  ]),
+  (3569, [
+  ⟨3569, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["{16}xgrid"], [("{16}xgrid", .match)], .known⟩
+  ]),
+  (3607, [
+  ⟨3607, 0, 0, 1, 7, 7, true, ⟨7, 7, 70, 70, true, [], []⟩, ["prism-H40011"], [("prism-H40011", .match)], .known⟩
+  ]),
+  (3660, [
+  ⟨3660, 0, 0, 1, 5, 5, true, ⟨5, 5, 5, 5, true, [], []⟩, ["B511111"], [("B511111", .match)], .known⟩
+  ]),
+  (3780, [
+  ⟨3780, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["prism-F41111"], [("prism-F41111", .match)], .known⟩
+  ]),
+  (3803, [
+  ⟨3803, 0, 0, 1, 9, 7, true, ⟨7, 7, 42, 42, true, [], []⟩, ["prism-H41001"], [("prism-H41001", .match)], .known⟩
+  ]),
+  (4001, [
+  ⟨4001, 0, 0, 1, 6, 7, true, ⟨7, 7, 28, 32, true, [], []⟩, ["prism-H40101"], [("prism-H40101", .match)], .known⟩
+  ]),
+  (4043, [
+  ⟨4043, 0, 0, 1, 6, 7, true, ⟨7, 7, 28, 28, true, [], []⟩, ["prism-H41010"], [("prism-H41010", .match)], .known⟩
+  ]),
+  (4083, [
+  ⟨4083, 0, 0, 1, 5, 5, true, ⟨5, 5, 20, 20, true, [], []⟩, ["prism-H40110"], [("prism-H40110", .match)], .known⟩
+  ]),
+  (4108, [
+  ⟨4108, 0, 0, 1, 5, 5, true, ⟨5, 5, 30, 30, true, [], []⟩, ["prism-H41100"], [("prism-H41100", .match)], .known⟩
+  ]),
+  (4113, [
+  ⟨4113, 0, 0, 1, 6, 6, true, ⟨6, 6, 12, 12, true, [], []⟩, ["prism-H41011"], [("prism-H41011", .match)], .known⟩
+  ]),
+  (4145, [
+  ⟨4145, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 12, true, [], []⟩, ["prism-H40111"], [("prism-H40111", .match)], .known⟩
+  ]),
+  (4151, [
+  ⟨4151, 0, 0, 1, 6, 6, true, ⟨6, 6, 12, 12, true, [], []⟩, ["prism-H41101"], [("prism-H41101", .match)], .known⟩
+  ]),
+  (4168, [
+  ⟨4168, 0, 0, 1, 5, 5, true, ⟨5, 5, 10, 10, true, [], []⟩, ["prism-H41110"], [("prism-H41110", .match)], .known⟩
+  ]),
+  (4184, [
+  ⟨4184, 0, 0, 1, 5, 5, true, ⟨5, 5, 5, 5, true, [], []⟩, ["prism-H41111"], [("prism-H41111", .match)], .known⟩
+  ])
+]
+
+theorem u3ReportGroupsP16_flatten :
+    (u3ReportGroupsP16.map Prod.snd).flatten = u3ReportP16 := by decide
+
+noncomputable def U3ReportRow.eliminatesOther (r s : U3ReportRow) : Bool :=
+  r.signatureIndex == s.signatureIndex || r.known_names.all fun n =>
+    s.embedding.contains (n, .no) || s.embedding.contains (n, .noCount)
+
+theorem u3ReportGroupsP16_exclusion_checks :
+    u3ReportGroupsP16.all (fun g => g.2.all fun r => g.2.all r.eliminatesOther) = true := by
+  decide
+
+theorem u3ReportGroupsP16_class_checks :
+    u3ReportGroupsP16.all (fun g => g.2.all fun r => r.classIndex == g.1) = true := by
+  decide
+
+theorem u3ReportGroupsP16_class_indices_nodup :
+    (u3ReportGroupsP16.map Prod.fst).Nodup := by
+  have hc : (u3ReportGroupsP16.map Prod.fst).Chain' (fun a b => a < b) := by decide
+  exact (List.chain'_iff_pairwise.mp hc).imp (fun h => Nat.ne_of_lt h)
+
+theorem u3ReportP16_mem_group {r : U3ReportRow} (hr : r ∈ u3ReportP16) :
+    ∃ g ∈ u3ReportGroupsP16, r ∈ g.2 := by
+  rw [← u3ReportGroupsP16_flatten] at hr
+  obtain ⟨l, hl, hrl⟩ := List.mem_flatten.mp hr
+  obtain ⟨g, hg, rfl⟩ := List.mem_map.mp hl
+  exact ⟨g, hg, hrl⟩
+
+theorem u3ReportP16_group_class {g : Nat × List U3ReportRow}
+    (hg : g ∈ u3ReportGroupsP16) {r : U3ReportRow} (hr : r ∈ g.2) :
+    r.classIndex = g.1 := by
+  have h := List.all_eq_true.mp
+    (List.all_eq_true.mp u3ReportGroupsP16_class_checks g hg) r hr
+  simpa using h
+
+/-- Every other realization of the same reported class is excluded for
+each name selected for this row. The finite output relation is proved;
+only the geometric soundness of NO and NO-COUNT remains an input. -/
+theorem u3ReportP16_other_excluded {r s : U3ReportRow}
+    (hr : r ∈ u3ReportP16) (hs : s ∈ u3ReportP16)
+    (hc : r.classIndex = s.classIndex) (hne : r ≠ s)
+    {n : String} (hn : n ∈ r.known_names) :
+    (n, U3EmbeddingVerdict.no) ∈ s.embedding ∨
+      (n, U3EmbeddingVerdict.noCount) ∈ s.embedding := by
+  obtain ⟨g, hg, hrg⟩ := u3ReportP16_mem_group hr
+  obtain ⟨k, hk, hsk⟩ := u3ReportP16_mem_group hs
+  have hgk : g.1 = k.1 :=
+    (u3ReportP16_group_class hg hrg).symm.trans
+      (hc.trans (u3ReportP16_group_class hk hsk))
+  have he : g = k := List.inj_on_of_nodup_map
+    u3ReportGroupsP16_class_indices_nodup hg hk hgk
+  subst k
+  have hcheck := List.all_eq_true.mp (List.all_eq_true.mp
+    (List.all_eq_true.mp u3ReportGroupsP16_exclusion_checks g hg) r hrg) s hsk
+  have hidx : r.signatureIndex ≠ s.signatureIndex := by
+    intro h
+    exact hne (List.inj_on_of_nodup_map u3ReportP16_signature_indices_nodup hr hs h)
+  have hall : r.known_names.all (fun name =>
+      s.embedding.contains (name, .no) || s.embedding.contains (name, .noCount)) = true := by
+    simpa [U3ReportRow.eliminatesOther, hidx] using hcheck
+  simpa using List.all_eq_true.mp hall n hn
+
+end Uniform5.Composition

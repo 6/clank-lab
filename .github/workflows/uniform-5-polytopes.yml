@@ -1,0 +1,105 @@
+name: Uniform 5-polytopes checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/uniform-5-polytopes/**'
+      - '.github/workflows/uniform-5-polytopes.yml'
+  pull_request:
+    paths:
+      - 'results/uniform-5-polytopes/**'
+      - '.github/workflows/uniform-5-polytopes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: uniform-5-polytopes-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Check uniform-5-polytopes
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      LEAN_NUM_THREADS: '4'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean
+        working-directory: results/uniform-5-polytopes/lean
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/uniform-5-polytopes/lean/.lake/build
+          key: uniform-5-polytopes-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/uniform-5-polytopes/lean/lean-toolchain', 'results/uniform-5-polytopes/lean/lake-manifest.json', 'results/uniform-5-polytopes/lean/lakefile.toml', 'results/uniform-5-polytopes/lean/**/*.lean', '!results/uniform-5-polytopes/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        working-directory: results/uniform-5-polytopes/lean
+        run: lake exe cache get
+
+      - name: Unit tests
+        working-directory: results/uniform-5-polytopes/lean
+        run: lake build +Uniform5.CompositionWedgeSanity
+
+      - name: Build proof
+        working-directory: results/uniform-5-polytopes/lean
+        run: lake build
+
+      - name: Audit axioms
+        working-directory: results/uniform-5-polytopes/lean
+        run: |
+          lake env lean Audit.lean > "$RUNNER_TEMP/uniform-5-polytopes-axioms.txt"
+          cat "$RUNNER_TEMP/uniform-5-polytopes-axioms.txt"
+          python3 - "$RUNNER_TEMP/uniform-5-polytopes-axioms.txt" <<'PYTHON'
+          import pathlib
+          import re
+          import sys
+
+          text = pathlib.Path(sys.argv[1]).read_text()
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          expected = {'Uniform5.Composition.mainClassification', 'Uniform5.Composition.classification_of_core_inputs', 'Uniform5.Composition.unitUniform5_smallFaces_known', 'Uniform5.Composition.unitUniform5_largeFace_known'}
+          reports = re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", text)
+          if len(reports) != len(expected) or {name for name, _ in reports} != expected:
+              sys.exit("Missing or duplicate axiom reports")
+          for name, axioms in reports:
+              unexpected = {a.strip() for a in axioms.split(",") if a.strip()} - allowed
+              if unexpected:
+                  sys.exit(f"Unexpected axioms for {name}: {sorted(unexpected)}")
+          print("PASS axiom audit: only standard Lean axioms")
+          PYTHON
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Install Python dependencies
+        run: python -m pip install --disable-pip-version-check -r results/uniform-5-polytopes/checks/requirements.txt
+
+      - name: Quick check
+        run: |
+          bundle=$(mktemp -d)
+          trap 'rm -rf "$bundle"' EXIT
+          git archive HEAD results/uniform-5-polytopes | tar -x -C "$bundle" --strip-components=2
+          cd "$bundle"
+          PYTHON=python bash checks/verify-public.sh quick

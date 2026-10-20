@@ -30,7 +30,7 @@ The contribution claimed here is the upper bound for arbitrary subsets. The matc
 
 The trusted base consists of the written cap induction and global symmetry argument; soundness of the set-to-formula counting interpretation, checked exhaustively clause by clause; the proof checkers within the coverage just stated; and the exhaustive lower-bound witness checks. In the public streaming replay, the very same audited CNF file is read by the solver and all checkers. No receipt or solver verdict substitutes for a refutation check. The small-dimensional upper caps are proved anew by the three auxiliary refutations, not imported as unchecked premises from Polymath.
 
-Recent work addresses adjacent questions: Mouhib's symmetric and one-weight colouring bounds~\cite{mouhib}, Conlon--Farnsworth--Robertson's colouring questions~\cite{colour}, Shelah's general bounds~\cite{shelah}, and Dahia's formalization of the general density theorem~\cite{dahia}. These are different endpoints and are not premises of this proof. This result determines one finite extremal value, not a new proof or improved general bound for the density theorem.
+Recent work addresses adjacent questions: Mouhib's symmetric and one-weight coloring bounds~\cite{mouhib}, Conlon--Farnsworth--Robertson's coloring questions~\cite{color}, Shelah's general bounds~\cite{shelah}, and Dahia's formalization of the general density theorem~\cite{dahia}. These are different endpoints and are not premises of this proof. This result determines one finite extremal value, not a new proof or improved general bound for the density theorem.
 
 \section{Lines, caps and symmetry}
 Any line-free set of at least 1303 points has a line-free 1303-point subset. Our formulas directly exclude the stronger condition of size at least 1303.
@@ -43,7 +43,7 @@ For brevity put $c_d=c_{d,3}$ and $c_0=1$.
 A single permutation $\pi$ of the alphabet, applied simultaneously in every coordinate, preserves lines, line-freeness, cardinality and coordinate-subcube bounds. It permutes the three first-coordinate slice sizes arbitrarily.
 \end{lemma}
 \begin{proof}
-Apply $\pi$ to each constant of a wildcard pattern, leaving its wildcard positions unchanged. The image of $w(a)$ is the resulting pattern evaluated at $\pi(a)$. Since $\pi$ is bijective, the image of the three-point line is exactly a line. The same map is bijective on all words and carries coordinate subcubes to subcubes of the same dimension. A first-coordinate slice labelled $a$ becomes the slice labelled $\pi(a)$. Choosing $\pi$ to send the three slice labels to their order by size proves the last assertion, including ties.
+Apply $\pi$ to each constant of a wildcard pattern, leaving its wildcard positions unchanged. The image of $w(a)$ is the resulting pattern evaluated at $\pi(a)$. Since $\pi$ is bijective, the image of the three-point line is exactly a line. The same map is bijective on all words and carries coordinate subcubes to subcubes of the same dimension. A first-coordinate slice labeled $a$ becomes the slice labeled $\pi(a)$. Choosing $\pi$ to send the three slice labels to their order by size proves the last assertion, including ties.
 \end{proof}
 Permuting symbols in the first coordinate alone is not the symmetry used here. For example, swapping 0 and 1 in that coordinate sends the line $\{00,11,22\}$ to $\{10,01,22\}$, which is not a combinatorial line. Earlier proof descriptions used this invalid local explanation. Lemma~\ref{sym} corrects it; the case formulas and the case cover are unchanged.
 
@@ -67,7 +67,7 @@ For each integer $s$ in this interval the main formula encodes line-freeness, si
 \[
 a_0=s\geq a_1\geq a_2.
 \]
-All sixteen formulas are unsatisfiable. Every counterexample to the upper bound would, after the global relabelling, satisfy one of them. Their refutations therefore imply $c_7\leq1302$.
+All sixteen formulas are unsatisfiable. Every counterexample to the upper bound would, after the global relabeling, satisfy one of them. Their refutations therefore imply $c_7\leq1302$.
 
 \section{Encoding and independent semantic audit}
 Point $x=(x_1,\ldots,x_n)$ has variable index $1+\sum_i x_i3^{n-i}$, interpreted as $x\in A$. Every line contributes the clause consisting of its three negated point variables. Hierarchical unary totalizers count points in coordinate subcubes and in intermediate unions of two child subcubes. Auxiliary variable $(S,j)$ means $|A\cap S|\geq j$, where $S$ is a product of nonempty subsets of the alphabet. Thresholds are truncated only beyond an available cap; the first forbidden threshold is explicitly false. A root threshold forces $|A|\geq K$. Units force $a_0=s$ and threshold implications force the slice order. The encoder and independent auditor are supplied as \texttt{checks/encode.py} and \texttt{checks/reduction.py}.
@@ -110,7 +110,7 @@ For the lower bound, the supplied 1302 words (written over $\{1,2,3\}$) are a re
 \]
 Their multinomial weights sum to 1302. Two independently written witness checkers verify distinctness, cardinality and absence of all 14,197 combinatorial lines. The data is a transcription of the published construction, not a new lower-bound construction. Together with the upper bound this proves Theorem~\ref{main}.
 
-\paragraph{Availability and licence.}
+\paragraph{Availability and license.}
 The accompanying bundle contains the manuscript source, the explicit witness, the formula specification, the encoder, semantic and symmetry audits, witness checkers, a standard LRAT checker and instructions for pinned external tools. Large proofs are regenerated. The work is licensed under Apache-2.0; the bundled drat-trim checker retains its MIT notice. See \texttt{THIRD\_PARTY.md} for dependencies and attribution.
 
 \begin{thebibliography}{99}
@@ -119,7 +119,7 @@ The accompanying bundle contains the manuscript source, the explicit witness, th
 \bibitem{polymath} D.H.J. Polymath, \emph{Density Hales--Jewett and Moser numbers}, in An Irregular Mind, Bolyai Society Mathematical Studies 21, Springer, 2010, \href{https://arxiv.org/abs/1002.0374}{arXiv:1002.0374}; \href{https://doi.org/10.1007/978-3-642-14444-8_22}{doi:10.1007/978-3-642-14444-8\_22}.
 \bibitem{oeis} OEIS Foundation, \href{https://oeis.org/A156989}{A156989: density Hales--Jewett numbers for an alphabet of size 3}.
 \bibitem{mouhib} Y. Mouhib, \emph{Lower Bounds for the Hales--Jewett Numbers via Symmetric and One-Weight Colorings}, \href{https://arxiv.org/abs/2606.22155v2}{arXiv:2606.22155v2}, 2026.
-\bibitem{colour} N. Conlon, N. Farnsworth and A. Robertson, \emph{On Hales--Jewett and Related Numbers}, \href{https://arxiv.org/abs/2607.18111}{arXiv:2607.18111}, 2026.
+\bibitem{color} N. Conlon, N. Farnsworth and A. Robertson, \emph{On Hales--Jewett and Related Numbers}, \href{https://arxiv.org/abs/2607.18111}{arXiv:2607.18111}, 2026.
 \bibitem{shelah} S. Shelah, \emph{HJ numbers revisited}, \href{https://arxiv.org/abs/2607.14732v3}{arXiv:2607.14732v3}, 2026.
 \bibitem{dahia} G. Dahia, \emph{DensityHalesJewett}, formalization of the Dodos--Kanellopoulos--Tyros proof, \url{https://github.com/gdahia/DensityHalesJewett}, 2026.
 \end{thebibliography}

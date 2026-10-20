@@ -49,7 +49,7 @@ frames, common positive squared radius, distinct points and all pairwise
 distances at least one. Full affine rank plus preservation of every
 pairwise distance extends a permutation uniquely to an affine isometry.
 For the full cospherical model this isometry fixes the unique
-circumcentre. Hence the supplied permutations prove actual vertex
+circumcenter. Hence the supplied permutations prove actual vertex
 transitivity, not approximate matrix orthogonality.
 
 Every proposed cell has a rank-three affine frame and an exact nonzero

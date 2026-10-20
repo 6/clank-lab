@@ -31,4 +31,4 @@ Lake downloads dependencies; no other checkout or local dependency path is requi
 
 `lake build` checks the modules imported by `Uniform5.lean`. `Audit.lean` traverses every declaration in the `Uniform5` namespace and rejects dependencies other than `propext`, `Classical.choice` and `Quot.sound`. It additionally runs `#print axioms` for the main classification, its core theorem, Case A and Case B. Success begins `PASS dependency audit:`. This checks kernel foundations; the explicit assumptions remain hypotheses.
 
-There has been no human expert review. Apache-2.0 applies to this work; Lean and Mathlib dependencies retain their own licences.
+There has been no human expert review. Apache-2.0 applies to this work; Lean and Mathlib dependencies retain their own licenses.

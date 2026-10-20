@@ -102,7 +102,8 @@ theorem ekg_jasinski_finite :
     have := key k (by omega)
     omega
 
-/-- The indices of A155549 and A064420 form finite sets. -/
+/-- The indices n with a(n) not prime and a(n) ≤ n - 1, and the indices of
+A064420, form finite sets. -/
 theorem ekg_exceptional_finite :
     {n : ℕ | 0 < n ∧ ¬ (a n).Prime ∧ a n ≤ n - 1}.Finite ∧
     {k : ℕ | 0 < k ∧ a (k + 1) = k}.Finite := by
@@ -121,3 +122,8 @@ theorem ekg_exceptional_finite :
       omega
     · have := ((hN (k + 1) (by omega)).2 hp).1
       omega
+
+/-- A155549 lists the values a(n) at the indices above, so it is finite. -/
+theorem ekg_a155549_finite :
+    (a '' {n : ℕ | 0 < n ∧ ¬ (a n).Prime ∧ a n ≤ n - 1}).Finite :=
+  ekg_exceptional_finite.1.image a

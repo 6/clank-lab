@@ -38,6 +38,7 @@ example : BelowDiagonalCountStatement := ekg_below_diagonal_count
 example : JasinskiFinitenessStatement := ekg_jasinski_finite
 example : ShortCyclesStatement := ekg_short_cycles_finite
 example : ExceptionalFinitenessStatement := ekg_exceptional_finite
+example : A155549FinitenessStatement := ekg_a155549_finite
 
 /-- info: 'ekg_eventual_sign' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
@@ -57,3 +58,6 @@ example : ExceptionalFinitenessStatement := ekg_exceptional_finite
 /-- info: 'ekg_exceptional_finite' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms ekg_exceptional_finite
+/-- info: 'ekg_a155549_finite' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms ekg_a155549_finite

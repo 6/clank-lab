@@ -3,9 +3,9 @@ import EKG.PrimePatternBase
 import EKG.PatternCount
 
 /-! The global EKG 2p,p,3p structure theorem. The sequence's finite base is
-kernel-checked. The bounded numerical inequality currently uses the
-native_decide trust extension in PatternCount; the unbounded range uses
-the proved modulus-210 sieve. The audit module exposes this dependency. -/
+kernel-checked. The bounded numerical inequality uses the ordinary
+kernel proofs in PatternCount; the unbounded range uses the proved
+modulus-210 sieve. -/
 namespace EKG
 
 theorem primeIntroductionPattern (s : GreedySeq) : PrimeIntroductionPattern s := by

@@ -12,7 +12,8 @@ https://creativecommons.org/licenses/by/4.0/ .
 Relative to that archive, `EKG/PatternCount.lean` replaces a finite
 native-evaluation proof with ordinary kernel proofs. The port makes two
 tactic-only changes in `EKG/PrimeEstimates.lean` and
-`EKG/PrimeStructureObstruction.lean`. The PartA, PartB, Counting and
+`EKG/PrimeStructureObstruction.lean`, and `EKG/PrimeStructureGlobal.lean`
+has its module comment updated to match. The PartA, PartB, Counting and
 Endpoint modules, together with the theorem adapters and public interface,
 are additions. File-level attribution is listed below.
 The mathematical argument also credits Lagarias, Rains and Sloane, and
@@ -30,7 +31,7 @@ none has been changed.
 Downloaded Lean, mathlib and other dependencies retain their respective
 licenses and are not redistributed in this small source bundle.
 The following files derive from Haver and retain Haver's CC BY 4.0 notice,
-including the three modified files identified above:
+including the four modified files identified above:
 
 ```text
 lean/EKG/Asymptotic.lean

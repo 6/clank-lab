@@ -56,7 +56,7 @@ lake build
 
 A passing build checks the exact statements of the theorem and its
 consequences, the finite sequence and smoothing controls, and that all
-thirteen audited theorems use only Lean's standard logical axioms.
+fourteen audited theorems use only Lean's standard logical axioms.
 [lean/README.md](lean/README.md) gives the details.
 The [numerical illustration](data/README.md) is optional and is not part of
 the proof.
@@ -84,6 +84,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The second-order asymptotic of the EKG sequence}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v2/results/ekg-sequence}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v3/results/ekg-sequence}}
 }
 ```

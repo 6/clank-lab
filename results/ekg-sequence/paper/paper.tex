@@ -789,9 +789,12 @@ the ratio form; the new content is that these are, with finitely many
 exceptions, exactly the indices below the diagonal.
 
 Two related OEIS entries are also finite sets: Ordowski's ``exceptional
-numbers'' A155549, the $n$ with $a(n)$ not prime and $a(n)\leq n-1$,
-and A064420, the $k$ with $a(k+1)=k$. Both are listed as ``probably
-complete''. The first is finite by Corollary~\ref{cor:sign}. For the
+numbers'' A155549, the values $a(n)$ that are not prime and satisfy
+$a(n)\leq n-1$ (its terms $16,26,49,\ldots$ occur at the indices
+$n=17,27,50,\ldots$), and A064420, the $k$ with $a(k+1)=k$. Both are
+listed as ``probably complete''. By Corollary~\ref{cor:sign} the indices
+$n$ with $a(n)$ not prime and $a(n)\leq n-1$ form a finite set, so its
+image A155549 is finite. For the
 second, $a(n)=n-1$ fails for large $n$: a prime value has
 $a(n)\leq2n/3$ and any other value has $a(n)>n$. De Vlieger
 \cite{devlieger} remarked that it is ``not surprising'' that A064420
@@ -933,12 +936,19 @@ independently of the proofs, for the one-based sequence \texttt{a}:
 \begin{itemize}
 \item \texttt{EventualSignStatement}: the first part of
   Corollary~\ref{cor:sign};
-\item \texttt{BelowDiagonalCountStatement} and
-  \texttt{OrdowskiDensityStatement}: its two counts;
+\item \texttt{BelowDiagonalCountStatement}: its count
+  $\#\{k\leq N:a(k)<k\}\sim N/(2\log N)$;
+\item \texttt{OrdowskiDensityStatement}: its last statement,
+  $\#\{k\leq N:a(k)>k\}/N\to1$. The sharper form
+  $N-(1/2+o(1))N/\log N$ follows from the previous count and the
+  finiteness of $\{k:a(k)=k\}$ as in the proof, but is not stated
+  as a separate Lean theorem;
 \item \texttt{JasinskiFinitenessStatement}: Corollary~\ref{cor:lines},
   with the lines written $2a(k)=k$, $a(k)=k$ and $2a(k)=3k$ as in the OEIS;
-\item \texttt{ExceptionalFinitenessStatement}: the finiteness of
-  A155549 and A064420;
+\item \texttt{ExceptionalFinitenessStatement}: the finiteness of the
+  indices $n$ with $a(n)$ not prime and $a(n)\leq n-1$, and of A064420;
+\item \texttt{A155549FinitenessStatement}: the finiteness of A155549,
+  the image of that index set under $a$;
 \item \texttt{ShortCyclesStatement}: Corollary~\ref{cor:cycles}, a cycle
   being the orbit of a positive $m$ with $a^{[l]}(m)=m$ for some
   $1\leq l\leq L$.

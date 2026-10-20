@@ -10,6 +10,8 @@ The proofs, the search code, the certificate checkers and the text were produced
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23491269](https://doi.org/10.5281/zenodo.23491269)
+
 ## Check it
 
 On Linux, install Python 3.10 or later, Git, a C/C++ compiler, Make and Rust/Cargo. From this folder:
@@ -40,6 +42,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The seventh ternary density Hales--Jewett number}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v1/results/density-seven}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v1/results/density-seven}},
+  doi          = {10.5281/zenodo.23491269}
 }
 ```

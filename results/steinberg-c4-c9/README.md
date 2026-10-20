@@ -10,6 +10,8 @@ The proofs, the search code, the certificate checkers and the text were produced
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23491271](https://doi.org/10.5281/zenodo.23491271)
+
 ## Check it
 
 With Python 3.10 or later, a C compiler and a POSIX shell, check the complete certificate and corruption controls in a few seconds:
@@ -33,6 +35,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A planar graph without four- or nine-cycles that is not three-colorable}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v2/results/steinberg-c4-c9}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v2/results/steinberg-c4-c9}},
+  doi          = {10.5281/zenodo.23491271}
 }
 ```

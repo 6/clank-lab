@@ -22,6 +22,7 @@ Zenodo records.
   when a(n) is composite), Jasinski's 2008 finiteness conjectures on
   A152458 and A152519, finiteness of A155549 and A064420, and finitely
   many cycles of each bounded length. Tag `ekg-sequence-v2`.
+- Zenodo: [10.5281/zenodo.23491265](https://doi.org/10.5281/zenodo.23491265)
 
 ## steinberg-c4-c9 v2 (October 20, 2026)
 
@@ -30,6 +31,7 @@ Zenodo records.
   certify four-criticality and equality in the Kostochka–Yancey edge bound
   at order 82; no minimum-order claim is made. A single standalone checker
   verifies the construction and these certificates. Tag: `steinberg-c4-c9-v2`.
+- Zenodo: [10.5281/zenodo.23491271](https://doi.org/10.5281/zenodo.23491271)
 
 ## ekg-sequence v1 (October 20, 2026)
 
@@ -41,11 +43,13 @@ Zenodo records.
 - First version: completeness of the known list of convex uniform
   5-polytopes, conditional on the 3- and 4-dimensional classifications.
   Paper, Lean formalization and certificate checkers.
+- Zenodo: [10.5281/zenodo.23491267](https://doi.org/10.5281/zenodo.23491267)
 
 ## density-seven v1 (October 20, 2026)
 
 - First version: the density Hales–Jewett number for length 7 over three
   letters is 1,302. Paper, witness and certificate checkers.
+- Zenodo: [10.5281/zenodo.23491269](https://doi.org/10.5281/zenodo.23491269)
 
 ## steinberg-c4-c9 v1 (October 20, 2026)
 

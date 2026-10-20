@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "verification_date_utc": "2026-10-20",
+  "result": "PASS \u2014 earlier base standalone replay plus the literal P1, filter, count and ROOT additions described below",
+  "platform": {
+    "os": "Linux",
+    "kernel": "7.0.0-1019-nvidia",
+    "architecture": "aarch64",
+    "libc": [
+      "glibc",
+      "2.43"
+    ],
+    "python": "3.14.8",
+    "cpu_quota_cores": 12,
+    "stage3_workers": 12,
+    "bash_version": "GNU bash, version 5.3.9(1)-release (aarch64-unknown-linux-gnu)"
+  },
+  "versions": {
+    "mpmath": "1.3.0",
+    "numpy": "2.5.4",
+    "python": "3.14.8",
+    "python-flint": "0.9.0",
+    "scipy": "1.18.1",
+    "sympy": "1.14.0"
+  },
+  "commands": {
+    "copy": "Export only the selected public Git tree to an empty directory outside the repository; execute there without Git metadata.",
+    "variables": "REPLAY_PYTHON is the exact installed virtual-environment interpreter; RETAINED_P16 is the fresh audited P16 output directory. All commands run at the appropriate exported public bundle root.",
+    "install": "python3 -m venv \"$REPLAY_ENV\"; \"$REPLAY_ENV/bin/python\" -m pip install --disable-pip-version-check -r checks/requirements.txt",
+    "initial_control": [
+      "bash checks/verify-public.sh full --list",
+      "python3 checks/test_manifest.py"
+    ],
+    "full_base": "env SHELLOPTS=xtrace PS4='+${EPOCHREALTIME} ' PYTHON=\"$REPLAY_PYTHON\" PYTHON_S23=\"$REPLAY_PYTHON\" S23_JOBS=12 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 bash checks/verify-public.sh full",
+    "final_delta": [
+      "\"$REPLAY_PYTHON\" checks/check_manifest.py",
+      "bash -n checks/verify-public.sh",
+      "bash checks/verify-public.sh full --list",
+      "\"$REPLAY_PYTHON\" checks/p1_literal_contract.py",
+      "\"$REPLAY_PYTHON\" checks/check_filter.py",
+      "\"$REPLAY_PYTHON\" checks/count_convention.py \"$RETAINED_P16/s3.jsonl\""
+    ],
+    "delta_environment": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1; filter executes in a disposable copy because it writes a provenance container."
+  },
+  "execution": {
+    "initial_control": {
+      "result": "PASS",
+      "elapsed_seconds": 0.286
+    },
+    "dependency_install": {
+      "name": "install",
+      "exit_code": 0,
+      "elapsed_seconds": 8.786,
+      "log_sha256": "def4feda28e7ce05ace831f16d4779f9abe99e45fa00ee4a44523a2c7a05d63d"
+    },
+    "full_base": {
+      "started_utc": "2026-10-20T06:12:58Z",
+      "finished_utc": "2026-10-20T06:31:25Z",
+      "exit_code": 0,
+      "elapsed_seconds": 1107.137,
+      "observed_final_line": "uniform-5-polytopes public full: PASS",
+      "stage_timing_method": "Timestamped unchanged-driver run_step trace; a succeeding step implies the preceding step returned successfully under set -e.",
+      "stages": [
+        {
+          "name": "test-manifest",
+          "result": "PASS",
+          "elapsed_seconds": 0.049
+        },
+        {
+          "name": "test-optimization",
+          "result": "PASS",
+          "elapsed_seconds": 3.173
+        },
+        {
+          "name": "s1-b2",
+          "result": "PASS",
+          "elapsed_seconds": 36.571
+        },
+        {
+          "name": "merge-check",
+          "result": "PASS",
+          "elapsed_seconds": 2.718
+        },
+        {
+          "name": "affine-check",
+          "result": "PASS",
+          "elapsed_seconds": 1.515
+        },
+        {
+          "name": "filter-check",
+          "result": "PASS",
+          "elapsed_seconds": 2.491
+        },
+        {
+          "name": "q5-check-a",
+          "result": "PASS",
+          "elapsed_seconds": 3.244
+        },
+        {
+          "name": "q5-check-b",
+          "result": "PASS",
+          "elapsed_seconds": 4.566
+        },
+        {
+          "name": "q5-corrupt",
+          "result": "PASS",
+          "elapsed_seconds": 2.419
+        },
+        {
+          "name": "snub",
+          "result": "PASS",
+          "elapsed_seconds": 13.619
+        },
+        {
+          "name": "chart-check",
+          "result": "PASS",
+          "elapsed_seconds": 0.451
+        },
+        {
+          "name": "s23-tests",
+          "result": "PASS",
+          "elapsed_seconds": 38.026
+        },
+        {
+          "name": "s23-replay",
+          "result": "PASS",
+          "elapsed_seconds": 271.226
+        },
+        {
+          "name": "caseb",
+          "result": "PASS",
+          "elapsed_seconds": 115.08
+        },
+        {
+          "name": "s23-p16",
+          "result": "PASS",
+          "elapsed_seconds": 608.326
+        }
+      ],
+      "parsed_audit_results": [
+        {
+          "status": "PASS",
+          "classes": 136,
+          "signatures": 168,
+          "realisations": 176,
+          "historical_comparison": false
+        },
+        {
+          "status": "PASS",
+          "models": 181,
+          "ordered_options_checked": 5108
+        },
+        {
+          "status": "PASS",
+          "classes": 563,
+          "signatures": 629,
+          "realisations": 657,
+          "historical_comparison": false
+        }
+      ]
+    },
+    "final_delta": [
+      {
+        "name": "final-manifest",
+        "result": "PASS",
+        "exit_code": 0,
+        "elapsed_seconds": 0.047
+      },
+      {
+        "name": "final-wrapper-syntax",
+        "result": "PASS",
+        "exit_code": 0,
+        "elapsed_seconds": 0.002
+      },
+      {
+        "name": "final-wrapper-full-list",
+        "result": "PASS",
+        "exit_code": 0,
+        "elapsed_seconds": 0.006
+      },
+      {
+        "name": "final-filter",
+        "result": "PASS",
+        "exit_code": 0,
+        "elapsed_seconds": 1.74
+      },
+      {
+        "name": "v2-p1-literal",
+        "result": "PASS",
+        "exit_code": 0,
+        "elapsed_seconds": 1.228,
+        "observed": [
+          "PASS literal P1Separated: 67 configurations, 36 bounded tails; every selected separation > 1/2000"
+        ]
+      },
+      {
+        "name": "final-count",
+        "result": "PASS",
+        "exit_code": 0,
+        "elapsed_seconds": 0.676,
+        "observed": [
+          "PASS finite convention: 19 + 31 + 8 + 47 - 1 = 104; sole finite-list overlap is the 5-cube",
+          "PASS ROOT coverage: all 629 signatures have a whole-class UNIQUE witness",
+          "The Open Problem Garden's reason for 105 is not established by this check."
+        ]
+      }
+    ],
+    "filter_observed": {
+      "checks": [
+        {
+          "bound": 6,
+          "checked_classes": 760,
+          "checked_removals": 877,
+          "checked_rounds": 659,
+          "convention": "parameter",
+          "matches_historical_u2_class_sets": true,
+          "surviving_classes": 136
+        },
+        {
+          "bound": 10,
+          "checked_classes": 1790,
+          "checked_removals": 1900,
+          "checked_rounds": 1585,
+          "convention": "parameter",
+          "matches_check_u1_class_sets": true,
+          "matches_historical_u2_class_sets": true,
+          "surviving_classes": 278
+        },
+        {
+          "bound": 16,
+          "checked_classes": 4224,
+          "checked_removals": 4220,
+          "checked_rounds": 3764,
+          "convention": "parameter",
+          "matches_check_u1_class_sets": true,
+          "matches_historical_u2_class_sets": true,
+          "surviving_classes": 563
+        },
+        {
+          "bound": 6,
+          "checked_classes": 699,
+          "checked_removals": 741,
+          "checked_rounds": 599,
+          "convention": "strict",
+          "matches_historical_u2_class_sets": false,
+          "surviving_classes": 129
+        }
+      ],
+      "consumer_intervals_cover_s1_roots": {
+        "10": 278,
+        "16": 563,
+        "6": 136
+      },
+      "same_corruptions_rejected_by_both": [
+        "supported orbit falsely claimed missing",
+        "removed surviving cycle",
+        "omitted deletion round"
+      ],
+      "status": "PASS",
+      "narrowed_consumer_interval_control": "Rejected independently for P6, P10 and P16; the executed code raises if any mutation is accepted."
+    }
+  },
+  "honest_failure_accounting": {
+    "unexpected_check_failures": [],
+    "expected_unrestricted_w_fan_failures": [
+      "(i)(38,3,7)",
+      "(i)(39,3,7)",
+      "(i)(40,3,7)",
+      "(i)(41,3,7)",
+      "(i)(23,3,8)",
+      "(i)(17,3,9)",
+      "(i)(19,4,5)"
+    ],
+    "w_observed": "127 fans; 120 certified over the full range; seven expected unrestricted misses, with seven certified restricted runs; summary ACCEPTED. Deliberately dropping separation constraints produced the required FAILED verdict. These unrestricted misses are not full-range certificates."
+  },
+  "limits": [
+    "The final v2 wrapper was not rerun end to end: its unchanged search/check kernels completed under the base full wrapper, followed by the new P1/count checks and updated filter check independently. Final wrapper syntax, stage list and scientific inventory passed. No aggregate final-v2 full-PASS line is claimed.",
+    "This replay checks computational claims only. It does not verify the written reductions, re-prove the cited 3-D/4-D classifications, or build Lean. The theorem remains conditional on the documented assumptions and checker correctness.",
+    "Literal P1 verifies the finite rational ranges; its universal delta bounds still rely on the written proof.",
+    "The finite 104 convention does not establish the reason for the Open Problem Garden value 105."
+  ],
+  "retained_outputs": {
+    "p16/s2.jsonl": {
+      "bytes": 14713337,
+      "sha256": "279edf436992e3d031c83ab2909bfa39538be97cf3bf8d83645acc027d69198d"
+    },
+    "p16/s2.jsonl.provenance.json": {
+      "bytes": 3910,
+      "sha256": "e85df009076d96ee5919f0438a8461c1448201ffa42707dfaf46684776e4bde5"
+    },
+    "p16/s3.jsonl": {
+      "bytes": 90568556,
+      "sha256": "bfd83eb85fb5663250cea384ef0cb5767a5d059ebc79439bc6970fe81e1efb8e"
+    },
+    "p16/s3.jsonl.frozen.json": {
+      "bytes": 183695345,
+      "sha256": "ffb64f5ec7e1ee45db702f7f4011ea3d8b441a22ba39785fa9871ae78d11bcfb"
+    }
+  },
+  "source_identity": {
+    "base_scientific_identity": {
+      "manifest": "data/PUBLIC.sha256",
+      "manifest_sha256": "02d587524eb9353cb6d9461fb0421efe276247c4e2a9a48379db555f0ec896de",
+      "scientific_files": 138,
+      "sorted_scientific_entries_sha256": "02d587524eb9353cb6d9461fb0421efe276247c4e2a9a48379db555f0ec896de",
+      "scope_sha256": "d0925c6308fd1761bc74152d240b0263d7ad2e43c9d3f70066b44ebb8b7a4354"
+    },
+    "final_scientific_identity": {
+      "manifest": "data/PUBLIC.sha256",
+      "manifest_sha256": "4b3169f0d579053e3309c43c0edc731802de6f58d7aeb0ca510c713168eda359",
+      "scientific_files": 140,
+      "sorted_scientific_entries_sha256": "4b3169f0d579053e3309c43c0edc731802de6f58d7aeb0ca510c713168eda359",
+      "scope_sha256": "c5a5c94d757393df8aa5f1840d27b3da3a438c2d737003a84105fbdbaac83397"
+    },
+    "final_executed_source_sha256": {
+      "checks/requirements.txt": "4894b940f1c5603ecb739d6b718e7b98137b7b735f22788fa2b5a5e45e2ccf56",
+      "checks/verify-public.sh": "bfca68c93b399ef9f76d4b3c635386454e2cfd6076121d5e9aedb37064d9d709",
+      "checks/verify_s23.sh": "f867b2baf7e4a876a9a505f28e2f1a6b38a8fa97ec12e6468ef4a8e2379158a1",
+      "checks/check_filter.py": "3562e6556ae47f0ea926460148dc6394bc21a0b981b6eba4ca3858caa9a033f3",
+      "checks/p1_literal_contract.py": "92785ce52297fa377f507a616d274a7ff88a84c570ed6c8f632add23a4cfad1d",
+      "checks/count_convention.py": "76aa7cfc28de0e52d3f7995363c9f6e0724a13903a26e4b0e9dbd46b38b81835",
+      "checks/independent-s23/run.py": "1b97df7b6e6623a896b037c6402d10aef2c567b114defbf4486816ab4ce21b18",
+      "checks/independent-s23/stage3.py": "cf4afe1107f9f98f3189e8e6368606da854f19fe1c8c8de43815393dd1e47e57",
+      "checks/independent-s23/audit_stage3.py": "bd529791f0be09a1d52a62b09b3443096f84a9be493bc61bc3a5ac7da5b86436",
+      "checks/independent-s23/certificates/equivalences-p16.json": "4cceb9dfd70d84a9a8ff64df0c0820224fd6ee9be0068e8832a363661063c6de"
+    },
+    "base_wrapper_sha256": "4cb4280c3b82c936832a27896537ee1ecbc6fb0f40558ffae0a44fc780661299",
+    "base_filter_sha256": "7e5b4af39af955e8bacef780b4bd84b3319131b28863693eba72e832a8d50653",
+    "unchanged_search_kernels": true,
+    "changed_existing_scientific_scope_files": [
+      "checks/check_filter.py",
+      "checks/verify-public.sh",
+      "data/acceptance-inputs.json"
+    ]
+  },
+  "scope_note": "Historical execution record. It predates the subsequent primary-program packaging, Lean-report bridge, strict outcome inventory and encoding correspondence checks; it does not claim their acceptance."
+}

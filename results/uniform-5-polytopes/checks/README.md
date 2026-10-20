@@ -9,6 +9,10 @@ The theorem holds conditional on the cited 3-D and 4-D classifications, the corr
 
 [Schulte's 2017 Handbook chapter, §18.5](https://www.csun.edu/~ctoth/Handbook/chap18.pdf) records completeness only through dimension four. [Winter's 2021 dissertation, Appendix E.3, p. 167](https://martinwintermath.github.io/pdf/phd/thesis.pdf) states: “it is unknown whether there exist non-prismatic non-Wythoffian uniform polytopes in dimension five or above.” The contribution is completeness of the known list, with no new examples.
 
+The [external hypothesis evidence map](../data/hypothesis-map.md) gives the
+argument, replay command, expected result and limits for each of the twelve
+inputs, plus the local-exhaustiveness and unbounded-parameter burdens.
+
 ## Status
 
 This is a computer-assisted proof, not expert-reviewed. The Lean project checks a conditional implication and selected geometric lemmas; the entire classification is not a completed Lean proof. The computational hypotheses and cited classifications remain assumptions, without a joint instance proved in Lean. The precise twelve computational hypotheses appear verbatim in the manuscript's appendix (from [data/core-hypotheses.txt](../data/core-hypotheses.txt)) and in [the Lean sources](../lean/README.md).
@@ -31,13 +35,17 @@ Only full mode checks all computational claims used in the theorem; quick mode d
 
 Installation needs a package index; the replay itself needs no network, Git metadata or files outside the bundle other than installed tools and dependencies. The driver authenticates the scientific inputs and checkers, runs disposable copies and stops on any failed check. Certificate validation uses explicit errors and remains enabled under `python -O`; regression checks test corruptions under both `-O` and `-OO`.
 
-The full check takes about half an hour. A successful full replay ends with:
+The earlier independent full check took about half an hour. Version 2 adds
+the primary replay; its total time depends on worker count and partitioning. A successful full replay ends with:
 
 ```text
 uniform-5-polytopes public full: PASS
 ```
 
-Two stage-3 workers are used by default; set `S23_JOBS=1` for serial execution. The independent steps can also be shared out across machines: `--part K/N` after the mode (for example `quick --part 3/8`) runs share K of N, balanced by each step's running time, and `--list` prints the steps a part would run. Every part from 1/N to N/N must pass; together they run exactly the steps of the whole check, each part repeating the dependency and inventory checks. The public CI runs the quick check this way, as eight parts. Full mode checks every W fan, all 181 P=16 equivalence certificates (5,108 ordered options), and P=16 stages 2/3 with coverage checks. The P=6 quick control retains fixed 8- and 10-gon facets and has 136 classes rather than the literal cutoff's 129; the libraries coincide at P=10 and P=16.
+Two stage-3 workers are used by default; set `S23_JOBS=1` for serial execution. The independent steps can also be shared out across machines: `--part K/N` after the mode (for example `quick --part 3/8`) runs share K of N, balanced by each step's running time, and `--list` prints the steps a part would run. Every part from 1/N to N/N must pass; together they run exactly the steps of the whole check, each part repeating the dependency and inventory checks. The public CI runs the quick check this way, as eight parts. Full mode checks every W fan, all 181 P=16 equivalence certificates (5,108 ordered options), and both P=16 stage-2/3 proof routes with coverage checks, primary library/B2/W
+replays, exact interval containment and disjointness, complete known-name
+coverage, and the row-by-row Lean report bridge. The source and generator
+are documented in [report-provenance.md](../data/report-provenance.md). The P=6 quick control retains fixed 8- and 10-gon facets and has 136 classes rather than the literal cutoff's 129; the libraries coincide at P=10 and P=16.
 
 The finite result is 563 classes, 629 signatures (628 known and one wholly refuted), zero OPEN cases and 890 matched construction names. The independent implementation has 657 raw realizations, including 28 additional mirror placements that it refutes. Construction names can be aliases and are not counts of distinct polytopes. The 628 polytopes include members of the infinite families.
 

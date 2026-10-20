@@ -46,7 +46,7 @@
 \author[P. Graham]{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
 \hypersetup{pdfauthor={P. Graham},
   pdftitle={The convex uniform 5-polytopes: a computer-assisted classification}}
-\date{October 19, 2026}
+\date{October 20, 2026}
 \thanks{This work is licensed under Apache-2.0; embedded fonts retain their own licenses, listed in \file{THIRD_PARTY.md}.}
 
 \begin{document}
@@ -143,7 +143,9 @@ decagons in orthogonal planes) \cite{ConwayGuy1965}.
 
 \subsection{The theorem}
 
-This paper presents a completeness statement with explicit computational
+To our knowledge, this is the first proof of completeness of the known
+convex uniform 5-polytopes, conditional on the cited three- and
+four-dimensional classifications. The proof has explicit computational
 lemmas and reproduction commands. It is a specialist classification
 result about the known five-dimensional list, not a classification in
 arbitrary dimension or a new general method. It is a
@@ -176,11 +178,27 @@ the tesseract and $\{4\}\times$cube; prisms over polyhedral prisms,
 antiprism prisms and duoprisms are of the form (K3)). The theorem asserts
 coverage, not disjointness. Counting the Coxeter--Johnson constructions
 \cite{Coxeter1935,CoxeterRP,Johnson1966} with the four-dimensional bases
-of \cite{Moller2004} gives $19+31+8+(47-1)=104$ in this convention:
-the tesseract prism is counted once as the 5-cube. The older Open Problem
-Garden total of 105 \cite{OPG} has not been reconciled with that convention;
-it is not used by the proof. The proof instead generates every ring pattern
-and product and tests congruence (Section~\ref{sec:known}). Every polytope in (K1)--(K3)
+of \cite{Moller2004} gives
+\[
+  19+31+8+47-1=104.
+\]
+The 47 fixed-base prisms include the tesseract prism, which is also the
+$B_5$ 5-cube; the subtraction counts it once. The same object occurs as
+$\{4\}\times\mathrm{cube}$ in the product families. Thus 104 is a
+finite-sublist convention, not a disjoint count after removing every
+intersection with the infinite families.
+The Open Problem Garden page \cite{OPG}, checked October 20, 2026,
+states two infinite classes and 105 additional examples but gives no
+component counts or overlap explanation. Its 105 equals the subtotal
+$19+31+8+47$ before subtracting the cube. This is consistent with an
+unremoved overlap, but the page does not establish that historical
+explanation. The number 105 is not used by the proof.
+The generated congruence classes independently give 19 $A_5$, 31 $B_5$,
+8 further $D_5$ forms and 47 fixed-base prisms, with exactly that one
+overlap. \file{checks/count_convention.py} extracts this bookkeeping from
+the audited stage-3 output; it is not another congruence proof.
+The proof generates every ring pattern and product and tests congruence
+(Section~\ref{sec:known}). Every polytope in (K1)--(K3)
 is convex and uniform, so the theorem is a classification. It is the
 union of two theorems, proved in Sections~\ref{sec:caseA}
 and~\ref{sec:caseB}:
@@ -451,7 +469,7 @@ handles (d) as undecided, and the full replays recorded below met it
 zero times (Sections~\ref{sec:S2}, \ref{sec:U2} and~\ref{sec:U3}):
 \texttt{cert\_vf.py} (\texttt{identify}) raises \texttt{Undecided}, counts
 it, and refuses to return a complete class; \texttt{check\_u2} raises
-\texttt{PrecisionError} and exits nonzero; \file{checks/check_u3} uses the
+\texttt{PrecisionError} and exits nonzero; \file{checks/primary/check_u3} uses the
 stricter equality bound $u<1/4$ and turns undecided cases into \texttt{OPEN},
 never into a refutation.
 
@@ -990,7 +1008,8 @@ supplied as follows (\file{checks/model_audit/}).
   constructions with exact generator and index identities and coordinate
   containment, checked independently with interval/Krawczyk and
   rational-dyadic arithmetic, each rejecting nine corruptions.
-\item \emph{Runtime guard}: \texttt{model\_guard.py} enforces in
+\item \emph{Runtime guard}: \file{checks/primary/model_audit/model_guard.py}
+  enforces in
   every run the midpoint, width and grid conditions of that contract for
   every point-set and lookup query, using exact rational endpoints. It is
   installed before any model is built in the independent stage-2 and
@@ -1030,9 +1049,19 @@ signature are congruent, because actual stars with that signature have
 the same rooted encoding and radius, and their star forces the polytope
 (Proposition~\ref{prop:u3}); existence comes from the named constructions,
 not from retaining a search row;
-names with different signatures are not, because the signature of a
-vertex figure is a congruence invariant. This count is not taken from the
-literature. By construction $\mathcal K_{16}$ contains every
+names in different radius classes cannot be congruent, because the
+closed consumer intervals are pairwise disjoint (checked with exact
+rational endpoints by \file{checks/check_filter.py}); within one class,
+different full cycle-word signatures cannot be congruent, because the
+signature of a vertex figure is a congruence invariant. This count is not taken from the
+literature. The audited name classes also give the exact decomposition
+$628=104+420+105-1$: 420 products from 14 polygon parameters and 30
+non-prismatic polyhedral bases, 105 unordered polygon-pair products, and
+104 fixed-list classes. The first set is disjoint from the others; the
+latter two meet only in the 5-cube. The 30 bases are four non-cubic
+Platonic solids, 13 Archimedean solids and 13 antiprisms of parameters
+4 through 16. The 47 fixed-list prisms include the grand-antiprism prism.
+These are checked class-set bijections, not merely arithmetic subtotals. By construction $\mathcal K_{16}$ contains every
 polytope of (K1)--(K3) whose 2-faces have at most 16 sides: the
 Wythoffians have only 3-, 4-, 5-, 6-, 8- and 10-gons, a prism over a
 prismatic 4-polytope is of the form (K3), and every (K2) prism over a
@@ -1345,10 +1374,13 @@ $P_{\max}=16$: 563, 629, 5,869 nodes (no node cap). The same 629 signatures are 
 stage-1 checker's broader class intervals. Both certificate checkers accept all 5,108 correspondences and reject
 all 905 corruptions. They share template, interval and model-guard code,
 so they check one certificate without providing two independent proofs
-of the model library. The replay driver \texttt{replay\_all.py} requires
-zero non-strict completions, checks every per-figure strict flag and the
-complete class accounting, and rejects 18 corruptions of its evidence; the
-full strict replays at $P_{\mathrm{ctl}}=6,10,16$ cover all 977 classes.
+of the model library. The strict-completion validator in
+\file{checks/primary/stage2/replay_all.py} requires zero non-strict
+completions and checks every per-figure strict flag and the complete class
+accounting. C9 applies that validator to the regenerated P16 search. The
+earlier recorded strict controls at $P_{\mathrm{ctl}}=6,10,16$ cover 977
+classes in total; the supported public entry point is C9, not the legacy
+multi-cutoff command-line interface of \texttt{replay\_all.py}.
 
 \noindent\emph{Second implementation} (\file{checks/independent-s23/},
 Section~\ref{sec:indep}). The implementation uses exact
@@ -1414,7 +1446,7 @@ and labels with every stage-1 input entry by Computation~\ref{comp:link}.
 (Section~\ref{sec:U3}).
 \subsection{Stage 3: from vertex figures to polytopes}\label{sec:S3}
 
-Stage 3 is checked by \file{checks/check_u3/}
+Stage 3 is checked by \file{checks/primary/check_u3/}
 (Section~\ref{sec:U3}; Proposition~\ref{prop:u3}) and
 \file{checks/independent-s23/} (Section~\ref{sec:indep}). Both certify
 a unique radius on the whole class interval, cover every actual star
@@ -1436,7 +1468,7 @@ $g'$, enclosed over the whole interval, excludes $0$.
 Section~\ref{sec:U3}): sign change at $R_{\rm lo}$ and $R_{\rm hi}$ and a
 forward-mode derivative excluding $0$ on the whole exported stage-1 class
 interval, evaluated with certified template angles. The inverse cosine
-used there (\file{checks/check_u3/ivla.py}, \texttt{iacos}) is a proved
+used there (\file{checks/primary/check_u3/ivla.py}, \texttt{iacos}) is a proved
 enclosure: for an input interval $[a,b]\subseteq[-1,1]$,
 an ordinary \texttt{mp.acos} evaluation only \emph{proposes} bounds
 $l\le u$, and each is returned only after the outward-rounded interval
@@ -1572,7 +1604,20 @@ identity, which contributes \texttt{OPEN} (also when another candidate
 survives) and is counted with its reason, so it can never yield
 \texttt{REFUTED}; candidate-point lookup tests every potentially matching point. The final guarded runs refute this
 vertex figure at $P_{\mathrm{ctl}}=6$, 10 and 16 with zero search, development and
-model-guard uncertainty.
+model-guard uncertainty. At $P=16$ the primary development records two
+branches. The independent trace records four nodes, not four branches;
+these counters describe different algorithms. The chosen extra-candidate
+cycle has cosines $1/5,-1/5,1/5,-1/5$ at $R=1$, hence angle sum $2\pi$.
+Indeed, it is the triangular cycle
+\texttt{A40001/tet}, \texttt{pr-tet/P3},
+\texttt{duoprism-3-3/P3}, \texttt{pr-tet/tet}.
+Here $\rho^2=1/3$, the successive sectional-angle cosines are
+$1/4,0,1/2,0$, and the successive shared-cell squared radii are
+$3/8,3/8,7/12,7/12$. Substitution in the closure formula gives the four
+displayed cosines, whose opposite pairs sum to $\pi$ under $\arccos$.
+Whole-class uniqueness therefore fixes the root at 1. Development still
+uses interval enclosures for the whole class; it does not substitute a
+rounded point estimate.
 \emph{Second implementation:} \file{checks/independent-s23/} refutes the same
 signature at $P_{\mathrm{ctl}}=6$, 10 and 16 by a finite development tree in which
 every branch dies (Section~\ref{sec:indep}); its restricted $R=1$ control
@@ -1656,10 +1701,19 @@ Neither the coarse signature nor the larger group $E_K$ of isometries of
 the vertex figure $X_K$ would do here: for the snub-cube prism a mirror
 fixes the vertex figure but not the full facet (after
 reflecting one snub-cube-prism facet of $\{3\}\times$ snub cube, the two
-facets contain distinct vertices only $0.2956$ apart).
-\file{checks/check_u3} (\texttt{canon.py}, \texttt{search.py}) uses full-template
+facets contain distinct vertices with squared distance less than $0.296$).
+\file{checks/primary/check_u3} (\texttt{canon.py}, \texttt{search.py}) uses full-template
 stabilizers and records the ordered model-neighbor indices, as the lemma
 requires.
+Its canonical code minimizes the complete incidence and ordered-template
+record over initial facets of the least present type and their full-template
+base stabilizers.
+Equality of codes therefore exhibits such a correspondence: undo the two
+minimizing relabelings, fix the common initial template and apply
+Lemma~\ref{lem:rooted} along the connected facet graph. Conversely a rooted
+congruence supplies one of the enumerated relabelings. Thus the canonical
+code cannot identify distinct full stars at a common admissible radius;
+minimizing a coarse facet multiset would not suffice.
 
 \begin{enumerate}[leftmargin=2em]
 \item \emph{Realization coverage.} For each signature, every actual star
@@ -1760,7 +1814,8 @@ forcing for all 629; 230
 \texttt{NO-COUNT} and 32 \texttt{NO} eliminations. Corruptions: shifting every
 class interval by $10^{-12}$ leaves no retained encoding and no \texttt{KNOWN};
 mirroring one snub-cube-prism facet changes \texttt{KNOWN} to
-\texttt{REFUTED}. \emph{Runs with the model guard active}: $P_{\mathrm{ctl}}=6$: 136 classes,
+\texttt{REFUTED}. \emph{Recorded controls with the model guard active} (the public
+primary full-mode driver replays $P=16$): $P_{\mathrm{ctl}}=6$: 136 classes,
 168 encodings, 167 \texttt{KNOWN}, one \texttt{REFUTED}; $P_{\max}=10$:
 278, 332, 331, one; $P_{\max}=16$: 563, 629, 628, one; all roots and all
 forcing checks certified, and zero \texttt{OPEN}, search, development and
@@ -1834,11 +1889,14 @@ all 136/278/563 classes complete with 168/332/629 signatures; stage 3
 finds 167/331/628 signatures \texttt{KNOWN} (235/455/890 names matched)
 and one wholly refuted signature at each bound (the extra vertex figure),
 with no \texttt{OPEN} class or realization. Its raw candidate-state counts are
-176/348/657 against \file{checks/check_u3}'s 168/332/629: the restored mirror
+176/348/657 independent realization groups against the primary
+168/332/629 retained encodings (633 complete primary search states at
+$P=16$): the restored mirror
 placements (8/16/28) each have a strict full-star separation contradiction;
-all classification conclusions are the same. \emph{Shared with \texttt{check\_u2}/\file{checks/check_u3}:}
+all classification conclusions are the same. \emph{Shared with \texttt{check\_u2}/\file{checks/primary/check_u3}:}
 the stage-1 class intervals (regenerated as black boxes and matched to the
-30 input pins), the known-name lists and facet-name table, the construction
+30 input pins, with class membership and interval containment additionally
+checked by C8), the known-name lists and facet-name table, the construction
 theorem (\file{checks/model_audit/wythoff_proof.md}), the two exceptional model
 certificate files, the alias table and the separation lemma.
 \subsection{Proof of Theorem~\ref{thm:A}}
@@ -1862,7 +1920,9 @@ the inputs listed in the shared-input discussion in Section~\ref{sec:computation
 \centering\small
 \caption{Counts of the finite computation for the control libraries
 $\mathcal H_6$, $\mathcal H_{10}$ and $\mathcal H_{16}$
-as checked by the full replays. Retained signatures are not
+from the recorded control and full replays. The public wrapper replays
+P6 independent controls and both P16 proof routes; P10 is a recorded
+control, not a command in that wrapper. Retained signatures are not
 exact-existence certificates for every row.}
 \label{tab:counts}
 \begin{tabular}{@{}lrrr@{}}
@@ -1876,13 +1936,12 @@ radius classes / surviving the filter & 760 / 136 & 1,790 / 278 & 4,224 / 563\\
 surviving classes with a known radius & 135 & 277 & 562\\
 vertex-figure signatures & 168 & 332 & 629\\
 distinct known polytopes & 167 & 331 & 628\\
-branches of the extra vertex figure (stuck) & 4 & 4 & 4\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Computed coverage}
-The guarded searches at $P_{\mathrm{ctl}}=6,10,16$ give 136/278/563
+The recorded guarded searches at $P_{\mathrm{ctl}}=6,10,16$ give 136/278/563
 surviving classes and 168/332/629 strict vertex figures, with zero
 undecided or non-strict results. The independent stage-1/B2 replay and
 stage-2/3 replays of Section~\ref{sec:indep} agree. The full $P=16$
@@ -2468,6 +2527,440 @@ points $n=m$ (fractional or out-of-range $m$ is refused before any
 arithmetic, and the checker's output records the parameter domain of every
 row).
 
+\paragraph{Finite geometric realizations and the chart.}
+We give the correspondence for the exact finite input
+\texttt{Composition.Wedge.RealizesWFan}; it is not an assumption that a
+geometric fan already has the program's coordinates. Translate the root
+to $0$. Write its normal and offset as $u,k$. The definition gives
+$|u|=1$ and $0<k<1$, and every fan vertex satisfies
+$|p|=1$, $p\cdot u=k$. Set $c=u/(2k)$ and $R=1/(2k)$.
+On the unit sphere, the latter scalar-product equation is equivalent to
+$|p-c|=R$. A supporting functional $g$ in
+\texttt{SupportingHalfspace} is nonzero, has kernel exactly the span of
+the root and the whole specified fan facet, is nonpositive on every fan
+vertex, and satisfies $g(u)<0$. These are the properties used below.
+
+Put $s=\sin(\pi/n)$ and $C=\cos(\pi/n)$. For finite $n\ge17$,
+$s,C>0$. The unit vectors $a,b$, with $|a-b|=2C$, are independent,
+and an orthogonal coordinate change gives
+\[
+ a=(s,C,0,0,0),\qquad b=(s,-C,0,0,0),\qquad
+ L=\operatorname{span}(e_1,e_2).
+\]
+Their sphere equations give $c_1=1/(2s)$ and $c_2=0$.
+All fan-facet supports vanish on $L$. We write
+$c=e_1/(2s)+\gamma$, $\gamma\in L^\perp$.
+
+\emph{Type (i).}
+The defining distances are $|x_i|=1$,
+$|a-x_i|=|b-x_i|=\sqrt2$, and
+$|x_i-x_{i+1}|=\ch_{q_i}$. The first three give
+$x_i\cdot a=x_i\cdot b=0$, so the lateral points lie in $L^\perp$.
+Their affine plane has dimension two and lies in
+$\gamma\cdot x=1/2$; in particular it misses $0$. Thus, for some unit
+axis $z$ and $d>0$, this plane is $z\cdot x=d$, the circle center is
+$dz$, the circle radius is $S=\sqrt{1-d^2}$, and
+$\gamma=z/(2d)$. The exact kernel of the $i$th support is
+$L+\operatorname{span}(x_i,x_{i+1})$. Its restriction to the lateral
+plane is the supporting line of that polygon edge. Moreover
+$g(c)=g(u)/(2k)<0$ implies $g(dz)<0$. Hence the circle center lies
+strictly inside every edge half-plane. The defining
+\texttt{vertices}, \texttt{injective} and \texttt{cyclic\_edges}
+conditions say that all polygon vertices are traversed once by polygon
+edges; their order is the convex boundary order or its reversal.
+Consequently every successive circle arc is a minor arc, and
+\[
+ \sum_i2\arcsin\bigl(\ch_{q_i}/(2S)\bigr)=2\pi.
+\]
+The strictly decreasing closure equation fixes $S$ uniquely
+(Lemma~\ref{lem:typei}). A rotation and, if needed, reflection of the
+lateral plane now gives exactly \texttt{FanTypeI}'s coordinates.
+The explicit lateral-cone argument below proves the nonnegative axial
+coordinate used by \texttt{FanTypeI.free\_box}; the other two
+coordinates lie in $[-1,1]$ by the unit norm.
+
+\emph{The common trapezoid for types (ii) and (iii).}
+Here the six prescribed distances are $|a-b|=2C$,
+$|x-y|=|a-x|=|b-y|=1$, and
+$|a-y|^2=|b-x|^2=1+2C$, together with the four unit norms.
+Taking scalar products determines
+\[
+ d=\frac{s}{2(1+C)},\qquad
+ x=d e_1+\tfrac12e_2+h e_3,\qquad
+ y=d e_1-\tfrac12e_2+h e_3,\qquad
+ h=\sqrt{1-\frac1{2(1+C)}}>0.
+\]
+Indeed the first two coordinates follow from the products with $a,b$;
+$|x-y|=1$ makes the two transverse residuals equal, and their norm is
+$h$. This orients $e_3$ toward the far edge, explicitly
+$e_3=(x+y-2d e_1)/(2h)$, and gives
+$x-y=(a-b)/(2C)$. Thus the trapezoid is affinely planar, whereas the
+span of its vertices together with the root is the three-dimensional
+space $M=L+\mathbb R e_3$. There is no assertion that the trapezoid's
+affine plane has dimension three.
+Every apex $z_j$ is unit and has distance $\sqrt2$ from each of
+$a,b,x,y$. Its scalar products with all four therefore vanish; hence
+$z_j\perp M$, including $z_j\perp e_3$.
+
+In type (ii), $|z_1-z_2|=\ch_q$, with finite $q\ge3$,
+fixes two independent unit vectors in the two-dimensional space
+$M^\perp$. Up to an orthogonal coordinate change they are
+$z_1=(0,0,0,\sin(\pi/q),\cos(\pi/q))$ and
+$z_2=(0,0,0,\sin(\pi/q),-\cos(\pi/q))$.
+Their equations and that of $x$ fix
+$\gamma=(h/2)e_3+r_q e_4$, precisely \texttt{FanTypeII}.
+The whole facet through $a,b,z_1,z_2$ has kernel
+$L+M^\perp$; since $x$ lies on its inner side and has positive
+$e_3$ coordinate, that side is $p_3\ge0$.
+This proves the first-coordinate restriction $[0,1]$ in its lateral
+free box. Neither an extra apex orientation nor a reflected trapezoid
+produces an omitted shape: these change only the orthogonal frame or
+exchange the two apex labels.
+
+\emph{The branch in type (iii).}
+The extra point $w$ is unit and satisfies
+$|w-a|=|w-b|=\sqrt2$, so $w\perp L$.
+The apex pair is distinct by definition and is not antipodal, since
+$u\cdot z_1=u\cdot z_2=k>0$. Thus $e_3,z_1,z_2$ form a basis of
+$L^\perp$; write $w=\alpha e_3+\beta z_1+\eta z_2$.
+For the pyramid containing $z_1$, the exact supporting kernel is
+$L+\operatorname{span}(e_3,z_1)$. The other apex is outside this kernel
+and on the nonpositive side, so its value is strictly negative.
+Applying this functional to $w$ gives $\eta\ge0$; the other pyramid
+gives $\beta\ge0$.
+For the support through $a,b,z_1,w$, denote the functional by $g$.
+Because $g$ vanishes on $L$,
+$g(e_3)=g(x)/h\le0$; this deduction uses the actual vertex $x$, not an
+assumption that the direction $e_3$ is a vertex. Also $g(z_2)\le0$.
+If $\alpha>0$ and $\eta>0$, then
+$0=g(w)=\alpha g(e_3)+\eta g(z_2)$ forces both values to vanish.
+Together with $g|_L=0$ and $g(z_1)=0$, this makes $g=0$, a contradiction.
+Thus $\alpha>0$ implies $\eta=0$, and the support through $a,b,w,z_2$
+similarly implies $\beta=0$. Unit norm would then give $w=e_3$.
+But $q_1,q_2$ are the two duoprism polygon parameters,
+$|w-z_j|=\ch_{q_j}$, and their unordered pair is
+$(3,3)$, $(3,4)$ or $(3,5)$. At least one required distance is
+$\ch_3=1$, whereas $|e_3-z_j|=\sqrt2$; this is impossible.
+If $\alpha=0$, the sphere equation gives $\beta+\eta=1$.
+A convex combination of two distinct unit vectors has unit norm only at
+an endpoint, so $w$ would equal an apex, contradicting its positive
+prescribed chord distance. We have proved $\alpha<0$.
+
+For completeness, the parameter domain and endpoint exclusions in
+\texttt{FanTypeIII} can be read directly from this argument. Choose
+coordinates in $M^\perp$ such that
+\[
+ z_1=(0,t,\sqrt{1-t^2}),\quad
+ z_2=(0,t,-\sqrt{1-t^2})\quad\hbox{in }L^\perp,\qquad 0<t<1,
+\]
+and put $b_j=-\cos(2\pi/q_j)$.
+The two chord equations and the proved negative sign give
+\[
+ w_4=\frac{b_1+b_2}{2t},\qquad
+ w_5=\frac{b_1-b_2}{2\sqrt{1-t^2}},\qquad
+ w_3=-\sqrt{1-w_4^2-w_5^2}<0.
+\]
+The center is $c=e_1/(2s)+(h/2)e_3+e_4/(2t)$, so
+$w_4/t-1=h|w_3|$. Thus the height, and then
+$C=1/(2(1-h^2))-1$, recover the original $n$.
+For each of the three pairs the constructor certifies
+$(b_1+b_2)2^{19}>1$, excluding $t\le2^{-20}$ by $w_4>1$.
+When $q_1\ne q_2$, it certifies
+$|b_1-b_2|/(2\sqrt{2\,2^{-40}})>1$, excluding
+$t\ge1-2^{-40}$ by $|w_5|>1$.
+For $(q_1,q_2)=(3,3)$ the same upper interval gives
+$w_4/t-1=1/(2t^2)-1<0$, contrary to $h|w_3|>0$.
+The search covers all of $[2^{-20},1-2^{-40}]$, retaining every box
+compatible with the height interval $[h(17),\sqrt3/2]$ and the unit-norm
+equations. It selects no individual root of a squared polynomial.
+Every geometric root therefore occurs in the searched chart;
+reversing $q_1,q_2$ is an isometric relabeling.
+
+\emph{Parameters, free points and supporting inequalities.}
+For the one-parameter type-(i) and type-(ii) charts the map
+$n\mapsto s=\sin(\pi/n)$ covers exactly $(0,\sin(\pi/17)]$;
+its continuous limit $s=0$ is included in the checked box.
+Given lateral coordinates $\xi$, every figure-sphere point has
+\[
+ p_1=s(1-2\gamma\cdot\xi),\qquad
+ p_2=\pm\sqrt{1-p_1^2-|\xi|^2}.
+\]
+Both signs are searched, and the unit-norm bounds and the justified
+nonnegative-coordinate restrictions give the stated free boxes.
+Type (iii) uses the full lateral cube $[-1,1]^3$.
+
+For the four two-parameter charts, the code labels
+\texttt{44}, \texttt{333}, \texttt{36}, \texttt{ii} mean, respectively,
+$(m,4,4)$, $(m,3,3,3)$, $(m,3,6)$ and type (ii) with $q=m$.
+Their explicit points in \texttt{FanFamily.structure} satisfy the same
+unit norms, chords and center equations; the uniqueness arguments above
+identify them with the finite geometric fans. Put
+$\sigma=\sin(\pi/m)$, $\tau=\max(s,\sigma)$ and
+\[
+ \vartheta=\begin{cases}s/\sigma&s\le\sigma,\\
+                         2-\sigma/s&s\ge\sigma,\end{cases}
+ \qquad \lambda=\min(1,\vartheta),\quad
+ \omega=\min(1,2-\vartheta).
+\]
+Then $s=\lambda\tau$, $\sigma=\omega\tau$, and every finite pair
+$n,m\ge17$ has $0<\tau\le\sin(\pi/17)$, $0<\vartheta<2$ and
+$\lambda,\omega>0$. Writing
+$\gamma=e/(2\sigma)+\gamma_0$ and
+$\xi=\omega\Pi e+f$, the sphere equation becomes
+$p_1=\lambda(\tau(1-2\gamma_0\cdot f)-\Pi)$.
+The orthogonal decomposition and all four point lists are given below,
+where an elementary rational bound proves that the searched box
+$[-1.5,1.5]\times[-1,1]^2$ contains every admissible point.
+Dividing facet functions by $\omega$ or $\sigma$ is legitimate for
+finite parameters; the continuous extensions are established below.
+
+For every chart, its facet functions vanish on exactly the prescribed
+whole-facet spans. Their orientations are fixed by the inner sides:
+for types (iii) and the four families, \texttt{check\_orient\_iii} and
+\texttt{check\_orient\_family} certify the off-facet vertex signs on
+interval boxes covering the full parameter domain; an initial sampled
+orientation is only a proposal. The exact equality of the support set
+in \texttt{Realizes} means there is no additional choice of supporting
+halfspace. Thus every checker facet inequality is implied by geometric
+admissibility. Its remaining feasibility inequalities are precisely the
+nonnegative square-root radicand and
+$p\cdot v\le1/2$ for each unit fan vertex $v$, the latter equivalent
+to $|p-v|\ge1$. No direction-test inequality is imposed as a feasibility
+constraint. Tests V and P prove, respectively, the admissible--vertex
+and admissible--admissible distance bounds; test F proves the required
+fan-vertex bounds. The reflection $p_2\mapsto-p_2$ preserves the fan
+set and its inequalities, exchanging $a,b$ and, where present, $x,y$.
+Together with exchanging the pair of points, it reduces the four sign
+pairs to the two searched pairs $(+,+)$ and $(+,-)$.
+The auxiliary D test is not an acceptance requirement.
+
+Finally, the explicit full inventory is
+$70+14+3+36+4=127$: the P1-retained unpaired type-(i) configurations,
+$q=3,\ldots,16$ in type (ii), the three type-(iii) pairs, the 36 bounded
+integer slices, and the four two-parameter families just named.
+The seven exceptional slices are accepted only with their additional
+$n=m$ runs and the recomputed partner-radius singleton. The other
+bounded slices keep the whole real $n\ge17$ domain. The compact boundary
+charts enlarge the finite domains for certification; they do not assert
+additional ambient infinite-radius instances of \texttt{RealizesWFan}.
+
+\paragraph{Admissible points, allowed vertices, and the exact tests.}
+These are different domains. In
+\file{lean/Uniform5/CompositionWedgeInput.lean},
+\texttt{Geometry.Admissible} requires the figure-sphere equations,
+membership in every fan halfspace, and distance at least $1$ from
+\emph{every} fan vertex. Such a point cannot itself be a fan vertex.
+By contrast, \texttt{Geometry.Allowed} means exactly a fan vertex outside
+the distinguished endpoint set; it includes no separation condition.
+Indeed an allowed vertex has distance zero from itself. The statement
+\texttt{W.no\_long\_pair} says that if each of $p,q$ is admissible
+\emph{or} allowed, and $|p-q|\ge\ch_{17}$, then both belong to the fan's
+vertex set. It does not assert that every such pair is short.
+
+Put $\kappa=\cos(2\pi/17)$. For unit points,
+$|p-q|\ge\ch_{17}$ is equivalent to $p\cdot q\le-\kappa$.
+The checker implements the statement by cases. P proves
+$p\cdot q>-\kappa$ for two admissible points; V proves this for one
+admissible point and each fixed fan vertex, hence in particular for an
+allowed vertex. When both points are allowed, the conclusion of
+\texttt{no\_long\_pair} already holds, and neither is submitted to the
+admissible-point search. Its feasibility tests $p\cdot v\le1/2$ for
+all fan vertices $v$ are therefore justified exactly on the domain
+where they are used. P may also certify the equivalent strict bound
+$|p+q|^2>2-2\kappa$.
+The separate field \texttt{W.fan\_distances} requires
+$|p-q|<\ch_{17}$ for fan vertices whose ordered pair is not
+\texttt{specialPair}. The special pairs are the large edge, its partner
+when present, and the type-(i) diagonals. F tests all distinct
+nonspecial pairs; coincident points have distance zero. Diagonal tests
+are reported but are not required for F acceptance. These are precisely
+the V/P/F obligations constructed by
+\file{checks/check_caseb/inventory.py}, \texttt{obligations}, and
+checked by \texttt{summary.validate\_records}. The auxiliary D test
+is neither a feasibility condition nor a required acceptance field.
+
+\paragraph{The lateral cone and coordinate conventions.}
+For type (i) let $N$ be the number of lateral vertices;
+\texttt{TypeIShape} requires $3\le N\le5$, affine dimension two,
+injectivity, exactly these hull vertices, and a hull edge between every
+successive pair. The boundary graph of a convex polygon is a cycle.
+An injective cyclic listing of all its vertices using only hull edges
+therefore follows that boundary once, in one of its two orientations.
+It cannot wind repeatedly or use a star-polygon ordering.
+To make the homogenization argument explicit, write the lateral plane
+as $z\cdot\xi=d>0$, with its circle center $dz$, and write its complete
+edge inequalities in the transverse plane as
+$a_i\cdot y\le b_i$, $b_i>0$. Take $a_i$ to be unit outward edge
+normals and $\ell_i>0$ the corresponding edge lengths. Closure of the
+polygon gives $\sum_i\ell_i a_i=0$. The homogeneous fan inequalities
+are
+$a_i\cdot y\le(b_i/d)t$, where $t=z\cdot\xi$.
+Summing gives $0\le t\sum_i\ell_i b_i/d$, hence $t\ge0$.
+At $t=0$ all inequalities are equalities, and the normals span the
+transverse plane, so $y=0$. For $t>0$, the inequalities say exactly
+$dy/t$ belongs to the polygon. Thus the halfspaces give its conical
+hull and exclude negative axial coordinates.
+In \texttt{FanTypeI}, this axis is the \emph{third lateral coordinate},
+i.e. global coordinate $p_5$ in the displayed five-coordinate chart.
+In \texttt{FanTypeII}, the antiprism axis $e_3$ is the
+\emph{first lateral coordinate}, global $p_3$.
+These are the respective $[0,1]$ restrictions in the two free boxes.
+
+For type (ii), write the lateral coordinates as
+$(\xi_3,\xi_4,\xi_5)$ and put
+$s_q=\sin(\pi/q)>0$, $C_q=\cos(\pi/q)>0$.
+The three inner-side inequalities in \texttt{FanTypeII.evaluate} are
+\[
+ C_q\xi_4-s_q\xi_5\ge0,\qquad
+ C_q\xi_4+s_q\xi_5\ge0,\qquad \xi_3\ge0.
+\]
+The first vanishes on the pyramid with apex
+$z_1=(0,s_q,C_q)$ and has value $2s_qC_q>0$ at $z_2$;
+the second has the reversed roles. The third vanishes on the tetrahedron
+with both apices and has value $h>0$ at $x,y$.
+Their kernels and inner orientations thus equal the three whole-facet
+supports required by \texttt{Realizes}. For type (iii), the four raw
+normal labels are
+$e_3\times z_1$, $e_3\times z_2$, $z_1\times w$, $w\times z_2$;
+\texttt{FanTypeIII.orient} supplies their signs, certified throughout
+the retained parameter interval by \texttt{check\_orient\_iii}.
+For the four families the labels are the ordered vertex pairs in each
+branch of \texttt{FanFamily.structure}; their signs are certified by
+\texttt{check\_orient\_family}. These checks use interval boxes over
+the full domain, not just the sample proposing the signs.
+For the equal type-(iii) pair $(3,3)$, the omitted upper endpoint
+interval $t\ge1-2^{-40}$ satisfies $t>1/\sqrt2$ and hence
+$1/(2t^2)-1<0$, whereas the sphere equation requires this quantity to be
+$h|w_3|>0$. This is the explicit upper-end exclusion for that pair.
+
+\paragraph{The four family charts and their bounds.}
+Here is the meaning of the coordinates used in
+\file{checks/check_caseb/fans.py}, \texttt{FanFamily.structure},
+\texttt{vertices}, \texttt{facet\_value}, and \texttt{evaluate}.
+In $L^\perp$, let $e$ be the unit direction of the midpoint of the
+partner edge: $(x_1+x_2)/(2\sigma)$ in the three type-(i) families,
+and $(z_1+z_2)/(2\sigma)$ in type (ii), where
+$\sigma=\sin(\pi/m)>0$.
+Let $E=L^\perp\cap e^\perp$ and choose the orthonormal ordered basis of
+$E$ used below. Thus $E$ is a two-dimensional Euclidean space.
+The center component is
+$\gamma=e/(2\sigma)+\gamma_0$ with $\gamma_0\in E$.
+A free lateral vector is written
+$\xi=\omega\Pi e+f$, where $f=f_1e'_1+f_2e'_2\in E$;
+$\Pi$ is a real coordinate, not an additional geometric direction.
+Write $C_m=\sqrt{1-\sigma^2}$,
+$h_j=\sqrt{1-1/(2(1+\cos(\pi/j)))}$,
+$d_m=\sqrt{1-1/(4C_m^2)}$ and
+$\chi=1/(2(1+C_m))$.
+In the notation $(\xi\cdot e;f_1,f_2)$, the lateral vertices are
+For label 44 the vertices and center component are
+\[
+ (\sigma;C_m,0),\ (\sigma;-C_m,0),\ (0;0,1),
+ \qquad \gamma_0=(0,1/2).
+\]
+For label 333 they are
+\[
+\begin{gathered}
+ (\sigma;C_m,0),\ (\sigma;-C_m,0),\
+ (\sigma\chi;-1/2,h_m),\ (\sigma\chi;1/2,h_m),\\
+ \gamma_0=(0,h_m/2).
+\end{gathered}
+\]
+For label 36 they are
+\[
+ (\sigma;C_m,0),\ (\sigma;-C_m,0),\
+ (0;-1/(2C_m),d_m),\qquad \gamma_0=(0,1/(2d_m)).
+\]
+For label ii the apices and center component are
+\[
+ z_1=(\sigma;0,C_m),\quad z_2=(\sigma;0,-C_m),
+ \qquad \gamma_0=(h_n/2,0).
+\]
+For label ii the remaining vertices $x,y$ have lateral component
+$(0;h_n,0)$ and $L$ components $(d,\pm1/2)$ from the trapezoid formula.
+Thus $e'_1$ is the antiprism axis for that label.
+Direct substitution gives
+$|\gamma_0|=1/2$ for 44,
+$|\gamma_0|=h_m/2\le\sqrt3/4$ for 333,
+$|\gamma_0|=h_n/2\le\sqrt3/4$ for ii, and
+$|\gamma_0|=1/(2d_m)$ for 36.
+
+For an explicit rational common bound, use
+$\tau\le\sin(\pi/17)<23/125$. For example the last strict inequality
+follows from $\pi<22/7$ and
+$\sin x\le x-x^3/6+x^5/120$ at $x=22/119$.
+It gives $C_m^2>15096/15625$ and therefore, in family 36,
+\[
+ |\gamma_0|^2<\frac{15096}{44759}<\frac{625}{1849},
+ \qquad |\gamma_0|<\frac{25}{43}.
+\]
+The other three displayed bounds are smaller. For $\vartheta\le1$,
+$\omega=1$, so $|\Pi|=|\xi\cdot e|\le1$.
+For $\vartheta\ge1$, $\lambda=1$ and the sphere equation gives
+\[
+ |\Pi|\le |p_1|+\tau(1+2|\gamma_0||f|)
+ <1+\frac{23}{125}\left(1+\frac{50}{43}\right)
+ =\frac{7514}{5375}<\frac{141}{100}.
+\]
+Here $|p_1|,|f|\le1$ follows from the unit norm and the orthogonal
+coordinate decomposition. This proves the full free-box coverage;
+\texttt{certify\_family\_chart} checks the corresponding bounds on
+the live formulas before searching.
+
+The rescaled expressions have no singular divisions at compact chart
+boundaries. To see this algebraically, for a facet pair write its lateral
+vertices as $u_A=(\sigma\chi_A,a_1,a_2)$ and
+$u_B=(\sigma\chi_B,b_1,b_2)$. Put
+$N_e=a_1b_2-a_2b_1$ and
+$N_t=(\chi_Ba_2-\chi_Ab_2,\chi_Ab_1-\chi_Ba_1)$.
+Then, since $\sigma=\omega\tau$,
+\[
+ (u_A\times u_B)\cdot\xi
+ =\omega\bigl(N_e\Pi+\tau N_t\cdot f\bigr).
+\]
+For the partner facet $N_e=0$, and dividing instead by $\sigma$
+gives $N_t\cdot f$. These are exactly the two branches of
+\texttt{facet\_value}. After these divisions, legitimate for every
+finite parameter pair, the displayed formulas extend continuously to
+$\tau=0$ or $\vartheta=0,2$.
+The quantities $C_m,h_m,d_m,\chi,\gamma_0$ also extend continuously:
+their displayed denominators and square-root arguments stay bounded
+away from zero on the compact domain. Point coordinates,
+$p_1=\lambda(\tau(1-2\gamma_0\cdot f)-\Pi)$,
+$\xi=\omega\Pi e+f$, and the nonnegative square-root branches for
+$p_2$ contain no division by a vanishing parameter. Hence all unit-point
+dot products and squared distances used by V/P/F extend continuously on
+their feasible domains. Compact boundary points are only an enlargement
+used for bounds, not extra finite ambient fan instances.
+
+\paragraph{Unpaired families and bounded slices.}
+A fan about a large $n$-gon is called paired when one of its facets
+contains a second large polygon through the vertex. In type (i) this
+means an entry $m\ge17$ in the configuration; in type (ii) it means
+$q=m\ge17$. Otherwise the fan is unpaired.
+The term ``family polygon'' in P1 has a different, explicit meaning:
+its size belongs to $\{7,9,11,12,13,14,15,16\}$. These are all at most
+16, even though the lower-dimensional classification forces product
+facets at them. Among the 137 closable small configurations, 83 contain
+such a size, 67 are excluded, and the other 16 are
+$(4,4,q)$ and $(3,3,3,q)$ for those eight $q$ values. They remain
+\emph{unpaired} about the large $n$-gon. Together with the 54 closable
+configurations without a family polygon, they give the 70 unpaired
+rows in the W inventory.
+
+The 36 bounded paired rows are precisely
+$(m,3,7)$ for $17\le m\le41$ (25 rows),
+$(m,3,8)$ for $17\le m\le23$ (7),
+$(17,3,9)$ (1), and $(m,4,5)$ for $17\le m\le19$ (3).
+Each is constructed by \texttt{FanBounded(m,rest)}, a
+\texttt{FanTypeI} chart with the listed integer $m$ fixed and the whole
+continuous $s=\sin(\pi/n)$ domain retained.
+Only $(38,3,7),\ldots,(41,3,7),(23,3,8),(17,3,9),(19,4,5)$ require the
+separate \texttt{restrict\_n(m)} chart. They are accepted at $n=m$ only
+after \texttt{summary.validate\_records} recomputes the partner filter's
+matching singleton. No continuous extension in the bounded parameter
+$m$, and no unrestricted conclusion for those seven rows, is asserted.
+
 \noindent\emph{The seven exceptional fans.} Over the full range of $n$,
 (W) fails for $(m,3,7)$, $m=38,\dots,41$, $(23,3,8)$, $(17,3,9)$, $(19,4,5)$,
 with rigorous interval witnesses at large finite $n$ (e.g.\ $n=547$ for
@@ -2544,11 +3037,16 @@ requires an explicit inventory (full, supplementary or quick), rejects
 duplicates, omissions, extra fans, wrong domains and missing or pending
 V/P/F tests, and accepts an exceptional fan's point $n=m$ only with the
 partner filter's singleton recomputed. Corruption tests exercise these requirements. The full replay checks
-228 Arb records (184 \texttt{CERTIFIED}, 31 \texttt{NOT CLOSABLE}, 3
-\texttt{DEGENERATE}, 10 expected \texttt{FAILED}) and its seven points;
+228 Arb records, partitioned as $127+67+31+3$: required fans,
+P1-excluded supplementary fans, nonclosable rows and degenerate rows.
+The 31 nonclosable rows are 28 bounded type-i configurations and three
+paired nonclosable families. The outcomes are 184 \texttt{CERTIFIED}, 31 \texttt{NOT CLOSABLE}, 3
+\texttt{DEGENERATE}, 10 expected \texttt{FAILED}, with seven point repairs;
 independent 127 full-domain fans (120 certified, 7 expected failures), seven
-certified points, 64 of 67 supplementary fans, 1,642 required V/P tests all
-passed. So both implementations prove the
+certified points. The independent supplementary 64-of-67 result and
+1,642-test diagnostic summary are recorded supplementary evidence; full
+mode does not rerun that supplementary inventory. The primary 228-row
+replay does include those supplementary configurations. So both implementations prove the
 whole of Computation~\ref{comp:W}, including the ``Moreover'' clause; the
 pairs with an end at $a$, $b$ or a partner end are still left by the
 Arb implementation to Lemma~\ref{lem:long} and Fact~\ref{fact:F3}.
@@ -2756,7 +3254,7 @@ undecided case stops the computation or is reported \texttt{OPEN}, and the
 final runs report zero such cases. Floating-point arithmetic is used to
 propose (orderings, candidate correspondences, witnesses); the one
 remaining decision made from a double is covered by the proved coordinate
-lemma of Section~\ref{sec:U3}. The \file{checks/check_u3/} geometric and transcendental routines and
+lemma of Section~\ref{sec:U3}. The \file{checks/primary/check_u3/} geometric and transcendental routines and
 \file{checks/check_caseb/} use \texttt{mpmath.iv}, exact arithmetic or
 outward-rounded binary64 intervals. Those routines avoid Arb, but the
 complete replay also calls exact model and root-audit code using Arb.
@@ -2922,6 +3420,411 @@ computational hypotheses with the two cited classifications; their joint
 truth rests on these written arguments and the external checkers.
 A kernel proof of their implication alone proves neither their truth nor
 their joint satisfiability. The classification is not a whole-theorem Lean proof.
+
+
+\subsection{External hypothesis evidence map}\label{sec:hypothesis-map}
+Table~\ref{tab:hypothesis-map} maps the twelve declarations of
+Appendix~\ref{app:lean-inputs} and four classification burdens to the
+written arguments and executable evidence. Paragraphs are identified by
+opening words, result names or numbered steps. The corresponding reader
+reference, \file{data/hypothesis-map.md}, includes the full command ledger
+and the count convention. ``External'' here means written proof together
+with certified computation, not a concrete Lean instance. The two cited
+lower-dimensional classifications are additional premises, not outputs of
+these scripts.
+
+These are commands and expected outputs. The separate
+\file{data/replay-v2.json} records the earlier October 20 standalone full
+replay and its first v2 additions. It does not claim execution of the
+subsequently added primary-program and report-bridge checks C9 and C10.
+
+Version 2 corrects an evidence omission in version 1: the primary
+programs named in the proof route and the source of the Lean report were
+absent from the bundle. The programs are now shipped under
+\file{checks/primary/}; C9 replays them. C10 regenerates the entire
+629-row Lean file from the shipped source and compares every logical row
+with fresh independent stage-3 output. This closes the executable table
+correspondence. It does not construct a joint exact numerical instance
+of the twelve Lean hypotheses: their universal geometric interpretation
+still uses the written proofs. In particular, interval MATCH is never
+asserted to establish exact equality.
+
+\begingroup\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.28\textwidth}@{}}
+\caption{External arguments and executable evidence. C1--C11 refer to the commands below.}\label{tab:hypothesis-map}\\
+\toprule
+Input or burden & Written argument & Command and expected output & Scope and limitation\\\midrule
+\endfirsthead
+\toprule Input or burden & Written argument & Command and expected output & Scope and limitation\\\midrule
+\endhead
+LIB & §3.2, LIB and LINK, paragraphs “What is computed” and “What is checked”; “A word determines its angle” proof; §3.3 construction paragraphs. & C1: \file{library_verify.py}, \file{library.py}, \file{parabolic.py}, \file{exceptional.py}; 181 types, 558 words, 1,277 polygon occurrences, containment and corruption checks pass. Exceptional models also run in C7. & External model/geometry correspondence. Construction proofs and cited 4-D classification remain premises; matching inventory counts alone is insufficient.\\\addlinespace
+S1 & §4.1, S1 and “What is computed”, then “Proof route”; exact exclusions in §3.2, “Exact inputs of the exclusions”. & C1: \file{stage1.py}, \file{verify_stage1.py}, \file{compare.py}; 14,965 cycles, 7,080 flat, 57 degenerate, 537 rootless, 7,291 retained roots; full canonical-word comparison and corruptions pass. & Coverage on the extended domain, not a bound of $10^{-20}$ on merged intervals. The stopping tolerance applies to leaves only.\\\addlinespace
+S2 & §4.2, S2, paragraph “Why such a search is exhaustive”, and “Exact equivalence of placements” proof. & C2: \file{stage2.py}, \file{run.py}, \file{check_equivalence.py}; 563 complete classes, 629 signatures; 181 models and 5,108 ordered equivalences checked. Class 25 alone has no signature. & Coverage of all actual figures at every radius in each class; retained encodings need not be realizable. Uncertain predicates must remain OPEN.\\\addlinespace
+ROOT & §4.4.1, ROOT and paragraph “Proof route”; §4.5.3, step 2. & C2: \file{s3_cycles.py}, \file{s3_radius.py}; Whole-class UNIQUE witnesses cover all 629 signatures, including the refuted signature. C6 tests wide intervals and corrupt closure constants. & Endpoint signs, derivative exclusion and continuity supply uniqueness. The final JSON audit checks coverage, not the derivative proof by itself.\\\addlinespace
+DEV & §4.4.3, opening paragraph, DEV and “What is checked”; §4.5.3, step 5. & C2: \file{s3_develop.py}; extra radius-one signature REFUTED, zero OPEN; C6 recovers a known radius-one control and refutes the extra star, with uncertainty controls OPEN. & Refutes a full actual incident-facet star with the same root and center, conditional on the written geometry-to-encoding correspondence. C9 replays the primary encoding and C10 binds the same extra candidate to Lean row 12 by full cycle-word signature. Neither existence of the extra encoding nor exclusion based on an unlabeled figure alone is asserted.\\\addlinespace
+B2 & §5.2, cycle-types proof; §5.3, three type-radius derivations; §5.4, “Reduction to a finite check”, “Proof route”, “Second implementation”, “Input identity”. & C1: \file{b2.py}, \file{verify_b2.sh}; 496,824 / 150,495 / 1,905 radii of types i/ii/iii, zero coincidences or undecided cases. \file{check_result.py}: 649,224 total, cutoff 398, disagreements 0. & Covers all integer n $\ge$ 17 using the written tail bound r\_398 > max Ω and all polynomial roots in (-1,1). A finite loop without that reduction is insufficient.\\\addlinespace
+P1 & §5.3, Type-(i) radius and closed-forms proofs; §5.6.1, P1 and paragraph “Hence the 67 configurations”. & C3: \file{p1check.py}; 168 configurations, 137 closable, 28 nonclosable, 3 degenerate, 83 family, 67 excluded, 16 survivors. C4: \file{p1_literal_contract.py}; all 67 literal rational-range separations > 1/2000. & C4 closes an evidence omission: the earlier program could use tighter discrete/tail bounds instead of the literal wider intervals in P1Separated. Universal delta ranges use the written monotonicity proof, not samples of n.\\\addlinespace
+W & §5.6.2, W; paragraphs “Scope of the two implementations”, “Parameter domains”, “Finite geometric realizations and the chart”, “What is computed”, “Completeness of computed results”; W-use proof. & C3: \file{fans.py}, \file{wcheck.py}, \file{w_bound.py} installed as \file{bnb.py}, \file{summary.py}; 127 full-domain fans, 120 certified, seven expected full-domain failures with seven certified n=m repairs. C5: \file{chartcheck.py}, four chart families and four rejected corruptions. & Finite geometric realizations only. New explicit chart paragraph supplies the coordinate-independent correspondence. Bounded partner parameters are 36 integer slices, not a real interval; seven exceptional fans are restricted to n=m.\\\addlinespace
+Partner\newline Radius\newline Filter & §5.6.2, “The seven exceptional fans”, Partner-radius filter lemma and proof beginning “From F”. & C3: \file{summary.py} calls \file{partner.allowed}; all seven exceptional slices have exactly the matching singleton partner, and the full summary is ACCEPTED. & Both type-II exclusion and equality forcing use the radius equation, interval separation and written infinite-tail bounds. Running \file{partner.py} alone produces no audit.\\\addlinespace
+U3\newline Realiza\-tions & §4.5.3, Rooted determinism proof and step 1 “Realization coverage”; §4.5.4, “Stages 2 and 3”. & C2 + C9 + C10 + C11: \file{stage3.py}, primary \file{search.py} and \file{canon.py}, and \file{report_bridge.py}; 629 signatures and 657 independent realization groups, including 28 additional mirror placements excluded by separation; no OPEN. & C9 regenerates the primary signatures and raw encoding report; C10 checks its class/signature row correspondence with C2. Geometry-to-encoding completeness and fixed-radius rigidity remain written arguments, not concrete Lean instances.\\\addlinespace
+U3\newline Identifi\-cation & §3.3, construction paragraphs; §4.5.3, step 3 “Identification by elimination”, and “stage 3, proof route” proposition proof. & C2 + C9 + C10: \file{s3_identify.py}, \file{models.py}, primary \file{identify.py} and the report bridge; 628 known signatures, 890 matched construction names, one wholly refuted signature, no OPEN. C6 rejects incomplete coverage. & Exact neighbor counts or exhaustive strict frame exclusions justify NO. POSSIBLE/MATCH interval overlap is not equality; existence of known constructions plus exhaustive elimination supplies identification. C10 checks all 890 MATCH, 230 NO-COUNT and 32 NO row/name pairs. Their exact-geometric soundness remains the written argument.\\\addlinespace
+U3\newline Forcing & §4.5.3, step 4 “Local uniqueness”, with Rooted determinism; independently §4.4.2, Coset comparison proof. & C2 + C9 + C10: \file{s3_stars.py} and primary \file{locuniq.py}; surviving known realizations have FORCED local uniqueness. C6 tests complete matching, symmetry and uncertainty controls. & The primary anchored-code route and independent coset route both run. C10 compares their FORCED flags for all 629 primary-corresponding rows, including the extra; 28 mirror alternatives are separate exclusions. Exact universal geometric meaning is supplied externally, not by the flags alone.\\\addlinespace
+Exhaus\-tiveness of local enumeration & §3.1 Library completeness; §4.1 complete closed walks and angle bound; §4.2 exhaustive opposite-hinge search; §4.5.3 step 1 and rooted rigidity. & C1 + C8 + C2 + C9 + C10 + C11, including equivalence/orientation coverage: 14,965 cycles $\to$ 563 classes $\to$ 629 signatures, no OPEN. & Enumerating known constructions alone would not prove completeness. Classification inputs, pruning soundness and geometry-to-encoding proofs remain external.\\\addlinespace
+Identifi\-cation and exclusion of retained signatures & §4.5.3 steps 2–4 and proposition proof; §4.6 proof of Case A. & C2: 628 known signatures, 890 names; 28 extra mirror realizations excluded by separation; all surviving known continuations forced. & Do not identify interval overlap with exact congruence or confuse 890 construction names with 628 objects. C9 and C10 now connect both executable routes to the Lean table; exact geometric soundness remains external.\\\addlinespace
+Extra candidate & §4.4.3 DEV and “What is checked”; §4.5.3 step 5. & C2 + C6: the radius-one, eight-vertex figure's actual-star continuations all die; limits and uncertain identities remain OPEN. & C2 is required for full P16 coverage, beyond the small radius-one control. C10 checks the full signature and binds the extra candidate to Lean row 12; C9 replays its primary development.\\\addlinespace
+At least 17 sides; unbounded parameters & §5.4 B2 corollary; §5.5 exactly-one-large-face product proof; §5.6.3 reduction to two paired faces; §5.6.4 paired theorem; §5.7 proof of Case B. & C1 + C3 + C4 + C5; optional Lean build checks their conditional geometric composition. & All-parameter coverage comes from the tail inequalities, finite charts, integer exceptions and structural product proof. Neither P=16 enumeration nor sampled large parameters supplies it.\\\addlinespace
+\bottomrule
+\end{longtable}
+\endgroup
+
+\paragraph{Literal contract clauses and data transport.}
+The following field names refer to Appendix~A. Each contract requires a
+written interpretation of numerical data as exact geometry; no Python
+command constructs a Lean proof term. P16 restricts polygon sizes in the
+finite library to at most 16. The audit field
+\texttt{historical\_comparison=false} means that the S3 audit checks the
+new run's coverage and provenance rather than agreement with an old S3
+result; it does not mean that inputs are unshared.
+
+\paragraph{LIB.}
+\texttt{model\_named}, \texttt{model\_hull} and
+\texttt{vertices\_exact} use the construction proofs and exact face
+certificates. \texttt{radius\_enclosed}, \texttt{coordinates\_enclosed}
+and \texttt{angles\_enclosed} use rigorous coordinate and radius
+bounds and the word-angle proof. C1 rebuilds the local library and checks
+containment; C7 also checks exceptional whole models. Count agreement
+alone does not validate arbitrary real-valued Lean model data.
+
+\paragraph{S1.}
+\texttt{cycle\_count}, \texttt{listed\_admissible},
+\texttt{distinct\_classes} and \texttt{complete} use exhaustive canonical
+closed-walk enumeration and the angle-length bound.
+\texttt{reciprocal\_enclosed} and \texttt{roots\_cover} combine exact
+maximum-radius bounds, the extended reciprocal domain and certified root
+isolation. \texttt{with\_roots}, \texttt{without\_roots},
+\texttt{flat\_exact}, \texttt{flat\_count},
+\texttt{degenerate\_exact} and \texttt{degenerate\_count} use C1's exact
+status tests and inventories. Root intervals cover all zeros, including
+domain endpoints; small subdivision leaves may merge into larger intervals.
+
+\paragraph{S2.}
+\texttt{signature\_count} and \texttt{empty\_class} are finite
+accounting, including the explicit empty triangle-cycle class 25.
+\texttt{complete} covers every actual figure at every radius in each
+surviving class. Its proof requires exhaustive hinges and labels and exact
+placement equivalences, not merely the count 629. C8 checks the class and
+interval connection from C1 to C2.
+
+\paragraph{ROOT.}
+\texttt{edge\_root} covers every retained signature, including those not
+marked \texttt{KNOWN}. It requires strict opposite endpoint signs, a
+nonzero derivative throughout the reciprocal class hull, and a unique
+zero. C2 computes these witnesses; its final count script requires a
+whole-class \texttt{UNIQUE} witness for each of the 629 signatures,
+including the wholly refuted one. That script checks report coverage;
+\file{checks/independent-s23/s3_radius.py} supplies the interval argument.
+
+\paragraph{DEV.}
+\texttt{refutation} concerns a hypothetical uniform polytope with the
+refuted encoding's actual root, center and full incident-facet star.
+U3Realizations' written coverage and encoding correspondence place it in
+the appropriate realization list; C2 exhausts its independent geometric
+realization/development route; C9 replays the primary route. C10 checks
+the full cyclic signature and binds the extra candidate to class 18,
+figure 0, Lean row 12. Figure shape alone and C6 alone do not establish full coverage.
+
+\paragraph{B2.}
+\texttt{type\_i}, \texttt{type\_ii} and \texttt{type\_iii} quantify
+over integers $n\ge17$ and their respective allowed configurations and
+parameters; the third includes every polynomial root in $(-1,1)$. C1
+checks the finite residual ranges; the written cutoff and exact
+$\Omega$ containment supply the infinite tail. The geometric definition
+of \texttt{stageOneOmega} is linked externally to the recorded enclosing
+intervals, rather than to an arbitrarily substituted $\Omega$.
+
+\paragraph{P1.}
+The data fields \texttt{configurations}, \texttt{closable},
+\texttt{nonclosable}, \texttt{degenerate}, \texttt{family} and
+\texttt{excluded} are C3's six finite inventory sets. Their count fields
+\texttt{configurations\_count}, \texttt{closable\_count},
+\texttt{nonclosable\_count}, \texttt{degenerate\_count},
+\texttt{family\_count} and \texttt{excluded\_count} require, respectively,
+168, 137, 28, 3, 83 and 67. The five equivalences
+\texttt{configurations\_iff}, \texttt{closable\_iff},
+\texttt{nonclosable\_iff}, \texttt{degenerate\_iff},
+\texttt{family\_iff}, together with \texttt{excluded\_subset},
+link those sets to the stated predicates.
+\texttt{separation} uses C4's literal
+rational ranges and all 36 bounded tails. \texttt{delta44},
+\texttt{delta333\_range} and \texttt{delta36\_range} require the written
+identities and monotonicity argument, not samples of $n$.
+\texttt{survivors} gives 16 literal family configurations. The other 54
+closable configurations have no family-size polygon; together they form
+all 70 unpaired type-i W fans, so none is dropped.
+
+\paragraph{W.}
+\texttt{no\_long\_pair} and \texttt{fan\_distances} are distinct
+obligations on every finite \texttt{RealizesWFan}, with the exact
+\texttt{WListed} domains and allowed points. C3 checks them through the
+chart correspondence and supporting inequalities. C5 supplies only the
+free-box bound for four unbounded paired families, not all 127 fans.
+The chart correspondence remains a written proof obligation and does not
+follow from numerical success alone.
+
+\paragraph{PartnerRadiusFilter.}
+\texttt{exclude\_ii} separates the antiprism-height alternative;
+\texttt{force\_equal} compares each of seven exceptional slices with the
+three unbounded tail families and 36 bounded integer tails. C3 recomputes
+the seven singleton lists, and monotonic closed-form bounds cover the
+unbounded tails. The literal \texttt{PartnerTail} domain excludes the
+extra sampled nonclosable tails in diagnostic code.
+
+\paragraph{U3Realizations.}
+Row, class and signature accounting uses \texttt{class\_valid},
+\texttt{class\_indices}, \texttt{signature\_valid},
+\texttt{signature\_complete}, and \texttt{signature\_indices}.
+\texttt{complete} covers all full geometric stars;
+\texttt{encoding\_rigid} requires equal radius and equal full rooted
+encoding to imply star congruence. C2 checks its independent coverage and
+rigid template correspondences. C9 replays the primary raw encoding
+and C10 checks its full logical row projection against C2 and the Lean table. Rooted determinism supplies the external semantic argument.
+
+\paragraph{U3Identification.}
+\texttt{admitted} requires actual known uniform models, their roots,
+centers and radii, and full library-facet admission, using the construction
+proofs and C2's model checks. \texttt{soundNO} and \texttt{soundNOCOUNT}
+require strict exhaustive frame rejection and exact neighbor counts.
+C9 replays the primary raw encoding. C10 checks each row/name elimination
+against both the independent report and the Lean table.
+
+There is no further MATCH or completeness field in U3Identification:
+coverage comes from U3Realizations, and finite other-row exclusions plus
+the soundness fields give the derived \texttt{identified\_row} theorem.
+
+\paragraph{U3Forcing.}
+\texttt{checked} supplies \texttt{U3ForcingCheck} for every flagged row
+and admissible geometric star. Its four fields are \texttt{complete},
+\texttt{retained\_nonempty}, \texttt{encoding\_unique} and
+\texttt{encoding\_sound}. The primary argument uses complete centered
+candidate maps and anchored exact codes. C2 establishes geometric
+continuation forcing by another encoding/coset route. C9 replays the
+primary anchored-code implementation; C10 checks the row flags against
+the independent report and Lean table. Those checks do not construct
+the exact universal Lean contract.
+
+\paragraph{Limits of the data correspondence.}
+The primary programs, their source report and the table generator are
+now shipped. The former packaging limitation is corrected. Separate
+successful computations do not establish jointly satisfiable Lean data. Exporting
+floating-point or interval tables as Lean literals would not suffice:
+the fields also require exact real models, functions, isometries and
+universal geometry-to-data correspondences.
+
+For the headline statement, see
+\file{lean/Uniform5/CompositionGeometry.lean}
+(\texttt{Uniform}, \texttt{UnitUniform}),
+\file{lean/Uniform5/CompositionKnownFiveNames.lean},\linebreak{} and
+\file{lean/Uniform5/CompositionMainClassification.lean}, as explained in
+Section~\ref{sec:lean} and \file{lean/README.md}. The toolchain is Lean v4.19.0;
+\file{lean/lake-manifest.json} pins Mathlib to
+\texttt{c44e0c8ee63ca166450922a373c7409c5d26b00b}.
+\file{lean/Audit.lean} rejects every collected axiom other than the three
+listed foundations, including \texttt{sorryAx} and
+\texttt{Lean.ofReduceBool} if present. It audits logical dependencies,
+not every compiler or foreign-function execution path; no stronger audit
+of \texttt{extern} or \texttt{implemented\_by} is asserted.
+
+The lower-dimensional premise is M\"oller's 2004 thesis and corresponding
+\emph{Results in Mathematics} article
+(\href{https://doi.org/10.1007/BF03322887}{doi:10.1007/BF03322887}),
+following Conway--Guy's list, together with the cited convex
+uniform-polyhedron classification. These published classification
+premises are not re-proved or independently referee-reviewed by this bundle.
+
+\paragraph{Commands C1--C11.}
+Use the documented requirements and let \texttt{PY} denote their absolute
+Python interpreter, \texttt{OUT} a fresh absolute output directory.
+Commands start at the bundle root. C1 is
+\begin{verbatim}
+PYTHON="$PY" bash checks/independent-s1-b2/verify.sh
+\end{verbatim}
+C2 is the full stage-2/3 replay and count extraction:
+\begin{verbatim}
+mkdir -p "$OUT"
+(cd checks/independent-s23
+ "$PY" unpack_inputs.py "$OUT/input" --pmax 16
+ "$PY" run.py "$OUT/input/u2_classes_p16.json" "$OUT/s2.jsonl" --states
+ "$PY" check_equivalence.py "$OUT/input/u2_classes_p16.json" \
+   certificates/equivalences-p16.json
+ "$PY" stage3.py --states "$OUT/s2.jsonl" --models models \
+   --known "$OUT/input/u3_known_p16.json" \
+   --output "$OUT/s3.jsonl" --jobs 2
+ "$PY" audit_stage3.py --classes "$OUT/input/u2_classes_p16.json" \
+   --states "$OUT/s2.jsonl" --results "$OUT/s3.jsonl" --models models \
+   --known "$OUT/input/u3_known_p16.json" --pmax 16 \
+   --receipt "$OUT/s3.jsonl.frozen.json")
+"$PY" checks/count_convention.py "$OUT/s3.jsonl" \
+  --known "$OUT/input/u3_known_p16.json" \
+  --classes "$OUT/input/u2_classes_p16.json"
+"$PY" checks/test_v2_outcomes.py "$OUT/s3.jsonl"
+\end{verbatim}
+Every command must exit zero. The S3 audit expects PASS, 563 classes,
+629 signatures and 657 realization groups: 628 known groups, 28 mirror
+alternatives excluded by strict full-star separation, and the additional
+candidate refuted by development. The raw schema uses REFUTED for both
+kinds of exclusion; their geometric reasons differ.
+C3 runs the full Case B check in a disposable copy:
+\begin{verbatim}
+mkdir -p "$OUT/caseb"
+cp -R checks/check_caseb "$OUT/caseb/check_caseb"
+cp checks/w_bound.py "$OUT/caseb/check_caseb/bnb.py"
+PYTHON="$PY" bash "$OUT/caseb/check_caseb/run.sh" full
+\end{verbatim}
+It must end with ACCEPTED and ALL OK, with precisely the seven expected
+full-domain failures and their restricted-point certifications.
+C4 checks the literal wider rational intervals of P1Separated:
+\begin{verbatim}
+"$PY" checks/p1_literal_contract.py
+\end{verbatim}
+It requires all 67 clauses, with all selected separations greater than
+$1/2000$. C5 checks four free-box chart bounds and rejects four corruptions:
+\begin{verbatim}
+"$PY" checks/check_caseb/chartcheck.py \
+  checks/repair-caseb-w/chart-certificate.json
+\end{verbatim}
+C6 runs small controls, not the P16 classification:
+\begin{verbatim}
+(cd checks/independent-s23
+ "$PY" test_r1_stage3.py
+ "$PY" test_stage3.py)
+\end{verbatim}
+It requires the known/refuted radius-one controls, 74,963 brute-force
+matching comparisons, and the simplex/uncertainty corruption checks.
+C7 runs all public computational obligations:
+\begin{verbatim}
+PYTHON="$PY" bash checks/verify-public.sh full
+\end{verbatim}
+The expected final line is
+\texttt{uniform-5-polytopes public full: PASS}. It includes the literal
+P1 check and the count extraction on fresh P16 output. It neither runs
+Lean nor automatically verifies these written mathematical arguments.
+C8 checks the connection from stage one to the packed stage-two inputs:
+\begin{verbatim}
+mkdir -p "$OUT/filter"
+cp -R checks data "$OUT/filter/"
+"$PY" "$OUT/filter/checks/check_filter.py"
+\end{verbatim}
+Run C1 before C8, then C2. C1's \file{verify_stage1.py/equal_file}
+compares the fresh parsed cycles with
+\file{checks/independent-s1-b2/evidence/cycles.json.gz}; C8 reads that
+same authenticated file. Equality followed by recomputation connects
+these commands without an ephemeral filename. C2 alone is not full
+acceptance: all C7 parts must pass. C8 checks the complete canonical cycle sets, strict pairwise disjointness
+of the closed class hulls, and requires each consumer
+interval to contain the regenerated surviving stage-one roots, using
+exact rational endpoints. Expected: PASS, 4,224 initial P16 classes and
+563 survivors; interval coverage counts P6/P10/P16 are 136/278/563;
+three semantic filter corruptions and narrowed consumer intervals are
+rejected. C7 includes this check. Thus the data connection is
+C1--C8--C2, not an unexplained fixed list of 563 classes.
+
+
+C9 replays the primary proof route in four independent parts:
+\begin{verbatim}
+"$PY" checks/replay_primary.py --part all --jobs 2 \
+  --out "$OUT/primary"
+\end{verbatim}
+Alternatively run \texttt{library}, \texttt{s23}, \texttt{caseb} and
+\texttt{wedge} with separate output directories. Expected: 181 models,
+14,965 cycles, 563 surviving classes, 629 primary encodings (633 search
+states), 628 known, one refuted, 890 names and all root/forcing checks.
+The primary W inventory has 228 rows: 184 certified, 31 nonclosable,
+three degenerate and ten expected unrestricted failures. Seven admissible
+exceptional slices are repaired at $n=m$; the other three failed rows
+are supplementary fans $(3,11,13)$, $(4,7,9)$ and $(5,6,7)$, separately
+excluded by P1. No unrestricted failed fan is certified.
+
+C10 regenerates and compares the Lean report:
+\begin{verbatim}
+"$PY" checks/report_bridge.py --write "$OUT/CompositionU3ReportP16.lean"
+"$PY" checks/report_bridge.py --independent "$OUT/s3.jsonl" \
+  --primary-report "$OUT/primary/s23/result_p16.json" \
+  --signatures "$OUT/primary/s23/vfs.json"
+"$PY" checks/test_report_bridge.py --independent "$OUT/s3.jsonl" \
+  --primary-report "$OUT/primary/s23/result_p16.json" \
+  --signatures "$OUT/primary/s23/vfs.json"
+\end{verbatim}
+Expected: byte-identical regeneration of all 629 Lean rows; agreement of
+all class/full-cycle signatures, verdicts, ROOT and FORCED flags, all
+890 MATCH, 230 NO-COUNT and 32 NO row/name pairs; nineteen corruptions
+rejected. Byte comparison is unconditional; \texttt{--write} also writes
+an inspectable copy. These paths follow C9's \texttt{--part all}; a separate
+\texttt{--part s23 --out DIR} writes directly under DIR.
+
+Both source files are manifest-pinned and the full-signature source has
+its own decompressed SHA pin. The Lean header itself pins only the
+primary report. C9 regenerates full signatures, restores the pinned
+presentation order, then passes that actual ordered \file{vfs.json} to S3.
+C10 checks the report against that input, including interval identity.
+All indices are zero-based. The extra is class 18, figure 0, Lean row 12;
+A510001 belongs to the same class and its row-12 pair must be NO,
+not NO-COUNT. Coarse facet/count data alone cannot distinguish those
+figures. Their exact-star interpretation in Lean remains the external
+U3Realizations obligation; a signature hash is not that proof.
+
+The candidate universe is every retained row of a class times every known
+name admitted by radius to that class: exactly 1,152 pairs. Both directions
+of the model/class inventory agree, and each of the 890 names MATCHes
+exactly one row. Other names are rejected by the radius/model-admission
+stage, not by an absent pair. C10 checks inventory consistency and all
+pair statuses; C2 and C9 perform the underlying geometric checks.
+Existence plus elimination gives the sole remaining row for each name,
+allowing several aliases in a row. MATCH is not an equality certificate.
+
+The fresh-primary comparison includes every serialized Lean row field,
+including integer diagnostic counters. The independent comparison checks
+the semantic projection, since implementation-specific counters differ.
+No general Python-to-Lean contract translator is claimed: the other
+literal counts and P1 rational ranges are checked against their specified
+values by executable assertions and written inspection.
+\texttt{stageOneOmega} is a geometric data field, not a concrete interval
+table instantiated in Lean. See \file{data/report-provenance.md}.
+
+C11 reconciles the search multiplicities and mirror exclusions:
+\begin{verbatim}
+"$PY" checks/encoding_correspondence.py \
+  --primary-report "$OUT/primary/s23/result_p16.json" \
+  --signatures "$OUT/primary/s23/vfs.json" \
+  --independent "$OUT/s3.jsonl" --output "$OUT/accounting.json"
+\end{verbatim}
+Primary 633 completed states reduce to 629 encodings: three duplicates
+are in the extra candidate and one in A511111. The independent 657 groups
+comprise 629 primary-corresponding groups and 28 additional snub-product
+mirror alternatives, excluded by strict full-star separation. Primary
+search cuts those alternatives earlier by cell-patch mismatch.
+C11 reruns all 28 normal searches, then a separately labeled diagnostic
+which bypasses only that cut: 56 distinct completed encodings, the original
+28 preserved, and all 28 additional encodings with strict separation
+witnesses. Full signatures and class mappings agree with independent S3.
+This diagnostic does not replace normal exhaustive search or the written
+proof of pruning soundness. The two implementations use shared, separately
+audited inputs and written geometry; independence is in code, not every
+premise. C7 includes C9--C11 in full mode.
+
+\paragraph{Known-name and model provenance.}
+These have a C2 chain separate from C8's class/interval bridge.
+\file{unpack_inputs.py} checks the decompressed known-name list against
+both input manifests; \file{stage3.py} records its byte digest and each
+class's parsed-list digest; \file{audit_stage3.py} authenticates both
+and checks complete model-source and certificate inventories. Model
+admission checks construction binding, radius and facet types.
+The construction theorems still supply uniformity, transitivity and
+geometric interpretation: hashes establish none of those facts, nor a
+Lean instance. Structural/lazy model certification is not expansion and
+an all-pairs check of every full orbit. The two counts of 181 in LIB and
+S2 refer to the same canonical four-dimensional library, rebuilt and
+checked independently.
 
 %======================================================================
 \appendix

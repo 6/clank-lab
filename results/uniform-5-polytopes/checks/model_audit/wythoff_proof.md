@@ -1,15 +1,20 @@
-# R2: Coxeter constructions, faces, and exact index contracts
+# Coxeter constructions, faces, and exact index contracts
 
-Scope: a mathematical construction proof for the independent `check_u3`
-models. This is not a certificate for snubs or the exceptional 600-cell
-subsets, and does not declare all of R2 closed. The theorem proves
+Scope: a mathematical construction proof for the primary `check_u3`
+models, also used by the independently implemented models. Snubs and the
+exceptional 600-cell subsets have their separate proofs and certificates
+in this directory. The theorem proves
 uniformity before separation is used. The software contract in Section 8
 must additionally be enforced to justify the returned indexed lists.
 No producer construction is used as a premise.
 
-Source anchors below refer to the pre-repair `geom.py`, `tcert.py`, and
-`ktypes.py`; use function names if later edits move lines.
-No computational replay is asserted by this document.
+Source anchors below refer to `checks/primary/check_u3/geom.py`,
+`tcert.py`, and `ktypes.py`; function names identify the code, while line
+numbers are historical locations. The runtime indexing guard is shipped
+as `checks/primary/model_audit/model_guard.py` and activated through
+`check_u3/model_runtime.py`; `checks/replay_primary.py --part s23` requires
+its active flag and zero guard uncertainty. The proof below supplies the
+exact-vertex interpretation which a runtime guard alone cannot prove.
 
 ## 1. Exact objects and foundational Coxeter facts
 

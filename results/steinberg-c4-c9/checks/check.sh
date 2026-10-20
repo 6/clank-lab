@@ -1,5 +1,6 @@
 #!/bin/sh
-# Standalone certificate checks. Run from any directory.
+# Retained executable-certificate checks. Run from any directory.
+# Check the Lean proof separately with the README's normal Lake commands.
 set -eu
 cd "$(dirname "$0")/.."
 PY=${PYTHON:-python3}

@@ -12,12 +12,12 @@ arguments are in Sections 2–5 of the paper.
 
 `data/graph.txt` begins with `82 136`, followed by the unordered edges on
 vertices 0 through 81. Comments start with `#`. `data/rotation.txt` has one
-line `v: neighbours in cyclic order` per vertex. Both files define the
-specific labelled witness; the paper reproduces them.
+line `v: neighbors in cyclic order` per vertex. Both files define the
+specific labeled witness; the paper reproduces them.
 
-`check_planar.py` and `check_planar.c` separately check the neighbour
+`check_planar.py` and `check_planar.c` separately check the neighbor
 permutations and connectivity, trace the dart permutation
-`(u,v) -> (v,next_v(u))`, and obtain 56 faces. Gluing oriented vertex discs
+`(u,v) -> (v,next_v(u))`, and obtain 56 faces. Gluing oriented vertex disks
 and untwisted edge bands, then capping the boundary walks, gives a connected
 closed orientable surface with Euler characteristic 82−136+56=2. It is the
 sphere, so this is a planar embedding. This is a rotation-system check,
@@ -34,21 +34,21 @@ with chords, through length 14. Both give:
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Count | 27 | 0 | 22 | 55 | 44 | 11 | 0 | 0 | 64 | 320 | 832 | 1824 |
 
-`check_col_elim.py` works directly over the three-colour domain. Each edge
+`check_col_elim.py` works directly over the three-color domain. Each edge
 starts as the six allowed unequal pairs. At an elimination step all
 relations containing a vertex are conjoined and that vertex is
 existentially projected out, enumerating every assignment on the remaining
 scope. All other relations remain. This preserves satisfiability; an empty
-relation therefore proves non-colourability. The largest remaining scope
+relation therefore proves non-colorability. The largest remaining scope
 encountered here has size three. No SAT code is imported by this path.
 
 `col3_cnf.py` independently generates a Boolean formula with variables
 `x(v,c)=3*v+c+1`, for `0 <= v < 82`, `0 <= c < 3`. It adds, for every
 vertex, one at-least-one and three at-most-one clauses; for every edge it
-adds three clauses forbidding equal endpoint colours. These clauses are
-equivalent to proper three-colouring. The lexicographically first triangle
-is `(0,1,6)`; it adds the units `1`, `5`, `21`. Any proper colouring gives
-these three vertices distinct colours and a permutation of colour names
+adds three clauses forbidding equal endpoint colors. These clauses are
+equivalent to proper three-coloring. The lexicographically first triangle
+is `(0,1,6)`; it adds the units `1`, `5`, `21`. Any proper coloring gives
+these three vertices distinct colors and a permutation of color names
 satisfies all three units. Thus satisfiability is unchanged. The formula
 has 246 variables and 739 clauses, including the three symmetry units.
 `data/col3.cnf` is the actual formula. `check_dimacs.py` compares its parsed
@@ -66,13 +66,13 @@ resource errors or a vanished process do not prove unsatisfiability.
 The entry point also checks nine negative-control outcomes, with these
 actual inputs in `data/controls/`:
 
-- `minus-edge.txt`: deletes `(0,1)`. Elimination must find it colourable;
+- `minus-edge.txt`: deletes `(0,1)`. Elimination must find it colorable;
   drat-trim must reject the original proof on its new CNF.
 - `plus-c4.txt`: adds `(0,12)`, closing `0–6–60–12–0`. Both cycle
   implementations must reject it.
 - `plus-c9.txt`: adds `(0,7)`, closing
   `0–1–6–60–12–62–63–13–7–0`. Both cycle implementations must reject it.
-- `rotation-swapped.txt`: swaps two neighbours at vertex zero. Both
+- `rotation-swapped.txt`: swaps two neighbors at vertex zero. Both
   planarity implementations must reject the resulting Euler characteristic
   zero. This rejects the supplied embedding, not the graph's planarity.
 - `col3-truncated.drat`: the first 45 complete proof steps, omitting the
@@ -87,7 +87,7 @@ edge-deletion result is part of this bundle.
 This is a computer-assisted proof. The mathematical reductions, graph
 parsers, enumerators and executable checker are not formalized in a proof
 assistant. The two languages for the geometric checks and the two different
-non-colourability methods provide independent implementation paths, not a
+non-colorability methods provide independent implementation paths, not a
 claim of a formally verified compiler or checker. Integer arithmetic is
 used throughout. On this graph `n=82`, maximum degree 10, cycle bound 14;
 even `82*10^14 < 2^63` bounds the C enumerator's raw counts. Its fixed array

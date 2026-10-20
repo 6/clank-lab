@@ -4,7 +4,7 @@
 by Marijn Heule and Nathan Wetzler, from
 [marijnheule/drat-trim](https://github.com/marijnheule/drat-trim).
 Its source header dates the last edit to April 21, 2024. It is distributed
-under MIT, separately from the original work's Apache-2.0 licence.
+under MIT, separately from the original work's Apache-2.0 license.
 The original work is by the author named in the paper.
 
 The source retains this full notice (including its updated copyright line):
@@ -30,7 +30,7 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-The accompanying upstream licence supplied with the source also retains
+The accompanying upstream license supplied with the source also retains
 this notice, reproduced without alteration:
 
 ```text
@@ -59,4 +59,4 @@ The proof `data/col3.drat` was generated with
 collaborators. CaDiCaL source and executable are not redistributed and are
 not needed to check the certificate. The DRAT proof format and its checker
 are due to Heule, Wetzler and collaborators; see the paper's references.
-No text, figure or code from the graph-colouring papers is redistributed.
+No text, figure or code from the graph-coloring papers is redistributed.

@@ -20,10 +20,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
-    name: Check density-seven
+  quick:
+    name: Quick check ${{ matrix.part }}/8
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    env:
+      PART: ${{ matrix.part }}
     defaults:
       run:
         shell: bash
@@ -37,8 +43,25 @@ jobs:
         with:
           python-version: '3.14.8'
 
-      - name: Build the checking tools
-        run: python3 checks/build_tools.py "$RUNNER_TEMP/density-tools"
+      - name: Build the checking tools, if this part has a proof step
+        run: |
+          if python3 checks/check.py --quick --part "$PART/8" --list | grep -qx proof-controls; then
+            python3 checks/build_tools.py "$RUNNER_TEMP/density-tools"
+          fi
 
-      - name: Quick check
-        run: python3 checks/check.py --quick --tools "$RUNNER_TEMP/density-tools" --work "$RUNNER_TEMP/density-quick"
+      - name: Quick check, part ${{ matrix.part }} of 8
+        run: python3 checks/check.py --quick --part "$PART/8" --tools "$RUNNER_TEMP/density-tools" --work "$RUNNER_TEMP/density-quick"
+
+  checks:
+    name: Check density-seven
+    needs: [quick]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Every job passed
+        env:
+          QUICK: ${{ needs.quick.result }}
+        run: |
+          echo "Quick check, all eight parts: $QUICK"
+          [ "$QUICK" = success ]

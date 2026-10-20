@@ -20,10 +20,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
-    name: Check uniform-5-polytopes
+  lean:
+    name: Lean proof
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 60
     env:
       LEAN_NUM_THREADS: '4'
     defaults:
@@ -88,6 +88,21 @@ jobs:
           print("PASS axiom audit: only standard Lean axioms")
           PYTHON
 
+  quick:
+    name: Quick check ${{ matrix.part }}/8
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
       - name: Set up Python
         uses: actions/setup-python@v7.0.0
         with:
@@ -96,10 +111,27 @@ jobs:
       - name: Install Python dependencies
         run: python -m pip install --disable-pip-version-check -r results/uniform-5-polytopes/checks/requirements.txt
 
-      - name: Quick check
+      - name: Quick check, part ${{ matrix.part }} of 8
+        env:
+          PART: ${{ matrix.part }}
         run: |
           bundle=$(mktemp -d)
           trap 'rm -rf "$bundle"' EXIT
           git archive HEAD results/uniform-5-polytopes | tar -x -C "$bundle" --strip-components=2
           cd "$bundle"
-          PYTHON=python bash checks/verify-public.sh quick
+          S23_JOBS=$(nproc) PYTHON=python bash checks/verify-public.sh quick --part "$PART/8"
+
+  checks:
+    name: Check uniform-5-polytopes
+    needs: [lean, quick]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Every job passed
+        env:
+          LEAN: ${{ needs.lean.result }}
+          QUICK: ${{ needs.quick.result }}
+        run: |
+          echo "Lean proof: $LEAN; quick check, all eight parts: $QUICK"
+          [ "$LEAN" = success ] && [ "$QUICK" = success ]

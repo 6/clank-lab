@@ -37,7 +37,7 @@ The full check takes about half an hour. A successful full replay ends with:
 uniform-5-polytopes public full: PASS
 ```
 
-Two stage-3 workers are used by default; set `S23_JOBS=1` for serial execution. Full mode checks every W fan, all 181 P=16 equivalence certificates (5,108 ordered options), and P=16 stages 2/3 with coverage checks. The P=6 quick control retains fixed 8- and 10-gon facets and has 136 classes rather than the literal cutoff's 129; the libraries coincide at P=10 and P=16.
+Two stage-3 workers are used by default; set `S23_JOBS=1` for serial execution. The independent steps can also be shared out across machines: `--part K/N` after the mode (for example `quick --part 3/8`) runs share K of N, balanced by each step's running time, and `--list` prints the steps a part would run. Every part from 1/N to N/N must pass; together they run exactly the steps of the whole check, each part repeating the dependency and inventory checks. The public CI runs the quick check this way, as eight parts. Full mode checks every W fan, all 181 P=16 equivalence certificates (5,108 ordered options), and P=16 stages 2/3 with coverage checks. The P=6 quick control retains fixed 8- and 10-gon facets and has 136 classes rather than the literal cutoff's 129; the libraries coincide at P=10 and P=16.
 
 The finite result is 563 classes, 629 signatures (628 known and one wholly refuted), zero OPEN cases and 890 matched construction names. The independent implementation has 657 raw realizations, including 28 additional mirror placements that it refutes. Construction names can be aliases and are not counts of distinct polytopes. The 628 polytopes include members of the infinite families.
 

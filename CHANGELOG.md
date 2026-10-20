@@ -9,6 +9,7 @@ Zenodo records.
 - Correction: the paper and README now credit Polymath1's 2009 bounds
   1302–1348, recorded by Tao and repeated by O'Bryant, and describe the
   witness as a realization of the known lower bound.
+- Zenodo: [10.5281/zenodo.23509560](https://doi.org/10.5281/zenodo.23509560)
 
 ## uniform-5-polytopes v2 (October 20, 2026)
 
@@ -20,6 +21,7 @@ Zenodo records.
 - Explains the count of 104: the 5-cube occurs both as a B5 form and as a
   prism. Open Problem Garden's 105 matches the total before removing that
   duplicate.
+- Zenodo: [10.5281/zenodo.23502450](https://doi.org/10.5281/zenodo.23502450)
 
 ## ekg-sequence v3 (October 20, 2026)
 

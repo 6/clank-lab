@@ -23,4 +23,4 @@ Zenodo records.
 ## steinberg-c4-c9 v1 (October 20, 2026)
 
 - First version: an 82-vertex planar graph with no 4- or 9-cycles that has
-  no proper 3-colouring. Paper, graph, SAT certificate and checkers.
+  no proper 3-coloring. Paper, graph, SAT certificate and checkers.

@@ -6,11 +6,11 @@
 \pdfgentounicode=1
 \usepackage{amsmath,amssymb,amsthm,geometry,hyperref,multicol,fancyvrb}
 \geometry{margin=1in}
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={A planar graph without four- or nine-cycles that is not three-colourable},pdfauthor={P. Graham},pdfsubject={Computer-assisted graph colouring counterexample},pdfkeywords={planar graph, proper colouring, forbidden cycles}}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={A planar graph without four- or nine-cycles that is not three-colorable},pdfauthor={P. Graham},pdfsubject={Computer-assisted graph coloring counterexample},pdfkeywords={planar graph, proper coloring, forbidden cycles}}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newcommand{\file}[1]{\texttt{\detokenize{#1}}}
-\title{A planar graph without four- or nine-cycles\texorpdfstring{\\}{ }that is not three-colourable}
+\title{A planar graph without four- or nine-cycles\texorpdfstring{\\}{ }that is not three-colorable}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
 \date{October 19, 2026}
 \begin{document}
@@ -19,16 +19,16 @@
 A question of Lu, Wang, Wang, Bu, Montassier and Raspaud, as reproduced
 by Kang, Jin and Wang~\cite{kjw}, asks which integers
 $i\in\{5,6,7,8,9\}$ have the property that every planar graph without cycles
-of length four or $i$ admits a proper three-colouring. We answer the
+of length four or $i$ admits a proper three-coloring. We answer the
 explicitly posed $i=9$ case negatively by giving an 82-vertex planar graph
-with 136 edges, no four- or nine-cycles, and no proper three-colouring.
+with 136 edges, no four- or nine-cycles, and no proper three-coloring.
 The witness also has no ten-cycle. It complements the earlier disproof of
 Steinberg's $i=5$ conjecture by Cohen-Addad, Hebdige, Král', Li and Salgado.
 The proof is
 computer-assisted: a supplied rotation system establishes planarity,
 two cycle enumerators check the forbidden lengths, and exact constraint
 elimination and a DRAT unsatisfiability certificate separately establish
-non-colourability. The graph, rotation system, formula, certificate and
+non-colorability. The graph, rotation system, formula, certificate and
 standalone checkers are supplied. The written reductions and executable
 checkers are not formalized in a proof assistant.
 \end{abstract}
@@ -38,17 +38,17 @@ checkers are not formalized in a proof assistant.
 \medskip\noindent Status: computer-assisted; not expert-reviewed; AI-assisted.
 
 \section{Introduction}
-All graphs in this paper are finite and simple. A proper three-colouring
+All graphs in this paper are finite and simple. A proper three-coloring
 is a map $f:V(G)\to\{0,1,2\}$ with $f(u)\ne f(v)$ for every edge $uv$.
 A cycle is simple; it need not be induced. Thus forbidding a cycle of
 length $k$, denoted $C_k$, forbids cycles with chords as well.
 
 Steinberg conjectured in 1976 that every planar graph without $C_4$ or
-$C_5$ is properly three-colourable; see the account in~\cite{steinberg}.
+$C_5$ is properly three-colorable; see the account in~\cite{steinberg}.
 Lu, Wang, Wang, Bu, Montassier and Raspaud~\cite{lu} posed a broader
 forbidden-pair question, as reproduced in Kang, Jin and Wang's
 Problem 1.2~\cite{kjw}: for which $i\in\{5,6,7,8,9\}$ is every
-$\{C_4,C_i\}$-free planar graph properly three-colourable?
+$\{C_4,C_i\}$-free planar graph properly three-colorable?
 The $i=5$ case is Steinberg's conjecture. Cohen-Addad, Hebdige, Král',
 Li and Salgado disproved that case in a preprint posted in April 2016,
 published in 2017~\cite{steinberg}. Jin, Kang, Liu and Wang's 2020
@@ -57,7 +57,7 @@ as open. The result here answers $i=9$.
 
 \begin{theorem}\label{thm:main}
 There exists an 82-vertex planar graph with 136 edges, without cycles of
-length four or nine, that is not properly three-colourable.
+length four or nine, that is not properly three-colorable.
 \end{theorem}
 
 This is a negative answer to the explicitly posed $i=9$ case. The
@@ -72,22 +72,22 @@ component in Figure 1~\cite{steinberg} contains the nine-cycle
 $a,f,k,n,m,j,i,h,g,a$ in the paper's own labels. This component is retained
 in the published construction.
 
-The distinction from neighbouring positive theorems matters. Kang, Jin
-and Wang prove proper three-colourability when $C_6$ is also
-excluded~\cite{kjw}. The $\{C_4,C_7,C_9\}$-free class is properly three-colourable by Lu and
+The distinction from neighboring positive theorems matters. Kang, Jin
+and Wang prove proper three-colorability when $C_6$ is also
+excluded~\cite{kjw}. The $\{C_4,C_7,C_9\}$-free class is properly three-colorable by Lu and
 coauthors, as also recorded in~\cite{kjw}; Kang, Jin and Zhu prove
-DP-3-colourability of that class~\cite{kjz}. DP-3-colourability implies
-three-choosability, which implies ordinary proper three-colourability.
-Consequently, failure of a list or DP colouring property alone would not
-supply the obstruction required here. Defective colourings are a different
-notion: a $(d_1,d_2,d_3)$-colouring permits each colour class to induce
+DP-3-colorability of that class~\cite{kjz}. DP-3-colorability implies
+three-choosability, which implies ordinary proper three-colorability.
+Consequently, failure of a list or DP coloring property alone would not
+supply the obstruction required here. Defective colorings are a different
+notion: a $(d_1,d_2,d_3)$-coloring permits each color class to induce
 maximum degree at most $d_j$. The $(1,1,0)$ result of Dai, Wang and Xu~\cite{dai}
 and the $(2,0,0)$ result of Chen, Dai, Nie, Wang and Yu~\cite{nie} concern
 the exact forbidden pair but allow monochromatic edges. They are
 compatible with Theorem~\ref{thm:main}. Xiao and Huang's weak
-DP-$(\mathcal F_2,\mathcal F_2,\mathcal F_0)$-colouring theorem for this
+DP-$(\mathcal F_2,\mathcal F_2,\mathcal F_0)$-coloring theorem for this
 pair uses classes $\mathcal F_d$ of forests of maximum degree at most
-$d$~\cite{xiao}; it likewise does not assert proper three-colourability.
+$d$~\cite{xiao}; it likewise does not assert proper three-colorability.
 
 The accessible question statement used here is the reproduction in
 \cite{kjw}. The defective and weak DP statements cited above are read
@@ -105,28 +105,28 @@ The supplied bundle contains the graph and rotation system reproduced
 in Appendix~\ref{app:graph}, with the formula, certificate and checkers
 at the relative paths specified in Sections 4--5. The two embedding and
 cycle implementations are separate Python and C programs. The two
-non-colourability paths are exact constraint elimination over the three
-colour values and a DRAT certificate checked by DRAT-trim. The
+non-colorability paths are exact constraint elimination over the three
+color values and a DRAT certificate checked by DRAT-trim. The
 mathematical reductions and ordinary executable programs, including the
 CNF generator, remain part of the proof's trust base.
 
 \section{The graph and its embedding}
 The input \file{data/graph.txt}, reproduced in Appendix~\ref{app:graph},
 defines $G$ on vertices $0,\ldots,81$ by 136 unordered edges. The
-accompanying \file{data/rotation.txt} gives a cyclic order of the neighbours
+accompanying \file{data/rotation.txt} gives a cyclic order of the neighbors
 at each vertex. The two planarity implementations separately validate
-the edge count, simplicity, neighbour lists and connectivity.
+the edge count, simplicity, neighbor lists and connectivity.
 
 Let $D=\{(u,v):uv\in E(G)\}$ be the darts. Write
-$\rho_v(u)$ for the neighbour following $u$ in the cyclic order at $v$.
+$\rho_v(u)$ for the neighbor following $u$ in the cyclic order at $v$.
 The face permutation is
 \[
    \phi(u,v)=(v,\rho_v(u)).
 \]
 Both implementations count 56 orbits of $\phi$. To justify this test,
-place an oriented disc at every vertex, attach an untwisted band for
+place an oriented disk at every vertex, attach an untwisted band for
 each edge according to the cyclic orders, and cap each boundary walk
-with a disc. The result is a connected closed orientable surface with
+with a disk. The result is a connected closed orientable surface with
 a cellular embedding of $G$. The boundary walks are precisely the
 orbits of $\phi$, so its Euler characteristic is
 \[
@@ -163,7 +163,7 @@ degree of this input is 10, even the coarse bound $82\cdot10^{14}<2^{63}$
 on raw enumeration counts is below the signed 64-bit limit used in C.
 All Python counts use arbitrary precision integers.
 
-\section{Two checks of non-colourability}
+\section{Two checks of non-colorability}
 \subsection{Exact constraint elimination}
 For each edge $uv$ start with the relation
 $R_{uv}=\{(a,b)\in\{0,1,2\}^2:a\ne b\}$.
@@ -178,7 +178,7 @@ of their scopes minus $v$, and replace them by the relation
 All other relations remain. The new conjunction is exactly the
 existential projection of the old one. Induction on eliminations shows
 that satisfiability is preserved. An empty relation proves that no
-colouring exists; a nonempty relation on the empty scope is a tautology
+coloring exists; a nonempty relation on the empty scope is a tautology
 and may be discarded.
 
 The implementation enumerates all $3^{|S|}$ assignments and all three
@@ -196,15 +196,15 @@ for $0\leq v<82$ and $c\in\{0,1,2\}$. The generator adds the clauses
  &\neg x_{v,a}\lor\neg x_{v,b}&&\text{for each }v\text{ and }0\leq a<b<3,\\
  &\neg x_{u,c}\lor\neg x_{v,c}&&\text{for each }uv\in E(G)\text{ and }c.
 \end{align*}
-The first two lines specify exactly one colour at each vertex, and the
-third specifies distinct colours across every edge. Assigning the unique
-true colour is therefore a bijection between satisfying assignments of
-these clauses and proper three-colourings of $G$.
+The first two lines specify exactly one color at each vertex, and the
+third specifies distinct colors across every edge. Assigning the unique
+true color is therefore a bijection between satisfying assignments of
+these clauses and proper three-colorings of $G$.
 
 The lexicographically first triangle is $(0,1,6)$. The generator also
 adds $x_{0,0}$, $x_{1,1}$ and $x_{6,2}$, that is, unit clauses $1$, $5$
-and $21$. Every proper colouring gives distinct colours to this triangle.
-There is a permutation of the three colour names taking them, in this
+and $21$. Every proper coloring gives distinct colors to this triangle.
+There is a permutation of the three color names taking them, in this
 order, to $0,1,2$; the other clauses are invariant under this permutation.
 Adding these units thus preserves satisfiability. No graph automorphism
 or unproved assertion about the search is used.
@@ -222,7 +222,7 @@ weaken the formula. Derivation of the empty clause therefore proves
 unsatisfiability of the input. This permits replay without trusting a
 solver's bare unsatisfiability answer or depending on a solver version. Together with the symmetry argument and
 the exact reduction above, this separately proves that $G$ has no proper
-three-colouring.
+three-coloring.
 
 \section{Replay, controls and scope}
 The complete standalone check is \file{sh checks/check.sh}, run from the
@@ -234,11 +234,11 @@ DRAT verification. The DRAT route requires successful termination and
 the exact success status, not just an absent error message.
 
 The same command exercises deliberate corruptions. Deleting edge $(0,1)$
-must make the elimination result colourable and invalidate the original
+must make the elimination result colorable and invalidate the original
 DRAT proof on the modified formula. Adding $(0,12)$ creates the cycle
 $0,6,60,12,0$; adding $(0,7)$ creates
 $0,1,6,60,12,62,63,13,7,0$. Both cycle implementations must reject each
-modified graph. Swapping two neighbours in the rotation at zero changes
+modified graph. Swapping two neighbors in the rotation at zero changes
 the Euler characteristic to zero and must be rejected by both embedding
 checks. This is rejection of a rotation, not a non-planarity claim for
 the underlying graph. Finally a proper prefix containing only the first
@@ -248,19 +248,19 @@ Sections 2--4 establish Theorem~\ref{thm:main}.
 
 This is a computer-assisted proof, not a proof-assistant formalization.
 The rotation-system argument, enumeration completeness, CNF reduction,
-colour symmetry and constraint-elimination argument are mathematical
+color symmetry and constraint-elimination argument are mathematical
 arguments written here. Their implementations and DRAT-trim run as
 ordinary programs and are not themselves formally verified. The
-different implementations and non-colourability methods reduce shared
+different implementations and non-colorability methods reduce shared
 implementation risk. The witness was found by composing small planar graphs with designated
-contact vertices, tabulating the possible colour patterns on those
+contact vertices, tabulating the possible color patterns on those
 contacts, and seeking a composition with no allowed pattern. This
 explains the discovery route; the certificate checks apply to the final
 edge list directly. The search is not needed for the proof and makes
 no claim of exhaustive search, optimal order or applicability to another
 forbidden pair.
 
-\paragraph{Credits and licence.}
+\paragraph{Credits and license.}
 Credit for posing and developing the forbidden-cycle questions belongs
 to the researchers cited above, and for the earlier Steinberg disproof
 to Cohen-Addad and coauthors. The SAT certificate uses CaDiCaL and is
@@ -325,7 +325,7 @@ SAT Competition 2020. \emph{Proc. SAT Competition 2020}, 51--53.
 \clearpage\appendix
 \section{Explicit graph and rotation}\label{app:graph}
 The graph list starts with the order and size, followed by every
-edge. The rotation gives every neighbour in cyclic order. These are the
+edge. The rotation gives every neighbor in cyclic order. These are the
 same input files used by the standalone check; no reconstruction from a
 drawing is necessary.
 \subsection*{Graph}

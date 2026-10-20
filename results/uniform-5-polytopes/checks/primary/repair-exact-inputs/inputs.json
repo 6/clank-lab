@@ -1,0 +1,5043 @@
+{
+  "cell_radius_squared": {
+    "A10": "(sqrt(10)*sqrt(sqrt(5) + 5) + 4*sqrt(5) + 3*sqrt(2)*sqrt(sqrt(5) + 5) + 16)/16",
+    "A11": "(-3 + 2*cos(pi/11))/(8*(-1 + cos(pi/11)))",
+    "A12": "(4*sqrt(3) + 5*sqrt(2) + 3*sqrt(6) + 10)/8",
+    "A13": "(-3 + 2*cos(pi/13))/(8*(-1 + cos(pi/13)))",
+    "A14": "(-3 + 2*cos(pi/14))/(8*(-1 + cos(pi/14)))",
+    "A15": "(-13*sqrt(2) + sqrt(10) + 2*sqrt(3)*sqrt(sqrt(5) + 5))/(4*(-9*sqrt(2) + sqrt(10) + 2*sqrt(3)*sqrt(sqrt(5) + 5)))",
+    "A16": "(-3 + 2*cos(pi/16))/(8*(-1 + cos(pi/16)))",
+    "A4": "(sqrt(2) + 4)/8",
+    "A5": "(sqrt(5) + 5)/8",
+    "A6": "(sqrt(3) + 3)/4",
+    "A7": "(-3 + 2*cos(pi/7))/(8*(-1 + cos(pi/7)))",
+    "A8": "(sqrt(2)*sqrt(sqrt(2) + 2) + 2*sqrt(2) + 2*sqrt(sqrt(2) + 2) + 6)/8",
+    "A9": "(-3 + 2*cos(pi/9))/(8*(-1 + cos(pi/9)))",
+    "P10": "(2*sqrt(5) + 7)/4",
+    "P11": "(sin(pi/11)**2 + 1)/(4*sin(pi/11)**2)",
+    "P12": "(4*sqrt(3) + 9)/4",
+    "P13": "(sin(pi/13)**2 + 1)/(4*sin(pi/13)**2)",
+    "P14": "(sin(pi/14)**2 + 1)/(4*sin(pi/14)**2)",
+    "P15": "(sqrt(6)*sqrt(sqrt(5) + 5) + 4*sqrt(5) + sqrt(30)*sqrt(sqrt(5) + 5) + 18)/8",
+    "P16": "(sin(pi/16)**2 + 1)/(4*sin(pi/16)**2)",
+    "P3": "7/12",
+    "P5": "(2*sqrt(5) + 15)/20",
+    "P6": "5/4",
+    "P7": "(sin(pi/7)**2 + 1)/(4*sin(pi/7)**2)",
+    "P8": "(2*sqrt(2) + 5)/4",
+    "P9": "(sin(pi/9)**2 + 1)/(4*sin(pi/9)**2)",
+    "co": "1",
+    "cube": "3/4",
+    "doe": "3*(sqrt(5) + 3)/8",
+    "girco": "(6*sqrt(2) + 13)/4",
+    "grid": "(12*sqrt(5) + 31)/4",
+    "ico": "(sqrt(5) + 5)/8",
+    "id": "(sqrt(5) + 3)/2",
+    "oct": "1/2",
+    "sirco": "(2*sqrt(2) + 5)/4",
+    "snic": "CRootOf(32*z**3 - 64*z**2 + 40*z - 7, 0)/(-1 + 4*CRootOf(32*z**3 - 64*z**2 + 40*z - 7, 0))",
+    "snid": "CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0)/(-1 + 4*CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0))",
+    "srid": "(4*sqrt(5) + 11)/4",
+    "tet": "3/8",
+    "ti": "(15*sqrt(5) + 37)/8",
+    "tic": "(4*sqrt(2) + 7)/4",
+    "tid": "(9*sqrt(5) + 29)/8",
+    "toe": "5/2",
+    "tut": "11/8"
+  },
+  "records": [
+    {
+      "name": "A40001",
+      "radius_squared": "2/5",
+      "words": [
+        {
+          "A": "tet",
+          "B": "tet",
+          "cosine": "1/4",
+          "multiplicity": 6,
+          "p": 3
+        }
+      ]
+    },
+    {
+      "name": "A40010",
+      "radius_squared": "3/5",
+      "words": [
+        {
+          "A": "oct",
+          "B": "oct",
+          "cosine": "1/4",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "oct",
+          "B": "tet",
+          "cosine": "-1/4",
+          "multiplicity": 6,
+          "p": 3
+        }
+      ]
+    },
+    {
+      "name": "A40011",
+      "radius_squared": "8/5",
+      "words": [
+        {
+          "A": "tet",
+          "B": "tut",
+          "cosine": "-1/4",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "tut",
+          "B": "tut",
+          "cosine": "1/4",
+          "multiplicity": 3,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "A40101",
+      "radius_squared": "7/5",
+      "words": [
+        {
+          "A": "P3",
+          "B": "oct",
+          "cosine": "-sqrt(6)/4",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "co",
+          "B": "co",
+          "cosine": "1/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "co",
+          "B": "oct",
+          "cosine": "-1/4",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "co",
+          "cosine": "-sqrt(6)/6",
+          "multiplicity": 4,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "A40110",
+      "radius_squared": "2",
+      "words": [
+        {
+          "A": "tut",
+          "B": "tut",
+          "cosine": "1/4",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "tut",
+          "B": "tut",
+          "cosine": "-1/4",
+          "multiplicity": 4,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "A40111",
+      "radius_squared": "17/5",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tut",
+          "cosine": "-sqrt(6)/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "toe",
+          "cosine": "-sqrt(6)/6",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "toe",
+          "B": "toe",
+          "cosine": "1/4",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "toe",
+          "B": "tut",
+          "cosine": "-1/4",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "A41001",
+      "radius_squared": "1",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tet",
+          "cosine": "-sqrt(6)/4",
+          "multiplicity": 6,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-2/3",
+          "multiplicity": 6,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "A41011",
+      "radius_squared": "13/5",
+      "words": [
+        {
+          "A": "P3",
+          "B": "co",
+          "cosine": "-sqrt(6)/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "co",
+          "B": "tut",
+          "cosine": "-1/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P6",
+          "cosine": "-2/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "co",
+          "cosine": "-sqrt(6)/6",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "tut",
+          "cosine": "-sqrt(6)/4",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "A41111",
+      "radius_squared": "5",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-2/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "toe",
+          "cosine": "-sqrt(6)/6",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "toe",
+          "cosine": "-sqrt(6)/4",
+          "multiplicity": 2,
+          "p": 6
+        },
+        {
+          "A": "toe",
+          "B": "toe",
+          "cosine": "-1/4",
+          "multiplicity": 1,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "B40001",
+      "radius_squared": "1",
+      "words": [
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 6,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "B40010",
+      "radius_squared": "3/2",
+      "words": [
+        {
+          "A": "co",
+          "B": "tet",
+          "cosine": "-1/2",
+          "multiplicity": 6,
+          "p": 3
+        },
+        {
+          "A": "co",
+          "B": "co",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "B40011",
+      "radius_squared": "(3*sqrt(2) + 5)/2",
+      "words": [
+        {
+          "A": "tet",
+          "B": "tic",
+          "cosine": "-1/2",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "tic",
+          "B": "tic",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "B40100",
+      "radius_squared": "1",
+      "words": [
+        {
+          "A": "oct",
+          "B": "oct",
+          "cosine": "-1/2",
+          "multiplicity": 12,
+          "p": 3
+        }
+      ]
+    },
+    {
+      "name": "B40101",
+      "radius_squared": "sqrt(2) + 2",
+      "words": [
+        {
+          "A": "P3",
+          "B": "oct",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "oct",
+          "B": "sirco",
+          "cosine": "-1/2",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "sirco",
+          "cosine": "-sqrt(3)/3",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "sirco",
+          "B": "sirco",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "B40110",
+      "radius_squared": "9/2",
+      "words": [
+        {
+          "A": "tut",
+          "B": "tut",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "toe",
+          "B": "toe",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "toe",
+          "B": "tut",
+          "cosine": "-1/2",
+          "multiplicity": 4,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "B40111",
+      "radius_squared": "(5*sqrt(2) + 11)/2",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tut",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "girco",
+          "cosine": "-sqrt(3)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "girco",
+          "B": "tut",
+          "cosine": "-1/2",
+          "multiplicity": 2,
+          "p": 6
+        },
+        {
+          "A": "girco",
+          "B": "girco",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "B41000",
+      "radius_squared": "1/2",
+      "words": [
+        {
+          "A": "tet",
+          "B": "tet",
+          "cosine": "-1/2",
+          "multiplicity": 12,
+          "p": 3
+        }
+      ]
+    },
+    {
+      "name": "B41001",
+      "radius_squared": "(sqrt(2) + 3)/2",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tet",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "cube",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 6,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 3,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "B41010",
+      "radius_squared": "3",
+      "words": [
+        {
+          "A": "co",
+          "B": "co",
+          "cosine": "-1/2",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "co",
+          "B": "cube",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 6,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "B41011",
+      "radius_squared": "2*(sqrt(2) + 2)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "co",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "co",
+          "B": "tic",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P8",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "co",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "tic",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 2,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "B41100",
+      "radius_squared": "5/2",
+      "words": [
+        {
+          "A": "oct",
+          "B": "tut",
+          "cosine": "-1/2",
+          "multiplicity": 4,
+          "p": 3
+        },
+        {
+          "A": "tut",
+          "B": "tut",
+          "cosine": "-1/2",
+          "multiplicity": 4,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "B41101",
+      "radius_squared": "(3*sqrt(2) + 7)/2",
+      "words": [
+        {
+          "A": "sirco",
+          "B": "tut",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P6",
+          "B": "cube",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "sirco",
+          "cosine": "-sqrt(3)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "sirco",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "tut",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "B41110",
+      "radius_squared": "7",
+      "words": [
+        {
+          "A": "cube",
+          "B": "toe",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 3,
+          "p": 4
+        },
+        {
+          "A": "toe",
+          "B": "toe",
+          "cosine": "-1/2",
+          "multiplicity": 3,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "B41111",
+      "radius_squared": "3*sqrt(2) + 8",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P8",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "girco",
+          "cosine": "-sqrt(3)/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "toe",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "toe",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "girco",
+          "B": "toe",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P8",
+          "B": "girco",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "F40101",
+      "radius_squared": "2*(sqrt(2) + 2)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "co",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "sirco",
+          "B": "sirco",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "sirco",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "co",
+          "B": "sirco",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 2,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "F40110",
+      "radius_squared": "2*(2*sqrt(2) + 3)",
+      "words": [
+        {
+          "A": "tic",
+          "B": "tic",
+          "cosine": "-1/2",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "tic",
+          "B": "tic",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 4,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "F40111",
+      "radius_squared": "2*(3*sqrt(2) + 5)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tic",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "girco",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "girco",
+          "B": "girco",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "girco",
+          "B": "tic",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 2,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "F41001",
+      "radius_squared": "sqrt(2) + 2",
+      "words": [
+        {
+          "A": "P3",
+          "B": "oct",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 8,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-2*sqrt(2)/3",
+          "multiplicity": 8,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "F41011",
+      "radius_squared": "3*sqrt(2) + 8",
+      "words": [
+        {
+          "A": "P3",
+          "B": "sirco",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P6",
+          "cosine": "-2*sqrt(2)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "sirco",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "sirco",
+          "B": "toe",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "toe",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "F41111",
+      "radius_squared": "9*sqrt(2) + 14",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-2*sqrt(2)/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "girco",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "girco",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 2,
+          "p": 6
+        },
+        {
+          "A": "girco",
+          "B": "girco",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "H40001",
+      "radius_squared": "(sqrt(5) + 3)/2",
+      "words": [
+        {
+          "A": "tet",
+          "B": "tet",
+          "cosine": "-sqrt(2)*sqrt(3*sqrt(5) + 23)/8",
+          "multiplicity": 30,
+          "p": 3
+        }
+      ]
+    },
+    {
+      "name": "H40010",
+      "radius_squared": "2*sqrt(5) + 5",
+      "words": [
+        {
+          "A": "ico",
+          "B": "oct",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 10,
+          "p": 3
+        },
+        {
+          "A": "oct",
+          "B": "oct",
+          "cosine": "-sqrt(2)*sqrt(3*sqrt(5) + 23)/8",
+          "multiplicity": 5,
+          "p": 3
+        }
+      ]
+    },
+    {
+      "name": "H40011",
+      "radius_squared": "(9*sqrt(5) + 23)/2",
+      "words": [
+        {
+          "A": "ico",
+          "B": "tut",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 5,
+          "p": 3
+        },
+        {
+          "A": "tut",
+          "B": "tut",
+          "cosine": "-sqrt(2)*sqrt(3*sqrt(5) + 23)/8",
+          "multiplicity": 5,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "H40100",
+      "radius_squared": "3*(3*sqrt(5) + 7)/2",
+      "words": [
+        {
+          "A": "id",
+          "B": "tet",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 6,
+          "p": 3
+        },
+        {
+          "A": "id",
+          "B": "id",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 3,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "H40101",
+      "radius_squared": "8*sqrt(5) + 19",
+      "words": [
+        {
+          "A": "co",
+          "B": "co",
+          "cosine": "-sqrt(2)*sqrt(3*sqrt(5) + 23)/8",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "co",
+          "B": "id",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "P5",
+          "B": "co",
+          "cosine": "-sqrt(10)*sqrt(2*sqrt(5) + 5)/10",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "id",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 5)/4",
+          "multiplicity": 2,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "H40110",
+      "radius_squared": "(25*sqrt(5) + 59)/2",
+      "words": [
+        {
+          "A": "tut",
+          "B": "tut",
+          "cosine": "-sqrt(2)*sqrt(3*sqrt(5) + 23)/8",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "tid",
+          "B": "tid",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "tid",
+          "B": "tut",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 4,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "H40111",
+      "radius_squared": "18*sqrt(5) + 43",
+      "words": [
+        {
+          "A": "P5",
+          "B": "toe",
+          "cosine": "-sqrt(10)*sqrt(2*sqrt(5) + 5)/10",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "tid",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 5)/4",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "tid",
+          "B": "toe",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 2,
+          "p": 6
+        },
+        {
+          "A": "toe",
+          "B": "toe",
+          "cosine": "-sqrt(2)*sqrt(3*sqrt(5) + 23)/8",
+          "multiplicity": 1,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "H41000",
+      "radius_squared": "3*sqrt(5) + 7",
+      "words": [
+        {
+          "A": "doe",
+          "B": "doe",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 6,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "H41001",
+      "radius_squared": "2*(3*sqrt(5) + 7)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tet",
+          "cosine": "-sqrt(3)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P5",
+          "cosine": "-sqrt(30)*sqrt(sqrt(5) + 5)/15",
+          "multiplicity": 6,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "doe",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 5)/4",
+          "multiplicity": 3,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "H41010",
+      "radius_squared": "10*sqrt(5) + 23",
+      "words": [
+        {
+          "A": "P3",
+          "B": "oct",
+          "cosine": "-sqrt(3)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "oct",
+          "B": "srid",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "srid",
+          "cosine": "-sqrt(6)*sqrt(sqrt(5) + 3)/6",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "srid",
+          "B": "srid",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 1,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "H41011",
+      "radius_squared": "5*(3*sqrt(5) + 7)",
+      "words": [
+        {
+          "A": "srid",
+          "B": "tut",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P5",
+          "B": "P6",
+          "cosine": "-sqrt(30)*sqrt(sqrt(5) + 5)/15",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "srid",
+          "cosine": "-sqrt(6)*sqrt(sqrt(5) + 3)/6",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "srid",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 5)/4",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P6",
+          "B": "tut",
+          "cosine": "-sqrt(3)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "H41100",
+      "radius_squared": "15*sqrt(5) + 34",
+      "words": [
+        {
+          "A": "tet",
+          "B": "ti",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "ti",
+          "B": "ti",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 3,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "H41101",
+      "radius_squared": "3*(7*sqrt(5) + 16)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "co",
+          "cosine": "-sqrt(3)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "co",
+          "B": "ti",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P10",
+          "B": "P3",
+          "cosine": "-sqrt(30)*sqrt(sqrt(5) + 5)/15",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "co",
+          "cosine": "-sqrt(10)*sqrt(2*sqrt(5) + 5)/10",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "ti",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 5)/4",
+          "multiplicity": 2,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "H41110",
+      "radius_squared": "4*(7*sqrt(5) + 16)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tut",
+          "cosine": "-sqrt(3)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "grid",
+          "cosine": "-sqrt(6)*sqrt(sqrt(5) + 3)/6",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "grid",
+          "B": "tut",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 2,
+          "p": 6
+        },
+        {
+          "A": "grid",
+          "B": "grid",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "H41111",
+      "radius_squared": "36*sqrt(5) + 83",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P6",
+          "cosine": "-sqrt(30)*sqrt(sqrt(5) + 5)/15",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "toe",
+          "cosine": "-sqrt(10)*sqrt(2*sqrt(5) + 5)/10",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "grid",
+          "cosine": "-sqrt(6)*sqrt(sqrt(5) + 3)/6",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "toe",
+          "cosine": "-sqrt(3)*sqrt(sqrt(5) + 3)/4",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "grid",
+          "B": "toe",
+          "cosine": "-sqrt(3*sqrt(5) + 7)/4",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P10",
+          "B": "grid",
+          "cosine": "-sqrt(2)*sqrt(sqrt(5) + 5)/4",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-10",
+      "radius_squared": "(sqrt(10)*sqrt(sqrt(5) + 5) + 4*sqrt(5) + 3*sqrt(2)*sqrt(sqrt(5) + 5) + 20)/16",
+      "words": [
+        {
+          "A": "A10",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P10",
+          "B": "P3",
+          "cosine": "-sqrt(1 - sqrt(sqrt(5)/8 + 5/8))/sqrt(3*sqrt(sqrt(5)/8 + 5/8) + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 4*sqrt(sqrt(5)/8 + 5/8)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A10",
+          "B": "P10",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-11",
+      "radius_squared": "(-5 + 4*cos(pi/11))/(8*(-1 + cos(pi/11)))",
+      "words": [
+        {
+          "A": "A11",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P11",
+          "B": "P3",
+          "cosine": "-sqrt(1 - cos(pi/11))/sqrt(3*cos(pi/11) + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 4*cos(pi/11)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A11",
+          "B": "P11",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-12",
+      "radius_squared": "(4*sqrt(3) + 5*sqrt(2) + 3*sqrt(6) + 12)/8",
+      "words": [
+        {
+          "A": "A12",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P12",
+          "B": "P3",
+          "cosine": "-sqrt(-sqrt(6)/4 - sqrt(2)/4 + 1)/sqrt(3*sqrt(2)/4 + 3*sqrt(6)/4 + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-sqrt(6)/3 - sqrt(2)/3 + 1/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A12",
+          "B": "P12",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-13",
+      "radius_squared": "(-5 + 4*cos(pi/13))/(8*(-1 + cos(pi/13)))",
+      "words": [
+        {
+          "A": "A13",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P13",
+          "B": "P3",
+          "cosine": "-sqrt(1 - cos(pi/13))/sqrt(3*cos(pi/13) + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 4*cos(pi/13)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A13",
+          "B": "P13",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-14",
+      "radius_squared": "(-5 + 4*cos(pi/14))/(8*(-1 + cos(pi/14)))",
+      "words": [
+        {
+          "A": "A14",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P14",
+          "B": "P3",
+          "cosine": "-sqrt(1 - cos(pi/14))/sqrt(3*cos(pi/14) + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 4*cos(pi/14)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A14",
+          "B": "P14",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-15",
+      "radius_squared": "(-11*sqrt(2) + sqrt(10) + 2*sqrt(3)*sqrt(sqrt(5) + 5))/(2*(-9*sqrt(2) + sqrt(10) + 2*sqrt(3)*sqrt(sqrt(5) + 5)))",
+      "words": [
+        {
+          "A": "A15",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P15",
+          "B": "P3",
+          "cosine": "-sqrt(-sqrt(3)*sqrt(sqrt(5)/8 + 5/8)/2 - sqrt(5)/8 + 9/8)/sqrt(3*sqrt(5)/8 + 3*sqrt(3)*sqrt(sqrt(5)/8 + 5/8)/2 + 21/8)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-2*sqrt(3)*sqrt(sqrt(5)/8 + 5/8)/3 - sqrt(5)/6 + 1/2",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A15",
+          "B": "P15",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-16",
+      "radius_squared": "(-5 + 4*cos(pi/16))/(8*(-1 + cos(pi/16)))",
+      "words": [
+        {
+          "A": "A16",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P16",
+          "B": "P3",
+          "cosine": "-sqrt(1 - cos(pi/16))/sqrt(3*cos(pi/16) + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 4*cos(pi/16)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A16",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-4",
+      "radius_squared": "(sqrt(2) + 6)/8",
+      "words": [
+        {
+          "A": "A4",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "A4",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 2*sqrt(2)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "cube",
+          "cosine": "-sqrt(1 - sqrt(2)/2)/sqrt(3*sqrt(2)/2 + 3)",
+          "multiplicity": 2,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-5",
+      "radius_squared": "(sqrt(5) + 7)/8",
+      "words": [
+        {
+          "A": "A5",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-sqrt(5)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P5",
+          "cosine": "-sqrt(3/4 - sqrt(5)/4)/sqrt(3*sqrt(5)/4 + 15/4)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A5",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-6",
+      "radius_squared": "(sqrt(3) + 4)/4",
+      "words": [
+        {
+          "A": "A6",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 2*sqrt(3)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P6",
+          "cosine": "-sqrt(1 - sqrt(3)/2)/sqrt(3*sqrt(3)/2 + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A6",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-7",
+      "radius_squared": "(-5 + 4*cos(pi/7))/(8*(-1 + cos(pi/7)))",
+      "words": [
+        {
+          "A": "A7",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 4*cos(pi/7)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P7",
+          "cosine": "-sqrt(1 - cos(pi/7))/sqrt(3*cos(pi/7) + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A7",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 7
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-8",
+      "radius_squared": "(sqrt(2)*sqrt(sqrt(2) + 2) + 2*sqrt(2) + 2*sqrt(sqrt(2) + 2) + 8)/8",
+      "words": [
+        {
+          "A": "A8",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 4*sqrt(sqrt(2)/4 + 1/2)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P8",
+          "cosine": "-sqrt(1 - sqrt(sqrt(2)/4 + 1/2))/sqrt(3*sqrt(sqrt(2)/4 + 1/2) + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A8",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "antiprism-prism-9",
+      "radius_squared": "(-5 + 4*cos(pi/9))/(8*(-1 + cos(pi/9)))",
+      "words": [
+        {
+          "A": "A9",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3 - 4*cos(pi/9)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P9",
+          "cosine": "-sqrt(1 - cos(pi/9))/sqrt(3*cos(pi/9) + 3)",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "A9",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 9
+        }
+      ]
+    },
+    {
+      "name": "duoprism-10-10",
+      "radius_squared": "(1 + sqrt(5))**2/2",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 2,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "duoprism-10-11",
+      "radius_squared": "(1 + sqrt(5))**2*(-sqrt(5) + 8*sin(pi/11)**2 + 3)/(32*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P11",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 10
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-10-12",
+      "radius_squared": "-(1 + sqrt(5))**2*(sqrt(2) + sqrt(6))**2*(-7 + sqrt(5) + 2*sqrt(3))/32",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P12",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 10
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-10-13",
+      "radius_squared": "(1 + sqrt(5))**2*(-sqrt(5) + 8*sin(pi/13)**2 + 3)/(32*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P13",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 10
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-10-14",
+      "radius_squared": "(1 + sqrt(5))**2*(-sqrt(5) + 8*sin(pi/14)**2 + 3)/(32*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P14",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 10
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-10-15",
+      "radius_squared": "-(-3 + sqrt(5))**2*(1 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-26 - sqrt(6)*sqrt(sqrt(5) + 5) + 6*sqrt(5) + sqrt(30)*sqrt(sqrt(5) + 5))/4096",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P15",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 10
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-10-16",
+      "radius_squared": "(1 + sqrt(5))**2*(-sqrt(5) + 8*sin(pi/16)**2 + 3)/(32*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 10
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-11-11",
+      "radius_squared": "1/(2*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 2,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-11-12",
+      "radius_squared": "(sqrt(2) + sqrt(6))**2*(-sqrt(3) + 4*sin(pi/11)**2 + 2)/(16*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P12",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 11
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-11-13",
+      "radius_squared": "(sin(pi/13)**2 + sin(pi/11)**2)/(4*sin(pi/13)**2*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P13",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 11
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-11-14",
+      "radius_squared": "(sin(pi/14)**2 + sin(pi/11)**2)/(4*sin(pi/14)**2*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P14",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 11
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-11-15",
+      "radius_squared": "(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-sqrt(30)*sqrt(sqrt(5) + 5) - 2*sqrt(5) + 32*sin(pi/11)**2 + sqrt(6)*sqrt(sqrt(5) + 5) + 14)/(4096*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P15",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 11
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-11-16",
+      "radius_squared": "(sin(pi/16)**2 + sin(pi/11)**2)/(4*sin(pi/16)**2*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 11
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-12-12",
+      "radius_squared": "(sqrt(2) + sqrt(6))**2/2",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 2,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-12-13",
+      "radius_squared": "(sqrt(2) + sqrt(6))**2*(-sqrt(3) + 4*sin(pi/13)**2 + 2)/(16*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P13",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 12
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-12-14",
+      "radius_squared": "(sqrt(2) + sqrt(6))**2*(-sqrt(3) + 4*sin(pi/14)**2 + 2)/(16*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P14",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 12
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-12-15",
+      "radius_squared": "-(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(sqrt(2) + sqrt(6))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-30 - sqrt(6)*sqrt(sqrt(5) + 5) + 2*sqrt(5) + 8*sqrt(3) + sqrt(30)*sqrt(sqrt(5) + 5))/4096",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P15",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 12
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-12-16",
+      "radius_squared": "(sqrt(2) + sqrt(6))**2*(-sqrt(3) + 4*sin(pi/16)**2 + 2)/(16*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 12
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-13-13",
+      "radius_squared": "1/(2*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 2,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-13-14",
+      "radius_squared": "(sin(pi/14)**2 + sin(pi/13)**2)/(4*sin(pi/14)**2*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P14",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 13
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-13-15",
+      "radius_squared": "(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-sqrt(30)*sqrt(sqrt(5) + 5) - 2*sqrt(5) + 32*sin(pi/13)**2 + sqrt(6)*sqrt(sqrt(5) + 5) + 14)/(4096*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P15",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 13
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-13-16",
+      "radius_squared": "(sin(pi/16)**2 + sin(pi/13)**2)/(4*sin(pi/16)**2*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 13
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-14-14",
+      "radius_squared": "1/(2*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 2,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-14-15",
+      "radius_squared": "(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-sqrt(30)*sqrt(sqrt(5) + 5) - 2*sqrt(5) + 32*sin(pi/14)**2 + sqrt(6)*sqrt(sqrt(5) + 5) + 14)/(4096*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "P15",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 14
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-14-16",
+      "radius_squared": "(sin(pi/16)**2 + sin(pi/14)**2)/(4*sin(pi/16)**2*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 14
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-15-15",
+      "radius_squared": "(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2/64",
+      "words": [
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 2,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-15-16",
+      "radius_squared": "(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-sqrt(30)*sqrt(sqrt(5) + 5) - 2*sqrt(5) + 32*sin(pi/16)**2 + sqrt(6)*sqrt(sqrt(5) + 5) + 14)/(4096*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P15",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 15
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-16-16",
+      "radius_squared": "1/(2*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 2,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-10",
+      "radius_squared": "(3*sqrt(5) + 11)/6",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P10",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-11",
+      "radius_squared": "(4*sin(pi/11)**2 + 3)/(12*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P11",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-12",
+      "radius_squared": "(3*sqrt(3) + 7)/3",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P12",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-13",
+      "radius_squared": "(4*sin(pi/13)**2 + 3)/(12*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P13",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-14",
+      "radius_squared": "(4*sin(pi/14)**2 + 3)/(12*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P14",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-15",
+      "radius_squared": "(3*sqrt(6)*sqrt(sqrt(5) + 5) + 12*sqrt(5) + 3*sqrt(30)*sqrt(sqrt(5) + 5) + 56)/24",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P15",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-16",
+      "radius_squared": "(4*sin(pi/16)**2 + 3)/(12*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P16",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-3",
+      "radius_squared": "2/3",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/2",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-4",
+      "radius_squared": "5/6",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-5",
+      "radius_squared": "(3*sqrt(5) + 25)/30",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-6",
+      "radius_squared": "4/3",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-7",
+      "radius_squared": "(4*sin(pi/7)**2 + 3)/(12*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 7
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-8",
+      "radius_squared": "(3*sqrt(2) + 8)/6",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "duoprism-3-9",
+      "radius_squared": "(4*sin(pi/9)**2 + 3)/(12*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "1/2",
+          "multiplicity": 1,
+          "p": 9
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-10",
+      "radius_squared": "(sqrt(5) + 4)/2",
+      "words": [
+        {
+          "A": "P10",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-11",
+      "radius_squared": "(2*sin(pi/11)**2 + 1)/(4*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-12",
+      "radius_squared": "(2*sqrt(3) + 5)/2",
+      "words": [
+        {
+          "A": "P12",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-13",
+      "radius_squared": "(2*sin(pi/13)**2 + 1)/(4*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-14",
+      "radius_squared": "(2*sin(pi/14)**2 + 1)/(4*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-15",
+      "radius_squared": "(sqrt(6)*sqrt(sqrt(5) + 5) + 4*sqrt(5) + sqrt(30)*sqrt(sqrt(5) + 5) + 20)/8",
+      "words": [
+        {
+          "A": "P15",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-16",
+      "radius_squared": "(2*sin(pi/16)**2 + 1)/(4*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P16",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-5",
+      "radius_squared": "(sqrt(5) + 10)/10",
+      "words": [
+        {
+          "A": "P5",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-6",
+      "radius_squared": "3/2",
+      "words": [
+        {
+          "A": "P6",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-7",
+      "radius_squared": "(2*sin(pi/7)**2 + 1)/(4*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P7",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 7
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-8",
+      "radius_squared": "(sqrt(2) + 3)/2",
+      "words": [
+        {
+          "A": "P8",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "duoprism-4-9",
+      "radius_squared": "(2*sin(pi/9)**2 + 1)/(4*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P9",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 9
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-10",
+      "radius_squared": "-(-15 + sqrt(5))*(1 + sqrt(5))**2/40",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-11",
+      "radius_squared": "(2*sqrt(5)*sin(pi/11)**2 + 10*sin(pi/11)**2 + 5)/(20*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-12",
+      "radius_squared": "-(sqrt(2) + sqrt(6))**2*(-20 - 2*sqrt(5) + sqrt(15) + 5*sqrt(3))/40",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-13",
+      "radius_squared": "(2*sqrt(5)*sin(pi/13)**2 + 10*sin(pi/13)**2 + 5)/(20*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-14",
+      "radius_squared": "(2*sqrt(5)*sin(pi/14)**2 + 10*sin(pi/14)**2 + 5)/(20*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-15",
+      "radius_squared": "-(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-35 - sqrt(5) + sqrt(30)*sqrt(sqrt(5) + 5))*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2/2560",
+      "words": [
+        {
+          "A": "P15",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-16",
+      "radius_squared": "(2*sqrt(5)*sin(pi/16)**2 + 10*sin(pi/16)**2 + 5)/(20*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P16",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-5",
+      "radius_squared": "(sqrt(5) + 5)/5",
+      "words": [
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 2,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-6",
+      "radius_squared": "(sqrt(5) + 15)/10",
+      "words": [
+        {
+          "A": "P5",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-7",
+      "radius_squared": "(2*sqrt(5)*sin(pi/7)**2 + 10*sin(pi/7)**2 + 5)/(20*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P5",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 7
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-8",
+      "radius_squared": "(sqrt(5) + 5*sqrt(2) + 15)/10",
+      "words": [
+        {
+          "A": "P5",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "duoprism-5-9",
+      "radius_squared": "(2*sqrt(5)*sin(pi/9)**2 + 10*sin(pi/9)**2 + 5)/(20*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P5",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "1/4 - sqrt(5)/4",
+          "multiplicity": 1,
+          "p": 9
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-10",
+      "radius_squared": "(sqrt(5) + 5)/2",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-11",
+      "radius_squared": "(4*sin(pi/11)**2 + 1)/(4*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-12",
+      "radius_squared": "sqrt(3) + 3",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-13",
+      "radius_squared": "(4*sin(pi/13)**2 + 1)/(4*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-14",
+      "radius_squared": "(4*sin(pi/14)**2 + 1)/(4*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-15",
+      "radius_squared": "(sqrt(6)*sqrt(sqrt(5) + 5) + 4*sqrt(5) + sqrt(30)*sqrt(sqrt(5) + 5) + 24)/8",
+      "words": [
+        {
+          "A": "P15",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-16",
+      "radius_squared": "(4*sin(pi/16)**2 + 1)/(4*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P16",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-6",
+      "radius_squared": "2",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-1/2",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-7",
+      "radius_squared": "(4*sin(pi/7)**2 + 1)/(4*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 7
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-8",
+      "radius_squared": "(sqrt(2) + 4)/2",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "duoprism-6-9",
+      "radius_squared": "(4*sin(pi/9)**2 + 1)/(4*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-1/2",
+          "multiplicity": 1,
+          "p": 9
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-10",
+      "radius_squared": "(1 + sqrt(5))**2*(-sqrt(5) + 8*sin(pi/7)**2 + 3)/(32*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-11",
+      "radius_squared": "(sin(pi/11)**2 + sin(pi/7)**2)/(4*sin(pi/11)**2*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-12",
+      "radius_squared": "(sqrt(2) + sqrt(6))**2*(-sqrt(3) + 4*sin(pi/7)**2 + 2)/(16*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-13",
+      "radius_squared": "(sin(pi/13)**2 + sin(pi/7)**2)/(4*sin(pi/13)**2*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-14",
+      "radius_squared": "(sin(pi/14)**2 + sin(pi/7)**2)/(4*sin(pi/14)**2*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-15",
+      "radius_squared": "(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-sqrt(30)*sqrt(sqrt(5) + 5) - 2*sqrt(5) + 32*sin(pi/7)**2 + sqrt(6)*sqrt(sqrt(5) + 5) + 14)/(4096*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P15",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-16",
+      "radius_squared": "(sin(pi/16)**2 + sin(pi/7)**2)/(4*sin(pi/16)**2*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P16",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-7",
+      "radius_squared": "1/(2*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 2,
+          "p": 7
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-8",
+      "radius_squared": "(2*sqrt(2)*sin(pi/7)**2 + 4*sin(pi/7)**2 + 1)/(4*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P7",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "duoprism-7-9",
+      "radius_squared": "(sin(pi/9)**2 + sin(pi/7)**2)/(4*sin(pi/9)**2*sin(pi/7)**2)",
+      "words": [
+        {
+          "A": "P7",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P7",
+          "B": "P7",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 7
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-cos(2*pi/7)",
+          "multiplicity": 1,
+          "p": 9
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-10",
+      "radius_squared": "-(1 + sqrt(5))**2*(-10 - 3*sqrt(2) + sqrt(10) + 2*sqrt(5))/16",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 8
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-11",
+      "radius_squared": "(2*sqrt(2)*sin(pi/11)**2 + 4*sin(pi/11)**2 + 1)/(4*sin(pi/11)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 8
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-12",
+      "radius_squared": "(sqrt(2) + sqrt(6))**2*(-2*sqrt(3) - sqrt(6) + 2*sqrt(2) + 6)/8",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 8
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-13",
+      "radius_squared": "(2*sqrt(2)*sin(pi/13)**2 + 4*sin(pi/13)**2 + 1)/(4*sin(pi/13)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 8
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-14",
+      "radius_squared": "(2*sqrt(2)*sin(pi/14)**2 + 4*sin(pi/14)**2 + 1)/(4*sin(pi/14)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 8
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-15",
+      "radius_squared": "-(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-22 - 7*sqrt(2) - sqrt(6)*sqrt(sqrt(5) + 5) - sqrt(3)*sqrt(sqrt(5) + 5) + sqrt(10) + 2*sqrt(5) + sqrt(15)*sqrt(sqrt(5) + 5) + sqrt(30)*sqrt(sqrt(5) + 5))/1024",
+      "words": [
+        {
+          "A": "P15",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 8
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-16",
+      "radius_squared": "(2*sqrt(2)*sin(pi/16)**2 + 4*sin(pi/16)**2 + 1)/(4*sin(pi/16)**2)",
+      "words": [
+        {
+          "A": "P16",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 8
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-8",
+      "radius_squared": "sqrt(2) + 2",
+      "words": [
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 2,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "duoprism-8-9",
+      "radius_squared": "(2*sqrt(2)*sin(pi/9)**2 + 4*sin(pi/9)**2 + 1)/(4*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P8",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 8
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 9
+        }
+      ]
+    },
+    {
+      "name": "duoprism-9-10",
+      "radius_squared": "(1 + sqrt(5))**2*(-sqrt(5) + 8*sin(pi/9)**2 + 3)/(32*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-sqrt(5)/4 - 1/4",
+          "multiplicity": 1,
+          "p": 9
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "duoprism-9-11",
+      "radius_squared": "(sin(pi/11)**2 + sin(pi/9)**2)/(4*sin(pi/11)**2*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P11",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-cos(2*pi/11)",
+          "multiplicity": 1,
+          "p": 9
+        },
+        {
+          "A": "P11",
+          "B": "P11",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 11
+        }
+      ]
+    },
+    {
+      "name": "duoprism-9-12",
+      "radius_squared": "(sqrt(2) + sqrt(6))**2*(-sqrt(3) + 4*sin(pi/9)**2 + 2)/(16*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P12",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-sqrt(3)/2",
+          "multiplicity": 1,
+          "p": 9
+        },
+        {
+          "A": "P12",
+          "B": "P12",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 12
+        }
+      ]
+    },
+    {
+      "name": "duoprism-9-13",
+      "radius_squared": "(sin(pi/13)**2 + sin(pi/9)**2)/(4*sin(pi/13)**2*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P13",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-cos(2*pi/13)",
+          "multiplicity": 1,
+          "p": 9
+        },
+        {
+          "A": "P13",
+          "B": "P13",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 13
+        }
+      ]
+    },
+    {
+      "name": "duoprism-9-14",
+      "radius_squared": "(sin(pi/14)**2 + sin(pi/9)**2)/(4*sin(pi/14)**2*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P14",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-cos(pi/7)",
+          "multiplicity": 1,
+          "p": 9
+        },
+        {
+          "A": "P14",
+          "B": "P14",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 14
+        }
+      ]
+    },
+    {
+      "name": "duoprism-9-15",
+      "radius_squared": "(-3 + sqrt(5))**2*(2 + sqrt(5))**2*(-sqrt(6) + 2*sqrt(sqrt(5) + 5) + sqrt(30))**2*(-sqrt(30)*sqrt(sqrt(5) + 5) - 2*sqrt(5) + 32*sin(pi/9)**2 + sqrt(6)*sqrt(sqrt(5) + 5) + 14)/(4096*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P15",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-sqrt(3)*sqrt(5/8 - sqrt(5)/8)/2 - sqrt(5)/8 - 1/8",
+          "multiplicity": 1,
+          "p": 9
+        },
+        {
+          "A": "P15",
+          "B": "P15",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 15
+        }
+      ]
+    },
+    {
+      "name": "duoprism-9-16",
+      "radius_squared": "(sin(pi/16)**2 + sin(pi/9)**2)/(4*sin(pi/16)**2*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P16",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-sqrt(sqrt(2)/4 + 1/2)",
+          "multiplicity": 1,
+          "p": 9
+        },
+        {
+          "A": "P16",
+          "B": "P16",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 1,
+          "p": 16
+        }
+      ]
+    },
+    {
+      "name": "duoprism-9-9",
+      "radius_squared": "1/(2*sin(pi/9)**2)",
+      "words": [
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P9",
+          "B": "P9",
+          "cosine": "-cos(2*pi/9)",
+          "multiplicity": 2,
+          "p": 9
+        }
+      ]
+    },
+    {
+      "name": "gap",
+      "radius_squared": "(sqrt(5) + 3)/2",
+      "words": [
+        {
+          "A": "A5",
+          "B": "tet",
+          "cosine": "-sqrt(10)/4",
+          "multiplicity": 6,
+          "p": 3
+        },
+        {
+          "A": "tet",
+          "B": "tet",
+          "cosine": "-sqrt(3*sqrt(5)/32 + 23/32)",
+          "multiplicity": 15,
+          "p": 3
+        },
+        {
+          "A": "A5",
+          "B": "A5",
+          "cosine": "-sqrt(sqrt(5)/8 + 3/8)",
+          "multiplicity": 1,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "pr-co",
+      "radius_squared": "5/4",
+      "words": [
+        {
+          "A": "P3",
+          "B": "co",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "cube",
+          "cosine": "-sqrt(3)/3",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "co",
+          "B": "cube",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "pr-doe",
+      "radius_squared": "(3*sqrt(5) + 11)/8",
+      "words": [
+        {
+          "A": "P5",
+          "B": "P5",
+          "cosine": "-sqrt(5)/5",
+          "multiplicity": 3,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "doe",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "pr-girco",
+      "radius_squared": "(3*sqrt(2) + 7)/2",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P8",
+          "cosine": "-sqrt(3)/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "cube",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "cube",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "girco",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "girco",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P8",
+          "B": "girco",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "pr-grid",
+      "radius_squared": "3*sqrt(5) + 8",
+      "words": [
+        {
+          "A": "P10",
+          "B": "P6",
+          "cosine": "-sqrt(15)*sqrt(2*sqrt(5) + 5)/15",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "cube",
+          "cosine": "-sqrt(10)*sqrt(sqrt(5) + 5)/10",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "cube",
+          "cosine": "-sqrt(6)*sqrt(sqrt(5) + 3)/6",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "grid",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "grid",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 6
+        },
+        {
+          "A": "P10",
+          "B": "grid",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "pr-ico",
+      "radius_squared": "(sqrt(5) + 7)/8",
+      "words": [
+        {
+          "A": "P3",
+          "B": "ico",
+          "cosine": "0",
+          "multiplicity": 5,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-sqrt(5)/3",
+          "multiplicity": 5,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "pr-id",
+      "radius_squared": "(2*sqrt(5) + 7)/4",
+      "words": [
+        {
+          "A": "P3",
+          "B": "id",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P5",
+          "cosine": "-sqrt(15)*sqrt(2*sqrt(5) + 5)/15",
+          "multiplicity": 4,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "id",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "pr-oct",
+      "radius_squared": "3/4",
+      "words": [
+        {
+          "A": "P3",
+          "B": "oct",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "-1/3",
+          "multiplicity": 4,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "pr-sirco",
+      "radius_squared": "(sqrt(2) + 3)/2",
+      "words": [
+        {
+          "A": "P3",
+          "B": "sirco",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "cube",
+          "cosine": "-sqrt(6)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "cube",
+          "cosine": "-sqrt(2)/2",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "sirco",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "pr-snic",
+      "radius_squared": "1/4 + CRootOf(32*z**3 - 64*z**2 + 40*z - 7, 0)/(-1 + 4*CRootOf(32*z**3 - 64*z**2 + 40*z - 7, 0))",
+      "words": [
+        {
+          "A": "P3",
+          "B": "snic",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "(-5 + 8*CRootOf(32*z**3 - 64*z**2 + 40*z - 7, 0))/3",
+          "multiplicity": 3,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "cube",
+          "cosine": "(-2*sqrt(6)*sqrt(1 - 2*CRootOf(32*z**3 - 64*z**2 + 40*z - 7, 0))*sqrt(1 - CRootOf(32*z**3 - 64*z**2 + 40*z - 7, 0)) - sqrt(3) + 4*sqrt(3)*CRootOf(32*z**3 - 64*z**2 + 40*z - 7, 0))/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "snic",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "pr-snid",
+      "radius_squared": "1/4 + CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0)/(-1 + 4*CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0))",
+      "words": [
+        {
+          "A": "P3",
+          "B": "snid",
+          "cosine": "0",
+          "multiplicity": 4,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "(-5 + 8*CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0))/3",
+          "multiplicity": 3,
+          "p": 4
+        },
+        {
+          "A": "P3",
+          "B": "P5",
+          "cosine": "(-2*sqrt(30)*sqrt(1 - CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0))*sqrt(-10*CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0) - 4*sqrt(5)*CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0) + sqrt(5) + 5) - sqrt(15)*sqrt(2*sqrt(5) + 5) + 4*sqrt(15)*sqrt(2*sqrt(5) + 5)*CRootOf(4096*z**6 - 16384*z**5 + 26624*z**4 - 22336*z**3 + 10112*z**2 - 2320*z + 209, 0))/15",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "snid",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "pr-srid",
+      "radius_squared": "sqrt(5) + 3",
+      "words": [
+        {
+          "A": "P3",
+          "B": "srid",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "cube",
+          "cosine": "-sqrt(6)*sqrt(sqrt(5) + 3)/6",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "cube",
+          "cosine": "-sqrt(10)*sqrt(sqrt(5) + 5)/10",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "srid",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "srid",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 5
+        }
+      ]
+    },
+    {
+      "name": "pr-tet",
+      "radius_squared": "5/8",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tet",
+          "cosine": "0",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P3",
+          "cosine": "1/3",
+          "multiplicity": 3,
+          "p": 4
+        }
+      ]
+    },
+    {
+      "name": "pr-ti",
+      "radius_squared": "3*(5*sqrt(5) + 13)/8",
+      "words": [
+        {
+          "A": "P3",
+          "B": "ti",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P10",
+          "B": "P10",
+          "cosine": "-sqrt(5)/5",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "P3",
+          "cosine": "-sqrt(15)*sqrt(2*sqrt(5) + 5)/15",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P10",
+          "B": "ti",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 10
+        }
+      ]
+    },
+    {
+      "name": "pr-tic",
+      "radius_squared": "sqrt(2) + 2",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tic",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P8",
+          "cosine": "-sqrt(3)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "P8",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P8",
+          "B": "tic",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 8
+        }
+      ]
+    },
+    {
+      "name": "pr-tid",
+      "radius_squared": "(9*sqrt(5) + 31)/8",
+      "words": [
+        {
+          "A": "P5",
+          "B": "P6",
+          "cosine": "-sqrt(15)*sqrt(2*sqrt(5) + 5)/15",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-sqrt(5)/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P5",
+          "B": "tid",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 5
+        },
+        {
+          "A": "P6",
+          "B": "tid",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "pr-toe",
+      "radius_squared": "11/4",
+      "words": [
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "-1/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "cube",
+          "cosine": "-sqrt(3)/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "cube",
+          "B": "toe",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "toe",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "pr-tut",
+      "radius_squared": "13/8",
+      "words": [
+        {
+          "A": "P3",
+          "B": "tut",
+          "cosine": "0",
+          "multiplicity": 1,
+          "p": 3
+        },
+        {
+          "A": "P3",
+          "B": "P6",
+          "cosine": "-1/3",
+          "multiplicity": 2,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "P6",
+          "cosine": "1/3",
+          "multiplicity": 1,
+          "p": 4
+        },
+        {
+          "A": "P6",
+          "B": "tut",
+          "cosine": "0",
+          "multiplicity": 2,
+          "p": 6
+        }
+      ]
+    },
+    {
+      "name": "sadi",
+      "radius_squared": "(sqrt(5) + 3)/2",
+      "words": [
+        {
+          "A": "ico",
+          "B": "ico",
+          "cosine": "-1/2",
+          "multiplicity": 3,
+          "p": 3
+        },
+        {
+          "A": "ico",
+          "B": "tet",
+          "cosine": "-sqrt(10)/4",
+          "multiplicity": 9,
+          "p": 3
+        },
+        {
+          "A": "tet",
+          "B": "tet",
+          "cosine": "-sqrt(3*sqrt(5)/32 + 23/32)",
+          "multiplicity": 3,
+          "p": 3
+        }
+      ]
+    }
+  ],
+  "schema": "exact-word-inputs-v1"
+}

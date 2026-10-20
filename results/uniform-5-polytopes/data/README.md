@@ -1,5 +1,8 @@
 # Certificates and data
 
+[hypothesis-map.md](hypothesis-map.md) maps each external hypothesis to its
+written argument and executable evidence, and explains the 104 convention.
+
 `core-hypotheses.txt` holds the twelve computational hypotheses, verbatim from the Lean sources; the paper's appendix prints it.
 
 `acceptance-inputs.json` lists the checkers, authoritative inputs and certificates authenticated by `PUBLIC.sha256`. Paths are relative to the bundle root. Prose and timing-bearing outputs are not acceptance pins. Outputs are compared by parsed mathematical fields.

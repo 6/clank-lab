@@ -4,6 +4,29 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## uniform-5-polytopes v2 (October 20, 2026)
+
+- Added the external-hypothesis evidence map, explicit finite-fan chart
+  correspondence, literal P1 range check, and 104-count overlap check.
+- Correction: version 1 named primary proof programs that were absent from
+  the bundle and supplied a Lean report without its source or a check
+  against the executable output. Version 2 ships those programs and source,
+  replays both proof routes, and checks all 629 logical report rows.
+  It also checks stage-one interval containment, disjoint class intervals,
+  the exact 628/1/890 outcomes and complete known-name coverage.
+- Correction: the extra-candidate table conflated search states with
+  development branches. At P16 the primary search has four completed states
+  for that encoding and a two-branch development; the independent development
+  has four nodes. A displayed snub-cube separation value is a squared
+  distance, not a distance. These bookkeeping corrections do not alter
+  either exclusion.
+- The finite count is 104 = 19 + 31 + 8 + 47 − 1: the 5-cube occurs both
+  among B5 forms and as a prism. Open Problem Garden's 105 equals the
+  subtotal before that subtraction, but its page does not explain the
+  discrepancy. No historical explanation is asserted. The classification
+  and its conditional scope are unchanged.
+  Tag on publication: `uniform-5-polytopes-v2`.
+
 ## ekg-sequence v3 (October 20, 2026)
 
 - Correction to v2: OEIS A155549 lists the values a(n), not the indices n.

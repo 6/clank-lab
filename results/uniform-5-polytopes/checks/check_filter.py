@@ -13,6 +13,35 @@ import filter as f
 import certificate_check as c
 
 
+def strict_disjoint_intervals(records, field, label):
+    """Closed class hulls are strictly disjoint, in exact rational arithmetic."""
+    intervals = sorted(f.interval(row[field]) for row in records)
+    for previous, current in zip(intervals, intervals[1:]):
+        if previous[1] >= current[0]:
+            raise ValueError(label + ': overlapping or touching class hulls')
+    return len(intervals)
+
+
+def consumer_intervals(actual, expected, library, *, check_disjoint=True):
+    """Every fresh S1 root in a surviving class is covered by the S2 input."""
+    def key(row):
+        return next(iter(f.class_sets([row], library)))
+    consumers = {key(row): row for row in expected}
+    if len(consumers) != len(expected):
+        raise ValueError('duplicate S2 consumer class')
+    if set(consumers) != {key(row) for row in actual}:
+        raise ValueError('S1/S2 complete class sets differ')
+    if check_disjoint:
+        strict_disjoint_intervals(actual, 'R_alive', 'regenerated S1')
+        strict_disjoint_intervals(expected, 'R', 'S2 consumer')
+    for row in actual:
+        low, high = f.interval(row['R_alive'])
+        outer_low, outer_high = f.interval(consumers[key(row)]['R'])
+        if not outer_low <= low <= high <= outer_high:
+            raise ValueError('S2 class interval does not cover regenerated S1 roots')
+    return len(actual)
+
+
 def main():
     # Rebind only the provenance container, using the already authenticated
     # public byte identities; no expected scientific result is learned here.
@@ -27,6 +56,8 @@ def main():
     output = BASE / 'independent-merge-filter/results'
     reports = c.check_all(BASE, output)
     requirements, aliases, complete = c.inputs(BASE)
+    interval_counts = {}
+    disjoint_counts = {}
     for p, convention, name in [(6, 'parameter', 'classes_p6.json.gz'),
                                 (10, 'parameter', 'classes_p10.json.gz'),
                                 (16, 'parameter', 'classes_p16.json.gz'),
@@ -36,6 +67,32 @@ def main():
         frozen = f.load_json(output / name)
         for key in ('counts', 'classes', 'deletion_certificates'):
             f.require(json.loads(json.dumps(actual[key])) == frozen[key], 'FILTER replay differs: ' + name + '/' + key)
+        disjoint_counts[f'independent-{convention}-p{p}'] = strict_disjoint_intervals(
+            actual['classes'], 'R_alive', name)
+        if convention == 'parameter':
+            consumer = f.load_json(BASE / f'independent-s23/inputs/u2_classes_p{p}.json.gz')
+            interval_counts[str(p)] = consumer_intervals(actual['classes'], consumer, library)
+            disjoint_counts[f'consumer-p{p}'] = strict_disjoint_intervals(
+                consumer, 'R', f'S2 P{p}')
+            # P6's primary producer classes are the authenticated S2 input.
+            # Separate public primary S1 files exist for P10 and P16.
+            if p in (10, 16):
+                primary = f.load_json(BASE / f'check_u1/classes_p{p}.json')
+                if f.class_sets(primary, library) != f.class_sets(actual['classes'], library):
+                    raise ValueError('primary/independent surviving class sets differ')
+                disjoint_counts[f'primary-p{p}'] = strict_disjoint_intervals(
+                    primary, 'R_alive', f'primary P{p}')
+                disjoint_counts[f'primary-original-p{p}'] = strict_disjoint_intervals(
+                    primary, 'R', f'primary original P{p}')
+            # A singleton at a consumer endpoint cannot cover a nonzero root box.
+            damaged = json.loads(json.dumps(consumer))
+            damaged[0]['R'][1] = damaged[0]['R'][0]
+            try:
+                consumer_intervals(actual['classes'], damaged, library)
+            except ValueError:
+                pass
+            else:
+                raise ValueError('accepted narrowed S2 class interval')
         # Reuse the same semantic corruptions against BOTH mathematical checks.
         if p == 16:
             keys = sorted(selected)
@@ -64,6 +121,8 @@ def main():
             if len(rejected) != 3:
                 raise ValueError('incomplete corruption suite')
     print(json.dumps({'status': 'PASS', 'checks': reports,
+                      'consumer_intervals_cover_s1_roots': interval_counts,
+                      'strictly_disjoint_class_hulls': disjoint_counts,
                       'same_corruptions_rejected_by_both': rejected}, sort_keys=True))
 
 

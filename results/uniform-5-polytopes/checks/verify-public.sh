@@ -44,8 +44,8 @@ steps=(test-manifest test-optimization s1-b2 merge-check affine-check filter-che
 seconds=(1 8 106 7 4 4 4 6 3 6 13 80 1650 190)
 if [ "$mode" = full ]; then
     seconds[13]=600
-    steps+=(s23-p16)
-    seconds+=(6000)
+    steps+=(s23-p16 primary-library primary-s23 primary-caseb primary-wedge)
+    seconds+=(6000 600 6000 600 1800)
 fi
 assigned=()
 if (( n == 1 )); then
@@ -103,7 +103,10 @@ run_step() {
         chart-check) "$py" check_caseb/chartcheck.py repair-caseb-w/chart-certificate.json ;;
         s23-tests) PYTHON="$s23py" bash verify_s23.sh tests ;;
         s23-replay) PYTHON="$s23py" bash verify_s23.sh replay ;;
-        caseb) bash check_caseb/run.sh "$mode" ;;
+        caseb)
+            "$py" p1_literal_contract.py
+            bash check_caseb/run.sh "$mode"
+            ;;
         s23-p16)
             cd independent-s23
             "$s23py" unpack_inputs.py "$work/p16/input" --pmax 16
@@ -114,6 +117,16 @@ run_step() {
             "$s23py" audit_stage3.py --classes "$work/p16/input/u2_classes_p16.json" \
                 --states "$work/p16/s2.jsonl" --results "$work/p16/s3.jsonl" --models models \
                 --known "$work/p16/input/u3_known_p16.json" --pmax 16 --receipt "$work/p16/s3.jsonl.frozen.json"
+            "$s23py" ../count_convention.py "$work/p16/s3.jsonl" \
+                --known "$work/p16/input/u3_known_p16.json" --classes "$work/p16/input/u2_classes_p16.json"
+            "$s23py" ../test_v2_outcomes.py "$work/p16/s3.jsonl"
+            "$s23py" ../report_bridge.py --independent "$work/p16/s3.jsonl"
+            "$s23py" ../test_report_bridge.py --independent "$work/p16/s3.jsonl"
+            "$s23py" ../encoding_correspondence.py --independent "$work/p16/s3.jsonl" \
+                --output "$work/p16/encoding-accounting.json"
+            ;;
+        primary-library|primary-s23|primary-caseb|primary-wedge)
+            "$py" replay_primary.py --part "${1#primary-}" --jobs "${S23_JOBS:-2}" --out "$work/$1"
             ;;
     esac
 }

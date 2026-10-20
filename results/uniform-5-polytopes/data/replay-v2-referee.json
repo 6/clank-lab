@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "verification_date_utc": "2026-10-20",
+  "result": "PASS \u2014 four standalone full shares, followed by seven post-review acceptance checks",
+  "scope": "The four shares ran on the same frozen public source. Subsequent changes to acceptance checks and their wrapper calls were checked separately on retained fresh outputs. This is not a single end-to-end run of the final wrapper.",
+  "frozen_scientific_manifest_sha256": "b52c3309b40acae33d6053070323814fde8a2af2ff3e105626e7b9592b3d49da",
+  "frozen_wrapper_sha256": "ee44842d8a4b1bf075c5d8fd7723cbe1e358c2670666ea65d272aa0d0cd2a2e0",
+  "standalone": "Each full share exported only public files, without repository metadata, and installed checks/requirements.txt in an environment outside the bundle.",
+  "shares": [
+    {
+      "part": "1/4",
+      "command": "bash checks/verify-public.sh full --part 1/4",
+      "steps": [
+        "s23-p16"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 896.254349,
+      "versions": {
+        "python": "3.14.8",
+        "python_flint": "0.9.0",
+        "sympy": "1.14.0",
+        "mpmath": "1.3.0",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1"
+      }
+    },
+    {
+      "part": "2/4",
+      "command": "bash checks/verify-public.sh full --part 2/4",
+      "steps": [
+        "primary-s23"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 519.321177,
+      "versions": {
+        "architecture": "aarch64",
+        "bash": "GNU bash, version 5.3.9(1)-release (aarch64-unknown-linux-gnu)",
+        "mpmath": "1.3.0",
+        "numpy": "2.5.4",
+        "python": "3.14.8 (main, Oct 14 2026, 01:05:37) [Clang 23.1.3 ]",
+        "python_flint": "0.9.0",
+        "scipy": "1.18.1",
+        "sympy": "1.14.0"
+      }
+    },
+    {
+      "part": "3/4",
+      "command": "bash checks/verify-public.sh full --part 3/4",
+      "steps": [
+        "test-manifest",
+        "test-optimization",
+        "s1-b2",
+        "merge-check",
+        "affine-check",
+        "filter-check",
+        "q5-check-a",
+        "q5-check-b",
+        "q5-corrupt",
+        "snub",
+        "chart-check",
+        "s23-tests",
+        "primary-library",
+        "primary-wedge"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 641.53605,
+      "versions": {
+        "python": "3.14.8",
+        "python_flint": "0.9.0",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "sympy": "1.14.0",
+        "mpmath": "1.3.0"
+      }
+    },
+    {
+      "part": "4/4",
+      "command": "bash checks/verify-public.sh full --part 4/4",
+      "steps": [
+        "s23-replay",
+        "caseb",
+        "primary-caseb"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 489.67017486301484,
+      "versions": {
+        "python": "3.14.8 (main, Oct 14 2026, 01:05:37) [Clang 23.1.3 ]",
+        "python-flint": "0.9.0",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "sympy": "1.14.0",
+        "mpmath": "1.3.0"
+      }
+    }
+  ],
+  "post_review": {
+    "date": "2026-10-20",
+    "scope": "Post-cold-read acceptance checks on retained fresh primary and independent P16 outputs; no full search rerun and no aggregate final-wrapper claim.",
+    "status": "PASS",
+    "versions": {
+      "python": "3.14.8",
+      "flint": "0.9.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "sympy": "1.14.0",
+      "mpmath": "1.3.0"
+    },
+    "sources": {
+      "checks/count_convention.py": "7689b8c48284ffc3ff9b87a54defcea93bf426c4b1b9e63d1233b36a9133f1de",
+      "checks/test_v2_outcomes.py": "d3c9c72afa9fa2f584714c28b1ac84729a75b20cd5694faab3bf34a6b97810f3",
+      "checks/report_bridge.py": "1536992bca2504c07a43363b631688f00f43789a7c558ce32ac5464827f3b01e",
+      "checks/test_report_bridge.py": "5a45ddbcd61f450c2ee487a5ede079d890baf14970af644a162a117055b6003c",
+      "checks/encoding_correspondence.py": "e08103977ac19fddb43d5f34017c93cb69328c55176fc6aae3f73db97cffc92f",
+      "checks/replay_primary.py": "3501a2b5fe54e495c6eb18df7ce2e000041c731d626e6ef34e0024d065feaf8b",
+      "checks/verify-public.sh": "79da19181f65ec3d12ac2bfcea9ce1e8f2448c2f1c3ba571216495eaae5e05b4"
+    },
+    "inputs": {
+      "primary_report_sha256": "210b4b88b08d6984dccbc85172891583468e048fd208e4393729c24dd64e35b8",
+      "primary_actual_signatures_sha256": "7ee6e765ec511d55efce5cef6fce94bed3b1bb19b4793eb39f3d94bb1d88f794",
+      "independent_result_sha256": "bfd83eb85fb5663250cea384ef0cb5767a5d059ebc79439bc6970fe81e1efb8e"
+    },
+    "checks": [
+      {
+        "check": "outcomes",
+        "command": [
+          "$PY",
+          "-B",
+          "checks/count_convention.py",
+          "$INDEPENDENT"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.977,
+        "log_sha256": "96407cbe27fc2a51482afa1ea342280cf30e7f04646564d2a465e7e7b7fb3301",
+        "output": "PASS outcomes: 629 signatures, 628 KNOWN, 1 explicit extra candidate; 28 snub-product mirrors refuted by strict separation\nPASS family partition: 628 = 104 + 420 + 105 - 1; 524 outside the finite list; all 14\u00d730 product parameters and 105 unordered polygon pairs represented exactly once\nPASS 30 product bases: 4 Platonic excluding cube + 13 Archimedean + 13 antiprisms A4...A16; 47 finite-list prisms include grand-antiprism prism\nPASS finite convention: 19 + 31 + 8 + 47 - 1 = 104; sole finite-list overlap is the 5-cube\nPASS exact known-name coverage: all 890 authenticated and regenerated names matched\nPASS ROOT coverage: all 629 signatures have a whole-class UNIQUE witness\nThe Open Problem Garden's reason for 105 is not established by this check."
+      },
+      {
+        "check": "outcome-corruptions",
+        "command": [
+          "$PY",
+          "-B",
+          "checks/test_v2_outcomes.py",
+          "$INDEPENDENT"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 2.239,
+        "log_sha256": "ceca93d18200a1e1cf59e41e135cd520646ccb74f14d78e8f48b0d7926a60e29",
+        "output": "REJECTED: P6 narrowed consumer\nREJECTED: P6 touching consumer classes\nREJECTED: P6 overlapping S1 hulls\nREJECTED: P10 narrowed consumer\nREJECTED: P10 touching consumer classes\nREJECTED: P10 overlapping S1 hulls\nREJECTED: P16 narrowed consumer\nREJECTED: P16 touching consumer classes\nREJECTED: P16 overlapping S1 hulls\nPASS exact P6/P10/P16 containment and disjointness: {\"6\": 136, \"10\": 278, \"16\": 563}\nPASS outcomes: 629 signatures, 628 KNOWN, 1 explicit extra candidate; 28 snub-product mirrors refuted by strict separation\nPASS family partition: 628 = 104 + 420 + 105 - 1; 524 outside the finite list; all 14\u00d730 product parameters and 105 unordered polygon pairs represented exactly once\nPASS 30 product bases: 4 Platonic excluding cube + 13 Archimedean + 13 antiprisms A4...A16; 47 finite-list prisms include grand-antiprism prism\nPASS finite convention: 19 + 31 + 8 + 47 - 1 = 104; sole finite-list overlap is the 5-cube\nPASS exact known-name coverage: all 890 authenticated and regenerated names matched\nPASS ROOT coverage: all 629 signatures have a whole-class UNIQUE witness\nThe Open Problem Garden's reason for 105 is not established by this check.\nREJECTED: omitted known name\nREJECTED: same counts, wrong known name\nREJECTED: wrong mirror refutation reason\nREJECTED: non-strict mirror separation\nREJECTED: wrong mirror signature\nREJECTED: wrong extra signature with unchanged facet multiset\nREJECTED: unresolved extra development\nREJECTED: narrowed whole-class ROOT witness\nREJECTED: same-count wrong polygon-product alias assignment\nREJECTED: grand-antiprism prism omitted from finite-list prisms\nPASS v2 outcome mutation controls"
+      },
+      {
+        "check": "report",
+        "command": [
+          "$PY",
+          "-B",
+          "checks/report_bridge.py",
+          "--primary-report",
+          "$PRIMARY/result_p16.json",
+          "--signatures",
+          "$PRIMARY/vfs.json",
+          "--independent",
+          "$INDEPENDENT"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.23,
+        "log_sha256": "37ce76dc2c090128eadaadad5545548e940949191977ea1f71f602abb798e2b5",
+        "output": "PASS Lean report: 629 rows regenerated byte-for-byte from source 938851dd\nPASS fresh primary report: every Lean logical field agrees\nPASS independent S3 report bridge: {\"classes\": 563, \"embedding_pairs\": {\"MATCH\": 890, \"NO\": 32, \"NO-COUNT\": 230}, \"extra_candidate_lean_row\": 12, \"extra_mirror_placements\": 28, \"rows\": 629}"
+      },
+      {
+        "check": "report-corruptions",
+        "command": [
+          "$PY",
+          "-B",
+          "checks/test_report_bridge.py",
+          "--primary-report",
+          "$PRIMARY/result_p16.json",
+          "--signatures",
+          "$PRIMARY/vfs.json",
+          "--independent",
+          "$INDEPENDENT"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 3.177,
+        "log_sha256": "29c4ea76ce9851a90d1877234805ea9fe6b25071a2f64dea7924d8c66ea6646e",
+        "output": "PASS report bridge corruption controls: 19 rejected"
+      },
+      {
+        "check": "fresh-primary-corruptions",
+        "command": [
+          "$PY",
+          "-B",
+          "checks/test_report_bridge.py",
+          "--primary-report",
+          "$PRIMARY/result_p16.json",
+          "--signatures",
+          "$PRIMARY/vfs.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 2.319,
+        "log_sha256": "fae5167d27b3e111702f9878be6b42f087cb1d83632c239a9d21fe77ea588423",
+        "output": "PASS report bridge corruption controls: 10 rejected"
+      },
+      {
+        "check": "encoding",
+        "command": [
+          "$PY",
+          "-B",
+          "checks/encoding_correspondence.py",
+          "--primary-report",
+          "$PRIMARY/result_p16.json",
+          "--signatures",
+          "$PRIMARY/vfs.json",
+          "--independent",
+          "$INDEPENDENT",
+          "--output",
+          "$OUT/encoding.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 6.509,
+        "log_sha256": "10bbf025d0597c41f10f26cce70717d424111ad594b0982877e70dcf0baf017b",
+        "output": "PASS primary accounting: 633 completions -> 629 encodings; duplicate excess 3+1\nPASS 28 mirror classes: 28 normal encodings; diagnostic 56, extra 28 strictly separation-refuted\nPASS independent 657-group inventory: all 28 mirror classes and full signatures agree\nDIAGNOSTIC only: bypassed cell-patch states are never accepted; 6.270s"
+      },
+      {
+        "check": "optimization",
+        "command": [
+          "$PY",
+          "-B",
+          "checks/test_optimization.py"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 4.951,
+        "log_sha256": "0c3222e02327643572b084705096d2eff908f31c5dec313cd0f5255006dbca75",
+        "output": "..\n----------------------------------------------------------------------\nRan 2 tests in 4.900s\n\nOK"
+      }
+    ]
+  },
+  "source_comparison": "All changed checker files since the four-share source are listed by SHA256 under post_review.sources. All other search and checker source files are byte-for-byte unchanged. The wrapper changes add the diagnostic and fresh report corruption checks recorded in the delta.",
+  "limits": [
+    "The twelve hypotheses remain external written arguments plus certified computation; no common concrete Lean instance is supplied.",
+    "These runs do not independently re-prove the cited three- and four-dimensional classifications.",
+    "The 104 finite-list convention is checked; the historical reason for Open Problem Garden\u2019s 105 remains unestablished."
+  ]
+}

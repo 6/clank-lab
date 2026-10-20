@@ -2,10 +2,18 @@
 
 `checks/drat-trim.c` is an unmodified copy of the DRAT-trim proof checker
 by Marijn Heule and Nathan Wetzler, from
-[marijnheule/drat-trim](https://github.com/marijnheule/drat-trim).
+[the matching upstream commit](https://github.com/marijnheule/drat-trim/blob/2e3b2dc0ecf938addbd779d42877b6ed69d9a985/drat-trim.c).
 Its source header dates the last edit to April 21, 2024. It is distributed
 under MIT, separately from the original work's Apache-2.0 license.
 The original work is by the author named in the paper.
+
+The Lean project depends on [Lean 4](https://github.com/leanprover/lean4)
+and [Mathlib](https://github.com/leanprover-community/mathlib4), distributed
+upstream under Apache-2.0. Their source and binaries are fetched dependencies,
+not vendored material in this bundle. The project imports Std's CNF definitions
+and Mathlib's graph, coloring and walk APIs. The local deletion-erased RUP
+checker and its soundness proof were written for this formalization. Prior
+LRAT verification methodology is credited in the paper.
 
 The source retains this full notice (including its updated copyright line):
 

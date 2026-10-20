@@ -20,6 +20,46 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      # One compiler at a time: the rotation module alone needs about 10 GiB.
+      LEAN_NUM_THREADS: '1'
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/steinberg-c4-c9/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/steinberg-c4-c9/lean/.lake/build
+          key: steinberg-c4-c9-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/steinberg-c4-c9/lean/lean-toolchain', 'results/steinberg-c4-c9/lean/lake-manifest.json', 'results/steinberg-c4-c9/lean/lakefile.toml', 'results/steinberg-c4-c9/lean/**/*.lean', '!results/steinberg-c4-c9/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof and check its axioms
+        run: lake build
+
   checks:
     name: Check steinberg-c4-c9
     runs-on: ubuntu-latest

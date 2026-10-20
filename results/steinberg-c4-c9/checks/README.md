@@ -124,12 +124,15 @@ mathematical rejection, rather than accepting crashes as negative results.
 The complete deletion-coloring file, rather than the single edge-deletion
 control, certifies criticality.
 
-This is a computer-assisted proof. The mathematical reductions, graph
-parsers, enumerators and executable checker are not formalized in a proof
-assistant. The two languages for the geometric checks and the two different
-non-colorability methods provide independent implementation paths, not a
-claim of a formally verified compiler or checker. Integer arithmetic is
-used throughout. On this graph `n=82`, maximum degree 10, cycle bound 14;
+The Lean proof is checked separately with `lake exe cache get` followed by
+`lake build` from `lean/`; see [its documentation](../lean/README.md). It
+checks non-three-colorability and exclusion of four- and nine-cycles for
+the parsed graph, together with the explicit spherical rotation certificate.
+The criticality, Ore reconstruction, ten-cycle exclusion and edge-bound
+consequence retain the executable checks and written arguments described
+above. The C and Python programs are independent implementation paths;
+their compilers and checkers are not formally verified. Integer arithmetic
+is used throughout. On this graph `n=82`, maximum degree 10, cycle bound 14;
 even `82*10^14 < 2^63` bounds the C enumerator's raw counts. Its fixed array
 and degree limits also exceed this input. The theorem concerns this fixed
 input, not arbitrary malformed files or arbitrary graph sizes.

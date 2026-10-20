@@ -35,7 +35,7 @@ embedding, forbidden cycles and deletion colorings. Planarity is certified
 by a rotation system, and cycle exclusion by finite enumeration.
 \end{abstract}
 
-\noindent The proofs, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+\noindent The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 \medskip\noindent Status: computer-assisted; not expert-reviewed; AI-assisted.
 
@@ -115,7 +115,8 @@ cycle implementations are separate Python and C programs. The Ore tree gives an 
 non-colorability checks are exact constraint elimination over the three
 color values and a DRAT certificate checked by DRAT-trim. The
 mathematical reductions and ordinary executable programs, including the
-CNF generator, remain part of the proof's trust base.
+CNF generator, remain part of the trust base for these executable routes.
+The separate Lean development is described in Section~\ref{sec:replay}.
 
 \section{The graph and its embedding}
 The input \file{data/graph.txt}, reproduced in Appendix~\ref{app:graph},
@@ -320,8 +321,8 @@ solver's bare unsatisfiability answer or depending on a solver version. Together
 the exact reduction above, this separately proves that $G$ has no proper
 three-coloring.
 
-\section{Replay, controls and scope}
-The complete standalone check is \file{sh checks/check.sh}, run from the
+\section{Replay, controls and scope}\label{sec:replay}
+The standalone executable check is \file{sh checks/check.sh}, run from the
 bundle root. It needs Python 3.10 or later, a C compiler and a POSIX
 shell; there are no third-party Python packages or network downloads.
 It compiles the supplied C sources in a temporary directory, runs both
@@ -346,10 +347,11 @@ the underlying graph. Finally a proper prefix containing only the first
 the standalone checker must reject it. These are ten control outcomes. The certificate checks and the reductions in
 the preceding sections establish Theorem~\ref{thm:main}.
 
-This is a computer-assisted proof, not a proof-assistant formalization.
-The rotation-system argument, enumeration completeness, Ore induction, criticality argument, CNF reduction,
-color symmetry and constraint-elimination argument are mathematical
-arguments written here. Their implementations and DRAT-trim run as
+The full statement of Theorem~\ref{thm:main} remains computer-assisted.
+For the executable routes above, the rotation-system argument, enumeration
+completeness, Ore induction, criticality argument, CNF reduction, color
+symmetry and constraint-elimination argument are mathematical arguments
+written here. The Python and C implementations and DRAT-trim run as
 ordinary programs and are not themselves formally verified. The
 different implementations and non-colorability methods reduce shared
 implementation risk. The witness was found by composing small planar graphs with designated
@@ -360,12 +362,43 @@ edge list directly. The search is not needed for the proof and makes
 no claim of exhaustive search, optimal order or applicability to another
 forbidden pair.
 
+\paragraph{Lean development.}
+The Lean theorem \file{Steinberg.counterexample} conjoins only three
+properties of one \file{SimpleGraph (Fin 82)}: a spherical rotation
+certificate, no simple $C_4$ or $C_9$, and non-three-colorability.
+Lean parses the unchanged \file{data/graph.txt} and \file{data/rotation.txt}
+to define this graph and rotation.
+The planarity certificate is a fully checked connected genus-zero rotation,
+including exact neighbor incidence, cyclic vertex orders, exhaustive face
+orbits covering all darts, and $82-136+56=2$.
+The correspondence with a topological embedding uses the surface argument
+above and is not formalized in Lean.
+Cycle exclusion covers all Mathlib \file{IsCycle} closed walks, including
+cycles with chords. Non-colorability uses a proved coloring-to-CNF reduction
+and kernel-proved equality with the symmetry-free input of a verified RUP
+checker using LRAT-style hints. Deletion-erased RUP retains deleted clauses;
+every retained clause is proved entailed by the input.
+The Lean certificate constants are checked by kernel reduction; no SAT solver
+is trusted. Run \file{lake exe cache get} then \file{lake build} from
+\file{lean/}. The build guards the top statement's exact type and
+\texttt{\#print axioms} using \texttt{\#guard\_msgs}, permitting only
+\file{propext}, \file{Classical.choice} and \file{Quot.sound}.
+No native/compiler proof evaluation or additional axioms are used.
+Four-criticality, the Ore decomposition, the edge minimum, $C_{10}$
+exclusion, and the full statement of Theorem~\ref{thm:main} lie outside
+this Lean scope.
+
 \paragraph{Credits and license.}
 The Ore-composition method and the sharp edge bound are credited to
 the work discussed by Kostochka and Yancey~\cite{ky}.
 Credit for posing and developing the forbidden-cycle questions belongs
 to the researchers cited above, and for the earlier Steinberg disproof
-to Cohen-Addad and coauthors. The SAT certificate uses CaDiCaL and is
+to Cohen-Addad and coauthors. The formalization uses
+\href{https://github.com/leanprover/lean4}{Lean 4 and its standard library}
+and \href{https://github.com/leanprover-community/mathlib4}{Mathlib};
+credit is due to their contributors. The hint-based certificate methodology
+is credited to Cruz-Filipe, Heule, Hunt, Kaufmann and
+Schneider-Kamp~\cite{lrat}. The SAT certificate uses CaDiCaL and is
 checked with Heule and Wetzler's DRAT-trim. This work, including the
 paper, is under Apache-2.0 (the repository's root \file{LICENSE}); the
 unmodified DRAT-trim source retains MIT. The full applicable notices and
@@ -432,6 +465,11 @@ DRAT-trim: Efficient checking and trimming using expressive clausal proofs.
 CaDiCaL, Kissat, Paracooba, Plingeling and Treengeling entering the
 SAT Competition 2020. \emph{Proc. SAT Competition 2020}, 51--53.
 \href{https://github.com/arminbiere/cadical}{CaDiCaL source and contributors}.
+\bibitem{lrat} L. Cruz-Filipe, M. J. H. Heule, W. A. Hunt, Jr.,
+M. Kaufmann and P. Schneider-Kamp.
+Efficient Certified RAT Verification.
+\emph{CADE 2017}, LNCS 10395, 220--236.
+\href{https://doi.org/10.1007/978-3-319-63046-5_14}{doi:10.1007/978-3-319-63046-5\_14}.
 \end{thebibliography}
 
 \clearpage\appendix

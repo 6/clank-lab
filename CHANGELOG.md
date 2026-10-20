@@ -11,6 +11,12 @@ Zenodo records.
   witness as a realization of the known lower bound.
 - Zenodo: [10.5281/zenodo.23509560](https://doi.org/10.5281/zenodo.23509560)
 
+## steinberg-c4-c9 v3 (October 20, 2026)
+
+- Adds a Lean proof of the whole result for the published graph: it is
+  planar, has no cycle of length 4 or 9, and has no proper 3-coloring, with
+  the coloring certificate checked inside Lean.
+
 ## uniform-5-polytopes v2 (October 20, 2026)
 
 - Correction: version 1 left out some programs its proof relies on and the

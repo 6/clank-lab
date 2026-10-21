@@ -73,3 +73,21 @@ reject 'Python planarity on the swapped rotation' "$PY" checks/check_planar.py d
 reject_drat 'the truncated proof' "$work/col3.cnf" "$C/col3-truncated.drat"
 reject 'Ore tree with a repeated K4 vertex' "$PY" checks/check_ore.py data/graph.txt "$C/ore-tree-invalid.json" data/rotation.txt data/deletion-colorings.json
 echo 'PASS: planar, no C4/C9/C10, 4-critical, 27 K4 leaves and 26 Ore joins; all ten corruption checks passed'
+
+# Optional illustration, separate from the proof and its controls above.
+"$PY" checks/draw_graph.py --check
+reject_drawing() {
+    expected=$1
+    control=$2
+    code=0
+    "$PY" checks/draw_graph.py --corruption "$C/$control" > "$work/drawing-control.log" 2>&1 || code=$?
+    if [ "$code" -ne 1 ] || ! grep -Fxq "REJECT: $expected" "$work/drawing-control.log"; then
+        cat "$work/drawing-control.log"
+        echo "FAIL: expected drawing rejection: $control"
+        exit 1
+    fi
+    echo "OK: rejected $control"
+}
+reject_drawing 'drawing edge set differs from graph' drawing-missing-edge.json
+reject_drawing 'nonincident edges (2, 23) and (32, 33) intersect' drawing-crossing.json
+reject_drawing 'geometric rotation differs at 0' drawing-mirror.json

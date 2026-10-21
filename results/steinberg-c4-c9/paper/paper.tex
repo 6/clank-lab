@@ -5,6 +5,7 @@
 \input{glyphtounicode}
 \pdfgentounicode=1
 \usepackage{amsmath,amssymb,amsthm,geometry,hyperref,multicol,fancyvrb}
+\usepackage{graphicx}
 \geometry{margin=1in}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={A planar graph without four- or nine-cycles that is not three-colorable},pdfauthor={P. Graham},pdfsubject={Computer-assisted graph coloring counterexample},pdfkeywords={planar graph, proper coloring, forbidden cycles}}
 \newtheorem{theorem}{Theorem}
@@ -222,6 +223,18 @@ produces the particular published graph. Starting with 27 copies of
 $K_4$, each join reduces the sum of orders and the sum of sizes by one,
 so the root has $27\cdot4-26=82$ vertices and
 $27\cdot6-26=136$ edges.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.92\linewidth]{../data/graph.pdf}
+\caption{The 82-vertex counterexample with its 136 edges. A Tutte
+(barycentric) drawing is obtained by triangulating the bounded faces of
+the published rotation system with temporary centers, then omitting the
+added vertices and edges. The figure illustrates the graph and is not
+part of the proof.}
+\label{fig:graph}
+\end{figure}
+\clearpage
 
 \subsection{Four-criticality and the edge bound}
 A graph is \emph{four-critical} if it has chromatic number four and

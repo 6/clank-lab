@@ -4,13 +4,13 @@
 
 A [proper three-coloring](https://en.wikipedia.org/wiki/Graph_coloring) assigns three colors to a graph's vertices so that adjacent vertices differ. A question attributed to Lu, Wang, Wang, Bu, Montassier and Raspaud (2009), [as reproduced by Kang, Jin and Wang](https://arxiv.org/pdf/1506.04629), asks which cycle lengths, together with length four, force a planar graph to admit such a coloring. This extends the question behind [Steinberg's conjecture](https://arxiv.org/abs/1604.05108), disproved by Cohen-Addad, Hebdige, Král', Li and Salgado. To our knowledge, the first counterexample to the assertion that every planar graph without four- or nine-cycles has a proper three-coloring is given here: an 82-vertex planar graph without four- or nine-cycles has no proper three-coloring.
 
+![The 82-vertex counterexample (illustration only; not part of the proof).](data/graph.svg)
+
 Computer-assisted; not yet reviewed by experts.
 
 The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
-
-Archived on Zenodo: [doi:10.5281/zenodo.23510448](https://doi.org/10.5281/zenodo.23510448)
 
 ## Check it
 
@@ -46,7 +46,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A planar graph without four- or nine-cycles that is not three-colorable}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v3/results/steinberg-c4-c9}},
-  doi          = {10.5281/zenodo.23510448}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v4/results/steinberg-c4-c9}}
 }
 ```

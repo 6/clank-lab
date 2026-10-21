@@ -4,6 +4,14 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## stanley-smith-forms v1 (October 21, 2026)
+
+- First version: a computer-assisted counterexample to Stanley's 2016
+  conjecture on the Smith normal forms of Jucys–Murphy elements on integral
+  Specht modules, smallest at λ = (3,1,1), k = 3, with a written proof of
+  exactly when it holds for k = 3. Paper, Lean checks of the key identity
+  and the matrix, and independent certificate checkers.
+
 ## difference-set-243 v1 (October 21, 2026)
 
 - First version: a computer-assisted proof that no (243,121,60) difference

@@ -1,0 +1,3 @@
+# Python 3.10 or later; standard library only (no pip dependencies).
+# GNU g++ with C++20 and OpenMP support; libgomp runtime.
+# Lean checks separately require elan, Git, and network access for pinned Lake dependencies.

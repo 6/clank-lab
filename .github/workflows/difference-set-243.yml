@@ -1,0 +1,100 @@
+name: Difference-set order-243 checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/difference-set-243/**'
+      - '.github/workflows/difference-set-243.yml'
+  pull_request:
+    paths:
+      - 'results/difference-set-243/**'
+      - '.github/workflows/difference-set-243.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: difference-set-243-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quick:
+    name: Bounded executable checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/difference-set-243
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Install C++ compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++
+
+      - name: Check finite structure and positive controls
+        run: python3 checks/check.py quick --threads "$(nproc)" --work "$RUNNER_TEMP/difference-set-243-quick"
+
+  lean:
+    name: Lean coverage and conditional conclusion
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      LEAN_NUM_THREADS: '1'
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/difference-set-243/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean with elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/difference-set-243/lean/.lake/build
+          key: difference-set-243-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/difference-set-243/lean/lean-toolchain', 'results/difference-set-243/lean/lake-manifest.json', 'results/difference-set-243/lean/lakefile.toml', 'results/difference-set-243/lean/**/*.lean', '!results/difference-set-243/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proofs and statement, definition and axiom checks
+        run: lake build
+
+  checks:
+    name: Check difference-set-243
+    needs: [quick, lean]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      QUICK_RESULT: ${{ needs.quick.result }}
+      LEAN_RESULT: ${{ needs.lean.result }}
+    steps:
+      - name: Require both checks
+        run: |
+          test "$QUICK_RESULT" = success
+          test "$LEAN_RESULT" = success

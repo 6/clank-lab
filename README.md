@@ -23,3 +23,4 @@ Results that settle one specific open case, such as a missing entry in a publish
 | Result | Open question | Published |
 |---|---|---|
 | [density-seven](results/density-seven/) | The [density Hales–Jewett number](https://oeis.org/A156989) for words of length 7 over three letters, conjectured by D.H.J. Polymath in 2010 to be 1,302. We give a computer-assisted proof that it is 1,302. | October 20, 2026 |
+| [difference-set-243](results/difference-set-243/) | Whether a (243,121,60) [difference set](https://en.wikipedia.org/wiki/Difference_set) exists in the group C3 × C9 × C9, open since Vera López and García Sánchez's 1997 table and listed in [Gordon's La Jolla Difference Set Repository](https://dmgordon.org/difference-sets/). We give a computer-assisted proof that none does. | October 21, 2026 |

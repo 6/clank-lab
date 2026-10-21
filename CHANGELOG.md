@@ -9,6 +9,7 @@ Zenodo records.
 - First version: a computer-assisted proof that no (243,121,60) difference
   set exists in C3 × C9 × C9, the case Gordon called the smallest open case.
   Paper, Lean coverage proof and standalone exhaustive-search checkers.
+- Zenodo: [10.5281/zenodo.23534853](https://doi.org/10.5281/zenodo.23534853)
 
 ## density-seven v3 (October 21, 2026)
 

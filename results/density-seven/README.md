@@ -12,6 +12,8 @@ The proofs, the search code, the certificate checkers and the text were produced
 
 Archived on Zenodo: [doi:10.5281/zenodo.23532529](https://doi.org/10.5281/zenodo.23532529)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23532529](https://doi.org/10.5281/zenodo.23532529)
+
 ## Check it
 
 On Linux, install Python 3.10 or later, Git, a C/C++ compiler, Make and Rust/Cargo. From this folder:

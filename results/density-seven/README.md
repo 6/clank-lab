@@ -10,8 +10,6 @@ The proofs, the search code, the certificate checkers and the text were produced
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23509560](https://doi.org/10.5281/zenodo.23509560)
-
 ## Check it
 
 On Linux, install Python 3.10 or later, Git, a C/C++ compiler, Make and Rust/Cargo. From this folder:
@@ -27,7 +25,7 @@ This checks the complete reduction and witness, and a small refutation with corr
 python3 checks/check.py --full --tools /tmp/density-tools --work /tmp/density-full
 ```
 
-Allow at least about 75 CPU-hours, plus drat-trim checking and audits, and several days elapsed. About 1.56 TB of generated proof text passes through pipes rather than being saved. The quick CI check does not replay the main refutations. [Checking details and dependencies](checks/README.md).
+Allow roughly 100 CPU-hours for solver and proof-checker work, plus drat-trim checking, audits and stream handling, and several days elapsed. The completed cake_lpr checks used heaps up to about 59 GiB. About 1.56 TB of generated proof text passes through pipes rather than being saved. The paper separates the measured historical computation from the eight additional cake_lpr checks. The quick CI check does not replay the main refutations. [Checking details and dependencies](checks/README.md).
 
 ## Credits
 
@@ -42,7 +40,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The seventh ternary density Hales--Jewett number}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v2/results/density-seven}},
-  doi          = {10.5281/zenodo.23509560}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v3/results/density-seven}}
 }
 ```

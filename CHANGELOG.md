@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## density-seven v3 (October 21, 2026)
+
+- Adds formally verified certificate checking for every propositional
+  refutation in the proof. The result is unchanged.
+
 ## density-seven v2 (October 20, 2026)
 
 - Correction: the paper and README now credit Polymath1's 2009 bounds

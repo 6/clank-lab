@@ -15,6 +15,7 @@ Results that settle a conjecture or question in general.
 | [Uniform 5-polytopes](results/uniform-5-polytopes/) | Whether every convex [uniform 5-polytope](https://en.wikipedia.org/wiki/Uniform_5-polytope) is already known, the case after Conway and Guy's four-dimensional list of 1965. We give a computer-assisted proof that it is. | October 20, 2026 |
 | [The EKG sequence](results/ekg-sequence/) | The second-order growth of the [EKG sequence](https://mathworld.wolfram.com/EKGSequence.html), conjectured by Lagarias, Rains and Sloane in 2002. We prove the remaining lower bound, completing the proof, and settle OEIS conjectures that follow. | October 20, 2026 |
 | [A planar graph without 4- or 9-cycles](results/steinberg-c4-c9/) | Whether every planar graph with no 4- or 9-cycles is [3-colorable](https://en.wikipedia.org/wiki/Gr%C3%B6tzsch%27s_theorem), asked by Lu and coauthors in 2009. We give a computer-assisted proof that one isn't: an 82-vertex counterexample. | October 20, 2026 |
+| [Stanley's conjecture on Smith forms of Specht modules](results/stanley-smith-forms/) | Whether the Smith normal form of each [Jucys–Murphy element](https://en.wikipedia.org/wiki/Jucys%E2%80%93Murphy_element) acting on an integral Specht module is given by products of contents, as conjectured by Richard Stanley in 2016. We give a computer-assisted proof that it is not: the smallest counterexamples have shape (3,1,1). | October 21, 2026 |
 
 ## Computed values
 

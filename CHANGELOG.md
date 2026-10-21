@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## steinberg-c4-c9 v4 (October 21, 2026)
+
+- Adds a drawing of the graph.
+
 ## path-ramsey v2 (October 21, 2026)
 
 - Adds COMPLETION.md, a record of the completed full check: the final

@@ -6,7 +6,7 @@ A difference set is a collection of points in a finite group whose ordered
 differences represent every nonzero group element equally often.
 [Gordon's La Jolla Difference Set Repository](https://dmgordon.org/difference-sets/)
 [lists](https://doi.org/10.5281/zenodo.19740740) the question whether 121 points
-in C3 × C9 × C9 can represent each nonzero element exactly 60 times as open;
+in $C_3 \times C_9 \times C_9$ can represent each nonzero element exactly 60 times as open;
 Gordon called it the “Smallest Open Case” in his
 [August 3, 2019 presentation, slide 38](https://cargo.wlu.ca/ArasuFest/ArasuFest_talks/Dan_Gordon.pdf#page=49).
 It was already unresolved in Vera López and García Sánchez's 1997 table.

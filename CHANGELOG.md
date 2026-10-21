@@ -16,7 +16,6 @@ Zenodo records.
 - Adds formally verified certificate checking for every propositional
   refutation in the proof. The result is unchanged.
 - Zenodo: [10.5281/zenodo.23532529](https://doi.org/10.5281/zenodo.23532529)
-- Zenodo: [10.5281/zenodo.23532529](https://doi.org/10.5281/zenodo.23532529)
 
 ## density-seven v2 (October 20, 2026)
 

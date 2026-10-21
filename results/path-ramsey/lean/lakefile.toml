@@ -1,0 +1,35 @@
+name = "R3P10"
+version = "0.1.0"
+defaultTargets = ["R3P10", "Checks"]
+
+[leanOptions]
+relaxedAutoImplicit = false
+autoImplicit = false
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.32.2"
+
+# Checked by the default `lake build`.
+[[lean_lib]]
+name = "R3P10"
+
+[[lean_lib]]
+name = "Checks"
+
+# Built by `lake build <target>` after checks/check.py has regenerated the
+# certificates (they are too large to ship); see README.md.
+[[lean_lib]]
+name = "R3P10Ladder"
+
+[[lean_lib]]
+name = "R3P10Sample"
+srcDir = "generated"
+
+[[lean_lib]]
+name = "R3P10Cubes"
+srcDir = "generated"
+
+[[lean_lib]]
+name = "R3P10Final"

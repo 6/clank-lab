@@ -4,6 +4,13 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## path-ramsey v1 (October 21, 2026)
+
+- First version: a computer-assisted proof that every 3-coloring of the edges
+  of the complete graph on 18 vertices has a one-colored path on 10 vertices,
+  so the three-color Ramsey number of that path is 18, as Faudree and Schelp
+  conjectured. Paper, Lean proof and certificate checkers.
+
 ## stanley-smith-forms v2 (October 21, 2026)
 
 - Adds a second counterexample, λ = (5,2) with k = 7, showing that Stanley's

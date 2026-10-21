@@ -11,6 +11,7 @@ Zenodo records.
   Specht modules, smallest at λ = (3,1,1), k = 3, with a written proof of
   exactly when it holds for k = 3. Paper, Lean checks of the key identity
   and the matrix, and independent certificate checkers.
+- Zenodo: [10.5281/zenodo.23541470](https://doi.org/10.5281/zenodo.23541470)
 
 ## difference-set-243 v1 (October 21, 2026)
 

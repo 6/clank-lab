@@ -13,6 +13,7 @@ Zenodo records.
   with two of its steps now checked in Lean, and moves the quotations and
   the tested modifications, with their conventions now stated, to
   appendices. The first counterexample is unchanged.
+- Zenodo: [10.5281/zenodo.23546377](https://doi.org/10.5281/zenodo.23546377)
 
 ## stanley-smith-forms v1 (October 21, 2026)
 

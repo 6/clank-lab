@@ -1,0 +1,108 @@
+name: Path Ramsey number checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/path-ramsey/**'
+      - '.github/workflows/path-ramsey.yml'
+  pull_request:
+    paths:
+      - 'results/path-ramsey/**'
+      - '.github/workflows/path-ramsey.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: path-ramsey-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Lean proof, statements and axioms
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/path-ramsey/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean with elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build the proof, statement, definition and axiom checks
+        run: lake build
+
+  quick:
+    name: Quick check ${{ matrix.part }}/8
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/path-ramsey
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Install Lean with elan
+        working-directory: results/path-ramsey/lean
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Steps of this part
+        run: python3 checks/check.py quick --part "${{ matrix.part }}/8" --list
+
+      - name: Quick check, part ${{ matrix.part }} of 8
+        run: python3 checks/check.py quick --part "${{ matrix.part }}/8" --jobs "$(nproc)" --work "$RUNNER_TEMP/path-ramsey-work"
+
+  checks:
+    name: Check path-ramsey
+    needs: [lean, quick]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      LEAN_RESULT: ${{ needs.lean.result }}
+      QUICK_RESULT: ${{ needs.quick.result }}
+    steps:
+      - name: Require every check
+        run: |
+          test "$LEAN_RESULT" = success
+          test "$QUICK_RESULT" = success

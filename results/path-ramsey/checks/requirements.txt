@@ -1,0 +1,2 @@
+# Python 3.9 or later, standard library only (no pip packages).
+# The script also needs git, gcc, g++ and make, and Lean through elan (see README.md).

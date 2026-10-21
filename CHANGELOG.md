@@ -11,6 +11,7 @@ Zenodo records.
 - Adds paper text that v1 left out by mistake: the reduction chain, the
   lower-bound coloring, the trust in compiled evaluation, and the earlier
   authors' remark on $P_{10}$. The result is unchanged.
+- Zenodo: [10.5281/zenodo.23548859](https://doi.org/10.5281/zenodo.23548859)
 
 ## path-ramsey v1 (October 21, 2026)
 

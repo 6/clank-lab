@@ -53,6 +53,8 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23548859](https://doi.org/10.5281/zenodo.23548859)
+
 ## Check it
 
 The Lean proof is a standard Lake project. With
@@ -130,6 +132,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The three-color Ramsey number of the 10-vertex path}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v2/results/path-ramsey}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v2/results/path-ramsey}},
+  doi          = {10.5281/zenodo.23548859}
 }
 ```

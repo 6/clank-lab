@@ -17,7 +17,7 @@ permissions:
 
 concurrency:
   group: uniform-5-polytopes-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   lean:

@@ -1,0 +1,2 @@
+24909666 7776
+maps=3888 normalized=889182 congruence_pass=1296 representatives=1 covered=1296 full_weight=7776

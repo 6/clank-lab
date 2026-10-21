@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## difference-set-243 v1 (October 21, 2026)
+
+- First version: a computer-assisted proof that no (243,121,60) difference
+  set exists in C3 × C9 × C9, the case Gordon called the smallest open case.
+  Paper, Lean coverage proof and standalone exhaustive-search checkers.
+
 ## density-seven v3 (October 21, 2026)
 
 - Adds formally verified certificate checking for every propositional

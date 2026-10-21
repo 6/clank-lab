@@ -34,12 +34,17 @@ def encode(row, path):
     subprocess.run([sys.executable, str(HERE / 'encode.py'), *row['args'], '-o', str(path)], check=True)
 
 
-def checker_commands(tools, cnf, proof, cake):
+# Heap settings from successful checks; these are not whole-machine RAM bounds.
+CAKE_HEAP_MIB = {'k1303_s435': 32768, 'k1303_s436': 40960, 'k1303_s440': 40960,
+                 **{'k1303_s' + str(s): 60000 for s in (437, 438, 439, 441, 442)}}
+
+
+def checker_commands(tools, cnf, proof, case):
+    heap = CAKE_HEAP_MIB.get(case, 5000)
     result = [('frat-rs', [str(tools / 'frat-rs'), 'lratchk', str(cnf), str(proof)]),
-              ('lrat-check', [str(tools / 'lrat-check'), str(cnf), str(proof)])]
-    if cake:
-        result.append(('cake_lpr', [str(tools / 'cake_lpr'), '--CML_HEAP_SIZE=5000',
-                                    '--CML_STACK_SIZE=1024', str(cnf), str(proof)]))
+              ('lrat-check', [str(tools / 'lrat-check'), str(cnf), str(proof)]),
+              ('cake_lpr', [str(tools / 'cake_lpr'), '--CML_HEAP_SIZE=' + str(heap),
+                            '--CML_STACK_SIZE=1024', str(cnf), str(proof)])]
     return result
 
 
@@ -80,7 +85,7 @@ def proof_controls(tools, work):
     for mode, lines in controls.items():
         altered = work / (mode + '.lrat')
         altered.write_text(''.join(lines))
-        for name, cmd in checker_commands(tools, cnf, altered, True):
+        for name, cmd in checker_commands(tools, cnf, altered, row['name']):
             log = work / (mode + '-' + name + '.log')
             with log.open('w') as f:
                 rc = subprocess.run(cmd, stdout=f, stderr=subprocess.STDOUT).returncode
@@ -104,13 +109,12 @@ def stream_case(row, tools, work):
     cnf = directory / (row['name'] + '.cnf')
     # Each checker receives the same bytes through its own FIFO. A checker
     # may stop at the empty clause; its closed pipe is then simply drained.
-    cake = row['name'].startswith('L') or int(row['name'][-3:]) >= 443
     solver_fifo = directory / 'solver.fifo'
     os.mkfifo(solver_fifo)
     processes = []
     destinations = []
     opened = []
-    for name, cmd in checker_commands(tools, cnf, directory / 'unused', cake):
+    for name, cmd in checker_commands(tools, cnf, directory / 'unused', row['name']):
         fifo = directory / (name + '.fifo')
         os.mkfifo(fifo)
         cmd[-1] = str(fifo)

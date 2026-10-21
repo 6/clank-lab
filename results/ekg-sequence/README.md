@@ -9,13 +9,11 @@ with the previous term. Its graph looks like an electrocardiogram, hence the
 name.
 
 In 2002 Lagarias, Rains and Sloane conjectured its second-order growth:
-a(n) = n + n/(3 log n) + o(n/log n) for almost all n. Replacing each value
-p or 3p, for an odd prime p, by 2p smooths out the sequence's spikes and
-gives b(n). We prove that, for every n,
+$a(n) = n + \frac{n}{3\log n} + o\bigl(\frac{n}{\log n}\bigr)$ for almost all $n$. Replacing each value
+$p$ or $3p$, for an odd prime $p$, by $2p$ smooths out the sequence's spikes and
+gives $b(n)$. We prove that, for every $n$,
 
-```text
-b(n) = n + n/(3 log n) + o(n/log n),
-```
+$$b(n) = n + \frac{n}{3\log n} + o\Bigl(\frac{n}{\log n}\Bigr),$$
 
 which implies their conjecture.
 
@@ -27,8 +25,8 @@ every index. Hofman and Pilipczuk earlier proved the weaker ratio form;
 their Conjecture 3, on global bounds, remains open.
 
 As consequences we settle two sets of OEIS conjectures. Ordowski's (2009):
-for large n, a(n) > n exactly when a(n) is composite. Jasinski's (2008):
-a(n) = n, 2a(n) = n and 2a(n) = 3n have only finitely many solutions
+for large $n$, $a(n) > n$ exactly when $a(n)$ is composite. Jasinski's (2008):
+$a(n) = n$, $2a(n) = n$ and $2a(n) = 3n$ have only finitely many solutions
 ([A152458](https://oeis.org/A152458), [A152519](https://oeis.org/A152519)).
 These consequences are checked in Lean too.
 

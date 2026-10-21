@@ -9,7 +9,7 @@ polygons. The five-dimensional case is the next case after Conway and Guy's
 open.
 
 This work gives a computer-assisted completeness proof for the known convex
-uniform 5-polytopes: Wythoff constructions of types A5, B5 and D5, prisms over
+uniform 5-polytopes: Wythoff constructions of types $A_5$, $B_5$ and $D_5$, prisms over
 convex uniform 4-polytopes, and products of regular polygons with convex
 uniform polyhedra. These families overlap; the theorem asserts coverage,
 not a disjoint count. It extends Möller's enumeration method and is

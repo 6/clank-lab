@@ -34,6 +34,8 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23541470](https://doi.org/10.5281/zenodo.23541470)
+
 ## Check it
 
 Python 3.10 or later, with no third-party packages, checks the certificates
@@ -79,6 +81,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A counterexample to Stanley's conjecture on Smith forms of Jucys--Murphy elements}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-smith-forms-v1/results/stanley-smith-forms}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-smith-forms-v1/results/stanley-smith-forms}},
+  doi          = {10.5281/zenodo.23541470}
 }
 ```

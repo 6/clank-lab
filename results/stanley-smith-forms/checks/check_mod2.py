@@ -12,6 +12,14 @@ Certificate part: the recorded basis is the set of standard tableaux, the
 recorded A satisfies X_k e_{T_j} = sum_i A[i][j] e_{T_i} exactly over Z, and
 U A V = diag(snf) with U, V of determinant +-1 (Bareiss) and snf a divisibility
 chain whose number of odd entries matches the basis-free rank.
+
+Weak form (only when the certificate has "weak_form": true): the eigenvalues of
+X_k are read off the Yamanouchi words as the content (column - row) of k in each
+SYT.  Applying the factors (A - c) for the distinct contents c in turn to every
+unit vector gives 0, so every eigenvalue of A is a content; the traces of
+A^1, ..., A^(d-1) (d distinct contents) match the power sums of the contents,
+which fixes the multiplicities.  Then some snf entry must differ from the absolute
+value of every product c^e over exponent vectors 0 <= e_c <= multiplicity of c.
 """
 import itertools, json, sys
 
@@ -154,6 +162,29 @@ def main(path):
             isinstance(r, list) and len(r) == f and all(type(x) is int for x in r) for r in M)
     if not (int_matrix(A) and int_matrix(U) and int_matrix(V)): bad("A, U, V must be f x f integer matrices")
     if not (isinstance(snf, list) and len(snf) == f and all(type(x) is int for x in snf)): bad("snf must be f integers")
+    weak = C.get("weak_form", False)
+    if not isinstance(weak, bool): bad("weak_form must be true or false")
+    if weak:
+        mult = {}
+        for T in S:
+            r = next(i for i, row in enumerate(T) if k in row)
+            c = T[r].index(k) - r
+            mult[c] = mult.get(c, 0) + 1
+        def apply(M, x):
+            return [sum(M[i][j] * x[j] for j in range(f)) for i in range(f)]
+        for j in range(f):
+            x = [int(i == j) for i in range(f)]
+            for c in mult:
+                x = [y - c * z for y, z in zip(apply(A, x), x)]
+            if any(x): bad("weak form: the content polynomial of A is not 0")
+        for p in range(1, len(mult)):
+            tr = 0
+            for j in range(f):
+                x = [int(i == j) for i in range(f)]
+                for _ in range(p): x = apply(A, x)
+                tr += x[j]
+            if tr != sum(m * c ** p for c, m in mult.items()):
+                bad(f"weak form: trace of A^{p} disagrees with the contents")
     E = [e_int(T, n) for T in B]
     for j in range(f):
         lhs = X(k, E[j]); rhs = {}
@@ -169,9 +200,20 @@ def main(path):
        any(b % a for a, b in zip(nz, nz[1:])): bad("snf is not a divisibility chain")
     if sum(1 for x in snf if x % 2) != r2: bad("odd invariant factors disagree with the basis-free F2 rank")
     if pred != C["predicted"]: bad("recorded prediction differs from the recomputed one")
+    if weak:
+        cs = sorted(mult)
+        reachable = set()
+        for exps in itertools.product(*[range(mult[c] + 1) for c in cs]):
+            v = 1
+            for c, e in zip(cs, exps): v *= c ** e
+            reachable.add(abs(v))
+        lonely = sorted(set(x for x in snf if x not in reachable))
+        if not lonely: bad("weak form holds: each snf entry is a product of eigenvalues")
     if podd == r2: bad("no mod-2 discrepancy with Conjecture 7.4")
     print(f"ACCEPT lambda={lam} n={n} k={k}: dim_F2 span = {f}, rank_F2 X_k = {r2}, "
-          f"Conjecture 7.4 needs {podd} (prediction {pred}); certificate SNF {snf} verified")
+          f"Conjecture 7.4 needs {podd} (prediction {pred}); certificate SNF {snf} verified"
+          + (f"; eigenvalue multiplicities {dict(sorted(mult.items()))}, entries {lonely} "
+             f"are not products of eigenvalues" if weak else ""))
 
 
 if __name__ == "__main__":

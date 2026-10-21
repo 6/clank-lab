@@ -1,2 +1,4 @@
 import StanleySmithForms.Basic
 import StanleySmithForms.GroupRing
+import StanleySmithForms.SmithFactors
+import StanleySmithForms.Weak

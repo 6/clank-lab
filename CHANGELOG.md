@@ -4,6 +4,16 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## stanley-smith-forms v2 (October 21, 2026)
+
+- Adds a second counterexample, λ = (5,2) with k = 7, showing that Stanley's
+  weaker remark also fails: the eigenvalues are 0 and 4, but the Smith form
+  has a 2. It is checked in Lean and by the certificate checkers.
+- Reorganizes the paper around the k = 3 classification, a written proof
+  with two of its steps now checked in Lean, and moves the quotations and
+  the tested modifications, with their conventions now stated, to
+  appendices. The first counterexample is unchanged.
+
 ## stanley-smith-forms v1 (October 21, 2026)
 
 - First version: a computer-assisted counterexample to Stanley's 2016

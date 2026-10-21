@@ -18,7 +18,7 @@ Results that settle a conjecture or question in general.
 
 ## Computed values
 
-Results that settle one specific open case, such as a missing entry in a published table.
+Results that settle one specific open case, such as a value a published survey lists as unknown.
 
 | Result | Open question | Published |
 |---|---|---|

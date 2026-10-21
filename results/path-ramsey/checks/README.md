@@ -34,8 +34,11 @@ of N balanced parts and `--list` lists a part's steps; leaving `--part` off
 runs everything. `--sample S` and `--seed X` choose the sampled cubes
 (default: 8 cubes, a random seed that is printed).
 
-`full` re-solves and checks every cube in Lean: about 250 CPU-hours, using
-every core (`--jobs`). It splits the cubes into the 162 chunks of
+`full` re-solves every one of the 15,956 cubes and checks every cube in
+Lean, then the ladder and the cover: about 250 CPU-hours, using every core
+(`--jobs`). With `--cross-check` it also runs the independent check that
+doesn't use Lean on every cube (`check_paths.py`, `check_inputs.py` and
+cake_lpr). It splits the cubes into the 162 chunks of
 [`../data/chunks.json`](../data/chunks.json), one Lean module
 `R3P10Cubes.C<k>` each, and builds each chunk as soon as its cubes are done;
 a chunk's certificates are deleted once its module is built, since the
@@ -43,8 +46,7 @@ a chunk's certificates are deleted once its module is built, since the
 records in the work directory. Plan for about 70 GB of free disk space in
 `../lean` (the chunk `.olean` files) and up to about 7 GB of memory per
 Lean build (`--lean-jobs`, default 2). `--chunks 0-40,77` restricts a run
-to some chunks, and `--cross-check` also runs `check_paths.py`,
-`check_inputs.py` and cake_lpr on every cube. When every chunk is built,
+to some chunks. When every chunk is built,
 the script writes `../lean/generated/R3P10Cubes.lean`, which joins the
 chunk ranges, and runs `lake build R3P10Final`, whose `R3_P10_eq_18 :
 ramsey3Path 10 = 18` must have exactly the axioms `propext`,

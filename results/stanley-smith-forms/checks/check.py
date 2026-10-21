@@ -5,8 +5,8 @@ Usage, from the folder holding checks/ and data/:
 
     python3 checks/check.py
 
-Both checkers must accept both witnesses, and must reject every corrupted
-certificate in data/corrupt/ and the agreeing control, each for its intended
+Both checkers must accept both witnesses and the weak-form certificate, and
+must reject every corrupted certificate in data/corrupt/ and the agreeing control, each for its intended
 reason (a crash does not count as a rejection). A third, separately written
 checker then recomputes every case with n <= 5 and confirms that the
 counterexample is the smallest. Standard library only.
@@ -22,7 +22,7 @@ CHECKERS = {
     'A': HERE / 'check_snf.py',
     'B': HERE / 'check_mod2.py',
 }
-WITNESSES = ['witness-311-k3.json', 'witness-52-k7.json']
+WITNESSES = ['witness-311-k3.json', 'witness-52-k7.json', 'weak-52-k7.json']
 # Each rejected input, with the reason each checker must give.
 REJECTED = {
     'control-51-k5.json': ('no discrepancy: snf equals the prediction',
@@ -39,6 +39,12 @@ REJECTED = {
                                         'recorded prediction differs from the recomputed one'),
     'corrupt/snf-claims-prediction.json': ('U A V != diag(snf)', 'U A V != diag(snf)'),
     'corrupt/snf-extra-zero.json': ('snf is not a list of f integers', 'snf must be f integers'),
+    'corrupt/weak-eigen-wrong.json': ('weak form: prod (A - cI) over the contents c is not 0',
+                                      'weak form: the content polynomial of A is not 0'),
+    'corrupt/weak-control.json': ('weak form holds: every snf entry is a product of eigenvalues',
+                                  'weak form holds: each snf entry is a product of eigenvalues'),
+    'corrupt/weak-control-311-k3.json': ('weak form holds: every snf entry is a product of eigenvalues',
+                                         'weak form holds: each snf entry is a product of eigenvalues'),
 }
 
 
@@ -76,8 +82,9 @@ def main():
         for failure in failures:
             print('FAIL', failure)
         return 1
-    print(f'PASS both checkers accept both witnesses and reject the agreeing control '
-          f'and all {len(REJECTED) - 1} corruptions; every case with n <= 5 confirmed')
+    print(f'PASS both checkers accept both witnesses and the weak-form certificate, and reject '
+          f'the agreeing control, the two weak-form controls and all {len(REJECTED) - 3} '
+          f'corruptions; every case with n <= 5 confirmed')
     return 0
 
 

@@ -11,6 +11,15 @@ From the definitions alone (standard library, imports no other project file):
   4. U A V = diag(snf) with det U, det V = +-1 and snf a divisibility chain
      (zeros last), so snf is the Smith normal form of X_k on S^lambda;
   5. Stanley's Conjecture 7.4 list, recomputed here, differs from snf.
+
+With "weak_form": true the certificate also claims that Stanley's weaker remark
+fails (every Smith entry is a product of eigenvalues of X_k).  Then, in addition:
+  6. the eigenvalues are the contents j - i of the cells holding k in the SYT,
+     one per tableau: prod over the distinct contents c of (A - cI) is 0, and
+     trace(A^j) equals the j-th power sum of these contents for j < number of
+     distinct contents, which fixes every multiplicity;
+  7. some entry of snf is not |product| of a sub-multiset of these eigenvalues
+     (the empty product is 1).
 """
 import itertools, json, sys
 from fractions import Fraction
@@ -115,6 +124,22 @@ def main(path):
     # A is the matrix of X_k
     A = C["A"]
     if len(A) != f or any(len(r) != f for r in A): fail("A has wrong size")
+    weak = C.get("weak_form", False)
+    if type(weak) is not bool: fail("weak_form must be true or false")
+    if weak:
+        if any(type(x) is not int for r in A for x in r): fail("A is not an f x f integer matrix")
+        eig = [j - i for T in S for i, row in enumerate(T) for j, x in enumerate(row) if x == k]
+        distinct = sorted(set(eig))
+        I = [[int(i == j) for j in range(f)] for i in range(f)]
+        P = I
+        for c in distinct:
+            P = matmul(P, [[A[i][j] - c * I[i][j] for j in range(f)] for i in range(f)])
+        if any(x for r in P for x in r): fail("weak form: prod (A - cI) over the contents c is not 0")
+        P = I
+        for j in range(1, len(distinct)):
+            P = matmul(P, A)
+            if sum(P[i][i] for i in range(f)) != sum(c ** j for c in eig):
+                fail(f"weak form: trace of A^{j} differs from the power sum of the contents")
     for j, e in enumerate(E):
         x = coords(apply_X(k, e))
         if x is None or x != [A[i][j] for i in range(f)]: fail(f"column {j} of A is not X_k e_T")
@@ -143,10 +168,18 @@ def main(path):
             if c >= r: p *= (j - i)
         pred[f - r] = abs(p)
     if pred != C["predicted"]: fail("recorded prediction differs from the recomputed one")
+    if weak:
+        products = {1}
+        for c in eig:
+            products |= {p * abs(c) for p in products}
+        if all(x in products for x in snf):
+            fail("weak form holds: every snf entry is a product of eigenvalues")
     if pred == snf: fail("no discrepancy: snf equals the prediction")
     odd = sum(1 for x in snf if x % 2); podd = sum(1 for x in pred if x % 2)
     print(f"ACCEPT lambda={lam} n={n} k={k} f={f}: SNF {snf}; Conjecture 7.4 predicts {pred}; "
-          f"rank mod 2 {odd} vs predicted {podd}")
+          f"rank mod 2 {odd} vs predicted {podd}"
+          + (f"; eigenvalues {sorted(eig)}, SNF entries not products of them: "
+             f"{sorted(set(x for x in snf if x not in products))}" if weak else ""))
 
 
 def rank_q(M):

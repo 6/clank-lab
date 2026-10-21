@@ -4,39 +4,33 @@
 
 The [EKG sequence](https://mathworld.wolfram.com/EKGSequence.html)
 ([OEIS A064413](https://oeis.org/A064413)) starts with 1 and 2, then
-repeatedly takes the smallest unused positive integer sharing a factor with
-the previous term. Its graph looks like an electrocardiogram, hence the name.
-In 2002 Lagarias, Rains and Sloane (LRS) conjectured its second-order growth.
-In 2026 Tomer Haver
-([*Explicit rates for the EKG sequence*](https://doi.org/10.5281/zenodo.23129632))
-reduced the question to counting certain odd values in the sequence
-(his Corollary 2(e)) and proved the upper half of the bound (his abstract
-and Theorem 1(d)). This work proves the lower half and
-extends it to every index, which completes the proof of the conjecture as
-LRS displayed it, for almost all n as stated in their abstract, and in
-fact gives the second-order asymptotic for every term on each of the three
-branches (the paper's corollary “The three branches”). Replacing each
-value p or 3p, for an odd prime p, by 2p gives the smoothed sequence b(n),
-which satisfies
+repeatedly takes the smallest unused positive integer that shares a factor
+with the previous term. Its graph looks like an electrocardiogram, hence the
+name.
+
+In 2002 Lagarias, Rains and Sloane conjectured its second-order growth:
+a(n) = n + n/(3 log n) + o(n/log n) for almost all n. Replacing each value
+p or 3p, for an odd prime p, by 2p smooths out the sequence's spikes and
+gives b(n). We prove that, for every n,
 
 ```text
-b(n) = n + n/(3 log n) + o(n/log n).
+b(n) = n + n/(3 log n) + o(n/log n),
 ```
 
-Hofman and Pilipczuk proved the ratio form (LRS Conjecture 2).
-LRS Conjecture 3, concerning global bounds, remains open.
+which implies their conjecture.
 
-Because b(n) > n for every large n, the paper also proves, as
-consequences: for all large n, a(n) > n exactly when a(n) is composite,
-and the number of k ≤ N with a(k) < k is asymptotic to N/(2 log N),
-which settles Thomas Ordowski's 2009 conjectures on
-[A064413](https://oeis.org/A064413); the equations a(n) = n,
-2a(n) = n and 2a(n) = 3n have only finitely many solutions, which settles
-Artur Jasinski's 2008 finiteness conjectures on
-[A152458](https://oeis.org/A152458) and
-[A152519](https://oeis.org/A152519) (not that their listed terms are
-complete); and the permutation has only finitely many cycles of each
-bounded length. These consequences are checked in Lean too.
+This builds directly on Tomer Haver's
+[*Explicit rates for the EKG sequence*](https://doi.org/10.5281/zenodo.23129632)
+(2026), which reduced the question to counting certain odd values and
+proved the upper half of the bound. We prove the lower half and extend it to
+every index. Hofman and Pilipczuk earlier proved the weaker ratio form;
+their Conjecture 3, on global bounds, remains open.
+
+As consequences we settle two sets of OEIS conjectures. Ordowski's (2009):
+for large n, a(n) > n exactly when a(n) is composite. Jasinski's (2008):
+a(n) = n, 2a(n) = n and 2a(n) = 3n have only finitely many solutions
+([A152458](https://oeis.org/A152458), [A152519](https://oeis.org/A152519)).
+These consequences are checked in Lean too.
 
 Checked in Lean from the definitions; not yet reviewed by experts.
 

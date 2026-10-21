@@ -24,20 +24,28 @@ $$R(P_{10}, P_{10}, P_{10}) = 18,$$
 
 as conjectured: every 3-coloring of the edges of $K_{18}$ has a one-colored
 path on 10 vertices, and a classical coloring of $K_{17}$, Faudree and
-Schelp's, shows that 18 is needed. We found the result neither in the survey
-nor in the literature we searched, so it is likely new.
+Schelp's, shows that 18 is needed. In that coloring each color has two label
+classes, of 9 and 8 vertices, and every edge of the color lies inside one of
+them, so a one-colored connected piece has at most 9 vertices. We found the
+result neither in the survey nor in the literature we searched, so it is
+likely new.
 
-The proof is a SAT computation. A formula that every coloring without such a
-path would satisfy, after symmetry reductions, is split into 15,956 pieces,
-and each piece is refuted with a certificate. A Lean proof derives the value
-from the definitions: it proves that the symmetry reductions and the
-formula lose no coloring, that the pieces cover every case, and the lower
-bound, and Lean's verified certificate checker checked every certificate.
-Those checks ran as compiled code, so they trust Lean's compiler as well as
-its kernel. The same refutations, before their conversion for Lean, were
-also checked separately by the verified checker cake_lpr. The upper bounds
-for $n \le 9$ that the computation uses are re-derived by the same method
-rather than taken from the literature.
+The proof is a SAT computation, checked as a Lean formalization with trusted
+native evaluation. Every coloring of $K_{18}$ without a one-colored $P_{10}$
+contains a one-colored $P_9$, since $R(P_9, P_9, P_9) \le 17$, so it can be
+relabeled to have that path in a fixed place and then reduced further by
+symmetry; the resulting formula is split into 15,956 pieces, a further
+certificate shows the pieces cover every case, and each piece is refuted with
+a certificate. Lean proves from the definitions that this chain loses no
+coloring, and proves the lower bound by its kernel. The certificate checks
+(the 15,956 pieces, the cover and the smaller cases) and one comparison of the
+formula with its definition run Lean's verified certificate checker as
+compiled code (`Lean.ofReduceBool`), so they trust Lean's compiler as well as
+its kernel. The same refutations, before their conversion for Lean, were also
+checked by the verified checker cake_lpr, and a separate checker with its own
+code re-checked every piece. The upper bounds for $n \le 9$ that the
+computation uses, $R(P_9, P_9, P_9) \le 17$ among them, are re-derived by the
+same method rather than taken from the literature.
 
 Computer-assisted; not yet reviewed by experts.
 
@@ -73,15 +81,21 @@ be rejected. It takes about fifteen minutes:
 python3 checks/check.py quick --work /tmp/path-ramsey-work
 ```
 
-The full check re-solves every cube and checks it in Lean, then builds the
+The full check re-solves every one of the 15,956 cubes and checks each of
+them in Lean, together with the smaller cases and the cover, then builds the
 final theorem `R3_P10_eq_18 : ramsey3Path 10 = 18` with
-`lake build R3P10Final`; only this step establishes the value in Lean. It takes about 250
-CPU-hours on as many cores as are available, resumes when rerun, and needs
-about 70 GB of disk:
+`lake build R3P10Final`; only this step establishes the value in Lean. It
+takes about 250 CPU-hours on as many cores as are available, resumes when
+rerun, and needs about 70 GB of disk:
 
 ```sh
 python3 checks/check.py full --work /tmp/path-ramsey-work
 ```
+
+Adding `--cross-check` to that command also runs the independent check that
+doesn't use Lean on every cube: the path-clause checker, the input checker
+and the verified checker cake_lpr. The record of a completed full check,
+with its axiom output and toolchain, is in [COMPLETION.md](COMPLETION.md).
 
 Details for specialists are in [the Lean notes](lean/README.md) and
 [the checking notes](checks/README.md).
@@ -116,6 +130,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The three-color Ramsey number of the 10-vertex path}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v1/results/path-ramsey}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v2/results/path-ramsey}}
 }
 ```

@@ -4,6 +4,14 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## path-ramsey v2 (October 21, 2026)
+
+- Adds COMPLETION.md, a record of the completed full check: the final
+  theorem, all 15,956 cubes checked in Lean, the axiom output and toolchain.
+- Adds paper text that v1 left out by mistake: the reduction chain, the
+  lower-bound coloring, the trust in compiled evaluation, and the earlier
+  authors' remark on $P_{10}$. The result is unchanged.
+
 ## path-ramsey v1 (October 21, 2026)
 
 - First version: a computer-assisted proof that every 3-coloring of the edges

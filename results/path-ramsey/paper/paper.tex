@@ -82,15 +82,21 @@ Lean's verified LRAT checker, run by native evaluation.
 The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 \paragraph{Scope of verification.}
-This is a computer-assisted proof. The statement, the reduction from
-colorings to propositional formulas, the cover of the case split, and the
-lower bound are proved in Lean from the definitions. The unsatisfiability
-certificates are checked inside Lean by native evaluation, which adds
-Lean's compiler to the trusted base (Section~\ref{sec:lean}). The
+This is a computer-assisted proof: a Lean formalization with trusted
+native evaluation. The statement, the reduction from colorings to
+propositional formulas, the cover of the case split, and the lower bound
+are proved in Lean (v4.32.2) from the definitions and checked by its
+kernel. Two kinds of check are natively evaluated, through
+\texttt{Lean.ofReduceBool}, which trusts Lean's compiler
+(\texttt{Lean.trustCompiler}): the $15{,}964$ unsatisfiability certificate
+checks (seven rungs, the cover and $15{,}956$ cubes), run by Lean's
+verified LRAT checker, and the comparison identifying the parsed $K_{18}$
+formula with the encoder's output (Section~\ref{sec:lean}). The
 corresponding refutations, before their conversion to the compact form Lean
 reads, were also checked independently of Lean by the verified checker
-\texttt{cake\_lpr} (Section~\ref{sec:separate}). No human expert
-has reviewed the proof.
+\texttt{cake\_lpr}, and a separate checker with its own code re-checked
+every piece (Section~\ref{sec:separate}). No human expert has reviewed the
+proof.
 
 \section{Introduction}\label{sec:intro}
 
@@ -130,10 +136,12 @@ attributes them. The values for $P_5$, $P_6$ and $P_7$ were obtained with
 the help of computer algorithms~\cite[Section~2]{DDR16}. Dybizbański,
 Dzido and Radziszowski~\cite{DDR16} (preprint 2012, published 2016) proved
 $\R(P_8)=14$ and $\R(P_9)=17$ without computer help, which, in their words, ``leaves
-$\R(P_{10})$ as the first open case''. They also tried to treat $P_{10}$ and
-$P_{11}$ by the same method, found the case analysis much harder, and
-expected the even case $\R(P_{10})=18$ to be the more difficult of the
-two~\cite[Section~5]{DDR16}. The latest revision of Radziszowski's survey
+$\R(P_{10})$ as the first open case''. They also attempted $P_{10}$ and
+$P_{11}$ by the same method and did not complete these proofs; in their
+words, ``between the first two open cases of Conjecture~2, namely the
+questions whether it is true that $\R(P_{10})=18$ and $\R(P_{11})=21$, we
+expect the former to be more difficult to prove'' (closing remarks
+of~\cite{DDR16}). The latest revision of Radziszowski's survey
 (revision \#18, April 24, 2026) still states that the conjecture ``is true
 for $n\le 9$ \dots, and the first open case is that for
 $P_{10}$''~\cite[Section~6.4]{Rad26}.
@@ -172,6 +180,22 @@ bound $\R(P_{10})\le18$, which settles the case $n=10$ of
 Conjecture~\ref{conj:FS}. The result is likely new: we found it neither
 in the survey, which lists the case as the first open
 one~\cite[Section~6.4]{Rad26}, nor in the literature we searched.
+
+The prior exact results are those of Table~\ref{tab:known}: Irving's
+$\R(P_4)=6$~\cite{Irv74}, Yang and Rowlinson's $\R(P_5)=9$ and
+$\R(P_6)=10$~\cite{YR92} and Yang's $\R(P_7)=13$~\cite{Yan95}, the last
+three obtained with computer help~\cite[Section~2]{DDR16}, and
+Dybizbański, Dzido and Radziszowski's $\R(P_8)=14$ and
+$\R(P_9)=17$~\cite{DDR16}, by hand. Each covers one value of $n$; none
+bounds $\R(P_{10})$ from above by less than the counting bound $23$ below,
+and the only computation bearing on $P_{10}$ that we found is Galindez's
+$\R(C_{10})\le26$~\cite{Gal26}, which gives $\R(P_{10})\le26$. On October
+21, 2026 we rechecked the indexed forward citations of the canonical
+papers: the one indexed citation of~\cite{DDR16}, and the citations
+of~\cite{GRSS07} since 2023 (among them~\cite{ABC+26}, on paths with few
+color changes); none treats $\R(P_{10})$. The news is the value. The Lean
+proof is how it is established and checked; we claim no novelty for the
+method, whose ingredients have precedents~\cite{HKWB12,HS24,SNG+24,Sze26}.
 The companion case $n=11$, $\R(P_{11})=21$, remains open; Dybizbański,
 Dzido and Radziszowski showed that it would follow from the conjectured
 value $\R(C_{10})=20$ for the $10$-cycle~\cite{DDR16}, which is itself the
@@ -252,11 +276,13 @@ $\R(P_{10})\ge 18$.
 \end{proposition}
 
 \begin{proof}
-For each color, the vertex set splits into two classes with no edge of
-that color between them: $A\cup B$ and $C\cup D$ for color $0$, $A\cup C$
-and $B\cup D$ for color $1$, $A\cup D$ and $B\cup C$ for color $2$. Each
-class has $8$ or $9$ vertices, so a monochromatic path, which stays inside
-one class, has at most $9$ vertices.
+Each color has two label classes: $A\cup B$ and $C\cup D$ for color $0$,
+$A\cup C$ and $B\cup D$ for color $1$, $A\cup D$ and $B\cup C$ for color
+$2$, of sizes $9$ and $8$ in each case. The edge invariant is that every
+edge of a color lies inside one of that color's two label classes; no edge
+of that color joins them. So every connected piece of a color class lies
+inside one label class and has at most $9$ vertices, and a monochromatic
+path, being connected, has at most $9$ vertices.
 \end{proof}
 
 In Lean the coloring is written out edge by edge, and the argument is a
@@ -448,6 +474,23 @@ rest. Each was split once more in the same way, by four further split
 edges, into $41$ children, $656$ in all ($144$ more path clauses were
 learned during this split). The final list consists of the $15{,}300$
 remaining first-level cubes and the $656$ children: $15{,}956$ cubes.
+
+\subsection{The reduction chain}\label{sec:chain}
+Suppose a $3$-coloring $X$ of $K_{18}$ has no monochromatic $P_{10}$. Since
+$\R(P_9)\le17$ (the top rung of the ladder, itself resting on the rungs
+below it, down to $P_3$ on $K_5$, which fixes nothing), $X$ contains a
+monochromatic $P_9$. By Lemma~\ref{lem:fix} a vertex permutation and a
+color permutation carry $X$ to a good coloring with color $0$ on the path
+$0,1,\dots,8$, and by Lemma~\ref{lem:lex} its orbit under the generators
+contains a good coloring $X^*$ that keeps the fixed path and satisfies
+every lex-leader inequality. With the auxiliaries set to their meaning,
+$X^*$ satisfies the base formula and every path clause. By the cover
+certificate, $X^*$ satisfies some cube of the final list (otherwise it
+would satisfy the cover formula), and that cube's formula is unsatisfiable
+by its own certificate: a contradiction. In Lean this whole chain is the
+theorem \texttt{K18\_P10\_of\_certs}, which takes an arbitrary coloring of
+$K_{18}$ and the certified facts and returns a monochromatic $P_{10}$
+(Section~\ref{sec:lean}).
 
 \subsection{Why the cubes cover every case}\label{sec:cover}
 Cubes whose propagation fails are dropped during generation, so the list is
@@ -653,6 +696,13 @@ generator preserves the fixed path, checks the reductions exhaustively on
 $K_4$ and $K_5$ (where the formula accepts exactly the colorings it should
 and no class of good colorings is lost), and rejects $30$ planted
 corruptions of the formulas, logs and reductions.
+\item \emph{Independent re-check.} A separate verification, with its own
+code and not importing the search or the Lean development, reconstructed
+the cube list and the inputs of every one of the $15{,}956$ cubes and of
+the cover from the frozen data, rechecked the path clauses, and checked
+every piece's refutation again; the cover refutation also passed an
+independently written LRUP checker, and both checkers rejected a corrupted
+proof and a corrupted input.
 \item \emph{Lower bound.} An exhaustive search confirms that the $K_{17}$
 coloring has no monochromatic $P_{10}$ (and that it has a monochromatic
 $P_9$).
@@ -738,6 +788,11 @@ the LRAT checker in its standard library, and Mathlib; we thank their
 authors and contributors.
 
 \begin{thebibliography}{99}
+
+\bibitem{ABC+26}
+P.~Allen, J.~Böttcher, D.~Clemens, F.~Hamann, J.~Skokan and A.~Taraz,
+\emph{On Ramsey-type problems for paths and cycles with few colour changes}, preprint, 2026.
+\href{https://arxiv.org/abs/2607.03243}{arXiv:2607.03243}.
 
 \bibitem{BBC+25}
 H.~Böving, S.~Bhat, L.~Cicolini, A.~Keizer, L.~Frenot, A.~Mohamed,

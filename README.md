@@ -8,7 +8,7 @@ The proofs, formalizations, programs and text were produced by AI models working
 
 ## Theorems
 
-Results that settle a stated conjecture or question in general.
+Results that settle a conjecture or question in general.
 
 | Result | Open question | Published |
 |---|---|---|
@@ -18,7 +18,7 @@ Results that settle a stated conjecture or question in general.
 
 ## Computed values
 
-Results that determine one value a survey or table lists as open.
+Results that settle one specific open case, such as a missing entry in a published table.
 
 | Result | Open question | Published |
 |---|---|---|

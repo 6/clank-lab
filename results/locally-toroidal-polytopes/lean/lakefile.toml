@@ -1,0 +1,38 @@
+name = "locallyToroidalPolytopes"
+version = "0.1.0"
+defaultTargets = ["P16c", "Statement", "StatementToroid", "StatementGroupForm", "StatementPolytope", "StatementTorus", "Main", "Axioms", "ExactTypes", "Examples"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.32.2"
+
+[[lean_lib]]
+name = "P16c"
+
+[[lean_lib]]
+name = "Statement"
+
+[[lean_lib]]
+name = "Axioms"
+
+[[lean_lib]]
+name = "StatementToroid"
+
+[[lean_lib]]
+name = "StatementGroupForm"
+
+[[lean_lib]]
+name = "StatementPolytope"
+
+[[lean_lib]]
+name = "StatementTorus"
+
+[[lean_lib]]
+name = "Main"
+
+[[lean_lib]]
+name = "ExactTypes"
+
+[[lean_lib]]
+name = "Examples"

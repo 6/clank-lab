@@ -1,0 +1,110 @@
+name: Thomson ten-point checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/thomson-10/**'
+      - '.github/workflows/thomson-10.yml'
+  pull_request:
+    paths:
+      - 'results/thomson-10/**'
+      - '.github/workflows/thomson-10.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: thomson-10-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      LEAN_NUM_THREADS: '1'
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/thomson-10/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Free disk for the Mathlib cache and swap
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL
+          df -h /
+
+      - name: Provide memory for the largest certificate module
+        run: |
+          sudo fallocate -l 4G "$RUNNER_TEMP/thomson.swap"
+          sudo chmod 600 "$RUNNER_TEMP/thomson.swap"
+          sudo mkswap "$RUNNER_TEMP/thomson.swap"
+          sudo swapon "$RUNNER_TEMP/thomson.swap"
+
+      - name: Install Lean
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/thomson-10/lean/.lake/build
+          key: thomson-10-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/thomson-10/lean/lean-toolchain', 'results/thomson-10/lean/lake-manifest.json', 'results/thomson-10/lean/lakefile.lean', 'results/thomson-10/lean/**/*.lean', 'results/thomson-10/lean/**/*.gz', 'results/thomson-10/data/**', '!results/thomson-10/lean/.lake/**') }}
+
+      - name: Expand the ambient certificate source
+        run: gzip -dc ThomsonN10/Local/Certificates/AmbientKernelData.lean.gz > ThomsonN10/Local/Certificates/AmbientKernelData.lean
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof and check its axioms
+        run: lake build
+
+  certificates:
+    name: Independent certificate checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/thomson-10
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Check the certificate
+        run: python3 checks/check.py
+
+  checks:
+    name: Check thomson-10
+    needs: [lean, certificates]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Every job passed
+        env:
+          LEAN: ${{ needs.lean.result }}
+          CERTIFICATES: ${{ needs.certificates.result }}
+        run: |
+          [ "$LEAN" = success ]
+          [ "$CERTIFICATES" = success ]

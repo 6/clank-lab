@@ -4,6 +4,13 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## thomson-10 v1 (October 22, 2026)
+
+- First version: a proof that, for N = 10, the bicapped square antiprism
+  uniquely minimizes the Coulomb energy of points on the unit sphere, up to
+  orthogonal maps and relabeling. Paper, Lean proof, exact certificates and
+  an independent checker.
+
 ## stanley-class-sum-snf v2 (October 21, 2026)
 
 - Correction: corrects the degree-zero exception to the commutant dimension

@@ -4,7 +4,7 @@ Proposed solutions to open problems in math.
 
 Not yet reviewed by experts. Corrections are welcome as pull requests or issues.
 
-The proofs, formalizations, programs and text were produced by AI models working under the author's direction.
+Produced by AI models under the author's direction.
 
 ## Theorems
 

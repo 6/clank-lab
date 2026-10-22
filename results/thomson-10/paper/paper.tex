@@ -71,9 +71,11 @@ error, makes every sufficiently small nonzero aligned displacement
 increase the energy. This last step turns approximate localization into
 exact equality.
 
-The argument builds directly on the nine-point proof directed and
-published by Aravind Karthigeyan~\cite{n9}, including substantial reuse of
-its MIT-licensed Lean code. For the ten-point geometry we supply new
+The argument builds directly on the nine-point proof published by
+Aravind Karthigeyan, which Anthropic's Opus 5.5 and OpenAI's GPT-6 Astra
+generated under his direction and which, unreviewed, he released
+requesting external review~\cite{n9}, including substantial reuse of its
+MIT-licensed Lean code. For the ten-point geometry we supply new
 energy, window-classification and Hessian certificates. The formal proof covers optimality, every equality
 case and the fact that the candidate consists of distinct unit vectors.
 To our knowledge no earlier rigorous proof for $N=10$ exists, and we make
@@ -606,7 +608,13 @@ enclosure remark in Section~\ref{sec:energy} agrees with the Erber--Hockney valu
 database's shorter numerical approximation.
 
 The immediate precedent is the MIT-licensed \texttt{thomson-n9-lean}
-project~\cite{n9}, directed and published by Aravind Karthigeyan. We adapt
+project~\cite{n9}, directed and published by Aravind Karthigeyan. Its
+README calls it AI-generated, by Anthropic's Opus 5.5 and OpenAI's GPT-6
+Astra, with the
+mathematics, formal code, checks and exposition ``developed through AI
+agents under human direction'', and describes it as ``a research release
+requesting external review and fresh-machine reproduction, not a claim of
+completed peer review or priority''. We adapt
 its global localization and local rigidity argument, including substantial
 reuse of its formal code. Appendix~\ref{app:provenance} identifies the
 revision, its nine-point theorem and our ten-point changes.
@@ -617,21 +625,42 @@ four-electron configuration appears in F\"oppl's 1912 stability analysis
 of electron arrangements~\cite{foppl}; this historical stability result
 should be distinguished from a global minimum theorem. Yudin's
 energy bounds, published in Russian in 1992 and in English in 1993,
-prove the octahedral case~\cite{yudin}. Andreev proved the twelve-point
-icosahedral case in 1996~\cite{andreev}, as also described by Cohn and
-Kumar~\cite{cohnkumar}; their 2007 universal-optimality theorem includes
-the tetrahedron, octahedron and icosahedron. Schwartz proved the
+prove the octahedral case~\cite{yudin}. For twelve points, Andreev's
+1996 paper proves that the icosahedron maximizes the product of pairwise
+distances and, as its zbMATH review records, claims the corresponding
+results for the Coulomb energy~\cite{andreev}; Cohn and Kumar credit him
+with the icosahedron as the unique minimum~\cite{cohnkumar}, and their
+2007 universal-optimality theorem, which covers the Coulomb energy,
+includes the tetrahedron, octahedron and icosahedron. Schwartz proved the
 five-point triangular bipyramid optimal in a 2010 preprint, published in
 2013~\cite{schwartz}.
 
-Recent work includes the seven-point result of Hung Tran and Vals AI,
-with a Lean proof, in September 2026~\cite{n7}. Kryvonos, Liehr and Taylor's
+Recent work includes Hung Tran's AI-assisted seven-point Lean proof,
+published on the Vals AI blog in September 2026: he fixed the two Lean
+statements and deployed ten agents running Anthropic's Sonnet 5.5, which
+did the proof work in about 15 hours, and he ran five checks on the
+result, including a second kernel~\cite{n7}. Kryvonos, Liehr and Taylor's
 September 18, 2026 paper~\cite{n8} proves that the square antiprism is the
 unique global minimizer for eight points for both Coulomb and logarithmic
 energy, with a computer-assisted proof verified in Lean. Joseph
-Tooby-Smith and Alex Zughaid also released a Lean-checked proof in
-September 2026 for Coulomb optimality and uniqueness of the eight-point
-square antiprism, up to orthogonal maps and relabeling~\cite{n8warrant}.
+Tooby-Smith and Alex Zughaid also released a Lean-checked warrant in
+September 2026 for the eight-point Coulomb problem~\cite{n8warrant}.
+Their README describes it as a formal check that the square antiprism
+solves the eight-point case uniquely, and calls it a complete warrant,
+not a proof, that is still a work in progress; it does not state
+uniqueness up to orthogonal maps and relabeling.
+Alex Zarco (\texttt{alejandrozarco}) released AI-produced, unreviewed
+Lean warrants for two smaller cases in September--October 2026. For five points, a
+single sharp three-point semidefinite certificate, with a finite
+enumeration for uniqueness, shows that the triangular bipyramid uniquely
+minimizes the Coulomb energy, a theorem already known from Schwartz; the
+Lean formalization states uniqueness up to orthogonal maps and
+relabeling~\cite{zarco5}. His seven-point
+repository, prepared in late September with its Lean part added on
+October 1 and chiefly on the logarithmic energy, added on October 8 a
+second check of
+Tran's Coulomb theorem with its own certificates and a Lean development
+that uses Tran's local lemma~\cite{zarco7}. We use no code from either.
 The general methodology belongs to the Delsarte--Yudin theory of energy
 bounds~\cite{delsarte,yudin}. The specific three-point lineage is the
 semidefinite-programming framework of Bachoc and Vallentin~\cite{bachoc}
@@ -1097,14 +1126,17 @@ ten-point entry.
 \url{https://www-wales.ch.cam.ac.uk/~wales/CCD/Thomson/table.html}.
 
 \bibitem{schwartz}
-R. E. Schwartz, The 5 Electron Case of Thomson's Problem,
+R. E. Schwartz, The Five-Electron Case of Thomson's Problem,
 \emph{Experimental Mathematics} 22 (2013), 157--186.
+\href{https://doi.org/10.1080/10586458.2013.766570}{doi:10.1080/10586458.2013.766570}.
+Preprint: The 5 Electron Case of Thomson's Problem, January 21, 2010,
 \href{https://arxiv.org/abs/1001.3702}{arXiv:1001.3702}.
 
 \bibitem{andreev}
 N. N. Andreev, An extremal property of the icosahedron,
 \emph{East Journal on Approximations} 2 (1996), no.~4, 459--462.
 \href{https://www.mathnet.ru/eng/person9017}{Author's publication list}.
+Review: \href{https://zbmath.org/?q=an:0877.51021}{Zbl 0877.51021}.
 
 \bibitem{cohnkumar}
 H. Cohn and A. Kumar, Universally optimal distribution of points on
@@ -1119,7 +1151,8 @@ on a sphere (October 11, 2026).
 \url{https://github.com/saberwatchmanga/-lean-finite-certificates}.
 
 \bibitem{n7}
-H. Tran and Vals AI, Seven-point Thomson problem, Lean proof,
+H. Tran, A Lean Proof of the Thomson Problem for Seven Electrons,
+Vals AI blog,
 September 28, 2026.
 \url{https://www.vals.ai/blogs/thomson-n7-lean-proof}.
 
@@ -1134,9 +1167,26 @@ Lean-checked warrant for the eight-point Coulomb Thomson problem,
 September 2026.
 \url{https://github.com/jstoobysmith/Thomson-N-8-Warrant}.
 
+\bibitem{zarco5}
+A. Zarco (\texttt{alejandrozarco}), \emph{Five points on the sphere: exact
+three-point certificates for the Riesz energies $s=1,\dots,6$, and Lean
+formalisations for $s=1$ (Coulomb) and $s=2$}, October 2026.
+\href{https://doi.org/10.5281/zenodo.23125753}{doi:10.5281/zenodo.23125753}.
+\url{https://github.com/alejandrozarco/five-points-riesz}.
+
+\bibitem{zarco7}
+A. Zarco (\texttt{alejandrozarco}), \emph{The pentagonal bipyramid as the unique
+logarithmic-energy minimiser for seven points on the sphere: an unreviewed
+Lean 4 warrant}, September--October 2026, with a Coulomb second check
+added October 8, 2026.
+\href{https://doi.org/10.5281/zenodo.23086382}{doi:10.5281/zenodo.23086382}.
+\url{https://github.com/alejandrozarco/thomson-n7-log}.
+
 \bibitem{n9}
 A. Karthigeyan (director and publisher), \texttt{thomson-n9-lean},
-MIT-licensed Lean code, revision \texttt{168ff0c}, October 6, 2026.
+MIT-licensed Lean code, AI-generated by Anthropic's Opus 5.5 and OpenAI's
+GPT-6 Astra, unreviewed,
+revision \texttt{168ff0c}, October 6, 2026.
 \url{https://github.com/aravindkarthigeyan/thomson-n9-lean}.
 
 \bibitem{delsarte}

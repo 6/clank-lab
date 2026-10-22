@@ -4,6 +4,13 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## locked-trominoes v1 (October 22, 2026)
+
+- First version: a proof of Tucker-Foltz's 2023 conjecture that every m × n
+  rectangle with m divisible by 3, m ≥ 6 and n ≥ 4 has a locked tromino
+  tiling, which completes the classification of the rectangles that have
+  one. Paper, Lean proof and certificate checkers.
+
 ## thomson-10 v2 (October 22, 2026)
 
 - Adds a figure of the configuration, in the paper and the README, and a

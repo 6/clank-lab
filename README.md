@@ -6,9 +6,9 @@ Not yet reviewed by experts. Corrections are welcome as pull requests or issues.
 
 Produced by AI models under the author's direction.
 
-## Theorems
+## Results on conjectures and questions
 
-Results that settle a conjecture or question in general.
+Proofs and counterexamples for published conjectures and questions.
 
 | Result | Open question | Published |
 |---|---|---|
@@ -22,9 +22,9 @@ Results that settle a conjecture or question in general.
 | [Locked tromino tilings of rectangles](results/locked-trominoes/) | Which rectangles have a locked [tromino](https://en.wikipedia.org/wiki/Polyomino) tiling, in which no two tiles can be re-cut into two other trominoes. Tucker-Foltz (2023) excluded sides of at most 3, built them for $3 \mid m$, $m \ge 6$, $n \ge 100$, and conjectured that $n \ge 4$ suffices. We prove the conjecture, completing the classification. | October 22, 2026 |
 | [String attractors of generalized pseudostandard sequences](results/pseudostandard-attractors/) | Whether every pseudopalindromic prefix of a binary generalized pseudostandard sequence has a [string attractor](https://doi.org/10.1145/3188745.3188814) of at most four positions, as conjectured by Dvořáková and Hendrychová in 2024; smaller bounds were known for three subclasses. We show that it fails at length 36, with a short written proof that a computer also checks. | October 22, 2026 |
 
-## Computed values
+## Results on individual cases
 
-Results that settle one specific open case, such as a value a published survey lists as unknown.
+Each addresses one specific case of a problem that remains open in general.
 
 | Result | Open question | Published |
 |---|---|---|

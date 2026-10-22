@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## thomson-10 v2 (October 22, 2026)
+
+- Adds a figure of the configuration, in the paper and the README, and a
+  paragraph on what is new beyond the N = 9 proof and which step was
+  hardest. The theorem, its proof and the certificates are unchanged.
+
 ## locally-toroidal-polytopes v1 (October 22, 2026)
 
 - Proves the existence half of McMullen–Schulte's 2002 conjecture and

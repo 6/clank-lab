@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## path-ramsey v3 (October 22, 2026)
+
+- Correction: Makes the abstract's statement of the proof's scope exact, corrects credits, citations and a reported timing, and credits further nearby work. The theorem and its checks are unchanged.
+
 ## thomson-10 v3 (October 22, 2026)
 
 - Correction: The citations and credits of earlier work on smaller cases, and the wording describing it, are corrected, and missing credits are added. The theorem and its checks are unchanged.

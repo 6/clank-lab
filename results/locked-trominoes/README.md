@@ -32,8 +32,8 @@ across one shared side.
 
 Lean checks the conjecture from the definitions, including the gluing lemma
 and every block, and two independently written programs check the blocks
-again. The "only if" direction is the area count and Tucker-Foltz's
-published Theorem 3.1, which the paper cites and does not formalize. The
+again. The "only if" direction is the area count and Theorem 3.1 of Tucker-Foltz's
+preprint, which the paper cites and does not formalize. The
 result concerns this grid model only, not redistricting in practice.
 
 Checked in Lean from the definitions; not yet reviewed by experts.
@@ -41,8 +41,6 @@ Checked in Lean from the definitions; not yet reviewed by experts.
 The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
-
-Archived on Zenodo: [doi:10.5281/zenodo.23562184](https://doi.org/10.5281/zenodo.23562184)
 
 ## Check it
 
@@ -84,6 +82,11 @@ method followed here, and computed the $6 \times 4$ and $6 \times 6$ cases
 used as controls. Daryl DeFord, Moon Duchin and Justin Solomon introduced the
 ReCom chain. Lean and its contributors supplied the formal-proof system.
 
+Mridul Aanjaneya and Sudebkumar Prasant Pal earlier showed that the same
+rectangles have [fault-free L-tromino tilings](https://arxiv.org/abs/math/0610925).
+Their condition forbids full cuts crossing no tile; locked tilings instead
+forbid two-tile recombinations, as the paper explains.
+
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Cite
@@ -93,7 +96,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Locked tromino tilings of rectangles}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/locked-trominoes-v1/results/locked-trominoes}},
-  doi          = {10.5281/zenodo.23562184}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/locked-trominoes-v2/results/locked-trominoes}}
 }
 ```

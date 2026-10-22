@@ -51,7 +51,7 @@ block are checked in Lean~4.
 
 \noindent The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
-\medskip\noindent Status: Checked in Lean from the definitions (Theorem~\ref{thm:conj}); not yet reviewed by experts. Theorem~\ref{thm:main} also uses Tucker-Foltz's published Theorem~3.1, by a short written argument.
+\medskip\noindent Status: Checked in Lean from the definitions (Theorem~\ref{thm:conj}); not yet reviewed by experts. Theorem~\ref{thm:main} also uses Theorem~3.1 of Tucker-Foltz's preprint, by a short written argument.
 
 \section{Introduction}
 
@@ -179,6 +179,19 @@ equal (Cannon~\cite{cannon}; Akitaya, Dituro, Gonczi, Korman, Souvaine, Stock
 and T\'oth~\cite{akitaya}), and in some exactly balanced cases, among them a
 $3\times n$ grid cut into three districts (Emre, Jerison and
 Veomett~\cite{emre}).
+
+Aanjaneya and Pal~\cite{faultfree} earlier proved that every rectangle
+with $m,n\geq4$ and $3\mid mn$ admits a fault-free tiling by L-trominoes
+\cite[Theorem~2]{faultfree}: the same rectangles as in
+Theorem~\ref{thm:main}, for a different property. Like ours, their
+construction builds large rectangles from finitely many small ones by
+adding rows and columns. A fault line is a full horizontal or vertical cut that crosses no tile;
+fault-free means no such cut exists. This is a different condition from
+being locked, which forbids every two-tile recombination and permits both
+straight and L-trominoes. In particular, the full cuts between our glued
+blocks are fault lines, although the resulting tilings are locked. Their
+fault-free existence theorem therefore does not establish the locked-tiling
+claim proved here.
 
 \paragraph{What is new, and the hardest step.}
 Tucker-Foltz's Theorem~3.2 already proves Theorem~\ref{thm:conj} for
@@ -1654,9 +1667,10 @@ partitions of each six-cell union into two trominoes. A third program,
 blocks and seams the proof needs, checks that the Lean files in
 \file{lean/Generated/} are exactly the rendering of \file{data/}, and checks
 that both programs reject planted errors. As a control it enumerates all
-locked tilings of the $6\times4$ and $6\times6$ rectangles and recovers
-Tucker-Foltz's counts: 26 locked tilings of the $6\times4$ rectangle, 7 up to
-symmetry, and 50 of the $6\times6$ rectangle. The figures in this paper are
+locked tilings of the $6\times4$ and $6\times6$ rectangles. It finds 26
+locked tilings of the $6\times4$ rectangle, a count obtained here; their
+7 symmetry classes and the 50 tilings of the $6\times6$ rectangle recover
+the counts reported by Tucker-Foltz. The figures in this paper are
 drawn from \file{data/} by \file{checks/figures.py}, which also checks that
 each drawn rectangle, taken as a whole, is a tiling with only rigid pairs.
 
@@ -1680,10 +1694,16 @@ C.~D. T\'oth,
 in: 2026 Symposium on Simplicity in Algorithms (SOSA), SIAM, 2026, 12--25.
 \href{https://doi.org/10.1137/1.9781611978964.2}{doi:10.1137/1.9781611978964.2}.
 
+\bibitem{faultfree}
+M.~Aanjaneya and S.~P. Pal,
+\emph{Faultfree tromino tilings of rectangles},
+arXiv:math/0610925, 2006.
+\url{https://arxiv.org/abs/math/0610925}.
+
 \bibitem{cannon}
 S.~Cannon,
 \emph{Irreducibility of recombination Markov chains in the triangular lattice},
-Discrete Applied Mathematics (2024).
+Discrete Applied Mathematics \textbf{347} (2024), 75--130.
 \href{https://doi.org/10.1016/j.dam.2023.12.019}{doi:10.1016/j.dam.2023.12.019}.
 
 \bibitem{recom}

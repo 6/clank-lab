@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## locked-trominoes v2 (October 22, 2026)
+
+- Correction: The paper attributed to Tucker-Foltz a count of 26 locked 6×4 tilings; that count is ours, and he reports 7 up to symmetry. It also called his Theorem 3.1 published, though it is in a preprint, and gave Cannon's paper without volume and pages. These are fixed; the result is unchanged.
+- Correction: The paper did not credit Aanjaneya and Pal's earlier theorem that the same rectangles have fault-free L-tromino tilings. It now does, and explains why that different property does not give locked tilings.
+
 ## ekg-sequence v4 (October 22, 2026)
 
 - Correction: The paper did not credit Jonathan Ayres, who discovered the sequence and, as Lagarias, Rains and Sloane record, also observed its three lines. The abstract and introduction now credit Ayres. The result is unchanged.

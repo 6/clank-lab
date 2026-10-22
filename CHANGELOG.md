@@ -7,6 +7,7 @@ Zenodo records.
 ## thomson-10 v3 (October 22, 2026)
 
 - Correction: The citations and credits of earlier work on smaller cases, and the wording describing it, are corrected, and missing credits are added. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23573422](https://doi.org/10.5281/zenodo.23573422)
 
 ## steinberg-c4-c9 v5 (October 22, 2026)
 

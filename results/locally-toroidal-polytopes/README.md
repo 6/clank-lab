@@ -12,6 +12,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23562182](https://doi.org/10.5281/zenodo.23562182)
+
 ![Square-torus fundamental domains of periods 3 and 9, with matching arrows on opposite sides](data/local-toroids.svg)
 
 Facet and vertex-figure maps for the theorem's example with periods 3 and 9. Identify opposite sides following the matching arrows; repeated boundary points become the same torus vertices. The shaded square, thick edge and dot form a base flag. The drawing is generated from modular grid data and checked against the vertex, edge and square definition of these maps.
@@ -41,6 +43,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Existence of locally toroidal regular 4-polytopes}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/locally-toroidal-polytopes-v1/results/locally-toroidal-polytopes}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/locally-toroidal-polytopes-v1/results/locally-toroidal-polytopes}},
+  doi          = {10.5281/zenodo.23562182}
 }
 ```

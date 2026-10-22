@@ -16,6 +16,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23571933](https://doi.org/10.5281/zenodo.23571933)
+
 ![Rays from the origin in the positive quadrant: blue rays below the diagonal, red rays above it, and the thick diagonal](data/rays.svg)
 
 The rays $(p,q)$ that carry a nontrivial function, up to total degree 12, in the ordered factorization of $T^5$, where $T$ is the automorphism of $\mathbb{Q}[[u,w]]$ with $T(u) = u(1+u+w)/(1+u)$ and $T(w) = w/(1+u)$. The function on the thick diagonal ray is the fifth power of the series in the theorem. Blue rays lie below the diagonal and red rays above it; the proof uses only which side each ray is on. The drawing is generated from an exact computation of the factorization.
@@ -45,6 +47,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/scattering-coefficients-v1/results/scattering-coefficients}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/scattering-coefficients-v1/results/scattering-coefficients}},
+  doi          = {10.5281/zenodo.23571933}
 }
 ```

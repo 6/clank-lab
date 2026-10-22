@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## pseudostandard-attractors v2 (October 22, 2026)
+
+- Correction: The paper, README, index and the v1 entry below dated Dvořáková and Hendrychová's conjecture to 2024, its journal year, not its August 2023 posting, and the paper dated Rote's article 1993, not 1994. Both dates are now correct; the v1 entry stays as released.
+- Correction: The abstract and README said Dvořáková and Hendrychová determined minimal attractors for several subclasses; they did so for standard complementary-symmetric Rote sequences, and gave attractors for pseudostandard sequences that are minimal in most cases. Both now say so, the README credits Dvořáková's episturmian paper, and the paper and README now name Florian before Dvořáková, as their periodicity paper does.
+- Correction: The README now states the proved Thue–Morse bound: prefixes of length $2^n$ need four positions for $n\geq4$. The result is unchanged.
+
 ## ekg-bounds v2 (October 22, 2026)
 
 - Correction: The paper cited five results of Haver's version 3 by the wrong numbers: his Theorems 5, 8 and 11 and Lemmas 4 and 7 appeared as Theorems 3, 4 and 5 and Lemmas 2 and 6. The citations now match that version; the result is unchanged.

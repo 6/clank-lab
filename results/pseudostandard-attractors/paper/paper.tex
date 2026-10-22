@@ -28,9 +28,10 @@ pseudostandard sequences are built by iterating palindromic and
 antipalindromic closures along a directive bi-sequence $(\Delta,\Theta)$, where
 $\Delta$ lists the letters appended and $\Theta$ the closures taken, $R$ for
 palindromic and $E$ for antipalindromic.
-Dvořáková and Hendrychová (2024) determined minimal string attractors of
-pseudopalindromic prefixes for several subclasses, among them the standard
-complementary-symmetric Rote sequences, and conjectured that the
+Dvořáková and Hendrychová (2023) determined the minimal string attractors of
+the pseudopalindromic prefixes of standard complementary-symmetric Rote
+sequences, gave attractors of at most three positions for the
+antipalindromic prefixes of pseudostandard sequences, and conjectured that the
 pseudopalindromic prefixes of every binary generalized pseudostandard
 sequence have a minimal string attractor of size at most four. We show that
 this bound fails at length 36: for $\Delta$ beginning $00101$ and $\Theta$
@@ -66,7 +67,7 @@ prefix of the next. Their limit is the sequence $\mathbf u(\Delta,\Theta)$,
 and each $w_n$ is a pseudopalindromic prefix of it, that is, a prefix fixed by
 $R$ or by $E$ (Section~\ref{sec:defs} quotes the definitions).
 
-Dvořáková and Hendrychová~\cite{dh} conjectured in 2024, from computer
+Dvořáková and Hendrychová~\cite{dh} conjectured in August 2023, from computer
 experiments, that every pseudopalindromic prefix of every such sequence has an
 attractor of at most four positions (Conjecture~\ref{conj}). The bound fails
 at length $36$.
@@ -269,7 +270,7 @@ reading, as a word $w_n$ of Definition~3 or as a pseudopalindromic prefix.
 \begin{remark}
 The conjecture asks for no further property of $\mathbf u(\Delta,\Theta)$, but
 the example also lives in an aperiodic sequence. Take $\Delta=00101(01)^\omega$
-and $\Theta=EEEER\,R^\omega$. Dvořáková and Florian~\cite{df} showed (see~\cite[Theorem~16]{dh}) that $\mathbf u(\Delta,\Theta)$ is eventually periodic exactly when some
+and $\Theta=EEEER\,R^\omega$. Florian and Dvořáková~\cite{df} showed (see~\cite[Theorem~16]{dh}) that $\mathbf u(\Delta,\Theta)$ is eventually periodic exactly when some
 bijection $f\colon\{E,R\}\to\{0,1\}$ satisfies $f(\vartheta_n)=\delta_{n+1}$ for
 all large $n$. Here $\vartheta_n=R$ for $n\geq5$ while $\delta_{n+1}$ alternates,
 so no such $f$ exists.
@@ -509,22 +510,22 @@ L.~Dvořáková,
 \emph{String attractors of episturmian sequences},
 Theoret.\ Comput.\ Sci.\ \textbf{986} (2024), 114341.
 
-\bibitem{df}
-L.~Dvořáková and J.~Florian,
-\emph{On periodicity of generalized pseudostandard words},
-Electron.\ J.\ Combin.\ \textbf{23} (2016), P1.2.
-
 \bibitem{dh}
 L.~Dvořáková and V.~Hendrychová,
 \emph{String attractors of Rote sequences},
 Discrete Math.\ Theor.\ Comput.\ Sci.\ \textbf{26}:3 (2024), \#2,
 \href{https://doi.org/10.46298/dmtcs.12385}{doi:10.46298/dmtcs.12385},
-\href{https://arxiv.org/abs/2308.00850}{arXiv:2308.00850}.
+\href{https://arxiv.org/abs/2308.00850}{arXiv:2308.00850}, first posted August 1, 2023.
 
 \bibitem{faro}
 S.~Faro, F.~P.~Marino and A.~Pavone,
 \emph{Smallest string attractors and minimal coverage certificates of
 Thue--Morse words}, \href{https://arxiv.org/abs/2610.10950}{arXiv:2610.10950}, 2026.
+
+\bibitem{df}
+J.~Florian and L.~Dvořáková,
+\emph{On periodicity of generalized pseudostandard words},
+Electron.\ J.\ Combin.\ \textbf{23} (2016), P1.2.
 
 \bibitem{kp}
 D.~Kempa and N.~Prezza,
@@ -540,7 +541,7 @@ Lecture Notes in Comput.\ Sci.\ \textbf{12303}, Springer, 2020, 213--220.
 \bibitem{rote}
 G.~Rote,
 \emph{Sequences with subword complexity $2n$},
-J.\ Number Theory \textbf{46} (1993), 196--213.
+J.\ Number Theory \textbf{46} (1994), 196--213.
 
 \end{thebibliography}
 \end{document}

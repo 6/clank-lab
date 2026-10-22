@@ -9,6 +9,7 @@ Zenodo records.
 - Correction: corrects the degree-zero exception to the commutant dimension
   and unreadable Lean notation in the paper's formalization section;
   the theorem is unchanged.
+- Zenodo: [10.5281/zenodo.23552057](https://doi.org/10.5281/zenodo.23552057)
 
 ## stanley-class-sum-snf v1 (October 21, 2026)
 

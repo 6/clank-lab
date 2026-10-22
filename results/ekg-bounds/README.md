@@ -52,6 +52,8 @@ The proofs, the Lean formalization, the programs and the text were produced by A
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23572754](https://doi.org/10.5281/zenodo.23572754)
+
 ## Check it
 
 The Lean proof is a standard Lake project. Install
@@ -127,6 +129,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Sharp linear bounds for the EKG sequence}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v2/results/ekg-bounds}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v2/results/ekg-bounds}},
+  doi          = {10.5281/zenodo.23572754}
 }
 ```

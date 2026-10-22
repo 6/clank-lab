@@ -2,15 +2,13 @@
 
 [![Checks](https://github.com/6/clank-lab/actions/workflows/density-seven.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/density-seven.yml)
 
-A combinatorial line in a grid of words replaces the same chosen positions by each of three letters in turn. How many seven-letter words can one choose without taking a whole line? This is a different question from the density Hales–Jewett theorem itself (Furstenberg and Katznelson, 1991; an elementary proof by D.H.J. Polymath), which shows such sets take up a vanishing fraction of all words as the length grows. The exact largest size was known only up to six letters (Polymath, 2010). Polymath1's bounds were $1302 \le c_{7,3} \le 1348$ in 2009, as [Tao's March 4 post](https://terrytao.wordpress.com/2009/03/04/dhj3-900-999-density-hales-jewett-type-numbers/) records and [O'Bryant's 2015 paper](https://cs.uwaterloo.ca/journals/JIS/VOL18/OBryant/obr3.pdf) repeats. [D.H.J. Polymath's 2010 paper](https://arxiv.org/abs/1002.0374) tentatively conjectured 1302. We prove the matching unrestricted upper bound, closing that gap and determining the next value of [OEIS A156989](https://oeis.org/A156989). The supplied witness realizes Polymath's known lower bound.
+A combinatorial line in a grid of words replaces the same chosen positions by each of three letters in turn. How many seven-letter words can one choose without taking a whole line? This is a different question from the density Hales–Jewett theorem itself (Furstenberg and Katznelson, 1991; an elementary proof by D.H.J. Polymath), which shows such sets take up a vanishing fraction of all words as the length grows. The exact largest size was known only up to six letters (Polymath, 2009). Polymath1's bounds were $1302 \le c_{7,3} \le 1348$ in 2009, as [Tao's March 4 post](https://terrytao.wordpress.com/2009/03/04/dhj3-900-999-density-hales-jewett-type-numbers/) records and [O'Bryant's 2015 paper](https://cs.uwaterloo.ca/journals/JIS/VOL18/OBryant/obr3.pdf) repeats. [D.H.J. Polymath's 2010 paper](https://arxiv.org/abs/1002.0374) tentatively conjectured 1302. We prove the matching unrestricted upper bound, closing that gap and determining the next value of [OEIS A156989](https://oeis.org/A156989). The supplied witness realizes Polymath's known lower bound.
 
 Computer-assisted; not yet reviewed by experts.
 
 The proofs, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
-
-Archived on Zenodo: [doi:10.5281/zenodo.23532529](https://doi.org/10.5281/zenodo.23532529)
 
 ## Check it
 
@@ -42,7 +40,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The seventh ternary density Hales--Jewett number}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v3/results/density-seven}},
-  doi          = {10.5281/zenodo.23532529}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v4/results/density-seven}}
 }
 ```

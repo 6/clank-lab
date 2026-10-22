@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## density-seven v4 (October 22, 2026)
+
+- Correction: The index dated Polymath1's 1,302 lower bound, and the README its exact values up to six letters, to 2010; Tao's post shows both known by March 2009, and they now say so. The paper corrects Shelah's title to “HJ numbers revisited” and withdraws a first-proof claim based on a literature search. The result and checks are unchanged.
+
 ## scattering-coefficients v1 (October 22, 2026)
 
 - First version: a proof of Conjecture 13 of Elgin, Reading and Stella

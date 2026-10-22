@@ -13,7 +13,7 @@
 \newcommand{\file}[1]{\texttt{\detokenize{#1}}}
 \title{A planar graph without four- or nine-cycles\texorpdfstring{\\}{ }that is not three-colorable}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 20, 2026}
+\date{October 22, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -34,6 +34,10 @@ the fewest edges among all 82-vertex four-critical graphs; no minimum-order
 claim is made. A standalone checker replays the tree and checks the
 embedding, forbidden cycles and deletion colorings. Planarity is certified
 by a rotation system, and cycle exclusion by finite enumeration.
+Lean proves, for the published graph, a connected genus-zero rotation
+certificate, the exclusion of four- and nine-cycles, and
+non-three-colorability; the passage from the rotation certificate to a
+planar embedding remains a written topological argument.
 \end{abstract}
 
 \noindent The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
@@ -54,7 +58,7 @@ Problem 1.2~\cite{kjw}: for which $i\in\{5,6,7,8,9\}$ is every
 $\{C_4,C_i\}$-free planar graph properly three-colorable?
 The $i=5$ case is Steinberg's conjecture. Cohen-Addad, Hebdige, Král',
 Li and Salgado disproved that case in a preprint posted in April 2016,
-published in 2017~\cite{steinberg}. Jin, Kang, Liu and Wang's 2020
+published in 2017~\cite{steinberg}. Kang, Jin, Liu and Wang's 2020
 preprint~\cite{jklw} explicitly describes the cases $i\in\{6,7,8,9\}$
 as open. To our knowledge, the first counterexample to the assertion that every
 planar graph without cycles of length four or nine is properly
@@ -101,7 +105,7 @@ $d$~\cite{xiao}; it likewise does not assert proper three-colorability.
 The accessible question statement used here is the reproduction in
 \cite{kjw}. The defective and weak DP statements cited above are read
 through publisher abstracts or excerpts rather than their full papers.
-The abstract of Ang--Leo's 2026 chapter~\cite{ang} describes two
+The abstract of Ang--Leo's 2026 conference paper~\cite{ang} describes two
 nonplanar constructions, the second excluding lengths four, five and six;
 it supplies no planar counterexample to the assertion considered here.
 Its full text, the updated Bu--Wang--Wang survey \emph{On Coloring
@@ -426,9 +430,11 @@ On the 3-colorability of planar graphs without 4-, 7- and 9-cycles.
 The 3-colorability of planar graphs without cycles of length 4, 6 and 9.
 \emph{Discrete Math.} 339 (2016), 299--307.
 \href{https://arxiv.org/abs/1506.04629}{arXiv:1506.04629} (first posted 2015).
-\bibitem{jklw} L. Jin, Y. Kang, P. Liu and Y. Wang.
+\bibitem{jklw} Y. Kang, L. Jin, P. Liu and Y. Wang.
 $(1,0,0)$-colorability of planar graphs without cycles of length 4 or 6.
-\href{https://arxiv.org/abs/2001.00166}{arXiv:2001.00166} (2020).
+\emph{Discrete Math.} 345 (2022), 112758.
+\href{https://doi.org/10.1016/j.disc.2021.112758}{doi:10.1016/j.disc.2021.112758};
+\href{https://arxiv.org/abs/2001.00166}{arXiv:2001.00166} (first posted 2020).
 \bibitem{steinberg} V. Cohen-Addad, M. Hebdige, D. Král', Z. Li and E. Salgado.
 Steinberg's conjecture is false.
 \emph{J. Combin. Theory Ser. B} 122 (2017), 452--456.
@@ -451,7 +457,10 @@ A weak DP-coloring of planar graphs without 4- and 9-cycles.
 \emph{Discrete Appl. Math.} 342 (2024), 391--397.
 \href{https://doi.org/10.1016/j.dam.2023.10.004}{doi:10.1016/j.dam.2023.10.004}.
 \bibitem{ang} R. K. Ang and Z. H. Leo.
-Exploring the Weak Steinberg's Conjecture (2026).
+Exploring the Weak Steinberg's Conjecture.
+In \emph{Proceedings of the 11th IRC Conference on Science, Engineering
+and Technology} (IRC-SET 2025), Proceedings in Technology Transfer,
+Springer, Singapore (2026), 435--443.
 \href{https://doi.org/10.1007/978-981-95-9630-0_37}{doi:10.1007/978-981-95-9630-0\_37}.
 \bibitem{survey} Y. Bu, W. Wang and Y. Wang.
 On Coloring Problems.

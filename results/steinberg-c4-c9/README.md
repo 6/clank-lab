@@ -12,6 +12,8 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23549429](https://doi.org/10.5281/zenodo.23549429)
+
 ## Check it
 
 Install [elan](https://github.com/leanprover/elan), then check the Lean proof:
@@ -46,6 +48,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A planar graph without four- or nine-cycles that is not three-colorable}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v4/results/steinberg-c4-c9}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v4/results/steinberg-c4-c9}},
+  doi          = {10.5281/zenodo.23549429}
 }
 ```

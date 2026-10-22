@@ -35,7 +35,7 @@ runs everything. `--sample S` and `--seed X` choose the sampled cubes
 (default: 8 cubes, a random seed that is printed).
 
 `full` re-solves every one of the 15,956 cubes and checks every cube in
-Lean, then the ladder and the cover: about 250 CPU-hours, using every core
+Lean, then the ladder and the cover: 249 and 301 CPU-hours in our two runs, using every core
 (`--jobs`). With `--cross-check` it also runs the independent check that
 doesn't use Lean on every cube (`check_paths.py`, `check_inputs.py` and
 cake_lpr). It splits the cubes into the 162 chunks of

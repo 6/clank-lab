@@ -8,12 +8,14 @@ says that with enough vertices some long [path](https://mathworld.wolfram.com/Pa
 has all its edges the same color; the three-color Ramsey number
 $R(P_n, P_n, P_n)$ is the smallest number of vertices that forces a
 one-colored path $P_n$ on $n$ vertices. In 1975 Faudree and Schelp
-conjectured that
+suggested that
 
 $$R(P_n, P_n, P_n) = 2n - 2 + (n \bmod 2),$$
 
 that is, $2n - 2$ for even $n$ and $2n - 1$ for odd $n$, and gave colorings
-showing it is at least that. Gyárfás, Ruszinkó, Sárközy and Szemerédi proved
+showing it is at least that. Dybizbański, Dzido and Radziszowski
+[stated the formula as a conjecture in their 2012 preprint](https://arxiv.org/abs/1207.5851).
+Gyárfás, Ruszinkó, Sárközy and Szemerédi proved
 this for all sufficiently large $n$ in 2007, and Dybizbański, Dzido and
 Radziszowski completed the values for $n \le 9$ in 2016, settling $n = 8$
 and $n = 9$;
@@ -23,8 +25,8 @@ lists $n = 10$ as the first open case. We prove that
 $$R(P_{10}, P_{10}, P_{10}) = 18,$$
 
 as conjectured: every 3-coloring of the edges of $K_{18}$ has a one-colored
-path on 10 vertices, and a classical coloring of $K_{17}$, Faudree and
-Schelp's, shows that 18 is needed. In that coloring each color has two label
+path on 10 vertices, and a classical coloring of $K_{17}$ shows that 18 is
+needed. In that coloring each color has two label
 classes, of 9 and 8 vertices, and every edge of the color lies inside one of
 them, so a one-colored connected piece has at most 9 vertices. We found the
 result neither in the survey nor in the literature we searched, so it is
@@ -90,8 +92,9 @@ The full check re-solves every one of the 15,956 cubes and checks each of
 them in Lean, together with the smaller cases and the cover, then builds the
 final theorem `R3_P10_eq_18 : ramsey3Path 10 = 18` with
 `lake build R3P10Final`; only this step establishes the value in Lean. It
-takes about 250 CPU-hours on as many cores as are available, resumes when
-rerun, and needs about 70 GB of disk:
+uses as many cores as are available, resumes when rerun and needs about
+70 GB of disk; it took 249 and 301 CPU-hours in our two runs (the second
+is recorded in [COMPLETION.md](COMPLETION.md)):
 
 ```sh
 python3 checks/check.py full --work /tmp/path-ramsey-work
@@ -107,18 +110,23 @@ Details for specialists are in [the Lean notes](lean/README.md) and
 
 ## Credits
 
-R. J. Faudree and R. H. Schelp posed the conjecture and gave the coloring
-behind the lower bound. A. Figaj and T. Łuczak found the asymptotics of
-three-color path Ramsey numbers, A. Gyárfás, M. Ruszinkó, G. N. Sárközy and
+R. J. Faudree and R. H. Schelp suggested the formula and gave the two
+colorings that prove the lower bound, one for odd and one for even $n$;
+J. Dybizbański, T. Dzido and S. Radziszowski stated it as a conjecture.
+A. Figaj and T. Łuczak found the asymptotics of three-color Ramsey numbers
+of long even cycles, which give those of paths, A. Gyárfás, M. Ruszinkó, G. N. Sárközy and
 E. Szemerédi proved the conjecture for large $n$, and S. Letzter later gave a
-simpler proof for long paths. J. Dybizbański,
+simpler proof of the asymptotic bound. J. Dybizbański,
 T. Dzido and S. Radziszowski settled $n = 8$ and $n = 9$, completing the known
 values, and this computation follows their work directly: it re-derives
 the upper bounds up to $n = 9$ and starts from their bound for $n = 9$. R. W. Irving, Yang Yuansheng and
 P. Rowlinson found the values for $n = 4$ to $7$. S. Radziszowski's dynamic survey records
 the problem's status and the sources of the earlier values. The paper
 also credits related work on other three-color path and cycle Ramsey
-numbers, including N. F. Galindez's recent SAT bound for 10-cycles. The
+numbers, including N. F. Galindez's recent SAT bound for 10-cycles,
+Z. Shao, H. Jiang, X. Xu and S. Wang's certificates for
+$R(C_4, C_6, C_8) = 12$, and J. Zhang's Lean bound for trees, which also
+gives 26 for this case. The
 computation
 uses A. Biere's CaDiCaL solver and its user-propagator interface by
 K. Fazekas, A. Niemetz, M. Preiner, M. Kirchweger, S. Szeider and A. Biere;
@@ -135,7 +143,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The three-color Ramsey number of the 10-vertex path}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v2/results/path-ramsey}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v3/results/path-ramsey}},
   doi          = {10.5281/zenodo.23548859}
 }
 ```

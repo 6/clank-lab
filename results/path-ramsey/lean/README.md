@@ -52,8 +52,8 @@ into `generated/` (not part of the bundle), and these targets check them:
 - `lake build R3P10Sample`: a random sample of cubes, written by
   `check.py quick`.
 - `lake build R3P10Final` (`R3P10Final.lean`): every cube, from the 162 chunk
-  modules `R3P10Cubes.C<k>` that `check.py full` writes and builds (about
-  250 CPU-hours), then the main theorem
+  modules `R3P10Cubes.C<k>` that `check.py full` writes and builds (249 and
+  301 CPU-hours in our two runs), then the main theorem
 
   ```lean
   theorem R3_P10_eq_18 : ramsey3Path 10 = 18

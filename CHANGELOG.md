@@ -8,17 +8,20 @@ Zenodo records.
 
 - Correction: The paper cited the (1,0,0)-colorability paper only as a 2020 preprint, and called Ang–Leo's conference paper a chapter without its proceedings. It now cites Discrete Mathematics 345 (2022), 112758, using the journal's author order throughout, and Ang–Leo's proceedings with pages.
 - Correction: The v3 entry below and its Zenodo description said Lean proves the graph planar. Lean proves a connected genus-zero rotation certificate, the exclusion of four- and nine-cycles, and non-three-colorability; that the certificate gives a planar embedding is a written argument. Both are corrected in place, and the abstract and README state this scope. The result is unchanged.
+- Zenodo: [10.5281/zenodo.23572996](https://doi.org/10.5281/zenodo.23572996)
 
 ## locked-trominoes v2 (October 22, 2026)
 
 - Correction: The paper attributed to Tucker-Foltz a count of 26 locked 6×4 tilings; that count is ours, and he reports 7 up to symmetry. It also called his Theorem 3.1 published, though it is in a preprint, and gave Cannon's paper without volume and pages. These are fixed; the result is unchanged.
 - Correction: The paper did not credit Aanjaneya and Pal's earlier theorem that the same rectangles have fault-free L-tromino tilings. It now does, and explains why that different property does not give locked tilings.
+- Zenodo: [10.5281/zenodo.23572919](https://doi.org/10.5281/zenodo.23572919)
 
 ## ekg-sequence v4 (October 22, 2026)
 
 - Correction: The paper did not credit Jonathan Ayres, who discovered the sequence and, as Lagarias, Rains and Sloane record, also observed its three lines. The abstract and introduction now credit Ayres. The result is unchanged.
 - Correction: The paper called Lagarias, Rains and Sloane's Conjecture 3 open; it now cites the sharp EKG bounds paper, which proves it. The result is unchanged.
 - Correction: The abstract said the asymptotic holds "at every index n"; it now states the eventual result and what it gives for a(n) at almost all n. Ordowski's and Jasinski's conjectures are stated as posed, and the paper says exactly what is Lean-checked, ours and Haver's. The result is unchanged.
+- Zenodo: [10.5281/zenodo.23572881](https://doi.org/10.5281/zenodo.23572881)
 
 ## pseudostandard-attractors v2 (October 22, 2026)
 

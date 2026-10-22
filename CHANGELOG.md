@@ -4,6 +4,13 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## stanley-class-sum-snf v1 (October 21, 2026)
+
+- Gives the Smith normal form of multiplication by the sum of all $n$-cycles
+  in the center of $\mathbb{Z}S_n$ for every positive $n$, proving both
+  conjectures Richard Stanley posed in 2019. Includes the paper and a Lean
+  proof from the definitions.
+
 ## steinberg-c4-c9 v4 (October 21, 2026)
 
 - Adds a drawing of the graph.

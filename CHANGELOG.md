@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## locally-toroidal-polytopes v1 (October 22, 2026)
+
+- Proves the existence half of McMullen–Schulte's 2002 conjecture and
+  Schulte–Weiss Problem 16 for every pair of distinct odd parameters at
+  least three. Finiteness and group classification remain open.
+
 ## ekg-bounds v1 (October 22, 2026)
 
 - First version: a computer-assisted proof that the EKG sequence satisfies

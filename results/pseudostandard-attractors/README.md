@@ -22,6 +22,8 @@ The proofs, the certificate checkers and the text were produced by AI models (fr
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23572812](https://doi.org/10.5281/zenodo.23572812)
+
 ## Check it
 
 Python 3.10 or later, with no packages to install, checks everything in a few seconds:
@@ -45,6 +47,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A generalized pseudostandard prefix with no string attractor of size four}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/pseudostandard-attractors-v2/results/pseudostandard-attractors}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/pseudostandard-attractors-v2/results/pseudostandard-attractors}},
+  doi          = {10.5281/zenodo.23572812}
 }
 ```

@@ -4,6 +4,14 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## pseudostandard-attractors v1 (October 22, 2026)
+
+- First version: a counterexample to Dvořáková and Hendrychová's 2024
+  conjecture that the pseudopalindromic prefixes of binary generalized
+  pseudostandard sequences have string attractors of at most four positions.
+  A 36-letter prefix needs five. Paper with a written proof of both bounds,
+  and two independent checkers.
+
 ## locked-trominoes v1 (October 22, 2026)
 
 - First version: a proof of Tucker-Foltz's 2023 conjecture that every m × n

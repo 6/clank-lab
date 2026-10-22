@@ -1,0 +1,41 @@
+name: Generalized pseudostandard attractor checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/pseudostandard-attractors/**'
+      - '.github/workflows/pseudostandard-attractors.yml'
+  pull_request:
+    paths:
+      - 'results/pseudostandard-attractors/**'
+      - '.github/workflows/pseudostandard-attractors.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pseudostandard-attractors-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: Check pseudostandard-attractors
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/pseudostandard-attractors
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Check both bounds, the controls and the rejected inputs
+        run: python3 checks/check.py

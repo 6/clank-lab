@@ -1,0 +1,18 @@
+{
+  "word": "010110010101100101101001101010011010",
+  "groups": [
+    {"lower_bound": 2, "factors": [
+      {"factor": "001010", "starts": [5]},
+      {"factor": "101011", "starts": [7]},
+      {"factor": "1100", "starts": [3, 11]}
+    ]},
+    {"lower_bound": 1, "factors": [
+      {"factor": "101101", "starts": [15]}
+    ]},
+    {"lower_bound": 2, "factors": [
+      {"factor": "010100", "starts": [25]},
+      {"factor": "110101", "starts": [23]},
+      {"factor": "0011", "starts": [21, 29]}
+    ]}
+  ]
+}

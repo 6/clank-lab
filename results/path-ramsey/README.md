@@ -72,7 +72,10 @@ checks the reduction from colorings to formulas, the lower bound, the value
 axioms. It needs no generated data.
 
 The certificates are about 60 GB, so they aren't included: the bundled
-solver regenerates them and Lean checks them. This needs Python 3.9 or
+solver regenerates them and Lean checks them. They're also archived on
+Zenodo, 36 GB compressed, at
+[doi:10.5281/zenodo.23562432](https://doi.org/10.5281/zenodo.23562432);
+its README explains how to check them without rerunning the solver. This needs Python 3.9 or
 later (standard library only), git, gcc, g++, make and network access to
 GitHub, besides elan. The quick check re-solves the smaller cases and
 checks them, the cover and a random sample of cubes, both in Lean and with

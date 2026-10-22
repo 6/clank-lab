@@ -4,7 +4,7 @@ All file paths below are relative to this result's folder. Every file not listed
 
 ## EKG sequence foundation (`lean/vendor/EKG/`)
 
-The EKG foundation is the Lean tree of the author's earlier result, *The second-order asymptotic of the EKG sequence* ([DOI 10.5281/zenodo.23493113](https://doi.org/10.5281/zenodo.23493113)), copied without change. Its sources derive from Tomer Haver, *Explicit rates for the EKG sequence*, version 3, October 4, 2026, [DOI 10.5281/zenodo.23129632](https://doi.org/10.5281/zenodo.23129632), whose Lean archive is released under Creative Commons Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/ .
+The EKG foundation is the Lean tree of the author's earlier result, *The second-order asymptotic of the EKG sequence* ([DOI 10.5281/zenodo.23493113](https://doi.org/10.5281/zenodo.23493113)), copied without change. Its sources derive from Tomer Haver, *Explicit rates for the EKG sequence*, version 3, October 4, 2026, [DOI 10.5281/zenodo.23129632](https://doi.org/10.5281/zenodo.23129632), whose Lean archive (`EKG-Lean4-sources-v2.zip`, deposited with version 2 and retained unchanged in version 3) is released under Creative Commons Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/ .
 
 Relative to Haver's archive, `lean/vendor/EKG/PatternCount.lean` replaces a finite native-evaluation proof with ordinary kernel proofs; `lean/vendor/EKG/PrimeEstimates.lean` and `lean/vendor/EKG/PrimeStructureObstruction.lean` have tactic-only changes; and `lean/vendor/EKG/PrimeStructureGlobal.lean` has its module comment updated to match. The following files derive from Haver and remain under CC BY 4.0, including the four changed files:
 

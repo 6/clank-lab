@@ -37,9 +37,9 @@ $n=28$ and $n=7$ respectively. We prove this conjecture. Earlier work
 gives coarse linear bounds at every $n$ (Lagarias, Rains and Sloane), the
 limits $1/2$, $3/2$ and $1$ of $a(n)/n$ on primes, their triples and the
 other terms (Hofman and Pilipczuk), and explicit rates (Haver), but not
-the sharp constants at every $n$. Our main step bounds the number of even
-values used before the least unused even number $E$ by a self-improving
-inequality closed with the large sieve. Explicit estimates then hold once
+the sharp constants at every $n$. Our main step bounds the number of used
+even values greater than the least unused even number $E$ by a
+self-improving inequality closed with the large sieve. Explicit estimates then hold once
 $E$ exceeds about $1.3\cdot10^{10}$, which happens within the first
 $1.6\cdot10^{10}$ terms; those terms are computed. Lean~4 checks the
 deduction from the definition, conditional on computed premises;
@@ -62,7 +62,8 @@ Write $\U_t=\{a(1),\dots,a(t)\}$. The sequence is defined by
  a(n)=\min\{m\ge1:\ m\notin\U_{n-1},\ \gcd(m,a(n-1))>1\}\quad(n\ge3),
 \end{equation}
 so it begins $1,2,4,6,3,9,12,8,10,5,15,18,14,7,21,24,16,20,22,11,\dots$.
-It is a permutation of the positive integers \cite[Theorem~1]{lrs}.
+It is a permutation of the positive integers \cite[Theorem~1]{lrs}
+(Theorem~2.5 in the journal version).
 Its graph has three visible lines (Figure~\ref{fig:ratio}): most terms
 satisfy $a(n)\approx n$, while each odd prime $p$ is immediately preceded
 by $2p$ and followed by $3p$, and when $a(n)=p$ we have $p\approx n/2$
@@ -102,12 +103,13 @@ linear bounds above and the rule that $a(n)$ is the least unused multiple
 of some prime factor of $a(n-1)$, and conjectured both the sharp bounds
 of Theorem~\ref{thm:main} and the asymptotics $a(n)\sim n$,
 $a(n)\sim n/2$ and $a(n)\sim 3n/2$ on the three lines. Hofman and
-Pilipczuk \cite{hp} proved that every odd prime $p$ appears in the
-pattern $2p,p,3p$, bounded the crossings of a level by composite terms,
+Pilipczuk \cite{hp} proved that every odd prime $p$ is immediately
+preceded by $2p$, bounded the crossings of a level by composite terms,
 and proved the asymptotics. Haver \cite{haver} made these arguments
-explicit and formalized them in Lean: he bounds the number of even terms
-placed ahead of the least missing even number, the spread of the terms
-above it, and the unused composites below it, and relates the index to
+explicit and formalized them in Lean: he completes the pattern
+$2p,p,3p$, reduces its computed base to the primes $p\le43$, bounds the
+number of used even numbers above the least missing even number, the
+spread of the terms above it, and the unused composites below it, and relates the index to
 that even number by a counting identity. The author \cite{graham}
 then obtained a second-order asymptotic, $n+n/(3\log n)+o(n/\log n)$, for
 a smoothed version of the sequence (each $p$ and $3p$ replaced by $2p$),
@@ -123,7 +125,7 @@ sharp constants at every $n$, and its margin is small: the lower line
 $a(n)/n\to1/2$ sits only $1/28$ above $13/28$. The obstacle is the
 number $K$ of \emph{early evens}: at a given moment, the even numbers
 already used that exceed the least even number $E$ not yet used. With Haver's bound
-$K\le12\pi(\sqrt E)+720$ \cite[Theorem~3]{haver} the argument closes
+$K\le12\pi(\sqrt E)+720$ \cite[Theorem~5]{haver} the argument closes
 only for very large $n$; we use it that way for $n\ge10^{156}$
 (Lemma~\ref{lem:F}), far beyond any computation.
 The new step is a self-improving bound
@@ -188,17 +190,28 @@ We use the following facts; each is a Lean theorem in the foundation
 \begin{itemize}
 \item[(F1)] \emph{Pointer rule} \cite{lrs}. $a(n)=\min\{B_q(n-1):q\text{
   prime},\ q\mid a(n-1)\}$ for $n\ge3$.
-\item[(F2)] \emph{Prime pattern} \cite[Theorem~4.3]{hp}, \cite{haver}.
+\item[(F2)] \emph{Prime pattern.}
   For each odd prime $p$ there is an index $N_p$ with $a(N_p)=2p=E(N_p-1)$,
   $a(N_p+1)=p$ and $a(N_p+2)=3p$; the value $3p$ occurs only at $N_p+2$,
   and indices $N_p$ of distinct primes differ by at least $4$.
+  That $p$ follows the first multiple of $p$ is \cite[Lemma~1]{lrs}
+  (Lemma~2.1 in the journal version), and that this multiple is $2p$ is
+  \cite[Theorem~4.3]{hp}. Hofman and Pilipczuk prove the latter by a
+  crossing count at the level $2p$ that closes for $p>25000$, and cover
+  smaller $p$ by the computation of $10^7$ terms in \cite{lrs}; Haver
+  \cite[Remark~3]{haver} closes the same count for every $p>43$, leaving
+  $p\le43$, which the first $82$ terms show. The rest, $2p=E(N_p-1)$, the
+  term $3p$, its uniqueness and the spacing, is proved in
+  \cite[(F2)]{haver}. In the Lean proof the primes $p\le43$ are
+  checked on the first terms, $43<p<4096$ by a finite computation, and
+  larger $p$ by explicit prime bounds.
 \item[(F3)] \emph{Crossings} \cite[Lemma~4.5]{hp}, \cite{haver}. For a
   level $x>2$, at most $\pi(\sqrt x)$ indices $n$ have $a(n)$ composite and
   $a(n)<x\le a(n+1)$.
-\item[(L6)] \cite[Lemma~6]{haver} $B_3(t)\le E(t)+6K(t)+6$ for $t\ge9$.
-\item[(SP)] \emph{Span} \cite[Theorem~4]{haver}. With $k=K(t)+1$ and
+\item[(L7)] \cite[Lemma~7]{haver} $B_3(t)\le E(t)+6K(t)+6$ for $t\ge9$.
+\item[(SP)] \emph{Span} \cite[Theorem~8]{haver}. With $k=K(t)+1$ and
   $e=E(t)$, $T(t)-e\le 2k^2+2k\sqrt{k^2+e}$ for $t\ge9$.
-\item[(EE)] \cite[Lemma~2]{haver}. Call $i<t$ a \emph{prime up} at state
+\item[(EE)] Our variant of \cite[Lemma~4]{haver}, from its proof. Call $i<t$ a \emph{prime up} at state
   $t$ if $a(i)$ is prime and $a(i)<E(t)\le a(i+1)$; it is \emph{paired} if
   $a(i+1)$ is odd and $a(i+2)<E(t)$, and \emph{unpaired} otherwise. Then
   $K(t)\le\pi(\sqrt{E(t)})+1+\#\{\text{unpaired prime ups at }t\}$.
@@ -220,12 +233,16 @@ $R(x)=c\sqrt x+\frac{c}{\log2}x^{1/3}\log x$.
   $\piL(x)=\max\bigl(0,(\alpha x-5\log x+5-R(x))/\log x\bigr)$; below $256$
   both equal $\pi(x)$. They follow by partial summation from
   Rosser and Schoenfeld's $\psi(x)<cx$ \cite[Theorem~12]{rs} and
-  Chebyshev's $\psi(x)\ge\alpha x-5\log x+5$ for $x\ge30$ \cite{chebyshev}.
+  $\psi(x)\ge\alpha x-5\log x+5$ for $x\ge30$, a weaker form of
+  Chebyshev's $\psi(x)>Ax-\frac52\log x-1$, $A=0.92129\ldots$
+  \cite[\S V]{chebyshev}, as proved in Lean in \cite{ieantn}.
 \item[(BT)] \emph{Primes in short intervals.} For real $x>0$, $y\ge1$ and
   integers $Q\ge6$,
   \[\pi(x+y)-\pi(x)\le\frac{y+Q^2}{\log(Q+1)+1.07}+\pi(Q).\]
   This is the large sieve \cite{montgomery,mv} with
-  $G(Q)=\sum_{d\le Q}\mu^2(d)/\varphi(d)>\log(Q+1)+1.07$ \cite[Lemma~7]{mv}.
+  $G(Q)=\sum_{d\le Q}\mu^2(d)/\varphi(d)>\log(Q+1)+1.07$, the form
+  in the proof of \cite[Lemma~7]{mv}, which states
+  $G(z)\ge\log z+1.07$ for real $z\ge6$.
 \item[(LS)] \emph{Arithmetic large sieve} \cite{montgomery,mv}. A set of
   integers in an interval of $N$ consecutive integers that avoids one
   residue class modulo every prime $p\le Q$ has at most
@@ -322,7 +339,7 @@ window; this is where his factor $12$ comes from.
 \section{Holes and odd terms above the frontier}\label{sec:HO}
 
 The next two lemmas bound $H$ and $O$ in terms of a bound $M$ on $K$.
-Lemma~\ref{lem:C} is Haver's hole bound \cite[Theorem~5]{haver} with an
+Lemma~\ref{lem:C} is Haver's hole bound \cite[Theorem~11]{haver} with an
 arbitrary nondecreasing bound $M$ in place of his explicit one, and with the
 hypothesis needed only at earlier states.
 
@@ -361,7 +378,7 @@ At most $\lceil Y/2\rceil$ odd values lie in $(e,X)$. Let $v=a(i)>X$ be
 another value counted by $O(t)$, and $c=a(i-1)$ its predecessor. If $c$
 were even, (F1) with $q=2$ would give $v\le E(i-1)\le e$; if $c$ were $1$
 or an odd prime, $v$ would be $2$ or a tick value (F2); if $c$ were a tick
-value, (F1) with $q=3$ and (L6) would give $v\le e+6K'+6<X$. So $c$ is an
+value, (F1) with $q=3$ and (L7) would give $v\le e+6K'+6<X$. So $c$ is an
 odd composite, not a tick value, with $c\le T(t)$. For each prime
 $r\mid c$, $B_r(i-1)\ge v$ by (F1), so the multiples of $2r$ in $(e,v)$
 are all early evens at $t$: there are at least $(v-e)/(2r)-1$ of them,
@@ -473,7 +490,7 @@ $7a(n)<12n$.
 At the states $t\ge n-3$ the hypothesis forces $E(t)>9\cdot10^{155}$. From
 (P) one derives $0.921\,x/\log x\le\pi(x)\le1.045\,x/\log x$ for
 $x\ge10^{76}$. Inserted into Haver's bounds $K\le12\pi(\sqrt e)+720$
-\cite[Theorem~3]{haver}, (SP), his hole bound and (CL) (with
+\cite[Theorem~5]{haver}, (SP), his hole bound and (CL) (with
 $O\le(T-e)/2+1$), this gives $0.997\,e<t$, $t+3<1.0766\,e$ and $T(t)<1.153\,e$ at
 each such state $t$, with $e=E(t)$, and shows that every hole exceeds
 $e/1.1543$. Then the three cases of the proof of Theorem~\ref{thm:T}
@@ -530,9 +547,11 @@ Sections~\ref{sec:notation}--\ref{sec:far}, including (F1)--(CL) and the
 analytic inputs (P), (BT), (LS), and the build fails if any theorem uses
 an axiom beyond Lean's three standard ones.
 
-The foundation is Haver's Lean archive \cite{haver} as extended in
+The foundation is Haver's Lean archive \cite{haver}
+(\texttt{EKG-Lean4-sources-v2.zip}, deposited with his version~2 and
+retained unchanged in version~3) as extended in
 \cite{graham}. The analytic inputs reuse published formalizations:
-Rosser and Schoenfeld's Theorem~12 and Chebyshev's lower bound from the
+Rosser and Schoenfeld's Theorem~12 and a form of Chebyshev's lower bound from the
 IEANTN project \cite{ieantn} (with interval tools from LeanCert
 \cite{leancert}), and the arithmetic large sieve from OpenAI's
 formalizations \cite{oaimath}. The bound $G(Q)>\log(Q+1)+1.07$, the
@@ -575,7 +594,8 @@ check covers only the first $10^8$ terms.
 
 \paragraph{Files.}
 The Lean project, the programs, the certificate and the expected outputs
-accompany this paper. The Lean build takes under an hour on two cores. A
+accompany this paper. The Lean build takes about an hour on two cores, with up to about
+$7.5$~GB of memory per Lean process. A
 quick check of the premises (minutes) checks the cover and its
 corruptions and replays the first $10^8$ terms; the full replay of the
 first $L$ terms takes about three hours and about $72$ and $33$ GB of
@@ -600,7 +620,8 @@ October 20, 2026, manuscript and Lean sources.
 
 \bibitem{haver}
 T. Haver, Explicit rates for the EKG sequence, version 3,
-October 4, 2026, manuscript and Lean sources.
+October 4, 2026, manuscript and Lean sources (the Lean archive
+\texttt{EKG-Lean4-sources-v2.zip}, unchanged from version 2).
 \href{https://doi.org/10.5281/zenodo.23129632}{doi:10.5281/zenodo.23129632}.
 
 \bibitem{hp}

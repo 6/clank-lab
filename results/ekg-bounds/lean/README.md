@@ -10,8 +10,8 @@ lake build
 ```
 
 `lake build` builds the default target `Check`, and with it every module
-the proof depends on. It takes about an hour on two cores; the largest Lean
-processes use about 7.5 GB of memory.
+the proof depends on. It takes about an hour on two cores, with up to about
+7.5 GB of memory per Lean process.
 
 ## The statement
 

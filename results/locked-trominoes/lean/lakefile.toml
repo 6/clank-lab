@@ -1,0 +1,13 @@
+name = "LockedTrominoes"
+defaultTargets = ["LockedTrominoes", "Check"]
+
+[leanOptions]
+relaxedAutoImplicit = false
+warningAsError = true
+
+[[lean_lib]]
+name = "LockedTrominoes"
+globs = ["ActualControls", "Arithmetic", "Assembly", "Audit", "CatalogCertificate", "Certificate", "Core", "FastCertificate", "Finite", "Geometry", "LocalCertificate", "LocalControls", "Nonunique", "Palette", "Strips", "SubsetCertificate", "Translation", "Generated.+"]
+
+[[lean_lib]]
+name = "Check"

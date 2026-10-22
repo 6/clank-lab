@@ -4,15 +4,17 @@
 
 For $N = 10$ equal charges on a sphere, is the familiar arrangement of two poles and two offset squares the unique arrangement of least repulsion? This is a case of the [Thomson problem](https://en.wikipedia.org/wiki/Thomson_problem), introduced by J. J. Thomson in 1904. We prove that this $D_{4d}$ bicapped square antiprism uniquely minimizes Coulomb energy among all ten distinct points on the unit sphere, up to orthogonal maps (including reflections) and relabeling. The proof directly adapts [Aravind Karthigeyan's MIT-licensed $N=9$ Lean project](https://github.com/aravindkarthigeyan/thomson-n9-lean).
 
+![The bicapped square antiprism: a side view with the heights h of the two squares marked, and the view from above, where the lower square is the upper one turned by π/4 (illustration only; not part of the proof).](data/antiprism.svg)
+
 The candidate's height is specified by an exact equation. Lean proves that the height exists and is unique in its specified interval, that the candidate consists of distinct unit vectors, and that every competitor has at least its energy, with equality exactly for congruent configurations. No symmetry is assumed of competitors. The proof first localizes every competitor of no greater energy, then uses orthogonal alignment and a local energy bound covering all spherical perturbations to force equality with the candidate.
+
+The proof follows the $N=9$ design and reuses most of its Lean code, but that machinery did not reach ten points in three places. A three-point energy certificate belongs to one configuration, and one sharp at the antiprism, missing its energy by less than $10^{-30}$, was needed; this was the hardest step. The poles are antipodal, so inner product $-1$ is a genuine contact that the $N=9$ classification of inner-product patterns excludes, and its argument that some three points are far from coplanar fails and is replaced. The local energy bound needs a new $30 \times 30$ Hessian certificate, with a smaller spectral gap than at $N=9$.
 
 Checked in Lean from the definitions; not yet reviewed by experts.
 
 The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
-
-Archived on Zenodo: [doi:10.5281/zenodo.23552642](https://doi.org/10.5281/zenodo.23552642)
 
 ## Check it
 
@@ -26,7 +28,7 @@ cd ..
 python3 -I checks/check.py
 ```
 
-The Python checker independently implements checks of the same rational certificates and rejects eight corruptions; Lean proves the geometric and analytic obligations. Python also checks a separate rigorous enclosure of the candidate energy $E$, $32.716949460147 < E < 32.716949460149$, outside the Lean theorem. The [Lean guide](lean/README.md) and [checking guide](checks/README.md) give the exact height interval, theorem hypotheses, axioms, certificate sizes, dependency versions, memory requirements and qualified build timing.
+The Python checker independently implements checks of the same rational certificates and rejects eight corruptions; it also checks that the figure shows the candidate's points. Lean proves the geometric and analytic obligations. Python also checks a separate rigorous enclosure of the candidate energy $E$, $32.716949460147 < E < 32.716949460149$, outside the Lean theorem. The [Lean guide](lean/README.md) and [checking guide](checks/README.md) give the exact height interval, theorem hypotheses, axioms, certificate sizes, dependency versions, memory requirements and qualified build timing.
 
 ## Credits
 
@@ -51,7 +53,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The Thomson problem for N = 10}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v1/results/thomson-10}},
-  doi          = {10.5281/zenodo.23552642}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v2/results/thomson-10}}
 }
 ```

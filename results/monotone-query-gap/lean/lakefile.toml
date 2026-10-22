@@ -1,0 +1,21 @@
+name = "MonotoneQueryGap"
+version = "0.1.0"
+defaultTargets = ["KS24", "Statement", "Examples", "Axioms"]
+
+# The cache executable comes from Mathlib; the proof imports only Lean core.
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.34.0"
+
+[[lean_lib]]
+name = "KS24"
+
+[[lean_lib]]
+name = "Statement"
+
+[[lean_lib]]
+name = "Examples"
+
+[[lean_lib]]
+name = "Axioms"

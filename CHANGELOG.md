@@ -4,6 +4,14 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## monotone-query-gap v1 (October 22, 2026)
+
+- First version: an explicit monotone function of five inputs answers
+  Köhler-Schindler and Steif's Question 2.1 (2024) negatively. At fair coins,
+  its optimal average query cost is $13/4$ and its optimal average subcube
+  partition cost is $51/16$. Includes the paper, a Lean proof of the gap,
+  and exact certificates with independent checkers.
+
 ## path-ramsey v3 (October 22, 2026)
 
 - Correction: Makes the abstract's statement of the proof's scope exact, corrects credits, citations and a reported timing, and credits further nearby work. The theorem and its checks are unchanged.

@@ -29,8 +29,9 @@ explicit and checked them in Lean, and our earlier
 [second-order asymptotic](https://doi.org/10.5281/zenodo.23493113) built on
 his work. None of these gives the sharp constants at every $n$: the
 explicit estimates apply only from astronomically large thresholds. The
-new step is a self-improving bound on how many even numbers are used
-before the smallest even number not yet used, closed with the large sieve.
+new step is a self-improving bound on how many even numbers larger than
+the smallest unused even number are already used, closed with the large
+sieve.
 It makes the explicit estimates work once that smallest unused even number
 passes about $1.3 \times 10^{10}$, which happens within the first
 $1.6 \times 10^{10}$ terms; those terms are computed.
@@ -51,8 +52,6 @@ The proofs, the Lean formalization, the programs and the text were produced by A
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23562177](https://doi.org/10.5281/zenodo.23562177)
-
 ## Check it
 
 The Lean proof is a standard Lake project. Install
@@ -64,7 +63,7 @@ lake exe cache get
 lake build
 ```
 
-The build takes about an hour on two cores, with up to about 8 GB of
+The build takes about an hour on two cores, with up to about 7.5 GB of
 memory per Lean process. It checks the exact statement of the theorem and
 of its four premises, the first thirty terms of the sequence, and that the
 proof uses only Lean's standard axioms. [lean/README.md](lean/README.md)
@@ -99,14 +98,19 @@ The conjecture, the definition and the rule that each term is the least
 unused multiple of a prime factor of its predecessor are due to
 [Lagarias, Rains and Sloane (2002)](https://doi.org/10.1080/10586458.2002.10504486).
 [Hofman and Pilipczuk (2008)](https://cs.uwaterloo.ca/journals/JIS/VOL11/Hofman/hofman1.html)
-proved the prime pattern $2p, p, 3p$ and the crossing lemma used
-throughout. Tomer Haver's
+proved that each odd prime $p$ is immediately preceded by $2p$ (by a
+crossing count for $p > 25000$, and below that from Lagarias, Rains and
+Sloane's computation) and the crossing lemma used throughout. Tomer Haver's
 [*Explicit rates for the EKG sequence*](https://doi.org/10.5281/zenodo.23129632)
-(version 3, October 2026) supplies the Lean definition of the sequence, the
-counting identity and the explicit bounds on early even terms, spans and
-missing composites, used here as proved Lean theorems and sharpened in the
-middle range. The prime-counting bounds rest on Rosser and Schoenfeld's
-(1962) bound for $\psi(x)$ and Chebyshev's (1852) lower bound, formalized
+(version 3, October 2026, whose Lean archive is the one deposited with
+version 2, unchanged) closes that crossing count for every $p > 43$ and
+proves the rest of the pattern $2p, p, 3p$: the term $3p$, that it occurs
+only there, and the spacing of these patterns. It supplies the Lean
+definition of the sequence, the counting identity and the explicit bounds
+on early even terms, spans and missing composites, used here as proved Lean
+theorems and sharpened in the middle range. The prime-counting bounds rest
+on Rosser and Schoenfeld's (1962) bound for $\psi(x)$ and a form of
+Chebyshev's (1852) lower bound, formalized
 in [IEANTN](https://github.com/teorth/IEANTN) (T. Tao and contributors)
 with [LeanCert](https://github.com/alerad/leancert); the arithmetic large
 sieve of Montgomery (1968) and Montgomery and Vaughan (1973) comes from
@@ -123,7 +127,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Sharp linear bounds for the EKG sequence}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v1/results/ekg-bounds}},
-  doi          = {10.5281/zenodo.23562177}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v2/results/ekg-bounds}}
 }
 ```

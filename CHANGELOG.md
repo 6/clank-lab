@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-bounds v2 (October 22, 2026)
+
+- Correction: The paper cited five results of Haver's version 3 by the wrong numbers: his Theorems 5, 8 and 11 and Lemmas 4 and 7 appeared as Theorems 3, 4 and 5 and Lemmas 2 and 6. The citations now match that version; the result is unchanged.
+- Correction: The paper credited Hofman and Pilipczuk with the whole prime pattern $2p, p, 3p$; they proved that $2p$ precedes $p$, and Haver proved the rest, reducing the computed base to $p \le 43$. Each part is now credited where it is proved.
+- Correction: Other citations are made exact: our early-even bound is a variant from Haver's proof, Chebyshev's and Montgomery and Vaughan's bounds are used in derived forms, the journal numbering of Lagarias, Rains and Sloane is added, and Haver's Lean sources are his version 2 archive. The abstract and README now describe the early evens correctly. The result is unchanged.
+
 ## density-seven v4 (October 22, 2026)
 
 - Correction: The index dated Polymath1's 1,302 lower bound, and the README its exact values up to six letters, to 2010; Tao's post shows both known by March 2009, and they now say so. The paper corrects Shelah's title to “HJ numbers revisited” and withdraws a first-proof claim based on a literature search. The result and checks are unchanged.

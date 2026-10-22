@@ -11,6 +11,7 @@ Zenodo records.
   pseudostandard sequences have string attractors of at most four positions.
   A 36-letter prefix needs five. Paper with a written proof of both bounds,
   and two independent checkers.
+- Zenodo: [10.5281/zenodo.23562188](https://doi.org/10.5281/zenodo.23562188)
 
 ## locked-trominoes v1 (October 22, 2026)
 
@@ -18,18 +19,21 @@ Zenodo records.
   rectangle with m divisible by 3, m ≥ 6 and n ≥ 4 has a locked tromino
   tiling, which completes the classification of the rectangles that have
   one. Paper, Lean proof and certificate checkers.
+- Zenodo: [10.5281/zenodo.23562184](https://doi.org/10.5281/zenodo.23562184)
 
 ## thomson-10 v2 (October 22, 2026)
 
 - Adds a figure of the configuration, in the paper and the README, and a
   paragraph on what is new beyond the N = 9 proof and which step was
   hardest. The theorem, its proof and the certificates are unchanged.
+- Zenodo: [10.5281/zenodo.23562190](https://doi.org/10.5281/zenodo.23562190)
 
 ## locally-toroidal-polytopes v1 (October 22, 2026)
 
 - Proves the existence half of McMullen–Schulte's 2002 conjecture and
   Schulte–Weiss Problem 16 for every pair of distinct odd parameters at
   least three. Finiteness and group classification remain open.
+- Zenodo: [10.5281/zenodo.23562182](https://doi.org/10.5281/zenodo.23562182)
 
 ## ekg-bounds v1 (October 22, 2026)
 
@@ -38,6 +42,7 @@ Zenodo records.
   $n = 28$ and $n = 7$, as Lagarias, Rains and Sloane conjectured in 2002.
   Paper, a Lean proof from four computed premises, and the programs that
   check those premises.
+- Zenodo: [10.5281/zenodo.23562177](https://doi.org/10.5281/zenodo.23562177)
 
 ## thomson-10 v1 (October 22, 2026)
 

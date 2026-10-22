@@ -1,0 +1,59 @@
+name: Stanley class-sum Smith form checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/stanley-class-sum-snf/**'
+      - '.github/workflows/stanley-class-sum-snf.yml'
+  pull_request:
+    paths:
+      - 'results/stanley-class-sum-snf/**'
+      - '.github/workflows/stanley-class-sum-snf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stanley-class-sum-snf-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Check stanley-class-sum-snf
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/stanley-class-sum-snf/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean with elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/stanley-class-sum-snf/lean/.lake/build
+          key: stanley-class-sum-snf-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/stanley-class-sum-snf/lean/lean-toolchain', 'results/stanley-class-sum-snf/lean/lake-manifest.json', 'results/stanley-class-sum-snf/lean/lakefile.toml', 'results/stanley-class-sum-snf/lean/**/*.lean', '!results/stanley-class-sum-snf/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof, statement and axiom checks
+        run: lake build
+

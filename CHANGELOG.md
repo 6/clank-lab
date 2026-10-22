@@ -10,6 +10,7 @@ Zenodo records.
   uniquely minimizes the Coulomb energy of points on the unit sphere, up to
   orthogonal maps and relabeling. Paper, Lean proof, exact certificates and
   an independent checker.
+- Zenodo: [10.5281/zenodo.23552642](https://doi.org/10.5281/zenodo.23552642)
 
 ## stanley-class-sum-snf v2 (October 21, 2026)
 

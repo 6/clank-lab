@@ -11,6 +11,7 @@ Zenodo records.
   its optimal average query cost is $13/4$ and its optimal average subcube
   partition cost is $51/16$. Includes the paper, a Lean proof of the gap,
   and exact certificates with independent checkers.
+- Zenodo: [10.5281/zenodo.23578348](https://doi.org/10.5281/zenodo.23578348)
 
 ## path-ramsey v3 (October 22, 2026)
 

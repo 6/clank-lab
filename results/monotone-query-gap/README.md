@@ -32,6 +32,8 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23578348](https://doi.org/10.5281/zenodo.23578348)
+
 ## Check it
 
 Requirements: Python 3.10 or later, [elan](https://github.com/leanprover/elan)
@@ -84,6 +86,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A monotone counterexample to a question on distributional complexity}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/monotone-query-gap-v1/results/monotone-query-gap}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/monotone-query-gap-v1/results/monotone-query-gap}},
+  doi          = {10.5281/zenodo.23578348}
 }
 ```

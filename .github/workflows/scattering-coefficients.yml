@@ -1,0 +1,69 @@
+name: Scattering coefficient checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/scattering-coefficients/**'
+      - '.github/workflows/scattering-coefficients.yml'
+  pull_request:
+    paths:
+      - 'results/scattering-coefficients/**'
+      - '.github/workflows/scattering-coefficients.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: scattering-coefficients-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/scattering-coefficients/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean through elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore proof build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/scattering-coefficients/lean/.lake/build
+          key: scattering-coefficients-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/scattering-coefficients/lean/lean-toolchain', 'results/scattering-coefficients/lean/lake-manifest.json', 'results/scattering-coefficients/lean/lakefile.toml', 'results/scattering-coefficients/lean/**/*.lean', '!results/scattering-coefficients/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof, examples, and axiom guards
+        run: lake build
+
+  check:
+    name: Check scattering-coefficients
+    needs: [lean]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful proof build
+        env:
+          LEAN_RESULT: ${{ needs.lean.result }}
+        run: test "$LEAN_RESULT" = success

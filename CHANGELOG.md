@@ -4,6 +4,13 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## scattering-coefficients v1 (October 22, 2026)
+
+- First version: a proof of Conjecture 13 of Elgin, Reading and Stella
+  (2024), that the rank-two scattering coefficients $\tau^{1,5}(2j,j)$ are
+  given by a binomial sum for every $j \ge 1$, in the convention of the
+  conjecture's table and code. Paper and a Lean proof from the definitions.
+
 ## pseudostandard-attractors v1 (October 22, 2026)
 
 - First version: a counterexample to Dvořáková and Hendrychová's 2024

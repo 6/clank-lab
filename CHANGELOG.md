@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## steinberg-c4-c9 v5 (October 22, 2026)
+
+- Correction: The paper cited the (1,0,0)-colorability paper only as a 2020 preprint, and called Ang–Leo's conference paper a chapter without its proceedings. It now cites Discrete Mathematics 345 (2022), 112758, using the journal's author order throughout, and Ang–Leo's proceedings with pages.
+- Correction: The v3 entry below and its Zenodo description said Lean proves the graph planar. Lean proves a connected genus-zero rotation certificate, the exclusion of four- and nine-cycles, and non-three-colorability; that the certificate gives a planar embedding is a written argument. Both are corrected in place, and the abstract and README state this scope. The result is unchanged.
+
 ## locked-trominoes v2 (October 22, 2026)
 
 - Correction: The paper attributed to Tucker-Foltz a count of 26 locked 6×4 tilings; that count is ours, and he reports 7 up to symmetry. It also called his Theorem 3.1 published, though it is in a preprint, and gave Cannon's paper without volume and pages. These are fixed; the result is unchanged.
@@ -164,9 +169,10 @@ Zenodo records.
 
 ## steinberg-c4-c9 v3 (October 20, 2026)
 
-- Adds a Lean proof of the whole result for the published graph: it is
-  planar, has no cycle of length 4 or 9, and has no proper 3-coloring, with
-  the coloring certificate checked inside Lean.
+- Adds Lean proofs of a connected genus-zero rotation certificate,
+  exclusion of four- and nine-cycles, and non-three-colorability for the
+  published graph. The passage from the rotation certificate to a planar
+  embedding remains a written topological argument.
 - Zenodo: [10.5281/zenodo.23510448](https://doi.org/10.5281/zenodo.23510448)
 
 ## uniform-5-polytopes v2 (October 20, 2026)

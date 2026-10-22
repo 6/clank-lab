@@ -12,8 +12,6 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23549429](https://doi.org/10.5281/zenodo.23549429)
-
 ## Check it
 
 Install [elan](https://github.com/leanprover/elan), then check the Lean proof:
@@ -31,11 +29,11 @@ Python 3.10 or later, a C compiler and a POSIX shell check the retained certific
 sh checks/check.sh
 ```
 
-No Python packages are required. [Lean documentation](lean/README.md) explains the formal statement and spherical rotation certificate. [Checker documentation](checks/README.md) explains the retained criticality, construction and independent executable checks.
+No Python packages are required. Lean checks a connected genus-zero rotation certificate, exclusion of four- and nine-cycles, and non-three-colorability. The passage from that certificate to a planar embedding is a written topological argument in the paper. [Lean documentation](lean/README.md) gives the exact formal statement. [Checker documentation](checks/README.md) explains the retained criticality, construction and independent executable checks.
 
 ## Credits
 
-The graph is a composition of 27 copies of K4; the paper gives the elementary non-colorability proof and credits Kostochka and Yancey for the sharp edge bound. Lu and coauthors posed the question; Kang, Jin and Wang and Jin, Kang, Liu and Wang recorded and developed it. Cohen-Addad and coauthors supplied the earlier Steinberg disproof. Marijn Heule and Nathan Wetzler's drat-trim checks the SAT certificate, generated with Armin Biere and collaborators' CaDiCaL. The paper distinguishes proper DP/list coloring and defective coloring results of Kang, Jin and Zhu, Dai, Wang and Xu, and Chen, Dai, Nie, Wang and Yu.
+The graph is a composition of 27 copies of K4; the paper gives the elementary non-colorability proof and credits Kostochka and Yancey for the sharp edge bound. Lu and coauthors posed the question; Kang, Jin and Wang, and Kang, Jin, Liu and Wang, recorded and developed it. Cohen-Addad and coauthors supplied the earlier Steinberg disproof. Marijn Heule and Nathan Wetzler's drat-trim checks the SAT certificate, generated with Armin Biere and collaborators' CaDiCaL. The paper distinguishes proper DP/list coloring and defective coloring results of Kang, Jin and Zhu, Dai, Wang and Xu, and Chen, Dai, Nie, Wang and Yu.
 
 The Lean proof uses Lean and Mathlib contributors' libraries and the LRAT verification methodology of Cruz-Filipe, Heule, Hunt, Kaufmann and Schneider-Kamp.
 
@@ -48,7 +46,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A planar graph without four- or nine-cycles that is not three-colorable}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v4/results/steinberg-c4-c9}},
-  doi          = {10.5281/zenodo.23549429}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v5/results/steinberg-c4-c9}}
 }
 ```

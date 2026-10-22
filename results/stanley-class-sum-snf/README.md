@@ -18,6 +18,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23552057](https://doi.org/10.5281/zenodo.23552057)
+
 ## Check it
 
 Install [elan](https://github.com/leanprover/elan), the standard Lean toolchain manager, and Git. From this folder, run:
@@ -43,6 +45,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Smith normal form of the n-cycle class sum}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-class-sum-snf-v2/results/stanley-class-sum-snf}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-class-sum-snf-v2/results/stanley-class-sum-snf}},
+  doi          = {10.5281/zenodo.23552057}
 }
 ```

@@ -10,6 +10,7 @@ Zenodo records.
   (2024), that the rank-two scattering coefficients $\tau^{1,5}(2j,j)$ are
   given by a binomial sum for every $j \ge 1$, in the convention of the
   conjecture's table and code. Paper and a Lean proof from the definitions.
+- Zenodo: [10.5281/zenodo.23571933](https://doi.org/10.5281/zenodo.23571933)
 
 ## pseudostandard-attractors v1 (October 22, 2026)
 

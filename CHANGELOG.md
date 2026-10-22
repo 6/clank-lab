@@ -4,6 +4,14 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-bounds v1 (October 22, 2026)
+
+- First version: a computer-assisted proof that the EKG sequence satisfies
+  $13n/28 \le a(n) \le 12n/7$ for every $n$, with equality only at
+  $n = 28$ and $n = 7$, as Lagarias, Rains and Sloane conjectured in 2002.
+  Paper, a Lean proof from four computed premises, and the programs that
+  check those premises.
+
 ## thomson-10 v1 (October 22, 2026)
 
 - First version: a proof that, for N = 10, the bicapped square antiprism

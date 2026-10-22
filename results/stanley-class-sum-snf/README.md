@@ -43,6 +43,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Smith normal form of the n-cycle class sum}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-class-sum-snf-v1/results/stanley-class-sum-snf}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-class-sum-snf-v2/results/stanley-class-sum-snf}}
 }
 ```

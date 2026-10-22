@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## stanley-class-sum-snf v2 (October 21, 2026)
+
+- Correction: corrects the degree-zero exception to the commutant dimension
+  and unreadable Lean notation in the paper's formalization section;
+  the theorem is unchanged.
+
 ## stanley-class-sum-snf v1 (October 21, 2026)
 
 - Gives the Smith normal form of multiplication by the sum of all $n$-cycles

@@ -534,11 +534,12 @@ permutation of type $\mu$ in $K_{(n)}K_\nu$; the development proves
 that the choice has the required cycle type and that these entries
 give the expansion~\eqref{eq:matrix}.
 
-The final theorem is:
+In ASCII Lean notation, the final theorem is:
 \begin{verbatim}
 theorem stanley_class_sum_snf (n : Nat) (hn : 0 < n) :
-    HasStanleySNF n (M n) \u2227
-      (\u2200 r, r + 1 < n \u2192 stanleyD n r \u2223 stanleyD n (r + 1))
+    And (HasStanleySNF n (M n))
+      (forall r, r + 1 < n ->
+        Dvd.dvd (stanleyD n r) (stanleyD n (r + 1)))
 \end{verbatim}
 Here \texttt{stanleyD} is~\eqref{eq:d}, with its division proved exact.
 The predicate \texttt{HasStanleySNF} asserts the existence of a finite
@@ -560,11 +561,14 @@ $IE+EI=n$. Thus $P=IE/n$ is an equivariant projection onto
 $\ker I$. Taking traces of the degree-$k$ action on this image gives
 the coefficients in~\eqref{eq:hook}.
 
-The degree-$k$ commutant is determined by the signed action on pairs
+For the interior degrees $1\le k<n$, the degree-$k$ commutant is
+determined by the signed action on pairs
 of $k$-subsets: a transposition in their difference kills an entry when
 their intersection has size at most $k-2$, and the remaining orbits
-leave a two-dimensional span of the identity and the projection.
+leave a two-dimensional span of the identity and the projection $P$.
 Restriction to the image of $P$ makes every commuting operator scalar.
+At degree $0$, the representation is one-dimensional and $P$ is the
+identity, so the same scalar conclusion holds directly.
 Taking traces of conjugacy averages consequently gives
 \[
  \sum_{g\in S_n}\chi_k(agb g^{-1})

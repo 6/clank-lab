@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-sequence v4 (October 22, 2026)
+
+- Correction: The paper did not credit Jonathan Ayres, who discovered the sequence and, as Lagarias, Rains and Sloane record, also observed its three lines. The abstract and introduction now credit Ayres. The result is unchanged.
+- Correction: The paper called Lagarias, Rains and Sloane's Conjecture 3 open; it now cites the sharp EKG bounds paper, which proves it. The result is unchanged.
+- Correction: The abstract said the asymptotic holds "at every index n"; it now states the eventual result and what it gives for a(n) at almost all n. Ordowski's and Jasinski's conjectures are stated as posed, and the paper says exactly what is Lean-checked, ours and Haver's. The result is unchanged.
+
 ## pseudostandard-attractors v2 (October 22, 2026)
 
 - Correction: The paper, README, index and the v1 entry below dated Dvořáková and Hendrychová's conjecture to 2024, its journal year, not its August 2023 posting, and the paper dated Rote's article 1993, not 1994. Both dates are now correct; the v1 entry stays as released.

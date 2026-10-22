@@ -91,7 +91,7 @@ columns of `A`:
    the eigenvalue list and checks, with exact integer matrix products, that
    $\prod_c (A - cI) = 0$ over the distinct contents $c$, so $A$ is
    diagonalizable with every eigenvalue among them, and that
-   $\operatorname{tr}(A^j)$ equals the $j$-th power sum of the list for
+   $\mathrm{tr}(A^j)$ equals the $j$-th power sum of the list for
    $1 \leq j < d$, where $d$ is the number of distinct contents. These $d$
    power sums (with $j = 0$ giving $f$) determine the multiplicities, since
    the Vandermonde matrix of distinct values is invertible;

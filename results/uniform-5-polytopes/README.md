@@ -4,9 +4,10 @@
 
 A [uniform polytope](https://en.wikipedia.org/wiki/Uniform_5-polytope)
 looks the same at every vertex and has uniform facets, down to regular
-polygons. The five-dimensional case is the next case after Conway and Guy's
-1965 four-dimensional list; Schulte (2017) and Winter (2021) recorded it as
-open.
+polygons. Conway and Guy announced the four-dimensional list in 1965;
+[Möller's 2004 dissertation](https://ediss.sub.uni-hamburg.de/handle/ediss/689)
+gave a complete account of its proof. Schulte (2017) and Winter (2021)
+recorded the five-dimensional case as open.
 
 This work gives a computer-assisted completeness proof for the known convex
 uniform 5-polytopes: Wythoff constructions of types $A_5$, $B_5$ and $D_5$, prisms over

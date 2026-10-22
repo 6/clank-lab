@@ -48,8 +48,8 @@ theorem counterexample :
 ```
 
 The first part says that the Smith normal form of `A` is
-$\operatorname{diag}(1,1,1,1,2,2)$ (the entries form a divisibility chain). The second
-says that the form $\operatorname{diag}(1,1,1,1,1,4)$ predicted by Stanley's Conjecture
+$\mathrm{diag}(1,1,1,1,2,2)$ (the entries form a divisibility chain). The second
+says that the form $\mathrm{diag}(1,1,1,1,1,4)$ predicted by Stanley's Conjecture
 7.4 for $\lambda = (3,1,1)$, $k = 3$ cannot be reached from `A` by any unimodular row
 and column operations. Since the Smith normal form is unique, this is the
 disagreement with the conjecture.
@@ -203,8 +203,8 @@ in this order, with column $j$ holding the coordinates of $X_7$ applied to
 basis vector $j$. `A52`, `U52` and `V52` are copied unchanged from
 [the certificate](../data/witness-52-k7.json); [Check.lean](Check.lean)
 confirms `A52` against the literal entry by entry. The Smith normal form is
-$\operatorname{diag}(1,1,1,1,2,4,4,4,4,0,0,0,0,0)$, while Stanley's
-Conjecture 7.4 predicts $\operatorname{diag}(1,1,1,1,1,4,4,4,4,0,0,0,0,0)$.
+$\mathrm{diag}(1,1,1,1,2,4,4,4,4,0,0,0,0,0)$, while Stanley's
+Conjecture 7.4 predicts $\mathrm{diag}(1,1,1,1,1,4,4,4,4,0,0,0,0,0)$.
 This witness also refutes the weaker remark that every diagonal entry of the
 Smith normal form is, up to sign, a product of eigenvalues: the only
 eigenvalues are $0$ and $4$, and $2$ is no product of them. The main theorem
@@ -257,7 +257,7 @@ How they are proved:
   `exists_two_exact_of_certificate`): integer vectors $x, y, w, z$ with
   $A_{52}\,y = 2x$, $w^{\mathsf T} A_{52} = 2z^{\mathsf T}$ and
   $w \cdot x = 1$, read off from `U52` and `V52` at the diagonal entry $2$.
-  For any unimodular $P$, $Q$ with $P A_{52} Q = D = \operatorname{diag}(d)$, set
+  For any unimodular $P$, $Q$ with $P A_{52} Q = D = \mathrm{diag}(d)$, set
   $x' = Px$, $y' = Q^{-1}y$ and $w' = (P^{-1})^{\mathsf T} w$. Then
   $d_i y'_i = 2x'_i$, $w'_i d_i$ is even for every $i$, and
   $w' \cdot x' = w \cdot x$ is odd. So some $i$ has $w'_i$ and $x'_i$ odd;

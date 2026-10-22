@@ -7,6 +7,7 @@ Zenodo records.
 ## steinberg-c4-c9 v4 (October 21, 2026)
 
 - Adds a drawing of the graph.
+- Zenodo: [10.5281/zenodo.23549429](https://doi.org/10.5281/zenodo.23549429)
 
 ## path-ramsey v2 (October 21, 2026)
 

@@ -7,6 +7,7 @@ Zenodo records.
 ## path-ramsey v3 (October 22, 2026)
 
 - Correction: Makes the abstract's statement of the proof's scope exact, corrects credits, citations and a reported timing, and credits further nearby work. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23574724](https://doi.org/10.5281/zenodo.23574724)
 
 ## thomson-10 v3 (October 22, 2026)
 

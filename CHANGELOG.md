@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## thomson-10 v3 (October 22, 2026)
+
+- Correction: The citations and credits of earlier work on smaller cases, and the wording describing it, are corrected, and missing credits are added. The theorem and its checks are unchanged.
+
 ## steinberg-c4-c9 v5 (October 22, 2026)
 
 - Correction: The paper cited the (1,0,0)-colorability paper only as a 2020 preprint, and called Ang–Leo's conference paper a chapter without its proceedings. It now cites Discrete Mathematics 345 (2022), 112758, using the journal's author order throughout, and Ang–Leo's proceedings with pages.

@@ -18,7 +18,7 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23552057](https://doi.org/10.5281/zenodo.23552057)
+Archived on Zenodo: [doi:10.5281/zenodo.23591100](https://doi.org/10.5281/zenodo.23591100)
 
 ## Check it
 
@@ -46,6 +46,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Smith normal form of the n-cycle class sum}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-class-sum-snf-v3/results/stanley-class-sum-snf}},
-  doi          = {10.5281/zenodo.23552057}
+  doi          = {10.5281/zenodo.23591100}
 }
 ```

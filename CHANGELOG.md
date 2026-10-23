@@ -9,16 +9,19 @@ Zenodo records.
 - Correction: We supply the omitted Proceedings of the American Mathematical Society citation for Cai and Stanley's paper. For the n=12 example in Stanley's question, we describe the differing entry and its failure of divisibility without attributing the discrepancy to a typographical error. The result is unchanged.
 - Correction: The v2 paper was dated October 22, 2026, while its CHANGELOG entry records October 21, 2026. The theorem and its checks are unchanged.
 - Correction: The README citation now points to version 3. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23591100](https://doi.org/10.5281/zenodo.23591100)
 
 ## difference-set-243 v2 (October 23, 2026)
 
 - Correction: The paper's account of the 1997 table blurred the source of the cyclic C243 exclusion with the table's multiplier calculation. It now credits Lander's Theorem 4.38 for C243 and separates the other three exclusions; the result is unchanged.
 - Correction: The Gordon presentation links in the paper and README now use the nearest Wayback Machine snapshot to its cited date. The theorem and its checks are unchanged.
 - Correction: The corrected paper is dated October 22, 2026, and the README citation points to version 2. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23591106](https://doi.org/10.5281/zenodo.23591106)
 
 ## thomson-10 v4 (October 23, 2026)
 
 - Correction: The paper and README now record the omitted “(Conjecture 1 of Armentano et al.)” in Zarco's seven-point warrant title. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23591086](https://doi.org/10.5281/zenodo.23591086)
 
 ## williamson-order-65 v1 (October 22, 2026)
 

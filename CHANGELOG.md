@@ -4,6 +4,17 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## multitwist-exceptions v1 (October 22, 2026)
+
+- First version: a counterexample on the sphere with five boundary
+  components showing that Fathi's consecutive-integers bound does not
+  extend to multitwists, which answers negatively Ivanov's Problem 5 (2006;
+  also in an earlier list dated 1994–1998). The base maps are reducible, so
+  the pseudo-Anosov case is untouched, and the weaker count question is
+  still open.
+- Paper with the written proof, a Lean proof of its braid and free-group
+  algebra, and two independent checking programs.
+
 ## monotone-query-gap v1 (October 22, 2026)
 
 - First version: an explicit monotone function of five inputs answers

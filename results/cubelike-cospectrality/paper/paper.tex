@@ -5,6 +5,7 @@
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{microtype}
 \usepackage{tikz}
+\usepackage{graphicx}
 \usepackage{listings}
 \lstset{basicstyle=\ttfamily\footnotesize,columns=fullflexible,keepspaces=true,
   literate={∀}{{$\forall$}}1 {∈}{{$\in$}}1 {∉}{{$\notin$}}1
@@ -302,7 +303,7 @@ Let $\alpha$ be the greatest of these numbers at most $M$, and let
 $\beta$ be the least of them at least $M$. Then
 \begin{equation}\label{eq:twopoint}
  \sum_{i=1}^N x_i^2\geq
-       N\bigl(M^2+(M-\alpha)(\beta-M)\bigr).
+       N\bigl(M^{\mkern6mu 2}+(M-\alpha)(\beta-M)\bigr).
 \end{equation}
 \end{lemma}
 \begin{proof}
@@ -311,7 +312,7 @@ between them, so $(x_i-\alpha)(x_i-\beta)\geq0$.
 Summing and using $\sum_i x_i=NM$ gives
 \[
  \sum_i x_i^2\geq N\bigl((\alpha+\beta)M-\alpha\beta\bigr)
- =N\bigl(M^2+(M-\alpha)(\beta-M)\bigr).
+ =N\bigl(M^{\mkern6mu 2}+(M-\alpha)(\beta-M)\bigr).
 \]
 This includes $\alpha=\beta=M$.
 \end{proof}
@@ -580,6 +581,7 @@ Theorem~\ref{thm:main}.
 
 \begin{figure}[tbp]
 \centering
+\resizebox{\linewidth}{!}{%
 % BEGIN EXAMPLE FIGURE
 \begin{tikzpicture}[x=2.35cm,y=2.35cm]
 \definecolor{graphblue}{RGB}{7,94,172}
@@ -2128,6 +2130,7 @@ Theorem~\ref{thm:main}.
 \node[text=graphblue] at (-1.16000000,-0.00000000) {$ 127 $};
 \end{tikzpicture}
 % END EXAMPLE FIGURE
+}
 \caption{The connected $20$-regular cubelike graph of
 \'Arnad\'ottir and Godsil on $128$ vertices. All edges are shown in gray;
 the four vertices $0,7,120,127$ of one strongly cospectral class are

@@ -1,6 +1,7 @@
-\documentclass[11pt]{amsart}
+\documentclass[11pt]{article}
+\pagestyle{plain}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,booktabs,etoolbox}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -40,17 +41,18 @@
 \DeclareUnicodeCharacter{2192}{\ensuremath{\to}}
 \DeclareUnicodeCharacter{2211}{\ensuremath{\sum}}
 \DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
-\makeatletter
-\patchcmd{\@setauthors}{\MakeUppercase{\authors}}{\authors}{}{\PackageError{paper}{byline patch failed}{}}
-\makeatother
 \setlength{\emergencystretch}{2em}
 \raggedbottom
 \title{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}
-\author[P. Graham]{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 22, 2026}
-\thanks{The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 23, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}}
 \begin{document}
+\maketitle
+\begingroup
+\renewcommand{\thefootnote}{}
+\footnotetext{The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.}
+\endgroup
 \begin{abstract}
 For positive integers $b$ and $c$, the rank-two cluster scattering
 diagram $\mathfrak{D}(1+x^b,1+y^c)$ is the consistent scattering diagram
@@ -70,7 +72,6 @@ Poisson bracket turn its factorization into a first-order differential
 equation whose unique solution is algebraic. The proof is formalized in
 Lean from the definitions.
 \end{abstract}
-\maketitle
 
 \section{Introduction}\label{sec:intro}
 

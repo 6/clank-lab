@@ -47,7 +47,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/scattering-coefficients-v1/results/scattering-coefficients}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/scattering-coefficients-v2/results/scattering-coefficients}},
   doi          = {10.5281/zenodo.23571933}
 }
 ```

@@ -8,6 +8,7 @@ Zenodo records.
 
 - A computer-assisted proof that every noncrossing partition lattice of a finite well-generated complex reflection group has a symmetric chain decomposition, completing the chain part of Mühle's question from 2015. The stronger Boolean-decomposition question is not settled here.
 - Includes the paper, exact chain certificates, independent chain checkers, interval reconstruction, and Lean proofs of the abstract reduction lemmas.
+- Zenodo: [10.5281/zenodo.23605555](https://doi.org/10.5281/zenodo.23605555)
 
 ## coinvariant-lefschetz v1 (October 23, 2026)
 

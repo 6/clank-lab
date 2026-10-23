@@ -1,0 +1,9 @@
+name = "NoncrossingChains"
+defaultTargets = ["Check"]
+
+[[lean_lib]]
+name = "NoncrossingChains"
+globs = ["Endpoint", "Product", "Transfer", "Reduction", "IntervalCertificate"]
+
+[[lean_lib]]
+name = "Check"

@@ -1,0 +1,92 @@
+name: Lit-only sigma-game checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/lit-only-sigma/**'
+      - '.github/workflows/lit-only-sigma.yml'
+  pull_request:
+    paths:
+      - 'results/lit-only-sigma/**'
+      - '.github/workflows/lit-only-sigma.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lit-only-sigma-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/lit-only-sigma/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean through elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore proof build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/lit-only-sigma/lean/.lake/build
+          key: lit-only-sigma-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/lit-only-sigma/lean/lean-toolchain', 'results/lit-only-sigma/lean/lake-manifest.json', 'results/lit-only-sigma/lean/lakefile.toml', 'results/lit-only-sigma/lean/**/*.lean', '!results/lit-only-sigma/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof, examples, and axiom guards
+        run: lake build
+
+  certificates:
+    name: Exact certificates and corruption controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/lit-only-sigma
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Check the witness, both checkers and the rejected input
+        run: python3 checks/check.py
+
+  check:
+    name: Check lit-only-sigma
+    needs: [lean, certificates]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful proof build
+        env:
+          LEAN_RESULT: ${{ needs.lean.result }}
+          CERTIFICATE_RESULT: ${{ needs.certificates.result }}
+        run: |
+          test "$LEAN_RESULT" = success
+          test "$CERTIFICATE_RESULT" = success

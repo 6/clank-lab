@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="390" viewBox="0 0 360 390" role="img" aria-labelledby="title description">
+<title id="title">The seven-vertex graph and starting configuration</title>
+<desc id="description">The complement of a six-cycle and an isolated vertex. Vertices 0, 1, 3 and 4 are lit, shown in blue.</desc>
+<rect width="360" height="390" fill="white"/>
+<g fill="none" stroke="dimgray" stroke-width="1.5">
+<line x1="180" y1="40" x2="310" y2="265"/>
+<path d="M 180 40 Q 108.000 190.000 180 340"/>
+<line x1="180" y1="40" x2="50" y2="265"/>
+<line x1="180" y1="40" x2="180" y2="190"/>
+<line x1="310" y1="115" x2="180" y2="340"/>
+<path d="M 310 115 Q 144.020 127.635 50 265"/>
+<line x1="310" y1="115" x2="50" y2="115"/>
+<line x1="310" y1="115" x2="180" y2="190"/>
+<line x1="310" y1="265" x2="50" y2="265"/>
+<path d="M 310 265 Q 215.980 127.635 50 115"/>
+<line x1="310" y1="265" x2="180" y2="190"/>
+<line x1="180" y1="340" x2="50" y2="115"/>
+<line x1="180" y1="340" x2="180" y2="190"/>
+<line x1="50" y1="265" x2="180" y2="190"/>
+<line x1="50" y1="115" x2="180" y2="190"/>
+</g>
+<g stroke="black" stroke-width="1.6">
+<circle cx="180" cy="40" r="17" fill="lightblue"/>
+<circle cx="310" cy="115" r="17" fill="lightblue"/>
+<circle cx="310" cy="265" r="17" fill="white"/>
+<circle cx="180" cy="340" r="17" fill="lightblue"/>
+<circle cx="50" cy="265" r="17" fill="lightblue"/>
+<circle cx="50" cy="115" r="17" fill="white"/>
+<circle cx="180" cy="190" r="17" fill="white"/>
+</g>
+<g font-family="sans-serif" font-size="17" text-anchor="middle" dominant-baseline="central" fill="black">
+<text x="180" y="40">0</text>
+<text x="310" y="115">1</text>
+<text x="310" y="265">2</text>
+<text x="180" y="340">3</text>
+<text x="50" y="265">4</text>
+<text x="50" y="115">5</text>
+<text x="180" y="190">6</text>
+</g>
+<text x="180" y="380" font-family="sans-serif" font-size="13" text-anchor="middle" fill="black">Blue vertices are lit.</text>
+</svg>

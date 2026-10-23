@@ -4,6 +4,13 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## lit-only-sigma v1 (October 23, 2026)
+
+- First version: a seven-vertex counterexample to Goldwasser, Wang and
+  Wu's Conjecture 5 (2011) on the difference between minimum light
+  numbers in the sigma-game and its lit-only version. Includes the
+  paper and a finite certificate checked by two separate programs.
+
 ## stanley-class-sum-snf v3 (October 23, 2026)
 
 - Correction: We supply the omitted Proceedings of the American Mathematical Society citation for Cai and Stanley's paper. For the n=12 example in Stanley's question, we describe the differing entry and its failure of divisibility without attributing the discrepancy to a typographical error. The result is unchanged.

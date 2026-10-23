@@ -20,7 +20,7 @@ that the counterexample is the smallest.
 For a partition $\lambda$ of $n$, the integral Specht module $S^\lambda$ is the $\mathbb{Z}$-span of the
 polytabloids $e_T$ in the tabloid module (row tabloids), where $T$ runs over all
 $n!$ fillings of the diagram of $\lambda$. The Jucys–Murphy element is
-$X_k = (1\,k) + (2\,k) + \cdots + (k{-}1\,k)$. Stanley's Conjecture 7.4 predicts the
+$`X_k = (1\,k) + (2\,k) + \cdots + (k{-}1\,k)`$. Stanley's Conjecture 7.4 predicts the
 Smith normal form of $X_k$ on $S^\lambda$: with $f = f^\lambda$ standard Young tableaux and
 $S_r$ the set of cells $(i, j)$ that $k$ occupies in at least $r$ of them, the
 invariant factor is
@@ -58,8 +58,8 @@ Each file in `data/` is one JSON object:
 
 The witnesses are `witness-311-k3.json` ($\lambda = (3,1,1)$, $k = 3$, the smallest
 counterexample: Smith form $(1,1,1,1,2,2)$ against the prediction
-$(1,1,1,1,1,4)$) and `witness-52-k7.json` ($\lambda = (5,2)$, $k = 7$: Smith form
-$(1,1,1,1,2,4,4,4,4,0,0,0,0,0)$ against $(1,1,1,1,1,4,4,4,4,0,0,0,0,0)$).
+$`(1,1,1,1,1,4)`$) and `witness-52-k7.json` ($\lambda = (5,2)$, $k = 7$: Smith form
+$(1,1,1,1,2,4,4,4,4,0,0,0,0,0)$ against $`(1,1,1,1,1,4,4,4,4,0,0,0,0,0)`$).
 
 `weak-52-k7.json` holds the same data as `witness-52-k7.json`, with
 `"weak_form": true` and its own `claim`. For $\lambda = (5,2)$, $k = 7$ the

@@ -1,7 +1,7 @@
 # Lean proof of the Elgin–Reading–Stella conjecture on $\tau^{1,5}(2j,j)$
 
 The theorem `ErsConj13.ers_conjecture_13` in `Main.lean` states that the
-scattering diagram $D(1+x,\,1+y^5)$ has a consistent family of wall functions,
+scattering diagram $`D(1+x,\,1+y^5)`$ has a consistent family of wall functions,
 and that for every consistent family the coefficient of $t^j$ in the function on
 the ray $(2,5)$, with $t = x^2y^5$, equals
 
@@ -43,8 +43,8 @@ guards.
   series `S`.
 - `Main.lean` states and proves `ers_conjecture_13`. It needs no other file
   to be read beyond these two definition files.
-- `Realization.lean` proves `ray21_eq_S5`: the ray-$(2,1)$ function of
-  $D((1+x)^5,\,1+y)$ is $S^5$.
+- `Realization.lean` proves `ray21_eq_S5`: the ray-$`(2,1)`$ function of
+  $`D((1+x)^5,\,1+y)`$ is $S^5$.
 - `MainLemma.lean` proves `main_lemma`: the diagonal wall function of the
   fifth power of the explicit automorphism $T$ is $S^5$, given the
   filtration properties of the two halves of its ordered factorization.

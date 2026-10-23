@@ -18,7 +18,7 @@ download, the build takes under a minute.
 [Basic.lean](StanleySmithForms/Basic.lean) defines three $6 \times 6$ integer
 matrices `A`, `U` and `V` as literals, copied unchanged from
 [the witness certificate](../data/witness-311-k3.json). `A` is the matrix of
-the Jucys–Murphy element $X_3 = (1\,3) + (2\,3)$ on the Specht module $S^{(3,1,1)}$,
+the Jucys–Murphy element $`X_3 = (1\,3) + (2\,3)`$ on the Specht module $S^{(3,1,1)}$,
 in the standard polytabloid basis indexed by the standard Young tableaux
 
 ```
@@ -82,7 +82,7 @@ matrix has five odd entries and so rank $5$.
 
 [GroupRing.lean](StanleySmithForms/GroupRing.lean) proves an identity in the
 integral group ring of the symmetric group, for every $n \geq 3$. Write
-$s = (1\,3)$, $t = (2\,3)$ and $u = (1\,2)$, so that $X_3 = s + t$. Then
+$`s = (1\,3)`$, $`t = (2\,3)`$ and $`u = (1\,2)`$, so that $X_3 = s + t$. Then
 $X_3^2 = 2 + st + ts$, and $X_3 u = su + tu$ is the sum of the same two 3-cycles on
 $\lbrace 1, 2, 3 \rbrace$, so $X_3(X_3 - u) = 2$, and likewise $(X_3 - u)X_3 = 2$. In Lean the
 points $1, 2, 3$ are `0, 1, 2 : Fin n`, permutations multiply by composition,
@@ -105,7 +105,7 @@ for $n = 5$ with the literals `0, 1, 2`.
 
 The step from this identity to modules is a written argument and is not
 formalized: on any lattice stable under the permutations of $\lbrace 1, 2, 3 \rbrace$, the
-matrix of $X_3$ times the matrix of $X_3 - (1\,2)$ is $2I$ in both orders, so every
+matrix of $X_3$ times the matrix of $`X_3 - (1\,2)`$ is $2I$ in both orders, so every
 invariant factor of $X_3$ on such a lattice divides $2$. For the witness, Lean
 checks this concretely. `B` is the integer matrix $2A^{-1}$, and
 
@@ -148,7 +148,7 @@ theorem invariant_factors_of_mul_eq_two {ι : Type*} [Fintype ι] [DecidableEq �
 
 Every diagonalization of `A` by unimodular matrices, the Smith normal form
 in particular, has entries $\pm 1$ and $\pm 2$, and the number of even entries is the
-2-adic valuation of $\det A$. The proof shows $D\,(V^{-1} B U^{-1}) = 2I$, so each
+2-adic valuation of $\det A$. The proof shows $`D\,(V^{-1} B U^{-1}) = 2I`$, so each
 $d_i$ divides $2$, and compares 2-adic valuations of $\det U \cdot \det A \cdot \det V$ and
 of the product of the $d_i$. Applied to the witness, with `A_mul_B` and
 `A_det`:
@@ -168,7 +168,7 @@ tableaux, and $a$ and $b$ the numbers of them with $3$ in the cells $(1,3)$ and
 $(3,1)$, of contents $2$ and $-2$. Counting from the top, the conjecture predicts
 the $r$-th invariant factor `predFactor a b r`. The actual one is
 `actFactor a b r`: by the matrix step all factors are $1$ or $2$, and the number
-of $2$s is the 2-adic valuation of $\det X_3$, which the content spectrum of $X_3$
+of $`2`$s is the 2-adic valuation of $\det X_3$, which the content spectrum of $X_3$
 (eigenvalues $1, -1, 2, -2$ with multiplicities given by the cells holding $3$)
 makes $a + b$.
 
@@ -191,7 +191,7 @@ has fewer than three columns or fewer than three rows.
 
 [Weak.lean](StanleySmithForms/Weak.lean) treats a second, larger witness.
 `A52 : Matrix (Fin 14) (Fin 14) ℤ` is the matrix of
-$X_7 = (1\,7) + (2\,7) + \cdots + (6\,7)$ on $S^{(5,2)}$, in the standard
+$`X_7 = (1\,7) + (2\,7) + \cdots + (6\,7)`$ on $S^{(5,2)}$, in the standard
 polytabloid basis indexed by
 
 ```
@@ -255,7 +255,7 @@ How they are proved:
   Conversely, explicit integer eigenvectors for $0$ and $4$ are exhibited.
 - `weak_remark_fails_52` uses a parity certificate (the general lemma
   `exists_two_exact_of_certificate`): integer vectors $x, y, w, z$ with
-  $A_{52}\,y = 2x$, $w^{\mathsf T} A_{52} = 2z^{\mathsf T}$ and
+  $`A_{52}\,y = 2x`$, $w^{\mathsf T} A_{52} = 2z^{\mathsf T}$ and
   $w \cdot x = 1$, read off from `U52` and `V52` at the diagonal entry $2$.
   For any unimodular $P$, $Q$ with $P A_{52} Q = D = \mathrm{diag}(d)$, set
   $x' = Px$, $y' = Q^{-1}y$ and $w' = (P^{-1})^{\mathsf T} w$. Then

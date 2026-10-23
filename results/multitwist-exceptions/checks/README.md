@@ -85,7 +85,7 @@ coordinate vectors, 300 random vectors and 300 random braid images of the
 round curves: each $\sigma_i \sigma_i^{-1}$ acts trivially, the braid and
 commutation relations hold, the full twist $(\sigma_1 \sigma_2 \sigma_3)^4$
 acts trivially, and the arc counts are consistent. On 400 random cases it
-checks $i(T_R^m(v), v) = |m|\, i(R, v)^2$, which confirms the update rules,
+checks $`i(T_R^m(v), v) = |m|\, i(R, v)^2`$, which confirms the update rules,
 the intersection formula and that each twist is a single Dehn twist about
 the intended curve. It then checks F0–F4 for $k \le 30$ and both signs,
 including the literal products $t^0 f_k$ and $t^{-k} f_k$ (not only their

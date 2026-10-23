@@ -14,6 +14,7 @@ Zenodo records.
   still open.
 - Paper with the written proof, a Lean proof of its braid and free-group
   algebra, and two independent checking programs.
+- Zenodo: [10.5281/zenodo.23582026](https://doi.org/10.5281/zenodo.23582026)
 
 ## monotone-query-gap v1 (October 22, 2026)
 

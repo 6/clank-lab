@@ -16,7 +16,7 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23571933](https://doi.org/10.5281/zenodo.23571933)
+Archived on Zenodo: [doi:10.5281/zenodo.23606216](https://doi.org/10.5281/zenodo.23606216)
 
 ![Rays from the origin in the positive quadrant: blue rays below the diagonal, red rays above it, and the thick diagonal](data/rays.svg)
 
@@ -48,6 +48,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/scattering-coefficients-v2/results/scattering-coefficients}},
-  doi          = {10.5281/zenodo.23571933}
+  doi          = {10.5281/zenodo.23606216}
 }
 ```

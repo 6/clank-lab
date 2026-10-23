@@ -12,6 +12,8 @@ The proofs, the certificate checkers and the text were produced by AI models (fr
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23605134](https://doi.org/10.5281/zenodo.23605134)
+
 ## Check it
 
 Use Python 3.11 or later, a C++17 compiler with OpenMP, FLINT and GMP development libraries, Singular 4, and GNU time. On Debian or Ubuntu, install the native requirements with `sudo apt-get install g++ libflint-dev libgmp-dev singular time python3-venv`. From this folder:
@@ -38,6 +40,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The strong Lefschetz property for complex reflection coinvariants}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/coinvariant-lefschetz-v1/results/coinvariant-lefschetz}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/coinvariant-lefschetz-v1/results/coinvariant-lefschetz}},
+  doi          = {10.5281/zenodo.23605134}
 }
 ```

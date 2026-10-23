@@ -12,6 +12,8 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23603018](https://doi.org/10.5281/zenodo.23603018)
+
 ## Check it
 
 Install Python 3, Git, and [elan](https://github.com/leanprover/elan), the standard Lean toolchain manager. From this folder, run:
@@ -42,6 +44,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Strongly cospectral sets in seven-dimensional cubelike graphs}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/cubelike-cospectrality-v1/results/cubelike-cospectrality}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/cubelike-cospectrality-v1/results/cubelike-cospectrality}},
+  doi          = {10.5281/zenodo.23603018}
 }
 ```

@@ -13,6 +13,7 @@ Zenodo records.
 
 - A computer-assisted proof of the strong Lefschetz property for the coinvariant ring of the exceptional complex reflection group $G_{34}$, completing the assertion for every irreducible finite complex reflection group over $\mathbb{C}$ using the earlier results for the other types.
 - Includes a paper, exact certificates, and independent arithmetic and monomial checkers.
+- Zenodo: [10.5281/zenodo.23605134](https://doi.org/10.5281/zenodo.23605134)
 
 ## weak-parking v1 (October 23, 2026)
 
@@ -20,14 +21,17 @@ Zenodo records.
   conjecture in types $E_7$ and $E_8$, completing the conjecture for
   irreducible finite real reflection groups. Includes the paper, exact
   certificates, two checking programs and the computation programs.
+- Zenodo: [10.5281/zenodo.23605084](https://doi.org/10.5281/zenodo.23605084)
 
 ## game-grundy-gap v1 (October 23, 2026)
 
 - First version: a computer-assisted counterexample to the first part of Havet and Zhu's June 2011 question, restated by Hollom. An explicit graph satisfies $\chi_g(G) \leq 5 < \Gamma_g(G)$; whether the gap can be arbitrarily large remains open. Includes the paper, two independent certificate checkers, and corruption tests.
+- Zenodo: [10.5281/zenodo.23604986](https://doi.org/10.5281/zenodo.23604986)
 
 ## uniform-5-polytopes v3 (October 23, 2026)
 
 - Correction: the paper's title now prints in sentence case and its byline appears once, with no running heads. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23604961](https://doi.org/10.5281/zenodo.23604961)
 
 ## lit-only-sigma v2 (October 23, 2026)
 

@@ -25,7 +25,7 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23502450](https://doi.org/10.5281/zenodo.23502450)
+Archived on Zenodo: [doi:10.5281/zenodo.23604961](https://doi.org/10.5281/zenodo.23604961)
 
 ## Check it
 
@@ -68,6 +68,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{The convex uniform 5-polytopes: a computer-assisted classification}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/uniform-5-polytopes-v3/results/uniform-5-polytopes}},
-  doi          = {10.5281/zenodo.23502450}
+  doi          = {10.5281/zenodo.23604961}
 }
 ```

@@ -1,0 +1,61 @@
+name: Williamson order 65 checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/williamson-order-65/**'
+      - '.github/workflows/williamson-order-65.yml'
+  pull_request:
+    paths:
+      - 'results/williamson-order-65/**'
+      - '.github/workflows/williamson-order-65.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: williamson-order-65-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  replay:
+    name: Replay part ${{ matrix.part }}/8
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/williamson-order-65
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+      - name: Install C and C++ requirements
+        run: sudo apt-get update && sudo apt-get install -y build-essential libssl-dev
+      - name: Install Python requirements
+        run: python3 -m pip install -r checks/requirements.txt
+      - name: Show this part
+        run: python3 checks/check.py --part "${{ matrix.part }}/8" --list
+      - name: Check this part
+        run: python3 checks/check.py --part "${{ matrix.part }}/8"
+
+  checks:
+    name: Check williamson-order-65
+    needs: [replay]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      REPLAY_RESULT: ${{ needs.replay.result }}
+    steps:
+      - name: Require every part
+        run: test "$REPLAY_RESULT" = success

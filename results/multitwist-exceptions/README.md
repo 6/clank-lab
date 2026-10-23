@@ -55,6 +55,8 @@ The proofs, the Lean formalization, the checking programs and the text were prod
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23582026](https://doi.org/10.5281/zenodo.23582026)
+
 ## Check it
 
 What Lean covers: the Lean proof works in the free group $F_4$, the
@@ -143,6 +145,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Fathi's consecutive-integers bound does not extend to multitwists}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v1/results/multitwist-exceptions}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v1/results/multitwist-exceptions}},
+  doi          = {10.5281/zenodo.23582026}
 }
 ```

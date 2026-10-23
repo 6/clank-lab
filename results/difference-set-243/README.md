@@ -8,7 +8,7 @@ differences represent every nonzero group element equally often.
 [lists](https://doi.org/10.5281/zenodo.19740740) the question whether 121 points
 in $C_3 \times C_9 \times C_9$ can represent each nonzero element exactly 60 times as open;
 Gordon called it the “Smallest Open Case” in his
-[August 3, 2019 presentation, slide 38](https://cargo.wlu.ca/ArasuFest/ArasuFest_talks/Dan_Gordon.pdf#page=49).
+[August 3, 2019 presentation, slide 38](https://web.archive.org/web/20240502201448/https://cargo.wlu.ca/ArasuFest/ArasuFest_talks/Dan_Gordon.pdf#page=49).
 It was already unresolved in Vera López and García Sánchez's 1997 table.
 We prove that no such set exists. The conclusion concerns these parameters
 in this group only.
@@ -90,7 +90,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Nonexistence of (243,121,60) difference sets in C3 × C9 × C9}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v1/results/difference-set-243}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v2/results/difference-set-243}},
   doi          = {10.5281/zenodo.23534853}
 }
 ```

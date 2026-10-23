@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## difference-set-243 v2 (October 23, 2026)
+
+- Correction: The paper's account of the 1997 table blurred the source of the cyclic C243 exclusion with the table's multiplier calculation. It now credits Lander's Theorem 4.38 for C243 and separates the other three exclusions; the result is unchanged.
+- Correction: The Gordon presentation links in the paper and README now use the nearest Wayback Machine snapshot to its cited date. The theorem and its checks are unchanged.
+- Correction: The corrected paper is dated October 22, 2026, and the README citation points to version 2. The theorem and its checks are unchanged.
+
 ## thomson-10 v4 (October 23, 2026)
 
 - Correction: The paper and README now record the omitted “(Conjecture 1 of Armentano et al.)” in Zarco's seven-point warrant title. The theorem and its checks are unchanged.

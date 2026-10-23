@@ -10,6 +10,7 @@ Zenodo records.
   Wu's Conjecture 5 (2011) on the difference between minimum light
   numbers in the sigma-game and its lit-only version. Includes the
   paper and a finite certificate checked by two separate programs.
+- Zenodo: [10.5281/zenodo.23602480](https://doi.org/10.5281/zenodo.23602480)
 
 ## stanley-class-sum-snf v3 (October 23, 2026)
 

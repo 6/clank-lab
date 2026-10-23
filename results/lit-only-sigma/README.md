@@ -16,6 +16,8 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23602480](https://doi.org/10.5281/zenodo.23602480)
+
 ## Check it
 
 With [elan](https://github.com/leanprover/elan) installed, build the proof from this folder:
@@ -52,6 +54,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A counterexample to a lit-only sigma-game conjecture}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/lit-only-sigma-v1/results/lit-only-sigma}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/lit-only-sigma-v1/results/lit-only-sigma}},
+  doi          = {10.5281/zenodo.23602480}
 }
 ```

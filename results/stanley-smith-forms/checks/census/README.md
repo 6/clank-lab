@@ -66,7 +66,7 @@ writing outputs outside it. The programs write nothing into this folder.
   other indexings of the invariant factors, other definitions of the cell
   sets $S_r$, the Smith form of the diagonal of eigenvalues, products with
   zero contents dropped, other ranges of $k$ ($X_{k \pm 1}$ and
-  $Y_k = \sum_{i>k} (i\,k)$), the conjugate shape, counts of partial fillings,
+  $`Y_k = \sum_{i>k} (i\,k)`$), the conjugate shape, counts of partial fillings,
   and the weaker statement that every invariant factor is a product of
   eigenvalues. It builds each lattice with `specht_lattice.py`, forms every
   $X_k$ and $Y_k$ from the matrices of the simple transpositions, checks the

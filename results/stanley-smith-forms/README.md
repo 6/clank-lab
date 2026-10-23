@@ -3,7 +3,7 @@
 [![Checks](https://github.com/6/clank-lab/actions/workflows/stanley-smith-forms.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/stanley-smith-forms.yml)
 
 The [Jucys–Murphy elements](https://en.wikipedia.org/wiki/Jucys%E2%80%93Murphy_element)
-$X_k = (1\,k) + (2\,k) + \cdots + (k{-}1\,k)$ act on each integral
+$`X_k = (1\,k) + (2\,k) + \cdots + (k{-}1\,k)`$ act on each integral
 [Specht module](https://en.wikipedia.org/wiki/Specht_module) $S^\lambda$ of the
 symmetric group, with eigenvalues given by the contents of standard Young
 tableaux. In his 2016 survey
@@ -18,7 +18,9 @@ We show the conjecture is false. A counterexample at the smallest possible
 size, $n = 5$, is $\lambda = (3,1,1)$ with $k = 3$, whose Smith form is $(1,1,1,1,2,2)$ instead
 of the predicted $(1,1,1,1,1,4)$. It comes from the identity
 
-$$X_3\,\bigl(X_3 - (1\,2)\bigr) = 2$$
+```math
+X_3\,\bigl(X_3 - (1\,2)\bigr) = 2
+```
 
 in the group ring, which forces every invariant factor of $X_3$ to be 1 or 2,
 while the conjecture predicts a 4 whenever $\lambda$ has at least three rows

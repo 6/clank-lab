@@ -15,7 +15,9 @@ largest values of $a(n)/n$ occur at $n = 28$ and $n = 7$
 ([Conjecture 3](https://arxiv.org/abs/math/0204011), end of §4): for every
 $n \ge 1$,
 
-$$\frac{13}{28}\,n \le a(n) \le \frac{12}{7}\,n,$$
+```math
+\frac{13}{28}\,n \le a(n) \le \frac{12}{7}\,n,
+```
 
 with equality only at $a(28) = 13$ and $a(7) = 12$. We prove this.
 

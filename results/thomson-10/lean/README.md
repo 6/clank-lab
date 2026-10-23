@@ -35,7 +35,7 @@ The project pins Lean 4.34.1 and Mathlib revision [`d13f23b723b8a846827a245b89c1
 
 The supplied proof uses neither `native_decide` nor `Lean.ofReduceBool`; the guarded dependency reports confirm that no `Lean.ofReduceBool` axiom enters these results.
 
-The Lean build proves [`ThomsonN10.thomson_ten_complete`](Solution.lean), with its exact statement in [`Challenge.lean`](Challenge.lean). Its competitors are maps $x:\{0,\ldots,9\}\to\mathbb{R}^3$ satisfying $\|x_i\|=1$ for every $i$ and injectivity. For every candidate parameter $h$, putting $p=p(h)$ and $E(x)=\sum_{i<j}\|x_i-x_j\|^{-1}$, it proves
+The Lean build proves [`ThomsonN10.thomson_ten_complete`](Solution.lean), with its exact statement in [`Challenge.lean`](Challenge.lean). Its competitors are maps $`x:\{0,\ldots,9\}\to\mathbb{R}^3`$ satisfying $`\|x_i\|=1`$ for every $i$ and injectivity. For every candidate parameter $h$, putting $p=p(h)$ and $`E(x)=\sum_{i<j}\|x_i-x_j\|^{-1}`$, it proves
 
 $$
 E(p)\leq E(x),\qquad E(x)=E(p)\ \Longleftrightarrow\ \exists Q\in O(3),\ \exists\sigma\in S_{10},\ \forall i,\ x_i=Qp_{\sigma(i)}.
@@ -69,13 +69,13 @@ For every injective unit-sphere configuration with $E(x)\leq E(p)$, the global a
 
 The preliminary separation bound uses the coarser energy cap $32717/1000=32.717$, which the certified candidate energy satisfies. This is the same cutoff used in the earlier ten-point chord result in the [credits](../README.md#credits); the paper's provenance appendix explains its role and the relation between the two bounds.
 
-Orthogonal Procrustes alignment then bounds the total displacement $\rho=(\sum_i\|y_i-p_i\|^2)^{1/2}$ by $10000\delta=10^{-6}$. The chosen windows therefore land well inside the local certificate's radius $10^{-3}$; no equality of the global and local radii is needed. A componentwise force calculation turns the height equation into full spherical stationarity. The constrained-Hessian certificate and an explicit cubic remainder bound give
+Orthogonal Procrustes alignment then bounds the total displacement $`\rho=(\sum_i\|y_i-p_i\|^2)^{1/2}`$ by $10000\delta=10^{-6}$. The chosen windows therefore land well inside the local certificate's radius $10^{-3}$; no equality of the global and local radii is needed. A componentwise force calculation turns the height equation into full spherical stationarity. The constrained-Hessian certificate and an explicit cubic remainder bound give
 
 $$
 E(y)-E(p)\geq\frac{\rho^2}{40}-\frac{153}{10}\rho^3\geq\frac{\rho^2}{200}\qquad(\rho\leq1/1000).
 $$
 
-The cubic bound is a separate exact algebraic estimate, not an inference from Hessian positivity. [`LocalPotential.lean`](ThomsonN10/Local/LocalPotential.lean) proves $(1+u)^{-1/2}\geq1-u/2+3u^2/8-5u^3/16$ for $-1<u\leq1$, giving a pairwise quadratic lower bound with a cubic loss of at most $(51/50)\|w\|^3/\|d\|^4$ for $\|w\|\leq\|d\|/200$. Here $d=p_i-p_j$ and $w=(y_i-p_i)-(y_j-p_j)$. Summing over pairs using the certified candidate separation $\|d\|\geq1$ gives the displayed $(153/10)\rho^3$ bound. The Hessian certificate supplies the quadratic term. Exact unit-sphere identities account for radial curvature. Every nonzero aligned displacement with $\rho\leq1/1000$ therefore raises the energy, so a competitor of no greater energy has $\rho=0$. This treats the full spherical configuration space up to orthogonal maps, including perturbations that break the candidate's symmetry. The infinitesimal directions removed by Procrustes alignment are rotations; reflections are included in the orthogonal choice.
+The cubic bound is a separate exact algebraic estimate, not an inference from Hessian positivity. [`LocalPotential.lean`](ThomsonN10/Local/LocalPotential.lean) proves $(1+u)^{-1/2}\geq1-u/2+3u^2/8-5u^3/16$ for $-1<u\leq1$, giving a pairwise quadratic lower bound with a cubic loss of at most $`(51/50)\|w\|^3/\|d\|^4`$ for $`\|w\|\leq\|d\|/200`$. Here $d=p_i-p_j$ and $w=(y_i-p_i)-(y_j-p_j)$. Summing over pairs using the certified candidate separation $`\|d\|\geq1`$ gives the displayed $(153/10)\rho^3$ bound. The Hessian certificate supplies the quadratic term. Exact unit-sphere identities account for radial curvature. Every nonzero aligned displacement with $\rho\leq1/1000$ therefore raises the energy, so a competitor of no greater energy has $\rho=0$. This treats the full spherical configuration space up to orthogonal maps, including perturbations that break the candidate's symmetry. The infinitesimal directions removed by Procrustes alignment are rotations; reflections are included in the orthogonal choice.
 
 The project adapts the MIT-licensed nine-point formalization by Aravind
 Karthigeyan. See [THIRD_PARTY.md](../THIRD_PARTY.md) for origins, changes,

@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## coinvariant-lefschetz v1 (October 23, 2026)
+
+- A computer-assisted proof of the strong Lefschetz property for the coinvariant ring of the exceptional complex reflection group $G_{34}$, completing the assertion for every irreducible finite complex reflection group over $\mathbb{C}$ using the earlier results for the other types.
+- Includes a paper, exact certificates, and independent arithmetic and monomial checkers.
+
 ## weak-parking v1 (October 23, 2026)
 
 - First version: a computer-assisted proof of the weak parking-space

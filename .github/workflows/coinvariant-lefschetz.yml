@@ -1,0 +1,58 @@
+name: Coinvariant Lefschetz checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/coinvariant-lefschetz/**'
+      - '.github/workflows/coinvariant-lefschetz.yml'
+  pull_request:
+    paths:
+      - 'results/coinvariant-lefschetz/**'
+      - '.github/workflows/coinvariant-lefschetz.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coinvariant-lefschetz-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  certificates:
+    name: Certificates ${{ matrix.part }}/8
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/coinvariant-lefschetz
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install native requirements
+        run: sudo apt-get update && sudo apt-get install -y g++ libflint-dev libgmp-dev singular time
+      - name: Install Python requirements
+        run: python3 -m pip install -r checks/requirements.txt
+      - name: Check certificates and negative controls
+        run: python3 checks/verify.py --part ${{ matrix.part }}/8 --workers 2
+
+  check:
+    name: Check coinvariant-lefschetz
+    needs: [certificates]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful certificate checks
+        env:
+          CERTIFICATE_RESULT: ${{ needs.certificates.result }}
+        run: test "$CERTIFICATE_RESULT" = success

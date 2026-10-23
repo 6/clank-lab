@@ -7,6 +7,7 @@ Zenodo records.
 ## lit-only-sigma v2 (October 23, 2026)
 
 - Correction: the paper's layout now matches the other papers (normal-case title, no running header); its content is unchanged.
+- Zenodo: [10.5281/zenodo.23604774](https://doi.org/10.5281/zenodo.23604774)
 
 ## cubelike-cospectrality v1 (October 23, 2026)
 
@@ -16,6 +17,7 @@ Zenodo records.
   negatively; their connected construction already attains four.
 - Paper, Lean proof of the upper bound, and exact certificates with
   independent checks and an attainment check.
+- Zenodo: [10.5281/zenodo.23603018](https://doi.org/10.5281/zenodo.23603018)
 
 ## lit-only-sigma v1 (October 23, 2026)
 

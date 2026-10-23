@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## game-grundy-gap v1 (October 23, 2026)
+
+- First version: a computer-assisted counterexample to the first part of Havet and Zhu's June 2011 question, restated by Hollom. An explicit graph satisfies $\chi_g(G) \leq 5 < \Gamma_g(G)$; whether the gap can be arbitrarily large remains open. Includes the paper, two independent certificate checkers, and corruption tests.
+
 ## uniform-5-polytopes v3 (October 23, 2026)
 
 - Correction: the paper's title now prints in sentence case and its byline appears once, with no running heads. The theorem and its checks are unchanged.

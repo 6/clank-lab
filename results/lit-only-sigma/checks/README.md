@@ -29,7 +29,7 @@ describe the same graph, start and transitions as the certificate. Every
 valid transition from the ten-state set stays in it. All its states have
 at least four lit vertices, and the start has exactly four; the regular
 path reaches zero. Thus the checked bounds are $ML_G(27)=0$ and
-$ML_G^*(27)=4$, giving $D(G)\geq4>7/2$.
+$`ML_G^*(27)=4`$, giving $D(G)\geq4>7/2$.
 
 Execution of these exact checks relies on the Python interpreter and its
 execution platform.

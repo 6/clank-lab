@@ -54,7 +54,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A counterexample to a lit-only sigma-game conjecture}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/lit-only-sigma-v1/results/lit-only-sigma}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/lit-only-sigma-v2/results/lit-only-sigma}},
   doi          = {10.5281/zenodo.23602480}
 }
 ```

@@ -1,0 +1,32 @@
+name: Game Grundy gap checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/game-grundy-gap/**'
+      - '.github/workflows/game-grundy-gap.yml'
+  pull_request:
+    paths:
+      - 'results/game-grundy-gap/**'
+      - '.github/workflows/game-grundy-gap.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: game-grundy-gap-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Check game-grundy-gap
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Check strategies, figures, and corruption tests
+        working-directory: results/game-grundy-gap
+        run: python3 -I checks/verify.py

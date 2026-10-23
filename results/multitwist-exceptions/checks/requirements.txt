@@ -1,0 +1,2 @@
+# Python 3.10 or later; standard library only (no pip packages) for check.py and both checkers.
+# Lean is checked separately with elan, Git and network access for the pinned Lake dependencies.

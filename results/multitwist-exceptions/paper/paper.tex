@@ -1,0 +1,565 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage{amsmath,amssymb,amsthm,geometry,hyperref,tikz}
+\geometry{margin=1in}
+\emergencystretch=1em
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={Fathi's consecutive-integers bound does not extend to multitwists},pdfauthor={P. Graham},pdfsubject={Dehn multitwists and pseudo-Anosov mapping classes},pdfkeywords={mapping class group, Dehn twist, multitwist, pseudo-Anosov, Ivanov's problems, Lean}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\file}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+\title{Fathi's consecutive-integers bound does not extend to multitwists}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 22, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $S$ be a compact orientable surface, $f$ a mapping class of $S$, and
+$t$ a Dehn multitwist about disjoint curves $\alpha_1,\dots,\alpha_n$ whose
+$f$-orbits together fill $S$. Ivanov asked, as Problem~5 of his 2006 list
+and of an earlier list dated 1994--1998, whether the integers $j$ for which $t^j f$ is
+not pseudo-Anosov must lie among $N_S$ consecutive integers, for a constant
+$N_S$ depending only on $S$. For a single Dehn twist on a closed surface this
+holds with $N_S=7$, by a theorem of Fathi (1987), which he presents as
+generalizing one of Long and Morton for pseudo-Anosov $f$; his theorem
+assumes only that the $f$-orbit of the twist curve fills. We show that
+this bound does not extend to multitwists: in Ivanov's orbit-filling form,
+with reducible base maps, no such $N_S$ exists when $S$ is the sphere with
+five boundary components, which answers Ivanov's Problem~5 negatively; his
+weaker question, which bounds only the number of exceptions, is
+untouched. For every $k\ge1$ we
+give $f_k$ and a two-component multitwist $t$ satisfying the
+hypothesis for which $t^0f_k$ and $t^{-k}f_k$ both fix an essential curve.
+So two exceptional exponents can lie arbitrarily far apart. The base maps
+$f_k$ are themselves reducible, so this gives no counterexample with a
+pseudo-Anosov base map, the setting of Long and Morton. The
+counterexample is on the five-holed sphere only; we claim nothing about
+other surfaces. The proof is a short written argument; its braid-group
+algebra is checked in Lean, and the finite intersection and fixed-curve
+facts it uses are checked by two independent programs.
+\end{abstract}
+
+\noindent The proofs, the Lean formalization, the checking programs and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+
+\medskip\noindent Status: Written proof, with Lean and computer checks; not yet reviewed by experts.
+
+\section{Introduction}
+
+Let $S$ be a compact orientable surface, possibly with boundary, and let
+$\Mod_S=\pi_0(\mathrm{Diff}(S))$ be its mapping class group. A mapping
+class is \emph{pseudo-Anosov} if it is neither periodic nor reducible
+(it fixes no finite set of disjoint essential curves); see~\cite{FM,FLP}.
+Many pseudo-Anosov classes come from Dehn twists. Long and
+Morton~\cite{LM} and then Fathi~\cite{Fathi} studied the sequence
+$T_\gamma^j f$, $j\in\Z$, where $T_\gamma$ is the Dehn twist about a curve
+$\gamma$. Fathi proved, for a closed surface $M$:
+
+\begin{quote}
+\textbf{Theorem 0.1 of~\cite{Fathi}.} ``Let $f$ be in $\pi_0(\mathrm{Diff}(M))$ and let $\gamma$ be in $\mathcal{S}(M)$. If the orbit of $\gamma$ under $f$ fills $M$, then $T_\gamma^n f$ is a pseudo-Anosov class except for at most 7 consecutive values of $n$.''
+\end{quote}
+
+\noindent Here $\mathcal{S}(M)$ is the set of isotopy classes of simple closed
+curves. Long and Morton~\cite{LM} had proved, for pseudo-Anosov $f$, that
+$T_\gamma^jf$ is pseudo-Anosov for all but finitely many $j$, with no bound
+on the number of exceptions, as Watanabe~\cite[\S1.1]{Watanabe} states
+it; we have not read their article. Fathi's summary says: ``we generalize a
+theorem of Long and Morton to obtain that if $f$ is a pseudo-Anosov
+diffeomorphism of an oriented surface and $T_\gamma$ is the Dehn twist
+around the simple closed curve $\gamma$, then the isotopy class of
+$T_\gamma^nf$ contains a pseudo-Anosov diffeomorphism except for at most 7
+consecutive values of $n$''~\cite{Fathi}, and Watanabe writes that Fathi
+``effectivised the above result of Long--Morton''~\cite[\S1.1]{Watanabe}.
+Theorem~0.1 itself assumes only that the $f$-orbit of $\gamma$ fills, so $f$
+may be reducible; Cumplido and Wiest state it in this form, for any mapping
+class~\cite[Theorem~3]{CW}. Boyer, Gordon and Zhang later improved the constant $7$ to
+$6$~\cite{BGZ}, as recorded by Watanabe~\cite[\S1.1]{Watanabe}.
+
+Ivanov asked whether Fathi's theorem extends to multitwists, with a
+constant depending only on the surface~\cite{Ivanov94,Ivanov06}. Let $t$ be
+a Dehn multitwist $T_{\alpha_1}^{\pm1}\cdots T_{\alpha_n}^{\pm1}$ about disjoint
+curves $\alpha_1,\dots,\alpha_n$, and suppose that the curves $f^m(\alpha_i)$,
+$1\le i\le n$, $m\in\Z$, together fill $S$, that is, every essential curve
+has nonzero geometric intersection number with one of them. His \emph{consecutive-integers}
+question asks whether the $j$ with $t^j\circ f$ not pseudo-Anosov always lie
+among $N_S$ consecutive integers, for a constant $N_S$ depending only on
+$S$; for a single twist on a closed surface this is Fathi's theorem with
+$N_S=7$. His weaker \emph{count} question asks only that at most $N_S$ of
+the $t^j\circ f$ fail to be pseudo-Anosov. Both were posed as Problem~5
+of his 2006 list and of an earlier list~\cite{Ivanov94}, for compact
+orientable surfaces possibly with boundary; Section~\ref{sec:question}
+quotes the problem in full. We answer the first question, for one surface,
+and say nothing about the second. All curves below are essential in the
+usual sense (Section~\ref{sec:conventions}).
+
+\begin{theorem}\label{thm:main}
+Let $S$ be the sphere with five boundary components. There are essential
+simple closed curves $a,d,c,C',C$ on $S$ such that for every $k\ge1$ and
+each $\varepsilon\in\{1,-1\}$ the mapping class $f_k=T_a^kT_d$ and the
+multitwist $t=T_aT_c^{\varepsilon}$ satisfy:
+\begin{enumerate}
+\item $a$ and $c$ are disjoint and not isotopic, so $t$ is a Dehn multitwist
+  with two components and nonzero exponents (a product of left twists when
+  $\varepsilon=1$);
+\item the set $\{f_k^m(a),f_k^m(c):m\in\Z\}$ fills $S$; already
+  $\{a,c,f_k(a)\}$ does;
+\item $t^0f_k=T_a^kT_d$ fixes $C'$ and $t^{-k}f_k=T_c^{-\varepsilon k}T_d$
+  fixes $C$, so neither is pseudo-Anosov.
+\end{enumerate}
+Hence the set of $j$ with $t^jf_k$ not pseudo-Anosov contains $0$ and $-k$,
+and no constant $N_S$ as in the consecutive-integers question exists for
+this $S$.
+\end{theorem}
+
+Composition is right to left, as in Ivanov's $t^j\circ f$: $T_a^kT_d$ applies
+$T_d$ first. The theorem holds verbatim for right-handed twists, and for
+$f_kt^j$ in place of $t^jf_k$, since the two are conjugate by $f_k$
+(Remark~\ref{rem:conventions}).
+
+\paragraph{What is new, and the key verification.} The mechanism is
+simple. Since $T_a$ and $T_c$ commute,
+$t^jf_k=T_a^{k+j}T_c^{\varepsilon j}T_d$, and the two components of $t$
+have exponents that vanish at different values of $j$: at $j=-k$ the twist
+about $a$ disappears and at $j=0$ the twist about $c$ does. Each vanishing
+leaves a product of twists about two curves of the pentagon of
+Figure~\ref{fig:curves}, and such a product fixes the curve of the pentagon
+disjoint from both. The key verification is the hypothesis: Ivanov's
+filling condition is on the union of the orbits of all components of $t$,
+and we must check that $a$, $c$ and $f_k(a)$ already fill. This is
+consistent with Fathi's theorem for several curves~\cite[Theorem
+0.2]{Fathi}: for curves whose $f$-orbits are distinct and fill a closed
+surface, it gives a pseudo-Anosov class once \emph{every} exponent has
+absolute value at least some $n$, and it gives no window in which the
+exceptions must lie. We
+know of no earlier written account of this example or of an answer to the
+consecutive-integers question; given how short it is, a specialist may well
+have known it informally.
+
+\paragraph{What remains open.} The count question (whether at most $N_S$
+members $t^jf$ fail to be pseudo-Anosov) is untouched: our family has
+exceptional exponents arbitrarily far apart, and we make no claim about how
+many there are, nor whether each such family has only finitely many
+exceptions. Also untouched are the variant in which the $f$-orbit of
+each single $\alpha_i$ fills $S$ (here the $f_k$-orbit of $a$ stays
+disjoint from $C'$), closed surfaces, and other surfaces with boundary.
+Finally, the base maps $f_k=T_a^kT_d$ are reducible (they fix $C'$). The
+theorem therefore answers the question in the orbit-filling form Ivanov
+states, where $f$ is arbitrary; it gives no counterexample in which $f$ is
+pseudo-Anosov, the setting of Long and Morton, and says nothing about that
+version.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.25]
+% Ellipses: centers on the x-axis, (half-width, half-height); punctures at x = 1, 2, 3, 4.
+\draw[gray] (2.5,0) circle (2.45);
+\draw[thick,blue] (1.5,0) ellipse (0.8 and 0.45);   % a = round{1,2}
+\draw[thick,red] (2.5,0) ellipse (0.8 and 0.45);    % d = round{2,3}
+\draw[thick,blue] (3.5,0) ellipse (0.8 and 0.45);   % c = round{3,4}
+\draw[thick,black!60!green] (2,0) ellipse (1.5 and 1);  % C' = round{1,2,3}
+\draw[thick,orange] (3,0) ellipse (1.5 and 1);      % C = round{2,3,4}
+\foreach \x/\l in {1/1,2/2,3/3,4/4} {\fill (\x,0) circle (0.06); \node[fill=white,inner sep=0.5pt] at (\x,-0.2) {\scriptsize $p_\l$};}
+\node[blue] at (1.5,0.6) {$a$};
+\node[red] at (2.5,0.6) {$d$};
+\node[blue] at (3.5,0.6) {$c$};
+\node[black!60!green] at (0.75,1.0) {$C'$};
+\node[orange] at (4.25,1.0) {$C$};
+\node[gray,anchor=west] at (4.3,1.9) {$\partial D = p_5$};
+\end{tikzpicture}
+\caption{The five curves in the disk model: $D$ with four punctures
+$p_1,\dots,p_4$ on a diameter, the boundary circle playing the role of the
+fifth boundary component. Each curve encloses a run of consecutive
+punctures: $a$, $d$, $c$ enclose $\{1,2\}$, $\{2,3\}$, $\{3,4\}$, and $C'$,
+$C$ enclose $\{1,2,3\}$, $\{2,3,4\}$. In the cyclic order
+$a,d,c,C',C$ consecutive curves meet twice and the others are disjoint.
+The multitwist is $t=T_aT_c^{\pm1}$ (blue curves) and $f_k=T_a^kT_d$.}
+\label{fig:curves}
+\end{figure}
+
+\paragraph{Plan.} Section~\ref{sec:question} quotes Ivanov's question in
+full. Section~\ref{sec:conventions} fixes conventions and lists
+the standard facts used. Section~\ref{sec:curves} describes the curves and
+their intersection pattern, and Section~\ref{sec:proof} proves the theorem.
+Section~\ref{sec:checks} states exactly what the Lean proof and the two
+programs check, and what they do not.
+
+
+\subsection{Ivanov's question in full}\label{sec:question}
+
+Ivanov's list concerns ``a compact orientable surface, possibly with
+boundary'', with $\Mod_S=\pi_0(\mathrm{Diff}(S))$ including
+orientation-reversing classes~\cite[p.~1]{Ivanov06}. We quote Problem~5
+exactly, from the arXiv version~\cite[pp.~4--5]{Ivanov06} (version~1,
+posted August 14, 2006, the only version). He writes $t_\alpha$ for the
+left Dehn twist along $\alpha$.
+
+\begin{quote}
+``\textbf{5.\ Dehn multitwists.} For a nontrivial circle $\alpha$ on $S$ (i.e.\ a submanifold $\alpha$ of $S$ diffeomorphic to the standard circle $S^1$) let us denote by $t_\alpha$ the (left) Dehn twist along $\alpha$; $t_\alpha\in\Mod_S$. A Dehn multi-twist is any composition of the form $t_{\alpha_1}^{\pm1}\circ t_{\alpha_2}^{\pm1}\circ\cdots\circ t_{\alpha_n}^{\pm1}$ for disjoint circles $\alpha_1,\alpha_2,\ldots,\alpha_n$.
+
+\textbf{Question.} Is there a constant $N_S$, depending only on $S$, such that the following holds? Let $f\in\Mod_S$ and let $t=t_{\alpha_1}^{\pm1}\circ t_{\alpha_2}^{\pm1}\circ\cdots\circ t_{\alpha_n}^{\pm1}$ be a Dehn multi-twist. If $A=\{f^m(\alpha_i):1\le i\le n,\ m\in\Z\}$ fills $S$ (i.e.\ for any nontrivial circle $\gamma$ there exists an $\alpha\in A$ such that the geometric intersection number $i(\gamma,\alpha)\ne0$), then only a finite number of elements of the form $t^j\circ f$, $j\in\Z$, are not pseudo-Anosov, and the corresponding $j$ are among some $N_S$ consecutive integers.
+
+By a theorem of A.~Fathi [Fath], if $t$ is a Dehn twist, then this is true for $N_S=7$. This theorem of A.~Fathi was preceded by a theorem of D.~Long and H.~Morton [LM] to the effect that for a Dehn twist $t$, only a finite number of element $t^j\circ f$ are not pseudo-Anosov under the above assumptions, without a uniform bound on the number of exceptions.
+
+A weaker version of this question is still interesting: under the same conditions, is it true that no more than $N_S$ of $t^j\circ f$ are not pseudo-Anosov?''
+\end{quote}
+
+\noindent Long and Morton's theorem, as noted above, assumes that $f$ is
+pseudo-Anosov, which is stronger than the filling hypothesis in Ivanov's
+summary of it. Ivanov goes on to call Fathi's paper ``one of the deepest and the
+most underappreciated works in the theory of the mapping class groups'' and
+adds: ``The above question may be considered as a test of our
+understanding of Fathi's ideas''~\cite[p.~5]{Ivanov06}. The question already
+appears, in essentially the same words, as Problem~5 of his earlier
+list~\cite{Ivanov94}, which also states the weaker version. That list is
+headed ``1994--1998, 2014''; Ivanov writes there that its original version
+was written in early 1994 and that updates were added until 1998, marked
+as such, and Problem~5 carries no update, but we have not seen the 1994
+original. Watanabe
+restated it in 2016, describing it as ``a Long's and Penner's like extension on
+Fathi's theorem''~\cite[\S1.1]{Watanabe}. Zhang discussed whether the twist can be replaced by a multitwist ``at a
+cost of replacing the number 7 by an undetermined but universal number'',
+citing Ivanov's manuscript \emph{Mapping class groups} of December 21,
+1998, in a preprint first posted August 6, 2007~\cite{Zhang07}.
+For a special class of pseudo-Anosov maps (those that become trivial when a
+chosen puncture is filled in) and multitwists satisfying a
+non-compressibility condition, it claimed that every composition is
+pseudo-Anosov, so that no exceptions occur; the author withdrew the
+preprint in January 2008. In a later paper~\cite{Zhang11}, Zhang showed
+that for any Dehn twist $t_c$ on a punctured surface there are
+pseudo-Anosov maps $f_m$ with $f_m\circ t_c^k$ pseudo-Anosov for all $k$
+once $m$ is large, and deduced a corollary for multitwists on two curves.
+Both works concern pseudo-Anosov base maps and give positive results; our
+example is of a different kind. So there are two questions: the
+\emph{consecutive-integers} question, which asks for Fathi's conclusion
+with $N_S$ in place of $7$, and the weaker \emph{count} question. We answer
+the first, for one surface, and say nothing about the second.
+
+
+\section{Conventions and standard facts}\label{sec:conventions}
+
+Throughout, $S$ is the compact sphere with five boundary components.
+Ivanov's $\Mod_S$ is $\pi_0(\mathrm{Diff}(S))$, so isotopies may move the
+boundary. Isotopy classes of curves, the action of mapping classes on them,
+geometric intersection numbers and the Nielsen--Thurston types are therefore
+those of the five-punctured sphere $S_{0,5}$, and we work there. A simple
+closed curve is \emph{essential} if it bounds neither a disk nor a disk with
+one puncture; on $S_{0,5}$ this means that each side contains at least two
+of the five punctures. This is Ivanov's ``nontrivial'' circle, which he
+describes in his Problem~6 as ``not bounding a disk and non deformable into
+the boundary''~\cite{Ivanov06}. (With a weaker reading the filling
+hypothesis could never hold, since an inessential curve meets nothing.)
+Ivanov's $\Mod_S$ includes orientation-reversing classes; our example uses
+orientation-preserving ones only.
+
+We write $i(x,y)$ for the geometric intersection number of isotopy classes
+and $T_x$ for the left Dehn twist about $x$. We use these standard facts:
+
+\begin{itemize}
+\item[(D)] If $i(x,y)=0$ then $T_x(y)=y$ and $T_xT_y=T_yT_x$, since the twists
+  have disjoint supports.
+\item[(I1)] $i(T_x^m(y),y)=|m|\,i(x,y)^2$ for all $m\in\Z$~\cite[Prop.~3.2]{FM}.
+\item[(I2)] $\bigl|\,i(T_x^m(y),z)-|m|\,i(x,y)\,i(x,z)\bigr|\le i(y,z)$
+  for all $m\in\Z$~\cite[Prop.~3.4]{FM}.
+\item[(N)] $i(h(x),h(y))=i(x,y)$ for every mapping class $h$.
+\item[(P)] A pseudo-Anosov class fixes no isotopy class of essential curve
+  (Nielsen--Thurston classification~\cite[Thm.~13.2]{FM}; see
+  also~\cite{FLP}).
+\item[(Q)] A pair of pants (a sphere with three boundary components or
+  punctures) contains no essential curve that is not parallel to a boundary
+  component or puncture. Indeed, a simple closed curve in it separates it,
+  and one of the two sides contains at most one of the three boundary
+  components or punctures, so that side is a disk or an annulus.
+\end{itemize}
+
+\section{The curves}\label{sec:curves}
+
+Model $S$ as the closed disk $D$ with four punctures $p_1,p_2,p_3,p_4$ on a
+horizontal diameter, in this order; the boundary circle $\partial D$ plays
+the role of the fifth puncture $p_5$ (collapsing it to a point gives
+$S_{0,5}$). For a set $I$ of consecutive indices, the
+\emph{round curve} about $I$ is the boundary of a convex neighborhood of
+$\{p_i:i\in I\}$ that contains no other puncture. Our five curves
+(Figure~\ref{fig:curves}) are
+\[
+a=\text{round}\{1,2\},\quad d=\text{round}\{2,3\},\quad
+c=\text{round}\{3,4\},
+\]
+\[
+C'=\text{round}\{1,2,3\},\quad C=\text{round}\{2,3,4\}.
+\]
+Each separates the five punctures into sets of sizes $2$ and $3$, so each is
+essential; and they induce five different partitions of $\{1,\dots,5\}$, so
+they are pairwise non-isotopic. Equivalently, with $p_1,\dots,p_5$ placed at
+the corners of a convex pentagon in this cyclic order, $a$, $d$, $c$, $C'$,
+$C$ are the boundaries of thin neighborhoods of the sides $p_1p_2$,
+$p_2p_3$, $p_3p_4$, $p_4p_5$, $p_5p_1$.
+
+\begin{lemma}[the pentagon pattern]\label{lem:pentagon}
+In the cyclic order $(a,d,c,C',C)$, consecutive curves have geometric
+intersection number $2$ and non-consecutive curves are disjoint:
+\begin{gather*}
+i(a,c)=i(a,C')=i(d,C')=i(d,C)=i(c,C)=0,\\
+i(a,d)=i(d,c)=i(c,C')=i(C',C)=i(C,a)=2.
+\end{gather*}
+\end{lemma}
+
+\begin{proof}
+Round curves about runs $I$, $J$ are disjoint when $I\subseteq J$,
+$J\subseteq I$ or $I\cap J=\emptyset$: choose nested or disjoint convex
+neighborhoods. This gives the five zeros. In each of the other five pairs
+the runs overlap partially, and the round curves can be drawn meeting in
+two points, as in Figure~\ref{fig:curves}. Each region bounded by one arc
+of each curve contains a puncture, so there is no bigon, and by the bigon
+criterion~\cite[Prop.~1.7]{FM} the curves are in minimal position, so the
+intersection number is $2$.
+\end{proof}
+
+Section~\ref{sec:checks} describes two independent exact checks of the
+pattern, in the form $i(u,v)=0\iff T_u(v)=v$ (which follows from (D) and
+(I1)).
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+We prove the three items of the theorem in turn and then conclude. Fix
+$k\ge1$ and $\varepsilon\in\{1,-1\}$, and put $f=f_k=T_a^kT_d$ and
+$t=T_aT_c^{\varepsilon}$.
+
+\paragraph{(1) The multitwist.} By Lemma~\ref{lem:pentagon}, $a$ and $c$ are
+disjoint, and they are not isotopic. Both exponents in $t$ are nonzero, and
+for $\varepsilon=1$ the multitwist $t$ is a product of left twists.
+
+\paragraph{(2) The orbits fill.} We first show that an essential curve
+$\gamma$ with $i(\gamma,a)=i(\gamma,c)=0$ is isotopic to $a$ or to $c$.
+Suppose it is isotopic to neither. Cutting $S$ along the disjoint curves $a$
+and $c$ leaves three pairs of pants: one bounded by $a$, $p_1$, $p_2$; one by
+$c$, $p_3$, $p_4$; and one by $a$, $c$, $p_5$. Realize $a$, $c$, $\gamma$ by
+geodesics of a complete hyperbolic metric; distinct simple closed geodesics
+are in minimal position~\cite[\S1.2]{FM}, so $\gamma$ is disjoint from
+$a\cup c$ and lies in one of the three pants. By (Q) it is parallel to $a$,
+to $c$ or to a puncture, which contradicts our assumption or the
+essentiality of $\gamma$.
+
+Next we compute two intersection numbers of $f(a)=T_a^kT_d(a)$. Since
+$i(a,a)=i(a,c)=0$, the twist $T_a^k$ fixes $a$ and $c$ by (D). By (N) and
+(I1),
+\[
+i(a,f(a))=i\bigl(T_a^{-k}(a),T_d(a)\bigr)=i(a,T_d(a))=i(d,a)^2=4 .
+\]
+By (N), $i(c,f(a))=i(T_a^{-k}(c),T_d(a))=i(c,T_d(a))$, and (I2) with
+$x=d$, $y=a$, $z=c$, $m=1$ gives
+$\bigl|\,i(T_d(a),c)-i(d,a)\,i(d,c)\bigr|\le i(a,c)=0$, so
+$i(c,f(a))=2\cdot2=4$.
+
+Now let $\gamma$ be any essential curve. If $\gamma$ is disjoint from both
+$a$ and $c$, it is $a$ or $c$, and both meet $f(a)$. So some member of
+$\{a,c,f(a)\}$ meets $\gamma$, and this set, which lies in
+$A=\{f^m(a),f^m(c):m\in\Z\}$, fills $S$.
+
+\paragraph{(3) Two exceptional members, $k$ apart.} By (D), $T_a$ and $T_c$
+commute, so $t^j=T_a^jT_c^{\varepsilon j}$ and
+\[
+t^jf=T_a^{k+j}\,T_c^{\varepsilon j}\,T_d\qquad(j\in\Z).
+\]
+For $j=0$ this is $T_a^kT_d$. By Lemma~\ref{lem:pentagon},
+$i(d,C')=i(a,C')=0$, so $T_d$ and $T_a$ fix $C'$ by (D), and so does
+$T_a^kT_d$. For $j=-k$ it is $T_c^{-\varepsilon k}T_d$. By
+Lemma~\ref{lem:pentagon}, $i(d,C)=i(c,C)=0$, so $T_d$ and $T_c$ fix $C$,
+and so does $T_c^{-\varepsilon k}T_d$. Since $C$ and $C'$ are essential,
+neither member is pseudo-Anosov, by (P).
+
+\paragraph{(4) Conclusion.} For each $k\ge1$ the hypothesis of Ivanov's
+question holds for $(f_k,t)$, and the set of $j$ with $t^jf_k$ not
+pseudo-Anosov contains $0$ and $-k$. Any run of consecutive integers that
+contains both has at least $k+1$ elements. If $N_S$ existed, taking
+$k=N_S$ would give a contradiction. So no such $N_S$ exists for the sphere
+with five boundary components. \qed
+
+\begin{remark}[conventions]\label{rem:conventions}
+With right-handed twists every $T_x$ becomes $T_x^{-1}$. The proof uses
+only (D), (I1), (I2) and (N), which hold for both, so it applies verbatim.
+Since $f\,t^j=f\,(t^jf)\,f^{-1}$, the members $ft^j$ and $t^jf$ are
+conjugate and have the same exceptional $j$.
+\end{remark}
+
+\begin{remark}[what the example does not show]
+In the family $t^jf_k$ the exceptional set contains $0$ and $-k$; we do not
+determine it, so the example bears only on where exceptions lie, not on how
+many there are. The base maps $f_k$ are reducible, so the example does not touch the
+version of the question in which $f$ is pseudo-Anosov. It also uses a filling hypothesis on the union of the
+orbits, as Ivanov states it; for the variant in which each orbit fills on
+its own it says nothing, since the $f_k$-orbit of $a$ is disjoint from
+$C'$ ($T_a^kT_d$ fixes $C'$ and $i(a,C')=0$).
+\end{remark}
+
+\section{What is checked by machine}\label{sec:checks}
+
+The proof above is complete as written. Its finite combinatorial core is
+also checked by a Lean proof and by two independent programs, in the
+folders \file{lean/} and \file{checks/} that accompany this paper. We state what each covers.
+
+\paragraph{The model.} The fundamental group of $S$ (the disk with four
+punctures) is free on loops $x_1,\dots,x_4$ around $p_1,\dots,p_4$, with
+$x_1x_2x_3x_4$ parallel to $\partial D$. The half twists act by the Artin
+automorphisms
+\[
+\sigma_i:\ x_i\mapsto x_ix_{i+1}x_i^{-1},\quad x_{i+1}\mapsto x_i,\quad
+x_m\mapsto x_m\ (m\ne i,i+1),
+\]
+and the twists about the round curves are the full twists of the enclosed
+strands~\cite[Ch.~9]{FM}: $T_a=\sigma_1^2$, $T_d=\sigma_2^2$, $T_c=\sigma_3^2$,
+$T_{C'}=(\sigma_1\sigma_2)^3$, $T_C=(\sigma_2\sigma_3)^3$, up to one global
+choice of handedness. The curves are the conjugacy classes, up to inversion,
+of the words $x_1x_2$, $x_2x_3$, $x_3x_4$, $x_1x_2x_3$, $x_2x_3x_4$. In this
+model the theorem rests on five finite facts:
+\begin{itemize}
+\item[F0.] Each of $T_a,T_d,T_c,T_{C'},T_C$ fixes its own curve.
+\item[F1.] The pentagon pattern of Lemma~\ref{lem:pentagon}: $T_u(v)=v$ for
+  the ten ordered disjoint pairs and $T_u(v)\ne v$ for the ten ordered
+  meeting pairs.
+\item[F2.] $T_aT_c=T_cT_a$.
+\item[F3.] For every $k$ and both signs, $T_a^kT_d$ fixes $C'$ and
+  $t^{-k}f_k=T_c^{-\varepsilon k}T_d$ fixes $C$.
+\item[F4.] For every $k$, $T_a(f_k(a))\ne f_k(a)$ and $T_c(f_k(a))\ne f_k(a)$,
+  that is, $f_k(a)$ meets $a$ and $c$.
+\end{itemize}
+
+\paragraph{Lean.} The file \file{lean/Multitwist.lean} (Lean~4 with Mathlib)
+proves F0--F4 for every $k\in\mathbb{N}$ and both signs, as statements about
+the Artin automorphisms of the free group $F_4$ and conjugacy in it. For
+disjoint pairs it gives explicit conjugators. For meeting pairs it gives a
+homomorphism $F_4\to\mathrm{Sym}(3)$ that sends exactly one of $T_u(v)$ and
+$v$ to the identity, so $T_u(v)$ is conjugate neither to $v$ nor to
+$v^{-1}$. For every $k$, F3 follows by commuting and canceling twists (F2), and F4
+by applying the automorphism $T_a^k$, which preserves conjugacy, to the case
+$k=0$. The file
+\file{lean/Check.lean} restates each fact with its exact type, checks that
+exchanging $C$ and $C'$ makes the $j=0$ statement false, and checks which
+axioms each statement uses: only the standard \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}.
+
+What Lean does \emph{not} check is the surface topology, which is the
+written proof above: that the Artin automorphisms are the maps the twists
+induce on $\pi_1$; that essential curves correspond to conjugacy classes up
+to inversion, so that $T_u(v)=v$ in the model means that the curves are
+equal; that $T_u(v)=v$ if and only if $i(u,v)=0$; the exact values
+$i=2$ and $i=4$; the pants argument for filling; and that a class fixing an
+essential curve is not pseudo-Anosov. Mathlib has no theory of mapping
+class groups or isotopy classes of curves, so these steps are not
+formalized.
+
+\paragraph{Checker A.} The program \file{checks/check_free_group.py} works in
+the same free-group model: it computes the Artin action on reduced words
+and compares curves by a canonical form of their cyclic words up to
+inversion. It verifies F0--F4 for $k=1,\dots,30$ and both signs, $327$
+checks in all. It is exact and uses only the Python standard library.
+
+\paragraph{Checker B.} The program \file{checks/check_dynnikov.py} was
+written separately, from the statement of the facts alone and without
+seeing checker~A or the Lean file. It uses a different model: curves in the
+four-punctured disk are encoded by their Dynnikov coordinates~\cite{Dynnikov}
+in $\Z^4$, a bijective encoding of multicurves, and the half twists act by
+the piecewise-linear update rules of Hall and Yurttaş~\cite{HY}.
+Intersection numbers with round curves are computed exactly by the formula
+of Yurttaş and Hall~\cite[Lemma~9]{YH} and, independently, by the twist test
+$i(u,v)=0\iff T_u(v)=v$. Before checking F0--F4 it validates the model on
+known facts: inverses, the braid relations, triviality of the full twist,
+and the identity (I1) on random curves. It verifies F0--F4 for
+$k=1,\dots,30$ and both signs, also with every twist reversed, and confirms
+the exact values $i(a,f_k(a))=i(c,f_k(a))=4$. It is exact (integers only)
+and uses only the Python standard library.
+
+\paragraph{Corruptions.} Both checkers must reject four corrupted inputs:
+$C$ replaced by $T_a(C)$; $C'$ replaced by $T_c(C')$; $C$ and $C'$
+exchanged; and $c$ replaced by $T_{C'}^{-1}(c)$. Each corruption breaks the
+pentagon pattern and the fixed-curve facts, and both checkers reject all
+four. The command \texttt{python3 checks/check.py} runs both checkers and
+all corruptions in about a second.
+
+The two programs implement one list of facts in two models, so they guard
+against errors of computation, not against an error in the topology above;
+like the Lean proof, they check the combinatorial core, while the step from
+it to the theorem is the written proof.
+
+\section*{Acknowledgments}
+
+The preliminary checks used Mark Bell's programs \texttt{flipper} and
+\texttt{curver}. Before the checkers of Section~\ref{sec:checks} were
+written, \texttt{flipper} was used to check the two exceptional members for
+$k\le5$ and both signs, on two different triangulations, and \texttt{curver}
+to cross-check the curve facts F0--F4 computed by checker~B. These checks
+are not part of the argument: neither the proof nor the final checkers,
+which use only the Python standard library, depend on them.
+
+\begin{thebibliography}{99}
+
+\bibitem{BGZ} S.~Boyer, C.~McA.~Gordon and X.~Zhang, \emph{Dehn fillings of
+large hyperbolic 3-manifolds}, J. Differential Geom. \textbf{58} (2001),
+263--308. \doi{10.4310/jdg/1090348327}.
+
+\bibitem{CW} M.~Cumplido and B.~Wiest, \emph{A positive proportion of
+elements of mapping class groups is pseudo-Anosov}, Bull. London Math. Soc.
+\textbf{50} (2018), 390--394. \doi{10.1112/blms.12148}. Posted March 15,
+2017, \href{https://arxiv.org/abs/1703.05044}{arXiv:1703.05044}.
+
+\bibitem{Dynnikov} I.~A.~Dynnikov, \emph{On a Yang--Baxter map and the
+Dehornoy ordering}, Russian Math. Surveys \textbf{57} (2002), 592--594.
+\doi{10.1070/RM2002v057n03ABEH000519}.
+
+\bibitem{FM} B.~Farb and D.~Margalit, \emph{A Primer on Mapping Class
+Groups}, Princeton University Press, 2012.
+
+\bibitem{Fathi} A.~Fathi, \emph{Dehn twists and pseudo-Anosov
+diffeomorphisms}, Invent. Math. \textbf{87} (1987), 129--151.
+\doi{10.1007/BF01389156}.
+
+\bibitem{FLP} A.~Fathi, F.~Laudenbach and V.~Poénaru, \emph{Travaux de
+Thurston sur les surfaces}, Astérisque \textbf{66--67}, 1979.
+
+\bibitem{HY} T.~Hall and S.~Ö.~Yurttaş, \emph{On the topological entropy of
+families of braids}, Topology Appl. \textbf{156} (2009), 1554--1564.
+\doi{10.1016/j.topol.2009.01.005}. \href{https://arxiv.org/abs/0808.3053}{arXiv:0808.3053}.
+
+\bibitem{Ivanov94} N.~V.~Ivanov, \emph{Ten problems on the mapping class
+groups}, headed ``1994--1998, 2014'' (original version early 1994,
+updates to 1998, retypeset 2014); posted on the author's website,
+\url{https://nikolaivivanov.com/wp-content/uploads/2014/02/ivanov1994problems.pdf}.
+
+\bibitem{Ivanov06} N.~V.~Ivanov, \emph{Fifteen problems about the mapping
+class groups}, in \emph{Problems on Mapping Class Groups and Related
+Topics}, Proc. Sympos. Pure Math. \textbf{74}, Amer. Math. Soc., 2006,
+71--80. \doi{10.1090/pspum/074/2264532}. Posted August 14, 2006,
+\href{https://arxiv.org/abs/math/0608325}{arXiv:math/0608325}.
+
+\bibitem{LM} D.~D.~Long and H.~R.~Morton, \emph{Hyperbolic 3-manifolds and
+surface automorphisms}, Topology \textbf{25} (1986), 575--583.
+\doi{10.1016/0040-9383(86)90033-9}.
+
+\bibitem{Watanabe} Y.~Watanabe, \emph{Pseudo-Anosov mapping classes from
+pure mapping classes}, Trans. Amer. Math. Soc. \textbf{373} (2020),
+419--434. \doi{10.1090/tran/7919}. Posted November 16, 2016,
+\href{https://arxiv.org/abs/1611.05119}{arXiv:1611.05119}.
+
+\bibitem{YH} S.~Ö.~Yurttaş and T.~Hall, \emph{Intersections of multicurves
+from Dynnikov coordinates}, Bull. Aust. Math. Soc. \textbf{98} (2018),
+149--158. \doi{10.1017/S0004972718000308}.
+\href{https://arxiv.org/abs/1711.00895}{arXiv:1711.00895}.
+
+\bibitem{Zhang07} C.~Zhang, \emph{Some pseudo-Anosov maps on punctured
+Riemann surfaces represented by multi-twists}, preprint, first posted
+August 6, 2007, \href{https://arxiv.org/abs/0708.0804v1}{arXiv:0708.0804v1};
+withdrawn by the author (version 2, January 16, 2008).
+
+\bibitem{Zhang11} C.~Zhang, \emph{Dehn twists combined with pseudo-Anosov
+maps}, Kodai Math. J. \textbf{34} (2011), 367--382.
+\doi{10.2996/kmj/1320935547}.
+
+\end{thebibliography}
+\end{document}

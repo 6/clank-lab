@@ -1,5 +1,6 @@
 % Manuscript source.
-\documentclass[11pt]{amsart}
+\documentclass[11pt]{article}
+\pagestyle{plain}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs,longtable,array}
@@ -9,7 +10,6 @@
 \usepackage{xcolor}
 \usepackage[no-math]{fontspec}
 \usepackage{fvextra}
-\usepackage{etoolbox}
 \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 
 \newtheorem{theorem}{Theorem}[section]
@@ -35,21 +35,24 @@
 \newcommand{\spn}{\operatorname{span}}
 \newcommand{\ch}{\operatorname{ch}}
 \makeatletter
-% amsart sets the byline in capitals, which would also capitalize the ORCID link.
-\patchcmd{\@setauthors}{\MakeUppercase{\authors}}{\authors}{}{\PackageError{paper}{byline patch failed}{}}
 \g@addto@macro\UrlBreaks{\do\_\do\-\do\,\do\;\do\.\do\=\do\/}
 \makeatother
 \newcommand{\file}[1]{\path{#1}}
 \setlength{\emergencystretch}{3em}
 
 \title{The convex uniform 5-polytopes:\\ a computer-assisted classification}
-\author[P. Graham]{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
 \hypersetup{pdfauthor={P. Graham},
   pdftitle={The convex uniform 5-polytopes: a computer-assisted classification}}
-\date{October 20, 2026}
-\thanks{This work is licensed under Apache-2.0; embedded fonts retain their own licenses, listed in \file{THIRD_PARTY.md}.}
+\date{October 23, 2026}
 
 \begin{document}
+
+\maketitle
+\begingroup
+\renewcommand{\thefootnote}{}
+\footnotetext{This work is licensed under Apache-2.0; embedded fonts retain their own licenses, listed in \file{THIRD_PARTY.md}.}
+\endgroup
 
 \begin{abstract}
 A convex polytope is uniform if its symmetries act transitively on its
@@ -67,8 +70,6 @@ neighborhoods, identifies 628 known polytopes and rules out one additional
 candidate; a face with at least 17 sides forces a product.
 This extends Möller's method to dimension five and produces no new examples.
 \end{abstract}
-
-\maketitle
 
 \paragraph{AI production.}
 The proofs, the Lean formalization and the text were produced by AI models

@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## uniform-5-polytopes v3 (October 23, 2026)
+
+- Correction: the paper's title now prints in sentence case and its byline appears once, with no running heads. The theorem and its checks are unchanged.
+
 ## lit-only-sigma v2 (October 23, 2026)
 
 - Correction: the paper's layout now matches the other papers (normal-case title, no running header); its content is unchanged.

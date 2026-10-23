@@ -1,0 +1,79 @@
+name: Cubelike strong cospectrality checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/cubelike-cospectrality/**'
+      - '.github/workflows/cubelike-cospectrality.yml'
+  pull_request:
+    paths:
+      - 'results/cubelike-cospectrality/**'
+      - '.github/workflows/cubelike-cospectrality.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cubelike-cospectrality-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  certificates:
+    name: Exact certificates and attainment
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Check certificates, corruptions and attaining graph
+        working-directory: results/cubelike-cospectrality
+        run: python3 checks/check.py
+
+  lean:
+    name: Lean proof and kernel controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      LEAN_NUM_THREADS: '2'
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/cubelike-cospectrality/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Install Lean with elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+      - name: Restore build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/cubelike-cospectrality/lean/.lake/build
+          key: cubelike-cospectrality-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/cubelike-cospectrality/lean/lean-toolchain', 'results/cubelike-cospectrality/lean/lake-manifest.json', 'results/cubelike-cospectrality/lean/lakefile.toml', 'results/cubelike-cospectrality/lean/**/*.lean', '!results/cubelike-cospectrality/lean/.lake/**') }}
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+      - name: Build proof, statement, axiom guards and kernel controls
+        run: lake build
+
+  check:
+    name: Check cubelike-cospectrality
+    if: always()
+    needs: [certificates, lean]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require both checks
+        env:
+          CERTIFICATES: ${{ needs.certificates.result }}
+          LEAN: ${{ needs.lean.result }}
+        run: test "$CERTIFICATES" = success && test "$LEAN" = success

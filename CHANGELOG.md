@@ -4,6 +4,15 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## cubelike-cospectrality v1 (October 23, 2026)
+
+- First version: a proof that the largest strongly cospectral set in a
+  seven-dimensional cubelike graph has four vertices. This answers
+  Árnadóttir and Godsil's 2021 question about tightness of their bound
+  negatively; their connected construction already attains four.
+- Paper, Lean proof of the upper bound, and exact certificates with
+  independent checks and an attainment check.
+
 ## lit-only-sigma v1 (October 23, 2026)
 
 - First version: a seven-vertex counterexample to Goldwasser, Wang and

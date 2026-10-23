@@ -1,6 +1,6 @@
-\documentclass[11pt]{amsart}
+\documentclass[11pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,booktabs,etoolbox,tikz}
+\usepackage{amsmath,amssymb,amsthm,booktabs,tikz}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -8,17 +8,15 @@
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \newtheorem{theorem}{Theorem}
 \newcommand{\ML}{\operatorname{ML}}
-\makeatletter
-\patchcmd{\@setauthors}{\MakeUppercase{\authors}}{\authors}{}{\PackageError{paper}{byline patch failed}{}}
-\makeatother
+\pagestyle{plain}
 \setlength{\emergencystretch}{2em}
 \raggedbottom
 \title{A counterexample to a lit-only sigma-game conjecture}
-\author[P. Graham]{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
 \date{October 23, 2026}
-\thanks{The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.}
 \hypersetup{pdfauthor={P. Graham},pdftitle={A counterexample to a lit-only sigma-game conjecture}}
 \begin{document}
+\maketitle
 \begin{abstract}
 A move in the sigma-game toggles the neighbors of a vertex; the lit-only
 game permits such a move only at a lit vertex. The gap for a
@@ -33,7 +31,8 @@ than four by lit-only moves. A finite closed set of configurations
 certifies the latter assertion. The counterexample is proved in Lean
 from the definitions.
 \end{abstract}
-\maketitle
+
+\noindent The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 \section{The conjecture and the counterexample}
 We define the gap between the two games, state the conjecture about large

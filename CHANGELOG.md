@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## stanley-class-sum-snf v3 (October 23, 2026)
+
+- Correction: We supply the omitted Proceedings of the American Mathematical Society citation for Cai and Stanley's paper. For the n=12 example in Stanley's question, we describe the differing entry and its failure of divisibility without attributing the discrepancy to a typographical error. The result is unchanged.
+- Correction: The v2 paper was dated October 22, 2026, while its CHANGELOG entry records October 21, 2026. The theorem and its checks are unchanged.
+- Correction: The README citation now points to version 3. The theorem and its checks are unchanged.
+
 ## difference-set-243 v2 (October 23, 2026)
 
 - Correction: The paper's account of the 1997 table blurred the source of the cyclic C243 exclusion with the table's multiplier calculation. It now credits Lander's Theorem 4.38 for C243 and separates the other three exclusions; the result is unchanged.

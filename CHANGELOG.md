@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## scattering-coefficients v2 (October 23, 2026)
+
+- Correction: the paper's layout now matches the other papers (normal-case title, no running header); its content is unchanged.
+
 ## noncrossing-symmetric-chains v1 (October 23, 2026)
 
 - A computer-assisted proof that every noncrossing partition lattice of a finite well-generated complex reflection group has a symmetric chain decomposition, completing the chain part of Mühle's question from 2015. The stronger Boolean-decomposition question is not settled here.

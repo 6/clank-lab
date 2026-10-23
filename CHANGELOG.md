@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## thomson-10 v4 (October 23, 2026)
+
+- Correction: The paper and README now record the omitted “(Conjecture 1 of Armentano et al.)” in Zarco's seven-point warrant title. The theorem and its checks are unchanged.
+
 ## williamson-order-65 v1 (October 22, 2026)
 
 - A computer-assisted search finds no Williamson matrices of order 65. The CPU search is replayable, with receipts and two coverage and accounting checkers. Two GPU repeats by the same team share the specification and are reported but not distributed; the paper states their record-checking limits.

@@ -1,0 +1,5 @@
+CFG_ORDER_V1
+1009 6
+weighted_degree_reverse_lex
+a b c d y z
+3 4 6 9 1 1

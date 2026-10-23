@@ -1,0 +1,25 @@
+\begin{tikzpicture}[scale=0.9, every node/.style={circle,draw,
+  minimum size=6mm,inner sep=0pt}, line width=0.5pt]
+\node[fill=blue!25] (v0) at (0,2) {$ 0 $};
+\node[fill=blue!25] (v1) at (1.73,1) {$ 1 $};
+\node[fill=white] (v2) at (1.73,-1) {$ 2 $};
+\node[fill=blue!25] (v3) at (0,-2) {$ 3 $};
+\node[fill=blue!25] (v4) at (-1.73,-1) {$ 4 $};
+\node[fill=white] (v5) at (-1.73,1) {$ 5 $};
+\node[fill=white] (v6) at (0,0) {$ 6 $};
+\draw (v0) -- (v2);
+\draw (v0) to[bend left=18] (v3);
+\draw (v0) -- (v4);
+\draw (v0) -- (v6);
+\draw (v1) -- (v3);
+\draw (v1) to[bend left=18] (v4);
+\draw (v1) -- (v5);
+\draw (v1) -- (v6);
+\draw (v2) -- (v4);
+\draw (v2) to[bend left=18] (v5);
+\draw (v2) -- (v6);
+\draw (v3) -- (v5);
+\draw (v3) -- (v6);
+\draw (v4) -- (v6);
+\draw (v5) -- (v6);
+\end{tikzpicture}

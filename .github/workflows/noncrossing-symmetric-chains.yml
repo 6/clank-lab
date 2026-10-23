@@ -1,0 +1,81 @@
+name: Noncrossing symmetric chains checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/noncrossing-symmetric-chains/**'
+      - '.github/workflows/noncrossing-symmetric-chains.yml'
+  pull_request:
+    paths:
+      - 'results/noncrossing-symmetric-chains/**'
+      - '.github/workflows/noncrossing-symmetric-chains.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: noncrossing-symmetric-chains-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  certificates:
+    name: Exact certificates and corruptions
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/noncrossing-symmetric-chains
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install GAP and SmallGrp identification
+        run: sudo apt-get update && sudo apt-get install -y gap-core gap-libs gap-smallgrp nodejs
+      - name: Check all six certificates and corruptions
+        run: python3 checks/verify.py
+
+  lean:
+    name: Lean lemmas and endpoint statement
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/noncrossing-symmetric-chains/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Install Lean with elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+      - name: Build lemmas, statement and guarded axiom checks
+        run: lake build
+
+  check:
+    name: Check noncrossing-symmetric-chains
+    needs: [certificates, lean]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require both checks
+        env:
+          CERTIFICATE_RESULT: ${{ needs.certificates.result }}
+          LEAN_RESULT: ${{ needs.lean.result }}
+        run: |
+          test "$CERTIFICATE_RESULT" = success
+          test "$LEAN_RESULT" = success

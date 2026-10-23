@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="430" viewBox="0 0 720 430" role="img" aria-labelledby="title desc">
+<title id="title">Symmetric chains in a product grid</title>
+<desc id="desc">Three chains partition the product of chains of lengths two and three. The endpoint ranks are zero and five, one and four, two and three.</desc>
+<rect width="720" height="430" fill="white"/>
+<g stroke="rgb(209,213,219)" stroke-width="2">
+<path d="M74,352 L74,79"/>
+<path d="M200,352 L200,79"/>
+<path d="M326,352 L326,79"/>
+<path d="M74,352 L326,352"/>
+<path d="M74,261 L326,261"/>
+<path d="M74,170 L326,170"/>
+<path d="M74,79 L326,79"/>
+</g>
+<polyline points="74,352 74,261 74,170 74,79 200,79 326,79" fill="none" stroke="rgb(37,99,235)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="200,352 200,261 200,170 326,170" fill="none" stroke="rgb(196,93,10)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="326,352 326,261" fill="none" stroke="rgb(21,128,61)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<g font-family="Arial, sans-serif" font-size="19" fill="rgb(17,24,39)">
+<circle cx="74" cy="352" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="87" y="340">(0, 0)</text>
+<circle cx="74" cy="261" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="87" y="249">(0, 1)</text>
+<circle cx="74" cy="170" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="87" y="158">(0, 2)</text>
+<circle cx="74" cy="79" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="87" y="67">(0, 3)</text>
+<circle cx="200" cy="352" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="213" y="340">(1, 0)</text>
+<circle cx="200" cy="261" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="213" y="249">(1, 1)</text>
+<circle cx="200" cy="170" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="213" y="158">(1, 2)</text>
+<circle cx="200" cy="79" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="213" y="67">(1, 3)</text>
+<circle cx="326" cy="352" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="339" y="340">(2, 0)</text>
+<circle cx="326" cy="261" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="339" y="249">(2, 1)</text>
+<circle cx="326" cy="170" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="339" y="158">(2, 2)</text>
+<circle cx="326" cy="79" r="6" fill="white" stroke="rgb(17,24,39)" stroke-width="2"/>
+<text x="339" y="67">(2, 3)</text>
+<line x1="398" y1="133" x2="435" y2="133" stroke="rgb(37,99,235)" stroke-width="7"/>
+<text x="450" y="139">k = 0: ranks 0 and 5</text>
+<line x1="398" y1="203" x2="435" y2="203" stroke="rgb(196,93,10)" stroke-width="7"/>
+<text x="450" y="209">k = 1: ranks 1 and 4</text>
+<line x1="398" y1="273" x2="435" y2="273" stroke="rgb(21,128,61)" stroke-width="7"/>
+<text x="450" y="279">k = 2: ranks 2 and 3</text>
+<text x="74" y="402">Rank of (i, j) = i + j</text>
+</g>
+</svg>

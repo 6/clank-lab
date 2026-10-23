@@ -1,0 +1,65 @@
+name: Weak parking checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/weak-parking/**'
+      - '.github/workflows/weak-parking.yml'
+  pull_request:
+    paths:
+      - 'results/weak-parking/**'
+      - '.github/workflows/weak-parking.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weak-parking-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  certificates:
+    name: Certificate part ${{ matrix.part }}/8
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/weak-parking
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Install GAP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends gap-core gap-libs gap-smallgrp gap-transgrp
+
+      - name: Install Python requirements
+        run: python3 -m pip install -r checks/requirements.txt
+
+      - name: Check certificates and controls
+        run: python3 checks/verify.py --part ${{ matrix.part }}/8
+
+  checks:
+    name: Check weak-parking
+    needs: [certificates]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CERTIFICATE_RESULT: ${{ needs.certificates.result }}
+    steps:
+      - name: Require every part
+        run: test "$CERTIFICATE_RESULT" = success

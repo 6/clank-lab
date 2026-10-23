@@ -4,6 +4,13 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## weak-parking v1 (October 23, 2026)
+
+- First version: a computer-assisted proof of the weak parking-space
+  conjecture in types $E_7$ and $E_8$, completing the conjecture for
+  irreducible finite real reflection groups. Includes the paper, exact
+  certificates, two checking programs and the computation programs.
+
 ## game-grundy-gap v1 (October 23, 2026)
 
 - First version: a computer-assisted counterexample to the first part of Havet and Zhu's June 2011 question, restated by Hollom. An explicit graph satisfies $\chi_g(G) \leq 5 < \Gamma_g(G)$; whether the gap can be arbitrarily large remains open. Includes the paper, two independent certificate checkers, and corruption tests.

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320">
+<title>A2 noncrossing flats and parking fibers</title>
+<desc>Three reflection lines, the whole plane and the origin are the five noncrossing flats. Each line has a fiber of 3 cosets, the plane has 6 and the origin has 1. Coxeter rotation is 120 degrees.</desc>
+<rect width="760" height="320" fill="white"/>
+<rect x="12" y="22" width="315" height="278" fill="rgb(240,245,248)"/>
+<text x="25" y="45" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="normal" fill="rgb(36,52,69)">V (the whole plane)</text>
+<line x1="43" y1="165" x2="289" y2="165" stroke="rgb(53,106,138)" stroke-width="2"/>
+<line x1="104.5" y1="271.521125" x2="227.5" y2="58.478875" stroke="rgb(53,106,138)" stroke-width="2"/>
+<line x1="227.5" y1="271.521125" x2="104.5" y2="58.478875" stroke="rgb(53,106,138)" stroke-width="2"/>
+<text x="295" y="170" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="normal" fill="rgb(36,52,69)">L1</text>
+<text x="234" y="58" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="normal" fill="rgb(36,52,69)">L2</text>
+<text x="77" y="58" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="normal" fill="rgb(36,52,69)">L3</text>
+<circle cx="166" cy="165" r="3" fill="rgb(36,52,69)"/>
+<text x="156" y="190" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="normal" fill="rgb(36,52,69)">{0}</text>
+<path d="M 236 165 C 236 139.991409 222.658075 116.882517 201 104.378222 C 179.341925 91.873926 152.658075 91.873926 131 104.378222" fill="none" stroke="rgb(155,73,53)" stroke-width="2"/>
+<polygon points="131,104.378222 137.660254,95.91412 141.660254,102.842323" fill="rgb(155,73,53)"/>
+<text x="241" y="129" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="normal" fill="rgb(155,73,53)">c: 120°</text>
+<text x="354" y="43" font-family="Helvetica,Arial,sans-serif" font-size="17" font-weight="bold" fill="rgb(36,52,69)">Parking fibers over the five flats</text>
+<text x="354" y="70" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="normal" fill="rgb(36,52,69)">The fiber over X is the coset set W/P_X.</text>
+<text x="354" y="107" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold" fill="rgb(36,52,69)">Flat X</text>
+<text x="552" y="107" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold" fill="rgb(36,52,69)">|P_X|</text>
+<text x="644" y="107" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold" fill="rgb(36,52,69)">|W/P_X|</text>
+<line x1="354" y1="117" x2="735" y2="117" stroke="rgb(189,203,211)" stroke-width="1"/>
+<text x="354" y="147" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">V</text>
+<text x="564" y="147" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">1</text>
+<text x="655" y="147" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">6</text>
+<text x="354" y="181" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">L1, L2, L3</text>
+<text x="564" y="181" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">2</text>
+<text x="655" y="181" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">3 each</text>
+<text x="354" y="215" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">{0}</text>
+<text x="564" y="215" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">6</text>
+<text x="655" y="215" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="normal" fill="rgb(36,52,69)">1</text>
+<line x1="354" y1="232" x2="735" y2="232" stroke="rgb(189,203,211)" stroke-width="1"/>
+<text x="354" y="258" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold" fill="rgb(36,52,69)">6 + 3 + 3 + 3 + 1 = 16 parking points</text>
+<text x="354" y="287" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="normal" fill="rgb(36,52,69)">The drawing shows flats; the counts refer to cosets.</text>
+</svg>

@@ -2,9 +2,9 @@
 
 [![Checks](https://github.com/6/clank-lab/actions/workflows/lit-only-sigma.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/lit-only-sigma.yml)
 
-In the [sigma-game](https://doi.org/10.37236/701), pressing a vertex of a graph toggles the lights at its neighbors. The lit-only rule permits pressing only a light that is on. For a starting configuration $x$, write $ML_G(x)$ and $ML_G^*(x)$ for the fewest lights left on in the two games, and let $D(G)$ be the largest difference $ML_G^*(x)-ML_G(x)$ over the same starting configuration.
+In the [sigma-game](https://doi.org/10.37236/701), pressing a vertex of a graph toggles the lights at its neighbors. The lit-only rule permits pressing only a light that is on. For a starting configuration $x$, write $ML_G(x)$ and $`ML_G^*(x)`$ for the fewest lights left on in the two games, and let $D(G)$ be the largest difference $`ML_G^*(x)-ML_G(x)`$ over the same starting configuration.
 
-Goldwasser, Wang and Wu's Conjecture 5, published in 2011, predicts that a connected graph with $D(G)>|V(G)|/2$ must be complete $m$-partite with $m\equiv3\pmod4$. Their complete multipartite examples motivate the question, which Wu and Xiang repeat in their 2019 survey. The implication fails: the complement of the disjoint union of a six-cycle and an isolated vertex is connected and not complete multipartite, but the configuration shown below has $ML_G(x)=0$ and $ML_G^*(x)=4>7/2$.
+Goldwasser, Wang and Wu's Conjecture 5, published in 2011, predicts that a connected graph with $D(G)>|V(G)|/2$ must be complete $m$-partite with $m\equiv3\pmod4$. Their complete multipartite examples motivate the question, which Wu and Xiang repeat in their 2019 survey. The implication fails: the complement of the disjoint union of a six-cycle and an isolated vertex is connected and not complete multipartite, but the configuration shown below has $ML_G(x)=0$ and $`ML_G^*(x)=4>7/2`$.
 
 ![The seven-vertex counterexample, with the starting lights shown in blue.](data/graph.svg)
 

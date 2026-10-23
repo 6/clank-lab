@@ -67,7 +67,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The convex uniform 5-polytopes: a computer-assisted classification}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/uniform-5-polytopes-v2/results/uniform-5-polytopes}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/uniform-5-polytopes-v3/results/uniform-5-polytopes}},
   doi          = {10.5281/zenodo.23502450}
 }
 ```

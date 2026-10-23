@@ -7,6 +7,7 @@ Zenodo records.
 ## williamson-order-65 v1 (October 22, 2026)
 
 - A computer-assisted search finds no Williamson matrices of order 65. The CPU search is replayable, with receipts and two coverage and accounting checkers. Two GPU repeats by the same team share the specification and are reported but not distributed; the paper states their record-checking limits.
+- Zenodo: [10.5281/zenodo.23584887](https://doi.org/10.5281/zenodo.23584887)
 
 ## multitwist-exceptions v1 (October 22, 2026)
 

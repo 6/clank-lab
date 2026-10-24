@@ -3,6 +3,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{alltt}
 \usepackage{graphicx}
+\usepackage[title]{appendix}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
@@ -18,13 +19,22 @@
 \maketitle
 \begin{center}Version 5\end{center}
 \begin{abstract}
+Aravind Karthigeyan's AI-generated nine-point project~\cite[README,
+revision \texttt{168ff0c}]{n9} gives a Lean proof of ``global optimality
+and uniqueness for nine distinct points'' on the unit sphere: the
+$D_{3h}$ tricapped trigonal prism, with equality up to orthogonal
+transformation and permutation. We build directly on its proof design
+and reuse most of its MIT-licensed Lean code.
 For ten distinct points on the unit sphere, we prove that the
 bicapped square antiprism uniquely minimizes Coulomb energy, up to
 orthogonal maps and relabeling. This settles the ten-point case of
 Thomson's problem, associated with his 1904 atomic model. The height is
-the unique critical point in an exact rational interval. The proof first confines all
-competitors of no greater energy to one inner-product pattern, aligns
-them with the candidate, and applies a quantitative local energy bound.
+the unique critical point in an exact rational interval. The new inputs
+are the ten-point energy, interval-classification and Hessian certificates.
+The proof first confines all competitors of no greater energy to one
+inner-product pattern, aligns them with the candidate, and applies a
+quantitative local energy bound. Lean checks the complete optimality
+and equality theorem from the definitions.
 \end{abstract}
 
 The proofs, the Lean formalization, the certificate checkers and the text
@@ -76,15 +86,58 @@ whose opening specifies the ``motion of a ring of $n$ negatively
 electrified particles''. For the general question, Cohn and Woo~\cite[Section~1.1, arXiv v2]{cohnwoo}
 use the phrase ``potential energy minimization''. Here the metric space
 is the unit sphere and the potential is inverse distance.
-Our immediate source is Aravind Karthigeyan's MIT-licensed nine-point
-project~\cite[README, revision \texttt{168ff0c}]{n9}, which states
-``global optimality and uniqueness for nine distinct points''.
-We adapt its formal code and proof design. The new inputs are the ten-point
+This work builds directly on Aravind Karthigeyan's AI-generated
+nine-point project~\cite[README, revision \texttt{168ff0c}]{n9}.
+Its stated ``global optimality and uniqueness for nine distinct points''
+is for the $D_{3h}$ tricapped trigonal prism on the unit sphere, with
+equality up to orthogonal transformation and permutation.
+We reuse most of its MIT-licensed Lean code and follow its proof design:
+the statement structure, three-point certificate checks, Bernstein
+inequalities, interval classification, orthogonal alignment, higher-order
+error bound and interval Hessian method. The new inputs are the ten-point
 energy, interval-classification and Hessian certificates. The hardest step
 is the three-point energy certificate: its error must be small enough to
 force geometric localization. The interval centered at $-1$ contains
 the antipodal pole pair; a five-point counting argument supplies the
 linearly independent triple needed for classification.
+
+\paragraph{Earlier and concurrent work.}
+F\"oppl's 1912 ICM contribution~\cite[p.~190]{foppl} calls the tetrahedral,
+octahedral and icosahedral arrangements ``stabile'', a stability statement.
+Cohn and Kumar~\cite[Section~1, arXiv v2]{cohnkumar} credit Yudin~\cite{yudin} with
+``regular simplex and cross polytope'' optima and Andreev~\cite{andreev} with the
+icosahedron; their own universal-optimality result is Theorem~1.2 and
+Table~1. Schwartz's five-point result is Theorem~1.1 of arXiv
+v5~\cite{schwartz}. The numerical ten-point predecessors are Erber and
+Hockney's Table~1~\cite{erber} and Wales and Ulker's database entry~\cite{cambridge}.
+Delsarte, Goethals and Seidel's~\cite{delsarte} lineage is credited in Bachoc and
+Vallentin's Section~1 (arXiv v4); Yudin's energy-bound lineage in Cohn and
+Woo's Section~1.1 (arXiv v2). Our three-point tools are their
+Corollary~3.5 and Theorem~5, respectively~\cite{bachoc,cohnwoo}.
+
+Nearby formal work includes Hung Tran's AI-assisted seven-point
+\nolinkurl{thomson_seven} and \nolinkurl{thomson_seven_unique}~\cite{n7},
+and Kryvonos, Liehr and Taylor's eight-point Theorem~1.1 (arXiv
+v1)~\cite{n8}. Joseph Tooby-Smith and Alex Zughaid separately give an
+eight-point ``warrant'', still ``a work in progress''~\cite{n8warrant}.
+Alex Zarco's five-point README states \nolinkurl{five_coulomb} and
+\nolinkurl{five_coulomb_unique}, with status ``produced by AI models''
+and ``not peer reviewed''~\cite[Opening; named Lean declarations]{zarco5};
+its ``Known results'' credits Schwartz. His seven-point README calls
+its result an ``AI-produced warrant'' for ``the logarithmic energy of
+seven points'', ``not peer reviewed''; its Coulomb section says it
+``uses Hung Tran's local lemma''~\cite[Opening; Coulomb]{zarco7}.
+Concurrent ten-point work by \texttt{saberwatchmanga} (formerly
+\texttt{terry2418}) includes the October 7 posting~\cite[README, revision
+\texttt{7ba9eb3}]{concurrent}, whose ``Thomson N=10 local minimum'' section
+states ``Global minimality is not proved.''
+The local project's Status section reports ``a local minimum in the full
+space of ten unit-sphere points''~\cite[Status]{concurrentlocal}. For ten distinct
+unit-sphere points, energy at most $32.717$ requires ``at least one pair
+farther apart than 1.935''~\cite[Opening]{concurrentchord}; that README
+says ``Global minimality is not proved.''
+Neither is a premise here. We share the cutoff $32.717$; whether our
+choice was independent or taken from that work cannot be established.
 
 \paragraph{Proof overview.}
 For a competitor of energy at most $\E(p)$, a two-point bound first gives
@@ -102,20 +155,6 @@ remainder estimate give $\E(y)-\E(p)\geq\rho^2/200$ for an aligned
 configuration with $\rho\leq10^{-3}$. Hence $\rho=0$.
 Appendices~\ref{sec:global} and~\ref{sec:local} give every reduction.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.85\linewidth]{../data/antiprism.pdf}
-\caption{The candidate $p(h_*)$. Left: a side view of the ten points and
-the edges of their convex hull, hidden edges dashed. The poles $p_0,p_1$
-are red, the upper square $p_2,\ldots,p_5$ at height $h=h_*$ is blue, and
-the lower square $p_6,\ldots,p_9$ at height $-h$ is orange; the dashed
-ellipses are the equator and the two circles of latitude. Right: the view
-from above, in which the lower square (dashed) is the upper square rotated
-by $\pi/4$. A label $i$ marks $p_i$.}
-\label{fig:antiprism}
-\end{figure}
-
-\clearpage
 % Formal bridge begin
 \paragraph{Formal theorem.}
 The closed Lean declarations have types
@@ -182,7 +221,20 @@ The toolchain and dependencies are pinned. The guides in
 requirements and the certificate inputs.
 
 \clearpage
-\appendix
+\begin{appendices}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.85\linewidth]{../data/antiprism.pdf}
+\caption{The candidate $p(h_*)$. Left: a side view of the ten points and
+the edges of their convex hull, hidden edges dashed. The poles $p_0,p_1$
+are red, the upper square $p_2,\ldots,p_5$ at height $h=h_*$ is blue, and
+the lower square $p_6,\ldots,p_9$ at height $-h$ is orange; the dashed
+ellipses are the equator and the two circles of latitude. Right: the view
+from above, in which the lower square (dashed) is the upper square rotated
+by $\pi/4$. A label $i$ marks $p_i$.}
+\label{fig:antiprism}
+\end{figure}
+
 \section{Candidate details}\label{app:candidate}
 This appendix records the family energy and the quantitative parameter
 facts used in Theorem~\ref{thm:main}.
@@ -1002,8 +1054,9 @@ The original code attribution, historical comparisons and cutoff account
 are retained in \nolinkurl{checks/context.md}; the file-level credits and
 full MIT notice remain in \nolinkurl{THIRD_PARTY.md}.
 
+\end{appendices}
 \clearpage
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 \small
 \bibitem{thomson}
 J. J. Thomson, On the structure of the atom: an investigation of the
@@ -1018,6 +1071,18 @@ A. Karthigeyan (director and publisher), \emph{The Nine-Point Coulomb
 Thomson Problem}, MIT-licensed Lean project, revision \texttt{168ff0c},
 October 6, 2026.
 \url{https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e}.
+
+\bibitem{delsarte}
+P. Delsarte, J. M. Goethals and J. J. Seidel, Spherical codes and designs,
+\emph{Geometriae Dedicata} 6 (1977), 363--388.
+\href{https://doi.org/10.1007/BF03187604}{doi:10.1007/BF03187604}.
+
+\bibitem{yudin}
+V. A. Yudin, Minimum potential energy of a point system of charges,
+\emph{Diskretnaya Matematika} 4 (1992), no.~2, 115--121;
+English translation in \emph{Discrete Mathematics and Applications}
+3 (1993), no.~1, 75--81.
+\href{https://doi.org/10.1515/dma.1993.3.1.75}{doi:10.1515/dma.1993.3.1.75}.
 
 \bibitem{bachoc}
 C. Bachoc and F. Vallentin, New upper bounds for kissing numbers from
@@ -1034,5 +1099,87 @@ H. Cohn and J. Woo, Three-point bounds for energy minimization,
 \href{https://arxiv.org/abs/1103.0485v2}{arXiv:1103.0485v2}.
 Version 2, June 24, 2013.
 
+
+\bibitem{foppl}
+L. F\"oppl, Stabile Anordnungen von Elektronen im Atom,
+in \emph{Proceedings of the Fifth International Congress of Mathematicians},
+Cambridge, 1912, vol.~II (Cambridge University Press, 1913), 188--191.
+\url{https://www.mathunion.org/fileadmin/ICM/Proceedings/ICM1912.2/ICM1912.2.ocr.pdf}.
+
+\bibitem{andreev}
+N. N. Andreev, An extremal property of the icosahedron,
+\emph{East Journal on Approximations} 2 (1996), no.~4, 459--462.
+\href{https://www.mathnet.ru/eng/person9017}{Author's publication list}.
+Review: \href{https://zbmath.org/?q=an:0877.51021}{Zbl 0877.51021}.
+
+\bibitem{cohnkumar}
+H. Cohn and A. Kumar, Universally optimal distribution of points on spheres,
+\emph{Journal of the American Mathematical Society} 20 (2007), 99--148.
+arXiv version 2, October 19, 2006.
+\url{https://arxiv.org/abs/math/0607446v2}.
+
+\bibitem{schwartz}
+R. E. Schwartz, The 5 Electron Case of Thomson's Problem,
+arXiv version 5, February 8, 2010 (first posted January 21, 2010).
+\url{https://arxiv.org/abs/1001.3702v5}.
+
+\bibitem{erber}
+T. Erber and G. M. Hockney, Equilibrium configurations of $N$ equal charges
+on a sphere, \emph{Journal of Physics A: Mathematical and General}
+24 (1991), L1369--L1377, Table~1.
+\href{https://doi.org/10.1088/0305-4470/24/23/008}{doi:10.1088/0305-4470/24/23/008}.
+\url{https://lss.fnal.gov/archive/1991/pub/Pub-91-222-T.pdf}.
+
+\bibitem{cambridge}
+D. J. Wales and S. Ulker, Cambridge Cluster Database, Thomson problem,
+ten-point entry, accessed October 24, 2026.
+\url{https://www-wales.ch.cam.ac.uk/~wales/CCD/Thomson/table.html}.
+
+\bibitem{concurrent}
+\texttt{saberwatchmanga} (formerly \texttt{terry2418}),
+Lean-verified local minimality for ten charges on a sphere
+(October 7, 2026), and A Lean-checked distance restriction for ten charges
+on a sphere (October 11, 2026).
+\url{https://github.com/saberwatchmanga/-lean-finite-certificates}.
+October 7 posting, root README, revision \texttt{7ba9eb3}:
+\url{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/7ba9eb38db36c9cb957ff26758b66bbacc31d8bc/README.md}.
+
+\bibitem{n7}
+H. Tran, A Lean Proof of the Thomson Problem for Seven Electrons,
+Vals AI blog, September 28, 2026, Problem section.
+\url{https://www.vals.ai/blogs/thomson-n7-lean-proof}.
+
+\bibitem{n8}
+L. Kryvonos, L. Liehr and M. A. Taylor, Energy minimization for eight
+points on the sphere, arXiv version 1, September 18, 2026.
+\url{https://arxiv.org/abs/2609.22077v1}.
+
+\bibitem{n8warrant}
+J. Tooby-Smith and A. Zughaid, A warrant for the N=8 Thomson problem, in Lean4,
+README, revision \texttt{2c35d62}, September 2026.
+\url{https://github.com/jstoobysmith/Thomson-N-8-Warrant/blob/2c35d62e07d72686931da4bc3e062d668e858eda/README.md}.
+
+\bibitem{zarco5}
+A. Zarco (\texttt{alejandrozarco}), \texttt{five-points-riesz},
+README, revision \texttt{aeb4588}, October 2026.
+\url{https://github.com/alejandrozarco/five-points-riesz/blob/aeb4588ccbb1ccb91c315fedeb79a18042b5fe13/README.md}.
+
+\bibitem{zarco7}
+A. Zarco (\texttt{alejandrozarco}), \emph{The pentagonal bipyramid as the unique
+logarithmic-energy minimiser for seven points on the sphere: an unreviewed
+Lean 4 warrant (Conjecture 1 of Armentano et al.)},
+\texttt{thomson-n7-log}, README, revision \texttt{fd2f8b2}, October 2026,
+including its Coulomb section.
+\url{https://github.com/alejandrozarco/thomson-n7-log/blob/fd2f8b2e7eb0e89ba4f82f6d2c3e98862f89bc28/README.md}.
+
+\bibitem{concurrentlocal}
+\texttt{saberwatchmanga} (formerly \texttt{terry2418}),
+\texttt{Thomson10LocalMinimum}, README, revision \texttt{7ba9eb3}, October 2026.
+\url{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/7ba9eb38db36c9cb957ff26758b66bbacc31d8bc/Thomson10LocalMinimum/README.md}.
+
+\bibitem{concurrentchord}
+\texttt{saberwatchmanga} (formerly \texttt{terry2418}),
+\texttt{Thomson10Chord1935}, README, revision \texttt{bc74bc0}, October 2026.
+\url{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/bc74bc050f4c39123e894b3fd3873ba17f60289a/Thomson10Chord1935/README.md}.
 \end{thebibliography}
 \end{document}

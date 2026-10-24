@@ -143,7 +143,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The three-color Ramsey number of the 10-vertex path}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v3/results/path-ramsey}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v4/results/path-ramsey}},
   doi          = {10.5281/zenodo.23574724}
 }
 ```

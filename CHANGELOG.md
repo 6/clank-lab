@@ -7,6 +7,7 @@ Zenodo records.
 ## game-grundy-gap v2 (October 23, 2026)
 
 - The same graph now has the exact values $\chi_g(G)=5$ and $\Gamma_g(G)=6$, with matching bounds and a checked six-color strategy. Arbitrarily large gaps remain open.
+- Zenodo: [10.5281/zenodo.23608437](https://doi.org/10.5281/zenodo.23608437)
 
 ## locally-toroidal-polytopes v2 (October 23, 2026)
 

@@ -31,23 +31,23 @@ $N_S = 7$ for a single twist, and separately called a weaker version, which
 bounds only the number of exceptions, "still interesting".
 
 We show that Fathi's consecutive-integers bound does not extend to
-multitwists: in the orbit-filling form Ivanov states, with reducible base
-maps, no constant $N_S$ exists for the sphere with five boundary
-components, which answers Ivanov's Problem 5 negatively; the weaker count
-version is untouched. For every $k \ge 1$ there are a mapping class $f_k$
-and a two-component multitwist $t$ satisfying Ivanov's hypothesis such
-that $t^0 f_k$ and $t^{-k} f_k$ each fix an essential curve, so neither is
-pseudo-Anosov: two exceptional exponents arbitrarily far apart. The base
-maps $f_k$ are themselves reducible, so it gives no counterexample with a
-pseudo-Anosov base map, the setting of Long and Morton, and says nothing
-about that version. The counterexample is on the five-holed sphere only;
-we claim nothing about other surfaces, closed or with boundary.
+multitwists on the sphere with five boundary components, even when the
+base map is pseudo-Anosov. For every $k \ge 1$, the same positive
+two-component multitwist $t=T_aT_c$ and a pseudo-Anosov base
+$g_k=T_a^{-1}T_c^{-(k+1)}T_d$ satisfy Ivanov's union-filling hypothesis,
+while $tg_k$ and $t^{k+1}g_k$ each fix an essential curve. The two
+exceptional exponents are $k$ apart. Penner's construction proves the base
+is pseudo-Anosov, and three explicit curves certify filling. The original
+reducible-base examples remain in the paper. This concerns a multitwist
+on this bordered surface; it contradicts no single-twist theorem of Long
+and Morton. The weaker count question and other surfaces remain outside
+the result.
 
-In short: a counterexample for reducible base maps on the five-holed
-sphere, not for pseudo-Anosov ones. The proof is a short written argument.
-Lean checks its braid and free-group
-algebra for every $k$, and two independent programs check the same curve
-facts in two different models; the surface topology is the written proof.
+The proof is written. Lean checks its Artin/free-group algebra for every
+$k$, two different exact curve models check finite instances, and two
+independent finite topology checkers certify the required complementary
+regions. The surface interpretation and Penner application are written
+arguments.
 
 Written proof, with Lean and computer checks; not yet reviewed by experts.
 
@@ -68,12 +68,13 @@ pattern of which curves meet; the two twists of $t$ commute; $t^0 f_k$ and
 $t^{-k} f_k$ fix the curves $C'$ and $C$; and $f_k(a)$ meets $a$ and $c$.
 
 What Lean does not cover: the surface topology. That the Artin
-automorphisms are the twists' actions on the fundamental group, that curves
-correspond to conjugacy classes up to inversion, that a twist fixes a curve
+automorphisms are the twists' actions on the fundamental group, that essential simple-curve classes
+inject into conjugacy classes up to inversion, that a twist fixes a curve
 exactly when the two are disjoint, the exact intersection numbers, the
 argument that the orbits fill the surface, and that a mapping class fixing
 an essential curve is not pseudo-Anosov are all proved in writing in the
-paper, from standard facts it cites.
+paper, from standard facts it cites. The application of Penner's theorem
+is also part of this written bridge.
 
 Install [elan](https://github.com/leanprover/elan), then check the Lean
 proof, which takes a few minutes once the Mathlib cache is downloaded:
@@ -84,8 +85,9 @@ lake exe cache get
 lake build
 ```
 
-The build also checks each statement's exact type, a negative control (with
-$C$ and $C'$ exchanged the statement is false) and the axioms used.
+The extension also checks the integer normal form, the new fixed-word
+identities and the nonconjugacy counterparts for every $k$. The build
+checks exact types, concrete negative controls and the axioms used.
 [Lean documentation](lean/README.md) lists the statements.
 
 What the programs check: two independent Python programs, exact and with no
@@ -105,8 +107,11 @@ second:
 python3 checks/check.py
 ```
 
-[Checker documentation](checks/README.md) describes both models and the
-corruptions.
+The same command checks the new endpoints in both models and verifies the
+rational diagram with two independent topology implementations, including
+corrupted diagrams and altered formulas. Finite instances do not replace
+the proof for every $k$. [Checker documentation](checks/README.md) describes the
+models, certificates and corruptions.
 
 ## Credits
 
@@ -133,8 +138,10 @@ programs [flipper](https://github.com/MarkCBell/flipper) and
 checks of the example; neither the proof nor the final checkers depend on
 them. Checker B uses I. A. Dynnikov's
 coordinates, with the update rules of Toby Hall and S. Öykü Yurttaş and
-the intersection formula of Yurttaş and Hall. Lean, Mathlib and their
-contributors supplied the formal-proof infrastructure.
+the intersection formula of Yurttaş and Hall. Robert C. Penner's
+[construction](https://doi.org/10.1090/S0002-9947-1988-0930079-9)
+provides the pseudo-Anosov bases in the strengthening. Lean, Mathlib and
+their contributors supplied the formal-proof infrastructure.
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -145,7 +152,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Fathi's consecutive-integers bound does not extend to multitwists}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v1/results/multitwist-exceptions}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v2/results/multitwist-exceptions}},
   doi          = {10.5281/zenodo.23582026}
 }
 ```

@@ -12,7 +12,8 @@ four-punctured disc. Both must accept F0-F4 for k = 1..30 and both signs,
 and both must reject the four corruptions K1-K4 (a crash does not count as a
 rejection: each run must end with its JSON verdict line). Checker B also runs
 with every twist reversed. Standard library only. Exit status 0 means
-everything passed.
+everything passed. The extension replay also checks its finite model facts,
+diagram certificate and negative controls.
 """
 import json
 import subprocess
@@ -73,6 +74,11 @@ def main():
         print(f'FAILED: {len(failures)} of the expected outcomes did not occur')
         return 1
     print('PASS: both checkers accept F0-F4 and reject every corruption')
+    extension = subprocess.run([sys.executable, '-I', str(HERE / 'extension' / 'replay.py')])
+    if extension.returncode != 0:
+        print('FAILED: extension checks did not pass')
+        return 1
+    print('PASS: original facts and pseudo-Anosov-base extension checks')
     return 0
 
 

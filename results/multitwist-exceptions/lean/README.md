@@ -73,13 +73,51 @@ with $C$ and $C'$ exchanged, the $j = 0$ statement is false, and
 of them uses an axiom beyond `propext`, `Classical.choice` and
 `Quot.sound` (in particular `sorryAx` or `native_decide`).
 
+## The pseudo-Anosov-base extension
+
+[V2.lean](V2.lean) imports the original Artin model and defines
+
+```lean
+def g (k : ℕ) : Monoid.End F := Tai * Tci ^ (k+1) * Td
+def t : Monoid.End F := Ta * Tc
+```
+
+These are the algebraic counterparts of $g_k=T_a^{-1}T_c^{-(k+1)}T_d$
+and $t=T_aT_c$ in the extension. Its written surface theorem uses $k\geq1$;
+the Lean identities hold for every `k : ℕ`, including zero.
+
+| Algebraic fact | Lean statements in `Multitwist.V2` |
+|---|---|
+| Integer normal form, in any group with `Commute A C`, for all `k n : ℤ` | `integer_identity A C D h k n : (A * C) ^ n * (A ^ (-1 : ℤ) * C ^ (-(k+1)) * D) = A ^ (n-1) * C ^ (n-k-1) * D` |
+| The two exceptional members in the Artin model | `first_member k : t * g k = Tci ^ k * Td`; `second_member k : t ^ (k+1) * g k = Ta ^ k * Td` |
+| The fixed words at the exceptional exponents | `fixed_C k : ((t ^ 1) * g k) wC = wC`; `fixed_Cp k : ((t ^ (k+1)) * g k) wCp = wCp` |
+| The image of `wa` under `g k` is moved by both component twists | `nonconj_a k` and `nonconj_c k`: the twisted image is conjugate neither to the original image nor to its inverse |
+
+The nonconjugacy proof transports the original base cases through
+`initial k := Tai * Tci ^ (k+1)`, using its proved left inverse `undo k`
+and its commutation with `Ta` and `Tc`.
+
+[V2Check.lean](V2Check.lean) restates all 18 new declarations with their
+exact types and guards each exact axiom set, all contained in `propext`,
+`Classical.choice` and `Quot.sound`. Its concrete controls prove that
+swapping the fixed curves, shifting the exceptional exponents or changing
+the exponent inside `g k` breaks the corresponding identities; omitting
+`Td` breaks the nonconjugacy conclusions; and dropping commutation breaks
+the integer identity in the permutation group on three elements. The
+default `lake build` checks both original modules and both extension modules.
+
 ## What is not stated
 
-Mathlib has no theory of mapping class groups, isotopy classes of curves or
-pseudo-Anosov maps, so the surface topology is not formalized. The written
+This development does not formalize mapping class groups, isotopy classes
+of curves or pseudo-Anosov maps, so the surface topology remains written. The written
 proof in the paper supplies it: that the Artin automorphisms are the maps
 the Dehn twists induce on the fundamental group; that essential simple
-closed curves correspond to conjugacy classes up to inversion; that
+closed-curve classes inject into conjugacy classes up to inversion; that
 $i(u, v) = 0$ exactly when $T_u(v) = v$; the exact intersection numbers;
 the argument that $a$, $c$ and $f_k(a)$ fill the surface; and that a
 mapping class fixing an essential curve is not pseudo-Anosov.
+For the extension, Lean also does not prove the pseudo-Anosov property of
+$g_k$, Penner's theorem or its application, the filling property of the
+three curves $a$, $c$ and $g_k(a)$, or any bound on intervals of exceptional exponents.
+The written proof supplies these surface arguments, using the finite
+diagram checks supplied outside this Lean project.

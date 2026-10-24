@@ -7,6 +7,7 @@ Zenodo records.
 ## locally-toroidal-polytopes v2 (October 23, 2026)
 
 - Correction: the paper's layout now matches the other papers (normal-case title, no running header); its content is unchanged.
+- Zenodo: [10.5281/zenodo.23607973](https://doi.org/10.5281/zenodo.23607973)
 
 ## monotone-query-gap v2 (October 23, 2026)
 

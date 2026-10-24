@@ -12,7 +12,7 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23562182](https://doi.org/10.5281/zenodo.23562182)
+Archived on Zenodo: [doi:10.5281/zenodo.23607973](https://doi.org/10.5281/zenodo.23607973)
 
 ![Square-torus fundamental domains of periods 3 and 9, with matching arrows on opposite sides](data/local-toroids.svg)
 
@@ -44,6 +44,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Existence of locally toroidal regular 4-polytopes}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/locally-toroidal-polytopes-v2/results/locally-toroidal-polytopes}},
-  doi          = {10.5281/zenodo.23562182}
+  doi          = {10.5281/zenodo.23607973}
 }
 ```

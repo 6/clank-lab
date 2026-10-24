@@ -116,6 +116,41 @@ by $\pi/4$. A label $i$ marks $p_i$.}
 \end{figure}
 
 \clearpage
+% Formal bridge begin
+\paragraph{Formal theorem.}
+The closed Lean declarations have types
+{\small
+\begin{verbatim}
+ThomsonN10.thomson_ten_complete : ThomsonN10.Challenge.CompleteTarget
+ThomsonN10.candidate_admissible (h : ThomsonN10.CandidateParameter) :
+  ThomsonN10.IsSphereConfiguration (ThomsonN10.candidate h)
+\end{verbatim}
+}
+Here \texttt{CompleteTarget} asserts that exactly one real height in the
+specified interval satisfies the stationarity equation; and for every
+\texttt{CandidateParameter h} and every \texttt{Configuration x}
+satisfying \texttt{IsSphereConfiguration x}, \texttt{candidate h} has
+energy at most that of \texttt{x}, and \texttt{x} has that same energy
+if and only if \texttt{Congruent x (candidate h)}.
+The parameter subtype imposes precisely
+that interval and equation; \texttt{heightLower}, \texttt{heightUpper} and
+\texttt{stationarity} are $a$, $b$ and $S$ above. The existence clause
+prevents vacuous parameter quantification, and \texttt{candidate h} has
+the displayed coordinates.
+
+A \texttt{Configuration} is a map from \texttt{Fin 10} to
+\texttt{EuclideanSpace} over the reals on \texttt{Fin 3}, hence a labeled
+ten-point map into $\R^3$. The sphere predicate means unit norm at every
+index and injectivity. The formal \texttt{coulombEnergy} is the displayed
+sum over unordered pairs. Lean's real inverse at zero is zero: collisions
+are excluded by injectivity, rather than assigned infinite energy.
+The predicate \texttt{Congruent} uses a real-linear isometric equivalence
+and a permutation of \texttt{Fin 10}, exactly $O(3)$ (including reflections)
+and relabeling. The separate admissibility theorem supplies the candidate's
+unit norms and injectivity. Together these declarations give
+Theorem~\ref{thm:main}, without external certificate hypotheses.
+% Formal bridge end
+
 \paragraph{Checked scope and reproduction.}
 Lean proves the root assertion, candidate admissibility, global optimality
 and the entire equality equivalence from the definitions; all certificate

@@ -1,0 +1,119 @@
+% Supplementary source and checking details; not an additional theorem.
+\section{Lean formalization and verification}\label{sec:lean}
+
+The project \texttt{lean/} uses Lean 4 \cite{lean} and mathlib
+\cite{mathlib}. The complete chain from the literal greedy rule
+\eqref{eq:rule}, through the smoothing \eqref{eq:smooth}, to
+Theorem~\ref{thm:main} is machine-checked. Haver's estimates in
+Proposition~\ref{prop:inputs} are \emph{imported proved theorems from Haver's
+Lean sources}, recompiled in this development. They are neither
+independently re-proved mathematical contributions of this paper nor
+hypotheses or added axioms. The archive provides, among others,
+\path{EKG/Canonical.lean}, \path{EKG/EarlyEvens.lean},
+\path{EKG/Span.lean}, \path{EKG/MissingComposites.lean} and
+\path{EKG/SmoothedPositions.lean}. Our new proofs of the two little-$o$
+estimates, the endpoint hypotheses of the counting identity, and the final
+transfer close the chain.
+The elementary constants used to weaken Haver's bounds are also proved.
+
+The type transliterated beside Theorem~\ref{thm:main} is independently fixed by
+\texttt{EndpointStatement} in \path{Statement.lean}.
+\path{Check.lean} requires \texttt{ekg\_sharp\_all\_index} to have that type.
+For the rule, \texttt{actualA\_properties}, \texttt{actualA\_gcd\_rule}
+and \texttt{actualA\_gcd\_minimal} prove positivity, non-repetition,
+gcd eligibility, and leastness, respectively. Thus the internal
+\texttt{GreedySeq} interface is instantiated by the recursively defined
+sequence, rather than left as an assumption.
+The proof sources accompany this manuscript in the same deposit.
+
+The formal $a(n)$ is the zero-based canonical sequence evaluated at
+$n-1$; its value at $n=0$ is a total extension unused in the theorem.
+The canonical construction proves existence, minimality, eligibility,
+and distinctness for the literal rule \eqref{eq:rule}, including the
+prime factor $2$. The new \texttt{smoothValue} definition excludes
+$2$ in both branches. The bridge to Haver's smoothing is proved
+for every $n\geq5$, using that the exceptional raw values $2,6$
+occur only at indices $2,4$.
+
+The files under \texttt{EKG/} correspond to the proof as follows:
+\begin{center}\small
+\begin{tabular}{ll}
+\texttt{PartA.lean}, \texttt{PartB.lean} & upper and lower excursions\\
+\texttt{CountingExact.lean} & exact counting identity\\
+\texttt{EndpointRemainders.lean} & negligible remainders\\
+\texttt{EndpointClock.lean} & prime counts and frontier clock\\
+\texttt{EndpointStructure.lean} & ordinary terms and prime blocks\\
+\texttt{EndpointTransfer.lean} & transfer to all indices
+\end{tabular}
+\end{center}
+The weak prime number theorem is obtained from
+\texttt{pi\_alt'} in the pinned \emph{PrimeNumberTheoremAnd}
+project \cite{pntcode}; its real-floor inclusive prime count is
+adapted in \path{SolutionPNT.lean}.
+
+The Lean toolchain and dependency revisions are pinned in
+\texttt{lean/lean-toolchain} and \texttt{lean/lake-manifest.json}.
+Source provenance is recorded in
+\path{THIRD_PARTY.md}.
+
+One inherited finite \texttt{native\_decide} proof is replaced by
+ordinary kernel proofs; two compatibility edits change tactic lines
+only, without changing definitions or declaration types.
+
+The exact output of \texttt{\#print axioms ekg\_sharp\_all\_index} is
+\begingroup\small
+\begin{verbatim}
+'ekg_sharp_all_index' depends on axioms: [propext, Classical.choice, Quot.sound]
+\end{verbatim}
+\endgroup
+These are the usual Lean logical axioms, with no mathematical
+hypothesis added for an estimate, the counting identity or the prime
+number theorem.
+The imported PNT file contains unrelated admitted declarations
+\texttt{prelim\_decay\_2}, \texttt{prelim\_decay\_3} and \texttt{decay\_alt};
+none occurs in the proof of Theorem~\ref{thm:main}. This does not certify the whole
+upstream project. The three-branch corollary is the elementary algebraic
+consequence proved in the text; its separate statement is not included
+as an additional Lean theorem.
+
+The following consequences in Section~\ref{sec:consequences} are also
+machine-checked. \path{CorollaryStatements.lean} fixes their statements
+independently of the proofs, for the one-based sequence \texttt{a}:
+\begin{itemize}
+\item \texttt{EventualSignStatement}: the first part of
+  Corollary~\ref{cor:sign};
+\item \texttt{BelowDiagonalCountStatement}: its count
+  $\#\{k\leq N:a(k)<k\}\sim N/(2\log N)$;
+\item \texttt{OrdowskiDensityStatement}: its last statement,
+  $\#\{k\leq N:a(k)>k\}/N\to1$. The sharper form
+  $N-(1/2+o(1))N/\log N$ follows from the previous count and the
+  finiteness of $\{k:a(k)=k\}$ as in the proof, but is not stated
+  as a separate Lean theorem;
+\item \texttt{JasinskiFinitenessStatement}: Corollary~\ref{cor:lines},
+  with the lines written $2a(k)=k$, $a(k)=k$ and $2a(k)=3k$ as in the OEIS;
+\item \texttt{ExceptionalFinitenessStatement}: the finiteness of the
+  indices $n$ with $a(n)$ not prime and $a(n)\leq n-1$, and of A064420;
+\item \texttt{A155549FinitenessStatement}: the finiteness of A155549,
+  the image of that index set under $a$;
+\item \texttt{ShortCyclesStatement}: Corollary~\ref{cor:cycles}, a cycle
+  being the orbit of a positive $m$ with $a^{[l]}(m)=m$ for some
+  $1\leq l\leq L$.
+\end{itemize}
+The proofs are in \path{SolutionSign.lean},
+\path{SolutionDensity.lean} and \path{SolutionCycles.lean}; they use
+Theorem~\ref{thm:main}, the permutation property and the prime number
+theorem above. \path{Check.lean} checks each against its statement and
+guards its axioms, which are again exactly
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+
+No human expert has reviewed it.
+
+
+Haver proves this counting identity in Corollary 12(b).
+Haver's Lean archive already proves \path{clock_balance},
+\path{clock_identity}, \path{clock_identity_with_ticks}, and
+\path{clock_identity_from_interval_counts}; the last takes the
+endpoint errors as hypotheses. We discharge those hypotheses by proving
+that the missing-prime count is $P_1+\theta_1$ and the tick count is
+$P_2-\theta_2$, and by evaluating the interval endpoints through $I$
+and $\theta$ as above.

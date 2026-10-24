@@ -1,8 +1,8 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage{fullpage,amsmath,amssymb,amsthm}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{url}
+\usepackage{url,tikz}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \hypersetup{pdftitle={The second-order asymptotic of the EKG sequence},
   pdfauthor={P. Graham},
@@ -21,121 +21,158 @@
 \newcommand{\ind}[1]{\mathbf{1}_{\{#1\}}}
 \newcommand{\pos}[1]{\max\{#1,0\}}
 \newcommand{\eps}{\varepsilon}
-\title{The second-order asymptotic\\of the EKG sequence}
+\title{The second-order asymptotic of the EKG sequence}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 22, 2026}
+\date{October 24, 2026}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-The EKG sequence, discovered by Jonathan Ayres, starts $a(1)=1$, $a(2)=2$,
-and thereafter takes the least unused positive integer not coprime to its
-predecessor.
-In 2002, Lagarias, Rains and Sloane conjectured
-$a(n)=n+n/(3\log n)+o(n/\log n)$ for almost all $n$.
-Replacing values $p,3p$ by $2p$ for odd primes $p$ defines $b(n)$;
-we prove
-$b(n)=n+n/(3\log n)+o(n/\log n)$ as $n\to\infty$ along all indices $n$,
-not only almost all ($\log$ natural). Since $a(n)=b(n)$ except at the
-density-zero set of indices with $a(n)=p$ or $3p$, this gives the
-conjectured formula for $a(n)$ at almost all $n$.
-Writing $E(t)$ for the least positive even integer outside
-$\{a(1),\ldots,a(t)\}$, Haver reduced its asymptotic to counting used odd values above $E(t)$
-other than $3p$ ($p$ odd prime), and proved the sharp upper bound
-$E(t)-t\leq(1/3+o(1))t/\log t$; we prove the lower half and pass from these frontier times to the
-full sequence of indices.
-For $x=E(t)$ as $t\to\infty$, every $a(i)$ ($1\leq i\leq t$) other than
-$3p$ ($p$ odd prime) is at most $x+o(x/\log x)$, and every unused composite
-$h<x$ satisfies $x-h=o(x/\log x)$ uniformly in $h$.
-The proofs inject selected neighbors of even terms into prime cofactors
-whose positive density in a common interval contradicts an elementary sieve bound.
-Haver's counting identity and the prime number theorem yield $1/3$.
-The complete Lean formalization imports the estimates proved in
-Haver's Lean sources and the prime number theorem as proved theorems;
-it proves the counting identity and the sharp coefficient itself. It also
-checks the following consequences. We give, to our knowledge, the first proofs of Ordowski's 2009
-conjectures in OEIS A064413, that $a(n)>n$ almost everywhere when $a(n)$
-is not prime and that $\#\{k\leq N:a(k)>k\}/N\to1$; we prove the first
-in the stronger form that $a(n)>n$ for all large $n$ with $a(n)$ not
-prime. We also prove Jasinski's 2008 conjectures that A152458
-($a(n)=n$) is finite and that the three lines $a(n)=n$, $2a(n)=n$ and
-$2a(n)=3n$ carry only finitely many points (A152519). Also $\#\{k\leq N:a(k)<k\}\sim N/(2\log N)$, and the
-permutation has only finitely many cycles of each bounded length.
+For the EKG sequence $a(n)$, let $b(n)$ replace values $p$ and $3p$ by
+$2p$ for odd primes $p$. We prove
+$b(n)=n+n/(3\log n)+o(n/\log n)$ along all indices, giving the formula
+in Lagarias, Rains and Sloane's 2002 PDF abstract for $a(n)$ at almost
+all indices. Building on Haver's frontier reduction and sharp upper
+bound, the proof supplies the lower bound by an elementary sieve and
+transfers the frontier asymptotic to every smoothed position.
 \end{abstract}
 
-\paragraph{AI production.}
 The proofs, the Lean formalization and the text were produced by AI models
 (from OpenAI and Anthropic), working under the author's direction.
 
-\section{Introduction}
-
-The EKG sequence was discovered by Jonathan Ayres, who entered it in
-the OEIS in September 2001 \cite{oeis}, and was first studied in print by
-Lagarias, Rains, and Sloane \cite{lrs}, who credit Ayres with its
-discovery. It starts with $1,2$ and then chooses the least unused positive
-integer having a common factor with the preceding term. It is
-\href{https://oeis.org/A064413}{A064413} in the On-Line Encyclopedia
-of Integer Sequences \cite{oeis}. Write $\U_t=\{a(1),\ldots,a(t)\}$.
-The rule is
+\section{The result}
+The EKG sequence starts $1,2,4,6,3,9,12,8,10,5,15,18,14,7,21$.
+Write $\U_t=\{a(1),\ldots,a(t)\}$. Its defining greedy rule is
 \begin{equation}\label{eq:rule}
  a(1)=1,\quad a(2)=2,\quad
  a(n)=\min\{m\geq 1:m\notin\U_{n-1},\
                          \gcd(m,a(n-1))>1\}\quad(n\geq3).
 \end{equation}
-Its first terms are $1,2,4,6,3,9,12,8,10,5,15,18,14,7,21$.
-We use LRS numbering from the arXiv text; in the journal version their
-Conjectures 1--3 are Conjectures 4.1--4.3.
-Lagarias, Rains, and Sloane prove the permutation property, increasing
-order of the primes (their Lemma 2), and linear upper and lower bounds.
-Their numerical experiments suggested three branches: ordinary values
-near $n$, primes near $n/2$, and three times primes near $3n/2$, as Ayres
-had also observed \cite[Section~4]{lrs}.
-Their PDF abstract says, exactly, ``We conjecture that almost all
-$a(n)$ satisfy the asymptotic formula'' and displays
-\[
- a(n)=n(1+1/(3\log n))+o(n/\log n)\quad\text{as }n\to\infty.
-\]
-Their Conjecture 2 defines $\sim$ as a ratio tending to $1$ and gives
-these exact mathematical expressions, with the indicated conditions:
-\[
-\begin{array}{ll}
- a(n)\sim n[1+1/(3\log n)],&a(n)\ne p,3p\ (p\text{ prime}),\\
- a(n)\sim \tfrac12 n[1+1/(3\log n)],&a(n)=p\ (p\text{ prime}),\\
- a(n)\sim \tfrac32 n[1+1/(3\log n)],&a(n)=3p\ (p\text{ prime}).
-\end{array}
-\]
-Thus the displayed Conjecture 2, read literally, asks only for three
-ratio limits. We interpret its intended second-order content in the
-stronger additive sense stated in their PDF abstract. The arXiv web
-abstract has different parentheses; the PDF is the source here.
 
-Hofman and Pilipczuk \cite[Theorem 4.3]{hp} prove that every odd prime
-$p$ is preceded by $2p$; the following $3p$ is the consequence already
-noted in LRS Conjecture 1. Their proof uses the LRS computation for
-$p\leq25000$; Haver's proof reduces this finite range \cite{haver}.
-Hofman and Pilipczuk also prove the three ratio limits in LRS Conjecture 2:
-their Theorem 4.17 gives $a'_n=n+O(n/\log\log\log n)$.
-Their $a'_n$ also replaces the prime $2$, so it agrees with our $b(n)$
-only up to finitely many indices and yields the same asymptotic bound.
-Their Conjecture 5.1 writes the LRS formula with $\sim$, but they
-introduce it as ``the stronger conjecture''; we read this as support for
-the additive second-order reading above.
-Haver \cite{haver} proves the
-stronger $b(n)=n+O(n/\log n)$ and quantitative estimates for early even
-values, used values above the least unused even integer, and missing
-composites below it. Haver's Corollary 2(e), in version 3 dated October 4,
-2026, reduces the second-order assertion at these even integers to a
-negligible count of odd used values above them. Haver's Theorem 1(d)
-(also stated in his abstract) and Corollary 12(d) already give
-$E(t)-t\leq(1/3+o(1))t/\log t$ and
-$N_p\geq2p-(2/3+o(1))p/\log p$, with sharp constants.
-Our contribution is the lower half of the clock,
-$E(t)-t\geq(1/3-o(1))t/\log t$, and the transfer from frontier times
-to the full sequence of indices.
-We prove the remaining hypothesis in Haver's Corollary 2(e), and a
-uniform bound for missing composites needed for that transfer.
-The reduction and the estimates it uses are Haver's.
+We use the smoothing convention of LRS Figure 5 \cite{lrs}:
+\begin{equation}\label{eq:smooth}
+ b(n)=s(a(n)),\qquad
+ s(m)=\begin{cases}
+  2p,&m=p\text{ or }m=3p\text{ for an odd prime }p,\\
+  m,&\text{otherwise}.
+ \end{cases}
+\end{equation}
 
+All logarithms are natural; $\N$ denotes the natural numbers.
+
+\begin{theorem}\label{thm:main}
+For the sequence defined by \eqref{eq:rule} and \eqref{eq:smooth},
+\[
+ b(n)=n+\frac{n}{3\log n}+o\!\left(\frac{n}{\log n}\right)
+ \qquad(n\longrightarrow\infty).
+\]
+Precisely, for every real $\eps>0$ there is an $N\in\N$, $N\geq3$,
+such that for every $n\in\N$ with $n\geq N$,
+\begin{equation}\label{eq:epsilon}
+ \left|b(n)-n-\frac{n}{3\log n}\right|
+       \leq \eps\frac{n}{\log n}.
+\end{equation}
+\end{theorem}
+
+
+This is an eventual assertion along all indices of $b$, with one cutoff
+for each $\eps$. The original sequence has the displayed formula only
+at almost all indices: the prime and three-times-prime branches remain
+different. Corollary~\ref{cor:branches} and its proof give the branch
+formulas and the density-zero exception set.
+
+\paragraph{The question and prior work.}
+Lagarias, Rains and Sloane's arXiv v1 PDF \cite[abstract]{lrs} says
+``We conjecture that almost all $a(n)$ satisfy the asymptotic formula''
+and displays $a(n)=n(1+1/(3\log n))+o(n/\log n)$.
+Their opening credits the sequence as ``discovered by Jonathan Ayres'';
+Section~4 says of the three lines, ``This was also observed by Ayres''.
+Their arXiv Conjecture~2 uses ratio
+asymptotics, a weaker assertion. Hofman and Pilipczuk's smoothed sequence $a'_n$ replaces $p,3p$
+by $2p$ for every prime $p$, including $2$. Their Theorem~4.17 \cite{hp} gives $a'_n=n+O(n/\log\log\log n)$.
+This convention differs from $b$ at only finitely many indices.
+Haver's version~3 \cite[Corollary~2(e)]{haver} states the counting
+criterion; his Theorem~1(d) and Corollary~12(d) give the sharp upper
+bound $E(t)-t\leq(1/3+o(1))t/\log t$, where $E(t)$ is the least
+unused positive even integer after $t$ terms. Here the new work is the
+remaining lower bound and the transfer to all smoothed indices.
+The hard step is improving the displacement estimates from
+$O(x/\log x)$ to $o(x/\log x)$; multiplying the existing bounds
+leaves a fixed coefficient. The proof below supplies sparsity of the
+prime cofactors that those bounds alone do not detect.
+
+\section{Method and consequences}
+The argument proceeds from two uniform displacement estimates to exact
+counting, then to the sequence. Put $L(x)=x/\log x$ for $x>1$.
+Propositions~\ref{prop:upper} and \ref{prop:lower} show that used values
+other than $3p$ exceed $E(t)$ by at most $o(L(E(t)))$, and that every
+unused composite below $E(t)$ lies within $o(L(E(t)))$ of it.
+For a fixed $\delta>0$ and a putative displacement $D\geq\delta x/\log x$,
+selected even
+multiples force distinct neighbors to have the form $rq$, where $r$ is their common prime factor
+and $q$ is prime in a common interval. Their positive density contradicts
+Lemma~\ref{lem:capacity}, a fixed-modulus sieve bound. The order of
+choosing constants makes the estimates uniform.
+
+The exact identity \eqref{eq:clockexact} then has negligible error
+terms. The prime number theorem gives its coefficient
+$1-2(1/2)+1/3=1/3$. An ordinary value is one unchanged by smoothing; a prime block is
+the pattern $2p,p,3p$ for an odd prime $p$. At an ordinary position the pre-occurrence frontier
+handles a possible jump; at a prime block the three smoothed values
+coincide. Section~\ref{sec:transfer} completes the proof, including the
+quantifiers of \eqref{eq:epsilon}. All details follow in the appendix.
+
+The consequences are stated and proved in
+Section~\ref{sec:consequences}: the eventual sign of $a(n)-n$, its
+below-diagonal count and the sharper complementary count, finiteness
+on the three critical lines, finiteness of A155549 and A064420, and
+finiteness of cycles of each bounded length. They include the
+Ordowski and Jasinski conjectures quoted there. The three-branch
+formulas are Corollary~\ref{cor:branches}. No completeness of the
+finite OEIS lists is asserted.
+
+\section{Checked scope and reproduction}\label{sec:lean}
+The standard Lake project in \path{lean/} checks Theorem~\ref{thm:main}
+from the literal greedy rule, including existence, leastness and the
+smoothing convention. Haver's estimates and the prime number theorem
+are imported proved theorems, recompiled with the proof; their provenance
+and licenses are in \path{THIRD_PARTY.md}. The build checks each proof against its independently stated type and
+allows only Lean's standard logical axioms. The unrelated admitted
+statements in the imported prime-number-theorem project are outside the
+checked proofs. The detailed source map and axiom output are in
+\path{checks/details.tex} and \path{lean/README.md}.
+
+The Lean-checked consequences are the eventual sign, below-diagonal
+asymptotic, density-one conclusion, three-line finiteness, the two
+exceptional-set finiteness statements, and bounded-cycle finiteness.
+The three-branch corollary and the sharper complementary count are
+written deductions, not separate Lean theorems. The trusted base is
+Lean's kernel and its standard logical axioms; the written deductions
+are supplied in full. No human expert has reviewed this work.
+
+Install elan, then from the public folder run:
+\begin{verbatim}
+cd lean
+lake exe cache get
+lake build
+\end{verbatim}
+The toolchain and dependencies are pinned in \path{lean/lean-toolchain}
+and \path{lean/lake-manifest.json}. The optional numerical table and
+its generator in \path{data/} are not part of the proof.
+\path{lean/README.md} identifies the exact theorem roots, independent
+statement checks and finite controls.
+
+\paragraph{Acknowledgment and license.}
+The author thanks Tomer Haver for the estimates, counting identity,
+reduction and accompanying Lean sources. Copyright \textcopyright\ 2026
+the author named in this paper. Apache-2.0 (see the repository's LICENSE),
+except for the third-party material listed in \path{THIRD_PARTY.md}.
+
+\clearpage
+\appendix
+\section{Definitions, interfaces and the three branches}
+This section fixes the indexing and smoothing conventions and derives
+the three branches before the detailed proof of the main theorem.
 For comparison with \eqref{eq:rule}, the Lean construction in
 \path{EKG/Canonical.lean} is transliterated below (\texttt{Nat} denotes the
 natural numbers). It is zero-based internally; \texttt{chooseNext}
@@ -155,14 +192,6 @@ unused total extension. Section~\ref{sec:lean} explains the checked
 existence, gcd eligibility and minimality statements, not additional
 assumptions on this construction.
 
-We use the smoothing convention of LRS Figure 5 \cite{lrs}:
-\begin{equation}\label{eq:smooth}
- b(n)=s(a(n)),\qquad
- s(m)=\begin{cases}
-  2p,&m=p\text{ or }m=3p\text{ for an odd prime }p,\\
-  m,&\text{otherwise}.
- \end{cases}
-\end{equation}
 In particular, $s(2)=2$ and $s(6)=6$. OEIS A256417 includes the prime
 $2$ in both replacements \cite{oeis}; it differs from $b$ only at
 indices $2,4$, where our values are $2,6$ and its values are $4,4$.
@@ -179,20 +208,6 @@ noncomputable def b (n : Nat) : Nat := smoothValue (a n)
 \end{verbatim}
 Here \texttt{And} and \texttt{Not} are Lean's logical constructors;
 the distributed source uses the usual symbolic notation. All logarithms are natural.
-
-\begin{theorem}\label{thm:main}
-For the sequence defined by \eqref{eq:rule} and \eqref{eq:smooth},
-\[
- b(n)=n+\frac{n}{3\log n}+o\!\left(\frac{n}{\log n}\right)
- \qquad(n\longrightarrow\infty).
-\]
-Precisely, for every real $\eps>0$ there is an $N\in\N$, $N\geq3$,
-such that for every $n\in\N$ with $n\geq N$,
-\begin{equation}\label{eq:epsilon}
- \left|b(n)-n-\frac{n}{3\log n}\right|
-       \leq \eps\frac{n}{\log n}.
-\end{equation}
-\end{theorem}
 
 The Lean type, transliterated using \texttt{abs}, \texttt{And} and \texttt{Exists}
 for the usual logical notation and opening \texttt{EKG.CanonicalEndpoint},
@@ -227,13 +242,29 @@ $a(n)=3b(n)/2$, respectively. Multiply Theorem~\ref{thm:main}
 by the fixed factor. The finitely many cases involving $2$ do not
 matter for any limit.
 \end{proof}
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1.1cm,y=0.65cm]
+\draw[->] (0,0) -- (5.1,0) node[right] {$n$};
+\draw[->] (0,0) -- (0,7.7) node[above] {$a(n)$};
+\draw[blue] (0,0) -- (4.5,2.25) node[right,black] {$n/2$};
+\draw[blue] (0,0) -- (4.5,4.5) node[right,black] {$n$};
+\draw[blue] (0,0) -- (4.5,6.75) node[right,black] {$3n/2$};
+\end{tikzpicture}
+\caption{The three critical lines, shown schematically. This is not
+sequence data; Corollary~\ref{cor:branches} gives the positive
+second-order corrections, and Corollary~\ref{cor:lines} proves
+finiteness of intersections with these exact lines.}
+\label{fig:branches}
+\end{figure}
+
 These are the three lines observed by Ayres and by Lagarias, Rains, and
-Sloane. For large $k$ with $a(k)\in\{p,3p\}$ we have $b(k)=2p\leq2k$, so
+Sloane \cite[Section~4]{lrs}. For large $k$ with $a(k)\in\{p,3p\}$ we have $b(k)=2p\leq2k$, so
 at most $2\pi(N)+O(1)=o(N)$ indices $k\leq N$ are of these two kinds.
 Hence the first line gives the formula of the LRS abstract for almost
 all $n$: this is the additive second-order interpretation. It implies
 the literal Conjecture 2, whose ratio limits were already proved
-by Hofman and Pilipczuk. LRS Conjecture 3,
+by Hofman and Pilipczuk \cite[Theorem~4.17]{hp}. LRS Conjecture 3,
 $13n/28\leq a(n)\leq12n/7$ for every $n$, with equality only at $n=28$
 and $n=7$, respectively, is not settled here: an eventual asymptotic
 does not settle the required finite range. It is proved, with computer
@@ -255,44 +286,9 @@ finite and, on A152519, that the three lines carry finitely many points
 in total. And the permutation has finitely many cycles of each bounded
 length.
 
-The coefficient has the counting heuristic of LRS Section 4 \cite{lrs}:
-\[
- n\approx x-\frac{x}{2\log x}+\frac{x}{6\log x}
-       =x-\frac{x}{3\log x}.
-\]
-Our new step upgrades two $O(x/\log x)$ displacement bounds to
-little-$o$. For the upper bound, the old greedy inequality is
-$D\leq2rk(t)$, with $r\leq\sqrt{e+D}$ and
-$k(t)\leq K_0\sqrt e/\log e$. Multiplying these estimates leaves a
-fixed coefficient of $e/\log e$; it does not force that coefficient
-to vanish. For the lower bound,
-$D\leq2\spf(h)F(e)$ and $\spf(h)\leq\sqrt e$ have the same loss.
-Haver already identifies these rough-predecessor and rough-missing-composite
-obstructions in the remark after Corollary 12 \cite{haver}.
-The additional information is sparsity among the forced prime cofactors. Given a putative displacement $D\geq\delta x/\log x$, we
-instead select multiples $2rMj$ and force their distinct neighbors
-to be products $rq_j$ with $q_j$ prime. There are at least
-$D/(4rM)-O(1)$ such cofactors in an interval of length
-$O(x/(r\log x))$. For each fixed $\delta>0$ their density is bounded
-below by a positive constant independent of $x$. It need not be
-independent of $\delta$: $M$ also depends on $\delta$. The sieve bound
-permits an arbitrarily small fixed upper density, chosen after $\delta$
-and $M$, which is exactly what the little-$o$ conclusion needs.
-
-The two estimates are an upper bound for the largest ordinary used
-value above the least unused even integer, and a lower bound on every
-unused composite below it. Sections~\ref{sec:upper} and
-\ref{sec:lower} prove them, then exact counting and the prime number
-theorem give the result. We extract no explicit remainder rate.
-The nonquantitative step is the choice of a fixed sieve modulus for
-each $\delta$, followed by unspecified eventual cutoffs in localization
-and the qualitative prime number theorem. This is not a claim of an
-intrinsically ineffective obstruction: the sieve constants are
-computable, but this proof does not supply a function $N(\eps)$.
-An explicit rate looks within reach using Brun--Titchmarsh in place
-of the fixed-modulus sieve; this is left for future work.
-
 \section{Frontiers and established estimates}\label{sec:inputs}
+
+This section fixes the frontier notation and records the established estimates used in the proof.
 
 Write $L(x)=x/\log x$ for $x>1$, and let
 $\U_t=\{a(1),\ldots,a(t)\}$.
@@ -335,8 +331,8 @@ Distinct introduction indices $N_p$ are at least four apart.
 
 These are results about the actual greedy sequence, not hypotheses
 added to Theorem~\ref{thm:main}. The prime pattern goes back to
-Hofman and Pilipczuk \cite{hp}; we use its introduction formulation
-as proved in Haver's archive \cite{haver}.
+Hofman and Pilipczuk \cite[Theorem~4.3]{hp}; we use its introduction formulation
+as proved in Haver's archive \cite[Section~2, (F2)]{haver}.
 The early-even bound follows from Haver's bound
 $K(t)\leq12\pi(\sqrt e)+720$ and elementary prime estimates.
 One may take $C_1=4\cdot793^2+2\cdot793$ in \eqref{eq:oldspan}.
@@ -350,7 +346,48 @@ $\sqrt e/\log e\geq1$, absorbing the additive constants.
 The prime estimate in \eqref{eq:F} does not require the
 prime number theorem.
 
+For the following comparison, write $e=E(t)$, let $D$ denote a positive
+displacement, let $r$ be the least prime factor of a predecessor, and let
+$h$ denote a missing composite. The quantities $k(t),K_0,F(e)$ and
+$\spf$ have been defined above.
+
+The coefficient has the counting heuristic of LRS Section 4 \cite{lrs}:
+\[
+ n\approx x-\frac{x}{2\log x}+\frac{x}{6\log x}
+       =x-\frac{x}{3\log x}.
+\]
+Our new step upgrades two $O(x/\log x)$ displacement bounds to
+little-$o$. For the upper bound, the old greedy inequality is
+$D\leq2rk(t)$, with $r\leq\sqrt{e+D}$ and
+$k(t)\leq K_0\sqrt e/\log e$. Multiplying these estimates leaves a
+fixed coefficient of $e/\log e$; it does not force that coefficient
+to vanish. For the lower bound,
+$D\leq2\spf(h)F(e)$ and $\spf(h)\leq\sqrt e$ have the same loss.
+Haver already identifies these rough-predecessor and rough-missing-composite
+obstructions in the remark after Corollary 12 \cite{haver}.
+The additional information is sparsity among the forced prime cofactors. Given a putative displacement $D\geq\delta x/\log x$, we
+instead select multiples $2rMj$ and force their distinct neighbors
+to be products $rq_j$ with $q_j$ prime. There are at least
+$D/(4rM)-O(1)$ such cofactors in an interval of length
+$O(x/(r\log x))$. For each fixed $\delta>0$ their density is bounded
+below by a positive constant independent of $x$. It need not be
+independent of $\delta$: $M$ also depends on $\delta$. The sieve bound
+permits an arbitrarily small fixed upper density, chosen after $\delta$
+and $M$, which is exactly what the little-$o$ conclusion needs.
+
+The two estimates are an upper bound for the largest ordinary used
+value above the least unused even integer, and a lower bound on every
+unused composite below it. Sections~\ref{sec:upper} and
+\ref{sec:lower} prove them, then exact counting and the prime number
+theorem give the result. We extract no explicit remainder rate.
+The nonquantitative step is the choice of a fixed sieve modulus for
+each $\delta$, followed by unspecified eventual cutoffs in localization
+and the qualitative prime number theorem. This is not a claim of an
+intrinsically ineffective obstruction: the sieve constants are
+computable, but this proof does not supply a function $N(\eps)$.
 \section{Greedy bounds and interval prime capacity}\label{sec:elementary}
+
+This section supplies the greedy inequality and the elementary sieve tools for both displacement bounds.
 
 If $q$ is any prime divisor of $a(j-1)$, every positive multiple of $q$
 smaller than $a(j)$ was used before index $j$; otherwise the greedy
@@ -363,6 +400,9 @@ are used even values above $E(t)$, and there are at least
 $(a(j)-E(t))/(2q)-1$ of them. Their number is at most $K(t)$.
 Notice that \eqref{eq:greedy} holds for every prime divisor $q$,
 at the same observation time, even if $j$ is much earlier than $t$.
+
+Euler's totient $\varphi(W)$ counts the reduced residue classes modulo $W$,
+and $\omega(W)$ counts its distinct prime divisors.
 
 The following elementary fixed-modulus sieve estimate is included with
 its proof; compare the sieve of Eratosthenes in \cite{sievebook}.
@@ -427,6 +467,8 @@ The constant is uniform. This uses only the old big-$O$ rate,
 not the sharp clock we will prove.
 
 \section{The upper excursion}\label{sec:upper}
+
+This section proves the uniform upper displacement bound for ordinary used values.
 
 \begin{proposition}\label{prop:upper}
 As $t\to\infty$,
@@ -517,6 +559,8 @@ on $t$ works for every later prefix. This proves the proposition.
 \end{proof}
 
 \section{Missing composites}\label{sec:lower}
+
+This section bounds the distance of every missing composite below the frontier.
 
 \begin{proposition}\label{prop:lower}
 For every $\delta>0$ there is $t_0$ such that, for all $t\geq t_0$
@@ -656,14 +700,6 @@ We obtain the exact identity
  \end{split}
 \end{equation}
 Haver proves this counting identity in Corollary 12(b).
-Haver's Lean archive already proves \path{clock_balance},
-\path{clock_identity}, \path{clock_identity_with_ticks}, and
-\path{clock_identity_from_interval_counts}; the last takes the
-endpoint errors as hypotheses. We discharge those hypotheses by proving
-that the missing-prime count is $P_1+\theta_1$ and the tick count is
-$P_2-\theta_2$, and by evaluating the interval endpoints through $I$
-and $\theta$ as above.
-
 The old missing-composite estimate suffices to count holes.
 For $t\geq13$, classify a missing composite by $s=\spf(h)$.
 By \eqref{eq:oldhole}, it is an odd multiple of the odd prime $s$
@@ -697,6 +733,8 @@ stated in Haver's Corollary 2(e) and proved in Corollary 12(d);
 the counting criterion itself is not new here.
 
 \section{Passage to the full sequence of indices}\label{sec:transfer}
+
+This section transfers the frontier asymptotic to all smoothed positions.
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
 First suppose $x=a(n)$ is ordinary, at a sufficiently large index,
@@ -751,7 +789,7 @@ finiteness, not the completeness. Below, $p$ denotes a prime.
 
 Only one feature of Theorem~\ref{thm:main} is new for these purposes:
 $b(n)>n$ for all large $n$, the sign of the second-order term. The ratio
-$b(n)/n\to1$ was already known \cite{hp,haver}; it does not decide on
+$b(n)/n\to1$ was already known \cite[Theorem~4.17 and Corollary~12(c), respectively]{hp,haver}; it does not decide on
 which side of the diagonal $a(n)$ lies.
 
 \begin{lemma}\label{lem:window}
@@ -875,115 +913,6 @@ that every cycle of length at most $L$ contains an integer below
 $N_0$. Distinct cycles are disjoint, so there are fewer than $N_0$ of them.
 \end{proof}
 
-\section{Lean formalization and verification}\label{sec:lean}
-
-The project \texttt{lean/} uses Lean 4 \cite{lean} and mathlib
-\cite{mathlib}. The complete chain from the literal greedy rule
-\eqref{eq:rule}, through the smoothing \eqref{eq:smooth}, to
-Theorem~\ref{thm:main} is machine-checked. Haver's estimates in
-Proposition~\ref{prop:inputs} are \emph{imported proved theorems from Haver's
-Lean sources}, recompiled in this development. They are neither
-independently re-proved mathematical contributions of this paper nor
-hypotheses or added axioms. The archive provides, among others,
-\path{EKG/Canonical.lean}, \path{EKG/EarlyEvens.lean},
-\path{EKG/Span.lean}, \path{EKG/MissingComposites.lean} and
-\path{EKG/SmoothedPositions.lean}. Our new proofs of the two little-$o$
-estimates, the endpoint hypotheses of the counting identity, and the final
-transfer close the chain.
-The elementary constants used to weaken Haver's bounds are also proved.
-
-The type transliterated beside Theorem~\ref{thm:main} is independently fixed by
-\texttt{EndpointStatement} in \path{Statement.lean}.
-\path{Check.lean} requires \texttt{ekg\_sharp\_all\_index} to have that type.
-For the rule, \texttt{actualA\_properties}, \texttt{actualA\_gcd\_rule}
-and \texttt{actualA\_gcd\_minimal} prove positivity, non-repetition,
-gcd eligibility, and leastness, respectively. Thus the internal
-\texttt{GreedySeq} interface is instantiated by the recursively defined
-sequence, rather than left as an assumption.
-The proof sources accompany this manuscript in the same deposit.
-
-The formal $a(n)$ is the zero-based canonical sequence evaluated at
-$n-1$; its value at $n=0$ is a total extension unused in the theorem.
-The canonical construction proves existence, minimality, eligibility,
-and distinctness for the literal rule \eqref{eq:rule}, including the
-prime factor $2$. The new \texttt{smoothValue} definition excludes
-$2$ in both branches. The bridge to Haver's smoothing is proved
-for every $n\geq5$, using that the exceptional raw values $2,6$
-occur only at indices $2,4$.
-
-The files under \texttt{EKG/} correspond to the proof as follows:
-\begin{center}\small
-\begin{tabular}{ll}
-\texttt{PartA.lean}, \texttt{PartB.lean} & upper and lower excursions\\
-\texttt{CountingExact.lean} & exact counting identity\\
-\texttt{EndpointRemainders.lean} & negligible remainders\\
-\texttt{EndpointClock.lean} & prime counts and frontier clock\\
-\texttt{EndpointStructure.lean} & ordinary terms and prime blocks\\
-\texttt{EndpointTransfer.lean} & transfer to all indices
-\end{tabular}
-\end{center}
-The weak prime number theorem is obtained from
-\texttt{pi\_alt'} in the pinned \emph{PrimeNumberTheoremAnd}
-project \cite{pntcode}; its real-floor inclusive prime count is
-adapted in \path{SolutionPNT.lean}.
-
-The Lean toolchain and dependency revisions are pinned in
-\texttt{lean/lean-toolchain} and \texttt{lean/lake-manifest.json}.
-Source provenance is recorded in
-\path{THIRD_PARTY.md}.
-
-One inherited finite \texttt{native\_decide} proof is replaced by
-ordinary kernel proofs; two compatibility edits change tactic lines
-only, without changing definitions or declaration types.
-
-The exact output of \texttt{\#print axioms ekg\_sharp\_all\_index} is
-\begingroup\small
-\begin{verbatim}
-'ekg_sharp_all_index' depends on axioms: [propext, Classical.choice, Quot.sound]
-\end{verbatim}
-\endgroup
-These are the usual Lean logical axioms, with no mathematical
-hypothesis added for an estimate, the counting identity or the prime
-number theorem.
-The imported PNT file contains unrelated admitted declarations
-\texttt{prelim\_decay\_2}, \texttt{prelim\_decay\_3} and \texttt{decay\_alt};
-none occurs in the proof of Theorem~\ref{thm:main}. This does not certify the whole
-upstream project. The three-branch corollary is the elementary algebraic
-consequence proved in the text; its separate statement is not included
-as an additional Lean theorem.
-
-The following consequences in Section~\ref{sec:consequences} are also
-machine-checked. \path{CorollaryStatements.lean} fixes their statements
-independently of the proofs, for the one-based sequence \texttt{a}:
-\begin{itemize}
-\item \texttt{EventualSignStatement}: the first part of
-  Corollary~\ref{cor:sign};
-\item \texttt{BelowDiagonalCountStatement}: its count
-  $\#\{k\leq N:a(k)<k\}\sim N/(2\log N)$;
-\item \texttt{OrdowskiDensityStatement}: its last statement,
-  $\#\{k\leq N:a(k)>k\}/N\to1$. The sharper form
-  $N-(1/2+o(1))N/\log N$ follows from the previous count and the
-  finiteness of $\{k:a(k)=k\}$ as in the proof, but is not stated
-  as a separate Lean theorem;
-\item \texttt{JasinskiFinitenessStatement}: Corollary~\ref{cor:lines},
-  with the lines written $2a(k)=k$, $a(k)=k$ and $2a(k)=3k$ as in the OEIS;
-\item \texttt{ExceptionalFinitenessStatement}: the finiteness of the
-  indices $n$ with $a(n)$ not prime and $a(n)\leq n-1$, and of A064420;
-\item \texttt{A155549FinitenessStatement}: the finiteness of A155549,
-  the image of that index set under $a$;
-\item \texttt{ShortCyclesStatement}: Corollary~\ref{cor:cycles}, a cycle
-  being the orbit of a positive $m$ with $a^{[l]}(m)=m$ for some
-  $1\leq l\leq L$.
-\end{itemize}
-The proofs are in \path{SolutionSign.lean},
-\path{SolutionDensity.lean} and \path{SolutionCycles.lean}; they use
-Theorem~\ref{thm:main}, the permutation property and the prime number
-theorem above. \path{Check.lean} checks each against its statement and
-guards its axioms, which are again exactly
-\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
-
-No human expert has reviewed it.
-
 \section{Numerical illustration}\label{sec:numerics}
 
 Table~\ref{tab:ratio} gives the normalized error
@@ -1025,41 +954,6 @@ at most $2z^{121}/(121(1-z^2))$. This certifies an absolute error
 at most $10^{-17}$ in the recorded ratios and correct rounding to
 nine decimal places in Table~\ref{tab:ratio}.
 
-\section{Related work}\label{sec:related}
-
-The argument completes the second-order program of Haver \cite{haver},
-using the structural work of Lagarias, Rains, and Sloane \cite{lrs} and
-Hofman and Pilipczuk \cite{hp}. Haver's Theorem 1(d) and Corollary 12(d)
-already prove the upper half of the frontier clock with sharp constant
-$1/3$ in his manuscript; his Lean sources do not cover the sharp
-coefficient or the Corollary 2(e) criterion. The new contribution is the
-lower half plus the transfer to the full sequence of indices.
-Haver also proves the exact counting identity and the equivalence stated
-in Corollary 2(e), and identifies the rough-predecessor obstruction in
-the remark after Corollary 12. We discharge the remaining hypothesis of
-that equivalence and prove the uniform missing-composite estimate needed
-for the transfer, extending the Lean proof to the full second-order theorem.
-The prime-capacity lemma is an elementary fixed-modulus sieve bound
-\cite{sievebook}, proved here; it does not require a short-interval
-prime number theorem. Haver's cited manuscript is unrefereed.
-
-\section*{Acknowledgment}
-The author thanks Tomer Haver for the quantitative estimates, counting
-identity, reduction and accompanying Lean sources that make this
-completion possible.
-
-\section*{License}
-Copyright \textcopyright\ 2026 the author named in this paper.
-This work is licensed under \mbox{Apache-2.0} (see the repository's LICENSE),
-except for the third-party material listed in \path{THIRD_PARTY.md}.
-
-\section*{Disclosure}
-The main theorem and the consequences listed in
-Section~\ref{sec:lean} are formally proved in Lean. The three-branch
-corollary and the sharper count in Corollary~\ref{cor:sign} are
-proved in the text, not as separate Lean theorems.
-No human expert has reviewed it.
-
 \begin{thebibliography}{99}
 
 \bibitem{sievebook}
@@ -1078,7 +972,8 @@ Springer, 2021, pp. 625--635.
 Ch.-J. de la Vall\'ee Poussin, Recherches analytiques sur la th\'eorie
 des nombres premiers. Premi\`ere partie: Les nombres premiers en g\'en\'eral,
 \emph{Ann. Soc. Sci. Bruxelles} \textbf{20}, deuxi\`eme partie (1896),
-183--256. \href{https://archive.org/details/recherchesanaly00pousgoog}{Digitized collected offprint}.
+Section~56 (\emph{Digitized collected offprint}, 1897, pp.~67--69).
+\href{https://archive.org/details/recherchesanaly00pousgoog}{Original offprint}.
 
 \bibitem{devlieger}
 M. De Vlieger, Constitutive analysis of the EKG sequence, 2021,
@@ -1109,7 +1004,7 @@ P. Hofman and M. Pilipczuk, A few new facts about the EKG sequence,
 J. C. Lagarias, E. M. Rains, and N. J. A. Sloane,
 The EKG sequence, \emph{Experimental Math.} \textbf{11} (2002), 437--446.
 \href{https://doi.org/10.1080/10586458.2002.10504486}{doi:10.1080/10586458.2002.10504486};
-\href{https://arxiv.org/abs/math/0204011}{arXiv:math/0204011}.
+\href{https://arxiv.org/abs/math/0204011v1}{arXiv:math/0204011v1}.
 
 \bibitem{mathlib}
 The mathlib Community, The Lean mathematical library, in

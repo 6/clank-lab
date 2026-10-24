@@ -22,13 +22,12 @@ $\varepsilon n/\log n$ for all $n$ beyond some $N(\varepsilon)$. Since
 $a(n) = b(n)$ except at the indices where $a(n)$ is an odd prime or three
 times one, a set of density zero, the formula holds for $a(n)$ at almost
 all $n$. This proves the additive second-order interpretation in their PDF abstract.
-Their numbered Conjecture 2, read literally, asks only for ratio limits,
-which Hofman and Pilipczuk already proved.
+Their arXiv Conjecture 2 uses ratio limits; Hofman and Pilipczuk's
+Theorem 4.17 gives the smoothed estimate $a'_n=n+O(n/\log\log\log n)$.
 
 This builds directly on Tomer Haver's
 [*Explicit rates for the EKG sequence*](https://doi.org/10.5281/zenodo.23129632)
-(2026), which reduced the question to counting certain odd values and
-proved the upper half of the bound in the manuscript. We prove the lower
+(version 3, October 4, 2026), Corollary 2(e) and Theorem 1(d). We prove the lower
 half and pass from Haver's frontier times to the full sequence of indices.
 Lagarias, Rains and Sloane's Conjecture 3, on global bounds, is proved in
 the companion [sharp EKG bounds paper](../ekg-bounds/README.md).
@@ -80,10 +79,13 @@ This completes Tomer Haver's
 theorems, the sequence's construction and permutation property, the prime
 pattern $2p, p, 3p$, the bounds on early even values, on the span of used
 values and on missing composites, and the rate $b(n) = n + O(n/\log n)$.
-Haver's manuscript also reduces the question to a counting problem
-(Corollary 2(e)) and proves the upper half of the second-order bound
-(abstract and Theorem 1(d)); these are outside his Lean coverage, and our
-Lean proof derives the counting identity and the sharp coefficient itself. The conjecture is due to
+Haver's manuscript states the counting criterion
+(Corollary 2(e)) and sharp upper bound (Theorem 1(d)); these second-order
+assertions lie outside his Lean archive's verified core. That archive
+already proves the general counting identities. Our Lean proof establishes
+the endpoint prime-interval and tick counts, discharges the hypotheses of
+his interval-count identity, and derives the sharp coefficient and transfer
+to all smoothed indices. The conjecture is due to
 [Lagarias, Rains and Sloane (2002)](https://doi.org/10.1080/10586458.2002.10504486),
 and [Hofman and Pilipczuk (2008)](https://cs.uwaterloo.ca/journals/JIS/VOL11/Hofman/hofman1.html)
 proved the ratio form (LRS Conjecture 2). The prime number theorem in Lean comes from
@@ -99,7 +101,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The second-order asymptotic of the EKG sequence}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v4/results/ekg-sequence}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v5/results/ekg-sequence}},
   doi          = {10.5281/zenodo.23572881}
 }
 ```

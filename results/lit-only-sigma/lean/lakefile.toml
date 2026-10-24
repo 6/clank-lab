@@ -12,4 +12,4 @@ rev = "v4.34.0"
 
 [[lean_lib]]
 name = "LitOnlySigma"
-roots = ["Statement", "LitOnlySigma", "Controls", "Check", "Audit"]
+roots = ["Statement", "LitOnlySigma", "Controls", "Check", "Audit", "ExtensionStatement", "ThreeTypes", "UniformBlowup"]

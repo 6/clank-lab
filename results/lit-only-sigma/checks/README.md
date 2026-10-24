@@ -24,12 +24,14 @@ reachable sets from the starting configuration. Both checkers accept the
 certificate and reject `data/corrupt.json`, which omits state 45.
 
 The entry point runs both checkers without optimization, checks their
-answers, and confirms that the diagram and the paper's closure table
+answers, and confirms that the diagram and the retained ten-row regression table
 describe the same graph, start and transitions as the certificate. Every
 valid transition from the ten-state set stays in it. All its states have
 at least four lit vertices, and the start has exactly four; the regular
 path reaches zero. Thus the checked bounds are $ML_G(27)=0$ and
 $`ML_G^*(27)=4`$, giving $D(G)\geq4>7/2$.
+
+The universal blow-up theorem and the three-type orbit, including symmetry coverage, are proved in Lean. The finite certificate remains an independent regression control; these programs do not prove an assertion for every fiber size by testing small examples.
 
 Execution of these exact checks relies on the Python interpreter and its
 execution platform.

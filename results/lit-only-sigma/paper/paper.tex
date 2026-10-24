@@ -13,7 +13,7 @@
 \raggedbottom
 \title{A counterexample to a lit-only sigma-game conjecture}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 23, 2026}
+\date{October 24, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={A counterexample to a lit-only sigma-game conjecture}}
 \begin{document}
 \maketitle
@@ -27,9 +27,11 @@ with gap greater than $n/2$ must be complete $m$-partite for
 $m\equiv3\pmod4$. We refute their Conjecture~5, published in 2011.
 The complement of the disjoint union of a six-cycle and an isolated vertex has a starting
 configuration reducible to zero lights by regular moves but to no fewer
-than four by lit-only moves. A finite closed set of configurations
-certifies the latter assertion. The counterexample is proved in Lean
-from the definitions.
+than four by lit-only moves. Its lit-only orbit has three configuration
+types. Replacing every vertex by $m$ independent copies gives connected
+graphs on $7m$ vertices that are not complete multipartite, with a uniform
+starting configuration having minimum light numbers $0$ and $4m$.
+The counterexample and this family are proved in Lean from the definitions.
 \end{abstract}
 
 \noindent The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
@@ -65,6 +67,22 @@ $\{0,1,3,4\}$. Then
 The graph $G$ is connected and is not complete multipartite.
 \end{theorem}
 
+
+\begin{theorem}\label{thm:blowup}
+For each integer $m\geq1$, replace every vertex $v$ of $G$ by an independent
+fiber $\{(v,i):0\leq i<m\}$, joining all pairs between two fibers exactly
+when their base vertices are adjacent. Call the resulting graph $G_m$,
+and set $x_m(v,i)=x(v)$. Then
+\[
+ \ML_{G_m}(x_m)=0,\qquad \ML_{G_m}^*(x_m)=4m,\qquad
+ \mathcal D(G_m)\geq4m>\frac{7m}{2}.
+\]
+Every $G_m$ is connected and is not complete multipartite.
+\end{theorem}
+
+The multiplicity in Theorem~\ref{thm:blowup} is independent of the number
+of parts in the conjecture below.
+
 A complete $m$-partite graph is loopless, with its vertex set partitioned
 into $m$ nonempty parts, two distinct vertices being adjacent exactly when
 they lie in different parts. Goldwasser, Wang and Wu's
@@ -95,6 +113,8 @@ $\mathcal D(G)$. Wu and Xiang restated the present implication in their
 2019 survey and described prior experiments on lit-only reachability
 \cite[Conjecture~3.3 and pp.~10--11 of the author manuscript]{WX}.
 Their investigations form the background to the present question.
+An outside AI model suggested the three-type description and uniform
+blow-up extension proved here.
 
 Nearby algebraic work includes Wu's analysis of lit-only games on line
 graphs~\cite{Wu}, and Sj\"ostrand's reachability characterization,
@@ -113,7 +133,9 @@ with fewer than four lights. Induction on the length of a move sequence
 therefore proves the lower bound, and the starting configuration attains
 it. The nonedges $01$ and $12$, together with the edge $02$, show that
 nonadjacency fails transitivity and rule out every complete multipartite
-graph. Section~\ref{sec:checks} describes the
+graph. For the family, every move from a uniform state projects to a base
+move and preserves uniformity; every base move lifts. Weights therefore
+scale by $m$. Section~\ref{sec:checks} describes the
 Lean proof, the certificate's independent checkers, and their scope.
 
 \section{The finite certificate}\label{sec:proof}
@@ -159,26 +181,45 @@ For the lit-only lower bound consider the set of configuration codes
 \begin{equation}\label{eq:closed}
  S=\{27,45,54,63,71,78,92,99,113,120\}.
 \end{equation}
-The starting state belongs to $S$. Table~\ref{tab:closure} lists, for
-each state, the vertices at which a lit-only move is permitted and all
-their successor states. The successors in every row belong to $S$.
+This set consists exactly of three types, with indices on the outer
+cycle interpreted modulo six:
+\begin{enumerate}
+\item[(A)] The hub is dark and two of the three antipodal pairs
+$\{0,3\},\{1,4\},\{2,5\}$ are lit: three states, each of weight four.
+\item[(B)] The hub is dark and all six outer vertices are lit: one state,
+of weight six.
+\item[(C)] The hub is lit and three consecutive outer vertices are lit:
+six states, each of weight four.
+\end{enumerate}
+The initial state is of type (A). Rotations and reflections of the outer
+cycle fix the hub and preserve adjacency, hence carry moves to moves.
+Rotations carry each representative through every state of its type.
+For (A), a rotation by three and the reflection $v\mapsto1-v$ act
+transitively on the four lit vertices of the representative
+$\{0,1,3,4\}$. For (B), rotations act transitively on its six lit vertices.
+For the representative (C) state $\{0,1,2,6\}$, the reflection
+$v\mapsto2-v$ exchanges the outer endpoints; the center and hub are
+separate cases. These symmetries cover all allowed moves by five cases,
+writing $(z,v)\mapsto z'$ for the successor of state $z$ played at $v$:
+\[
+ (27,0)\mapsto71,\quad (63,0)\mapsto99,\quad
+ (71,0)\mapsto27,\quad (71,1)\mapsto63,\quad
+ (71,6)\mapsto120.
+\]
+Their successors have types (C), (C), (A), (B), (C), respectively.
+Thus every permitted move stays in $S$; a play at a dark vertex is the
+identity. Induction over every finite move sequence confines the
+lit-only orbit to $S$, giving $\ML_G^*(x)\geq4$. The initial state has
+weight four, so equality holds.
 
-\begin{table}[ht]
-\centering
-\input{../data/closure-table.tex}
-\caption{Closure of $S$ under lit-only moves. Successors are in the
-order of the lit vertices listed in the middle column. Each is obtained
-by exclusive or with the corresponding row of~\eqref{eq:rows}.}
-\label{tab:closure}
-\end{table}
-
-Every lit-only state reachable from $27$ lies in $S$. Indeed, this is
-true before any move; if it holds after a sequence of moves, the next
-allowed move stays in $S$ by Table~\ref{tab:closure}. This proves the
-claim by induction. The state $63$ has six lights and each of the other
-states in $S$ has four. Consequently $\ML_G^*(x)\geq4$. The starting
-state itself has four lights, so equality holds. Together with the
-regular minimum this gives $\mathcal D(G)\geq4>7/2$.
+In fact every state of $S$ is attainable. The other two type (A) states,
+$45$ and $54$, are reached by the legal move lists $(1,5)$ and $(0,2)$.
+From $27$, single moves reach $71,99,120,92$; from $45$, moves $0$ and
+$3$ reach $113$ and $78$. These are all six type (C) states. The move
+list $(0,1)$ reaches the type (B) state $63$. Consequently $S$ is exactly
+the lit-only orbit, and its three-type description proves the claimed
+minimum. Together with the regular minimum this gives
+$\mathcal D(G)\geq4>7/2$.
 
 Finally, $01$ and $12$ are nonedges of $G$, whereas $02$ is an edge.
 In a complete multipartite graph, nonadjacent distinct vertices must lie
@@ -186,12 +227,50 @@ in the same part. The two nonedges would put $0,1,2$ in one part, in
 contradiction to the edge $02$. Thus $G$ is not complete multipartite.
 This completes the proof of Theorem~\ref{thm:main}.
 
+
+\subsection*{Uniform blow-ups}
+We prove Theorem~\ref{thm:blowup} by identifying all configurations
+reachable from the uniform initial state. For a base configuration $y$,
+write $L_m y$ for its uniform lift, $(L_m y)(v,i)=y(v)$. If $R_v$ is a
+regular move at $v$, then for every copy $i$,
+\[
+ R_{(v,i)}(L_m y)=L_m(R_v y).
+\]
+Indeed, precisely the fibers of the neighbors of $v$ are toggled, each
+in its entirety. The fiber of $v$ is not toggled, since $G$ is loopless.
+The played copy is lit exactly when $y(v)$ is lit, so the same identity
+holds for lit-only moves, including identity moves at dark vertices.
+
+Induction now projects every finite move list to its base-vertex list,
+preserving order, repetitions, and lit-only legality at every step.
+Conversely, every base list lifts by playing copy $0$ of each vertex;
+this copy exists because $m\geq1$. Thus the configurations reachable
+from $x_m=L_mx$ in either game are exactly the uniform lifts of those
+reachable from $x$ in that game. Each lit base vertex contributes exactly
+$m$ lit copies, so $|L_my|=m|y|$. The two minima are therefore $0$ and
+$4m$, with the empty sequence attaining the latter and the lifted moves
+$0,4$ attaining the former. The same-start difference proves
+$\mathcal D(G_m)\geq4m>7m/2$.
+
+Every outer copy is adjacent to copy $0$ of the hub. Every hub copy is
+adjacent to copy $0$ of vertex $0$, which is adjacent to copy $0$ of the
+hub. These paths prove connectedness. The first copies of vertices
+$0,1,2$ remain distinct and induce the nonedges $01,12$ and the edge
+$02$. The same part-membership contradiction as before excludes every
+complete multipartition. This completes Theorem~\ref{thm:blowup}.
+
 \section{Formalization, computational checks and scope}\label{sec:checks}
 The Lean project in \path{lean/} proves Theorem~\ref{thm:main} from the
 game definitions, including the induction over arbitrary finite move
 sequences. The theorem \texttt{LitOnlySigma.counterexample} proves the
 graph's symmetry and connectivity, the two same-start minima, failure
 of every complete multipartition, and the negation of Conjecture~5.
+The new endpoints \texttt{LitOnlySigma.three\_type\_description} and
+\texttt{LitOnlySigma.uniform\_blowup} prove the exact three-type orbit
+and Theorem~\ref{thm:blowup}, with every hypothesis discharged.
+The projection and lifting lemmas quantify over arbitrary finite move
+lists and preserve strict lit-only legality. Weight scaling is proved by
+a bijection with the product of the base lit set and the copy set.
 The direct refutation is also named \texttt{LitOnlySigma.not\_conjecture5}.
 The definitions and their correspondence with the source are given in
 \path{lean/Statement.lean} and \path{lean/FAITHFULNESS.md}.
@@ -224,16 +303,17 @@ closed set~\eqref{eq:closed}. The public check is
 \texttt{python3 checks/check.py}
 \end{center}
 It runs two independent exact checkers and corruption controls, and
-confirms that the graph illustration and closure table agree with the
-certificate. One checker uses integer bitmasks; the other uses explicit
+confirms that the graph illustration and the retained ten-row
+regression table agree with the certificate. One checker uses integer bitmasks; the other uses explicit
 sets of vertices and symmetric difference, and additionally enumerates
 the configurations reachable from the starting state in each game.
 Neither checker imports search code. Both reject the corrupted
 certificate obtained by deleting state $45$ from~\eqref{eq:closed}.
 The entry point needs Python~3.10 or later and only its standard library.
 The small finite data
-can also be checked directly from~\eqref{eq:rows} and
-Table~\ref{tab:closure}.
+can also be checked directly from~\eqref{eq:rows}. The ten-row table
+is retained in \path{data/closure-table.tex} as a regression artifact;
+the proof above uses the three configuration types.
 
 The verified finite obligations are the graph's stated adjacency,
 connectivity and failure to be complete multipartite; the regular path
@@ -244,7 +324,9 @@ sequences is the induction given above, also proved in Lean. The checkers
 use exact integer or set operations; there is no numerical approximation.
 
 The result concerns the exhibited starting configuration and its
-consequence for the strict-threshold implication. It asserts neither
+consequence for the strict-threshold implication. The family theorem concerns uniform initial configurations only. The
+stronger statement $\mathcal D(G_m)=4m$ over arbitrary nonuniform
+initial configurations remains unproved here. The result asserts neither
 minimality of the example nor an exact graph-wide value of
 $\mathcal D(G)$, and it does not settle the other light-number or
 maximum-degree conjectures in the cited papers.

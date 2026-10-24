@@ -51,3 +51,25 @@ lake env lean Audit.lean
 
 The trusted base is Lean's kernel and these standard logical foundations,
 together with the source correspondence described in the faithfulness note.
+
+The strengthening definitions in `ExtensionStatement.lean` are proved by
+`ThreeTypes.lean` and `UniformBlowup.lean`. The endpoints are
+`three_type_description : ThreeTypeStatement` and
+`uniform_blowup : UniformBlowupStatement`. The first identifies the exact
+lit-only orbit with three disjoint types (3, 1 and 6 states), checks all
+dihedral symmetries and the five legal-move representatives' exhaustive
+coverage, and gives legal paths to every state. The missing-representative
+control proves that deleting one representative leaves a cover gap.
+
+The second quantifies over every positive natural number m. Vertices are
+`Fin (7*m)`, identified with `Fin 7 × Fin m` by `finProdFinEquiv`. Adjacency
+depends only on the base vertices, so fibers are independent. Every finite
+move list projects in order to the base list, every base list lifts using
+copy 0, and strict lit-only legality is equivalent. Reachable states stay
+uniform; a bijection of lit sets proves weight multiplication by m. The
+endpoint discharges the general lemmas' commutation hypotheses and proves
+minima 0 and 4m for the lifted published start, D at least 4m, the strict
+half-order threshold, connectedness, and failure of every complete
+multipartition. An explicit induced edge-plus-isolated-vertex obstruction
+survives on the first copies of 0,1,2. No upper bound for arbitrary
+nonuniform starting configurations is asserted.

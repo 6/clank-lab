@@ -16,7 +16,7 @@ The proofs, the search code, the certificate checkers and the text were produced
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23604986](https://doi.org/10.5281/zenodo.23604986)
+Archived on Zenodo: [doi:10.5281/zenodo.23608437](https://doi.org/10.5281/zenodo.23608437)
 
 <img src="data/graph.svg" width="830" alt="The counterexample graph, with vertices labeled 0 through 10.">
 
@@ -46,6 +46,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Greedy play can require more colors in the coloring game}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/game-grundy-gap-v2/results/game-grundy-gap}},
-  doi          = {10.5281/zenodo.23604986}
+  doi          = {10.5281/zenodo.23608437}
 }
 ```

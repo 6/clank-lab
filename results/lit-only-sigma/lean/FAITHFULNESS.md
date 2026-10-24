@@ -37,3 +37,23 @@ closed set; `corruptCodes` removes state 45 for the negative control.
 minima 0 and 4, failure of every complete multipartition and the negation
 of `Conjecture5 graph`. The proof establishes a graph-wide gap of at least
 four, without asserting equality or minimality of the example.
+
+The extension keeps all these definitions and the original witness unchanged.
+`ThreeTypes` describes two whole antipodal pairs with dark hub, all outer
+vertices with dark hub, or a cyclic consecutive triple with lit hub, in
+exactly the published labeling. `three_type_description` proves equality
+both with the certificate and with the whole reachable orbit.
+
+For `UniformBlowupStatement`, `fiberVertex` is the first coordinate of
+`finProdFinEquiv.symm : Fin (7*m) → Fin 7 × Fin m`. Thus `blowup m u v`
+is precisely base adjacency between those coordinates; no within-fiber
+edges are introduced, and all cross-fiber edges are retained.
+`uniformStart m` lifts `start`, not a separately chosen start for each m.
+The endpoint is quantified over every natural m with 0<m. Its minima use
+the original unrestricted finite `Reachable` relation; the additional
+`legalMoves` predicate records strictly lit plays and is proved equivalent
+under projection and lifting for every finite list. These two conventions
+agree after omitting dark identity plays. The discrepancy conclusion is
+only a lower bound from the same uniform start. The complete multipartite
+exclusion quantifies over every number of nonempty parts and follows from
+the preserved induced graph on first copies of 0,1,2.

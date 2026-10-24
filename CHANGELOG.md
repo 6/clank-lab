@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## lit-only-sigma v3 (October 23, 2026)
+
+- Describe the counterexample's exact lit-only orbit by three configuration types and prove a uniform blow-up family with a stated starting configuration's gap equal to four sevenths of the graph's order. No exact maximum over arbitrary starts is claimed.
+
 ## game-grundy-gap v2 (October 23, 2026)
 
 - The same graph now has the exact values $\chi_g(G)=5$ and $\Gamma_g(G)=6$, with matching bounds and a checked six-color strategy. Arbitrarily large gaps remain open.

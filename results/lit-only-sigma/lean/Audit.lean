@@ -43,3 +43,12 @@ run_cmd do
 /-- info: 'LitOnlySigma.rejects_deleted_state' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms LitOnlySigma.rejects_deleted_state
+/-- info: 'LitOnlySigma.three_type_description' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms LitOnlySigma.three_type_description
+/-- info: 'LitOnlySigma.uniform_blowup' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms LitOnlySigma.uniform_blowup
+/-- info: 'LitOnlySigma.rejects_missing_representative' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms LitOnlySigma.rejects_missing_representative

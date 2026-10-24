@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{fullpage,amsmath,amssymb,amsthm}
+\usepackage[title]{appendix}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{url,tikz}
@@ -215,7 +216,7 @@ the author named in this paper. Apache-2.0 (see the repository's LICENSE),
 except for the third-party material listed in \path{THIRD_PARTY.md}.
 
 \clearpage
-\appendix
+\begin{appendices}
 \section{Definitions, interfaces and the three branches}
 This section fixes the indexing and smoothing conventions and derives
 the three branches before the detailed proof of the main theorem.
@@ -1001,6 +1002,7 @@ at most $2z^{121}/(121(1-z^2))$. This certifies an absolute error
 at most $10^{-17}$ in the recorded ratios and correct rounding to
 nine decimal places in Table~\ref{tab:ratio}.
 
+\end{appendices}
 \begin{thebibliography}{99}
 
 \bibitem{sievebook}

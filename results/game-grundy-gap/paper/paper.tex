@@ -15,7 +15,7 @@
 \newcommand{\N}{\mathbb{N}}
 \title{Greedy play can require more colors in the coloring game}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 23, 2026}
+\date{October 24, 2026}
 
 \begin{document}
 \maketitle
@@ -28,9 +28,10 @@ available positive integer; Alice minimizes and Bob maximizes the number
 of colors used. Havet and Zhu asked in June 2011 whether the resulting
 game Grundy number is always at most the game chromatic number.
 We give an explicit finite simple graph $G$ for which
-$\chig(G)\leq5<\Gammag(G)$, answering the first part of their question
+$\chig(G)=5$ and $\Gammag(G)=6$, answering the first part of their question
 negatively. The proof consists of independently checked finite strategy
-certificates for the two unrestricted Alice-first games. It does not
+certificates for the two unrestricted Alice-first games, together with
+a clique obstruction and a short greedy strategy. It does not
 establish arbitrarily large separation between the parameters.
 \end{abstract}
 
@@ -57,9 +58,9 @@ vertex, and neither player may pass.
 The graph $G$ defined in Section~\ref{sec:graph} is a finite simple graph
 with $11$ vertices and $27$ edges satisfying
 \[
-             \chig(G)\leq5<\Gammag(G).
+             \chig(G)=5, \qquad \Gammag(G)=6.
 \]
-Both inequalities concern unrestricted vertex selection with Alice
+Both values concern unrestricted vertex selection with Alice
 moving first, alternating turns, and no passes.
 \end{theorem}
 
@@ -71,8 +72,8 @@ on June 15, 2011. The first sentence of Problem~5 in version~1 reads:
 The problem then asks separately whether the game Grundy number can be
 arbitrarily large compared with the game chromatic number~\cite[p.~6]{HZ}.
 Theorem~\ref{thm:main} answers the first part negatively. It does not
-answer the second part, and makes no assertion about the exact values
-of either parameter for $G$ or about the smallest possible counterexample.
+answer the second part, and makes no assertion about the smallest
+possible counterexample.
 
 Hollom restated the inequality as Question~3.4 and explained an obstacle
 to transferring an ordinary winning strategy to greedy
@@ -144,13 +145,17 @@ colors form an initial interval of the positive integers: a first use
 of color $c$ requires colored neighbors of every smaller positive color.
 Consequently its largest color and its number of colors agree.
 
-The proof has two parts. The ordinary certificate selects a legal move
+The two original certificates give the outer bounds. The ordinary certificate selects a legal move
 for Alice and covers every legal move by Bob. It forces a full proper
 coloring from the five-color palette. The greedy certificate selects a
 legal move for Bob and covers every greedy move by Alice. It forces a
 blocked vertex in the palette-five game. Since the five colors on that
 vertex's neighbors persist, unrestricted greedy play must eventually
-use a color at least six.
+use a color at least six. A five-vertex clique supplies the matching
+ordinary lower bound. For the greedy upper bound, Alice ensures that the
+only two vertices of degree greater than five are colored within the
+first three moves.
+Every other vertex then receives a color at most six.
 
 Each certificate is a directed graph of literal labeled positions.
 Different histories reaching the same position share its continuation.
@@ -193,11 +198,12 @@ The drawing is generated from the edge list in \texttt{data/graph.json}.}
 \label{fig:graph}
 \end{figure}
 
-The machine-readable graph is \texttt{data/graph.json}. Both strategy
+The machine-readable graph is \texttt{data/graph.json}. All three strategy
 certificates contain the same vertex set and edge list, and the public
 entry point checks their equality to this graph before checking either
-strategy. It also binds both certificates to palette size five,
-Alice-first play, and unrestricted vertex selection. The ordinary
+strategy. It binds the original pair to palette size five and the new
+greedy certificate to palette size six, all with Alice-first play and
+unrestricted vertex selection. The ordinary
 certificate's first move colors vertex $5$ with color $1$; subsequent
 choices are given by its positions and arcs, rather than by a short
 case-based strategy in the text.
@@ -273,6 +279,32 @@ its greedy color is consequently greater than $k$. Thus Bob forces
 the required lower bound, regardless of subsequent moves.
 \end{proof}
 
+\subsection{The matching local bounds}
+The remaining bounds use only the labeled graph and a short opening strategy.
+
+\begin{lemma}\label{lem:local}
+The graph $G$ satisfies $\chig(G)\geq5$ and $\Gammag(G)\leq6$.
+\end{lemma}
+
+\begin{proof}
+All ten pairs of vertices in $\{1,4,6,9,10\}$ are edges in
+Table~\ref{tab:edges}. Every complete proper coloring therefore uses
+at least five colors, so Alice cannot win with any smaller palette.
+
+Every vertex outside $\{9,10\}$ has degree at most five. A vertex of
+degree $d$ receives a greedy color at most $d+1$: a larger color would
+require distinct colored neighbors of every smaller positive color.
+Alice first chooses vertex $10$, which receives color $1$.
+If Bob chooses vertex $9$ on move two, its color is at most $2$.
+Otherwise Alice chooses $9$ on move three, when its color is at most
+$3$ because only two vertices have been colored. In either branch,
+both exceptional vertices are colored by move three. All later choices
+are among vertices of degree at most five and receive colors at most
+six. Alice may choose any remaining vertex thereafter. Each move
+colors a new vertex, so play finishes after eleven moves, with at most
+six distinct colors, for every legal Bob response.
+\end{proof}
+
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
 Table~\ref{tab:edges} specifies a simple graph of the stated order and
 size. The two checks described in Section~\ref{sec:checking} accept an
@@ -285,11 +317,12 @@ five colors. Hence $\chig(G)\leq5$ directly from the definition as the
 least winning palette size. No assertion that ordinary winning
 palettes are monotone is needed. The same lemma gives Bob a winning
 strategy in the greedy palette-five game. Lemma~\ref{lem:bridge} then
-gives $\Gammag(G)>5$.
+gives $\Gammag(G)>5$. Combining these outer bounds with
+Lemma~\ref{lem:local} proves the two exact values.
 \end{proof}
 
 \section{Finite verification and reproducibility}\label{sec:checking}
-The bundle contains the graph, the two finite strategies and two
+The bundle contains the graph, the three finite strategies and two
 separately written certificate checkers. Checking requires Python 3
 and its standard library, with no graph generator, search executable
 or external mathematical package. From the bundle's top-level directory,
@@ -297,13 +330,14 @@ the command is
 \begin{verbatim}
 python3 -I checks/verify.py
 \end{verbatim}
-The same command checks both certificates and performs the corruption
-tests. Detailed format and checker documentation is in
+The same command checks all three certificates, the local graph facts,
+and the corruption tests. Detailed format and checker documentation is in
 \texttt{checks/README.md}.
 
 \subsection{Data and checker independence}
-The files \texttt{data/ordinary-k5.json.gz} and
-\texttt{data/greedy-k5.json.gz} are gzip-compressed JSON objects.
+The files \texttt{data/ordinary-k5.json.gz},
+\texttt{data/greedy-k5.json.gz} and \texttt{data/greedy-k6.json.gz}
+are gzip-compressed JSON objects.
 Besides the game conventions and graph, each contains a map from
 comma-separated color vectors to lists of moves. The coordinate order
 is the vertex order $0,\ldots,10$; $0$ is the uncolored marker.
@@ -321,9 +355,10 @@ Game & Declared winner & Nodes & Arcs & Terminal nodes\\
 \midrule
 Ordinary, $k=5$ & Alice & $108\,669$ & $216\,995$ & $2\,800$\\
 Greedy, $k=5$ & Bob & $5\,594$ & $6\,730$ & $2\,010$\\
+Greedy, $k=6$ & Alice & $2\,223$ & $3\,339$ & $208$\\
 \bottomrule
 \end{tabular}
-\caption{The two finite strategy certificates.}
+\caption{The finite strategy certificates.}
 \label{tab:certificates}
 \end{table}
 
@@ -335,12 +370,12 @@ available colors, the player to move, legal moves and terminal outcomes
 from each certificate. In particular, terminal winners are recomputed;
 they are not trusted labels attached to leaves. The entry point also
 checks the graph and game bindings against the public statement's
-five-color obligations. Thus acceptance of a different graph, a
+five-color outer bounds and six-color upper bound. Thus acceptance of a different graph, a
 different starting player or an ordered variant cannot substitute for
-the two obligations used in the theorem.
+the game obligations used in the theorem.
 
 \subsection{Corruption tests and trusted components}
-For each certificate the public command makes seven semantic changes:
+For each original five-color certificate the public command makes seven semantic changes:
 it omits an opponent reply, reverses the declared winner, inserts an
 illegal Alice move, adds an edge, changes the starting player, treats
 the root as a terminal node, and adds a move at a terminal node.
@@ -349,13 +384,22 @@ both must reject it. The command therefore requires $28$ rejection
 outcomes in addition to accepting the two unchanged certificates.
 These controls exercise game semantics rather than file-integrity checks.
 
+The six-color Alice certificate follows the opening in Lemma~\ref{lem:local}
+and then selects the smallest uncolored label on Alice's turns. Every Bob
+reply is retained. All its leaves are full colorings, so no early threshold
+stop replaces unrestricted greedy completion. Both checkers reject eight
+changes: a missing Bob reply, an Alice pass, a nonleast greedy color,
+ordered play, Bob moving first, an unfinished leaf, threshold five, and a
+missing successor. The local-fact check also rejects a deleted clique edge,
+a violation of the degree bound, and a cyclic shift of the vertex labels.
+
 The proof relies on the correctness of the two Python implementations,
 the Python interpreter and its JSON and gzip libraries, and the written
 finite-induction and blocked-vertex arguments above. The certificate
 checks use exact integer and finite-set operations. The graph drawing
 is generated from the graph data, and its edges are checked against
 that data; the mathematical definition of $G$ remains the edge list.
-There is no proof-assistant formalization. The search that found the
+The checks in this bundle run in Python. The search that found the
 graph is unnecessary for checking the theorem, and no exhaustive graph
 search or claim of minimality is part of the result.
 

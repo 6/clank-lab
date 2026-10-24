@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-sequence v5 (October 24, 2026)
+
+- Concise edition: the main paper states the result, method and checked scope, with proof details in an appendix. The theorem, its corollaries and checked artifacts are unchanged.
+
 ## multitwist-exceptions v2 (October 23, 2026)
 
 - Using Penner's construction, add examples on the five-holed sphere with pseudo-Anosov bases and a fixed positive two-component multitwist: two exceptional exponents are arbitrarily far apart as the base varies. The weaker count question and other surfaces remain outside the result.

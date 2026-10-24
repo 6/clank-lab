@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## williamson-order-65 v2 (October 24, 2026)
+
+- Concise edition: the main paper is shorter, with proof details in the appendix and computation history in the checker documentation. The theorem, exhaustion records, checks, and trust limitations are unchanged.
+
 ## thomson-10 v5 (October 24, 2026)
 
 - Concise edition: shorten the main paper and move proof details to appendices and historical context to the checking guide. The theorem and its checks are unchanged.

@@ -15,6 +15,7 @@ Zenodo records.
 ## ekg-sequence v5 (October 24, 2026)
 
 - Concise edition: the main paper states the result, method and checked scope, with proof details in an appendix. The theorem, its corollaries and checked artifacts are unchanged.
+- Correction: the main text now names the Lean theorem and matches its exact statement, indexing, smoothing conventions and axioms to the displayed theorem. Statements and proof artifacts are unchanged.
 
 ## multitwist-exceptions v2 (October 23, 2026)
 

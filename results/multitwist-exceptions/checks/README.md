@@ -1,7 +1,8 @@
 # Checkers
 
-`check.py` runs both checkers on the finite facts F0–F4 of the paper
-(Section 5) and on four corruptions:
+`check.py` runs both checkers on the finite facts F0–F4 of the paper and on
+four corruptions. It then runs the finite model and diagram checks for the
+pseudo-Anosov-base extension:
 
 ```sh
 python3 checks/check.py
@@ -38,10 +39,11 @@ The step from a disjointness test to intersection numbers uses
 $i(u, v) = 0 \iff T_u(v) = v$ (Farb and Margalit, *A Primer on Mapping
 Class Groups*, Prop. 3.2). The checkers test the facts for
 $k = 1, \dots, 30$; the Lean proof in `../lean/` proves them for every $k$.
-Neither the checkers nor Lean check the surface topology that turns these
-facts into the theorem; that is the written proof in the paper. The two
-checkers implement one list of facts in two models, so they guard against
-errors of computation, not against an error in that topology.
+For F0–F4, the two checkers implement one list of facts in two models, so
+they guard against errors of computation. The extension's finite diagram
+checks are described below. The identification of the models and diagram
+with surface curves, and the surface argument that turns these facts into
+the theorem, remain part of the written proof in the paper.
 
 ## Checker A: the free group
 
@@ -109,3 +111,68 @@ Each JSON file gives the replaced curve words for checker A (positive
 integer $g$ for $x_g$, negative for its inverse); checker B builds the same
 four corruptions itself (`--corrupt`). In each case the pentagon pattern
 and a fixed-curve fact fail, and both checkers report REJECT.
+
+## Pseudo-Anosov-base extension
+
+For $k \ge 1$, the extension uses
+
+$$
+g_k = T_a^{-1}T_c^{-(k+1)}T_d, \qquad t=T_aT_c.
+$$
+
+The entry point runs `extension/replay.py`, which can also be run directly:
+
+```sh
+python3 checks/extension/replay.py
+```
+
+`extension/check_free_group.py` imports the free-group model above and
+checks $k=1,\dots,12$, both global twist handednesses, and the integer
+exponents $-2,-1,0,1,2,k,k+1,k+2$. It checks the identity
+$t^n g_k=T_a^{n-1}T_c^{n-k-1}T_d$ as an equality of free-group
+automorphisms, the fixed curves $C$ at $n=1$ and $C'$ at $n=k+1$, and the
+twist tests showing that $g_k(a)$ meets $a$ and $c$.
+
+`extension/check_dynnikov.py` imports the independently written Dynnikov
+model above. It validates that model, then checks $k=1,\dots,8$, both
+global handednesses, and exponents $n=-3,-2,-1,0,1,2,3,k,k+1,k+2$.
+For the identity it compares actions on nine specified coordinate vectors;
+it also checks the two fixed curves and the exact intersection numbers
+$i(a,g_k(a))=i(c,g_k(a))=4$. Both drivers reject the four original curve
+corruptions. The free-group driver also rejects reversed factor order and
+a wrong exponent. The Dynnikov driver rejects the six inputs
+`extension/corruptions/model/*.json`, changing an exponent or a composition
+order. Expected rejections must have the mathematical verdict and exit
+status; a crash does not pass a negative control.
+
+`extension/topology.json` gives exact rectangle boundaries and the five
+punctures. `extension/check_topology.py` uses a rectilinear grid
+decomposition. `extension/check_topology_independent.py` independently
+reconstructs the crossings, directed edges, cyclic rotations and facial
+boundaries using rational arithmetic. Both verify the specified pentagon
+incidences and puncture partitions. For $a,d,c$, they establish four
+crossings and six complementary disks on the capped sphere: four
+punctured bigons, one unpunctured quadrilateral and one punctured outer
+quadrilateral. Replacing the punctures by boundary circles makes the five
+punctured regions peripheral annuli. They also check that $a,c$ cut the
+surface into the specified three pairs of pants.
+
+The complete independent facial certificate is
+`extension/topology-independent-certificate.json`. The replay regenerates
+it and compares all parsed fields. Both topology checkers must reject the
+three supplied diagram corruptions (a moved puncture, changed crossings
+and a deleted face). The independent checker also rejects seven mutations,
+including a deleted occurrence of a crossing in its reconstructed graph,
+and accepts a rational affine change of coordinates and a puncture moved
+within its face.
+
+These model checks cover only the stated finite parameter sets. The
+Artin algebra for every $k$ and $n$ is proved separately in `../lean/V2.lean`;
+it is not inferred from these samples. The diagram checkers establish
+properties of the finite rational embedding. The written proof identifies
+that embedding and the two algebraic models with the paper's actual
+surface curves and twists, applies Penner's theorem to obtain the
+pseudo-Anosov bases, and uses the pants classification, intersection and
+fixed-curve facts to obtain filling and widely separated exceptions.
+Those surface identifications and cited topological theorems are not
+formalized by these Python checks or by the Lean algebra.

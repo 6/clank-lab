@@ -31,3 +31,9 @@ phrases from Watanabe (arXiv 1611.05119), with attribution. Checker B
 implements formulas published by Dynnikov (2002), Hall and Yurttaş (arXiv
 0808.3053) and Yurttaş and Hall (arXiv 1711.00895). These works are cited
 for their mathematics; no code from them is reproduced.
+
+The pseudo-Anosov-base extension applies Robert C. Penner's *A construction
+of pseudo-Anosov homeomorphisms* (Trans. Amer. Math. Soc. 310, 1988),
+Theorem 3.1. Its theorem and definitions are paraphrased with attribution;
+no source PDF or text reproduction is included. The finite rational diagram,
+its two topology checkers and its certificate are supplied with this work.

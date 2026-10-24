@@ -1,5 +1,6 @@
 % Manuscript source.
-\documentclass[11pt]{amsart}
+\documentclass[11pt]{article}
+\pagestyle{plain}
 \usepackage[margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -11,7 +12,6 @@
 \usepackage{enumitem}
 \usepackage{fvextra}
 \usepackage{newunicodechar}
-\usepackage{etoolbox}
 \usepackage{xcolor}
 \usepackage[hyphens]{url}
 \usepackage{hyperref}
@@ -44,17 +44,15 @@
 
 \newcommand{\lex}{\le_{\mathrm{lex}}}
 \newcommand{\R}{R_3}
-\makeatletter
-% amsart sets the byline in capitals, which would also capitalize the ORCID link.
-\patchcmd{\@setauthors}{\MakeUppercase{\authors}}{\authors}{}{\PackageError{paper}{byline patch failed}{}}
-\makeatother
 \setlength{\emergencystretch}{3em}
 
-\title[The three-color Ramsey number of the 10-vertex path]{The three-color Ramsey number of the 10-vertex path}
-\author[P. Graham]{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 22, 2026}
+\title{The three-color Ramsey number of the 10-vertex path}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 23, 2026}
 
 \begin{document}
+
+\maketitle
 
 \begin{abstract}
 For a graph $H$, the three-color Ramsey number $R(H,H,H)$ is the least
@@ -81,8 +79,6 @@ regenerates every certificate and checks it in Lean ($249$ and $301$
 CPU-hours in our two runs), or installs the certificates from a published
 dataset, which skips the regeneration ($234$ and $284$ of those hours).
 \end{abstract}
-
-\maketitle
 
 \paragraph{AI production.}
 The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.

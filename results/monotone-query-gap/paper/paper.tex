@@ -1,6 +1,7 @@
-\documentclass[11pt]{amsart}
+\documentclass[11pt]{article}
+\pagestyle{plain}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,booktabs,etoolbox}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -10,17 +11,18 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newcommand{\scplx}{\operatorname{sc}}
 \newcommand{\codim}{\operatorname{codim}}
-\makeatletter
-\patchcmd{\@setauthors}{\MakeUppercase{\authors}}{\authors}{}{\PackageError{paper}{byline patch failed}{}}
-\makeatother
 \setlength{\emergencystretch}{2em}
 \raggedbottom
 \title{A monotone counterexample to a question on distributional complexity}
-\author[P. Graham]{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 22, 2026}
-\thanks{The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 24, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={A monotone counterexample to a question on distributional complexity}}
 \begin{document}
+\maketitle
+\begingroup
+\renewcommand{\thefootnote}{}
+\footnotetext{The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.}
+\endgroup
 \begin{abstract}
 For a Boolean function under a product measure, distributional algorithmic
 complexity is the minimum expected number of adaptive queries needed to
@@ -38,7 +40,6 @@ certificate proves the partition value is optimal. The strict inequality
 is formalized in Lean; independent exact checkers verify the additional
 dual certificate.
 \end{abstract}
-\maketitle
 
 \section{The question and the example}
 A deterministic adaptive algorithm evaluates a Boolean function by asking for input bits,
@@ -261,7 +262,7 @@ Table~\ref{tab:dual}. These weights sum to $102$ and satisfy
 The inequalities are finite integer comparisons; both exact checkers
 enumerate all restrictions and check~\eqref{eq:dual} on each monochromatic
 one. No optimization solver is needed to verify them.
-\begin{table}[ht]
+\begin{table}[t]
 \centering
 \begin{tabular}{c|rrrrrrrr}
 \toprule

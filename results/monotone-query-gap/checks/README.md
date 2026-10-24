@@ -37,7 +37,7 @@ A subcube string has five characters from `0`, `1`, `*`, in coordinate order
   nonconstant restriction satisfies
   $L(r)\le1+(L(r_{i=0})+L(r_{i=1}))/2$.
   Induction over a decision tree gives the query lower bound from
-  $L(\texttt{*****})=13/4$. Repeated queries cannot help.
+  $`L(\texttt{*****})=13/4`$. Repeated queries cannot help.
 - `optimal_tree`: nodes `{"q": i, "0": T0, "1": T1}` and leaves
   `{"leaf": v}`. Both checkers follow every input to a correctly labeled
   leaf where $f$ is determined and verify the total depth 104. This tree

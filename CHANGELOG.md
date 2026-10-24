@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## monotone-query-gap v2 (October 23, 2026)
+
+- Correction: the paper's layout now matches the other papers (normal-case title, no running header); its content is unchanged.
+
 ## path-ramsey v4 (October 23, 2026)
 
 - Correction: the paper's layout now matches the other papers (normal-case title, no running header); its content is unchanged.

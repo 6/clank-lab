@@ -9,6 +9,7 @@ Zenodo records.
 - Concise edition: the main paper is shorter, with proof details in the appendix and computation history in the checker documentation. The theorem, exhaustion records, checks, and trust limitations are unchanged.
 - Correction: restore the main-text prior-work lineage, Williamson's 1944 origin in the abstract, and explicit credit to Holzmann, Kharaghani and Tayfeh-Rezaie's spectral bounds and product-identity elimination, alongside the compression credit. Mathematical statements, proof steps, checked artifacts and trust limitations are unchanged.
 - Correction: restore main-paper nearby-work references to the Egan–Kotsireas–London–Ó Catháin survey, Bennett–Bright–Colinot–Nayak quaternionic work and Zhang’s AI-assisted account; all mathematical statements and checked artifacts remain unchanged.
+- Zenodo: [10.5281/zenodo.23622210](https://doi.org/10.5281/zenodo.23622210)
 
 ## thomson-10 v5 (October 24, 2026)
 

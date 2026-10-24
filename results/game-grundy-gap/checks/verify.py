@@ -174,7 +174,8 @@ def main():
     print("PASS semantic corruptions: 28 rejections (7 corruptions x 2 games x 2 checkers)")
     load_module("figure").check_figures(graph)
     print("PASS figures: SVG and TikZ match graph.json")
-    print("PASS conclusion: chi_g(G) <= 5 < Gamma_g(G)")
+    load_module("exact_values").verify(graph, checkers)
+    print("PASS conclusion: chi_g(G) = 5 and Gamma_g(G) = 6")
 
 
 if __name__ == "__main__":

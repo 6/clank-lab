@@ -5,7 +5,7 @@
 In the [graph coloring game](https://en.wikipedia.org/wiki/Game_chromatic_number), Alice and Bob take turns coloring a vertex, keeping adjacent vertices different. Alice wants the whole graph colored; Bob wants to prevent this. The game chromatic number is the smallest palette with which Alice can win. In the greedy game, each player chooses a vertex and must use its smallest available positive color; Alice minimizes the number of colors and Bob maximizes it. Havet and Zhu asked in [June 2011, Problem 5](https://inria.hal.science/inria-00600738v1/document), whether greedy play always needs at most the game chromatic number. [Hollom's Question 3.4](https://arxiv.org/abs/2308.03528v2) restates this question and explains an obstacle to transferring strategies between the games. We answer its first part negatively with a graph satisfying
 
 $$
-\chi_g(G) \leq 5 < \Gamma_g(G).
+\chi_g(G) = 5, \qquad \Gamma_g(G) = 6.
 $$
 
 This answers only the first part of Havet and Zhu's question. Whether the gap can be arbitrarily large remains open.
@@ -28,7 +28,7 @@ Python 3.10 or later is sufficient; [requirements.txt](requirements.txt) lists t
 python3 -I checks/verify.py
 ```
 
-The command checks both strategy certificates with two independent implementations, requires both to reject the corruption tests, and checks that the figures match the graph. It needs only this folder and Python's standard library. The [checker documentation](checks/README.md) explains the certificate format and the proof obligations.
+The command checks the three strategy certificates with two independent implementations, requires both to reject the corruption tests, checks the clique and degree bounds, and checks that the figures match the graph. It needs only this folder and Python's standard library. The [checker documentation](checks/README.md) explains the certificate format and the proof obligations.
 
 ## Credits
 
@@ -45,7 +45,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Greedy play can require more colors in the coloring game}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/game-grundy-gap-v1/results/game-grundy-gap}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/game-grundy-gap-v2/results/game-grundy-gap}},
   doi          = {10.5281/zenodo.23604986}
 }
 ```

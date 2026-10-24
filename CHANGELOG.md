@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## game-grundy-gap v2 (October 23, 2026)
+
+- The same graph now has the exact values $\chi_g(G)=5$ and $\Gamma_g(G)=6$, with matching bounds and a checked six-color strategy. Arbitrarily large gaps remain open.
+
 ## locally-toroidal-polytopes v2 (October 23, 2026)
 
 - Correction: the paper's layout now matches the other papers (normal-case title, no running header); its content is unchanged.

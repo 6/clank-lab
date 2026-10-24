@@ -28,13 +28,27 @@
 \maketitle
 
 \begin{abstract}
-For the EKG sequence $a(n)$, let $b(n)$ replace values $p$ and $3p$ by
-$2p$ for odd primes $p$. We prove
-$b(n)=n+n/(3\log n)+o(n/\log n)$ along all indices, giving the formula
-in Lagarias, Rains and Sloane's 2002 PDF abstract for $a(n)$ at almost
-all indices. Building on Haver's frontier reduction and sharp upper
-bound, the proof supplies the lower bound by an elementary sieve and
-transfers the frontier asymptotic to every smoothed position.
+For the EKG sequence discovered by Jonathan Ayres \cite[opening]{lrs},
+Haver's version~3
+\cite[Corollary~2(e)]{haver} reduces the frontier asymptotic to counting
+used odd values above the least unused even integer, excluding $3p$
+for odd primes $p$; his Theorem~1(d) and Corollary~12(d) prove the sharp
+upper bound. We prove the lower half by an elementary sieve and transfer
+from frontier times to all smoothed indices. Replacing values $p,3p$
+by $2p$ for odd primes defines $b(n)$. We prove
+$b(n)=n+n/(3\log n)+o(n/\log n)$ along every index, giving the formula
+for the original sequence $a(n)$ at almost all indices, as conjectured
+by Lagarias, Rains and Sloane in their 2002 arXiv v1 PDF abstract
+\cite[abstract]{lrs}. We prove Ordowski's 2009 OEIS A064413 conjectures:
+eventual $a(n)>n$ when $a(n)$ is not prime, and density one for
+$a(n)>n$; and Jasinski's 2008 A152458/A152519 conjectures: finiteness
+on the three critical lines, including $a(n)=n$ \cite{oeis}.
+The below-diagonal count is asymptotic to $N/(2\log N)$, and there
+are finitely many cycles of each bounded length. No completeness of the
+finite OEIS lists is asserted. Lean checks the main theorem and these
+sign, density, counting and finiteness consequences from the literal
+greedy rule; the three-branch formulas and sharper complementary count
+remain written deductions.
 \end{abstract}
 
 The proofs, the Lean formalization and the text were produced by AI models
@@ -96,6 +110,7 @@ criterion; his Theorem~1(d) and Corollary~12(d) give the sharp upper
 bound $E(t)-t\leq(1/3+o(1))t/\log t$, where $E(t)$ is the least
 unused positive even integer after $t$ terms. Here the new work is the
 remaining lower bound and the transfer to all smoothed indices.
+The reduction and the estimates it uses are Haver's.
 The hard step is improving the displacement estimates from
 $O(x/\log x)$ to $o(x/\log x)$; multiplying the existing bounds
 leaves a fixed coefficient. The proof below supplies sparsity of the
@@ -299,7 +314,7 @@ by Hofman and Pilipczuk \cite[Theorem~4.17]{hp}. LRS Conjecture 3,
 $13n/28\leq a(n)\leq12n/7$ for every $n$, with equality only at $n=28$
 and $n=7$, respectively, is not settled here: an eventual asymptotic
 does not settle the required finite range. It is proved, with computer
-assistance, in our companion paper \cite{ekgbounds}. Nor do we address the
+assistance, in our companion paper \cite[Theorem~1, version~1]{ekgbounds}. Nor do we address the
 unproved distributional suggestions for higher-order fluctuations in
 LRS Section 4 or their unnumbered cycle questions, beyond the bounded
 cycle lengths of Section~\ref{sec:consequences}.
@@ -365,7 +380,8 @@ added to Theorem~\ref{thm:main}. The prime pattern goes back to
 Hofman and Pilipczuk \cite[Theorem~4.3]{hp}; we use its introduction formulation
 as proved in Haver's archive \cite[Section~2, (F2)]{haver}.
 The early-even bound follows from Haver's bound
-$K(t)\leq12\pi(\sqrt e)+720$ and elementary prime estimates.
+$K(t)\leq12\pi(\sqrt e)+720$ \cite[version~3, Theorem~1(a)]{haver}
+and elementary prime estimates.
 One may take $C_1=4\cdot793^2+2\cdot793$ in \eqref{eq:oldspan}.
 The printed sources of \eqref{eq:oldhole} and \eqref{eq:oldrate}
 are Haver's Theorem 11 and Corollary 12(c), respectively.

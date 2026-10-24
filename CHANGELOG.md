@@ -17,6 +17,7 @@ Zenodo records.
 
 - Concise edition: the main paper states the result, method and checked scope, with proof details in an appendix. The theorem, its corollaries and checked artifacts are unchanged.
 - Correction: the main text now names the Lean theorem and matches its exact statement, indexing, smoothing conventions and axioms to the displayed theorem. Statements and proof artifacts are unchanged.
+- Correction: the abstract restores Ayres's discovery credit, Haver's reduction and sharp upper bound, our lower bound and transfer to all smoothed indices, and the dated Ordowski and Jasinski consequences; the introduction restores the explicit Haver credit sentence. The canonical index restores the full prior-work credit and the previously proved ratio-limit distinction. Mathematics and checked artifacts are unchanged.
 
 ## multitwist-exceptions v2 (October 23, 2026)
 

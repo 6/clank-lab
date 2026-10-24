@@ -11,6 +11,7 @@ Zenodo records.
 ## thomson-10 v5 (October 24, 2026)
 
 - Concise edition: shorten the main paper and move proof details to appendices and historical context to the checking guide. The theorem and its checks are unchanged.
+- Correction: add the omitted main-text bridge to the named Lean theorem and separate candidate-admissibility theorem, with their definitions, hypotheses, conventions and checked scope; the mathematical statements and checked artifacts are unchanged.
 
 ## ekg-sequence v5 (October 24, 2026)
 

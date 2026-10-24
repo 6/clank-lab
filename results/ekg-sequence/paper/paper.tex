@@ -132,6 +132,37 @@ formulas are Corollary~\ref{cor:branches}. No completeness of the
 finite OEIS lists is asserted.
 
 \section{Checked scope and reproduction}\label{sec:lean}
+The formal theorem is \texttt{ekg\_sharp\_all\_index} in
+\path{lean/SolutionEndpoint.lean}. Its statement is exactly: for every
+real $\eps$, if $0<\eps$, there exists a natural $N$ with $3\leq N$
+such that, for every natural $n$, $N\leq n$ implies
+\eqref{eq:epsilon}, with $b(n)$ equal to
+\texttt{EKG.CanonicalEndpoint.b n}. Natural numbers in that inequality
+are coerced to real numbers, and the logarithm is \texttt{Real.log}.
+This is the independently defined \texttt{EndpointStatement} in
+\path{lean/Statement.lean}; \path{lean/Check.lean} checks the theorem
+against that type. Thus the formal quantifiers are exactly those of
+Theorem~\ref{thm:main}, including one cutoff for all later indices.
+
+In \path{lean/EKG/EndpointDefinitions.lean}, the formal $a(n)$ is
+\texttt{EKG.canonical.a (n - 1)}. The canonical sequence is the
+zero-based \texttt{actualA} in \path{lean/EKG/Canonical.lean}, starting
+at $1,2$; its \texttt{chooseNext} is proved in \path{lean/EKG/Basic.lean}
+to select the least positive unused value sharing a prime factor with
+the preceding term, equivalently having gcd greater than $1$.
+This gives \eqref{eq:rule} for $n\geq1$; truncated natural subtraction
+also sets $a(0)=1$, outside the theorem's range $n\geq N\geq3$.
+The formal $b$ applies \texttt{smoothValue} to $a$: its two branches
+select odd primes and exactly three times odd primes, respectively.
+It is precisely \eqref{eq:smooth}, leaving $2$ and $6$ fixed.
+
+The declaration has no additional sequence or analytic hypotheses.
+The imported estimates are proved dependencies, not assumptions to be
+supplied by the reader. \path{lean/Check.lean} guards its actual axiom
+list: \texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound} (propositional extensionality, classical choice,
+and quotient soundness).
+
 The standard Lake project in \path{lean/} checks Theorem~\ref{thm:main}
 from the literal greedy rule, including existence, leastness and the
 smoothing convention. Haver's estimates and the prime number theorem

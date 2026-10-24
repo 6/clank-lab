@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 290" role="img" aria-label="Lower-bound coloring of K17">
+<rect width="440" height="290" fill="white"/>
+<line x1="80" y1="50" x2="360" y2="50" stroke="rgb(179,27,27)" stroke-width="4"/>
+<line x1="80" y1="210" x2="360" y2="210" stroke="rgb(179,27,27)" stroke-width="4"/>
+<line x1="80" y1="50" x2="80" y2="210" stroke="rgb(0,91,181)" stroke-width="4" stroke-dasharray="10 5"/>
+<line x1="360" y1="50" x2="360" y2="210" stroke="rgb(0,91,181)" stroke-width="4" stroke-dasharray="10 5"/>
+<line x1="80" y1="50" x2="360" y2="210" stroke="rgb(36,122,57)" stroke-width="4" stroke-dasharray="2 5"/>
+<line x1="360" y1="50" x2="80" y2="210" stroke="rgb(36,122,57)" stroke-width="4" stroke-dasharray="2 5"/>
+<circle cx="80" cy="50" r="32" fill="white" stroke="black"/>
+<text x="80" y="56" text-anchor="middle" font-family="serif" font-size="22">A: 5</text>
+<circle cx="360" cy="50" r="32" fill="white" stroke="black"/>
+<text x="360" y="56" text-anchor="middle" font-family="serif" font-size="22">B: 4</text>
+<circle cx="80" cy="210" r="32" fill="white" stroke="black"/>
+<text x="80" y="216" text-anchor="middle" font-family="serif" font-size="22">C: 4</text>
+<circle cx="360" cy="210" r="32" fill="white" stroke="black"/>
+<text x="360" y="216" text-anchor="middle" font-family="serif" font-size="22">D: 4</text>
+<text x="55" y="280" fill="rgb(179,27,27)" font-family="serif" font-size="20">color 0</text>
+<text x="195" y="280" fill="rgb(0,91,181)" font-family="serif" font-size="20">color 1</text>
+<text x="335" y="280" fill="rgb(36,122,57)" font-family="serif" font-size="20">color 2</text>
+</svg>

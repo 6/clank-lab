@@ -7,30 +7,34 @@ with one of three colors. [Ramsey's theorem](https://en.wikipedia.org/wiki/Ramse
 says that with enough vertices some long [path](https://mathworld.wolfram.com/PathGraph.html)
 has all its edges the same color; the three-color Ramsey number
 $R(P_n, P_n, P_n)$ is the smallest number of vertices that forces a
-one-colored path $P_n$ on $n$ vertices. In 1975 Faudree and Schelp
-suggested that
+one-colored path $P_n$ on $n$ vertices. Dybizbański, Dzido and Radziszowski (DDR)'s
+[Conjecture 2, arXiv:1207.5851v3, Section 2](https://arxiv.org/abs/1207.5851v3)
+states the formula below and attributes its suggestion to Faudree and Schelp
+(1975), quoting “they feel”:
 
-$$R(P_n, P_n, P_n) = 2n - 2 + (n \bmod 2),$$
+$$R(P_n, P_n, P_n) = 2n - 2 + (n \bmod 2).$$
 
-that is, $2n - 2$ for even $n$ and $2n - 1$ for odd $n$, and gave colorings
-showing it is at least that. Dybizbański, Dzido and Radziszowski
-[stated the formula as a conjecture in their 2012 preprint](https://arxiv.org/abs/1207.5851).
-Gyárfás, Ruszinkó, Sárközy and Szemerédi proved
-this for all sufficiently large $n$ in 2007, and Dybizbański, Dzido and
-Radziszowski completed the values for $n \le 9$ in 2016, settling $n = 8$
-and $n = 9$;
-[Radziszowski's survey of small Ramsey numbers](https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS1)
-lists $n = 10$ as the first open case. We prove that
+Theorem 1 in Gyárfás, Ruszinkó, Sárközy and Szemerédi's
+[author manuscript dated July 9, 2012, Section 1.1](https://www.renyi.hu/~gyarfas/Cikkek/120_sharp3cfin.pdf)
+proves this formula for all sufficiently large $n$ (published in 2007,
+with a corrigendum in 2008). Dybizbański, Dzido and Radziszowski proved
+$R(P_8, P_8, P_8)=14$ in Theorem 10 and $R(P_9, P_9, P_9)\le17$ in
+Theorem 8; with their Section 2 lower bound, the latter gives equality $17$.
+[Radziszowski's survey, revision 18, p. 65, Sections 6.4 and 6.4.1(c)](https://www.cs.rit.edu/~spr/ElJC/ejcram18.pdf)
+records the formula through nine vertices and the ten-vertex path as the
+first open case. We prove that
 
 $$R(P_{10}, P_{10}, P_{10}) = 18,$$
 
 as conjectured: every 3-coloring of the edges of $K_{18}$ has a one-colored
-path on 10 vertices, and a classical coloring of $K_{17}$ shows that 18 is
-needed. In that coloring each color has two label
+path on 10 vertices. The new bound is the upper bound $18$; the matching
+$K_{17}$ coloring is the even-case blow-up in Gyárfás, Ruszinkó, Sárközy
+and Szemerédi's Section 1.1 after Theorem 1, also given in DDR's Section 2.
+In that coloring each color has two label
 classes, of 9 and 8 vertices, and every edge of the color lies inside one of
-them, so a one-colored connected piece has at most 9 vertices. We found the
-result neither in the survey nor in the literature we searched, so it is
-likely new.
+them, so a one-colored connected piece has at most 9 vertices. This settles the case $n = 10$; the general conjecture remains open.
+
+<img src="data/lower-bound.svg" width="650" alt="Four parts of sizes 5, 4, 4, 4; colored edges encode the lower-bound coloring.">
 
 The proof is a SAT computation, checked as a Lean formalization with trusted
 native evaluation. Every coloring of $K_{18}$ without a one-colored $P_{10}$
@@ -105,28 +109,34 @@ doesn't use Lean on every cube: the path-clause checker, the input checker
 and the verified checker cake_lpr. The record of a completed full check,
 with its axiom output and toolchain, is in [COMPLETION.md](COMPLETION.md).
 
+[Corrections and interpretation of historical records](checks/CORRECTIONS.md)
+explain the control-count and documentation errors retained in the earlier
+text, and distinguish preserved measurements from this edition's checks.
+
 Details for specialists are in [the Lean notes](lean/README.md) and
-[the checking notes](checks/README.md).
+[the checking notes](checks/README.md). The preceding edition's detailed background and credits are retained in
+[the historical background](checks/historical-background.tex), and its
+independent checks, computing costs and replay account in
+[the checking record](checks/checking-record.tex), with
+[the formalization controls](checks/formal-controls.tex) and the earlier
+[construction credit](checks/construction-credit.tex) and
+[ladder context](checks/ladder-context.tex), with the earlier
+[bibliography](checks/bibliography-background.tex) and
+[cube context](checks/cube-context.tex).
 
 ## Credits
 
-R. J. Faudree and R. H. Schelp suggested the formula and gave the two
-colorings that prove the lower bound, one for odd and one for even $n$;
-J. Dybizbański, T. Dzido and S. Radziszowski stated it as a conjecture.
-A. Figaj and T. Łuczak found the asymptotics of three-color Ramsey numbers
-of long even cycles, which give those of paths, A. Gyárfás, M. Ruszinkó, G. N. Sárközy and
-E. Szemerédi proved the conjecture for large $n$, and S. Letzter later gave a
-simpler proof of the asymptotic bound. J. Dybizbański,
-T. Dzido and S. Radziszowski settled $n = 8$ and $n = 9$, completing the known
-values, and this computation follows their work directly: it re-derives
-the upper bounds up to $n = 9$ and starts from their bound for $n = 9$. R. W. Irving, Yang Yuansheng and
-P. Rowlinson found the values for $n = 4$ to $7$. S. Radziszowski's dynamic survey records
-the problem's status and the sources of the earlier values. The paper
-also credits related work on other three-color path and cycle Ramsey
-numbers, including N. F. Galindez's recent SAT bound for 10-cycles,
-Z. Shao, H. Jiang, X. Xu and S. Wang's certificates for
-$R(C_4, C_6, C_8) = 12$, and J. Zhang's Lean bound for trees, which also
-gives 26 for this case. The
+The prior path and cycle Ramsey literature is credited to
+R. J. Faudree and R. H. Schelp; J. Dybizbański, T. Dzido and
+S. Radziszowski; A. Figaj and T. Łuczak; A. Gyárfás, M. Ruszinkó,
+G. N. Sárközy and E. Szemerédi; S. Letzter; R. W. Irving;
+Yang Yuansheng and P. Rowlinson; N. F. Galindez; Z. Shao, H. Jiang,
+X. Xu and S. Wang; and J. Zhang. The paper retains their bibliographic
+credits; the preceding edition's full credit and historical account remain
+in [its landing page](checks/landing-page-background.md) and the checking
+background. Nearby method credit also belongs to M. Kirchweger,
+P. Manrique and S. Szeider, [IJCAR 2026, abstract and Section 1](https://doi.org/10.1007/978-3-032-32589-1_8).
+The
 computation
 uses A. Biere's CaDiCaL solver and its user-propagator interface by
 K. Fazekas, A. Niemetz, M. Preiner, M. Kirchweger, S. Szeider and A. Biere;
@@ -143,7 +153,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The three-color Ramsey number of the 10-vertex path}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v4/results/path-ramsey}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v5/results/path-ramsey}},
   doi          = {10.5281/zenodo.23607175}
 }
 ```

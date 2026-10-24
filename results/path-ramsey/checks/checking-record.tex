@@ -1,0 +1,134 @@
+% Checking and replay documentation from the preceding edition, retained verbatim.
+% Citations and labels use paper/paper.tex. This is not a second manuscript.
+\section{Checks independent of Lean}\label{sec:separate}
+
+The result was also checked by a separate route that does not use
+Lean.
+
+\begin{itemize}[leftmargin=*]
+\item \emph{Certificates.} CaDiCaL wrote a DRAT proof for each rung and
+each cube; drat-trim~\cite{WHH14} converted it to LRAT~\cite{CHH+17}, and
+\texttt{cake\_lpr}~\cite{THM21}, a checker verified in CakeML down to its
+machine code, accepted every rung, every one of the $15{,}956$ cubes and
+the cover formula.
+\item \emph{Inputs.} For each check, an input checker confirmed that the
+file given to \texttt{cake\_lpr} is exactly the base formula,
+plus the solver's clause log, plus the cube's unit clauses (or the negated
+cubes, for the cover).
+\item \emph{Path clauses.} A separate checker, sharing no code with the
+encoder or the solver, confirmed that every logged clause consists of
+$m-1$ distinct negative literals of one color whose edges form a path on
+$m$ distinct vertices. It rejects ten kinds of planted corruption.
+\item \emph{Replays.} The solver was deterministic under the pinned build. Every cube was solved a
+second time on a different computer from the one that first solved it,
+with byte-identical proofs and clause logs; re-solving all cubes again to
+produce the Lean certificates reproduced every proof and log once more.
+\item \emph{Encoding audit.} An independently written auditor, which does
+not import the encoder, checks every clause of every rung's base formula
+against a direct reading of the problem (with the auxiliaries at their
+meaning), checks that the clause multiset is exactly the one the stated
+encoding generates, with nothing missing or extra, checks that every
+generator preserves the fixed path, checks the reductions exhaustively on
+$K_4$ and $K_5$ (where the formula accepts exactly the colorings it should
+and no class of good colorings is lost), and rejects $30$ planted
+corruptions of the formulas, logs and reductions.
+\item \emph{Independent re-check.} A separate verification, with its own
+code and not importing the search or the Lean development, reconstructed
+the cube list and the inputs of every one of the $15{,}956$ cubes and of
+the cover from the frozen data, rechecked the path clauses, and checked
+every piece's refutation again; the cover refutation also passed an
+independently written LRUP checker, and both checkers rejected a corrupted
+proof and a corrupted input.
+\item \emph{Lower bound.} An exhaustive search confirms that the $K_{17}$
+coloring has no monochromatic $P_{10}$ (and that it has a monochromatic
+$P_9$).
+\end{itemize}
+
+Table~\ref{tab:status} compares the two routes. In the route of this
+section the faithfulness of the encoding rests on the auditor and on short
+written lemmas; in the Lean route it is proved.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright}p{0.42\textwidth}>{\raggedright}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}@{}}
+\toprule
+Step & Separate route & Lean route\\
+\midrule
+Each rung and cube, and the cover formula, is unsatisfiable & \texttt{cake\_lpr} (verified) & verified LRAT checker, native evaluation\\
+The checked formula is the intended one & input checker & the formula is the Lean term\\
+Every logged clause is a path clause & path-clause checker & rebuilt from paths and proved\\
+The base clauses hold for admissible colorings & auditor, clause by clause & proved for all $n,k$\\
+Relabeling to fix the path (Lemma~\ref{lem:fix}) & written; exhaustive on $K_4$, $K_5$ & proved\\
+Generators preserve the fixed path & auditor, every generator & proved\\
+Lex-leader soundness (Lemma~\ref{lem:lex}) & written; exhaustive on $K_4$, $K_5$ & proved\\
+Logged clauses suffice (monotonicity) & written & proved\\
+Cover argument (Lemma~\ref{lem:cover}) and assembly & written & proved\\
+Lower bound & exhaustive search & proved (kernel decision)\\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{What each route checks by machine and what it argues in writing.}\label{tab:status}
+\end{table}
+
+\section{Computation and replay}\label{sec:replay}
+
+\subsection{Cost}
+The search took about $217$ CPU-hours of solving, $48$ of checking and
+converting the proofs with drat-trim, and $3$ of checking them with
+\texttt{cake\_lpr}; the hardest single cube took about
+$2.9$ hours to solve. We ran the full check of
+Section~\ref{sec:commands} twice, in independent pieces. In the first run,
+which produced the Lean certificates, re-solving every cube took about
+$185$ CPU-hours, conversion to LRAT with drat-trim about $45$, packing the
+certificates about $3$ and the Lean checks about $15$: $249$ in all. In
+the second, recorded in the accompanying \path{COMPLETION.md}, the same
+steps took about $229$, $50$, $5$ and $18$: $301$ in all. The README of the
+certificate dataset~\cite{Gra26} records the same two runs. The DRAT
+proofs of the cubes total about $58$\,GB and are not distributed: the
+solver is deterministic, and the replay regenerates them.
+
+\subsection{How to check}\label{sec:commands}
+The accompanying files contain the Lean project in \path{lean/}, the
+certificate checkers in \path{checks/}, and the formulas and cube lists in
+\path{data/}. They pin the Lean toolchain and Mathlib, and the commits of
+CaDiCaL, drat-trim and \texttt{cake\_lpr} that the checks build. The Lean
+project is checked with the standard commands:
+\begin{Verbatim}
+cd lean
+lake exe cache get
+lake build
+\end{Verbatim}
+This builds the encoding proof, the conditional theorems, the lower bound
+and the statement, and checks their axioms; it needs no generated
+certificate data and does not by itself establish the value. The
+computation is replayed with
+\begin{Verbatim}
+python3 checks/check.py quick
+python3 checks/check.py full
+\end{Verbatim}
+The quick mode re-solves the ladder and checks it, the cover and a random
+sample of cubes both in Lean and with \texttt{cake\_lpr}, and runs the
+planted errors; it prints the seed of its sample. The full mode re-solves
+and checks every cube in Lean ($249$ and $301$ CPU-hours in our two runs, in independent
+pieces that can run in parallel on several machines), then the ladder and
+the cover, and finally runs \texttt{lake build R3P10Final}, which proves
+\texttt{R3\_P10\_eq\_18} and prints its axioms as in
+Section~\ref{sec:lean}. With \texttt{--cross-check} it also checks every
+cube with the path-clause checker, the input checker and
+\texttt{cake\_lpr}. The certificates can instead be installed from the
+published dataset~\cite{Gra26}, which holds the $15{,}956$ compact cube
+certificates and an installer; the full mode then skips the search and
+conversion for every cube ($234$ and $284$ CPU-hours of our two runs) and
+goes straight to the Lean checks.
+
+\section*{Acknowledgments}
+This work rests on that of Dybizbański, Dzido and Radziszowski, who
+settled $n=8$ and $n=9$, completing the known values; the computation
+re-derives the upper bounds for $n\le9$, including their
+$\R(P_9)\le17$, and uses that bound, and on Radziszowski's survey, which records the problem's status and
+the sources of the earlier values. It uses the SAT solver CaDiCaL and its
+IPASIR-UP interface, drat-trim, \texttt{cake\_lpr} and CakeML, Lean~4 and
+the LRAT checker in its standard library, and Mathlib; we thank their
+authors and contributors.
+

@@ -1,0 +1,225 @@
+% Historical text from the preceding edition; retained without revision.
+% This file is documentation, not a second manuscript. Citations use the paper bibliography.
+\begin{abstract}
+For a graph $H$, the three-color Ramsey number $R(H,H,H)$ is the least
+$N$ such that every coloring of the edges of the complete graph $K_N$
+with three colors contains a monochromatic copy of $H$. Dybizbański,
+Dzido and Radziszowski stated the formula
+$R(P_n,P_n,P_n)=2n-2+(n\bmod 2)$ as a conjecture in 2012, crediting
+its suggestion to Faudree and Schelp (1975); $P_n$ is the path on $n$ vertices.
+Gyárfás, Ruszinkó, Sárközy and Szemerédi proved this for all
+sufficiently large $n$, and Dybizbański, Dzido and Radziszowski
+determined $R(P_8,P_8,P_8)=14$ and $R(P_9,P_9,P_9)=17$, completing the
+cases $n\le 9$ and leaving $n=10$ as the first open case. We prove
+$R(P_{10},P_{10},P_{10})=18$: every $3$-coloring of the edges of $K_{18}$
+contains a monochromatic path on $10$ vertices. The proof is a SAT
+computation: symmetry breaking anchored on a monochromatic $P_9$, whose
+existence is re-derived by the same method for the smaller cases, path
+constraints generated during the search, and a cube-and-conquer split
+into $15{,}956$ subproblems, each with an unsatisfiability certificate.
+The argument is formalized in Lean~4, with certificates checked by
+Lean's verified LRAT checker using trusted native evaluation. The default
+\texttt{lake build} proves the value only with the certificate facts as
+hypotheses. The unconditional theorem is built by the full check, which
+regenerates every certificate and checks it in Lean ($249$ and $301$
+CPU-hours in our two runs), or installs the certificates from a published
+dataset, which skips the regeneration ($234$ and $284$ of those hours).
+\end{abstract}
+
+\paragraph{AI production.}
+The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+
+\paragraph{Scope of verification.}
+This is a computer-assisted proof: a Lean formalization with trusted
+native evaluation. The statement, the reduction from colorings to
+propositional formulas, the cover of the case split, and the lower bound
+are proved in Lean (v4.32.2) from the definitions and checked by its
+kernel. Two kinds of check are natively evaluated, through
+\texttt{Lean.ofReduceBool}, which trusts Lean's compiler
+(\texttt{Lean.trustCompiler}): the $15{,}964$ unsatisfiability certificate
+checks (seven rungs, the cover and $15{,}956$ cubes), run by Lean's
+verified LRAT checker, and the comparison identifying the parsed $K_{18}$
+formula with the encoder's output (Section~\ref{sec:lean}). The
+corresponding refutations, before their conversion to the compact form Lean
+reads, were also checked independently of Lean by the verified checker
+\texttt{cake\_lpr}, and a separate checker with its own code re-checked
+every piece (Section~\ref{sec:separate}). No human expert has reviewed the
+proof.
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{The problem}
+For graphs $G_1,G_2,G_3$, the Ramsey number $R(G_1,G_2,G_3)$ is the least
+$N$ such that every coloring of the edges of $K_N$ with colors $1,2,3$
+contains, for some $i$, a copy of $G_i$ all of whose edges have color $i$.
+We write $\R(G)=R(G,G,G)$, and $P_n$ for the path on $n$ vertices (with
+$n-1$ edges). Paths are not required to be induced.
+
+Faudree and Schelp~\cite{FS75} studied $R(P_m,P_n,P_k)$ for paths of
+different lengths and, ``from checking lower cases'', suggested a formula
+for all of them~\cite[p.~159]{FS75}, whose diagonal case is the formula
+below; Dybizbański, Dzido and Radziszowski~\cite{DDR16}
+stated that case as a conjecture, and Radziszowski's dynamic
+survey~\cite{Rad26} records it as the conjecture of Faudree and Schelp.
+
+[The conjecture is retained verbatim in paper/paper.tex.]
+
+The lower bound $\R(P_n)\ge 2n-2+(n\bmod2)$ holds for every $n$, by
+Faudree and Schelp~\cite{FS75}: for odd $n$ by a blow-up of the
+factorization of $K_4$ into three perfect matchings, and for even $n$ by
+their general lower bound for paths of different lengths (proof of
+Theorem~6). Gyárfás, Ruszinkó, Sárközy and Szemerédi~\cite{GRSS07} give
+the blow-up for even $n$ as well (see also~\cite{DDR16} and
+Section~\ref{sec:lower}). Figaj and
+Łuczak~\cite{FL07} determined the three-color Ramsey numbers of long
+even cycles asymptotically, which gives $R(P_{n_1},P_{n_2},P_{n_3})$
+asymptotically as well~\cite[Section~6.4.1(a)]{Rad26}, and Gyárfás, Ruszinkó, Sárközy and
+Szemerédi~\cite{GRSS07} proved Conjecture~\ref{conj:FS} for all
+sufficiently large $n$, by the regularity method, with no explicit
+threshold; Dybizbański, Dzido and Radziszowski report that their attempts
+to extract a reasonable bound on the threshold from that proof
+failed~\cite[Section~2]{DDR16}. Letzter~\cite{Let22} later gave a simpler
+proof of the asymptotic bound $\R(P_n)\le(2+o(1))n$, with a sketch of a
+corresponding stability result.
+
+For small $n$ the conjecture is known for $n\le 9$. Table~\ref{tab:known}
+lists the values with their sources as the survey~\cite[Section~6.4.1(c)]{Rad26}
+attributes them, except for $n=5$ (see its caption). The values for $P_5$, $P_6$ and $P_7$ were obtained with
+the help of computer algorithms~\cite[Section~2]{DDR16}. Dybizbański,
+Dzido and Radziszowski~\cite{DDR16} (preprint 2012, published 2016) proved
+$\R(P_8)=14$ and $\R(P_9)=17$ without computer help, which, in their words, ``leaves
+$\R(P_{10})$ as the first open case''. They also attempted $P_{10}$ and
+$P_{11}$ by the same method and did not complete these proofs; in their
+words, ``between the first two open cases of Conjecture~2, namely the
+questions whether it is true that $\R(P_{10})=18$ and $\R(P_{11})=21$, we
+expect the former to be more difficult to prove'' (closing remarks
+of~\cite{DDR16}). The latest revision of Radziszowski's survey
+(revision \#18, April 24, 2026) still states that the conjecture ``is true
+for $n\le 9$ \dots, and the first open case is that for
+$P_{10}$''~\cite[Section~6.4]{Rad26}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+$n$ & 3 & 4 & 5 & 6 & 7 & 8 & 9\\
+\midrule
+$\R(P_n)$ & 5 & 6 & 9 & 10 & 13 & 14 & 17\\
+source & \cite[Ea1]{Rad26} & \cite{Irv74} & \cite{YR94} & \cite{YR92} & \cite{Yan95} & \cite{DDR16} & \cite{DDR16}\\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{The known values of $\R(P_n)$, with the sources the survey~\cite{Rad26}
+gives, except for $n=5$: the survey cites~\cite{YR92}, which treats graphs
+with five edges, while $P_5$, with four, is among the graphs
+of~\cite{YR94}. For $n=3$ the survey notes that the value is easy to
+obtain.}\label{tab:known}
+\end{table}
+
+For comparison, counting edges with the extremal theorem for paths gives
+an upper bound. Erdős and Gallai~\cite{EG59} bounded the number of edges
+of a graph with no long path; Faudree and Schelp~\cite{FS75}, and
+independently Kopylov~\cite{Kop77}, determined it exactly (see
+also~\cite[Theorem~4]{DDR16}). By their theorem, a $P_{10}$-free graph on $23$ vertices has at most
+$2\binom92+\binom52=82$ edges, and $3\cdot 82<\binom{23}{2}$, so
+$\R(P_{10})\le 23$.
+
+\subsection{The result}
+
+[The main theorem is retained verbatim in paper/paper.tex.]
+
+The lower bound is the classical construction; the new part is the upper
+bound $\R(P_{10})\le18$, which settles the case $n=10$ of
+Conjecture~\ref{conj:FS}. The result is likely new: we found it neither
+in the survey, which lists the case as the first open
+one~\cite[Section~6.4]{Rad26}, nor in the literature we searched.
+
+The prior exact results are those of Table~\ref{tab:known}: Irving's
+$\R(P_4)=6$~\cite{Irv74}, Yang and Rowlinson's $\R(P_5)=9$~\cite{YR94} and
+$\R(P_6)=10$~\cite{YR92} and Yang's $\R(P_7)=13$~\cite{Yan95}, the last
+three obtained with computer help~\cite[Section~2]{DDR16}, and
+Dybizbański, Dzido and Radziszowski's $\R(P_8)=14$ and
+$\R(P_9)=17$~\cite{DDR16}, by hand. Each covers one value of $n$; none
+bounds $\R(P_{10})$ from above by less than the counting bound $23$ below,
+and the only other results bounding $\R(P_{10})$ that we found are
+Galindez's computation $\R(C_{10})\le26$~\cite{Gal26} and Zhang's Lean
+proof of a bound for all trees~\cite{ZhJ26}, each giving
+$\R(P_{10})\le26$. On October
+21, 2026 we rechecked the indexed forward citations of the canonical
+papers: the one citation of~\cite{DDR16} that OpenAlex and Crossref
+index, and the citations
+of~\cite{GRSS07} since 2023 (among them~\cite{ABC+26}, on paths with few
+color changes); none treats $\R(P_{10})$. The news is the value. The Lean
+proof is how it is established and checked; we claim no novelty for the
+method, whose ingredients have precedents~\cite{HKWB12,HS24,SNG+24,Sze26}.
+The companion case $n=11$, $\R(P_{11})=21$, remains open; Dybizbański,
+Dzido and Radziszowski showed that it would follow from the conjectured
+value $\R(C_{10})=20$ for the $10$-cycle~\cite{DDR16}, which is itself the
+first open case of the conjecture $\R(C_{2m})=4m$ for $m\ge3$, which
+Dzido made in his 2005 thesis~\cite[Section~6.3.1(b)]{Rad26}; Benevides and
+Skokan~\cite{BS09} proved it for large $m$.
+
+The proof is a computation, built directly on the work of Dybizbański,
+Dzido and Radziszowski. A monochromatic $P_9$ exists in every
+$3$-coloring of $K_{18}$ because $\R(P_9)=17$~\cite{DDR16}, and fixing it
+is the first and most effective reduction of the search. We do not take
+that bound from the literature: a ladder of seven smaller computations,
+$P_3$ on $K_5$ up to $P_9$ on $K_{17}$, re-derives the upper bounds
+$\R(P_m)\le 5,6,9,10,13,14,17$ for $m=3,\dots,9$, each rung fixing the
+monochromatic path that the rung below guarantees
+(Section~\ref{sec:ladder}). The top rung, $P_{10}$ on $K_{18}$, is split
+into $15{,}956$ subproblems (``cubes''); each is refuted by a SAT solver
+with a proof certificate, and a separate certificate shows that the cubes
+cover all cases (Section~\ref{sec:cnc}).
+
+Lean~4~\cite{MU21} with Mathlib~\cite{Mathlib20} proves the reduction
+from colorings to formulas: from the unsatisfiability of the rungs, the
+cover formula and the cubes, it derives that every $3$-coloring of
+$K_{18}$ has a monochromatic $P_{10}$. Every certificate (all $15{,}956$ cubes,
+the cover and the seven rungs) is checked inside Lean by the verified LRAT
+checker that ships with Lean (it underlies the \texttt{bv\_decide}
+tactic~\cite{BBC+25}), run by native evaluation. The final theorem is the
+Lean statement \texttt{ramsey3Path 10 = 18} (Section~\ref{sec:lean}).
+
+\subsection{Related and concurrent work}\label{sec:related}
+SAT solvers have settled several Ramsey-type questions, among them the
+Boolean Pythagorean triples problem~\cite{HKM16}, by
+cube-and-conquer~\cite{HKWB12} with a proof certificate, and the
+three-color Ramsey number $R(4,3,3)=30$~\cite{CFIM16}, whose authors
+expected certificates for it to be of unmanageable size; the empty hexagon
+theorem~\cite{HS24} was later verified in Lean~\cite{SNG+24}. Szeider has
+recently described a tool that imports LRAT certificates, including those
+of cube-and-conquer computations, into Lean theorems through the same
+verified checker of Lean's core library~\cite{Sze26}; our certificate
+import (Section~\ref{sec:certs}) relies on the same checker, with its own
+compact certificate encoding. On multicolor cycle
+Ramsey numbers, Wesley~\cite{Wes25} used SAT solvers to prove
+$R(C_3,C_6,C_6)=R(C_5,C_6,C_6)=15$ together with new bounds, and
+Galindez~\cite{Gal26} has posted an exhaustive SAT computation, using SAT
+Modulo Symmetries~\cite{KS24} and cube-and-conquer, giving
+$\R(C_{10})\le 26$. That bound implies $\R(P_{10})\le 26$, since a
+$10$-cycle contains a $P_{10}$. Shao, Jiang, Xu and Wang~\cite{SJXW26}
+have posted a reproduction package for $R(C_4,C_6,C_8)=12$: after a hand
+reduction in their paper, nine SAT instances, each refuted with a RUP
+certificate. A public SAT project on three-color cycle
+Ramsey numbers~\cite{Zha26} is also active. For trees, Zhang~\cite{ZhJ26}
+has posted a Lean proof that $R_k(T)\le k(n-2)+2$ for every tree $T$ on
+$n\ge2$ vertices, as a corollary of a machine-checked proof of the
+Erdős--Sós conjecture found by GPT-6 Astra and packaged by Adamczewski; for three colors and $P_{10}$
+it gives $26$. Three-color Ramsey numbers of
+paths of different lengths, and of paths against cycles, have been
+determined in many further cases~\cite{Dzi05,DF09,OR11,MORS15}, and
+Radziszowski's survey~\cite{Rad26} records many further computer-assisted
+results on small Ramsey numbers.
+
+\subsection{Organization}
+Section~\ref{sec:lower} gives the lower bound. Section~\ref{sec:encoding}
+describes the propositional encoding and the two symmetry reductions,
+Section~\ref{sec:ladder} the ladder, and Section~\ref{sec:cnc} the case
+split on $K_{18}$ and why it is complete. Section~\ref{sec:lean} describes
+the Lean formalization and exactly what it trusts;
+Section~\ref{sec:separate} the checks made independently of Lean, and
+which steps of that route are machine-checked and which are argued.
+Section~\ref{sec:replay} gives the computing cost and how to replay the
+proof.
+

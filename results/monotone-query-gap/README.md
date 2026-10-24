@@ -86,7 +86,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A monotone counterexample to a question on distributional complexity}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/monotone-query-gap-v1/results/monotone-query-gap}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/monotone-query-gap-v2/results/monotone-query-gap}},
   doi          = {10.5281/zenodo.23578348}
 }
 ```

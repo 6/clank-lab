@@ -55,7 +55,7 @@ The proofs, the Lean formalization, the checking programs and the text were prod
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23582026](https://doi.org/10.5281/zenodo.23582026)
+Archived on Zenodo: [doi:10.5281/zenodo.23609073](https://doi.org/10.5281/zenodo.23609073)
 
 ## Check it
 
@@ -153,6 +153,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Fathi's consecutive-integers bound does not extend to multitwists}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v2/results/multitwist-exceptions}},
-  doi          = {10.5281/zenodo.23582026}
+  doi          = {10.5281/zenodo.23609073}
 }
 ```

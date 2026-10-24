@@ -2,7 +2,7 @@
 
 [![Checks](https://github.com/6/clank-lab/actions/workflows/thomson-10.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/thomson-10.yml)
 
-For ten equal charges on a sphere, does the bicapped square antiprism minimize Coulomb energy? This is the ten-point case of the [Thomson problem](https://en.wikipedia.org/wiki/Thomson_problem), associated with J. J. Thomson's 1904 atomic model. We adapt the MIT-licensed formal code of [Aravind Karthigeyan's nine-point project](https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e). We prove global optimality among all ten distinct unit-sphere points, with equality exactly up to orthogonal maps (including reflections) and relabeling.
+For ten equal charges on a sphere, does the bicapped square antiprism minimize Coulomb energy? This is the ten-point case of the [Thomson problem](https://en.wikipedia.org/wiki/Thomson_problem), associated with J. J. Thomson's 1904 atomic model. We build directly on [Aravind Karthigeyan's AI-generated nine-point Lean proof](https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e), reusing most of its MIT-licensed Lean code and its proof design. We prove global optimality among all ten distinct unit-sphere points, with equality exactly up to orthogonal maps (including reflections) and relabeling.
 
 ![The bicapped square antiprism: a side view with the heights h of the two squares marked, and the view from above, where the lower square is the upper one turned by π/4 (illustration only; not part of the proof).](data/antiprism.svg)
 
@@ -34,7 +34,7 @@ The Python checker independently implements checks of the same rational certific
 
 ## Credits
 
-Aravind Karthigeyan's pinned October 6, 2026 [README](https://github.com/aravindkarthigeyan/thomson-n9-lean/blob/168ff0c98cab4dfda0460ba55f8d169070ac385e/README.md) states “global optimality and uniqueness for nine distinct points” and calls the project “a research release requesting external review”. We substantially adapt its MIT-licensed Lean code and proof design. [THIRD_PARTY.md](THIRD_PARTY.md) preserves the file-level attribution, changes and full license notice.
+Aravind Karthigeyan's pinned October 6, 2026 [README](https://github.com/aravindkarthigeyan/thomson-n9-lean/blob/168ff0c98cab4dfda0460ba55f8d169070ac385e/README.md) states “global optimality and uniqueness for nine distinct points” and calls the project “a research release requesting external review”. That AI-generated proof establishes the D3h tricapped trigonal prism as minimizer, with equality up to orthogonal transformation and permutation. We reuse most of its MIT-licensed Lean code and follow its proof design. [THIRD_PARTY.md](THIRD_PARTY.md) preserves the file-level attribution, changes and full license notice.
 
 The prior and concurrent credits remain in [historical context](checks/context.md), including Föppl; Yudin; Schwartz; Andreev; Cohn and Kumar; Hung Tran; Kryvonos, Liehr and Taylor; Joseph Tooby-Smith and Alex Zughaid; Alex Zarco; Delsarte, Goethals and Seidel; Bachoc and Vallentin; Cohn and Woo; saberwatchmanga (formerly terry2418); Erber and Hockney; and the Cambridge Cluster Database. That account also preserves the shared-cutoff provenance qualification. No priority claim is made.
 

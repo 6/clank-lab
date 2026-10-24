@@ -1,0 +1,18 @@
+% Formalization-control audit from the preceding edition, retained verbatim.
+% Labels refer to paper/paper.tex. This is documentation, not a second manuscript.
+Planted errors are rejected by the build: a negated literal in a proof
+step, a dropped hint, a path with a repeated vertex, a certificate checked
+against the wrong rung's formula, and a comparison of the $K_{18}$ encoder
+with the $K_{17}$ formula each make the natively evaluated check return
+false, so the theorem is not accepted; a missing range of cubes makes
+\texttt{K18.all} fail to cover $15{,}956$ indices. Seven mutations of the
+formalization each make the build fail in the expected declaration: a path
+clause missing an edge, an encoder missing a fixed-path unit (no longer the
+certified formula), a generator that moves the fixed path, a fixed path one
+edge longer than the premise provides, a reversed lex comparison, a
+comparison that ignores the color permutation, and a recolored edge of the
+$K_{17}$ coloring. Some of these changes are sound in isolation (a dropped
+clause, or reversing every comparison); their failure shows that the proofs
+and the certified formulas are tied to each other, not that every sound
+variant would be accepted.
+

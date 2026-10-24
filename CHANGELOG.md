@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## path-ramsey v5 (October 24, 2026)
+
+- Concise edition: shorten the main text and move detailed proofs to the appendix and background to the checking notes. The theorem and its checks are unchanged.
+- Correction: restore prominent credit to the large-path formula, small-case results, lower-bound construction, nearby work and checking methods; print named appendix headings and clarify the historical audit count and native-evaluation terminology. The theorem and its checks are unchanged.
+
 ## williamson-order-65 v2 (October 24, 2026)
 
 - Concise edition: the main paper is shorter, with proof details in the appendix and computation history in the checker documentation. The theorem, exhaustion records, checks, and trust limitations are unchanged.

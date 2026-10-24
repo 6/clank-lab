@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage[title]{appendix}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -19,13 +20,22 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-There are no Williamson matrices of order $65$: four symmetric circulant
-sign matrices whose squares sum to $260$ times the identity. Bright's
-March 20, 2019 research statement identifies this existence question.
-The computer-assisted argument reduces it by compression and symmetry,
-then exhaustively joins pairs of full rows. Separate checks establish
-coverage and accounting. The conclusion depends on correct execution of
-the exhaustive joins, which have not been formally verified.
+Williamson's 1944 construction uses four symmetric circulant sign matrices
+\cite{Williamson}; see the historical account in Koukouvinos and Kounias,
+Section 1, p.~162~\cite{KK1990}. Our search builds on Holzmann, Kharaghani
+and Tayfeh-Rezaie's row and pair spectral bounds and their elimination
+using Williamson's product theorem: December 12, 2007 manuscript,
+Eq.~(2), Theorem 1 and algorithm 2(c--d)~\cite{HKT}.
+We add a computer-assisted nonexistence result at order $65$: no such four
+matrices have squares summing to $260$ times the identity. Bright's
+March 20, 2019 research statement, Section 4.2, identifies this existence
+question~\cite{BrightStatement}. We use \DJ okovi\'c and Kotsireas's
+compression, arXiv version 1, Theorem 3~\cite{DK}, in the Williamson
+formulation of Bright, Kotsireas and Ganesh, arXiv version 2,
+Theorem 12~\cite{BKG}, then exhaustively join pairs of full rows.
+Separate checks establish coverage and accounting. The conclusion depends
+on correct execution of the exhaustive joins, which have not been
+formally verified.
 \end{abstract}
 
 \section{The result}
@@ -43,7 +53,7 @@ $65$ satisfying $A^2+B^2+C^2+D^2=260I_{65}$.
 \end{theorem}
 This is a statement about symmetric circulant blocks, not about arbitrary
 Hadamard matrices of order $260$ or the broader Williamson-type families.
-Order $67$ remains open.
+Order $67$ remains open~\cite[version 2, Section 2.3: ``have not yet been found'']{KMTZ}.
 
 \smallskip
 \noindent Computer-assisted; not yet reviewed by experts.
@@ -60,16 +70,52 @@ matrices exist. For the neighboring near-Williamson question, see
 Kharaghani, Mohammadian, Tayfeh-Rezaie and Zaitsev, arXiv version 2,
 Definition 1.1 and Table 6~\cite{KMTZ}.
 
-This paper completes the order-$65$ nonexistence argument. Its ingredients
-include the compression and spectral conditions in Bright, Kotsireas and
-Ganesh, version 2, Definition 11, Theorem 12 and Corollaries 8--9,
-and Williamson's product theorem as stated there in Theorem 14~\cite{BKG}.
-The difficult step here is excluding every full-row lift of every
-admissible compressed tuple: excluding compressed objects alone would not
-settle the question. A direct join of pairs of full rows completes that
-step, with conservative spectral bounds. The contribution is this complete
-exhaustion at order $65$; no general construction principle or speedup over
-prior programs is claimed.
+Turyn's 1972 abstract records ``it has been conjectured that one such exists
+of any order $4t$'' and ``An infinite family is constructed here''~\cite{Turyn}.
+Koukouvinos and Kounias (1990, Section 1, p.~162) credit Baumert, Golomb
+and Hall (1962) with ``Williamson matrices for $m=23$'' (Hadamard order $92$),
+and Baumert and Hall (1965) with ``all solutions for $3\leq m\leq23$''
+(at odd block orders)~\cite{KK1990,BGH,BH}.
+\DJ okovi\'c's 1995 note (Section 5, p.~174) records ``An exhaustive computer
+search for non-equivalent solutions'' by Sawade (1977), Koukouvinos and
+Kounias (1988, 1990), and \DJ okovi\'c (1992, 1993); its Table 1 corrects
+the order-$25$ count~\cite{Sawade,KK1988,KK1990,Djokovic1992,Djokovic,Djokovic1995}.
+The same note (Section 1, p.~172), citing his 1993 paper, records
+``it has none for $n=35$'', disproving the odd-order conjecture; Section 5
+records corrections at $33$ and $39$~\cite{Djokovic1995,Djokovic}.
+Holzmann, Kharaghani and Tayfeh-Rezaie enumerate odd orders through $59$,
+with none at $47$, $53$ and $59$: December 12, 2007 manuscript,
+Section 4, Table 1~\cite{HKT}.
+Bright, Kotsireas and Ganesh's version 2, p.~3, reports ``the order 61 was
+enumerated by Lang and Schneider (2012)''~\cite{BKG,LS}; the latter paper's
+title specifies Turyn type.
+
+The row and pair spectral restrictions and the product-identity elimination
+already appear in Holzmann, Kharaghani and Tayfeh-Rezaie's December 12, 2007
+manuscript: Eq.~(2), Theorem 1 and algorithm 2(c--d)~\cite{HKT}.
+After fixing the first two blocks, they eliminate the fourth using
+Williamson's product theorem and solve linearized equations modulo $4$
+for the third, finally checking the original equations: Section 3,
+Eqs.~(4--5), steps 2(d)(ii)(A--E). We build on those restrictions.
+Our search combines \DJ okovi\'c--Kotsireas compression, version 1,
+Definition 3 and Theorem 3~\cite{DK}, in the formulation of Bright,
+Kotsireas and Ganesh, version 2, Definition 11 and Theorem 12~\cite{BKG},
+with a multiplier restriction on one row and two-sided pair bounds
+before a direct full-row pair join. Their Corollaries 8--9 give the
+spectral formulation, and Theorem 14 explicitly attributes the product
+theorem to Williamson. The difficult step here is excluding every full-row
+lift of every admissible compressed tuple: excluding compressed objects
+alone would not settle the question. The contribution is this complete
+exhaustion at order $65$; no general construction principle or speedup
+over prior programs is claimed.
+
+Nearby work includes Egan, Kotsireas, London and \'O Cath\'ain's
+October 19, 2026 survey (version 1, Section 2.1: ``Williamson matrices do
+not exist at every odd order'', listing $35,47,53,59$)~\cite{EKLO},
+Bennett, Bright, Colinot and Nayak's quaternionic perfect-sequence
+enumeration (version 1, abstract: ``does not require the sequences to be
+symmetric'')~\cite{BBCN}, and Zhang's April 2, 2026 AI-assisted
+account~\cite[Section 7.4]{Zhang}.
 
 \section{Proof overview}\label{sec:overview}
 A symmetric row of order $65$, normalized to start with $+1$, is
@@ -126,8 +172,8 @@ python3 -m pip install -r checks/requirements.txt
 python3 checks/check.py
 \end{verbatim}
 The default check validates the record and runs known-case controls; it
-does not repeat every order-$65$ join. Add \texttt{--full-controls} for the
-longer known-case controls or \texttt{--full-search} for the complete CPU
+does not repeat every order-$65$ join. Add \texttt{-{}-full-controls} for the
+longer known-case controls or \texttt{-{}-full-search} for the complete CPU
 exhaustion. The numerical and storage arguments follow in the appendix;
 the exact command scope, historical CPU and GPU receipts, sample checks,
 and their limitations are in \texttt{checks/README.md} and
@@ -135,7 +181,7 @@ and their limitations are in \texttt{checks/README.md} and
 external dataset is required and no separate dataset DOI exists.
 
 \clearpage
-\appendix
+\begin{appendices}
 \section{Rows, autocorrelations, and spectra}\label{sec:rows}
 This section fixes the encoding and proves the necessary conditions used
 to retain individual rows. All indices below are taken modulo the odd
@@ -502,7 +548,71 @@ the high bits of this same key on both sides. Equal keys always belong to
 the same pass. Every reported order-$65$ unit completed in one pass.
 
 
+\end{appendices}
 \begin{thebibliography}{99}
+\bibitem{Williamson}
+J. Williamson, Hadamard's determinant theorem and the sum of four squares,
+Duke Mathematical Journal \textbf{11} (1944), 65--81.
+\url{https://doi.org/10.1215/S0012-7094-44-01108-7}.
+\bibitem{Turyn}
+R. J. Turyn, An infinite class of Williamson matrices,
+Journal of Combinatorial Theory, Series A \textbf{12} (1972), 319--321.
+\url{https://doi.org/10.1016/0097-3165(72)90095-7}.
+\bibitem{BGH}
+L. Baumert, S. W. Golomb and M. Hall, Jr., Discovery of an Hadamard
+matrix of order 92, Bulletin of the American Mathematical Society
+\textbf{68} (1962), 237--238.
+\url{https://doi.org/10.1090/S0002-9904-1962-10761-7}.
+\bibitem{BH}
+L. Baumert and M. Hall, Jr., Hadamard matrices of the Williamson type,
+Mathematics of Computation \textbf{19} (1965), 442--447.
+\url{https://doi.org/10.1090/S0025-5718-1965-0179093-2}.
+\bibitem{Djokovic1992}
+D. \v Z. \DJ okovi\'c, Williamson matrices of orders $4\cdot29$ and $4\cdot31$,
+Journal of Combinatorial Theory, Series A \textbf{59} (1992), 309--311.
+\url{https://doi.org/10.1016/0097-3165(92)90071-2}.
+\bibitem{Djokovic1995}
+D. \v Z. \DJ okovi\'c, Note on Williamson matrices of orders $25$ and $37$,
+Journal of Combinatorial Mathematics and Combinatorial Computing
+\textbf{18} (1995), 171--175.
+\url{https://combinatorialpress.com/jcmcc-articles/volume-018/note-on-williamson-matrices-of-orders-25-and-37/}.
+\bibitem{Djokovic}
+D. \v Z. \DJ okovi\'c, Williamson matrices of order $4n$ for $n=33,35,39$,
+Discrete Mathematics \textbf{115} (1993), 267--271.
+\url{https://doi.org/10.1016/0012-365X(93)90495-F}.
+\bibitem{HKT}
+W. H. Holzmann, H. Kharaghani and B. Tayfeh-Rezaie,
+Williamson matrices up to order 59, Designs, Codes and Cryptography
+\textbf{46} (2008), 343--352. Cited version: author manuscript dated
+December 12, 2007 (page and algorithm numbering refer to this version).
+\url{https://web.archive.org/web/20170810183932id_/http://math.ipm.ac.ir/~tayfeh-r/papersandpreprints/Williamson.pdf}.
+\url{https://doi.org/10.1007/s10623-007-9163-5}.
+\bibitem{LS}
+W. Lang and E. Schneider, Turyn type Williamson matrices up to order 99,
+Designs, Codes and Cryptography \textbf{62} (2012), 79--84;
+first published online March 5, 2011.
+\url{https://doi.org/10.1007/s10623-011-9492-2}.
+\bibitem{Sawade}
+K. Sawade, Hadamard matrices of order 100 and 108,
+Bulletin of the Nagoya Institute of Technology \textbf{29} (1977), 147--153.
+\url{https://cir.nii.ac.jp/crid/1520572358172744832}.
+\bibitem{KK1988}
+C. Koukouvinos and S. Kounias, Hadamard matrices of the Williamson type
+of order $4\cdot m$, $m=p\cdot q$ an exhaustive search for $m=33$,
+Discrete Mathematics \textbf{68} (1988), 45--57.
+\url{https://doi.org/10.1016/0012-365X(88)90040-4}.
+\bibitem{KK1990}
+C. Koukouvinos and S. Kounias, There are no circulant symmetric Williamson
+matrices of order 39, Journal of Combinatorial Mathematics and
+Combinatorial Computing \textbf{7} (1990), 161--169.
+\url{https://combinatorialpress.com/jcmcc-articles/volume-007/there-are-no-circulant-symmetric-williamson-matrices-of-order-39/}.
+\bibitem{DK}
+D. \v Z. \DJ okovi\'c and I. S. Kotsireas,
+Compression of periodic complementary sequences and applications,
+arXiv:1302.0571v1, February 4, 2013;
+Designs, Codes and Cryptography \textbf{74} (2015), 365--377.
+\url{https://arxiv.org/abs/1302.0571v1}.
+\url{https://doi.org/10.1007/s10623-013-9862-z}.
 \bibitem{BKG}
 C. Bright, I. Kotsireas and V. Ganesh,
 Applying Computer Algebra Systems with SAT Solvers to the Williamson
@@ -520,5 +630,19 @@ arXiv:2605.08661v2, September 6, 2026.
 First posted May 9, 2026 as version 1 by H. Kharaghani, A. Mohammadian
 and B. Tayfeh-Rezaie, titled \emph{A search for Hadamard matrices of Williamson type}.
 \url{https://arxiv.org/html/2605.08661v2}.
+\bibitem{EKLO}
+R. Egan, I. Kotsireas, S. London and P. \'O Cath\'ain,
+Recent progress in the construction of Hadamard matrices,
+arXiv:2610.27175, first posted October 19, 2026.
+\url{https://arxiv.org/abs/2610.27175}.
+\bibitem{BBCN}
+A. Bennett, C. Bright, P. Colinot and A. Nayak,
+Quaternionic Perfect Sequences and Hadamard Matrices,
+arXiv:2601.22337, first posted January 29, 2026.
+\url{https://arxiv.org/abs/2601.22337}.
+\bibitem{Zhang}
+S. Y. Zhang, Programmable Emergence via Cognitive Engine: Longitudinal
+Evidence of AI Research Maturation, April 2, 2026.
+\url{https://doi.org/10.5281/zenodo.19392279}.
 \end{thebibliography}
 \end{document}

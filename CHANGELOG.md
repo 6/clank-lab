@@ -7,10 +7,12 @@ Zenodo records.
 ## multitwist-exceptions v2 (October 23, 2026)
 
 - Using Penner's construction, add examples on the five-holed sphere with pseudo-Anosov bases and a fixed positive two-component multitwist: two exceptional exponents are arbitrarily far apart as the base varies. The weaker count question and other surfaces remain outside the result.
+- Zenodo: [10.5281/zenodo.23609073](https://doi.org/10.5281/zenodo.23609073)
 
 ## lit-only-sigma v3 (October 23, 2026)
 
 - Describe the counterexample's exact lit-only orbit by three configuration types and prove a uniform blow-up family with a stated starting configuration's gap equal to four sevenths of the graph's order. No exact maximum over arbitrary starts is claimed.
+- Zenodo: [10.5281/zenodo.23608956](https://doi.org/10.5281/zenodo.23608956)
 
 ## game-grundy-gap v2 (October 23, 2026)
 

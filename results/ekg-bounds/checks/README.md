@@ -104,3 +104,11 @@ makes an accidental match negligible. The direct checker covers the first
 $10^8$ terms (its arrays for the full prefix would exceed one machine), so
 beyond that the definition is checked only through the two generators,
 which could in principle share a misreading of it.
+
+## Supplementary notes
+
+The [checking notes relocated from the paper](checking-notes.tex)
+retain the implementation details, precise resource estimates, theorem
+identifiers and certificate margins. Their references use the labels in
+`paper/paper.tex`; the notes are documentation and are not read by a
+proof or checker.

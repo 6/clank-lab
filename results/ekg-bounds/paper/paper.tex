@@ -1,8 +1,12 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
 \usepackage{fullpage,amsmath,amssymb,amsthm}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{graphicx}
+\usepackage[title]{appendix}
 \usepackage{url}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \hypersetup{pdftitle={Sharp linear bounds for the EKG sequence},
@@ -24,37 +28,43 @@
 \newcommand{\lean}[1]{\texttt{#1}}
 \title{Sharp linear bounds for the EKG sequence}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 22, 2026}
+\date{October 25, 2026}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-The EKG sequence starts $a(1)=1$, $a(2)=2$, and thereafter takes the
-least unused positive integer sharing a factor greater than $1$ with its
-predecessor. In 2002 Lagarias, Rains and Sloane conjectured that
-$13n/28\le a(n)\le 12n/7$ for every $n\ge1$, with equality only at
-$n=28$ and $n=7$ respectively. We prove this conjecture. Earlier work
-gives coarse linear bounds at every $n$ (Lagarias, Rains and Sloane), the
-limits $1/2$, $3/2$ and $1$ of $a(n)/n$ on primes, their triples and the
-other terms (Hofman and Pilipczuk), and explicit rates (Haver), but not
-the sharp constants at every $n$. Our main step bounds the number of used
-even values greater than the least unused even number $E$ by a
-self-improving inequality closed with the large sieve. Explicit estimates then hold once
-$E$ exceeds about $1.3\cdot10^{10}$, which happens within the first
-$1.6\cdot10^{10}$ terms; those terms are computed. Lean~4 checks the
-deduction from the definition, conditional on computed premises;
-separate programs check those premises, and their match with the Lean
+We prove that the EKG sequence satisfies $13n/28\le a(n)\le12n/7$ for
+every $n\ge1$, with equality only at $n=28$ and $n=7$, respectively.
+Discovered by Jonathan Ayres, the sequence starts with $1,2$ and
+repeatedly takes the least unused
+positive integer sharing a factor greater than $1$ with its predecessor.
+This proves the sharp linear bounds conjectured by Lagarias, Rains and
+Sloane, who established coarse bounds at every index. Hofman and Pilipczuk
+proved the limits $1/2$, $3/2$ and $1$ of $a(n)/n$ on primes, their
+triples and the other terms, and Haver made these estimates explicit and
+formalized them in Lean. Our earlier
+second-order asymptotic also builds on Haver's work. The new step is a
+self-improving bound for the number of used even values above the least
+unused even number. The large sieve makes this bound effective in a
+range that meets a finite computation. Lean checks the deduction from
+the definition, conditional on computed premises; independent programs
+check those premises, and their correspondence with the formal
 statements was checked by reading the code.
 \end{abstract}
 
-\paragraph{AI production.}
-The proofs, the Lean formalization, the programs and the text were
-produced by AI models (from OpenAI and Anthropic), working under the
-author's direction.
+\bigskip
+\noindent 2020 \emph{Mathematics Subject Classification}:
+Primary 11B83; Secondary 11N36, 68V15.\\
+\emph{Keywords}: EKG sequence, greedy permutation, explicit bounds,
+large sieve, formal verification.
+
+
+
 
 \section{Introduction}
 
-The EKG sequence, introduced by Lagarias, Rains and Sloane \cite{lrs},
+The EKG sequence, discovered by Jonathan Ayres and studied by Lagarias,
+Rains and Sloane \cite[Introduction]{lrs},
 is \href{https://oeis.org/A064413}{A064413} in the OEIS \cite{oeis}.
 Write $\U_t=\{a(1),\dots,a(t)\}$. The sequence is defined by
 \begin{equation}\label{eq:rule}
@@ -93,20 +103,20 @@ upper bound only for $n=7$ (where $a(7)=12$).
 $13/28$ (bottom) of Theorem~\ref{thm:main}, attained at $n=7$ and $n=28$.
 Right: the largest and smallest values of $a(n)/n$ over each block
 $2^k\le n<2^{k+1}$, $n\le10^6$, approaching $3/2$ and $1/2$ (dotted).
-Drawn from the computed sequence by \texttt{data/figure.py}.}
+Drawn from the computed sequence.}
 \label{fig:ratio}
 \end{figure}
 
 \paragraph{Prior work.}
-Lagarias, Rains and Sloane \cite{lrs} defined the sequence, proved the
+Lagarias, Rains and Sloane \cite[Theorems~1--3 and Lemma~1]{lrs} defined the sequence, proved the
 linear bounds above and the rule that $a(n)$ is the least unused multiple
 of some prime factor of $a(n-1)$, and conjectured both the sharp bounds
 of Theorem~\ref{thm:main} and the asymptotics $a(n)\sim n$,
 $a(n)\sim n/2$ and $a(n)\sim 3n/2$ on the three lines. Hofman and
-Pilipczuk \cite{hp} proved that every odd prime $p$ is immediately
+Pilipczuk \cite[Theorems~4.3, 4.17 and Lemma~4.5]{hp} proved that every odd prime $p$ is immediately
 preceded by $2p$, bounded the crossings of a level by composite terms,
-and proved the asymptotics. Haver \cite{haver} made these arguments
-explicit and formalized them in Lean: he completes the pattern
+and proved the asymptotics. Haver made these arguments
+explicit and formalized them in Lean \cite[(F2), Theorems~5, 8, 11]{haver}: he completes the pattern
 $2p,p,3p$, reduces its computed base to the primes $p\le43$, bounds the
 number of used even numbers above the least missing even number, the
 spread of the terms above it, and the unused composites below it, and relates the index to
@@ -117,54 +127,28 @@ on Haver's Lean foundation. The present proof uses Haver's Lean
 definition of the sequence and his estimates, and the author's exact form
 of the counting identity, as proved Lean theorems.
 
-\paragraph{What is new, and the hardest step.}
-The bounds of Lagarias, Rains and Sloane hold at every $n$ but are far
-from sharp; the later results are asymptotic, and the explicit forms
-apply only from enormous thresholds. Theorem~\ref{thm:main} needs the
-sharp constants at every $n$, and its margin is small: the lower line
-$a(n)/n\to1/2$ sits only $1/28$ above $13/28$. The obstacle is the
-number $K$ of \emph{early evens}: at a given moment, the even numbers
-already used that exceed the least even number $E$ not yet used. With Haver's bound
-$K\le12\pi(\sqrt E)+720$ \cite[Theorem~5]{haver} the argument closes
-only for very large $n$; we use it that way for $n\ge10^{156}$
-(Lemma~\ref{lem:F}), far beyond any computation.
-The new step is a self-improving bound
-(Lemma~\ref{lem:A}, Corollary~\ref{cor:A}): the primes responsible for
-the excess of $K$ lie among the $3K+2$ integers just below $E/2$, so
-$K\le\pi(\sqrt E)+2+\#\{\text{primes among }3K+2\text{ consecutive integers}\}$, and a
-Brun--Titchmarsh bound from the large sieve turns this into
-$K\le(1+o(1))\pi(\sqrt E)$. The bound is proved by induction over the
-moments of the sequence, so it needs no prior bound on $K$: at each moment
-the earlier ones already satisfy it, and an explicit inequality, checked
-on intervals of $E$, carries it to the next. At $E=1.3328\cdot10^{10}$
-the certified bound is $28{,}017$, against $131{,}628$ from Haver's bound.
-The hardest part is making every constant small enough for these
-inequalities to close at a size of $E$ a computation can reach. A second
-large-sieve bound controls the odd terms above $E$ (Lemma~\ref{lem:D}).
-With these, explicit estimates close once $E\ge1.3328\cdot10^{10}$; the
-computed first $1.6\cdot10^{10}$ terms reach that point (with $E$ above
-$1.41\cdot10^{10}$ by $n=1.393\cdot10^{10}$) and settle every smaller $n$.
+Our new step replaces Haver's bound on used even values above the least
+unused even number by a self-improving inequality. The large sieve makes
+its constants small enough for the analytic range to meet a finite
+computation. Obtaining constants that close the argument at a computable
+threshold is the hardest step.
 
-\paragraph{How it is checked.}
-Theorem~\ref{thm:main} is a Lean theorem \cite{lean,mathlib} about
-Haver's definition of the sequence, conditional on four computed premises: three facts about
-the first $1.6\cdot10^{10}$ terms and the existence of a cover of
-$[1.3328\cdot10^{10},10^{205})$ by intervals satisfying explicit
-inequalities. Every analytic input (explicit prime counting bounds and the
-large sieve) is proved in Lean. The premises are computed, and each is
-checked by programs that share no code with the ones that produced it;
-that the programs compute what the premises state was checked by reading
-the code. Section~\ref{sec:trust} lists exactly what is trusted.
+The proof uses Lean and computations of a finite prefix and an
+interval-arithmetic certificate. Section~\ref{sec:trust} gives the formal
+statement and its relation to the theorem; Appendix~\ref{app:checks}
+describes the computed premises and their checks.
 
-\paragraph{Outline.}
-Section~\ref{sec:notation} fixes notation and recalls the known facts.
-Section~\ref{sec:overview} gives the strategy. Sections
-\ref{sec:K}--\ref{sec:middle} prove the middle range, Section~\ref{sec:far}
-the far range and Section~\ref{sec:finite} describes the computed range.
-Section~\ref{sec:trust} describes the formalization and the checks.
+The proofs, the Lean formalization, the programs and the text were
+produced by AI models (from OpenAI and Anthropic), working under the
+author's direction. The result is computer-assisted and has not yet been
+reviewed by experts.
 
 \section{Notation and known facts}\label{sec:notation}
 
+All logarithms are natural. The notation below separates the three kinds
+of terms and the errors
+in the counting identity. The terms \emph{frontier}, \emph{early evens} and \emph{tick value}
+follow Haver \cite[\S\S1--2]{haver}.
 A \emph{state} $t\ge1$ is the moment after $a(1),\dots,a(t)$ have been
 placed. For a state $t$ define:
 \begin{itemize}
@@ -185,7 +169,8 @@ For example, after $a(1..7)=1,2,4,6,3,9,12$ we have $E(7)=8$, the early
 even $12$, so $K(7)=1$, and $O(7)=0$ since $9$ is a tick value.
 
 We use the following facts; each is a Lean theorem in the foundation
-(Section~\ref{sec:trust}).
+(Section~\ref{sec:trust}). The parenthesized labels refer to the
+statements recalled here.
 
 \begin{itemize}
 \item[(F1)] \emph{Pointer rule} \cite{lrs}. $a(n)=\min\{B_q(n-1):q\text{
@@ -194,17 +179,8 @@ We use the following facts; each is a Lean theorem in the foundation
   For each odd prime $p$ there is an index $N_p$ with $a(N_p)=2p=E(N_p-1)$,
   $a(N_p+1)=p$ and $a(N_p+2)=3p$; the value $3p$ occurs only at $N_p+2$,
   and indices $N_p$ of distinct primes differ by at least $4$.
-  That $p$ follows the first multiple of $p$ is \cite[Lemma~1]{lrs}
-  (Lemma~2.1 in the journal version), and that this multiple is $2p$ is
-  \cite[Theorem~4.3]{hp}. Hofman and Pilipczuk prove the latter by a
-  crossing count at the level $2p$ that closes for $p>25000$, and cover
-  smaller $p$ by the computation of $10^7$ terms in \cite{lrs}; Haver
-  \cite[Remark~3]{haver} closes the same count for every $p>43$, leaving
-  $p\le43$, which the first $82$ terms show. The rest, $2p=E(N_p-1)$, the
-  term $3p$, its uniqueness and the spacing, is proved in
-  \cite[(F2)]{haver}. In the Lean proof the primes $p\le43$ are
-  checked on the first terms, $43<p<4096$ by a finite computation, and
-  larger $p$ by explicit prime bounds.
+  See \cite[Theorem~4.3]{hp} and \cite[(F2)]{haver}; the finite checks and
+  detailed attributions are in Appendix~\ref{sec:finite}.
 \item[(F3)] \emph{Crossings} \cite[Lemma~4.5]{hp}, \cite{haver}. For a
   level $x>2$, at most $\pi(\sqrt x)$ indices $n$ have $a(n)$ composite and
   $a(n)<x\le a(n+1)$.
@@ -220,22 +196,15 @@ We use the following facts; each is a Lean theorem in the foundation
   \[ e-t=A(e)+H(t)-K(t)-O(t)+c(t),\qquad 1\le c(t)\le5 .\]
 \end{itemize}
 
-The analytic inputs are explicit and all are proved in Lean. Put
-$c=1.03883$, $\alpha=0.92129$ and, for $x\ge256$,
-$F(x)=\frac{x}{\log x}\bigl(1+\frac1{\log x}+\frac2{\log^2x}+\frac{24}{\log^3x}\bigr)$,
-$R(x)=c\sqrt x+\frac{c}{\log2}x^{1/3}\log x$.
+Here $c(t)$ is the bounded correction in (CL). A crossing of a level
+is a step from one side of that level to the other; upward and downward
+refer to its direction. The inequalities in (F3) fix the convention at
+an endpoint.
+
+Write $\piL(x)\le\pi(x)\le\piU(x)$ for the explicit prime-counting
+bounds in Appendix~\ref{app:prime}; $\pi(x)$ counts primes up to $x$.
+The following two forms of the large sieve are proved in Lean.
 \begin{itemize}
-\item[(P)] \emph{Prime counting.} For $x\ge256$,
-  $\piL(x)\le\pi(x)\le\piU(x)$, where
-  $\piU(x)=cF(x)+J$ with
-  $J=\pi(256)-\theta(256)/\log256+c\,(256/\log256-F(256))$, where
-  $\pi(256)=54$ and $\theta(256)=\sum_{p<256}\log p$, and
-  $\piL(x)=\max\bigl(0,(\alpha x-5\log x+5-R(x))/\log x\bigr)$; below $256$
-  both equal $\pi(x)$. They follow by partial summation from
-  Rosser and Schoenfeld's $\psi(x)<cx$ \cite[Theorem~12]{rs} and
-  $\psi(x)\ge\alpha x-5\log x+5$ for $x\ge30$, a weaker form of
-  Chebyshev's $\psi(x)>Ax-\frac52\log x-1$, $A=0.92129\ldots$
-  \cite[\S V]{chebyshev}, as proved in Lean in \cite{ieantn}.
 \item[(BT)] \emph{Primes in short intervals.} For real $x>0$, $y\ge1$ and
   integers $Q\ge6$,
   \[\pi(x+y)-\pi(x)\le\frac{y+Q^2}{\log(Q+1)+1.07}+\pi(Q).\]
@@ -273,16 +242,42 @@ indices into three ranges:
   \ref{sec:K}--\ref{sec:middle});
 \item $n\ge10^{156}$: Haver's bounds alone (Section~\ref{sec:far}).
 \end{enumerate}
-The ranges overlap, so every $n$ is covered. The hardest step is the bound
-on $K$ in range~2, which must be good enough already at
-$e=1.3\cdot10^{10}$.
+The ranges overlap, so every $n$ is covered. Range~2 requires the bound
+on $K$ already at $e=1.3\cdot10^{10}$.
+
+\paragraph{The early-even bound.}
+The bounds of Lagarias, Rains and Sloane hold at every $n$ but are far
+from sharp; the later results are asymptotic, and the explicit forms
+apply only from enormous thresholds. Theorem~\ref{thm:main} needs the
+sharp constants at every $n$, and its margin is small: the lower line
+$a(n)/n\to1/2$ sits only $1/28$ above $13/28$. The obstacle is the
+number $K$ of \emph{early evens}: at a given moment, the even numbers
+already used that exceed the least even number $E$ not yet used. With Haver's bound
+$K\le12\pi(\sqrt E)+720$ \cite[Theorem~5]{haver} the argument closes
+only for very large $n$; we use it that way for $n\ge10^{156}$
+(Lemma~\ref{lem:F}), far beyond any computation.
+The new step is a self-improving bound
+(Lemma~\ref{lem:A}, Corollary~\ref{cor:A}): the primes responsible for
+the excess of $K$ lie among the $3K+2$ integers just below $E/2$, so
+$K\le\pi(\sqrt E)+2+\#\{\text{primes among }3K+2\text{ consecutive integers}\}$, and a
+Brun--Titchmarsh bound from the large sieve turns this into
+$K\le(1+o(1))\pi(\sqrt E)$. The bound is proved by induction over the
+moments of the sequence, so it needs no prior bound on $K$: at each moment
+the earlier ones already satisfy it, and an explicit inequality, checked
+on intervals of $E$, carries it to the next. At $E=1.3328\cdot10^{10}$
+the certified bound is $28{,}017$, against $131{,}628$ from Haver's bound.
+A second
+large-sieve bound controls the odd terms above $E$ (Lemma~\ref{lem:D}).
+With these, explicit estimates close once $E\ge1.3328\cdot10^{10}$; the
+computed first $1.6\cdot10^{10}$ terms reach that point (with $E$ above
+$1.41\cdot10^{10}$ by $n=1.393\cdot10^{10}$) and settle every smaller $n$.
 
 \section{Early evens}\label{sec:K}
 
-This section proves the self-improving bound on $K$. For a state $t$ let
+For a state $t$ let
 $K^{<}(t)=\max\{K(s):1\le s<t\}$.
 
-\begin{lemma}[Lean: \lean{EKG3.lemmaA}]\label{lem:A}
+\begin{lemma}\label{lem:A}
 Let $t$ be a state and $e=E(t)$. Every unpaired prime up $i$ at state $t$
 has $p=a(i)$ prime with $2p<e<2p+6K^{<}(t)+6$.
 \end{lemma}
@@ -304,7 +299,7 @@ $\U_{i-2}$ and is an early even at state $i-2$; hence
 $(e-2p)/2-1\le K^{<}(t)$, which is stronger.
 \end{proof}
 
-\begin{corollary}[Bootstrap; Lean: \lean{EKG3.boundedCorollaryA}]\label{cor:A}
+\begin{corollary}[Bootstrap]\label{cor:A}
 Let $e_0<E_1$, let $M$ be a nondecreasing function on the integers, and
 let $\mathrm{BT}(y)$ bound the number of primes in every block of $y$
 consecutive integers. Suppose that $K(s)\le M(E(s))$ at every state $s$
@@ -328,6 +323,8 @@ and they are distinct because the sequence does not repeat values. Thus
 \eqref{eq:boot}.
 \end{proof}
 
+The function $\mathrm{BT}(y)$ bounds primes in an interval of length $y$;
+the label (BT) refers to the displayed sieve estimate.
 With (BT), $\mathrm{BT}(y)\le (y+Q^2)/(\log(Q+1)+1.07)+\pi(Q)$ for any
 integer $Q\ge6$. For $y=3M+2$ and $Q$ near $\sqrt{y/\log y}$ this is about
 $2y/\log y\approx6M/\log M$, so \eqref{eq:boot} holds once $M$ is a little larger than
@@ -343,7 +340,7 @@ Lemma~\ref{lem:C} is Haver's hole bound \cite[Theorem~11]{haver} with an
 arbitrary nondecreasing bound $M$ in place of his explicit one, and with the
 hypothesis needed only at earlier states.
 
-\begin{lemma}[Holes; Lean: \lean{EKG3.lemmaC}]\label{lem:C}
+\begin{lemma}[Holes]\label{lem:C}
 Let $M$ be nondecreasing with $K(s)\le M(E(s))$ for every state $s<t$, and
 $e=E(t)$. Every hole $h\ge15$ at state $t$ satisfies
 $e-h\le2\spf(h)\bigl(\pi(\sqrt h)+M(h)+4\bigr)$, where $\spf(h)$ is the
@@ -351,7 +348,7 @@ least prime factor of $h$, and
 $H(t)\le\pi(\sqrt e)\bigl(\pi(\sqrt e)+M(e)+5\bigr)$.
 \end{lemma}
 
-\begin{proof}[Sketch]
+\begin{proof}
 A hole $h$ is odd; put $s=\spf(h)$ and let $t_1$ be the first state with
 $E(t_1)>h$. Every multiple $w$ of $2s$ in $(h,e)$ is used. If it was
 placed after $t_1$ then the next term is at most $B_s<h$ by (F1), a
@@ -365,7 +362,7 @@ primes $s\le\sqrt e$ the number of odd multiples of $s$ in the resulting
 window gives the second.
 \end{proof}
 
-\begin{lemma}[Odd terms above the frontier; Lean: \lean{EKG3.lemmaD}]\label{lem:D}
+\begin{lemma}[Odd terms above the frontier]\label{lem:D}
 Let $t\ge10$ be a state, $e=E(t)$, $K'=\max_{s\le t}K(s)$, and let $Y\ge
 6K'+7$ be an integer. Put $X=e+Y+\tfrac12$ and $R=(Y+\tfrac12)/(2(K(t)+1))$. Then
 \[ O(t)\le\Bigl\lceil\frac Y2\Bigr\rceil+\pi(\sqrt X)+Z,\]
@@ -394,7 +391,9 @@ every integer $3\le Q\le R$.
 
 \section{The middle range}\label{sec:middle}
 
-We now combine the lemmas on a cover. Put $e_0=13{,}328{,}000{,}000$,
+We now combine the lemmas using a finite table of parameters on adjacent
+intervals of values of $E(t)$. The inequalities in each row bound the
+terms of the counting identity. Put $e_0=13{,}328{,}000{,}000$,
 $K_{\mathrm{fin}}=329$, $E_1=10^{205}$ and $L=16{,}000{,}000{,}000$.
 
 \begin{definition}\label{def:cover}
@@ -429,12 +428,13 @@ bounds the terms above the frontier, and (Ol) the holes filled, for the
 remaining terms. $O^*$, $H^*$, $A_{\min}$ and $A_{\max}$ bound $O$, $H$ and
 $A$ on the row.
 
-A cover exists: we found one with first row $M=28{,}017$ and checked it as
-described in Section~\ref{sec:trust}. Its tightest inequalities are (B),
-(Hc) and $Q\le(Y+\frac12)/(2(M+1))$, each satisfied with a ratio of about
-$1-10^{-9}$, and (Od), with ratio about $1-2\cdot10^{-6}$.
+The accompanying interval certificate gives a cover with first row
+$M=28{,}017$. Appendix~\ref{app:cover} displays its first row and describes
+the finite checks. The condition (P) in Definition~\ref{def:cover} is an
+index inequality; Appendix~\ref{app:prime} uses the same label for the
+prime-counting bounds.
 
-\begin{theorem}[Lean: \lean{EKG3.P3.theoremT}]\label{thm:T}
+\begin{theorem}\label{thm:T}
 Assume a cover exists, the bounds of Theorem~\ref{thm:main} for $n\le L$
 with its equality cases, $E(L-2)\ge e_0$, and $K(s)\le K_{\mathrm{fin}}$ at
 every state $s$ with $E(s)<e_0$. Then every $n$ with $L<n<10^{203}$ has
@@ -479,14 +479,23 @@ has $E(t)\ge E(L-2)\ge e_0$, so the bounds above apply at $t\in[n-3,n]$.
 \section{The far range}\label{sec:far}
 
 For very large $n$ Haver's explicit bounds suffice, without a cover.
+Ordinary terms here mean even terms and odd composite terms other than
+the values $3p$. The hypothesis below is used only while $E(t)<E_1$,
+to obtain the stated lower bound on $E(t)$ at large indices. Once
+$E(t)\ge E_1$ that lower bound is automatic. The subsequent estimates
+use Haver's bounds; this is the sense of range~3 in the strategy.
+In the proof below, (P) means the prime-counting bounds of
+Appendix~\ref{app:prime}. The numerical estimates follow by substituting
+those bounds into Haver's sequence estimates; the accompanying Lean proof
+contains their derivation.
 
-\begin{lemma}[Lean: \lean{EKG3.P3.lemmaF}]\label{lem:F}
+\begin{lemma}\label{lem:F}
 Suppose every state $t$ with $e_0\le E(t)<E_1$ has $t+2<14E(t)/13$, and
 $E(L-2)\ge e_0$. Then every $n\ge10^{156}$ has $13n<28a(n)$ and
 $7a(n)<12n$.
 \end{lemma}
 
-\begin{proof}[Sketch]
+\begin{proof}
 At the states $t\ge n-3$ the hypothesis forces $E(t)>9\cdot10^{155}$. From
 (P) one derives $0.921\,x/\log x\le\pi(x)\le1.045\,x/\log x$ for
 $x\ge10^{76}$. Inserted into Haver's bounds $K\le12\pi(\sqrt e)+720$
@@ -500,7 +509,86 @@ for primes and tick values; the binding comparison is
 $13\cdot2\cdot1.0766<28$.
 \end{proof}
 
-\section{The computed range}\label{sec:finite}
+\section{Proof of the main theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The computed range supplies the three finite premises of
+Theorem~\ref{thm:T}, and the interval certificate supplies its cover.
+That theorem proves the strict bounds for $L<n<10^{203}$ and the
+inequality on states required by Lemma~\ref{lem:F}. The lemma proves the
+strict bounds for $n\ge10^{156}$. These ranges overlap and cover every
+$n>L$; the computed bounds for $n\le L$ supply both equality cases.
+\end{proof}
+
+\section{Formal verification}\label{sec:trust}
+
+Lean~4 \cite{lean,mathlib} checks the theorem
+\begin{gather*}
+ \lean{EKG3.conj3\_of\_computations} :\\
+ \lean{FiniteFa}\to\lean{FiniteFbP3}\to\lean{FiniteFcP3}\to
+ \lean{CertifiedCoverP3}\to\lean{Conj3Statement}.
+\end{gather*}
+Its conclusion says: for every $i\ge0$, with $n=i+1$ and
+$a(n)=\lean{EKG.actualA}\ i$,
+$13n\le28a(n)$, $7a(n)\le12n$, $13n=28a(n)\iff n=28$ and
+$7a(n)=12n\iff n=7$. These integer forms are equivalent to the rational
+ones in Theorem~\ref{thm:main}. The sequence in the formal statement is
+Haver's greedy sequence with initial terms $1,2$, injectivity, a shared prime
+factor and minimality as in \eqref{eq:rule}; its indexing starts at zero.
+Reading the implication from left to right, the four premises are
+respectively (Fa), (Fb), (Fc) of Appendix~\ref{sec:finite}, and the cover of
+Definition~\ref{def:cover}. They assert the finite bounds, the lower bound
+on $E(L-2)$, the bound on $K$ before $e_0$, and the existence of that
+cover, all about the sequence with no free parameters. The last term,
+\lean{Conj3Statement}, is the conclusion just spelled out.
+Lean checks the analytic inputs and the deduction from these premises;
+the premises themselves and the correspondence of the programs with
+those definitions are checked outside Lean. The formal proof uses only
+Lean's standard axioms. Appendix~\ref{app:checks} describes the computational checks and
+dependencies. Reproduction commands and implementation details are in the
+supplementary checking notes.
+
+\begin{appendices}
+\section{Prime-counting bounds}\label{app:prime}
+
+These formulas specify the prime-counting bounds used in the interval
+conditions and in the far range.
+The analytic inputs are explicit and all are proved in Lean. Put
+$c=1.03883$, $\alpha=0.92129$ and, for $x\ge256$,
+$F(x)=\frac{x}{\log x}\bigl(1+\frac1{\log x}+\frac2{\log^2x}+\frac{24}{\log^3x}\bigr)$,
+$R(x)=c\sqrt x+\frac{c}{\log2}x^{1/3}\log x$.
+\begin{itemize}
+\item[(P)] \emph{Prime counting.} For $x\ge256$,
+  $\piL(x)\le\pi(x)\le\piU(x)$, where
+  $\piU(x)=cF(x)+J$ with
+  $J=\pi(256)-\theta(256)/\log256+c\,(256/\log256-F(256))$, where
+  $\pi(256)=54$ and $\theta(256)=\sum_{p<256}\log p$, and
+  $\piL(x)=\max\bigl(0,(\alpha x-5\log x+5-R(x))/\log x\bigr)$; below $256$
+  both equal $\pi(x)$. They follow by partial summation from
+  Rosser and Schoenfeld's $\psi(x)<cx$ \cite[Theorem~12]{rs} and
+  $\psi(x)\ge\alpha x-5\log x+5$ for $x\ge30$, a weaker form of
+  Chebyshev's $\psi(x)>Ax-\frac52\log x-1$, $A=0.92129\ldots$
+  \cite[\S V]{chebyshev}, as proved in Lean in \cite{ieantn}.
+\end{itemize}
+
+\section{Computational and formal details}\label{app:checks}
+
+\subsection{Finite computation}\label{sec:finite}
+
+\paragraph{The prime pattern.}
+  That $p$ follows the first multiple of $p$ is \cite[Lemma~1]{lrs}
+  (Lemma~2.1 in the journal version), and that this multiple is $2p$ is
+  \cite[Theorem~4.3]{hp}. Hofman and Pilipczuk prove the latter by a
+  crossing count at the level $2p$ that closes for $p>25000$, and cover
+  smaller $p$ by the computation of $10^7$ terms in \cite{lrs}; Haver
+  \cite[Remark~3]{haver} closes the same count for every $p>43$, leaving
+  $p\le43$, which the first $82$ terms show. The rest, $2p=E(N_p-1)$, the
+  term $3p$, its uniqueness and the spacing, is proved in
+  \cite[(F2)]{haver}. In the Lean proof the primes $p\le43$ are
+  checked on the first terms, $43<p<4096$ by a finite computation, and
+  larger $p$ by explicit prime bounds.
+
+
 
 The premises of Theorem~\ref{thm:T} about the first $L$ terms are:
 \begin{itemize}
@@ -521,35 +609,12 @@ equality cases are $a(7)=12$ and $a(28)=13$.
 Two programs written independently, with different factorization methods,
 memory layouts and formulas for $K$, compute these facts and agree; a
 third program checks the defining minimality property directly on the
-first $10^8$ terms. Section~\ref{sec:trust} gives details.
+first $10^8$ terms. 
 
-\section{Formalization and checks}\label{sec:trust}
 
-\paragraph{The Lean theorem.}
-The Lean statement \lean{EKG3.Conj3Statement} says: for every $i\ge0$,
-with $n=i+1$ and $a(n)=\lean{EKG.actualA}\ i$,
-$13n\le28a(n)$, $7a(n)\le12n$, $13n=28a(n)\iff n=28$ and
-$7a(n)=12n\iff n=7$. These integer forms are equivalent to the rational
-ones. \lean{EKG.actualA} is Haver's sequence: $1$, $2$, then the least
-positive unused integer sharing a prime factor with the previous term; it
-is proved to satisfy that specification (seeds, injectivity, the shared
-factor and minimality), and its first thirty terms are checked against
-the OEIS. The main theorem is
-\begin{gather*}
- \lean{EKG3.conj3\_of\_computations} :\\
- \lean{FiniteFa}\to\lean{FiniteFbP3}\to\lean{FiniteFcP3}\to
- \lean{CertifiedCoverP3}\to\lean{Conj3Statement},
-\end{gather*}
-whose premises are (Fa), (Fb), (Fc) and the existence of a cover
-(Definition~\ref{def:cover}), stated about the actual sequence with no
-free parameters. Lean checks the whole deduction of
-Sections~\ref{sec:notation}--\ref{sec:far}, including (F1)--(CL) and the
-analytic inputs (P), (BT), (LS), and the build fails if any theorem uses
-an axiom beyond Lean's three standard ones.
+\subsection{Formal development}
 
-The foundation is Haver's Lean archive \cite{haver}
-(\texttt{EKG-Lean4-sources-v2.zip}, deposited with his version~2 and
-retained unchanged in version~3) as extended in
+The foundation is Haver's Lean archive \cite{haver} as extended in
 \cite{graham}. The analytic inputs reuse published formalizations:
 Rosser and Schoenfeld's Theorem~12 and a form of Chebyshev's lower bound from the
 IEANTN project \cite{ieantn} (with interval tools from LeanCert
@@ -557,49 +622,33 @@ IEANTN project \cite{ieantn} (with interval tools from LeanCert
 formalizations \cite{oaimath}. The bound $G(Q)>\log(Q+1)+1.07$, the
 Brun--Titchmarsh form (BT) and the bounds (P) are proved here.
 
-\paragraph{What is computed, and how it is checked.}
-The four premises are not proved inside Lean; they are computed.
-\begin{itemize}
-\item (Fa), (Fb), (Fc) are produced by two programs that share no code:
-  one keeps a smallest-prime-factor table and one pointer per prime, the
-  other factors by segmented sieving with a paged cursor store and
-  computes $K$ by a different formula. Both run to $n=L$ and report the
-  same equality cases, no violations, the same frontier thresholds, and
-  identical checkpoints every $10^8$ terms: $(n,a(n),E,K,\max K)$ and a
-  64-bit hash of $a(1),\dots,a(n)$. A third program, which uses neither
-  pointers nor factorization, checks the defining property of every term
-  up to $10^8$ (each smaller multiple of a prime factor of $a(n-1)$ appears
-  earlier); swapping two terms or changing one is detected both by it and
-  by the hash.
-\item The cover is produced with interval arithmetic and checked by a
-  separate program written from the Lean statement of
-  Definition~\ref{def:cover} alone, using ball arithmetic (Arb) at 256
-  bits and exact rationals and integers; every inequality is proved with
-  the correct strictness. It accepts the cover and rejects corrupted ones
-  (a gap, a decreased $M$, a $Q$ above its bound, $b_q=5$, $h_c=14$, a
-  moved start and a short end).
-\end{itemize}
 
-\paragraph{Trusted base.}
-Beyond Lean's kernel, the proof trusts: the two prefix programs, their
-compilers and their recorded runs; the cover checker and the Arb library;
-and the correspondence between the programs and the Lean definitions,
-which was checked by reading rather than by machine: that both programs
-compute \lean{EKG.actualA} by the pointer rule, that their $E$ and $K$ are
-Lean's \lean{frontier} and \lean{earlyEvenCount} at the matching state
-(the program's state $n$ is Lean's state $n-1$), and that the program
-outputs give the premises as stated. The two prefix programs could in
-principle share a misreading of the definition; the direct minimality
-check covers only the first $10^8$ terms.
+\subsection{Interval certificate}\label{app:cover}
 
-\paragraph{Files.}
-The Lean project, the programs, the certificate and the expected outputs
-accompany this paper. The Lean build takes about an hour on two cores, with up to about
-$7.5$~GB of memory per Lean process. A
-quick check of the premises (minutes) checks the cover and its
-corruptions and replays the first $10^8$ terms; the full replay of the
-first $L$ terms takes about three hours and about $72$ and $33$ GB of
-memory for the two programs.
+The certificate has $16{,}857$ rows. Its first row is shown in
+Table~\ref{tab:cover}; the complete table accompanies the paper.
+Each row supplies the integer parameters of Definition~\ref{def:cover}.
+The independent checker verifies the row inequalities, the common
+endpoints of consecutive intervals, monotonicity of $M$, and the first
+and last endpoints. The checker uses exact integers and rationals with
+outward-rounded interval arithmetic. 
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lr}
+Parameter & First row\\\hline
+$e_a$ & $13{,}328{,}000{,}000$\\
+$e_b$ & $13{,}341{,}330{,}000$\\
+$M$ & $28{,}017$\\
+$Y$ & $266{,}194{,}600$\\
+$Q$ & $4{,}750$\\
+$h_c$ & $7{,}132{,}721{,}000$\\
+$b_q$ & $90$
+\end{tabular}
+\caption{The first row of the interval certificate.}\label{tab:cover}
+\end{table}
+
+\end{appendices}
 
 \begin{thebibliography}{99}
 
@@ -674,11 +723,5 @@ of prime numbers, \emph{Illinois J. Math.} \textbf{6} (1962), 64--94.
 \href{https://doi.org/10.1215/ijm/1255631807}{doi:10.1215/ijm/1255631807}.
 
 \end{thebibliography}
-
-\bigskip
-\noindent 2020 \emph{Mathematics Subject Classification}:
-Primary 11B83; Secondary 11N36, 68V15.\\
-\emph{Keywords}: EKG sequence, greedy permutation, explicit bounds,
-large sieve, formal verification.
 
 \end{document}

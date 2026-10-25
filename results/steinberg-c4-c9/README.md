@@ -2,7 +2,7 @@
 
 [![Checks](https://github.com/6/clank-lab/actions/workflows/steinberg-c4-c9.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/steinberg-c4-c9.yml)
 
-A [proper three-coloring](https://en.wikipedia.org/wiki/Graph_coloring) assigns three colors to a graph's vertices so that adjacent vertices differ. A question attributed to Lu, Wang, Wang, Bu, Montassier and Raspaud (2009), [as reproduced by Kang, Jin and Wang](https://arxiv.org/pdf/1506.04629), asks which cycle lengths, together with length four, force a planar graph to admit such a coloring. This extends the question behind [Steinberg's conjecture](https://arxiv.org/abs/1604.05108), disproved by Cohen-Addad, Hebdige, Král', Li and Salgado. To our knowledge, the first counterexample to the assertion that every planar graph without four- or nine-cycles has a proper three-coloring is given here: an 82-vertex planar graph without four- or nine-cycles has no proper three-coloring.
+A [proper three-coloring](https://en.wikipedia.org/wiki/Graph_coloring) assigns three colors to a graph's vertices so that adjacent vertices differ. [Problem 1.2 of Kang, Jin and Wang, arXiv:1506.04629v1](https://arxiv.org/abs/1506.04629v1), attributed there to Lu, Wang, Wang, Bu, Montassier and Raspaud (2009), asks which lengths from five through nine, together with length four, force this property for planar graphs. Here an 82-vertex planar graph without four- or nine-cycles has no proper three-coloring, answering the length-nine case. Cohen-Addad, Hebdige, Král', Li and Salgado's [Theorem 3, arXiv:1604.05108v2](https://arxiv.org/abs/1604.05108v2), concerns the four-and-five pair. No minimum-order claim is made.
 
 <img src="data/graph.svg" width="420" alt="The 82-vertex counterexample (illustration only; not part of the proof).">
 
@@ -13,6 +13,8 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23572996](https://doi.org/10.5281/zenodo.23572996)
+
+This DOI archives version 5; the version 6 DOI is pending.
 
 ## Check it
 
@@ -35,7 +37,7 @@ No Python packages are required. Lean checks a connected genus-zero rotation cer
 
 ## Credits
 
-The graph is a composition of 27 copies of K4; the paper gives the elementary non-colorability proof and credits Kostochka and Yancey for the sharp edge bound. Lu and coauthors posed the question; Kang, Jin and Wang, and Kang, Jin, Liu and Wang, recorded and developed it. Cohen-Addad and coauthors supplied the earlier Steinberg disproof. Marijn Heule and Nathan Wetzler's drat-trim checks the SAT certificate, generated with Armin Biere and collaborators' CaDiCaL. The paper distinguishes proper DP/list coloring and defective coloring results of Kang, Jin and Zhu, Dai, Wang and Xu, and Chen, Dai, Nie, Wang and Yu.
+The construction uses Ore composition as defined in Kostochka and Yancey, [arXiv:1408.0846v3, Section 1 and Theorem 4](https://arxiv.org/abs/1408.0846v3). Lu and coauthors are credited for the question through Kang, Jin and Wang's Problem 1.2; Kang, Jin, Liu and Wang's arXiv:2001.00166v1 also records it as Problem 1.2 (with Jin first in that version). Cohen-Addad and coauthors are credited for Theorem 3 cited above. The paper's bibliography also credits Kang, Jin and Zhu, Dai, Wang and Xu, Chen, Dai, Nie, Wang and Yu, and Xiao and Huang. [Context and reading limits](checks/context.md) records incomplete source coverage. Marijn Heule and Nathan Wetzler's drat-trim checks the SAT certificate, generated with Armin Biere and collaborators' CaDiCaL.
 
 The Lean proof uses Lean and Mathlib contributors' libraries and the LRAT verification methodology of Cruz-Filipe, Heule, Hunt, Kaufmann and Schneider-Kamp.
 
@@ -48,7 +50,8 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A planar graph without four- or nine-cycles that is not three-colorable}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v5/results/steinberg-c4-c9}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v6/results/steinberg-c4-c9}},
+  % DOI for archived version 5; awaiting the version 6 deposit.
   doi          = {10.5281/zenodo.23572996}
 }
 ```

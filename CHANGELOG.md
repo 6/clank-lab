@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## steinberg-c4-c9 v6 (October 24, 2026)
+
+- Journal-style edition: presents the main proof in the main text, improves the mathematical prose and retains the corrected appendix headings. The theorem and its checks are unchanged.
+
 ## williamson-order-65 v3 (October 24, 2026)
 
 - Journal-style edition: the main text now presents the proof, with standard terminology, narrative credit and the recorded smaller-order validation and computation times. Mathematical statements and checked artifacts are unchanged.

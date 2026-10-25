@@ -5,13 +5,16 @@
 A difference set is a collection of points in a finite group whose ordered
 differences represent every nonzero group element equally often.
 [Gordon's La Jolla Difference Set Repository](https://dmgordon.org/difference-sets/)
-[lists](https://doi.org/10.5281/zenodo.19740740) the question whether 121 points
-in $C_3 \times C_9 \times C_9$ can represent each nonzero element exactly 60 times as open;
+[listed](https://doi.org/10.5281/zenodo.19740740) the question whether 121 points
+in $C_3 \times C_9 \times C_9$ can represent each nonzero element exactly 60 times as open in its April 24, 2026 archive;
 Gordon called it the “Smallest Open Case” in his
 [August 3, 2019 presentation, slide 38](https://web.archive.org/web/20240502201448/https://cargo.wlu.ca/ArasuFest/ArasuFest_talks/Dan_Gordon.pdf#page=49).
 It was already unresolved in Vera López and García Sánchez's 1997 table.
-We prove that no such set exists. The conclusion concerns these parameters
-in this group only.
+[Keita Baba first proved that no such set exists on October 4, 2026](https://github.com/kei825/open-questions-2026/tree/d40fc3a3ac538e08e1bc31cf45b5d1204a2c34c8/space/difference-set-243),
+by a SAT computation with a certificate accepted by the formally verified
+checker cake_lpr and by lrat-check. We give an independent proof by a different
+method: a lifting search with the reduction checked in Lean. The conclusion
+concerns these parameters in this group only.
 
 Computer-assisted; not yet reviewed by experts.
 
@@ -20,6 +23,8 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23638325](https://doi.org/10.5281/zenodo.23638325)
+
+This DOI identifies version 3.
 
 ## Check it
 
@@ -71,6 +76,11 @@ source-access qualifications and recorded formal checks.
 
 ## Credits
 
+Keita Baba proved this theorem first. Baba's SAT proof uses multiplier 61,
+99 orbits and all 49 cyclic quotients; Baba also solved the instances for all
+864 possible images in $G/3G$. Baba's repository describes the work as written
+with AI assistance from Anthropic. Our proof was obtained independently.
+
 Daniel M. Gordon maintained the La Jolla repository, singled out this exact
 case and connected it to the earlier literature. A. Vera López and M. A.
 García Sánchez recorded it as unresolved in their 1997 systematic study and
@@ -92,7 +102,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Nonexistence of (243,121,60) difference sets in C3 × C9 × C9}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v3/results/difference-set-243}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v4/results/difference-set-243}},
   doi          = {10.5281/zenodo.23638325}
 }
 ```

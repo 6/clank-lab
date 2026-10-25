@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## difference-set-243 v4 (October 25, 2026)
+
+- Correction (October 25, 2026): The paper, README and index omitted Keita Baba's prior proof of October 4, 2026. They now credit Baba first and describe ours as an independent proof by a different method. The theorem and its checks are unchanged.
+
 ## steinberg-c4-c9 v7 (October 25, 2026)
 
 - Lean now checks the existing rational straight-line drawing directly, completing the formal proof of planarity, the cycle exclusions and non-three-colorability. The mathematical statements and credits are unchanged.
@@ -400,8 +404,8 @@ Zenodo records.
 
 ## difference-set-243 v1 (October 21, 2026)
 
-- First version: a computer-assisted proof that no (243,121,60) difference
-  set exists in C3 × C9 × C9, the case Gordon called the smallest open case.
+- Correction (October 25, 2026): Our initial release gave an independent computer-assisted proof that no (243,121,60) difference
+  set exists in C3 × C9 × C9; Baba first proved this on October 4, 2026.
   Paper, Lean coverage proof and standalone exhaustive-search checkers.
 - Zenodo: [10.5281/zenodo.23534853](https://doi.org/10.5281/zenodo.23534853)
 

@@ -8,7 +8,7 @@ For ten equal charges on a sphere, does the bicapped square antiprism minimize C
 
 The candidate's height is specified by an exact equation. Lean proves that the height exists and is unique in its specified interval, that the candidate consists of distinct unit vectors, and that every competitor has at least its energy, with equality exactly for congruent configurations. No symmetry is assumed of competitors. The proof first localizes every competitor of no greater energy, then uses orthogonal alignment and a local energy bound covering all spherical perturbations to force equality with the candidate.
 
-The new inputs are the ten-point energy, interval-classification and Hessian certificates. The hardest step is the three-point energy certificate, whose error must be small enough to force geometric localization. The [paper](paper/paper.pdf) states the result and proof overview in three pages; its appendices keep the complete mathematical argument.
+The new inputs are the ten-point energy, interval-classification and Hessian certificates. The hardest step is the three-point energy certificate, whose error must be small enough to force geometric localization. The [paper](paper/paper.pdf) contains the proof and its key lemmas in the main text; its appendices give routine verifications, finite case checks and formal-proof details.
 
 Checked in Lean from the definitions; not yet reviewed by experts.
 
@@ -17,6 +17,8 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23622084](https://doi.org/10.5281/zenodo.23622084)
+
+The linked DOI identifies version 5.
 
 ## Check it
 
@@ -47,7 +49,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The Thomson problem for N = 10}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v5/results/thomson-10}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v6/results/thomson-10}},
   doi          = {10.5281/zenodo.23622084}
 }
 ```

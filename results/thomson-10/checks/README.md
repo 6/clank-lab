@@ -23,3 +23,12 @@ large compressed ambient certificate automatically before checking it.
 ## The figure
 
 [`draw_antiprism.py`](draw_antiprism.py) draws [`antiprism.svg`](../data/antiprism.svg) and [`antiprism.pdf`](../data/antiprism.pdf) from the Lean definition of the candidate, `lean/ThomsonN10/Candidate.lean`: its rational height interval and the coordinates of `candidateAt`. Run it with `--check` to check the supplied files without overwriting them. The check reads the drawing back, recovers each point's three coordinates from its two views, and requires them to be the candidate's point with the same index, to within $10^{-6}$ of the radius; it also checks the hull edges, the marks for $h$ and $\pi/4$, and the labels. `check.py` runs it and confirms that the six controls in [`data/controls/`](../data/controls/) (two points nudged by 0.001 typographic points, a pole moved by one, two swapped labels, a missing edge and a shifted height mark) are rejected. The figure is an illustration, not part of the proof.
+
+## Formal correspondence
+
+The [formal definitions and checking details](formal-correspondence.md)
+identify the fixed coefficient data, formal theorem names and local
+perturbation estimates, and retain the implementation and attribution
+notes relocated from the paper. This includes the exact source mappings
+for the energy polynomial, candidate upper bound, Gram-stability estimates,
+orthogonal alignment and pair remainder inequality.

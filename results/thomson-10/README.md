@@ -2,7 +2,7 @@
 
 [![Checks](https://github.com/6/clank-lab/actions/workflows/thomson-10.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/thomson-10.yml)
 
-For ten equal charges on a sphere, does the bicapped square antiprism minimize Coulomb energy? This is the ten-point case of the [Thomson problem](https://en.wikipedia.org/wiki/Thomson_problem), associated with J. J. Thomson's 1904 atomic model. We build directly on [Aravind Karthigeyan's AI-generated nine-point Lean proof](https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e), reusing most of its MIT-licensed Lean code and its proof design. We prove global optimality among all ten distinct unit-sphere points, with equality exactly up to orthogonal maps (including reflections) and relabeling.
+For ten equal charges on a sphere, does the bicapped square antiprism minimize Coulomb energy? This is the ten-point case of the [Thomson problem](https://en.wikipedia.org/wiki/Thomson_problem), associated with J. J. Thomson's 1904 atomic model. We build directly on [Aravind Karthigeyan's AI-generated nine-point Lean proof](https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e), reusing most of its MIT-licensed Lean code and its proof design. Jingxing Huang also reports a separate nine-point Lean proof candidate with conditional independent Python checking ([repository, revision of October 25, 2026](https://github.com/Stickerbug/thomson-n9-proof/tree/5f8492931e40e62e2064a162f978ff0e2541a2f6), [Zenodo record 23573472](https://doi.org/10.5281/zenodo.23573472)). We prove global optimality among all ten distinct unit-sphere points, with equality exactly up to orthogonal maps (including reflections) and relabeling.
 
 ![The bicapped square antiprism: a side view with the heights h of the two squares marked, and the view from above, where the lower square is the upper one turned by π/4 (illustration only; not part of the proof).](data/antiprism.svg)
 
@@ -17,6 +17,8 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23634449](https://doi.org/10.5281/zenodo.23634449)
+
+The linked DOI identifies version 6.
 
 ## Check it
 
@@ -47,7 +49,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The Thomson problem for N = 10}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v6/results/thomson-10}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v7/results/thomson-10}},
   doi          = {10.5281/zenodo.23634449}
 }
 ```

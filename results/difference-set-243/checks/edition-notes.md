@@ -1,5 +1,12 @@
 # Checking notes for the concise and journal-style edition
 
+Correction, October 25, 2026: Keita Baba first proved this theorem on
+October 4, 2026, by SAT with a certificate accepted by a formally verified
+checker. The paper and README now credit Baba's
+[pinned repository](https://github.com/kei825/open-questions-2026/tree/d40fc3a3ac538e08e1bc31cf45b5d1204a2c34c8/space/difference-set-243).
+Our lifting proof was obtained independently. The historical open-status
+records below predate Baba's proof. The theorem and its checks are unchanged.
+
 These are previously reported checks and conventions, retained from the published version. No new mathematical computation or formal build was performed for this edition. The commands in [README.md](README.md) reproduce the checks. The mathematical statements below use the paper’s notation.
 
 ## Historical records and source access

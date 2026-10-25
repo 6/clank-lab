@@ -22,7 +22,11 @@
 
 \begin{abstract}
 We prove, by exhaustive computation, that no $(243,121,60)$ difference
-set exists in $C_3\times C_9\times C_9$. A difference set with these
+set exists in $C_3\times C_9\times C_9$. Keita Baba settled this case first
+on October~4, 2026, by a SAT computation with a certificate accepted by a
+formally verified checker. We give an independent proof by a different
+method: a lifting search with the reduction checked in Lean.
+A difference set with these
 parameters is a 121-element subset whose ordered differences represent
 every nonzero group element exactly 60 times. Vera L\'opez and Garc\'ia
 S\'anchez recorded this group-specific case as unresolved, and Gordon
@@ -40,6 +44,11 @@ integer computations.
 \end{abstract}
 
 \section{Introduction}
+
+Keita Baba settled this case first on October~4, 2026, by a SAT computation
+with a certificate accepted by a formally verified checker~\cite{Baba2026}.
+The present paper gives an independent proof by a different method:
+a lifting search with the reduction checked in Lean.
 
 Write $C_m=\mathbb Z/m\mathbb Z$ additively. For a subset $P$ of an
 abelian group, put
@@ -66,8 +75,18 @@ also lists $\operatorname{DS}(243,121,60,[3,9,9])$ as
 Open~\cite{GordonData}. The neighboring abelian groups and the relevant
 published restrictions are reviewed in Appendix~\ref{sec:context}.
 
-The new step is the complete finite reduction and lifting exhaustion
-for this remaining group. A translate fixed by the multiplier still
+Baba's proof uses multiplier~61, its 99 orbits, and a SAT encoding over
+all 49 cyclic quotients with 64,940 variables~\cite[Steps~1--5 and~8(a)]{Baba2026}.
+The CaDiCaL refutation was accepted by cake\_lpr, a formally verified
+checker, and by lrat-check. A second route uses the 864 possible images
+in $G/3G$: one representative has a checked certificate, and all 864
+instances were also solved separately, without individual
+certificates~\cite[Steps~6--8 and VERIFY, Sections~4--5]{Baba2026}.
+Baba describes the work as written with AI assistance from
+Anthropic~\cite[repository README, Caveats]{Baba2026}.
+
+Our independent proof uses a complete finite reduction and lifting
+exhaustion. A translate fixed by the multiplier still
 has many possible unions of orbits; the difficult step is to reduce
 these possibilities far enough that all lifts can be tested.
 Section~\ref{sec:multiplier} first obtains a fixed translate and the
@@ -499,7 +518,7 @@ $\operatorname{IsDiffSet}$ uses the cardinality and ordered differences
 in that theorem. The correspondence between the formal leaf table and the executable
 options, and the exhaustive range assertions, are external checks.
 The \href{../checks/edition-notes.md}{checking notes} in the accompanying
-\href{https://github.com/6/clank-lab/tree/difference-set-243-v3/results/difference-set-243}{source bundle} identify the exact formal statement types, the logical
+\href{https://github.com/6/clank-lab/tree/difference-set-243-v4/results/difference-set-243}{source bundle} identify the exact formal statement types, the logical
 axioms and the reproduction commands.
 
 \begin{appendices}
@@ -541,7 +560,7 @@ For $C_3^5$, Paley's quadratic-residue construction~\cite{Paley1933}
 in the additive group of $\mathbb F_{243}$ gives the stated parameters.
 The 1997 table cites Emma Lehmer~\cite{Lehmer1953} for its positive entry.
 The nonexistence at issue here concerns
-the remaining group $C_3\times C_9\times C_9$.
+the group $C_3\times C_9\times C_9$, settled first by Baba~\cite{Baba2026}.
 
 The parameter identity $k(k-1)=\lambda(v-1)$ holds. The odd-order
 Bruck--Ryser--Chowla equation $61x^2-60y^2=z^2$ has the nonzero
@@ -780,6 +799,15 @@ K. T. Arasu and S. L. Ma,
 and divisible difference sets},
 Journal of Statistical Planning and Inference \textbf{95} (2001), 67--73.
 \href{https://doi.org/10.1016/S0378-3758(00)00278-0}{doi:10.1016/S0378-3758(00)00278-0}.
+
+\bibitem{Baba2026}
+Keita Baba,
+\emph{No (243, 121, 60) difference set in $\mathbb Z_3\times\mathbb Z_9\times\mathbb Z_9$},
+in \emph{Answers to seven open questions (2026)}, October~4, 2026,
+repository \texttt{kei825/open-questions-2026}, commit \texttt{d40fc3a3}.
+\url{https://github.com/kei825/open-questions-2026/tree/d40fc3a3ac538e08e1bc31cf45b5d1204a2c34c8/space/difference-set-243}.
+Repository README (Caveats):
+\url{https://github.com/kei825/open-questions-2026/blob/d40fc3a3ac538e08e1bc31cf45b5d1204a2c34c8/README.md}.
 
 \bibitem{ChenXiangSehgal1994}
 Y. Q. Chen, Q. Xiang, and S. K. Sehgal,

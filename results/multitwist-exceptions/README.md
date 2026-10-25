@@ -57,6 +57,8 @@ The proofs, the Lean formalization, the checking programs and the text were prod
 
 Archived on Zenodo: [doi:10.5281/zenodo.23609073](https://doi.org/10.5281/zenodo.23609073)
 
+The DOI above identifies version 2.
+
 ## Check it
 
 What Lean covers: the Lean proof works in the free group $F_4$, the
@@ -111,7 +113,8 @@ The same command checks the new endpoints in both models and verifies the
 rational diagram with two independent topology implementations, including
 corrupted diagrams and altered formulas. Finite instances do not replace
 the proof for every $k$. [Checker documentation](checks/README.md) describes the
-models, certificates and corruptions.
+models, certificates and corruptions. The [supplementary notes](checks/edition-notes.md)
+retain the detailed background and checking descriptions.
 
 ## Credits
 
@@ -125,6 +128,7 @@ single-twist case the question extends, and D. D. Long and H. R. Morton's
 finiteness theorem
 ([Topology 1986](https://doi.org/10.1016/0040-9383(86)90033-9)) preceded
 it; S. Boyer, C. McA. Gordon and X. Zhang later improved Fathi's 7 to 6.
+Their abstract states this refinement for a pseudo-Anosov base.
 Yohsuke Watanabe restated the question in
 [2016](https://arxiv.org/abs/1611.05119). Chaohui Zhang discussed the
 multitwist extension, citing Ivanov's 1998 manuscript *Mapping class
@@ -152,7 +156,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Fathi's consecutive-integers bound does not extend to multitwists}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v2/results/multitwist-exceptions}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v3/results/multitwist-exceptions}},
   doi          = {10.5281/zenodo.23609073}
 }
 ```

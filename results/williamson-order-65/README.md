@@ -10,7 +10,7 @@ The proofs, the search code, the enumeration checkers, the witness checkers and 
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23622210](https://doi.org/10.5281/zenodo.23622210)
+Archived on Zenodo: [doi:10.5281/zenodo.23630685](https://doi.org/10.5281/zenodo.23630685)
 
 The release URL below names the journal-style edition, version 3. Both the archive link above and the retained DOI in the Cite entry identify the published version 2; a DOI for version 3 will be added after its deposit.
 
@@ -40,6 +40,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Nonexistence of Williamson matrices of order 65}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/williamson-order-65-v3/results/williamson-order-65}},
-  doi          = {10.5281/zenodo.23622210}
+  doi          = {10.5281/zenodo.23630685}
 }
 ```

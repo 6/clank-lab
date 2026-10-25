@@ -42,9 +42,7 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23572919](https://doi.org/10.5281/zenodo.23572919)
-
-The DOI above identifies version 2.
+Archived on Zenodo: [doi:10.5281/zenodo.23638798](https://doi.org/10.5281/zenodo.23638798)
 
 ## Check it
 
@@ -101,6 +99,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Locked tromino tilings of rectangles}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/locked-trominoes-v3/results/locked-trominoes}},
-  doi          = {10.5281/zenodo.23572919}
+  doi          = {10.5281/zenodo.23638798}
 }
 ```

@@ -16,9 +16,7 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23622084](https://doi.org/10.5281/zenodo.23622084)
-
-The linked DOI identifies version 5.
+Archived on Zenodo: [doi:10.5281/zenodo.23634449](https://doi.org/10.5281/zenodo.23634449)
 
 ## Check it
 
@@ -50,6 +48,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{The Thomson problem for N = 10}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v6/results/thomson-10}},
-  doi          = {10.5281/zenodo.23622084}
+  doi          = {10.5281/zenodo.23634449}
 }
 ```

@@ -16,9 +16,7 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23606216](https://doi.org/10.5281/zenodo.23606216)
-
-The DOI above identifies version 2. This is version 3, the concise and journal-style edition.
+Archived on Zenodo: [doi:10.5281/zenodo.23635973](https://doi.org/10.5281/zenodo.23635973)
 
 ![Rays from the origin in the positive quadrant: blue rays below the diagonal, red rays above it, and the thick diagonal](data/rays.svg)
 
@@ -73,6 +71,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/scattering-coefficients-v3/results/scattering-coefficients}},
   % DOI for version 2.
-  doi          = {10.5281/zenodo.23606216}
+  doi          = {10.5281/zenodo.23635973}
 }
 ```

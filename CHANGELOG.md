@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## steinberg-c4-c9 v7 (October 25, 2026)
+
+- Lean now checks the existing rational straight-line drawing directly, completing the formal proof of planarity, the cycle exclusions and non-three-colorability. The mathematical statements and credits are unchanged.
+
 ## noncrossing-symmetric-chains v2 (October 25, 2026)
 
 - Combined concise edition and journal-style edition, with the main proof and its key lemmas in the main text and routine model and certificate details in appendices. The theorem and its checks are unchanged.

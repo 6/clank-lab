@@ -18,7 +18,7 @@
 \newcommand{\file}[1]{\texttt{\detokenize{#1}}}
 \title{A planar graph without four- or nine-cycles\texorpdfstring{\\}{ }that is not three-colorable}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 24, 2026}
+\date{October 25, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -332,35 +332,38 @@ $e$. Appendix~\ref{app:additional} gives two further non-colorability arguments:
 exact elimination of coloring constraints and a clausal proof of
 unsatisfiability.
 
-The formal graph has vertex set $\{0,\ldots,81\}$ and adjacency given
-by exactly the 136 unordered edges in Appendix~\ref{app:graph}; its rotation
-is the cyclic neighbor list printed there. For this fixed graph $G$,
-the theorem \texttt{Steinberg.counterexample} in Lean asserts:
-\begin{enumerate}
-\item the cyclic neighbor orders form a connected orientable rotation system
-whose face orbits partition all darts and have Euler characteristic two;
-\item every closed walk in $G$ that is a simple cycle has length different
-from four and nine;
-\item $G$ has no proper coloring by three colors.
-\end{enumerate}
-There are no external hypotheses. The formal proof uses only Lean's standard
-axioms and kernel checking; the exact axiom inventory and the Lean and
-Mathlib versions are given in the accompanying
+The formal graph $G$ has vertex set $\{0,\ldots,81\}$ and adjacency given
+by exactly the 136 unordered edges in Appendix~\ref{app:graph}.
+The Lean theorem \texttt{Steinberg.planar\_counterexample} states the
+following conjunction for this graph:
+\[
+\begin{gathered}
+G\text{ has a crossing-free straight-line drawing with rational coordinates};\\
+\text{every simple cycle of }G\text{ has length different from four and nine};\\
+\text{there is no proper coloring }V(G)\longrightarrow\{0,1,2\}.
+\end{gathered}
+\]
+The formal planarity predicate, \texttt{RationalPlanar}, requires an
+injective assignment of rational coordinate pairs to the vertices, with a
+vertex on an edge segment only at an endpoint and edge segments meeting
+only at a shared endpoint. Segments are closed real affine segments
+between those rational points. The proof checks the existing drawing's
+six-decimal coordinates as exact rationals. Mathlib's simple closed walks
+and proper colorings supply the other two predicates; their conventions
+agree with the introduction, including cycles with chords. This proves
+the planar counterexample to the length-nine question directly from
+these definitions.
+
+The formal theorem has no hypotheses and is checked by Lean's kernel
+using only its standard axioms. The exact axiom inventory, pinned versions
+and build commands are in the accompanying
 \href{https://raw.githubusercontent.com/6/clank-lab/main/results/steinberg-c4-c9/checks/README.md}{checking notes}.
-Compiling the proof with cached dependencies took about four and a half
-minutes on a twelve-CPU allocation. The finite-pattern search used about
-twenty CPU-minutes on two CPUs. Processor models and separate timings for
-each of the remaining checks were not recorded.
-The formal cycle and coloring definitions agree with the conventions in
-the introduction, including cycles with chords. Appendix~\ref{sec:replay}
-describes the formal non-colorability argument.
-The realization of the rotation system as a plane embedding in
-Section~\ref{app:embedding} is a written topological argument outside Lean.
-Ore induction, criticality and the edge-minimum deduction are also written
-arguments; the last uses Kostochka and Yancey's theorem. Independent
-checks establish the other cycle counts in Appendix~\ref{app:cycles} and
-the deletion colorings. The graph and finite certificates are unchanged
-from the \href{https://doi.org/10.5281/zenodo.23572996}{archived graph and certificates (version 5)}.
+Appendix~\ref{sec:replay} describes the formal non-colorability argument.
+The remaining assertions of Theorem~\ref{thm:main}---Ore membership,
+criticality and the edge minimum---use the written arguments in
+Section~\ref{sec:ore}; the last uses Kostochka and Yancey's theorem.
+The Ore construction, deletion colorings and other cycle counts also
+have independent executable checks.
 
 \clearpage\begin{appendices}
 \section{The embedding certificate}\label{app:rotation}
@@ -459,15 +462,15 @@ after checking simplicity, the neighbor orders and connectedness.
 \caption{The counterexample, with vertex numbers from the accompanying
 \href{https://raw.githubusercontent.com/6/clank-lab/main/results/steinberg-c4-c9/data/graph.svg}{SVG drawing}.
 The drawing was generated from, and checked against, the edge and rotation
-data in Appendix~\ref{app:graph}; the rotation system proves planarity.}
+data in Appendix~\ref{app:graph}; its rational coordinates are also checked in Lean.}
 \label{fig:graph}
 \end{figure}
 
-\paragraph{Drawing.} The figure is a Tutte (barycentric) drawing. For background see Tutte's
-``How to Draw a Graph''~\cite{tutte}. It is obtained by triangulating
-the bounded faces of the rotation system with temporary centers,
-then omitting the added vertices and edges. The rotation system, rather
-than the numerical coordinates of the drawing, establishes planarity.
+\paragraph{Drawing.} The figure is obtained by applying Tutte's barycentric
+method to a triangulation of the bounded faces, using temporary centers,
+and then omitting the added vertices and edges. For background see Tutte's
+``How to Draw a Graph''~\cite{tutte}. The finite-decimal coordinates are exact
+rationals, checked in Lean as described in Section~\ref{sec:checks}.
 
 \section{Excluding cycles}\label{app:cycles}
 An independent enumeration checks the cycle counts used in

@@ -13,18 +13,46 @@ The toolchain and Mathlib dependency are pinned in `lean-toolchain`,
 Only dependency artifacts come from the Mathlib cache; Lake checks the local
 proof sources.
 
-A source-only default build with dependency caches took about 4.5 minutes
-on a 12-CPU allocation. Peak observed memory was 10.1 GiB for one compiler
-and 16.9 GiB for the complete build process tree; dependency download time
-is excluded. The package uses six proof threads per compiler.
-
-[Check.lean](Check.lean) states `Steinberg.counterexample`:
+[Check.lean](Check.lean) states `Steinberg.planar_counterexample`:
 
 ```lean
-HasSphericalRotation graph rotation ∧
+RationalPlanar graph ∧
 (∀ v (p : graph.Walk v v), p.IsCycle → p.length ≠ 4 ∧ p.length ≠ 9) ∧
 IsEmpty (graph.Coloring (Fin 3))
 ```
+
+`RationalPlanar G` is the existence of an injective map from the finite
+vertex set into rational coordinate pairs giving a crossing-free straight-line
+drawing. [Drawing.lean](Steinberg/Drawing.lean) defines each closed segment
+by a real affine parameter between zero and one. Every vertex is excluded
+from a segment unless it is an endpoint; distinct edge segments can meet
+only at the image of a common endpoint. This includes adjacent edges, whose
+interiors cannot overlap. Increasing endpoint labels only select a canonical
+orientation for undirected edges; segment reversal is proved in Lean.
+
+[Planarity.lean](Steinberg/Planarity.lean) proves this property for the
+unchanged graph. [DrawingData.lean](Steinberg/DrawingData.lean) contains the
+figure's exact six-decimal coordinates as integer millionths, interpreted as
+rationals by division by one million. The coordinate export can be reproduced
+with `python3 checks/export_lean_drawing.py --check` from the bundle root.
+The exporter checks equality to the existing SVG and PDF and is not trusted
+by the formal proof: Lean checks the literal coordinates and proves equality
+between its edge list and the parsed graph.
+
+The finite check uses separating linear functionals with integer
+coefficients. Lean proves that strict separation of endpoints excludes every
+intersection of their real closed segments. A supporting functional at a
+shared endpoint proves that adjacent edges meet there alone. Every vertex
+and edge pair is checked by kernel reduction in
+[DrawingCertificate.lean](Steinberg/DrawingCertificate.lean) and
+[DrawingRows.lean](Steinberg/DrawingRows.lean), then composed with these
+geometric soundness lemmas. [DrawingControls.lean](Steinberg/DrawingControls.lean)
+checks a solved square and rejects crossing, coincident, nonincident and
+overlapping configurations. No assumption of general position is used.
+
+The earlier `Steinberg.counterexample` theorem is retained with its exact
+statement, replacing `RationalPlanar graph` by
+`HasSphericalRotation graph rotation` in the conjunction above.
 
 The graph is a `SimpleGraph (Fin 82)`. [Data.lean](Steinberg/Data.lean)
 parses the bundle's unchanged [graph](../data/graph.txt) and
@@ -33,7 +61,7 @@ bounds, distinctness and counts, and defines adjacency from those edges.
 Literal normal forms used to shorten later calculations are proved equal
 to these parsed data.
 
-The three properties use this same graph:
+Both endpoint theorems concern this same graph. The retained components are:
 
 - [Rotation.lean](Steinberg/Rotation.lean) defines the spherical rotation
   criterion. Each vertex has its exact neighbors in one cyclic order;
@@ -42,8 +70,8 @@ The three properties use this same graph:
   [The certificate](Steinberg/RotationCertificate.lean) checks 272 darts and
   56 faces. [The theorem](Steinberg/RotationControls.lean) assembles this
   certificate with `82 + 56 = 136 + 2`. This is the combinatorial planarity
-  criterion; its correspondence with a topological embedding is the surface
-  argument in the paper, rather than a separate Lean realization theorem.
+  criterion. The paper retains its written surface argument; the new
+  geometric theorem proves planarity directly from the rational drawing.
 - [Cycles.lean](Steinberg/Cycles.lean) proves exclusion of lengths four and
   nine for every Mathlib closed walk satisfying `IsCycle`, including cycles
   with chords. The bounded search has a general soundness proof and checks

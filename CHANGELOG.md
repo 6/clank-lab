@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## noncrossing-symmetric-chains v2 (October 25, 2026)
+
+- Combined concise edition and journal-style edition, with the main proof and its key lemmas in the main text and routine model and certificate details in appendices. The theorem and its checks are unchanged.
+
 ## multitwist-exceptions v3 (October 25, 2026)
 
 - Concise edition and journal-style edition: reorganize the presentation around the proofs, with algebraic and topology checking details in appendices and notes. The theorems and their checks are unchanged.

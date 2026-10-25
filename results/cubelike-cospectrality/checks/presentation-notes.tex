@@ -1,0 +1,214 @@
+% Supporting checking notes; read alongside paper/paper.tex.
+\section{Computation and formalization}\label{sec:formal}
+This section specifies which parts are machine-checked and what the
+checks assume. The mathematical upper bound is formalized from the
+adjacency matrix and spectral definition of strong cospectrality;
+the attaining example is a separate exact computation.
+The complete accompanying bundle contains the paper, the Lean project,
+the certificate data and the exact checkers. All paths in this paper
+are relative to that bundle: the formal definitions and theorem are
+in \texttt{lean/CubelikeSC/Statement.lean} and
+\texttt{lean/CubelikeSC/Proof.lean}, the certificates are in
+\texttt{data/d7k3.cert}, and the arithmetic check is
+\texttt{checks/check.py}. The bundle's \texttt{README.md} gives the
+commands for checking it as a standalone directory.
+
+\subsection{The formal upper-bound statement}
+The formal definitions identify the machine-checked statement with
+Theorem~\ref{thm:main}'s upper bound. The project uses Lean~4 and
+mathlib, with versions fixed by its Lake configuration. Its definitions
+are reproduced below, with line breaks for readability:
+\begin{lstlisting}
+abbrev V := Fin 7 → ZMod 2
+
+def adj (S : Finset V) : Matrix V V ℝ :=
+  fun x y => if x - y ∈ S then 1 else 0
+
+def StronglyCospectral (S : Finset V) (u v : V) : Prop :=
+  ∀ θ : ℝ,
+    Module.End.HasEigenvalue (Matrix.toEuclideanLin (adj S)) θ →
+    let E := Module.End.eigenspace (Matrix.toEuclideanLin (adj S)) θ
+    E.starProjection (EuclideanSpace.single u 1) =
+      E.starProjection (EuclideanSpace.single v 1) ∨
+    E.starProjection (EuclideanSpace.single u 1) =
+      -E.starProjection (EuclideanSpace.single v 1)
+
+def EndpointSC : Prop :=
+  ∀ S : Finset V, (0 : V) ∉ S → ∀ P : Finset V,
+    (∀ u ∈ P, ∀ v ∈ P, StronglyCospectral S u v) → P.card ≤ 4
+\end{lstlisting}
+The adjacency convention $x-y\in S$ agrees with $x+y\in S$ over
+$\F_2$. The expression \texttt{E.starProjection} is the orthogonal
+projection onto the real eigenspace \texttt{E}; the disjunction permits
+either sign separately for each eigenvalue.
+The name \texttt{EndpointSC} denotes the final universal upper-bound
+assertion. Its proof is declared as
+\begin{verbatim}
+theorem endpoint_sc : EndpointSC
+\end{verbatim}
+The definition of \texttt{EndpointSC} is the universal statement
+\[
+ \forall S\subseteq V,\quad 0\notin S\ \Longrightarrow\
+ \forall P\subseteq V,\quad
+ (\forall u,v\in P,\ u,v\text{ are strongly cospectral})
+ \ \Longrightarrow\ |P|\leq4.
+\]
+It quantifies over every connection set excluding zero and every
+pairwise strongly cospectral set, including disconnected graphs.
+
+The formalization proves the direction of
+Lemma~\ref{lem:criterion} needed for the upper bound:
+strong cospectrality of $u,v$ implies $v-u\in K(S)$.
+It proves the subspace and parity facts, the moment identities, bracket
+extraction, the penalty bound, the finite certificate checks, and their
+case cover. Instead of changing basis, it selects three independent
+vectors of $K(S)$ whose span contains $\sigma$, and indexes character
+cosets by their three dot products. This is the same reduction in a
+coordinate-independent form.
+
+All certificate calculations are evaluated by Lean's kernel. No axiom asserts the finite inequality, and
+\texttt{native\_decide} is not used. The final theorem depends only on the usual
+logical axioms \texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}. The build fails if the theorem's axiom dependencies
+differ from this list.
+From \texttt{lean/}, the standard check is
+\begin{verbatim}
+lake exe cache get
+lake build
+\end{verbatim}
+The trusted foundation for that check is Lean's kernel and the
+definitions and library results used by the proof. The formal theorem's
+identification with the graph-theoretic statement is given by the
+definitions just described, rather than by a hypothesis about character
+eigenvalue fibers.
+
+\subsection{Independent arithmetic checks}
+The separate integer checker verifies the certificates directly for the
+original cases, and also checks the rejection of deliberately damaged data.
+The resulting certificate counts are summarized in Table~\ref{tab:certificates}.
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lr}
+\hline
+Certificate disposition & Number of case keys\\
+\hline
+A coset has no allowed bracket & $58$\\
+Nonnegative weights satisfy~\eqref{eq:scaleddual} & $3{,}926$\\
+\hline
+Total & $3{,}984$\\
+\hline
+\end{tabular}
+\caption{Exact certificate outcomes. Each key can represent several
+cases; these are counts of keys, not counts of connection sets or cases.}
+\label{tab:certificates}
+\end{table}
+The $58$ empty-list entries have $n=0,1,2,3,4,5,6$, with respectively
+$2,5,9,15,16,9,2$ keys. Together they represent $1{,}628$ original cases.
+For each entry, forming the relevant $J_u$ verifies that no integer pair
+satisfies conditions 1--4. For example, at $n=0$ the only possible endpoint
+is zero, which condition~4 forbids on a nonzero coset.
+A separate exact Python checker forms each case's own eight bracket
+lists and checks the matching certificate on those lists, without
+assuming the key-sharing argument.
+
+\subsection{Certificate generation and the lower example}
+We distinguish the untrusted generation of certificates from their
+exact verification, and record the separate check of attainment.
+The certificate weights were obtained from a floating-point linear
+programming dual and converted to rational numbers.
+This generation step is not trusted: only the inequalities on the
+supplied integer weights are used. The separate Python certificate
+checker uses arbitrary-precision integers. Its role is an additional
+implementation of the certificate calculation, not an additional
+mathematical assumption in the Lean theorem.
+To test rejection, the supplied checks deliberately remove an entry,
+falsely assert that a bracket list is empty, weaken or zero weights,
+make a weight negative, and duplicate an entry. Every altered file is
+rejected. Lean also proves that selected entries fail their check when
+weights are removed or halved, and that deleting a required entry
+leaves a case without a certificate. The command
+\texttt{python3 checks/check.py} performs the exact Python checks
+and these rejection tests; \texttt{checks/README.md} explains them.
+
+Earlier computational work is recorded in \'Arnad\'ottir and Godsil's
+Appendix~A, which gives six connection sets on $32$ vertices; their
+complements give the other six graphs. Appendix~B provides Sage code.
+Their acknowledgments credit Gordon Royle's cubelike graph lists.
+
+The converse of Lemma~\ref{lem:criterion} and attainment are not part
+of the Lean development. For the displayed construction, exact
+character sums check~\eqref{eq:attain}; a separate computation checks
+strong cospectrality using spectral projection columns with rational
+entries. The construction and the written character argument above
+give the lower bound four. Neither the upper theorem nor this lower
+example relies on a numerical eigensolver.
+
+Figure~\ref{fig:example} and its SVG version in \texttt{data/figure.svg}
+come from the same graph data. The optional illustration script
+\texttt{checks/figure.py} checks the graph's vertex count, edge count,
+degree, connectivity and highlighted class, and reproduces the figure
+and the spectral-sign table. It is not needed for the upper-bound proof.
+
+
+\section{Further presentation notes}
+Condition~2 is
+redundant given condition~1; it is retained to match the finite assertion
+checked by the accompanying certificates.
+
+Cases with no admissible assignment satisfy it vacuously.
+The parameter range includes $n=0$, $B=\varnothing$, $t=0$, and all
+other boundary values; all of them are included in the finite check.
+
+
+
+The data are supplied in
+\texttt{data/d7k3.cert} in the accompanying bundle.
+
+
+\section{Verification and reproducibility}\label{sec:formal}
+Lean and mathlib prove the universal upper bound, with formal theorem
+\texttt{CubelikeSC.endpoint\_sc}:
+\begin{verbatim}
+theorem endpoint_sc : EndpointSC
+\end{verbatim}
+The definition of \texttt{EndpointSC} is the universal statement
+\[
+ \forall S\subseteq V,\quad 0\notin S\ \Longrightarrow\
+ \forall P\subseteq V,\quad
+ (\forall u,v\in P,\ u,v\text{ are strongly cospectral})
+ \ \Longrightarrow\ |P|\leq4.
+\]
+Here the formal vertex type is $(\mathbb Z/2\mathbb Z)^7$.
+The adjacency convention $x-y\in S$ agrees with $x+y\in S$ over
+$\F_2$. Strong cospectrality is defined using orthogonal projections
+onto the real adjacency eigenspaces, with either sign permitted for
+each eigenvalue. Thus the formal assertion is precisely the upper bound
+of Theorem~\ref{thm:main}, with no connectivity hypothesis.
+
+The formalization proves the direction of
+Lemma~\ref{lem:criterion} needed for the upper bound:
+strong cospectrality of $u,v$ implies $v-u\in K(S)$.
+It proves the subspace and parity facts, the moment identities, bracket
+extraction, the penalty bound, the finite certificate checks, and their
+case cover. Instead of changing basis, it selects three independent
+vectors of $K(S)$ whose span contains $\sigma$, and indexes character
+cosets by their three dot products. This is the same reduction in a
+coordinate-independent form.
+
+The converse character criterion and attainment remain outside Lean.
+The written character argument and \'Arnad\'ottir and Godsil's construction
+give the lower bound; independent exact computations check the character
+sums and the adjacency spectral projections. A separate integer checker
+verifies every original case's certificate and rejects damaged data.
+The checking guide gives the reproduction commands, formal definitions,
+logical dependencies and certificate details. The proof uses Lean's
+kernel and its library results; no solver output is assumed as an axiom.
+
+
+
+\section{Historical and dimensional context}
+The question appeared in their first preprint, posted September 15, 2021;
+the journal article appeared in 2023.
+This result does not bound the size of strongly cospectral sets uniformly
+over all dimensions. The maximum in dimensions eight and higher is not determined
+here.

@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## cubelike-cospectrality v2 (October 25, 2026)
+
+- Concise edition and journal-style edition: the main text presents the proof and its key lemmas, with routine certificate details in appendices and implementation details in the checking notes. The mathematical statements and checked artifacts are unchanged.
+
 ## scattering-coefficients v3 (October 25, 2026)
 
 - Concise and journal-style edition: present the main proof and its key lemmas in the main text, with routine details in named appendices. The theorem and its checks are unchanged.

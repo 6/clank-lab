@@ -1,11 +1,16 @@
 \documentclass[11pt]{article}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{microtype}
+\usepackage[title]{appendix}
 \usepackage{tikz}
 \usepackage{graphicx}
+\usepackage{placeins}
 \usepackage{listings}
 \lstset{basicstyle=\ttfamily\footnotesize,columns=fullflexible,keepspaces=true,
   literate={∀}{{$\forall$}}1 {∈}{{$\in$}}1 {∉}{{$\notin$}}1
@@ -26,33 +31,26 @@
 \newcommand{\supp}{\operatorname{supp}}
 \title{Strongly cospectral sets in seven-dimensional cubelike graphs}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 23, 2026}
+\date{October 25, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-Two vertices of a graph are strongly cospectral if their orthogonal
+Every set of pairwise strongly cospectral vertices in a cubelike graph
+on $128$ vertices has at most four elements, and a connected graph
+attains four. Vertices are strongly cospectral if their orthogonal
 projections onto each adjacency eigenspace agree up to sign.
-\'Arnad\'ottir and Godsil asked in 2021 whether their upper bound
-$2^{\lceil d/2\rceil-1}$ for the size of a pairwise strongly cospectral
-set in a cubelike graph on $2^d$ vertices, $d\geq3$, is tight in every
-dimension in its range.
-We prove that every such set in every cubelike graph on $128$ vertices
-has size at most four, whereas their bound gives eight.
-Their connected construction attains four, so the maximum in dimension
-seven is exactly four and the all-dimensions tightness question has a
-negative answer.
-The proof combines character sums, congruences and a second-moment bound
-with an exact finite inequality certified by linear programming duality.
-The universal upper bound, including the certificate checks, is formalized
-in Lean; attainment is checked separately.
+This gives a negative answer to \'Arnad\'ottir and Godsil's question
+whether their upper bound is tight in every dimension: in dimension
+seven their bound gives eight. They proved the general bound,
+attained it in dimensions three through six, and supplied the connected
+construction attaining four used here. Our upper bound combines their
+abelian character criterion, building on Sin and Sorci's normal-Cayley
+criterion, with congruences, a second-moment bound and an exact finite
+inequality certified by linear programming duality. The universal upper
+bound, including the certificate checks, is formalized in Lean;
+exact computations also verify the attaining graph. Sin's construction gives arbitrarily
+large strongly cospectral classes as the dimension grows.
 \end{abstract}
-
-\noindent Computer-assisted; not yet reviewed by experts.
-
-\smallskip
-\noindent The proofs, the Lean formalization, the certificate checkers and the text
-were produced by AI models (from OpenAI and Anthropic), working under the
-author's direction.
 
 \section{Introduction}
 A \emph{cubelike graph} is a Cayley graph $\Cay(\F_2^d,S)$, where
@@ -72,17 +70,15 @@ This bound is attained by a connected graph.
 No connectivity or degree assumption is imposed on the upper bound; in
 particular, it includes the empty connection set.
 
-\'Arnad\'ottir and Godsil~\cite{AG}, Corollary~8.3, proved that a pairwise
+\'Arnad\'ottir and Godsil~\cite[Corollary~8.3]{AG} proved that a pairwise
 strongly cospectral set in a cubelike graph on $2^d$ vertices has size at
 most $2^{\lceil d/2\rceil-1}$ for $d\geq3$.
-Their Example~8.4 attains this bound for $d=3,4,5,6$.
-In Section~11 they asked:
+Their Example~8.4~\cite{AG} attains this bound for $d=3,4,5,6$.
+In Section~11~\cite{AG} they asked:
 \begin{quote}
 ``Is the upper bound on the size of strongly cospectral sets in cubelike
 graphs tight in all dimensions?''
 \end{quote}
-The question appeared in their first preprint, posted September 15, 2021;
-the journal article appeared in 2023.
 At $d=7$ their bound is eight. Theorem~\ref{thm:main} reduces it to four,
 and hence answers their question negatively.
 
@@ -94,28 +90,27 @@ Julien Sorci~\cite[Theorems~2.3 and~2.4]{SinSorci}, as credited in
 \'Arnad\'ottir--Godsil's Theorem~5.2.
 The attaining connected example is \'Arnad\'ottir--Godsil's Theorem~10.2.
 Their bound follows from eigenvalue multiplicities and a global
-second-moment argument. Here the hardest step is a stronger finite
+second-moment argument~\cite[Theorems~6.1 and~8.2]{AG}. Here the hardest step is a stronger finite
 inequality, certified by linear programming duality. It combines
 disjointness of the eigenvalue values on eight character cosets with
 their individual means, their residues modulo four, and Parseval's
 identity. The earlier multiplicity bound does not impose these
 coset restrictions together.
 
-This result does not bound the size of strongly cospectral sets uniformly
-over all dimensions. Peter Sin~\cite{Sin}, in work first posted in 2022,
+Peter Sin~\cite[Theorem~4.4]{Sin}, in work first posted in 2022,
 constructed cubelike graphs with arbitrarily large strongly cospectral
 classes. The maximum in dimensions eight and higher is not determined
 here. The computational examples and Sage code of \'Arnad\'ottir and
 Godsil, and Gordon Royle's cubelike graph lists credited by them,
-are prior work.
+are prior work~\cite[Appendices~A--B and Acknowledgments]{AG}.
 
-Section~\ref{sec:overview} explains the proof. Sections~\ref{sec:characters}
-and~\ref{sec:moments} derive the character and moment restrictions.
-Section~\ref{sec:finite} reduces the upper bound to a finite inequality,
-and Section~\ref{sec:certificates} gives the exact certificate argument.
-Section~\ref{sec:example} describes the known
-attaining graph. The final section states the scope of the computation
-and formalization.
+The upper bound is proved in Lean, including the exact finite inequality;
+Section~\ref{sec:formal} describes its relation to the written proof.
+
+Computer-assisted; not yet reviewed by experts.
+The proofs, the Lean formalization, the certificate checkers and the text
+were produced by AI models (from OpenAI and Anthropic), working under the
+author's direction.
 
 \section{Proof overview}\label{sec:overview}
 The proof rules out a strongly cospectral class of size eight.
@@ -132,7 +127,7 @@ The sum $\sigma=\sum_{s\in S}s$ also belongs to $K(S)$.
 Consequently, if $|K(S)|\geq8$, a change of basis places a
 three-dimensional subspace $H$ inside $K(S)$ with $\sigma\in H$.
 
-The eight cosets of $H^\perp$ then have disjoint sets of eigenvalue
+The eight cosets of the orthogonal complement $H^\perp$ then have disjoint sets of eigenvalue
 values. All values in a given coset have a prescribed residue modulo
 four. Their full coset means depend only on $B=S\cap H$, which has at
 most seven elements. After removing the trivial character from the
@@ -357,9 +352,7 @@ The cost for $u\ne0$ is the right side of~\eqref{eq:twopoint} with
 $N=16$ and $M=\mu_u$. For $u=0$ it is $n^2$ plus that bound with
 $N=15$ and $M=M_0$. Although $M_0$ can be rational, the expanded
 costs~\eqref{eq:cost0}--\eqref{eq:costu} are integers.
-A \emph{bracket} means one of these integer pairs. Condition~2 is
-redundant given condition~1; it is retained to match the finite assertion
-checked by the accompanying certificates. An endpoint equal to the
+A \emph{bracket} means one of these integer pairs. An endpoint equal to the
 mean is allowed even when the other endpoint is different.
 
 \begin{lemma}[Extraction]\label{lem:extraction}
@@ -385,19 +378,9 @@ has cost strictly greater than $128n$.
 \end{lemma}
 
 Section~\ref{sec:certificates} proves this finite assertion using exact
-certificates. Cases with no admissible assignment satisfy it vacuously.
-The parameter range includes $n=0$, $B=\varnothing$, $t=0$, and all
-other boundary values; all of them are included in the finite check.
+certificates.
 
-\begin{proof}[Proof of the upper bound in Theorem~\ref{thm:main}]
-If a pairwise strongly cospectral set has more than four vertices,
-Lemmas~\ref{lem:criterion} and~\ref{lem:normal} put its connection set
-in the position required by Lemma~\ref{lem:extraction}.
-That lemma produces an admissible assignment of cost at most $128n$,
-contradicting Lemma~\ref{lem:finite}.
-\end{proof}
-
-\section{Exact certificates for the finite inequality}\label{sec:certificates}
+\section{Weak duality and the finite computation}\label{sec:certificates}
 We prove a lower bound that reduces Lemma~\ref{lem:finite} to small,
 independent integer calculations. For a fixed case, let $J_u$ be the
 set of all brackets for coset $u$ satisfying conditions 1--4 of
@@ -432,21 +415,24 @@ one. No linear programming solver is part of the verification:
 nonnegative weights with $L(w)>128n$ suffice. If some $J_u$ is empty,
 there can be no admissible assignment and no weights are needed.
 
-\subsection{The finite certificate assertion}
+\subsection{The finite computation}
 We now specify the finite arithmetic assertion used to finish the proof.
-There are
-\[
- 8\sum_{B\subseteq\{1,\ldots,7\}}(128-|B|)
- =8(128\cdot128-7\cdot64)=127{,}488
-\]
-cases. A case can share its certificate with any case having the same
+A case can share its certificate with any case having the same
 \emph{case key}
 \begin{equation}\label{eq:key}
  \left(n,m,\text{the sorted list of }(\mu_u,r_u)\text{ for }1\leq u\leq7\right).
 \end{equation}
 These data determine $J_0$ and its cost, and determine the other seven
 bracket lists and costs up to permutation. Such a permutation preserves
-disjointness and total cost. Forming~\eqref{eq:key} for every
+disjointness and total cost.
+
+There are
+\[
+ 8\sum_{B\subseteq\{1,\ldots,7\}}(128-|B|)
+ =8(128\cdot128-7\cdot64)=127{,}488
+\]
+cases.
+Forming~\eqref{eq:key} for every
 case~\eqref{eq:case} gives $3{,}984$ distinct keys.
 
 A \emph{certificate entry} consists of a case key together with either
@@ -462,7 +448,7 @@ For a weight entry, the required inequality is
 Here $\mathbf1_{\beta\ne\alpha}$ is one when the endpoints differ and
 zero when they agree. All operations are integer operations.
 The sets $J_u$ are formed by ranging $\alpha,\beta$ over the integers
-in $[-n,n]$ and applying conditions 1--4 literally; comparisons with
+in $[-n,n]$ and applying conditions 1--4; comparisons with
 $M_0$ are made after multiplication by $15$.
 
 The finite assertion established by the supplied data is that every
@@ -471,46 +457,12 @@ satisfying~\eqref{eq:scaleddual}, and that the entries cover all cases.
 To \emph{cover} means that every case's key occurs among the entries
 with the correct coset data. Both parts of this assertion are checked
 exactly, in Lean and by the separate integer checker described in
-Section~\ref{sec:formal}. The data are supplied in
-\texttt{data/d7k3.cert} in the accompanying bundle.
+Section~\ref{sec:formal}.
+The certificate weights were obtained from a floating-point linear
+programming dual and converted to rational numbers. The complete weight
+tables accompany the paper; Appendix~\ref{app:certificates} gives a
+worked instance and the routine certificate counts.
 
-\subsection{A worked certificate}
-The case $n=12$, $B=\{1,2\}$, $t=4$ illustrates how the weights exclude
-an assignment. In unscaled cost units, its certificate has the nonzero
-weights
-\[
-\begin{array}{c|rrrrrrrrr}
- v&-8&-6&-4&-2&0&2&4&6&8\\\hline
- w_v&256&384&896&1024&1984&1024&1216&384&704
-\end{array}.
-\]
-The integer weights in the data file are $15000$ times these values.
-In coset order $u=0,\ldots,7$, the means and residues are
-\[
- (M_u)=(4/3,0,0,-2,2,0,0,-2),\qquad
- (r_u)=(0,0,0,0,2,2,2,2).
-\]
-Enumerating the permitted pairs gives
-\begin{align*}
- \bigl(\min_{j\in J_u}(c_u(j)+w(j))\bigr)_{u=0}^7
-    &=(1920,1984,1984,1984,1088,1344,1344,1088),\\
- \sum_v w_v&=7872.
-\end{align*}
-For example, a minimizing pair on the zero coset is $(-12,4)$.
-Its cost is
-\[
- 12^2+(-12+4)(32-12)-15(-12)(4)=704,
-\]
-so its adjusted cost is $704+w_{-12}+w_4=704+0+1216=1920$.
-Minimizing pairs on the other cosets, in order, are
-$(-12,0),(-12,0),(-8,8),(-10,2),(-10,2),(-10,2),(-10,-2)$.
-Thus~\eqref{eq:dual} gives
-\[
- L(w)=12736-7872=4864>1536=128\cdot12.
-\]
-Without endpoint penalties, the sum of the eight individual minimum
-costs is only $608$. The disjointness requirement, expressed through
-the penalties, is essential to this certificate.
 
 \begin{proof}[Proof of Lemma~\ref{lem:finite}]
 Each case is covered by a checked entry. An empty bracket list excludes
@@ -520,8 +472,16 @@ Lemma~\ref{lem:dual} therefore puts every admissible assignment's cost
 strictly above $128n$.
 \end{proof}
 
+\begin{proof}[Proof of the upper bound in Theorem~\ref{thm:main}]
+If a pairwise strongly cospectral set has more than four vertices,
+Lemmas~\ref{lem:criterion} and~\ref{lem:normal} put its connection set
+in the position required by Lemma~\ref{lem:extraction}.
+That lemma produces an admissible assignment of cost at most $128n$,
+contradicting Lemma~\ref{lem:finite}.
+\end{proof}
+
 \section{The connected example attaining four}\label{sec:example}
-For completeness, we describe the instance of
+We use the instance of
 \'Arnad\'ottir--Godsil's odd-dimensional construction~\cite[Theorem~10.2]{AG}
 that proves attainment. With the standard basis $e_1,\ldots,e_7$, let
 \begin{align*}
@@ -572,6 +532,7 @@ $-6$ & 12 & $+$ & $-$ & $-$\\
 example. Each sign is constant over the entire indicated fiber.}
 \label{tab:signs}
 \end{table}
+
 
 For each displayed $g$, the value $\chi_a(g)$ is therefore constant as
 $a$ ranges over an eigenvalue fiber, as required by Lemma~\ref{lem:criterion}.
@@ -2140,92 +2101,81 @@ is generated from the displayed connection set.}
 \label{fig:example}
 \end{figure}
 
-\section{Computation and formalization}\label{sec:formal}
-This section specifies which parts are machine-checked and what the
-checks assume. The mathematical upper bound is formalized from the
-adjacency matrix and spectral definition of strong cospectrality;
-the attaining example is a separate exact computation.
-The complete accompanying bundle contains the paper, the Lean project,
-the certificate data and the exact checkers. All paths in this paper
-are relative to that bundle: the formal definitions and theorem are
-in \texttt{lean/CubelikeSC/Statement.lean} and
-\texttt{lean/CubelikeSC/Proof.lean}, the certificates are in
-\texttt{data/d7k3.cert}, and the arithmetic check is
-\texttt{checks/check.py}. The bundle's \texttt{README.md} gives the
-commands for checking it as a standalone directory.
+\FloatBarrier
+\section{Formal verification}\label{sec:formal}
+The universal upper bound is formalized in Lean and mathlib.
+The formal theorem is named \texttt{CubelikeSC.endpoint\_sc}:
 
-\subsection{The formal upper-bound statement}
-The formal definitions identify the machine-checked statement with
-Theorem~\ref{thm:main}'s upper bound. The project uses Lean~4 and
-mathlib, with versions fixed by its Lake configuration. Its definitions
-are reproduced below, with line breaks for readability:
-\begin{lstlisting}
-abbrev V := Fin 7 → ZMod 2
-
-def adj (S : Finset V) : Matrix V V ℝ :=
-  fun x y => if x - y ∈ S then 1 else 0
-
-def StronglyCospectral (S : Finset V) (u v : V) : Prop :=
-  ∀ θ : ℝ,
-    Module.End.HasEigenvalue (Matrix.toEuclideanLin (adj S)) θ →
-    let E := Module.End.eigenspace (Matrix.toEuclideanLin (adj S)) θ
-    E.starProjection (EuclideanSpace.single u 1) =
-      E.starProjection (EuclideanSpace.single v 1) ∨
-    E.starProjection (EuclideanSpace.single u 1) =
-      -E.starProjection (EuclideanSpace.single v 1)
-
-def EndpointSC : Prop :=
-  ∀ S : Finset V, (0 : V) ∉ S → ∀ P : Finset V,
-    (∀ u ∈ P, ∀ v ∈ P, StronglyCospectral S u v) → P.card ≤ 4
-\end{lstlisting}
-The adjacency convention $x-y\in S$ agrees with $x+y\in S$ over
-$\F_2$. The expression \texttt{E.starProjection} is the orthogonal
-projection onto the real eigenspace \texttt{E}; the disjunction permits
-either sign separately for each eigenvalue.
-The name \texttt{EndpointSC} denotes the final universal upper-bound
-assertion. Its proof is declared as
 \begin{verbatim}
 theorem endpoint_sc : EndpointSC
 \end{verbatim}
-The definition of \texttt{EndpointSC} is the universal statement
+The source states its expanded quantifiers; the displayed form uses
+the definition \texttt{EndpointSC}, the universal statement
 \[
  \forall S\subseteq V,\quad 0\notin S\ \Longrightarrow\
  \forall P\subseteq V,\quad
  (\forall u,v\in P,\ u,v\text{ are strongly cospectral})
  \ \Longrightarrow\ |P|\leq4.
 \]
-It quantifies over every connection set excluding zero and every
-pairwise strongly cospectral set, including disconnected graphs.
+Here the formal vertex type is $(\mathbb Z/2\mathbb Z)^7$;
+$S$ and $P$ are finite sets, as are all subsets of this vertex set.
+The adjacency convention $x-y\in S$ agrees with $x+y\in S$ over
+$\F_2$. Strong cospectrality is defined using orthogonal projections
+onto the real adjacency eigenspaces: for each real eigenvalue $\theta$,
+the projections of the two coordinate vectors must agree or be negatives
+of each other. The sign can depend on $\theta$. Thus the formal assertion is precisely the upper bound
+of Theorem~\ref{thm:main}, with no connectivity hypothesis.
+The formal proof includes the spectral reduction, the exact inequalities
+on the supplied weights and coverage of every case. Independent integer
+calculations check the same inequalities directly for every original case.
 
-The formalization proves the direction of
-Lemma~\ref{lem:criterion} needed for the upper bound:
-strong cospectrality of $u,v$ implies $v-u\in K(S)$.
-It proves the subspace and parity facts, the moment identities, bracket
-extraction, the penalty bound, the finite certificate checks, and their
-case cover. Instead of changing basis, it selects three independent
-vectors of $K(S)$ whose span contains $\sigma$, and indexes character
-cosets by their three dot products. This is the same reduction in a
-coordinate-independent form.
+The converse character criterion and the attaining construction remain
+outside Lean. The written argument and the published construction give
+the lower bound, with independent exact computations of the character
+sums and adjacency spectral projections. The accompanying checking guide
+gives reproduction instructions, full formal definitions and logical
+dependencies.
 
-All certificate calculations are evaluated by Lean's kernel. No axiom asserts the finite inequality, and
-\texttt{native\_decide} is not used. The final theorem depends only on the usual
-logical axioms \texttt{propext}, \texttt{Classical.choice}, and
-\texttt{Quot.sound}. The build fails if the theorem's axiom dependencies
-differ from this list.
-From \texttt{lean/}, the standard check is
-\begin{verbatim}
-lake exe cache get
-lake build
-\end{verbatim}
-The trusted foundation for that check is Lean's kernel and the
-definitions and library results used by the proof. The formal theorem's
-identification with the graph-theoretic statement is given by the
-definitions just described, rather than by a hypothesis about character
-eigenvalue fibers.
+\begin{appendices}
+\section{Certificate details}\label{app:certificates}
+\subsection{A worked certificate}
+The case $n=12$, $B=\{1,2\}$, $t=4$ illustrates how the weights exclude
+an assignment. In unscaled cost units, its certificate has the nonzero
+weights
+\[
+\begin{array}{c|rrrrrrrrr}
+ v&-8&-6&-4&-2&0&2&4&6&8\\\hline
+ w_v&256&384&896&1024&1984&1024&1216&384&704
+\end{array}.
+\]
+The integer weights in the data file are $15000$ times these values.
+In coset order $u=0,\ldots,7$, the means and residues are
+\[
+ (M_u)=(4/3,0,0,-2,2,0,0,-2),\qquad
+ (r_u)=(0,0,0,0,2,2,2,2).
+\]
+Enumerating the permitted pairs gives
+\begin{align*}
+ \bigl(\min_{j\in J_u}(c_u(j)+w(j))\bigr)_{u=0}^7
+    &=(1920,1984,1984,1984,1088,1344,1344,1088),\\
+ \sum_v w_v&=7872.
+\end{align*}
+For example, a minimizing pair on the zero coset is $(-12,4)$.
+Its cost is
+\[
+ 12^2+(-12+4)(32-12)-15(-12)(4)=704,
+\]
+so its adjusted cost is $704+w_{-12}+w_4=704+0+1216=1920$.
+Minimizing pairs on the other cosets, in order, are
+$(-12,0),(-12,0),(-8,8),(-10,2),(-10,2),(-10,2),(-10,-2)$.
+Thus~\eqref{eq:dual} gives
+\[
+ L(w)=12736-7872=4864>1536=128\cdot12.
+\]
+Without endpoint penalties, the sum of the eight individual minimum
+costs is only $608$. The disjointness requirement, expressed through
+the penalties, is essential to this certificate.
 
-\subsection{Independent arithmetic checks}
-The separate integer checker verifies the certificates directly for the
-original cases, and also checks the rejection of deliberately damaged data.
 The resulting certificate counts are summarized in Table~\ref{tab:certificates}.
 \begin{table}[htbp]
 \centering
@@ -2252,43 +2202,8 @@ A separate exact Python checker forms each case's own eight bracket
 lists and checks the matching certificate on those lists, without
 assuming the key-sharing argument.
 
-\subsection{Certificate generation and the lower example}
-We distinguish the untrusted generation of certificates from their
-exact verification, and record the separate check of attainment.
-The certificate weights were obtained from a floating-point linear
-programming dual and converted to rational numbers.
-This generation step is not trusted: only the inequalities on the
-supplied integer weights are used. The separate Python certificate
-checker uses arbitrary-precision integers. Its role is an additional
-implementation of the certificate calculation, not an additional
-mathematical assumption in the Lean theorem.
-To test rejection, the supplied checks deliberately remove an entry,
-falsely assert that a bracket list is empty, weaken or zero weights,
-make a weight negative, and duplicate an entry. Every altered file is
-rejected. Lean also proves that selected entries fail their check when
-weights are removed or halved, and that deleting a required entry
-leaves a case without a certificate. The command
-\texttt{python3 checks/check.py} performs the exact Python checks
-and these rejection tests; \texttt{checks/README.md} explains them.
 
-Earlier computational work is recorded in \'Arnad\'ottir and Godsil's
-Appendix~A, which gives six connection sets on $32$ vertices; their
-complements give the other six graphs. Appendix~B provides Sage code.
-Their acknowledgments credit Gordon Royle's cubelike graph lists.
-
-The converse of Lemma~\ref{lem:criterion} and attainment are not part
-of the Lean development. For the displayed construction, exact
-character sums check~\eqref{eq:attain}; a separate computation checks
-strong cospectrality using spectral projection columns with rational
-entries. The construction and the written character argument above
-give the lower bound four. Neither the upper theorem nor this lower
-example relies on a numerical eigensolver.
-
-Figure~\ref{fig:example} and its SVG version in \texttt{data/figure.svg}
-come from the same graph data. The optional illustration script
-\texttt{checks/figure.py} checks the graph's vertex count, edge count,
-degree, connectivity and highlighted class, and reproduces the figure
-and the spectral-sign table. It is not needed for the upper-bound proof.
+\end{appendices}
 
 \section*{Acknowledgments}
 The question, general bound, abelian character criterion, and attaining
@@ -2300,6 +2215,7 @@ graph lists credited in their paper, provide earlier computational
 work on the problem. Peter Sin's construction establishes unboundedness
 as the dimension varies. The formalization uses Lean and mathlib.
 
+{\small
 \begin{thebibliography}{9}
 \bibitem{AG}
 A.~S.~\'Arnad\'ottir and C.~Godsil,
@@ -2308,6 +2224,7 @@ Discrete Mathematics \textbf{346} (2023), no.~5, Article 113341.
 \href{https://doi.org/10.1016/j.disc.2023.113341}{doi:10.1016/j.disc.2023.113341}.
 Preprint first posted September 15, 2021;
 \href{https://arxiv.org/abs/2109.07568}{arXiv:2109.07568}.
+Theorem numbers follow arXiv version~2.
 
 \bibitem{Sin}
 P.~Sin, \emph{Large sets of Strongly Cospectral Vertices in Cayley Graphs},
@@ -2315,6 +2232,7 @@ Vietnam Journal of Mathematics \textbf{52} (2024), 411--420.
 \href{https://doi.org/10.1007/s10013-023-00625-3}{doi:10.1007/s10013-023-00625-3}.
 Published online May 30, 2023; preprint first posted July 11, 2022;
 \href{https://arxiv.org/abs/2207.05211}{arXiv:2207.05211}.
+Theorem numbers follow arXiv version~4.
 
 \bibitem{SinSorci}
 P.~Sin and J.~Sorci,
@@ -2324,4 +2242,5 @@ Algebraic Combinatorics \textbf{5} (2022), no.~4, 699--714.
 Preprint first posted November 15, 2020;
 \href{https://arxiv.org/abs/2011.07566}{arXiv:2011.07566}.
 \end{thebibliography}
+}
 \end{document}

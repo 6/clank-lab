@@ -62,3 +62,7 @@ reproduction from the same published connection set:
 ```sh
 python3 checks/figure.py --check
 ```
+
+The [presentation checking notes](presentation-notes.tex) retain the detailed
+formal definitions, logical dependencies, certificate-generation description,
+and reproduction commands accompanying the paper.

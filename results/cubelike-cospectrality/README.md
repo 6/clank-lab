@@ -29,7 +29,7 @@ The Python check uses only the standard library. It checks the exact certificate
 
 ## Credits
 
-Árnadóttir and Godsil posed the tightness question, proved the earlier upper bound, gave the abelian character criterion, and constructed the connected examples attaining four. Their earlier Sage computations and Gordon Royle's cubelike graph lists supplied the small-dimensional examples used for calibration.
+Árnadóttir and Godsil posed the tightness question, proved the earlier upper bound, gave the abelian character criterion, and constructed the connected examples attaining four. The small-dimensional calibration examples came from Árnadóttir and Godsil's Example 8.4 and Appendix A. Their paper records their Sage computations and credits Gordon Royle's cubelike graph lists.
 
 The underlying normal-Cayley character criterion is due to Peter Sin and Julien Sorci in [their earlier paper](https://arxiv.org/abs/2011.07566), first posted November 15, 2020.
 
@@ -44,7 +44,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Strongly cospectral sets in seven-dimensional cubelike graphs}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/cubelike-cospectrality-v1/results/cubelike-cospectrality}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/cubelike-cospectrality-v2/results/cubelike-cospectrality}},
   doi          = {10.5281/zenodo.23603018}
 }
 ```

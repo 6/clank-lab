@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## locked-trominoes v3 (October 25, 2026)
+
+- Concise edition and journal-style edition: the complete argument stays in the main text, with routine checking details and additional illustrations in appendices. The theorem and its checks are unchanged.
+
 ## difference-set-243 v3 (October 25, 2026)
 
 - Concise edition and journal-style edition: the main text presents the multiplier reduction, singleton and quotient classifications, lifting argument and main proof; routine checks and certificate details are collected in appendices and checking notes. Mathematical statements and checked artifacts are unchanged.

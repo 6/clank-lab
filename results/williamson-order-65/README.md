@@ -6,11 +6,13 @@
 
 Computer-assisted; not yet reviewed by experts.
 
-The proofs, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+The proofs, the search code, the enumeration checkers, the witness checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23622210](https://doi.org/10.5281/zenodo.23622210)
+
+The release URL below names the journal-style edition, version 3. Both the archive link above and the retained DOI in the Cite entry identify the published version 2; a DOI for version 3 will be added after its deposit.
 
 
 ## Check it
@@ -37,7 +39,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Nonexistence of Williamson matrices of order 65}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/williamson-order-65-v2/results/williamson-order-65}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/williamson-order-65-v3/results/williamson-order-65}},
   doi          = {10.5281/zenodo.23622210}
 }
 ```

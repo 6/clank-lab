@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{tikz}
+\usepackage[title]{appendix}
 \usepackage[hyphens]{url}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \newtheorem{theorem}{Theorem}[section]
@@ -45,62 +46,41 @@
 \raggedbottom
 \title{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 23, 2026}
+\date{October 25, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}}
 \begin{document}
 \maketitle
-\begingroup
-\renewcommand{\thefootnote}{}
-\footnotetext{The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.}
-\endgroup
 \begin{abstract}
-For positive integers $b$ and $c$, the rank-two cluster scattering
-diagram $\mathfrak{D}(1+x^b,1+y^c)$ is the consistent scattering diagram
-with initial walls $1+x^b$ and $1+y^c$; its wall functions have
-coefficients $\tau^{b,c}(i,j)$. In 2024 Elgin, Reading and Stella stated
-eighteen conjectures on these coefficients, supported by extensive
-computation. Burcroff, Lee, Mou, Musiker and Reineke (2025) proved most of
-them and recorded Conjecture~13 as unsolved and mysterious from both the
-quiver-moduli and tight-grading points of view. We prove it, for the
-coefficients as Burcroff et al.\ define them, which is the convention of
-the table and code of Elgin, Reading and Stella: for every $j\geq1$,
-$\tau^{1,5}(2j,j)=\frac1j\sum_{\ell}\binom{\ell}{j-\ell+1}\binom{j+\ell-1}{\ell}$.
-After a change of lattice and a monomial substitution, the wall function
-becomes the diagonal factor of the fifth power of an explicit automorphism
-of $\Q[\![u,w]\!]$. A grading by the difference of the two degrees and the
-Poisson bracket turn its factorization into a first-order differential
-equation whose unique solution is algebraic. The proof is formalized in
-Lean from the definitions.
+For the rank-two cluster scattering diagram with initial walls $1+x$
+and $1+y^5$, we prove
+$\tau^{1,5}(2j,j)=\frac1j\sum_{\ell}\binom{\ell}{j-\ell+1}\binom{j+\ell-1}{\ell}$
+for every $j\geq1$, in the convention of Burcroff and coauthors and of
+Elgin, Reading and Stella's table and code. This proves Elgin, Reading
+and Stella's Conjecture~13. Elgin, Reading and Stella provided extensive computations and stated
+eighteen conjectures on rank-two cluster scattering coefficients. Burcroff, Lee, Mou,
+Musiker and Reineke proved Conjectures~1--3, 5--10 and 14--18, leaving
+Conjecture~13 unresolved and mysterious from both the quiver-moduli and
+tight-grading points of view. Kontsevich and Soibelman provided ordered
+factorization, and Gross, Hacking, Keel and Kontsevich provided the
+change of lattice used here. The binomial sum was already recorded by
+Vladimir Kruchinin, with functional equations by Paul D. Hanna;
+Burcroff and coauthors identified its algebraicity and growth rate
+conditionally on the conjecture. The new step identifies these numbers
+with the scattering coefficients. After a change of lattice and a
+monomial substitution, the fifth power of the wall function becomes the
+diagonal factor of an explicit Poisson automorphism. A grading separates
+that factor from the other walls and yields a differential equation
+with a unique algebraic solution. The coefficient identity is formalized
+in Lean from the definitions.
 \end{abstract}
-
 \section{Introduction}\label{sec:intro}
-
-Scattering diagrams were introduced by Kontsevich and Soibelman
-\cite{KS06} and by Gross and Siebert \cite{GS11}, and became a central
-tool for cluster algebras through the work of Gross, Hacking, Keel and
-Kontsevich \cite{GHKK}. In rank two a scattering diagram is a collection of rays in
-the plane, each carrying a power series called its wall function, subject
-to a consistency condition (Section~\ref{sec:defs}). For positive integers
-$b,c$ let $\mathfrak{D}(1+x^b,1+y^c)$ be the consistent diagram whose two
-initial walls, on the coordinate axes, carry $1+x^b$ and $1+y^c$; it is
-the rank-two cluster scattering diagram associated with the cluster
-algebra $\mathcal{A}(b,c)$ \cite{GHKK,BLMMR}. Following
-\cite[(2.2)]{BLMMR}, for coprime $d,e\geq1$ the coefficients
-$\tau^{b,c}(kd,ke)$ are defined by expanding the wall function on the ray
-of direction $(db,ec)$ as $1+\sum_{k\geq1}\tau^{b,c}(kd,ke)\,x^{kdb}y^{kec}$.
-
-Elgin, Reading and Stella \cite{ERS} computed these coefficients
-symbolically to high degree and stated eighteen conjectures about them
-(first posted on arXiv on April~17, 2024, with Conjecture~13 already in
-that version; published in 2026).
-Their Conjecture~13 concerns $(b,c)=(1,5)$ and the wall of direction
-$(2,5)$. Let
-\[
-  S(t)=1+\sum_{j\geq1}\tau^{1,5}(2j,j)\,t^j\in\ps{t},
-\]
-so that the wall function of $\mathfrak{D}(1+x,1+y^5)$ on the ray of
-direction $(2,5)$ is $S(x^2y^5)$.
-
+For positive integers $b,c$, let $\mathfrak D(1+x^b,1+y^c)$ be the
+consistent rank-two scattering diagram. A wall carries a power series.
+Following \cite[(2.2)]{BLMMR}, $\tau^{b,c}(kd,ke)$ is its coefficient
+of $x^{kdb}y^{kec}$ on the ray proportional to $(db,ec)$, for coprime
+$d,e\geq1$; Section~\ref{sec:defs} gives the precise definitions.
+Put $S(t)=1+\sum_{j\geq1}\tau^{1,5}(2j,j)t^j\in\ps{t}$.
+Thus the function on the ray $(2,5)$ is $S(x^2y^5)$.
 \begin{theorem}\label{thm:main}
 For every $j\geq1$,
 \begin{equation}\label{eq:ers}
@@ -115,10 +95,38 @@ $S$ is the unique power series with constant term $1$ satisfying
 \end{equation}
 \end{theorem}
 
-The first values are $\tau^{1,5}(2j,j)=2,5,17,64,259,1098,4815$ for
-$j=1,\dots,7$. Theorem~\ref{thm:main} uses the convention for $\tau$ of
-\cite{BLMMR}, which is the convention of the table and the code of
-\cite{ERS}; Remark~\ref{rem:reading} explains this point.
+This proves Elgin, Reading and Stella's Conjecture~13
+\cite[Conjecture~13]{ERS}, posed in their first preprint on April~17, 2024.
+The convention matters: their printed definition interchanges $b,c$
+relative to their table and code; we follow the table and code
+\cite{scatcoef}, as does \cite[(2.2)]{BLMMR}
+(Remark~\ref{rem:reading}). The first values are $2,5,17,64,259$.
+
+Thomas Elgin, Nathan Reading and Salvatore Stella \cite{ERS} computed
+these coefficients symbolically to high degree; the conjectures, data
+and code \cite{scatcoef} are theirs. Amanda Burcroff, Kyungyong Lee, Lang Mou, Gregg
+Musiker and Markus Reineke \cite[Theorem~1.4]{BLMMR} (first posted on arXiv on
+November~18, 2025; published in 2026) proved Conjectures~1--3, 5--10 and
+14--18 of \cite{ERS}, combining the change-of-lattice relation between
+$\mathfrak{D}(1+x^b,1+y^c)$ and $\mathfrak{D}((1+x)^c,(1+y)^b)$ (from
+\cite[Example~1.15]{GHKK}), Euler characteristics of quiver moduli through
+the refined GW/Kronecker correspondence of Reineke and Weist \cite{RW},
+and the tight gradings of Burcroff, Lee and Mou \cite{BLM}. They wrote
+that Conjectures~4, 12 and~13 remain unsolved, and that the formula of
+Conjecture~13 is mysterious from both the quiver moduli and tight
+grading points of view \cite[\S1.3]{BLMMR}. Ryota Akagi \cite[Proposition~1.3]{Akagi}
+(first posted on arXiv on July~29, 2025)
+proved Conjectures~1, 2, 3, 5, 6, 11 and~15 (the proof of~11 there is
+due to Burcroff, Lee and Mou \cite[Remark~1.4]{Akagi}), with results related to 14 and 16--18, by
+translating a description of rank-two cluster scattering diagrams through
+dilogarithm elements into power series, building on Akagi's earlier explicit
+forms of rank-two cluster scattering diagrams in low degrees
+\cite{Akagi23} (first posted on arXiv on September~27, 2023). Amanda
+Burcroff and Kyungyong Lee \cite{BL} study broken lines and compatible
+pairs for rank-two quantum cluster algebras. The ordered-product
+factorization on which everything rests is due to Kontsevich and
+Soibelman \cite[Theorem~6]{KS06}, \cite[Factorization Property]{KS08}; we use the formulation of Gross,
+Pandharipande and Siebert \cite[\S1.3]{GPS}.
 
 The right side of \eqref{eq:ers} was known as a sequence before the
 conjecture. Vladimir Kruchinin's OEIS entry A217596 (March 19, 2013), the
@@ -140,78 +148,44 @@ chosen vertex; so $\tau^{1,5}(2j,j)$ is this count for a $(j+3)$-gon
 this interpretation. What was open is that the scattering
 coefficients equal these numbers; this is what Theorem~\ref{thm:main}
 proves.
-
-\subsection*{Prior work}
-The conjectures, the data behind them and the code that produced the data
-\cite{scatcoef} are due to Thomas Elgin, Nathan Reading and Salvatore
-Stella \cite{ERS}. Amanda Burcroff, Kyungyong Lee, Lang Mou, Gregg
-Musiker and Markus Reineke \cite{BLMMR} (first posted on arXiv on
-November~18, 2025; published in 2026) proved Conjectures~1--3, 5--10 and
-14--18 of \cite{ERS}, combining the change-of-lattice relation between
-$\mathfrak{D}(1+x^b,1+y^c)$ and $\mathfrak{D}((1+x)^c,(1+y)^b)$ (from
-\cite[Example~1.15]{GHKK}), Euler characteristics of quiver moduli through
-the refined GW/Kronecker correspondence of Reineke and Weist \cite{RW},
-and the tight gradings of Burcroff, Lee and Mou \cite{BLM}. They wrote
-that Conjectures~4, 12 and~13 remain unsolved, and that the formula of
-Conjecture~13 ``is mysterious from both the quiver moduli and tight
-grading points of view'' \cite[\S1.3 of arXiv version~1]{BLMMR}. Ryota Akagi \cite{Akagi}
-(first posted on arXiv on July~29, 2025)
-proved Conjectures~1, 2, 3, 5, 6, 11 and~15 (the proof of~11 there is
-due to Burcroff, Lee and Mou), with results related to 14 and 16--18, by
-translating a description of rank-two cluster scattering diagrams through
-dilogarithm elements into power series, building on his earlier explicit
-forms of rank-two cluster scattering diagrams in low degrees
-\cite{Akagi23} (first posted on arXiv on September~27, 2023). Amanda
-Burcroff and Kyungyong Lee \cite{BL} study broken lines and compatible
-pairs for rank-two quantum cluster algebras. The ordered-product
-factorization on which everything rests is due to Kontsevich and
-Soibelman \cite{KS06,KS08}; we use the formulation of Gross,
-Pandharipande and Siebert \cite[\S1]{GPS}.
-
-\subsection*{What is new}
-The coefficients of a single wall are usually computed either by solving
-the consistency equations degree by degree, which involves all walls at
-once (this is how the data of \cite{ERS} were produced), or through
-closed formulas for invariants attached to that wall, such as the Euler
-characteristics and tight gradings used in \cite{BLMMR}. For the ray of
-direction $(2,5)$ the first route gives only finitely many coefficients,
-and, as recalled above, the authors of \cite{BLMMR} found no explanation
-of the conjectured formula by the second. Here we
-isolate this one wall. After the change of
-lattice (Section~\ref{sec:lattice}) and the substitution $u=x$, $w=xy$
-(Section~\ref{sec:T}), its fifth power becomes the diagonal factor $F$ in
-the ordered factorization of $T^5$, where
-$T=\theta_{(1,0),1+u}\circ\theta_{(0,1),1+w}$, a composition of two walls
-(defined in \eqref{eq:wall}), is an explicit automorphism
-of $\ps{u,w}$ that fixes $s=u+w$ and multiplies $u/w$ by $1+s$. The new
-step, and the one that resisted, is to obtain a closed equation for $F$
-without knowing the other walls. A grading by $h=(\text{degree in
-}w)-(\text{degree in }u)$ separates the factors of slope below, at and
-above the diagonal; writing $\gl$ for the product of the factors below the
-diagonal, it shows that $P=\gl^{-1}(s)$ has only three
-homogeneous components, $uF(uw)+\beta(uw)+w$ (Section~\ref{sec:filtration}).
-Splitting $\log(1+P)$ by this grading determines $F$ in terms of one root
-of a quadratic equation (Section~\ref{sec:split}), and the Poisson bracket
-then turns the factorization into a first-order differential equation,
-whose unique solution is algebraic (Sections~\ref{sec:string}
-and~\ref{sec:solution}). We reuse the Kontsevich--Soibelman factorization,
+The entry also credits Bala's 2015 recurrence
+(Appendix~\ref{sec:formal-details}).
+Scattering diagrams were introduced by Kontsevich and Soibelman
+\cite{KS06} and by Gross and Siebert \cite{GS11}; Gross, Hacking, Keel
+and Kontsevich provided the cluster-algebra construction \cite{GHKK}.
+The change of lattice used here is theirs
+\cite[Example~1.15 and Appendix~C]{GHKK}. We reuse the Kontsevich--Soibelman factorization,
 the change of lattice (which we reprove in the form needed) and the
 pentagon identity.
 
-\subsection*{Organization}
-Section~\ref{sec:defs} gives the definitions and the convention for $\tau$.
-Section~\ref{sec:overview} outlines the proof. Section~\ref{sec:KS} proves
-existence and uniqueness of ordered factorizations.
-Sections~\ref{sec:lattice} and~\ref{sec:T} reduce the theorem to the
-diagonal factor of $T^5$. Sections~\ref{sec:filtration}--\ref{sec:string}
-derive a differential equation for that factor, and
-Section~\ref{sec:solution} solves it and proves Theorem~\ref{thm:main}.
-Section~\ref{sec:lean} describes the Lean formalization.
+
+The coefficient identity is formalized in Lean from the definitions (Section~\ref{sec:lean}). The proofs, the Lean
+formalization and the text were produced by AI models (from OpenAI and
+Anthropic), working under the author's direction. The result has not yet
+been reviewed by experts.
+
+\section{Outline of the proof}\label{sec:overview}
+To identify the sequence with the scattering coefficients, the hardest
+step is to obtain a closed equation for one wall function without knowing
+the other walls. A change of lattice
+and a monomial substitution identify $S^5$ with the wall function on
+$(1,1)$ in the ordered factorization of the fifth iterate of the
+automorphism $T$ of $\ps{u,w}$, where
+\[
+T(u)=\frac{u(1+u+w)}{1+u},\qquad T(w)=\frac{w}{1+u}.
+\]
+Since $T$ fixes $u+w$, grading by exponent difference isolates three
+components of the transformed sum (Section~\ref{sec:filtration}). Factoring
+this expression and comparing logarithms yields two auxiliary series
+(Section~\ref{sec:split}).
+The Poisson bracket gives a differential equation; its unique solution
+and Lagrange inversion give the coefficients.
 
 \section{Scattering diagrams and the coefficients \texorpdfstring{$\tau$}{tau}}\label{sec:defs}
 
-This section fixes the definitions: walls, ordered products, consistency
-and the coefficients $\tau^{b,c}$.
+We set up the diagram and factorization used below. We write \emph{wall} for its wall-crossing automorphism, retaining the
+supporting ray and attached series. Routine algebraic verifications are
+collected in Appendix~\ref{sec:factor-details}.
 
 \subsection{Walls and ordered products}
 Let $z_1,z_2$ be variables and $\mathcal{A}=\ps{z_1,z_2}$, with maximal
@@ -247,6 +221,7 @@ over the rays with $|r|<N$ listed by increasing slope. Thus the ray of
 smallest slope is leftmost and is applied last.
 
 \subsection{Consistent diagrams}
+Consistency equates the initial-wall product with the ordered product.
 
 \begin{definition}\label{def:consistent}
 Let $P_1,P_2\in\Lambda$. A family $f=(f_r)$ is \emph{consistent for
@@ -294,116 +269,8 @@ $f_{(2,5)}(t)$, where $f$ is the consistent family for
 $\mathfrak{D}(1+t,1+t^5)$. That is, $S=f_{(2,5)}$, the series of the
 introduction. This is the only coefficient family used below.
 
-\begin{remark}[Path-ordered products and orientation]\label{rem:GPS}
-In \cite[\S1.3]{GPS}, crossing a wall supported on a line through $r$
-acts by $z^a\mapsto z^a f^{\langle n_0,a\rangle}$, where $n_0\perp r$ is
-primitive with $\langle n_0,\gamma'\rangle>0$ for the crossing path
-$\gamma$, and a diagram is consistent when the path-ordered product
-$\theta_{\gamma}=\theta_s\circ\cdots\circ\theta_1$ along every loop is the
-identity. A counterclockwise loop starting just below the positive
-$x$-axis crosses the positive $x$-axis, the rays $\mathbb{R}_{\geq0}r$ with
-$r_1,r_2>0$ in order of increasing slope, and the positive $y$-axis, each
-by $\theta_{r,f_r}^{-1}$ in the notation \eqref{eq:wall}, and then crosses
-the negative $x$- and $y$-axes by $\theta_{(1,0),P_1}$ and
-$\theta_{(0,1),P_2}$. So $\theta_\gamma=\mathrm{id}$ is the identity
-$\theta_{(0,1),P_2}\theta_{(1,0),P_1}=\theta_{(1,0),P_1}\circ\big(\asc_{r_1,r_2>0}\theta_{r,f_r}\big)\circ\theta_{(0,1),P_2}$,
-which is \eqref{eq:consistent}. Burcroff, Lee, Mou, Musiker and Reineke
-draw the wall carrying $f_v$ on $\mathbb{R}_{\leq0}v$, in the sign
-convention of \cite{GS11}, in which $z^a$ propagates in the direction
-$-a$ (see \cite[\S1.2]{GPS}); the walls carry the same functions. As a
-check on the orientation, Definition~\ref{def:consistent} with
-$P_1=P_2=(1+t)^2$ gives $(1-t)^{-4}$ on the ray $(1,1)$ and $(1+t)^2$ on
-$(n+1,n)$ and $(n,n+1)$, as found in \cite[\S1.3]{GPS}.
-\end{remark}
-
-\begin{remark}[Reading the definition in \cite{ERS}]\label{rem:reading}
-The convention of Definition~\ref{def:tau} is that of the table of
-$\tau^{3,2}(i,j)$, $0\leq i,j\leq7$, printed in \cite[\S2]{ERS}, all of whose entries it reproduces (we
-compared them one by one), and of the code published with \cite{ERS}
-(the method \texttt{wall\_hom} of \texttt{scatcoef.py} in \cite{scatcoef});
-it is also the convention in which \cite{BLMMR} restate the conjectures.
-A reader comparing with the definition in \cite[\S2]{ERS} should note that,
-read literally, it attaches the exponents $b$ and $c$ to the two initial
-walls the other way round, so that its coefficient $\tau^{b,c}(i,j)$
-would be $\tau^{c,b}(i,j)$ in the convention used here. Under that
-reading $\tau^{3,2}(3,1)$ would be $1$, whereas the table in \cite{ERS}
-prints $0$, which is its value under Definition~\ref{def:tau}; and
-Conjecture~13 would already fail at $j=1$, since $\tau^{5,1}(2,1)=0$. We
-therefore read \cite{ERS} in the convention of its table and code.
-\end{remark}
-
-\section{Overview of the proof}\label{sec:overview}
-
-This section outlines the argument; the details follow in the same order
-in Sections~\ref{sec:KS}--\ref{sec:solution}.
-
-\emph{Step 1: change of lattice (Section~\ref{sec:lattice}).} The ring
-homomorphism $X\mapsto x$, $Y\mapsto y^5$ carries each wall of
-$\mathfrak{D}_5:=\mathfrak{D}((1+t)^5,1+t)$, on $\ps{X,Y}$, to a wall of
-$\mathfrak{D}(1+t,1+t^5)$. Comparing the two consistent families gives
-$S^5=F$, where $F$ is the function of $\mathfrak{D}_5$ on the ray $(2,1)$.
-This is a case of the change of lattice of \cite[Proposition~2.2]{BLMMR}.
-
-\emph{Step 2: a single automorphism (Section~\ref{sec:T}).} On
-$\ps{u,w}$ let $T=\theta_{(1,0),1+u}\circ\theta_{(0,1),1+w}$. The
-substitution $u=X$, $w=XY$ carries walls to walls, $T$ to $\bX\bZ$, and
-the ray $(1,1)$ to $(2,1)$. With the pentagon identity this shows that $F$
-is the function on the diagonal ray $(1,1)$ in the ascending
-factorization of $T^5$. Explicitly
-\[
-  T(u)=\frac{u(1+u+w)}{1+u},\qquad T(w)=\frac{w}{1+u},
-\]
-so $T$ fixes $s=u+w$ and $T(u)/T(w)=(1+s)\,u/w$.
-
-\emph{Step 3: three components (Section~\ref{sec:filtration}).} Group the
-factorization as $T^5=\gl\circ\theta_F\circ\gr$, the factors of slope
-below~$1$, the diagonal wall $\theta_F=\theta_{(1,1),F}$, and the factors
-of slope above~$1$. Give $u^pw^q$ the degree $h=q-p$. Walls of slope above
-$1$ only add terms of positive $h$, and walls of slope below $1$ only
-terms of negative $h$; the diagonal wall preserves $h$. Because $T^5$
-fixes $s$, the series $P=\gl^{-1}(s)=\theta_F\gr(s)$ can be computed from
-either side, and the two computations force
-\[
-  P=uF(t)+\beta(t)+w,\qquad t=uw,\quad \beta\in t\ps{t}.
-\]
-Nothing else about the infinitely many other walls is used.
-
-\emph{Step 4: splitting the logarithm (Section~\ref{sec:split}).} The
-ratio $\mu_\phi=(\phi(u)/u)/(\phi(w)/w)$ satisfies the cocycle rule
-$\mu_{\phi\psi}=\phi(\mu_\psi)\,\mu_\phi$. Applied to $\gl^{-1}T^5=\theta_F\gr$ it gives
-$(1+P)^5\,\mu_{\gl^{-1}}=F^2\,\theta_F(\mu_{\gr})$. Writing
-$1+P=(1+u\delta)\,\rho\,(1+w/\rho)$ with $\rho,\delta\in\ps{t}$ and
-comparing the parts of the logarithm with $h<0$, $h=0$ and $h>0$ yields
-$F^2=\rho^5$ and $\mu_{\gl^{-1}}=(1+u\delta)^{-5}$.
-
-\emph{Step 5: the string equation (Section~\ref{sec:string}).} The Euler
-derivation $E=u\partial_u+w\partial_w$ satisfies $E(s)=s$; conjugating it by the
-Poisson automorphism $\gl^{-1}$ shifts it by the Hamiltonian derivation of
-$\log\mu_{\gl^{-1}}$. This gives $(1+u\delta)(E(P)-P)=5\{u\delta,P\}$,
-and with $P=(\rho+w)(1+u\delta)-1$ the equation collapses to a single
-first-order differential equation for $(\rho,\delta)$, with $\delta^2=\rho^3$,
-which has exactly one solution.
-
-\emph{Step 6: the solution (Section~\ref{sec:solution}).} The pair
-$(\Sst^2,\Sst^3)$ with $\Sst=(1+\xi)/(1-\xi-\xi^2)$ solves the equation, so
-$F=\Sst^5$ and $S=\Sst$; Lagrange inversion gives \eqref{eq:ers}.
-
-The obvious approach, computing the factorization and recognizing the
-coefficients, does not lead to a proof: in each degree the consistency
-equations couple the wall of interest to all walls of smaller degree,
-and many of them are nontrivial already in low degree
-(Figure~\ref{fig:rays}). Steps~3--5 avoid them: the only information
-about the other walls that enters is the sign of $h$ on each side of the
-diagonal.
-
-\section{Ordered factorization}\label{sec:KS}
-
-This section proves the existence and uniqueness of ascending
-factorizations (Proposition~\ref{prop:KS}), which make
-Definition~\ref{def:consistent} meaningful and are used in every later
-step.
-
-\subsection{The Poisson bracket}
+\subsection{The Poisson bracket and ordered factorization}
+The Poisson bracket controls ordered factorization.
 On $\mathcal{A}=\ps{z_1,z_2}$ let
 \[
   \{f,g\}=(z_1\partial_{z_1}f)(z_2\partial_{z_2}g)-(z_2\partial_{z_2}f)(z_1\partial_{z_1}g),
@@ -424,16 +291,7 @@ ascending product of walls.
 \end{enumerate}
 \end{lemma}
 
-\begin{proof}
-(1) By the chain rule, both $\phi\{f,g\}$ and $\{\phi f,\phi g\}$ equal
-$\sum_{i,j}\phi(\partial_if)\phi(\partial_jg)$ times $\phi\{z_i,z_j\}$,
-respectively $\{\phi z_i,\phi z_j\}$, and $\{z_1,z_2\}=z_1z_2$. (2) For
-$g=f(z^r)$ one has $z_i\partial_{z_i}g=r_i\,q\,g$ with
-$q=z^rf'(z^r)/f(z^r)$, and a direct computation gives
-$\{z_1g^{r_2},z_2g^{-r_1}\}=z_1g^{r_2}\,z_2g^{-r_1}\big((1+r_1r_2q)(1-r_1r_2q)+r_1^2r_2^2q^2\big)=\theta_{r,f}(z_1)\,\theta_{r,f}(z_2)$,
-so (1) applies. Products of unipotent Poisson automorphisms, and their
-$\m$-adic limits, are again unipotent and Poisson.
-\end{proof}
+
 
 \begin{proposition}[Kontsevich--Soibelman]\label{prop:KS}
 Let $\phi$ be a unipotent Poisson automorphism of $\mathcal{A}$. There is
@@ -441,37 +299,7 @@ exactly one family $f=(f_r)$ with $\phi=\asc_r\theta_{r,f_r}$. Moreover,
 any automorphism of $\mathcal{A}$ has at most one such factorization.
 \end{proposition}
 
-\begin{proof}
-We give the degree-by-degree argument of \cite{KS06} and
-\cite[\S1.3]{GPS}. Say that two families agree below degree $d$ if
-$[t^j]f_r=[t^j]f'_r$ whenever $j|r|<d$; then the corresponding ascending
-products agree on $z_1,z_2$ modulo $\m^{d+1}$. If they agree below degree
-$d$, then, since every wall is the identity to first order, the
-coefficients of degree $d$ enter additively at the lowest order:
-\begin{gather*}
-  \asc\theta_{r,f_r}(z_1)-\asc\theta_{r,f'_r}(z_1)\equiv z_1\textstyle\sum r_2\,(c_{r,j}-c'_{r,j})\,z^{jr},\\
-  \asc\theta_{r,f_r}(z_2)-\asc\theta_{r,f'_r}(z_2)\equiv -z_2\textstyle\sum r_1\,(c_{r,j}-c'_{r,j})\,z^{jr}
-\end{gather*}
-modulo $\m^{d+2}$, where the sums run over the pairs $(r,j)$ with
-$j|r|=d$ and $c_{r,j}=[t^j]f_r$. Distinct pairs give distinct monomials
-$z^{jr}$, and $(r_1,r_2)\neq0$, so this difference vanishes only if the
-families agree below degree $d+1$. This proves uniqueness.
 
-For existence, suppose that $\Pi=\asc\theta_{r,f_r}$ agrees with $\phi$
-on $z_1,z_2$ modulo $\m^{d+1}$, with $d\geq1$, and write
-$\phi(z_1)-\Pi(z_1)\equiv z_1\alpha$, $\phi(z_2)-\Pi(z_2)\equiv z_2\alpha'$
-modulo $\m^{d+2}$, with $\alpha,\alpha'$ homogeneous of degree $d$. Both
-$\phi$ and $\Pi$ satisfy Lemma~\ref{lem:walls}(1); subtracting the two
-identities and keeping the terms of degree $d+2$ gives
-$z_1z_2(z_1\partial_{z_1}\alpha+z_2\partial_{z_2}\alpha')=0$. So for
-each monomial $z^k$ of degree $d$, the coefficients satisfy
-$k_1\alpha_k+k_2\alpha'_k=0$, that is,
-$(\alpha_k,\alpha'_k)=c_k\,(r_2,-r_1)$ with $r=k/\gcd(k_1,k_2)$. Adding
-$c_k\,t^{\gcd(k_1,k_2)}$ to $f_r$ for each such $k$ changes the images of
-$z_1,z_2$ only in degrees $\geq d+1$, and removes the discrepancy in
-degree $d+1$. The resulting families converge coefficientwise, and their
-limit factors $\phi$.
-\end{proof}
 
 By Lemma~\ref{lem:walls}, the left side of \eqref{eq:consistent} is
 unipotent and Poisson, so every $\mathfrak{D}(P_1,P_2)$ has exactly one
@@ -479,9 +307,9 @@ consistent family.
 
 \section{The change of lattice}\label{sec:lattice}
 
-This section relates the ray $(2,5)$ of $\mathfrak{D}(1+t,1+t^5)$ to the
+The change of lattice relates the ray $(2,5)$ of $\mathfrak{D}(1+t,1+t^5)$ to the
 ray $(2,1)$ of $\mathfrak{D}_5=\mathfrak{D}((1+t)^5,1+t)$. The general
-statement is the change of lattice of \cite[Proposition~2.2]{BLMMR},
+statement is the change of lattice of \cite[Proposition~2.5]{BLMMR},
 going back to \cite[Example~1.15 and Appendix~C]{GHKK}; we prove the case
 needed by a forward substitution.
 
@@ -503,15 +331,7 @@ For every ray $(d,e)$ and $G\in\Lambda$,
 $\kappa\circ\theta_{(d,e),G}=\theta_{v(d,e),G^{\kappa}_{(d,e)}}\circ\kappa$.
 \end{lemma}
 
-\begin{proof}
-Both sides are continuous ring homomorphisms, so it suffices to compare
-them on $X$ and $Y$. If $5\nmid d$, then $v=(d,5e)$,
-$z^{v}=\kappa(X^dY^e)$ and $h=G^{1/5}$ give
-$\theta_{v,h}(x)=x\,h(z^v)^{5e}=\kappa\big(X\,G(X^dY^e)^e\big)$ and
-$\theta_{v,h}(y^5)=y^5h(z^v)^{-5d}=\kappa\big(Y\,G(X^dY^e)^{-d}\big)$. If
-$5\mid d$, then $v=(d/5,e)$, $(z^v)^5=\kappa(X^dY^e)$ and $h(t)=G(t^5)$
-give the same two values.
-\end{proof}
+
 
 \begin{proposition}\label{prop:lattice}
 Let $G$ be the consistent family for $\mathfrak{D}_5$ and $f$ the
@@ -535,10 +355,10 @@ $\mathfrak{D}(1+t,1+t^5)$, and $f=f'$ by Proposition~\ref{prop:KS}. In
 particular $f_{(2,5)}=f'_{v(2,1)}=G_{(2,1)}^{1/5}$.
 \end{proof}
 
-\section{From \texorpdfstring{$\mathfrak{D}_5$}{D5} to the fifth power of one automorphism}\label{sec:T}
+\subsection{The monomial substitution}\label{sec:T}
 
-This section identifies $G_{(2,1)}$ with the diagonal factor of $T^5$ and
-computes $T$.
+A monomial substitution identifies $G_{(2,1)}$ with the diagonal factor
+of $T^5$.
 
 Let $\iota\colon\ps{u,w}\to\ps{X,Y}$ be the injective continuous ring
 homomorphism with $\iota(u)=X$ and $\iota(w)=XY$. On exponents it is the
@@ -589,24 +409,47 @@ The automorphism $T$ is given by
 Hence, with $s=u+w$, one has $T(s)=s$ and $T(u)/T(w)=(1+s)\,u/w$.
 \end{lemma}
 
-\begin{proof}
-By \eqref{eq:wall}, $\theta_w(u)=u(1+w)$, $\theta_w(w)=w$,
-$\theta_u(u)=u$ and $\theta_u(w)=w/(1+u)$. So $T(w)=w/(1+u)$ and
-$T(u)=\theta_u(u(1+w))=u\big(1+\tfrac{w}{1+u}\big)$. Adding the two
-values gives $T(s)=s$, and dividing them gives the last identity.
-\end{proof}
+
 
 From now on we write $F=\varphi_{(1,1)}\in\Lambda$, the diagonal factor
 of $T^5$. Propositions~\ref{prop:lattice} and~\ref{prop:T5} give
 \begin{equation}\label{eq:SF}
   S^5=f_{(2,5)}^5=F .
 \end{equation}
-Figure~\ref{fig:rays} shows the rays that carry nontrivial functions in
-the factorization of $T^5$ in low degree.
+Figure~\ref{fig:rays} shows these rays in low degree.
 
-\begin{figure}[ht]
+
+
+\section{The diagonal factor}\label{sec:filtration}
+
+The grading by the difference of the exponents separates the two sides of
+the diagonal.
+Throughout, $A=\ps{u,w}$ and $t=uw$; we identify $\ps{t}$ with the
+subring of $A$ of series in $uw$.
+
+For a monomial put $h(u^pw^q)=q-p$, and for $k\in\mathbb{Z}$ let $\pi_k$
+be the continuous projection of $A$ onto the closed span of the monomials
+with $h=k$. The monomials with $h=0$ are the powers of $t$, so
+$\pi_0(A)=\ps{t}$, and $\pi_{-1}(A)=u\ps{t}$, $\pi_1(A)=w\ps{t}$. Let
+$\Oge{k}$ and $\Ole{k}$ be the closed subspaces of series all of whose
+monomials have $h\geq k$, respectively $h\leq k$. Since $h$ is additive,
+$\Oge0$ is a closed subring, $\Oge{k}\Oge{l}\subseteq\Oge{k+l}$, and
+likewise for $\Ole{}$; in particular $1+\Oge1$ and $1+\Ole{-1}$ are
+groups under multiplication.
+
+Group the factorization of $T^5$ by slope: let $\gl$ be the ascending
+product of the walls $\theta_{r,\varphi_r}$ with $r_2<r_1$ (including
+$(1,0)$), let $\gr$ be that of the walls with $r_2>r_1$ (including
+$(0,1)$), and let $\theta_F=\theta_{(1,1),F}$, so that
+\begin{equation}\label{eq:split}
+  T^5=\gl\circ\theta_F\circ\gr,\qquad
+  \theta_F(u)=uF(t),\quad \theta_F(w)=w/F(t).
+\end{equation}
+The automorphisms $\gl$ and $\gr$ are Poisson, by Lemma~\ref{lem:walls}.
+We show that $\gl^{-1}(s)$ has only three graded components.
+\begin{figure}[t]
 \centering
-\begin{tikzpicture}[scale=0.95,
+\begin{tikzpicture}[scale=0.75,
   low/.style={blue!70!black,thin},high/.style={red!65!black,thin},diag/.style={black,very thick}]
 \draw[->] (0,0) -- (4.8,0) node[right] {$p$};
 \draw[->] (0,0) -- (0,4.8) node[above] {$q$};
@@ -654,34 +497,19 @@ The proof uses only the sign of $h$ on each side of the diagonal.}
 \label{fig:rays}
 \end{figure}
 
-\section{The \texorpdfstring{$h$}{h}-grading and the extraction of the diagonal}\label{sec:filtration}
+Here and below $z^a=u^{a_1}w^{a_2}$, and $s=u+w$.
+Let $\xi\in t\ps{t}$ be the unique series with $\xi(1-\xi-\xi^2)=t$,
+equivalently $\xi=t+\xi^2+\xi^3$, and let
+\[
+  \Sst=\frac{1+\xi}{1-\xi-\xi^2}=\frac1t-\frac1\xi .
+\]
+(The second expression holds because $1/\xi=(1-\xi-\xi^2)/t$.) Since
+$\xi=t+O(t^2)$, the substitution $t\mapsto\xi$ identifies $\ps{t}$ with
+$\ps{\xi}$.
 
-This section introduces the grading that separates the two sides of the
-diagonal and shows that $\gl^{-1}(s)$ has only three graded components.
-Throughout, $A=\ps{u,w}$ and $t=uw$; we identify $\ps{t}$ with the
-subring of $A$ of series in $uw$.
 
-For a monomial put $h(u^pw^q)=q-p$, and for $k\in\mathbb{Z}$ let $\pi_k$
-be the continuous projection of $A$ onto the closed span of the monomials
-with $h=k$. The monomials with $h=0$ are the powers of $t$, so
-$\pi_0(A)=\ps{t}$, and $\pi_{-1}(A)=u\ps{t}$, $\pi_1(A)=w\ps{t}$. Let
-$\Oge{k}$ and $\Ole{k}$ be the closed subspaces of series all of whose
-monomials have $h\geq k$, respectively $h\leq k$. Since $h$ is additive,
-$\Oge0$ is a closed subring, $\Oge{k}\Oge{l}\subseteq\Oge{k+l}$, and
-likewise for $\Ole{}$; in particular $1+\Oge1$ and $1+\Ole{-1}$ are
-groups under multiplication.
-
-Group the factorization of $T^5$ by slope: let $\gl$ be the ascending
-product of the walls $\theta_{r,\varphi_r}$ with $r_2<r_1$ (including
-$(1,0)$), let $\gr$ be that of the walls with $r_2>r_1$ (including
-$(0,1)$), and let $\theta_F=\theta_{(1,1),F}$, so that
-\begin{equation}\label{eq:split}
-  T^5=\gl\circ\theta_F\circ\gr,\qquad
-  \theta_F(u)=uF(t),\quad \theta_F(w)=w/F(t).
-\end{equation}
-The automorphisms $\gl$ and $\gr$ are Poisson, by Lemma~\ref{lem:walls}.
-The following theorem, the core of the proof, is proved in
-Sections~\ref{sec:filtration}--\ref{sec:solution}.
+The following theorem, proved in Section~\ref{sec:solution}, is the core
+of the argument.
 
 \begin{theorem}\label{thm:mainlemma}
 Let $F\in\Lambda$, let $\theta_F$ be as in \eqref{eq:split}, and let
@@ -700,22 +528,7 @@ The factors in \eqref{eq:split} satisfy \eqref{eq:filt}, and $\theta_F$
 commutes with every projection $\pi_k$.
 \end{lemma}
 
-\begin{proof}
-Let $\mathcal{G}_>$ be the set of unipotent automorphisms $g$ with
-$g(z^a)\in z^a(1+\Oge1)$ for all $a$. A wall with $r_2>r_1$ lies in
-$\mathcal{G}_>$, because $f(z^r)^{\omega(a,r)}-1$ is a series in the
-monomials $z^{jr}$, $j\geq1$, which have $h=j(r_2-r_1)\geq1$. If
-$g,g'\in\mathcal{G}_>$ and $g(z^a)=z^a(1+\eta)$ with $\eta\in\Oge1$, then
-$g'g(z^a)=g'(z^a)\,(1+g'(\eta))$, and $g'(\eta)\in\Oge1$ because $g'$ maps each
-monomial $z^k$ with $h(k)\geq1$ into $z^k(1+\Oge1)\subseteq\Oge1$ and is
-continuous. So $\mathcal{G}_>$ is closed under composition, and it is
-closed under $\m$-adic limits because its defining condition concerns
-coefficients only. Hence $\gr\in\mathcal{G}_>$. The same argument, with
-the inverse walls $\theta_{r,1/f}$, $r_2<r_1$, taken in descending order,
-gives the statement for $\gl^{-1}$. Finally,
-$\theta_F(z^a)=z^aF(t)^{a_1-a_2}$ has the same $h$ as $z^a$ in every
-term.
-\end{proof}
+
 
 \begin{lemma}\label{lem:extract}
 Under the hypotheses of Theorem~\ref{thm:mainlemma}, the series
@@ -740,10 +553,12 @@ $\pi_k(P)=0$ for $k\geq2$. Hence $P=uF+\pi_0(P)+w$, and
 $\beta=\pi_0(P)\in\ps{t}$ has no constant term because $P\in\m$.
 \end{proof}
 
-\section{Splitting the logarithm}\label{sec:split}
 
-This section turns the factorization into two identities, one for $F$
-and one for $\gl$, by comparing graded components. For a unipotent
+
+\subsection{Splitting the logarithm}\label{sec:split}
+
+Comparing graded components turns the factorization into two identities,
+one for $F$ and one for $\gl$. For a unipotent
 automorphism $\phi$ of $A$ let
 \[
   \mu_\phi=\frac{\phi(u)/u}{\phi(w)/w}\in1+\m .
@@ -812,11 +627,10 @@ $F^2=\rho^5$; then $\rho^2\delta^2=F^2=\rho^5$ gives $\delta^2=\rho^3$.
 Applying $\sum_{k<0}\pi_k$ gives $5\log(1+u\delta)+\log\mu_{\gl^{-1}}=0$.
 \end{proof}
 
-\section{The string equation and a differential equation}\label{sec:string}
+\section{The differential equation}\label{sec:string}
 
-This section uses the Poisson property of $\gl$ to obtain a differential
-equation for $(\rho,\delta)$, and shows that the equation has only one
-solution. Let $E=u\partial_u+w\partial_w$ be the Euler derivation of $A$.
+The Poisson property of $\gl$ gives a differential equation for
+$(\rho,\delta)$. Coefficient induction will show uniqueness. Let $E=u\partial_u+w\partial_w$ be the Euler derivation of $A$.
 For $G\in\ps{t}$ write $G'=t\,dG/dt$. One checks directly that
 \begin{equation}\label{eq:rules}
   E(G)=2G',\qquad \{G,u\}=-uG',\qquad \{G,w\}=wG',\qquad \{u,w\}=uw .
@@ -830,21 +644,15 @@ $y\in A$,
 \]
 \end{lemma}
 
-\begin{proof}
-From the definition of the bracket, $uw\,E(y)=w\{u,y\}-u\{w,y\}$. Apply
-$\phi$ and write $\phi(u)=u\alpha$, $\phi(w)=w\alpha'$. Expanding
-$\{u\alpha,\phi y\}$ and $\{w\alpha',\phi y\}$ by the Leibniz rule and
-using the same identity for $\phi(y)$ gives
-$uw\alpha\alpha'\,\phi(E y)=uw\alpha\alpha'\big(E(\phi y)+\{\alpha,\phi y\}/\alpha-\{\alpha',\phi y\}/\alpha'\big)$.
-Divide by $uw\alpha\alpha'$, and note that
-$\{\alpha,g\}/\alpha-\{\alpha',g\}/\alpha'=\{\log(\alpha/\alpha'),g\}$.
-\end{proof}
+
 
 Formally, $E$ is the Hamiltonian derivation of $\log u-\log w$, and
 Lemma~\ref{lem:euler} says that $\phi$ shifts $\log(u/w)$ by
 $\log\mu_\phi$; the lemma makes this precise without logarithms of $u$
 and $w$.
 
+The following Poisson identity, called the string equation here, relates
+the Euler derivation to the bracket.
 \begin{proposition}[String equation]\label{prop:string}
 Under the hypotheses of Theorem~\ref{thm:mainlemma}, with $P$ as in
 Lemma~\ref{lem:extract} and $\delta$ as in Lemma~\ref{lem:quadratic},
@@ -874,6 +682,8 @@ Then $(1+u\delta)(E(P)-P)-5\{u\delta,P\}=(1+u\delta)\big(\Phi(\rho,\delta)+u\,\P
 Expand the left side with the Leibniz rule and \eqref{eq:rules}; a
 direct computation shows that it equals the right side.
 \end{proof}
+
+
 
 \begin{corollary}\label{cor:ode}
 Under the hypotheses of Theorem~\ref{thm:mainlemma}, the series $\rho$ and
@@ -911,18 +721,8 @@ $\rho_k=(3k+1)\delta_{k-1}/(2k-1)$, since $2k-1\neq0$.
 
 \section{The solution and the proof of the theorem}\label{sec:solution}
 
-This section exhibits the solution of \eqref{eq:ode}, completes the proofs
-of Theorems~\ref{thm:mainlemma} and~\ref{thm:main}, and derives the
-binomial sum.
-
-Let $\xi\in t\ps{t}$ be the unique series with $\xi(1-\xi-\xi^2)=t$,
-equivalently $\xi=t+\xi^2+\xi^3$, and let
-\[
-  \Sst=\frac{1+\xi}{1-\xi-\xi^2}=\frac1t-\frac1\xi .
-\]
-(The second expression holds because $1/\xi=(1-\xi-\xi^2)/t$.) Since
-$\xi=t+O(t^2)$, the substitution $t\mapsto\xi$ identifies $\ps{t}$ with
-$\ps{\xi}$.
+An algebraic parametrization solves \eqref{eq:ode}; Lagrange inversion
+then gives the binomial formula.
 
 \begin{lemma}\label{lem:solution}
 The pair $(\rho,\delta)=(\Sst^2,\Sst^3)$ lies in $\Lambda^2$, satisfies
@@ -944,6 +744,8 @@ $0$. Substituting $t=\xi(1-\xi-\xi^2)$ and $\Sst$ into \eqref{eq:cubic}
 likewise gives $0$. For uniqueness, the coefficient of $t^k$ in
 \eqref{eq:cubic} is $S_k$ plus a polynomial in $S_0,\dots,S_{k-1}$.
 \end{proof}
+
+
 
 \begin{proof}[Proof of Theorem~\ref{thm:mainlemma}]
 By Corollary~\ref{cor:ode}, Lemma~\ref{lem:solution} and
@@ -969,6 +771,8 @@ $(1-z(1+z))^{-j}=\sum_{\ell\geq0}\binom{j+\ell-1}{\ell}z^\ell(1+z)^\ell$
 and take the coefficient of $z^{j+1}$.
 \end{proof}
 
+
+
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
 By Lemma~\ref{lem:filt}, the factorization \eqref{eq:split} of $T^5$
 satisfies the hypotheses of Theorem~\ref{thm:mainlemma}, so $F=\Sst^5$.
@@ -980,6 +784,198 @@ vanishes unless $0\leq j+1-\ell\leq\ell$, that is,
 $\lceil(j+1)/2\rceil\leq\ell\leq j+1$. Lemma~\ref{lem:solution} gives
 \eqref{eq:cubic} and its uniqueness.
 \end{proof}
+\section{Formal verification}\label{sec:lean}
+The formal theorem uses the following definitions. Here \texttt{Slope} is $\mathbb Q_{\geq0}$ with a top element for the
+vertical ray; $5/2$ represents $(2,5)$. A family assigns a series in
+$\ps{t}$ to each slope. The predicate \texttt{IsConsistentFamily}
+requires constant term $1$ and Definition~\ref{def:consistent}'s
+ascending-product identity on both generators in every finite total
+degree.
+The expression \texttt{ersCoeff j} is the finite sum \eqref{eq:ers}
+over $\ell\leq j+1$, with natural-number subtraction: none truncates for
+$j\geq1$, and later terms vanish.
+\begin{samepage}
+The formal theorem \texttt{ErsConj13.ers\_conjecture\_13} states:
+{\scriptsize
+\begin{verbatim}
+theorem ers_conjecture_13 :
+    (∃ f, IsConsistentFamily (1 + PowerSeries.X) (1 + PowerSeries.X ^ 5) f) ∧
+    ∀ f, IsConsistentFamily (1 + PowerSeries.X) (1 + PowerSeries.X ^ 5) f →
+      ∀ j, 1 ≤ j → PowerSeries.coeff j (f ((5 / 2 : ℚ≥0) : Slope)) = ersCoeff j
+\end{verbatim}
+}
+\end{samepage}
+The first conjunct gives existence; the second is
+Theorem~\ref{thm:main}'s coefficient assertion for every consistent family
+and $j\geq1$, in Definition~\ref{def:tau}'s convention. Lean also proves the cubic identity
+and intermediate factorizations; the $\xi$-parametrization, uniqueness
+of the series in \eqref{eq:cubic} and Lagrange inversion are written arguments
+(Appendix~\ref{sec:formal-details}).
+
+The formal coefficient proof instead uses Bala's recurrence. Logical
+dependencies and build instructions are in the checking notes. The scattering-diagram
+interpretation and convention comparison are outside Lean, as is
+Remark~\ref{rem:general}.
+
+\begin{appendices}
+\section{Ordered factorization and routine identities}\label{sec:factor-details}
+The Poisson criterion and the degree-by-degree construction supply the
+ordered factorization used in the main argument.
+
+\begin{proof}[Proof of Lemma~\ref{lem:walls}]
+(1) By the chain rule, both $\phi\{f,g\}$ and $\{\phi f,\phi g\}$ equal
+$\sum_{i,j}\phi(\partial_if)\phi(\partial_jg)$ times $\phi\{z_i,z_j\}$,
+respectively $\{\phi z_i,\phi z_j\}$, and $\{z_1,z_2\}=z_1z_2$. (2) For
+$g=f(z^r)$ one has $z_i\partial_{z_i}g=r_i\,q\,g$ with
+$q=z^rf'(z^r)/f(z^r)$, and a direct computation gives
+$\{z_1g^{r_2},z_2g^{-r_1}\}=z_1g^{r_2}\,z_2g^{-r_1}\big((1+r_1r_2q)(1-r_1r_2q)+r_1^2r_2^2q^2\big)=\theta_{r,f}(z_1)\,\theta_{r,f}(z_2)$,
+so (1) applies. Products of unipotent Poisson automorphisms, and their
+$\m$-adic limits, are again unipotent and Poisson.
+\end{proof}
+\begin{proof}[Proof of Proposition~\ref{prop:KS}]
+We give the degree-by-degree argument of \cite{KS06} and
+\cite[\S1.3]{GPS}. Say that two families agree below degree $d$ if
+$[t^j]f_r=[t^j]f'_r$ whenever $j|r|<d$; then the corresponding ascending
+products agree on $z_1,z_2$ modulo $\m^{d+1}$. If they agree below degree
+$d$, then, since every wall is the identity to first order, the
+coefficients of degree $d$ enter additively at the lowest order:
+\begin{gather*}
+  \asc\theta_{r,f_r}(z_1)-\asc\theta_{r,f'_r}(z_1)\equiv z_1\textstyle\sum r_2\,(c_{r,j}-c'_{r,j})\,z^{jr},\\
+  \asc\theta_{r,f_r}(z_2)-\asc\theta_{r,f'_r}(z_2)\equiv -z_2\textstyle\sum r_1\,(c_{r,j}-c'_{r,j})\,z^{jr}
+\end{gather*}
+modulo $\m^{d+2}$, where the sums run over the pairs $(r,j)$ with
+$j|r|=d$ and $c_{r,j}=[t^j]f_r$. Distinct pairs give distinct monomials
+$z^{jr}$, and $(r_1,r_2)\neq0$, so this difference vanishes only if the
+families agree below degree $d+1$. This proves uniqueness.
+
+For existence, suppose that $\Pi=\asc\theta_{r,f_r}$ agrees with $\phi$
+on $z_1,z_2$ modulo $\m^{d+1}$, with $d\geq1$, and write
+$\phi(z_1)-\Pi(z_1)\equiv z_1\alpha$, $\phi(z_2)-\Pi(z_2)\equiv z_2\alpha'$
+modulo $\m^{d+2}$, with $\alpha,\alpha'$ homogeneous of degree $d$. Both
+$\phi$ and $\Pi$ satisfy Lemma~\ref{lem:walls}(1); subtracting the two
+identities and keeping the terms of degree $d+2$ gives
+$z_1z_2(z_1\partial_{z_1}\alpha+z_2\partial_{z_2}\alpha')=0$. So for
+each monomial $z^k$ of degree $d$, the coefficients satisfy
+$k_1\alpha_k+k_2\alpha'_k=0$, that is,
+$(\alpha_k,\alpha'_k)=c_k\,(r_2,-r_1)$ with $r=k/\gcd(k_1,k_2)$. Adding
+$c_k\,t^{\gcd(k_1,k_2)}$ to $f_r$ for each such $k$ changes the images of
+$z_1,z_2$ only in degrees $\geq d+1$, and removes the discrepancy in
+degree $d+1$. The resulting families converge coefficientwise, and their
+limit factors $\phi$.
+\end{proof}
+\begin{proof}[Proof of Lemma~\ref{lem:kappa}]
+Both sides are continuous ring homomorphisms, so it suffices to compare
+them on $X$ and $Y$. If $5\nmid d$, then $v=(d,5e)$,
+$z^{v}=\kappa(X^dY^e)$ and $h=G^{1/5}$ give
+$\theta_{v,h}(x)=x\,h(z^v)^{5e}=\kappa\big(X\,G(X^dY^e)^e\big)$ and
+$\theta_{v,h}(y^5)=y^5h(z^v)^{-5d}=\kappa\big(Y\,G(X^dY^e)^{-d}\big)$. If
+$5\mid d$, then $v=(d/5,e)$, $(z^v)^5=\kappa(X^dY^e)$ and $h(t)=G(t^5)$
+give the same two values.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:Texplicit}]
+By \eqref{eq:wall}, $\theta_w(u)=u(1+w)$, $\theta_w(w)=w$,
+$\theta_u(u)=u$ and $\theta_u(w)=w/(1+u)$. So $T(w)=w/(1+u)$ and
+$T(u)=\theta_u(u(1+w))=u\big(1+\tfrac{w}{1+u}\big)$. Adding the two
+values gives $T(s)=s$, and dividing them gives the last identity.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:filt}]
+Let $\mathcal{G}_>$ be the set of unipotent automorphisms $g$ with
+$g(z^a)\in z^a(1+\Oge1)$ for all $a$. A wall with $r_2>r_1$ lies in
+$\mathcal{G}_>$, because $f(z^r)^{\omega(a,r)}-1$ is a series in the
+monomials $z^{jr}$, $j\geq1$, which have $h=j(r_2-r_1)\geq1$. If
+$g,g'\in\mathcal{G}_>$ and $g(z^a)=z^a(1+\eta)$ with $\eta\in\Oge1$, then
+$g'g(z^a)=g'(z^a)\,(1+g'(\eta))$, and $g'(\eta)\in\Oge1$ because $g'$ maps each
+monomial $z^k$ with $h(k)\geq1$ into $z^k(1+\Oge1)\subseteq\Oge1$ and is
+continuous. So $\mathcal{G}_>$ is closed under composition, and it is
+closed under $\m$-adic limits because its defining condition concerns
+coefficients only. Hence $\gr\in\mathcal{G}_>$. The same argument, with
+the inverse walls $\theta_{r,1/f}$, $r_2<r_1$, taken in descending order,
+gives the statement for $\gl^{-1}$. Finally,
+$\theta_F(z^a)=z^aF(t)^{a_1-a_2}$ has the same $h$ as $z^a$ in every
+term.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:euler}]
+From the definition of the bracket, $uw\,E(y)=w\{u,y\}-u\{w,y\}$. Apply
+$\phi$ and write $\phi(u)=u\alpha$, $\phi(w)=w\alpha'$. Expanding
+$\{u\alpha,\phi y\}$ and $\{w\alpha',\phi y\}$ by the Leibniz rule and
+using the same identity for $\phi(y)$ gives
+$uw\alpha\alpha'\,\phi(E y)=uw\alpha\alpha'\big(E(\phi y)+\{\alpha,\phi y\}/\alpha-\{\alpha',\phi y\}/\alpha'\big)$.
+Divide by $uw\alpha\alpha'$, and note that
+$\{\alpha,g\}/\alpha-\{\alpha',g\}/\alpha'=\{\log(\alpha/\alpha'),g\}$.
+\end{proof}
+
+
+
+
+
+\section{Conventions and the associated sequence}\label{sec:conventions}
+The comparisons below fix the orientation and coefficient convention,
+and identify the sequence already recorded in the literature.
+
+\begin{remark}[Path-ordered products and orientation]\label{rem:GPS}
+In \cite[\S1.3]{GPS}, crossing a wall supported on a line through $r$
+acts by $z^a\mapsto z^a f^{\langle n_0,a\rangle}$, where $n_0\perp r$ is
+primitive with $\langle n_0,\gamma'\rangle>0$ for the crossing path
+$\gamma$, and a diagram is consistent when the path-ordered product
+$\theta_{\gamma}=\theta_s\circ\cdots\circ\theta_1$ along every loop is the
+identity. A counterclockwise loop starting just below the positive
+$x$-axis crosses the positive $x$-axis, the rays $\mathbb{R}_{\geq0}r$ with
+$r_1,r_2>0$ in order of increasing slope, and the positive $y$-axis, each
+by $\theta_{r,f_r}^{-1}$ in the notation \eqref{eq:wall}, and then crosses
+the negative $x$- and $y$-axes by $\theta_{(1,0),P_1}$ and
+$\theta_{(0,1),P_2}$. So $\theta_\gamma=\mathrm{id}$ is the identity
+$\theta_{(0,1),P_2}\theta_{(1,0),P_1}=\theta_{(1,0),P_1}\circ\big(\asc_{r_1,r_2>0}\theta_{r,f_r}\big)\circ\theta_{(0,1),P_2}$,
+which is \eqref{eq:consistent}. Burcroff, Lee, Mou, Musiker and Reineke
+draw the wall carrying $f_v$ on $\mathbb{R}_{\leq0}v$, in the sign
+convention of \cite{GS11}, in which $z^a$ propagates in the direction
+$-a$ (see \cite[\S1.2]{GPS}); the walls carry the same functions. As a
+check on the orientation, Definition~\ref{def:consistent} with
+$P_1=P_2=(1+t)^2$ gives $(1-t)^{-4}$ on the ray $(1,1)$ and $(1+t)^2$ on
+$(n+1,n)$ and $(n,n+1)$, as found in \cite[\S1.3]{GPS}.
+\end{remark}
+
+\begin{remark}[Reading the definition in \cite{ERS}]\label{rem:reading}
+The convention of Definition~\ref{def:tau} is that of the table of
+$\tau^{3,2}(i,j)$, $0\leq i,j\leq7$, printed in \cite[\S2]{ERS}, all of whose entries it reproduces (we
+compared them one by one), and of the code published with \cite{ERS}
+(the method \texttt{wall\_hom} of \texttt{scatcoef.py} in \cite{scatcoef});
+it is also the convention in which \cite{BLMMR} restate the conjectures.
+A reader comparing with the definition in \cite[\S2]{ERS} should note that,
+read literally, it attaches the exponents $b$ and $c$ to the two initial
+walls the other way round, so that its coefficient $\tau^{b,c}(i,j)$
+would be $\tau^{c,b}(i,j)$ in the convention used here. Under that
+reading $\tau^{3,2}(3,1)$ would be $1$, whereas the table in \cite{ERS}
+prints $0$, which is its value under Definition~\ref{def:tau}; and
+Conjecture~13 would already fail at $j=1$, since $\tau^{5,1}(2,1)=0$. We
+therefore read \cite{ERS} in the convention of its table and code.
+\end{remark}
+
+\subsection{The associated sequence}\label{rem:sequence}
+Here reversion means compositional inversion.
+
+The right side of \eqref{eq:ers} was known as a sequence before the
+conjecture. Vladimir Kruchinin's OEIS entry A217596 (March 19, 2013), the
+expansion of $x/\mathrm{reversion}(x-x^2-x^3)$, lists exactly this
+binomial sum, so that the right side of \eqref{eq:ers} is
+$-\mathrm{A217596}(j+1)$ \cite{OEIS}; in our notation its generating
+function is $1-t\Sst$, with $\Sst$ the series of Theorem~\ref{thm:main}.
+The same day Paul D. Hanna added functional equations for this
+generating function $A$, the first being $A=1-t/A-t^2/A^2$; clearing
+denominators gives the cubic $A^3=A^2-tA-t^2$, which Burcroff, Lee, Mou,
+Musiker and Reineke used to note that the conjectured wall function is
+algebraic \cite[\S9.3]{BLMMR}, and which is equivalent to
+\eqref{eq:cubic} under $A=1-tS$. According to a comment of Muhammed
+Sefa Saydam on the entry (January 27, 2025), $-\mathrm{A217596}(n)$ counts
+the dissections of a convex $(n+2)$-gon into triangles and
+quadrilaterals by noncrossing diagonals none of which passes through a
+chosen vertex; so $\tau^{1,5}(2j,j)$ is this count for a $(j+3)$-gon
+(for example $2$ for a square and $5$ for a pentagon). We do not use
+this interpretation.
+\section{Further consequences}\label{sec:consequences}
+The coefficient formula has the following consequences.
 
 \begin{remark}[Algebraicity]\label{rem:algebraic}
 In particular, the wall function $S(x^2y^5)$ on the ray $(2,5)$ of
@@ -1006,121 +1002,38 @@ part of the formalization, which treats $c=5$ only; for $c=3,6,7$ it
 agrees with the factorization of $T^c$ through order $t^5$.
 \end{remark}
 
-\section{Formalization}\label{sec:lean}
 
-This section states what is checked in Lean and what is trusted. The
-Lean development accompanying this paper (folder \texttt{lean/}) is
-written in Lean~4 (version 4.32.2) with Mathlib, and builds in a few
-minutes with the Mathlib cache.
+\section{Relation to the formal proof}\label{sec:formal-details}
+The formal argument uses factorization and a coefficient recurrence in
+place of logarithms and Lagrange inversion.
 
-\subsection*{The statement}
-The main theorem is \texttt{ErsConj13.ers\_conjecture\_13} in
-\texttt{lean/Main.lean}:
-{\small
-\begin{verbatim}
-theorem ers_conjecture_13 :
-    (∃ f, IsConsistentFamily (1 + PowerSeries.X) (1 + PowerSeries.X ^ 5) f) ∧
-    ∀ f, IsConsistentFamily (1 + PowerSeries.X) (1 + PowerSeries.X ^ 5) f →
-      ∀ j, 1 ≤ j → PowerSeries.coeff j (f ((5 / 2 : ℚ≥0) : Slope)) = ersCoeff j
-\end{verbatim}
-}
-\noindent It states that $\mathfrak{D}(1+t,1+t^5)$ has a consistent family,
-so that the second part is not vacuous, and that for every consistent
-family $f$ and every $j\geq1$ the coefficient of $t^j$ in the function on
-the ray of slope $5/2$, the ray $(2,5)$, equals the right side of
-\eqref{eq:ers}. The definitions it uses are in
-\texttt{lean/ErsConj13/ScatDefs.lean} and
-\texttt{lean/ErsConj13/Defs.lean}:
-\begin{itemize}
-\item \texttt{Slope} is $\mathbb{Q}_{\geq0}$ with a top element added; a slope
-$q/p$ in lowest terms stands for the ray $(p,q)$, and the top element
-for $(0,1)$. A family is a function from slopes to $\ps{t}$.
-\item \texttt{wall s f} is the substitution \eqref{eq:wall} on $\ps{x,y}$.
-\item \texttt{IsConsistentFamily P$_1$ P$_2$ f} holds when every
-$f_r$ has constant term $1$ and, for every $N$ and each of $x,y$, the
-finite ascending product of the walls with $r_1+r_2<N$ agrees with
-$\theta_{(0,1),P_2}\theta_{(1,0),P_1}$ on that generator in all
-coefficients of total degree less than $N$. This is
-Definition~\ref{def:consistent}, with the infinite product read degree by
-degree as in Section~\ref{sec:defs}.
-\item \texttt{ersCoeff j} is
-$\frac1j\sum_{\ell=0}^{j+1}\binom{\ell}{j+1-\ell}\binom{j+\ell-1}{\ell}$,
-the right side of \eqref{eq:ers} (the subtractions are of natural numbers
-and do not truncate for $j\geq1$, $\ell\leq j+1$), and \texttt{S} is
-$1+\sum_{j\geq1}\texttt{ersCoeff j}\,t^j$.
-\end{itemize}
+The comparison of graded components in Proposition~\ref{prop:E} is
+replaced by the uniqueness of factorizations in
+$(1+\Ole{-1})\cdot\ps{t}^{\times}\cdot(1+\Oge1)$ applied directly to
+\eqref{eq:cocycle}. Lemma~\ref{lem:euler} is used in a form multiplied
+through by $\phi(u)\phi(w)/(uw)$.
+The formal argument starts with the binomial series rather than
+$\Sst$. Its coefficients and those of the root of \eqref{eq:cubic}
+satisfy the same second-order linear recurrence with the same initial
+values; for the sequence A217596, Peter Bala recorded this recurrence in
+2015 \cite{OEIS}. The formal argument then derives \eqref{eq:ode} for
+the square and cube of that series from \eqref{eq:cubic}.
 
-\subsection*{What is proved}
-The Lean development assumes nothing beyond the definitions: the ordered
-factorization, the change of lattice and the uniqueness of the solution of \eqref{eq:ode} are
-all proved. The main intermediate results are
-\texttt{ErsConj13.ray21\_eq\_S5} in \texttt{lean/Realization.lean}
-($\mathfrak{D}_5$ has a consistent family, and its function on the ray
-$(2,1)$ is $\texttt{S}^5$) and \texttt{ErsConj13.main\_lemma} in
-\texttt{lean/MainLemma.lean} (Theorem~\ref{thm:mainlemma}, with the
-conclusion $F=\texttt{S}^5$). The table lists the Lean names of the other
-steps; supporting lemmas are in \texttt{lean/ErsConj13/}. Small checks of
-the definitions, such as the first values of \texttt{ersCoeff}, are in
-\texttt{lean/Examples.lean}.
+The formal definitions use the consistency condition of
+Definition~\ref{def:consistent}, identified with \cite[\S1.3]{GPS} by
+Remark~\ref{rem:GPS}. The levelwise reading of the infinite product is
+equivalent to the $\m$-adic one, and the ray of slope $5/2$ is $(2,5)$
+in Definition~\ref{def:tau}. The identification with the coefficients
+in \cite{ERS} is the reading explained in Remark~\ref{rem:reading}.
 
-\begin{center}
-\small
-\begin{tabular}{ll}
-\toprule
-In this paper & In the Lean development\\
-\midrule
-Lemma~\ref{lem:walls} & \texttt{wall\_bracket}\\
-Proposition~\ref{prop:KS} & \texttt{factor\_exists}, \texttt{factor\_unique}\\
-Proposition~\ref{prop:lattice} & \texttt{transport5\_consistent}\\
-Proposition~\ref{prop:T5} & \texttt{transport\_consistent}\\
-Lemma~\ref{lem:filt} & \texttt{realization}\\
-Lemma~\ref{lem:extract} & \texttt{V1}\\
-Lemmas~\ref{lem:cocycle}, \ref{lem:quadratic}, Proposition~\ref{prop:E} & \texttt{cocycle}, \texttt{quad\_root}, \texttt{one\_add\_P\_factor}, \texttt{lemma\_E}\\
-Lemma~\ref{lem:euler}, Proposition~\ref{prop:string} & \texttt{euler\_conj}, \texttt{lemma\_SE}\\
-Lemma~\ref{lem:exact}, Corollary~\ref{cor:ode} & \texttt{exact\_identity}, \texttt{ode\_of\_SE}\\
-Lemma~\ref{lem:unique} & \texttt{ode\_unique}\\
-Lemma~\ref{lem:solution} & \texttt{c5\_identity}, \texttt{S\_cubic}\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-The formal proof differs from the text in two places. It avoids
-logarithms: the comparison of graded components in
-Proposition~\ref{prop:E} is replaced by the uniqueness of factorizations
-in $(1+\Ole{-1})\cdot\ps{t}^{\times}\cdot(1+\Oge1)$ applied to
-\eqref{eq:cocycle} directly (\texttt{unique\_factor}), and
-Lemma~\ref{lem:euler} is used in a form multiplied through by
-$\phi(u)\phi(w)/(uw)$. And it works with $\texttt{S}$, defined by the
-binomial sum, rather than with $\Sst$: it proves that $\texttt{S}$
-satisfies \eqref{eq:cubic} by showing that its coefficients and those of
-the root of \eqref{eq:cubic} satisfy the same second-order linear
-recurrence with the same initial values (for the sequence A217596 this
-recurrence was recorded by Peter Bala in 2015 \cite{OEIS}), and then derives \eqref{eq:ode} for
-$(\texttt{S}^2,\texttt{S}^3)$ from \eqref{eq:cubic}. Lagrange inversion
-is therefore not used in the formal proof.
-
-\subsection*{Axioms and trust}
-During the build, the file \texttt{lean/Axioms.lean} checks that
-\texttt{ers\_conjecture\_13} and the main intermediate theorems use no
-axioms beyond the three standard ones of Lean and Mathlib:
-\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. The trusted base is Lean's kernel, Mathlib, and
-the faithfulness of the definitions above to the coefficients
-$\tau^{1,5}$ of \cite[(2.2)]{BLMMR}: Definition~\ref{def:consistent} is the
-consistency condition of \cite[\S1.3]{GPS} by Remark~\ref{rem:GPS}, the
-levelwise reading of the infinite product is equivalent to the
-$\m$-adic one, and the ray of slope $5/2$ is the ray $(2,5)$ of
-Definition~\ref{def:tau}. The identification of these coefficients with
-those of \cite{ERS} is the reading explained in
-Remark~\ref{rem:reading}. As a check of conventions, separate from the
-proof, the values $\tau^{1,5}(2j,j)$ for $j\leq12$ produced by the code
-published with \cite{ERS} (see \cite{scatcoef}) agree with \eqref{eq:ers}.
+\end{appendices}
 
 \begin{thebibliography}{99}
 
 \bibitem{Akagi}
 R.~Akagi,
 \emph{Some coefficients of rank 2 cluster scattering diagrams},
-preprint, 2025.
+preprint, arXiv version~3, 2025.
 \href{https://arxiv.org/abs/2507.21916}{arXiv:2507.21916}.
 
 \bibitem{Akagi23}
@@ -1153,7 +1066,7 @@ Section and equation numbers refer to arXiv version~1.
 \bibitem{ERS}
 T.~Elgin, N.~Reading and S.~Stella,
 \emph{Cluster scattering coefficients in rank 2},
-Arnold Math. J. \textbf{12} (2026), no.~1, 111--122.
+Arnold Math. J. \textbf{12} (2026), no.~1, Art.~003, starting p.~111.
 \href{https://doi.org/10.56994/armj.012.001.003}{doi:10.56994/armj.012.001.003};
 \href{https://arxiv.org/abs/2404.11381}{arXiv:2404.11381}.
 Section numbers refer to arXiv version~4.

@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## scattering-coefficients v3 (October 25, 2026)
+
+- Concise and journal-style edition: present the main proof and its key lemmas in the main text, with routine details in named appendices. The theorem and its checks are unchanged.
+
 ## stanley-smith-forms v3 (October 25, 2026)
 
 - Journal-style edition: presents the counterexample construction, decisive matrix calculation and classification proof in the main text, with routine details in named appendices. Long source quotations are replaced by precise citations and source notes. The theorem and its checks are unchanged.

@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## uniform-5-polytopes v4 (October 25, 2026)
+
+- Concise edition and journal-style edition, with the main argument and its key lemmas together in the main text. The theorem and its checks are unchanged.
+
 ## thomson-10 v7 (October 25, 2026)
 
 - Correction: credit Jingxing Huang's separate nine-point proof candidate and correct the README and index wording about nine-point proofs (October 25, 2026). The theorem and its checks are unchanged.

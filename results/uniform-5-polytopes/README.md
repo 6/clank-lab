@@ -6,8 +6,9 @@ A [uniform polytope](https://en.wikipedia.org/wiki/Uniform_5-polytope)
 looks the same at every vertex and has uniform facets, down to regular
 polygons. Conway and Guy announced the four-dimensional list in 1965;
 [Möller's 2004 dissertation](https://ediss.sub.uni-hamburg.de/handle/ediss/689)
-gave a complete account of its proof. Schulte (2017) and Winter (2021)
-recorded the five-dimensional case as open.
+gave a complete account of its proof. Schulte's 2017 survey stated that a complete list was known only in dimension
+four; Winter's 2021 dissertation recorded the higher-dimensional
+classification as open.
 
 This work gives a computer-assisted completeness proof for the known convex
 uniform 5-polytopes: Wythoff constructions of types $A_5$, $B_5$ and $D_5$, prisms over
@@ -39,7 +40,11 @@ PYTHON=python3 bash checks/verify-public.sh full
 
 A successful run ends with `uniform-5-polytopes public full: PASS`.
 [checks/README.md](checks/README.md) has installation instructions, the
-scope of the checks and a shorter partial check.
+scope of the checks and a shorter partial check. The
+[detailed checking notes](checks/checking-notes.pdf), their
+[LaTeX source](checks/edition-details.tex) and the
+[section and statement reference map](checks/edition-reference-map.md)
+retain the supporting derivations and the earlier section locators.
 
 ## Credits
 
@@ -48,7 +53,7 @@ vertex-neighborhood completion are the direct methodological foundation
 ([dissertation](https://ediss.sub.uni-hamburg.de/handle/ediss/689),
 [*4-dimensionale Archimedische Polytope*](https://doi.org/10.1007/BF03322887)).
 The proof uses the 3-D classification (see
-[Schulte, §18.5](https://www.csun.edu/~ctoth/Handbook/chap18.pdf) and
+[Schulte, §18.5](https://web.archive.org/web/20240415194537/https://www.csun.edu/~ctoth/Handbook/chap18.pdf) and
 [Grünbaum](https://doi.org/10.4171/EM/120)) and the 4-D classification of
 Conway–Guy and Möller.
 [Winter's 2021 dissertation, Appendix E.3](https://martinwintermath.github.io/pdf/phd/thesis.pdf)
@@ -67,7 +72,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The convex uniform 5-polytopes: a computer-assisted classification}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/uniform-5-polytopes-v3/results/uniform-5-polytopes}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/uniform-5-polytopes-v4/results/uniform-5-polytopes}},
   doi          = {10.5281/zenodo.23604961}
 }
 ```

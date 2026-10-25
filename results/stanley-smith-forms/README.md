@@ -55,9 +55,7 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23546377](https://doi.org/10.5281/zenodo.23546377)
-
-The DOI above and the DOI in Cite belong to the deposited prior version (v2); the prepared journal-style edition (v3) has no new DOI yet.
+Archived on Zenodo: [doi:10.5281/zenodo.23635828](https://doi.org/10.5281/zenodo.23635828)
 
 ## Check it
 
@@ -117,7 +115,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{A counterexample to Stanley's conjecture on Smith forms of Jucys--Murphy elements}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-smith-forms-v3/results/stanley-smith-forms}},
-  doi          = {10.5281/zenodo.23546377}
+  doi          = {10.5281/zenodo.23635828}
 }
 % DOI: deposited v2. The URL identifies the prepared v3 journal-style edition.
 ```

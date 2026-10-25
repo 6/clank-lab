@@ -7,47 +7,58 @@ Zenodo records.
 ## noncrossing-symmetric-chains v2 (October 25, 2026)
 
 - Combined concise edition and journal-style edition, with the main proof and its key lemmas in the main text and routine model and certificate details in appendices. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23639462](https://doi.org/10.5281/zenodo.23639462)
 
 ## multitwist-exceptions v3 (October 25, 2026)
 
 - Concise edition and journal-style edition: reorganize the presentation around the proofs, with algebraic and topology checking details in appendices and notes. The theorems and their checks are unchanged.
+- Zenodo: [10.5281/zenodo.23639372](https://doi.org/10.5281/zenodo.23639372)
 
 ## locked-trominoes v3 (October 25, 2026)
 
 - Concise edition and journal-style edition: the complete argument stays in the main text, with routine checking details and additional illustrations in appendices. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23638798](https://doi.org/10.5281/zenodo.23638798)
 
 ## difference-set-243 v3 (October 25, 2026)
 
 - Concise edition and journal-style edition: the main text presents the multiplier reduction, singleton and quotient classifications, lifting argument and main proof; routine checks and certificate details are collected in appendices and checking notes. Mathematical statements and checked artifacts are unchanged.
+- Zenodo: [10.5281/zenodo.23638325](https://doi.org/10.5281/zenodo.23638325)
 
 ## stanley-class-sum-snf v4 (October 25, 2026)
 
 - Concise edition and journal-style edition: the main text contains the lattice lemmas and Smith-form proof, with a mathematical account of the formal theorem and supporting calculations and checking notes separated. The mathematical statements and checked artifacts are unchanged.
+- Zenodo: [10.5281/zenodo.23638220](https://doi.org/10.5281/zenodo.23638220)
 
 ## ekg-bounds v3 (October 25, 2026)
 
 - Concise edition and journal-style edition: the main text retains the proof and its key lemmas; routine checking details are in appendices. The theorem, computed premises and checks are unchanged.
 - Correction: The paper and README now credit Jonathan Ayres's discovery of the sequence.
+- Zenodo: [10.5281/zenodo.23638042](https://doi.org/10.5281/zenodo.23638042)
 
 ## cubelike-cospectrality v2 (October 25, 2026)
 
 - Concise edition and journal-style edition: the main text presents the proof and its key lemmas, with routine certificate details in appendices and implementation details in the checking notes. The mathematical statements and checked artifacts are unchanged.
+- Zenodo: [10.5281/zenodo.23636896](https://doi.org/10.5281/zenodo.23636896)
 
 ## scattering-coefficients v3 (October 25, 2026)
 
 - Concise and journal-style edition: present the main proof and its key lemmas in the main text, with routine details in named appendices. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23635973](https://doi.org/10.5281/zenodo.23635973)
 
 ## stanley-smith-forms v3 (October 25, 2026)
 
 - Journal-style edition: presents the counterexample construction, decisive matrix calculation and classification proof in the main text, with routine details in named appendices. Long source quotations are replaced by precise citations and source notes. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23635828](https://doi.org/10.5281/zenodo.23635828)
 
 ## path-ramsey v6 (October 25, 2026)
 
 - Journal-style edition: the main text now gives the proof with its key lemmas, and the presentation and references follow journal conventions. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23634505](https://doi.org/10.5281/zenodo.23634505)
 
 ## thomson-10 v6 (October 25, 2026)
 
 - Journal-style edition: presents the main proof and formal theorem in the main text, with standard mathematical prose and implementation details in the checking guide. The mathematical statements and checked artifacts are unchanged.
+- Zenodo: [10.5281/zenodo.23634449](https://doi.org/10.5281/zenodo.23634449)
 
 ## ekg-sequence v6 (October 24, 2026)
 

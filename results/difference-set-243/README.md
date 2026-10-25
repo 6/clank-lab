@@ -19,7 +19,7 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23591106](https://doi.org/10.5281/zenodo.23591106)
+Archived on Zenodo: [doi:10.5281/zenodo.23638325](https://doi.org/10.5281/zenodo.23638325)
 
 ## Check it
 
@@ -93,6 +93,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Nonexistence of (243,121,60) difference sets in C3 × C9 × C9}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v3/results/difference-set-243}},
-  doi          = {10.5281/zenodo.23591106}
+  doi          = {10.5281/zenodo.23638325}
 }
 ```

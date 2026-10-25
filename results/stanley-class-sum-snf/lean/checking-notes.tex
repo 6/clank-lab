@@ -1,0 +1,131 @@
+% Checking notes accompanying the paper; equation references are to the paper.
+\section{The formal character bridge}
+This section gives the definitions and direct formal proof of the character formula.
+The accompanying Lean project defines $S_n$ as the permutations of
+$\{0,\ldots,n-1\}$ and works in its integral monoid algebra.
+The class sum includes each permutation of the prescribed cycle type
+with coefficient one. The matrix entry is the coefficient of a chosen
+permutation of type $\mu$ in $K_{(n)}K_\nu$; the development proves
+that the choice has the required cycle type and that these entries
+give the expansion~\eqref{eq:matrix}.
+
+In ASCII Lean notation, the final theorem is:
+\begin{verbatim}
+theorem stanley_class_sum_snf (n : Nat) (hn : 0 < n) :
+    And (HasStanleySNF n (M n))
+      (forall r, r + 1 < n ->
+        Dvd.dvd (stanleyD n r) (stanleyD n (r + 1)))
+\end{verbatim}
+Here \texttt{stanleyD} is~\eqref{eq:d}, with its division proved exact.
+The predicate \texttt{HasStanleySNF} asserts the existence of a finite
+index set $\kappa$ and an integral basis indexed by
+$\{0,\ldots,n-1\}\sqcup\kappa$, for which the image is the span of
+$d_r b_r$. This is precisely~\eqref{eq:image}. Positivity and
+independence turn that span into the direct sum stated in the theorem.
+The written basis-change argument in Section~\ref{sec:assembly} identifies it with the
+usual diagonal Smith form. In particular the formal statement does not
+replace the group-ring matrix by a matrix defined through a character
+formula.
+
+For the character formula, the formal proof uses an explicit model
+of the exterior algebra of $\Q^n$, with basis indexed by subsets.
+Permutations act by signed permutations of these basis vectors.
+Exterior multiplication by $e=e_1+\cdots+e_n$ and contraction by
+the all-ones linear functional give operators $E$ and $I$ satisfying
+$IE+EI=n$. Thus $P=IE/n$ is an equivariant projection onto
+$\ker I$. Taking traces of the degree-$k$ action on this image gives
+the coefficients in~\eqref{eq:hook}.
+
+In the conjugacy average below, $a,b$ are arbitrary permutations in $S_n$,
+and $\chi_k$ is evaluated on their cycle types.
+For the interior degrees $1\le k<n$, the degree-$k$ commutant is
+determined by the signed action on pairs
+of $k$-subsets: a transposition in their difference kills an entry when
+their intersection has size at most $k-2$, and the remaining orbits
+leave a two-dimensional span of the identity and the projection $P$.
+Here the matrix entries are indexed by pairs of subsets: a transposition
+of two elements belonging to one subset but not the other fixes one
+subset and reverses the sign on the other.
+Restriction to the image of $P$ makes every commuting operator scalar.
+At degree $0$, the representation is one-dimensional and $P$ is the
+identity, so the same scalar conclusion holds directly.
+Taking traces of conjugacy averages consequently gives
+\[
+ \sum_{g\in S_n}\chi_k(agb g^{-1})
+       =\frac{n!}{\binom Nk}\chi_k(a)\chi_k(b).
+\]
+Evaluation of~\eqref{eq:hook} at $q=-1$ gives the indicator identity
+$\sum_k(-1)^k\chi_k(\mu)=n\,\mathbf1_{\mu=(n)}$.
+This identity, the preceding conjugacy average, and orbit--stabilizer
+prove Proposition~\ref{prop:bridge} directly in Lean. Consequently,
+the formal proof does not take the classical representation-theoretic
+theorems used in its shorter written derivation as extra hypotheses.
+
+The remaining development follows the polynomial pairing, the two
+lattice lemmas, row divisibility, and assembly above. It uses Lean's
+kernel and the mathlib library; no certificate generator, numerical
+approximation, or external computational oracle is required. From the
+bundle's \texttt{lean/} directory, the standard commands are
+\begin{verbatim}
+lake exe cache get
+lake build
+\end{verbatim}
+The build includes checks of the final statement and its logical
+dependencies. The accompanying Lean guide documents these checks and
+the correspondence of definitions. The paper can be rebuilt from its
+source with \texttt{pdflatex}.
+
+\end{appendices}
+
+
+% Exact final-theorem correspondence and permitted logical dependencies.
+\section{Formal verification}\label{sec:formal}
+We state exactly the formal endpoint and its mathematical interpretation.
+In the namespace \texttt{StanleySnf}, the theorem
+\texttt{stanley\_class\_sum\_\allowbreak snf} states the following. For every natural number $n$,
+if $0<n$, then \texttt{HasStanleySNF n (M n)} and, for every natural
+number $r$, $r+1<n$ implies
+\texttt{stanleyD n r} divides \texttt{stanleyD n (r+1)}.
+There are no other hypotheses.
+The predicate \texttt{HasStanleySNF n A} means that there exist a type
+$\kappa$, a finite enumeration of $\kappa$, and a $\Z$-basis
+$b$ of the integer-valued functions on partitions of $n$, indexed by
+$\texttt{Fin }n\sqcup\kappa$, such that the range of multiplication of
+column vectors by $A$ equals the $\Z$-span of
+$\{\texttt{stanleyD n r}\,b(\mathrm{inl}\,r):r\in\texttt{Fin }n\}$.
+The natural-number function \texttt{stanleyD} is exactly~\eqref{eq:d};
+its division is proved exact and its relevant values positive.
+Thus the span is the direct sum in~\eqref{eq:image}.
+
+The permutations are those of $\texttt{Fin }n=\{0,\ldots,n-1\}$,
+including fixed points in their partition; $n=0$ is excluded.
+The entry \texttt{M n} is defined in the integral monoid algebra by the
+coefficient at a chosen permutation of type $\mu$ in $K_{(n)}K_\nu$.
+The fidelity theorems \texttt{Fid.classSum\_coeff},
+\texttt{Fid.rep\_spec}, \texttt{Fid.parts\_eq\_iff\_isConj}, and
+\texttt{Fid.M\_structure} respectively assert that a class-sum coefficient
+is one exactly at the specified partition and zero otherwise, that the
+representative has that partition, that partition equality is equivalent
+to conjugacy to the representative, and, for $0<n$, that
+$K_{(n)}K_\nu=\sum_\mu M_n[\mu,\nu]K_\mu$ for every $\nu\vdash n$.
+These fix the row/output and column/input conventions.
+
+The theorem \texttt{bridge} says: for every natural $n$ with $0<n$ and
+every $\mu,\nu\vdash n$, the rational cast of \texttt{M n \ensuremath{\mu} \ensuremath{\nu}}
+equals \texttt{bridgeFormula n \ensuremath{\mu} \ensuremath{\nu}}.
+That formula is precisely the hook sum above.
+The intermediate theorem \texttt{main} has the same conclusion as
+\texttt{stanley\_class\_sum\_\allowbreak snf}, with the additional hypothesis that
+this bridge equality holds for every $\mu,\nu$; \texttt{bridge} discharges it.
+
+The permitted axioms are exactly \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound}; the default build guards
+their reports. Trust rests on Lean's kernel and the pinned Lean/mathlib
+inputs, not an external oracle. The conversion of the image-lattice
+statement to the usual diagonal form, the count $p(n)-n$ of zero entries,
+and Corollary~\ref{cor:primes} are written deductions, not separate Lean
+endpoints. The main text gives their proofs.
+From \texttt{lean/}, reproduce the formal check with
+\texttt{lake exe cache get} followed by \texttt{lake build};
+\texttt{lean/README.md} gives the pins and checks.
+

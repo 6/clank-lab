@@ -54,6 +54,8 @@ Archived on Zenodo: [doi:10.5281/zenodo.23572881](https://doi.org/10.5281/zenodo
 
 ## Check it
 
+The archived DOI identifies version 4; the version 6 DOI is pending.
+
 Install [elan](https://github.com/leanprover/elan#installation), then run:
 
 ```sh
@@ -101,7 +103,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The second-order asymptotic of the EKG sequence}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v5/results/ekg-sequence}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v6/results/ekg-sequence}},
   doi          = {10.5281/zenodo.23572881}
 }
 ```

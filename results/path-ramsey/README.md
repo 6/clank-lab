@@ -118,6 +118,7 @@ Details for specialists are in [the Lean notes](lean/README.md) and
 [the historical background](checks/historical-background.tex), and its
 independent checks, computing costs and replay account in
 [the checking record](checks/checking-record.tex), with
+[the formal-development details](checks/formal-development.tex),
 [the formalization controls](checks/formal-controls.tex) and the earlier
 [construction credit](checks/construction-credit.tex) and
 [ladder context](checks/ladder-context.tex), with the earlier
@@ -153,7 +154,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The three-color Ramsey number of the 10-vertex path}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v5/results/path-ramsey}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v6/results/path-ramsey}},
   doi          = {10.5281/zenodo.23627699}
 }
 ```

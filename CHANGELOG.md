@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## path-ramsey v6 (October 25, 2026)
+
+- Journal-style edition: the main text now gives the proof with its key lemmas, and the presentation and references follow journal conventions. The theorem and its checks are unchanged.
+
 ## thomson-10 v6 (October 25, 2026)
 
 - Journal-style edition: presents the main proof and formal theorem in the main text, with standard mathematical prose and implementation details in the checking guide. The mathematical statements and checked artifacts are unchanged.

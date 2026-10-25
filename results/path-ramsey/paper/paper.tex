@@ -50,34 +50,29 @@
 
 \title{The three-color Ramsey number of the 10-vertex path}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 24, 2026}
+\date{October 25, 2026}
 
 \begin{document}
 \maketitle
 \begin{abstract}
-Writing $P_n$ for the path on $n$ vertices and $R_3(P_n)=R(P_n,P_n,P_n)$
-for its three-color Ramsey number, Gyárfás, Ruszinkó, Sárközy and
-Szemerédi proved $R_3(P_n)=2n-2+(n\bmod2)$ for all sufficiently large $n$
-\cite[author manuscript, July 9, 2012, Theorem~1]{GRSS07}.
-Dybizbański, Dzido and Radziszowski (DDR) established $R_3(P_8)=14$ and
-$R_3(P_9)=17$ \cite[arXiv:1207.5851v3, Theorems~10 and~8 with Section~2]{DDR16},
-completing the cases $n\le9$ recorded by Radziszowski's survey
-\cite[revision~18, p.~65, Section~6.4.1(c)]{Rad26}.
-We prove the next case, $R_3(P_{10})=18$: every three-coloring of the
-edges of $K_{18}$ contains a monochromatic ten-vertex path, while a coloring
-of $K_{17}$ contains none. The new bound is the upper bound $18$; the lower
-bound uses the even-case $K_4$ blow-up in
-\cite[Section~1.1, after Theorem~1]{GRSS07} and \cite[Section~2]{DDR16}.
-This is the ten-vertex case of Conjecture~2 in the cited DDR version,
-which credits Faudree and Schelp's 1975 suggestion.
-Boolean satisfiability refutations prove the upper bound. Lean checks the
-full certificate proof using trusted native evaluation; the default Lake
-build alone is conditional.
+We prove $R(P_{10},P_{10},P_{10})=18$: every three-coloring of the edges
+of $K_{18}$ contains a monochromatic path on ten vertices, and some
+three-coloring of $K_{17}$ contains none. Faudree and Schelp suggested a
+formula for three-color path Ramsey numbers. Gyárfás, Ruszinkó, Sárközy
+and Szemerédi proved that the three-color Ramsey number of the path on
+$n$ vertices is $2n-2+(n\bmod2)$ for all sufficiently large $n$.
+Dybizbański, Dzido and Radziszowski established the eight- and
+nine-vertex cases, completing the cases through nine vertices recorded
+by Radziszowski's survey. The lower-bound coloring is the even-case
+$K_4$ blow-up given by Gyárfás, Ruszinkó, Sárközy and Szemerédi and by
+Dybizbański, Dzido and Radziszowski. The new upper bound follows from
+Boolean satisfiability refutations after fixing a monochromatic
+nine-vertex path and imposing simultaneous symmetry constraints. A
+separate refutation proves that the cases considered cover every
+coloring. The reduction and the certificate checks are formalized in Lean.
 \end{abstract}
 
-\noindent The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-
-\section{The result}
+\section{Introduction}
 For graphs $G_1,G_2,G_3$, the Ramsey number $R(G_1,G_2,G_3)$ is the least
 $N$ such that every coloring of the edges of $K_N$ with colors $1,2,3$
 contains, for some $i$, a copy of $G_i$ all of whose edges have color $i$.
@@ -93,95 +88,123 @@ $3$-coloring of the edges of $K_{17}$ contains none.
 The advance is the upper bound $\R(P_{10})\le18$.
 Gyárfás, Ruszinkó, Sárközy and Szemerédi proved
 $\R(P_n)=2n-2+(n\bmod2)$ for all sufficiently large $n$
-\cite[author manuscript, July 9, 2012, Theorem~1]{GRSS07}, with its corrigendum.
+\cite[Theorem~1]{GRSS07}, with its corrigendum.
 Dybizbański, Dzido and Radziszowski proved $\R(P_8)=14$
-(Theorem~10) and $\R(P_9)\le17$ (Theorem~8), which with their Section~2
-lower bound gives $\R(P_9)=17$ \cite[arXiv:1207.5851v3]{DDR16}.
-Radziszowski's survey \cite[revision~18, p.~65, Sections~6.4 and~6.4.1(c)]{Rad26}
+(Theorem~10) and $\R(P_9)\le17$ (Theorem~8), which with their
+lower bound gives $\R(P_9)=17$ \cite{DDR16}.
+Radziszowski's survey \cite{Rad26}
 records the formula through $n=9$ and $P_{10}$ as the first open case.
 Our $K_{17}$ lower bound is the even-case blow-up in
-\cite[Section~1.1, after Theorem~1]{GRSS07}, also given in
-\cite[arXiv:1207.5851v3, Section~2]{DDR16}.
-The latter attributes Conjecture~2's suggestion to Faudree and Schelp
-(1975), quoting ``they feel''; its closing remarks say,
-``We did not complete these proofs'', referring to $P_{10}$ and $P_{11}$.
+\cite{GRSS07}, also given in
+\cite{DDR16}.
+In Conjecture~2 of \cite{DDR16}, Dybizbański, Dzido and Radziszowski
+attribute the suggestion to Faudree and Schelp \cite{FS75}.
+
+\begin{conjecture}[suggested by Faudree--Schelp~\cite{FS75}; stated as a conjecture in~\cite{DDR16}; see~\cite{Rad26}]\label{conj:FS}
+For all $n\ge1$, $\R(P_n)=2n-2+(n\bmod 2)$.
+\end{conjecture}
+
 This paper settles $n=10$ of Conjecture~\ref{conj:FS}; the general
-conjecture remains open.
+conjecture remains open. Starting from their nine-vertex bound, our
+upper-bound computation combines simultaneous symmetry constraints with
+a separately verified cover of the remaining cases. The difficult step is obtaining a tractable case
+split without losing a coloring: fixing a guaranteed path and imposing
+symmetry constraints must be jointly sound, and the case division must
+be proved complete. A lexicographic minimum and a separate refutation
+excluding all assignments outside the selected cases discharge these
+obligations. Dybizbański, Dzido and Radziszowski reported that their
+attempts at the ten- and eleven-vertex cases remained incomplete \cite{DDR16}.
 
-Heule, Kullmann, Wieringa and Biere's cube-and-conquer
-\cite[author manuscript, Section~3, Overview]{HKWB12} ``partitions a formula
-into many subformulas''.
-We use the verified LRAT checker from the \texttt{bv\_decide} work of
-Böving et al.\ \cite[version of record, introduction, contributions, and
-Section~4.4]{BBC+25}, which lists an ``LRAT UNSAT proof checker''.
-Szeider's streaming tool \texttt{lrat-catcher}
-\cite[arXiv:2607.00815v2, abstract]{Sze26} ``turns a certificate into a Lean
-theorem'' using Lean core's verified checker.
-Our certificate import uses the same checker, with its own compact
-certificate encoding (Appendix~\ref{sec:certs}).
+The method combines cube-and-conquer with symmetry breaking and verified
+certificate checking. Heule, Kullmann, Wieringa and Biere's
+cube-and-conquer method divides a satisfiability problem into subproblems
+\cite{HKWB12}. For certificate import we use Böving et al.'s verified
+LRAT checker \cite{BBC+25}. LRAT certificates are propositional
+refutations whose steps refer to earlier clauses by number.
+Szeider's streaming tool \texttt{lrat-catcher} imports certificates into
+Lean theorems \cite{Sze26}; our import uses the same checker with its own
+compact encoding. Kirchweger, Manrique and Szeider combine SAT modulo
+symmetries and Lean for formally verified graph generation \cite{KMS26}.
 
-For the verification method, Kirchweger, Manrique and Szeider
-\cite[IJCAR 2026, abstract]{KMS26} describe ``a unified, machine-checked
-verification pipeline'' for graph generation.
+Computational precedents include Heule, Kullmann and Marek's
+Boolean Pythagorean triples proof \cite[Theorem~1]{HKM16}, Codish, Frank,
+Itzhakov and Miller's $R(4,3,3)=30$ \cite{CFIM16}, and Heule and
+Scheucher's empty-hexagon theorem \cite{HS24}, with Subercaseaux et al.'s
+formal verification \cite{SNG+24}. In related Ramsey computations, Wesley
+proves $R(C_3,C_6,C_6)=R(C_5,C_6,C_6)=15$
+\cite[Theorems~3 and~4]{Wes25}; Galindez reports
+$R(C_{10},C_{10},C_{10})\le26$ \cite{Gal26}, using
+cube-and-conquer and Kirchweger--Szeider's SAT modulo symmetries
+\cite{KS24}. Shao, Jiang, Xu and Wang provide a
+reproduction package for $R(C_4,C_6,C_8)=12$ \cite{SJXW26}, and
+Leo-Y-Zhang provides \textit{CycleRamsey} \cite{Zha26}.
+Zhang's tree-bound corollary $R_k(T)\le k(n-2)+2$ for trees on $n\ge2$
+vertices \cite{ZhJ26} comes from the GPT-6 Astra
+proof packaged by Adamczewski; it gives $\R(P_{10})\le26$.
 
-Related computations include Heule, Kullmann and Marek's Boolean
-Pythagorean triples proof \cite[author preprint, Theorem~1]{HKM16},
-Codish, Frank, Itzhakov and Miller's ``$R(4,3,3)=30$''
-\cite[author preprint, abstract]{CFIM16}, and Heule and Scheucher's
-``An empty hexagon in every set of 30 points'' \cite[TACAS 2024, title]{HS24},
-with Subercaseaux et al.'s ``Formal verification of the empty hexagon
-number'' \cite[ITP 2024, title]{SNG+24}.
-Wesley's Theorems~3 and~4 give
-$R(C_3,C_6,C_6)=R(C_5,C_6,C_6)=15$ \cite[arXiv:2509.03784v1]{Wes25}.
-Galindez reports ``$R(C_{10},C_{10},C_{10})\le26$''
-\cite[Zenodo record title]{Gal26}, using cube-and-conquer and
-Kirchweger--Szeider's ``SAT modulo symmetries'' \cite[TOCL 2024, title]{KS24};
-Shao, Jiang, Xu and Wang provide the ``reproduction package:
-$R(C_4,C_6,C_8)=12$'' \cite[Zenodo record title]{SJXW26}.
-Posted work also includes Leo-Y-Zhang's ``CycleRamsey'' \cite[repository title]{Zha26}
-and Zhang's $k$-color tree-bound corollary $R_k(T)\le k(n-2)+2$ for trees on $n\ge2$
-vertices \cite[pinned README, Ramsey corollary]{ZhJ26}, from the
-GPT-6 Astra proof packaged by Adamczewski; it gives $\R(P_{10})\le26$.
-Allen et al. consider ``Ramsey-type problems for paths and cycles''
-\cite[arXiv:2607.03243v1, title]{ABC+26}.
+Earlier path and cycle literature includes Dzido \cite{Dzi05},
+Dzido--Fidytek \cite{DF09}, Omidi--Raeisi \cite{OR11},
+Maherani et al.\ \cite[Theorem~1.1]{MORS15}, Benevides--Skokan
+\cite{BS09}, Figaj--Łuczak \cite{FL07} and Letzter \cite{Let22}.
+For small cases, see Irving, Yang--Rowlinson and Yang
+\cite{Irv74,YR94,YR92,Yan95}, and Radziszowski's survey
+\cite{Rad26}.
+The extremal background is due to Erdős--Gallai \cite{EG59},
+Faudree--Schelp \cite{FS75}, whose theorem is recalled by Dybizbański,
+Dzido and Radziszowski \cite[Theorem~4]{DDR16}. See also Kopylov's work on paths and cycles \cite{Kop77}.
+Allen et al.\ study paths and cycles with few color changes
+\cite{ABC+26}.
+We use de~Moura and Ullrich's Lean~4 \cite{MU21}, the mathlib Community's
+library \cite{Mathlib20}, Wetzler, Heule and Hunt's \texttt{drat-trim}
+\cite{WHH14} for conversion to Cruz-Filipe et al.'s LRAT format
+\cite{CHH+17}, and Tan, Heule and Myreen's \texttt{cake\_lpr}
+\cite{THM21} for the separate checks.
 
-For ``Ramsey numbers for paths'', see Dzido \cite[title]{Dzi05} and
-Dzido--Fidytek \cite[title]{DF09}; Omidi--Raeisi treat ``paths versus
-cycles'' \cite[title]{OR11}, and Maherani et al. give mixed-path cases
-\cite[arXiv:1207.3771v1, Theorem~1.1]{MORS15}.
-Earlier cycle work includes Benevides--Skokan's ``even cycles''
-\cite[title]{BS09}, Figaj--Łuczak's ``long even cycles'' \cite[title]{FL07},
-and Letzter's ``connected matchings method'' \cite[title]{Let22}.
-Small-case credit to Irving, Yang--Rowlinson and Yang
-\cite{Irv74,YR94,YR92,Yan95} follows the survey
-\cite[revision~18, p.~65, Section~6.4.1(c)]{Rad26}.
-The extremal comparison credits Erdős--Gallai's ``maximal paths and
-circuits'' \cite[title]{EG59} and the Faudree--Schelp theorem
-\cite{FS75} as recalled in DDR \cite[arXiv:1207.5851v3, Theorem~4]{DDR16}.
-Kopylov's ``Maximal paths and cycles in a graph'' \cite[title]{Kop77}
-gives related context.
-We use de~Moura and Ullrich's Lean~4 \cite{MU21} and the mathlib
-Community's library \cite{Mathlib20}.
-The separate checks use Wetzler, Heule and Hunt's \texttt{drat-trim}
-\cite[title]{WHH14} for conversion to Cruz-Filipe et al.'s LRAT format
-\cite[abstract]{CHH+17}, and Tan, Heule and Myreen's \texttt{cake\_lpr}
-\cite[title]{THM21} for checking.
+The proof uses Boolean satisfiability certificates and Lean;
+Section~\ref{sec:verification} describes this dependence.
+The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+The proof is computer-assisted and has not been reviewed by human experts.
 
 \section{Proof overview}
-The difficult step is obtaining a tractable case split without losing
-a coloring: fixing a guaranteed path and imposing symmetry constraints
-must be jointly sound, and discarded branches leave a coverage obligation.
-A lexicographic minimum and a separate cover refutation discharge these
-obligations. The earlier obstruction is explicit in the closing remarks
-of Dybizbański, Dzido and Radziszowski~\cite[arXiv:1207.5851v3, Section~5]{DDR16}:
-``the complexity of case analysis appears to be quite harder''.
-The reduction starts with a monochromatic $P_9$, as in the bound
-of Dybizbański, Dzido and Radziszowski, Theorem~8 of the version
-cited above. Here that bound is re-derived by smaller Boolean satisfiability (SAT)
-refutations, starting with $P_3$ on $K_5$ and ending with $P_9$ on
-$K_{17}$. Each refutation fixes only the path guaranteed by the preceding
-one. The construction in Figure~\ref{fig:lower} supplies the matching
-lower bound; Appendix~\ref{sec:lower} gives its proof.
+The lower bound is the $K_4$ blow-up in Figure~\ref{fig:lower}: every
+monochromatic component has at most nine vertices. For the upper bound,
+we first re-derive Dybizbański, Dzido and Radziszowski's bound
+\cite[Theorem~8]{DDR16} by successive Boolean satisfiability refutations,
+starting with $P_3$ on $K_5$ and ending with $P_9$ on $K_{17}$.
+Each formula fixes only the monochromatic path guaranteed by the
+preceding bound.
+
+A hypothetical coloring of $K_{18}$ without a monochromatic $P_{10}$
+therefore contains a $P_9$. After fixing that path, we choose a least
+coloring among those obtained by the permitted vertex and color
+permutations. It satisfies all the imposed lexicographic inequalities
+simultaneously. To make the final refutations tractable, we divide the
+remaining assignments into cubes, conjunctions of edge-color assignments.
+One refutation excludes assignments outside all the cubes; a refutation
+for each cube then completes the upper bound. Lean checks the reductions
+and these finite certificates, as described in
+Section~\ref{sec:verification}.
+
+\section{The lower bound}\label{sec:lower}
+The following $K_4$ blow-up gives a coloring of $K_{17}$ without a
+monochromatic ten-vertex path. In the construction and the upper-bound
+encoding we use the color labels $0,1,2$ in place of $1,2,3$. Partition $\{0,\dots,16\}$ into $A=\{0,\dots,4\}$, $B=\{5,\dots,8\}$,
+$C=\{9,\dots,12\}$ and $D=\{13,\dots,16\}$. Color an edge with color $0$
+if both ends lie in $A\cup B$ or both lie in $C\cup D$; with color $1$ if
+it joins $A$ to $C$ or $B$ to $D$; and with color $2$ if it joins $A$ to
+$D$ or $B$ to $C$. This is the blow-up of the factorization of $K_4$ into
+the matchings $\{AB,CD\}$, $\{AC,BD\}$, $\{AD,BC\}$, with the edges inside
+the parts given color $0$. This is the construction of Gyárfás,
+Ruszinkó, Sárközy and Szemerédi \cite{GRSS07}, also presented by
+Dybizbański, Dzido and Radziszowski \cite{DDR16}; both specify the odd
+and even part sizes.
+
+For each color, its \emph{label classes} are the two parts of the
+corresponding partition: $(A\cup B,C\cup D)$ for color $0$,
+$(A\cup C,B\cup D)$ for color $1$, and $(A\cup D,B\cup C)$ for color $2$.
+The \emph{edge invariant} says that an edge of a given color has both
+ends in one of its label classes. Figure~\ref{fig:lower} displays the
+four constituent parts.
 
 \begin{figure}[ht]
 \centering
@@ -192,81 +215,6 @@ color~0. In each color, the two label classes have sizes 9 and 8.}
 \label{fig:lower}
 \end{figure}
 
-A Boolean literal is a variable or its negation; a clause is a
-disjunction of literals.
-Each logged path clause is rebuilt in Lean from its color and distinct
-vertices. Refuting this subset suffices: a coloring without a monochromatic
-path would satisfy every path clause, hence also the logged subset.
-Cubes are conjunctions of literals fixing edge colors. A separate cover
-refutation proves that every model satisfies at least one listed cube;
-each cube has its own refutation. Lemma~\ref{lem:cover} joins these facts.
-Appendices~\ref{sec:encoding}--\ref{sec:cnc} give the encoding, the
-reductions and this complete dependency chain.
-
-\section{What is checked and trusted}
-In namespace \texttt{R3P10}, the unconditional theorem is
-\texttt{R3\_P10\_eq\_18 : ramsey3Path 10 = 18}.
-Here \texttt{Col n} is \texttt{Sym2 (Fin n) → Fin 3}: colors on unordered
-vertex pairs. Diagonal values are unused and arbitrary; colors $0,1,2$
-replace $1,2,3$. The predicate \texttt{HasMonoPath n m X} means that there
-exist a color and an injective map from $m$ vertices to $n$ vertices whose
-consecutive pairs have that color. It requires no condition on other
-pairs, so it means our non-induced $P_m$, with $m$ vertices, not edges.
-The definition \texttt{ramsey3Path m} is the infimum in the natural numbers
-of the $n$ for which every \texttt{Col n} satisfies that predicate.
-The proof establishes membership at $18$ and a countercoloring at $17$;
-restriction of that coloring excludes every smaller $n$. Thus this
-infimum is precisely the Ramsey number in Theorem~\ref{thm:main}, with
-no remaining certificate hypotheses.
-
-Lean proves the lower bound, symmetry reductions, encoding soundness and
-assembly of refutations. Its verified LRAT checker checks a line-indexed
-format of propositional refutations. The final theorem's axioms are
-\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound},
-\texttt{Lean.ofReduceBool} and \texttt{Lean.trustCompiler}.
-The last two support native evaluation of certificate checks, list lengths
-and the parsed-formula comparison. The proof trusts Lean's kernel,
-compiler and imported compiled modules; rebuilding the certificate modules
-avoids trusting previously built copies. The SAT solver, converter and
-external checkers are outside this trusted base. Literature attributions,
-historical timings and reports of separate checker executions are outside
-Lean. Appendix~\ref{sec:lean} gives the declarations and dependency details.
-
-From the accompanying folder, \texttt{cd lean},
-\texttt{lake exe cache get}, then \texttt{lake build} check the
-reduction, lower bound and conditional theorem, not the unconditional
-value. The full command \texttt{python3 checks/check.py full}
-regenerates and checks every certificate and builds \texttt{R3P10Final}.
-Installing the archived certificates~\cite{Gra26} first avoids repeating
-the search. Quick mode checks a sample and cannot replace the full check.
-See \path{COMPLETION.md} for the completed full check and
-\path{checks/README.md} and \path{lean/README.md} for requirements,
-commands and independent checks. The proof is computer-assisted and has not been reviewed by human experts.
-
-\clearpage
-\begin{appendices}
-\section{The conjecture}
-The general conjecture is Conjecture~2 of Dybizbański, Dzido and
-Radziszowski~\cite[arXiv:1207.5851v3, Section~2]{DDR16}; its ten-vertex
-case is proved here.
-\begin{conjecture}[suggested by Faudree--Schelp~\cite{FS75}; stated as a conjecture in~\cite{DDR16}; see~\cite{Rad26}]\label{conj:FS}
-For all $n\ge1$, $\R(P_n)=2n-2+(n\bmod 2)$.
-\end{conjecture}
-
-\section{The lower bound}\label{sec:lower}
-
-Partition $\{0,\dots,16\}$ into $A=\{0,\dots,4\}$, $B=\{5,\dots,8\}$,
-$C=\{9,\dots,12\}$ and $D=\{13,\dots,16\}$. Color an edge with color $0$
-if both ends lie in $A\cup B$ or both lie in $C\cup D$; with color $1$ if
-it joins $A$ to $C$ or $B$ to $D$; and with color $2$ if it joins $A$ to
-$D$ or $B$ to $C$. This is the blow-up of the factorization of $K_4$ into
-the matchings $\{AB,CD\}$, $\{AC,BD\}$, $\{AD,BC\}$, with the edges inside
-the parts given color $0$. For this construction, Gyárfás, Ruszinkó, Sárközy and Szemerédi
-\cite[author manuscript, July 9, 2012, Section~1.1, paragraph following
-Theorem~1]{GRSS07} write: ``One type comes from a `blow-up' of a
-factorization of $K_4$.'' The odd and even part sizes are specified there;
-see also Dybizbański, Dzido and Radziszowski~\cite[arXiv:1207.5851v3,
-Section~2, paragraph following Conjecture~2]{DDR16}.
 
 \begin{proposition}\label{prop:lower}
 This coloring of $K_{17}$ has no monochromatic $P_{10}$. Hence
@@ -283,51 +231,21 @@ inside one label class and has at most $9$ vertices, and a monochromatic
 path, being connected, has at most $9$ vertices.
 \end{proof}
 
-In Lean the coloring is written out edge by edge, and the argument is a
-general lemma (for all $n$ and $m$: if each color has a labeling of the
-vertices that is constant along edges of that color and whose classes have
-fewer than $m$ vertices, there is no monochromatic $P_m$) together with two
-finite facts decided by the kernel's own reduction (\texttt{decide
-+kernel}), without native evaluation.
-
-\section{The encoding}\label{sec:encoding}
-
-For the upper bound, suppose a coloring of $K_{18}$ has no monochromatic
-$P_{10}$. Relabel vertices and colors so that $0,1,\ldots,8$ is a path
-of color~0. Among colorings reachable by permutations that preserve this
-path, take a lexicographically least one. It satisfies every imposed
-symmetry inequality simultaneously (Lemmas~\ref{lem:fix}
-and~\ref{lem:lex}). The chosen symmetries need not include every
-permutation preserving the path.
-
-A Boolean literal is a variable or its negation; a clause is a
-disjunction of literals. A model assigns truth values satisfying every
-clause; a refutation certifies that no such assignment exists.
-The SAT variables specify one color per edge, with auxiliary variables
-expressing the symmetry inequalities. A path clause excludes a specified
-monochromatic $P_{10}$. Rather than list all paths, the solver logs the
-path clauses it uses. Each is independently recognized as a path clause
-and rebuilt in Lean from its color and distinct vertices. Refuting this
-subset suffices: a coloring without a monochromatic path would satisfy
-every path clause, hence also the logged subset. The solver's path-finding
-procedure therefore need not be trusted for completeness.
-
-The remaining formula is divided into cubes, conjunctions of literals
-fixing edge colors. A separate cover refutation proves that every model
-satisfies at least one listed cube; each cube has its own refutation.
-Lemma~\ref{lem:cover} joins these facts, contradicting the assumed
-coloring. The same argument establishes each smaller bound used to fix a
-path. Appendices~\ref{sec:encoding}--\ref{sec:cnc} give the encoding,
-the reductions and this complete dependency chain.
-
-
-Throughout, a \emph{coloring} of $K_n$ is a map $X$ from the edges to
-$\{0,1,2\}$, and it is \emph{good} (for $m$) if it has no monochromatic
-$P_m$. We order the edges $\{i,j\}$, $i<j$, row by row:
+\section{The upper bound}\label{sec:encoding}
+We encode a hypothetical coloring without a monochromatic path and
+refute the resulting finite formulas. Throughout, a \emph{coloring} of $K_n$ is a map $X$ from the edges to
+$\{0,1,2\}$. For a fixed path order $m$, such a coloring is \emph{good} if it has no
+monochromatic $P_m$; goodness refers to this same $m$ throughout each
+formula and its associated lemmas. We order the edges $\{i,j\}$, $i<j$, row by row:
 $\{0,1\},\{0,2\},\dots,\{0,n-1\},\{1,2\},\dots,\{n-2,n-1\}$, and number
 them $e=0,1,\dots,\binom n2-1$ in this order.
 
 \subsection{Variables and the coloring clauses}
+We express the coloring and path conditions as Boolean clauses.
+A Boolean literal is a variable or its negation; a clause is a
+disjunction of literals. A model assigns truth values satisfying every
+clause; a refutation certifies that no such assignment exists.
+
 The variable $x_{e,c}=3e+c+1$ means ``edge $e$ has color $c$''.
 An unordered pair in the edge subscript denotes its number in the preceding edge order. For each
 edge there is one clause $x_{e,0}\vee x_{e,1}\vee x_{e,2}$ and three
@@ -338,17 +256,17 @@ colorings. For a color $c$ and distinct vertices $p_0,\dots,p_{m-1}$, the
 \bigvee_{i=0}^{m-2}\neg x_{\{p_i,p_{i+1}\},c}
 \]
 says that this path is not monochromatic in color $c$. A coloring is good
-exactly when its assignment satisfies every path clause. The path clauses
-are not written into the formula in advance; they are generated during the
-search (Section~\ref{sec:prop}).
+exactly when its assignment satisfies every path clause. Only the path clauses used in a refutation need to be listed: a good
+coloring satisfies every path clause, hence any listed subset. Lean
+rebuilds each listed clause from its color and distinct vertices, so the
+solver's path-finding procedure need not be assumed complete.
 
 \subsection{The fixed path}
 Vertex permutations $\pi\in S_n$ and color permutations $\sigma\in S_3$ act
 on colorings by $(g\cdot X)(\{\pi a,\pi b\})=\sigma(X(\{a,b\}))$ for
-$g=(\pi,\sigma)$. They map good colorings to good colorings.
+$g=(\pi,\sigma)$. On edges, $\pi\{a,b\}=\{\pi(a),\pi(b)\}$. They map good colorings to good colorings.
 
-Here ``good'' means having no monochromatic $P_m$, for the same $m$
-as in the preceding encoding. The following lemma fixes only path edges.
+The following lemma fixes only the edges of the guaranteed path.
 
 \begin{lemma}[fixed path]\label{lem:fix}
 Let $k\le n$ and suppose every $3$-coloring of $K_n$ contains a
@@ -363,23 +281,24 @@ permutation sending $v_t$ to $t$ and the transposition of colors $c$ and
 $0$.
 \end{proof}
 
-The formula for the rung ``$P_m$ on $K_n$ with a fixed $P_k$'' contains
+The formula for $P_m$ on $K_n$ with a fixed $P_k$ contains
 the $k-1$ unit clauses $x_{\{t,t+1\},0}$. Only the path edges are
 constrained; the chords of the fixed path are free.
 
-\subsection{Lex-leader constraints}
+\subsection{Symmetry constraints}
+The following constraints retain a lexicographically least coloring.
 Compare colorings by the lexicographic order $\lex$ of their color vectors
 $(X(e))_{e}$ in edge order, with $0<1<2$. Let $\Gamma$ be a list of
 generators $g=(\pi,\sigma)$. With a fixed $P_k$ on $0,\dots,k-1$ and
 $W=\{k,\dots,n-1\}$, $\Gamma$ consists of the transpositions of pairs of
 vertices of $W$ (in lexicographic order), the reversal $t\mapsto k-1-t$ of
-$\{0,\dots,k-1\}$, and the color transposition $1\leftrightarrow2$. On the
-first rung, $K_5$, nothing is fixed and $\Gamma$ consists of all vertex
+$\{0,\dots,k-1\}$, and the color transposition $1\leftrightarrow2$. For $K_5$, nothing is fixed and $\Gamma$ consists of all vertex
 transpositions and the color transpositions $0\leftrightarrow1$ and
 $1\leftrightarrow2$.
 
-In the following lemma, goodness still refers to $P_m$ and $\Gamma$ is
-the preceding list of path-preserving vertex and color permutations.
+The orbit of a coloring consists of the colorings reachable by finitely
+many moves from $\Gamma$. A least member of an orbit gives simultaneous
+symmetry inequalities, as follows.
 
 \begin{lemma}[lex-leader]\label{lem:lex}
 Let $S$ be the set of good colorings with color $0$ on the fixed path.
@@ -403,9 +322,11 @@ the fixed path; the two reductions are therefore jointly sound. The
 generators do not need to generate the full stabilizer of the fixed path:
 a weaker set of constraints only leaves more symmetry in the search.
 
+The base formula consists of the coloring clauses, the fixed-path unit
+clauses, and the clauses encoding these symmetry inequalities.
+\subsection{Encoding the symmetry inequalities}\label{sec:auxiliary}
 The constraint $X\lex g\cdot X$ is encoded in the standard
-way~\cite[technical report TR-1996-012, Section~3,
-Proposition~3.1 and the following auxiliary-variable clauses]{CGLR96}. The clauses below adapt that Boolean-variable construction to three colors. The positions compared are the edges $f$ in edge order,
+way~\cite[Proposition~3.1]{CGLR96}. The clauses below adapt that Boolean-variable construction to three colors. The positions compared are the edges $f$ in edge order,
 except those with $\pi^{-1}(f)=f$ and $\sigma$ the identity (where
 $X(f)=(g\cdot X)(f)$ identically). For the $j$-th compared position $f_j$,
 let $Y_j=\sigma(X(\pi^{-1}f_j))$ be the color of $g\cdot X$ there, and let
@@ -419,126 +340,56 @@ are, for colors $a,b$:
 &q_j\wedge X(f_j)=a\to Y_j=a.
 \end{align*}
 Under the intended meaning of the $q_j$, every clause holds exactly when
-$X\lex g\cdot X$. For $K_{18}$ with a fixed $P_9$ there are $38$
-generators ($36$ transpositions of the nine vertices of $W$, the reversal,
-and the color swap), and the base formula has $1{,}868$ variables ($459$
-color variables and $1{,}409$ auxiliaries) and $14{,}672$ clauses.
+$X\lex g\cdot X$.
+Its soundness is proved in Lean: assigning
+the auxiliaries their intended values extends every coloring satisfying
+the inequalities to a model of the encoded clauses.
 
-\subsection{Path clauses generated during the search}\label{sec:prop}
-The solver is CaDiCaL~\cite{BFF+24} with an external propagator attached
-through the IPASIR-UP interface~\cite{FNP+23,FNP+24}. The propagator
-follows the assignment of the color variables. Whenever an edge receives a
-color $c$, it searches for paths on $m$ vertices through that edge, in the
-graph of edges not yet excluded from color $c$, all of whose edges except
-at most one are already known to have color $c$. If all edges are known,
-it reports the path clause as a conflict; if exactly one is unknown, it
-sets that edge to ``not $c$'' with the path clause as the reason. When the
-solver reaches a complete assignment, the propagator searches it
-exhaustively for a monochromatic $P_m$ and, if it finds one, rejects the
-assignment with that path clause. Every clause handed to the solver is a
-path clause and is written to a log.
-
-The refuted formula is therefore the base formula plus the logged path
-clauses (plus a cube's unit clauses), a subset of the formula with
-\emph{all} path clauses. A refutation of the subset refutes the full
-formula; nothing about the completeness of the propagator is needed.
-Conversely, a satisfying assignment is accepted only after the exhaustive
-search, and every coloring the method reports is rechecked by a separate
-program.
-
-\section{The ladder}\label{sec:ladder}
-
-The rung ``$P_m$ on $K_n$, fixing $P_k$'' is the formula of
-Section~\ref{sec:encoding} with the fixed path on $0,\dots,k-1$, together
+\subsection{Successive path bounds}\label{sec:ladder}
+The formula for $P_m$ on $K_n$ with fixed $P_k$ is the formula of Sections~4.1--4.4 with the fixed path on $0,\dots,k-1$, together
 with all path clauses for $P_m$. If it is unsatisfiable and every
 $3$-coloring of $K_n$ contains a monochromatic $P_k$, then by
 Lemmas~\ref{lem:fix} and~\ref{lem:lex} every $3$-coloring of $K_n$
 contains a monochromatic $P_m$. Every $3$-coloring of a larger complete
 graph then does too, by restriction.
 
-Table~\ref{tab:ladder} lists the rungs. The first fixes nothing; each later
-rung fixes the path guaranteed by the rung before it. A DRAT proof is a
-clause-addition and deletion refutation, converted to the line-indexed LRAT
-format for checking. Each rung up to
-$P_9$ on $K_{17}$ is solved as one formula, with a DRAT proof. The rungs
-establish the upper bounds $\R(P_m)\le n$ for $m=3,\dots,9$; the top
-rung, $P_{10}$ on $K_{18}$, uses $\R(P_9)\le17$ as established by the
-rung below it. The earlier $P_9$ bound is Theorem~8 of Dybizbański,
-Dzido and Radziszowski~\cite[arXiv:1207.5851v3, Section~4]{DDR16}.
+The sequence of bounds is
+\begin{gather*}
+\R(P_3)\le5,\quad \R(P_4)\le6,\quad \R(P_5)\le9,\quad
+\R(P_6)\le10,\\
+\R(P_7)\le13,\quad \R(P_8)\le14,\quad \R(P_9)\le17.
+\end{gather*}
+The first formula fixes nothing; each later formula fixes the path
+obtained at the preceding stage. Each is refuted as a whole. The final
+formula, for $P_{10}$ on $K_{18}$, fixes $P_9$ and is divided into cubes.
+The formula sizes and smaller-order checks are in
+Appendix~\ref{sec:computation}.
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Rung & fixed path & variables & base clauses & logged path clauses\\
-\midrule
-$P_3$ on $K_5$ & none & 110 & 828 & 11\\
-$P_4$ on $K_6$ & $P_3$ & 92 & 527 & 31\\
-$P_5$ on $K_9$ & $P_4$ & 308 & 2{,}135 & 185\\
-$P_6$ on $K_{10}$ & $P_5$ & 368 & 2{,}502 & 1{,}683\\
-$P_7$ on $K_{13}$ & $P_6$ & 828 & 6{,}234 & 10{,}094\\
-$P_8$ on $K_{14}$ & $P_7$ & 928 & 6{,}897 & 60{,}734\\
-$P_9$ on $K_{17}$ & $P_8$ & 1{,}720 & 13{,}633 & 520{,}545\\
-$P_{10}$ on $K_{18}$ & $P_9$ & 1{,}868 & 14{,}672 & (per cube)\\
-\bottomrule
-\end{tabular}
-\medskip
-\caption{The ladder. Each rung from $P_3$ to $P_9$ is refuted as a whole;
-the largest takes a few CPU-minutes. The $K_{18}$ rung is split into cubes
-(Section~\ref{sec:cnc}).}\label{tab:ladder}
-\end{table}
-
-The same code also finds colorings where they exist. For example it finds
-good colorings for $P_5$ on $K_8$, $P_6$ on $K_9$, $P_7$ on $K_{12}$ and
-$P_8$ on $K_{13}$, and, with no fixed path, a coloring of $K_{16}$ with no
-monochromatic $P_9$; each was confirmed by a separate exhaustive path
-search.
-
-\section{Cube and conquer on \texorpdfstring{$K_{18}$}{K18}}\label{sec:cnc}
-This section constructs the split, proves its coverage and joins the refutations.
-
-\subsection{The cubes}
-A cube is a conjunction of literals fixing the colors of some edges.
+\subsection{Covering the cases}\label{sec:cnc}
+We split the possible colorings into cases and certify completeness
+separately. A cube is a conjunction of literals fixing the colors of some edges.
 Unit propagation forces the last unassigned literal of a clause when
-all its other literals are false. The
-cubes were produced by the solver itself, with the propagator attached.
-Walking the edges in edge order, at each edge it assumes each color in
-turn and runs unit propagation (including the path propagator); colors
-leading to a conflict are dropped, an edge with a single surviving color
-is fixed without counting as a split, and the walk stops after $10$ edges
-with at least two surviving colors. This produced $15{,}316$ cubes of
-$11$ to $20$ literals, and $18$ path clauses learned during generation.
+all its other literals are false. Walking through the edges in order, the
+CaDiCaL solver of Biere et al.\ \cite{BFF+24} tries each color and
+propagates the consequences, including path clauses, through Fazekas et
+al.'s IPASIR-UP interface \cite{FNP+23,FNP+24}. Choices leading to a conflict are discarded; an edge with only
+one surviving color is fixed without counting as a split. The walk stops
+after ten edges with at least two surviving colors. This gives 15,316
+cubes. Continuing the same procedure, with conflict rejection and unit
+propagation, splits sixteen of them on four further split edges, giving
+41 surviving children each and 656 in total. The final list has $15{,}316-16+656=15{,}956$ cubes.
 
-Sixteen of these cubes, each with $11$ literals, are listed in
-\path{data/k18/split/parents.txt}. Each was split once more in the same way, by four further split
-edges, into $41$ children, $656$ in all ($144$ more path clauses were
-learned during this split). The final list consists of the $15{,}300$
-remaining first-level cubes and the $656$ children: $15{,}956$ cubes.
-
-\subsection{The reduction chain}\label{sec:chain}
-Suppose a $3$-coloring $X$ of $K_{18}$ has no monochromatic $P_{10}$. Since
-$\R(P_9)\le17$ (the top rung of the ladder, itself resting on the rungs
-below it, down to $P_3$ on $K_5$, which fixes nothing), $X$ contains a
-monochromatic $P_9$. By Lemma~\ref{lem:fix} a vertex permutation and a
-color permutation carry $X$ to a good coloring with color $0$ on the path
-$0,1,\dots,8$, and by Lemma~\ref{lem:lex} its orbit under the generators
-contains a good coloring $X^*$ that keeps the fixed path and satisfies
-every lex-leader inequality. With the auxiliaries set to their meaning,
-$X^*$ satisfies the base formula and every path clause. By the cover
-certificate, $X^*$ satisfies some cube of the final list (otherwise it
-would satisfy the cover formula), and that cube's formula is unsatisfiable
-by its own certificate: a contradiction. In Lean this whole chain is the
-theorem \texttt{K18\_P10\_of\_certs}, which takes an arbitrary coloring of
-$K_{18}$ and the certified facts and returns a monochromatic $P_{10}$
-(Section~\ref{sec:lean}).
-
-\subsection{Why the cubes cover every case}\label{sec:cover}
-Cubes whose propagation fails are dropped during generation, so the list is
-not complete by construction. Its completeness is proved instead by one
-more certificate: the \emph{cover formula}, which consists of the base
-formula, the $162$ path clauses learned during generation, and the
-negation of every final cube (one clause per cube), $30{,}790$ clauses in
-all, is unsatisfiable.
+The discarded branches are accounted for by the cover formula: it
+consists of the base formula, the 162 path clauses learned during
+generation, and the negation of every final cube (one clause per cube).
+The computational facts used below are that this cover formula and the
+formula for each cube, augmented by the path clauses used in its
+refutation, are unsatisfiable. For each formula, Lean's verified LRAT
+checker accepts a propositional refutation. The resulting 15,957 certificates, together
+with the seven smaller-formula certificates, give 15,964 in all.
+The following lemma combines the cover refutation with the cube
+refutations. In this lemma $c$ denotes a cube, and $\mathcal P$ includes
+every path clause for the given path order.
 
 \begin{lemma}\label{lem:cover}
 Let $F$ be a formula, $\mathcal C$ a list of cubes, and $\mathcal P$ the
@@ -553,141 +404,109 @@ otherwise it falsifies a literal of every cube and so satisfies every
 $\neg c$. It is then a model of $F\cup\mathcal P\cup c$.
 \end{proof}
 
-With $F$ the $K_{18}$ base formula, Lemma~\ref{lem:cover} and the
-$15{,}957$ certificates give the unsatisfiability of the top rung, and the
-ladder then gives $\R(P_{10})\le18$. In Lean this is the theorem combining
-the cover certificate with the per-cube certificates
-(\texttt{unsat\_of\_cubes}); the per-cube facts enter through
-\texttt{cubes\_of\_range}, which turns a theorem
-\texttt{K18.all :\ ∀ i, 0 ≤ i → i < 15956 → CubeOK i} over the list's
-indices into the statement for every member of the list, given that the
-list has length $15{,}956$.
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Suppose a $3$-coloring $X$ of $K_{18}$ has no monochromatic $P_{10}$. Since
+$\R(P_9)\le17$ by the successive bounds above, $X$ contains a
+monochromatic $P_9$. By Lemma~\ref{lem:fix} a vertex permutation and a
+color permutation carry $X$ to a good coloring with color $0$ on the path
+$0,1,\dots,8$, and by Lemma~\ref{lem:lex} its orbit under the generators
+contains a good coloring $X^*$ that keeps the fixed path and satisfies
+every lex-leader inequality.
 
-\section{The Lean formalization}\label{sec:lean}
-This section states the formal claim and explains its hypotheses and trusted boundary.
+With the auxiliaries set to their meaning,
+$X^*$ satisfies the base formula and every path clause. By the cover
+certificate, $X^*$ satisfies some cube of the final list (otherwise it
+would satisfy the cover formula), and that cube's formula is unsatisfiable
+by its own certificate: a contradiction.
+Thus $\R(P_{10})\le18$, while Proposition~\ref{prop:lower} gives
+$\R(P_{10})\ge18$.
+\end{proof}
 
-\subsection{The statement}
-The definitions use Mathlib's unordered pairs \texttt{Sym2}; a coloring of
-$K_n$ assigns a color to every pair, and the diagonal pairs are never
-used.
-\begin{Verbatim}
-abbrev Col (n : ℕ) := Sym2 (Fin n) → Fin 3
-
-def HasMonoPath (n m : ℕ) (X : Col n) : Prop :=
-  ∃ (c : Fin 3) (p : Fin m → Fin n), Function.Injective p ∧
-    ∀ (i : ℕ) (h : i + 1 < m), X s(p ⟨i, by omega⟩, p ⟨i + 1, h⟩) = c
-
-noncomputable def ramsey3Path (m : ℕ) : ℕ :=
-  sInf {n | ∀ X : Col n, HasMonoPath n m X}
-
-theorem K18_has_mono_P10 (X : Sym2 (Fin 18) → Fin 3) :
-    ∃ (c : Fin 3) (p : Fin 10 → Fin 18), Function.Injective p ∧
-      ∀ (i : ℕ) (h : i + 1 < 10), X s(p ⟨i, by omega⟩, p ⟨i + 1, h⟩) = c
-
-theorem K17_no_mono_P10 : ¬ HasMonoPath 17 10 k17Col
-
-theorem R3_P10_eq_18 : ramsey3Path 10 = 18
-\end{Verbatim}
-A path is an injective map $p$ from $\{0,\dots,m-1\}$ to the vertices whose
-consecutive pairs all have color $c$, which is the usual (not necessarily
-induced) path on $m$ vertices. \texttt{ramsey3Path m} is the least $n$ for
-which every coloring of $K_n$ has a monochromatic $P_m$; the proof of
-\texttt{R3\_P10\_eq\_18} shows that $18$ belongs to that set and that no
-smaller $n$ does, since a good coloring of $K_{17}$ restricts to one of any
-smaller complete graph.
-
-\subsection{What is proved}
-Lean defines a closed-form encoder \texttt{encode n k}, which produces
-the formula of Section~\ref{sec:encoding}, and proves for all $n$ and $k$
-that it is sound for the colorings: a coloring with the fixed path
-that satisfies every generator inequality, with the auxiliaries set to
-their meaning, satisfies every clause (\texttt{encode\_sat}); a good
-coloring satisfies every path clause (\texttt{paths\_ok}). It proves
-Lemma~\ref{lem:fix} (\texttt{relabel}), that every generator preserves the
-fixed path and goodness (\texttt{gens\_fix}, \texttt{act\_noMono}),
-Lemma~\ref{lem:lex} (\texttt{orbit\_min}), the rung argument
-(\texttt{rung}), Lemma~\ref{lem:cover} (\texttt{unsat\_of\_cubes}), the
-chain of rungs, and the lower bound (Section~\ref{sec:lower}). The facts
-about formulas are stated with the DIMACS semantics: a literal is a nonzero
-integer, an assignment is a predicate on variables, and
+\section{Computational verification}\label{sec:verification}
+The Lean development proves the following formal statement:
 \[
-\texttt{UnsatWithPaths n m F}
+\texttt{R3P10.R3\_P10\_eq\_18}\;:\quad\texttt{ramsey3Path 10 = 18}.
 \]
-says that $F$ together with \emph{every} path clause for $P_m$ in $K_n$
-has no model.
+Its colorings assign one of the colors $0,1,2$ to every unordered pair of
+vertices, including unused diagonal pairs. Relabeling the colors as
+$1,2,3$ gives the convention of Theorem~\ref{thm:main}.
+A formal monochromatic path is an injective map from $\{0,\dots,m-1\}$
+whose consecutive pairs all have one color, with no condition on the
+other pairs. Thus it is the same non-induced path on $m$ vertices used
+here. The formal Ramsey number is the natural-number infimum of the
+orders at which every coloring contains such a path. The proof shows
+that this set contains $18$ and excludes every smaller order by
+restricting the countercoloring on $17$ vertices. The final theorem has
+no certificate hypotheses; the finite coloring in its lower bound is
+exactly the construction of Section~\ref{sec:lower}.
 
-The proof of \texttt{K18\_has\_mono\_P10} uses nine hypotheses of this
-kind: one for each of the seven rungs, one for the cover formula
-\texttt{encode 18 9 ++ finalCubes.map negCube}, and one for every cube $c$
-of \texttt{finalCubes}, \texttt{encode 18 9 ++ cubeUnits c} (one
-universally quantified hypothesis over the list, so $15{,}964$ instances
-in all). The list \texttt{finalCubes} is parsed in Lean from the
-accompanying cube lists, and the cover formula and the cube hypothesis
-use this same list.
-The conditional theorems \texttt{K18\_P10\_of\_certs} and
-\texttt{R3\_P10\_eq\_18\_of\_certs} take the nine facts as hypotheses and
-depend only on Lean's standard axioms \texttt{propext},
-\texttt{Classical.choice} and \texttt{Quot.sound}, as does
-\texttt{K17\_no\_mono\_P10}.
+Lean proves the reductions, the lower bound and the soundness of the
+certificate checker. The finite certificate checks are evaluated by compiled code, so their
+validity also relies on faithful compiled evaluation. The checking notes
+specify the logical assumptions and reproduction instructions.
+The refutations were checked twice, using a total of about twenty-three
+days of processor time. The archived certificates \cite{Gra26} permit
+checking without repeating the search.
 
-\subsection{How the certificates enter}\label{sec:certs}
-Each instance is proved by a Boolean check
-\texttt{checkUnsat n m F paths proof} and its soundness theorem
-\[
-\texttt{checkUnsat\_sound :\ checkUnsat n m F paths proof = true →
-UnsatWithPaths n m F},
-\]
-proved in Lean. The check confirms that every literal of $F$ is nonzero;
-that each entry of \texttt{paths} (a color and $m$ distinct vertices below
-$n$) yields a path clause, which Lean rebuilds from the path itself; and
-that Lean's verified LRAT checker (\texttt{Std.Tactic.BVDecide.LRAT}, with
-its soundness theorem) accepts \texttt{proof} as a refutation of $F$
-together with those path clauses. The bridge between the two semantics is
-a proved lemma (\texttt{toStd\_eval}): under the nonzero-literal condition,
-an assignment satisfying the formula in the DIMACS semantics above gives an
-assignment satisfying its translation into the checker's clause type, so
-the checker's soundness theorem yields \texttt{UnsatWithPaths n m F}, the
-same predicate that the rung and cover arguments consume. Only the path
-clauses that the trimmed proof uses are included. Nothing outside Lean decides what counts as a
-path clause, and the formula checked is a Lean term, not a file: the base
-formula used in the cube checks is parsed from the accompanying $K_{18}$
-formula and proved equal to \texttt{encode 18 9} by a comparison that is
-itself natively evaluated.
+\clearpage
+\begin{appendices}
+\section{Computational details}\label{sec:computation}
+The details below specify the finite formulas, case division and checks
+used in Section~\ref{sec:encoding}.
 
-Each certificate is stored as a compact string (an LRAT proof with
-delta-coded hints and implicit clause identifiers). It is decoded by total
-functions written in Lean. The decoder is outside the logical trusted
-base: whatever it produces, acceptance implies unsatisfiability by
-\texttt{checkUnsat\_sound}. The check is a closed Boolean term,
-and the kernel accepts its value through \texttt{Lean.ofReduceBool}, which
-evaluates it with Lean's compiled code. The $15{,}956$ cube facts are
-checked in $162$ modules, each covering a contiguous range of indices; a
-final module joins the ranges into \texttt{K18.all}.
+\subsection{Formula sizes}
+For $K_{18}$ with a fixed $P_9$ there are $38$
+generators ($36$ transpositions of the nine vertices of $W$, the reversal,
+and the color swap), and the base formula has $1{,}868$ variables ($459$
+color variables and $1{,}409$ auxiliaries) and $14{,}672$ clauses.
 
-\subsection{Axioms and trusted base}
-The axiom report of both main theorems is
-\begin{Verbatim}
-'R3P10.K18_has_mono_P10' depends on axioms:
-  [propext, Classical.choice, Lean.ofReduceBool, Lean.trustCompiler, Quot.sound]
-'R3P10.R3_P10_eq_18' depends on axioms:
-  [propext, Classical.choice, Lean.ofReduceBool, Lean.trustCompiler, Quot.sound]
-\end{Verbatim}
-The two non-standard axioms come from the natively evaluated certificate
-checks (Lean v4.32.2, pinned in the accompanying project). The trusted base
-therefore has three parts: Lean's kernel, which checks all the mathematics,
-including the lower bound and the reduction from colorings to formulas;
-Lean's compiler and interpreter, whose evaluation of the closed Boolean
-certificate checks the kernel accepts without reducing them itself
-(\texttt{Lean.ofReduceBool}, \texttt{Lean.trustCompiler}); and the
-compiled modules a build imports, which Lean does not recheck. The evaluated code
-is the verified LRAT checker, the decoder and the clause and path builders;
-by \texttt{checkUnsat\_sound}, only the faithful execution of this code is
-trusted, not its correctness. Lean does not recheck imported compiled
-modules, so a reader who wants the whole proof checked on one machine
-rebuilds the $162$ certificate modules (see \path{checks/checking-record.tex}). The SAT
-solver, the proof converter, the external checkers and the scripts that
-produced the certificates are not part of the trusted base of the Lean
-theorem.
+
+\subsection{Smaller path bounds}
+Table~\ref{tab:ladder} lists the formulas. The first fixes nothing; each later
+formula fixes the path guaranteed by the preceding stage. A DRAT proof is a
+clause-addition and deletion refutation, converted to the line-indexed LRAT
+format for checking. Each formula up to
+$P_9$ on $K_{17}$ is solved as one formula, with a DRAT proof. The formulas
+establish the upper bounds $\R(P_m)\le n$ for $m=3,\dots,9$; the final
+formula, $P_{10}$ on $K_{18}$, uses $\R(P_9)\le17$ as established by the
+formula below it. The earlier $P_9$ bound is Theorem~8 of Dybizbański,
+Dzido and Radziszowski~\cite{DDR16}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Formula & fixed path & variables & base clauses & logged path clauses\\
+\midrule
+$P_3$ on $K_5$ & none & 110 & 828 & 11\\
+$P_4$ on $K_6$ & $P_3$ & 92 & 527 & 31\\
+$P_5$ on $K_9$ & $P_4$ & 308 & 2{,}135 & 185\\
+$P_6$ on $K_{10}$ & $P_5$ & 368 & 2{,}502 & 1{,}683\\
+$P_7$ on $K_{13}$ & $P_6$ & 828 & 6{,}234 & 10{,}094\\
+$P_8$ on $K_{14}$ & $P_7$ & 928 & 6{,}897 & 60{,}734\\
+$P_9$ on $K_{17}$ & $P_8$ & 1{,}720 & 13{,}633 & 520{,}545\\
+$P_{10}$ on $K_{18}$ & $P_9$ & 1{,}868 & 14{,}672 & (per cube)\\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{Successive upper bounds. Each formula from $P_3$ to $P_9$ is refuted as a whole;
+the largest of these seven takes a few CPU-minutes. The $K_{18}$ formula is split into cubes
+(Section~\ref{sec:cnc}).}\label{tab:ladder}
+\end{table}
+
+The same code also finds colorings where they exist. For example it finds
+good colorings for $P_5$ on $K_8$, $P_6$ on $K_9$, $P_7$ on $K_{12}$ and
+$P_8$ on $K_{13}$, and, with no fixed path, a coloring of $K_{16}$ with no
+monochromatic $P_9$; each was confirmed by a separate exhaustive path
+search.
+
+\subsection{Certificate sizes}
+The initial cubes have $11$ to $20$ literals; the sixteen selected parents
+have $11$ literals each. Generation of the initial cubes and their
+children uses $18$ and $144$ path clauses respectively, for a total of
+$162$. The cover formula has $30{,}790$ clauses: the $14{,}672$ base
+clauses, these $162$ path clauses, and one negated clause for each of the
+$15{,}956$ cubes.
 
 \end{appendices}
 
@@ -696,7 +515,7 @@ theorem.
 \bibitem{ABC+26}
 P.~Allen, J.~Böttcher, D.~Clemens, F.~Hamann, J.~Skokan and A.~Taraz,
 \emph{On Ramsey-type problems for paths and cycles with few colour changes}, preprint, 2026.
-\href{https://arxiv.org/abs/2607.03243}{arXiv:2607.03243}.
+\href{https://arxiv.org/abs/2607.03243v1}{arXiv:2607.03243v1}.
 
 \bibitem{BBC+25}
 H.~Böving, S.~Bhat, L.~Cicolini, A.~Keizer, L.~Frenot, A.~Mohamed,
@@ -720,13 +539,14 @@ cycles}, J.~Combin.\ Theory Ser.~B \textbf{99} (2009), 690--708.
 M.~Codish, M.~Frank, A.~Itzhakov and A.~Miller,
 \emph{Computing the Ramsey number $R(4,3,3)$ using abstraction and
 symmetry breaking}, Constraints \textbf{21} (2016), 375--393.
-\href{https://doi.org/10.1007/s10601-016-9240-3}{doi:10.1007/s10601-016-9240-3}.
+\href{https://doi.org/10.1007/s10601-016-9240-3}{doi:10.1007/s10601-016-9240-3};
+author preprint \href{https://arxiv.org/abs/1510.08266}{arXiv:1510.08266}.
 
 \bibitem{CGLR96}
 J.~M.~Crawford, M.~L.~Ginsberg, E.~M.~Luks and A.~Roy,
 \emph{Symmetry-breaking predicates for search problems}, in: Proc.\ Fifth
 International Conference on Principles of Knowledge Representation and
-Reasoning (KR'96), Morgan Kaufmann, 1996, 148--159.
+Reasoning (KR'96), Morgan Kaufmann, 1996, 148--159; technical report TR-1996-012.
 
 \bibitem{CHH+17}
 L.~Cruz-Filipe, M.~J.~H.~Heule, W.~A.~Hunt, M.~Kaufmann and
@@ -740,7 +560,7 @@ J.~Dybizbański, T.~Dzido and S.~Radziszowski,
 \emph{On some three-color Ramsey numbers for paths}, Discrete Appl.\
 Math.\ \textbf{204} (2016), 133--141.
 \href{https://doi.org/10.1016/j.dam.2015.11.002}{doi:10.1016/j.dam.2015.11.002};
-preprint \href{https://arxiv.org/abs/1207.5851}{arXiv:1207.5851} (2012).
+preprint \href{https://arxiv.org/abs/1207.5851v3}{arXiv:1207.5851v3} (2015; first posted 2012).
 
 \bibitem{DF09}
 T.~Dzido and R.~Fidytek, \emph{On some three color Ramsey numbers for paths
@@ -794,6 +614,8 @@ A.~Gyárfás, M.~Ruszinkó, G.~N.~Sárközy and E.~Szemerédi,
 \emph{Three-color Ramsey numbers for paths}, Combinatorica \textbf{27}
 (2007), 35--69.
 \href{https://doi.org/10.1007/s00493-007-0043-4}{doi:10.1007/s00493-007-0043-4};
+author manuscript dated July 9, 2012,
+\url{https://www.renyi.hu/~gyarfas/Cikkek/120_sharp3cfin.pdf};
 corrigendum, Combinatorica \textbf{28} (2008), 499--502.
 \href{https://doi.org/10.1007/s00493-008-2395-9}{doi:10.1007/s00493-008-2395-9}.
 
@@ -801,14 +623,16 @@ corrigendum, Combinatorica \textbf{28} (2008), 499--502.
 M.~J.~H.~Heule, O.~Kullmann and V.~W.~Marek, \emph{Solving and verifying
 the Boolean Pythagorean triples problem via cube-and-conquer}, in: Theory
 and Applications of Satisfiability Testing -- SAT 2016, Lecture Notes in
-Comput.\ Sci.\ \textbf{9710}, Springer, 2016, 228--245.
+Comput.\ Sci.\ \textbf{9710}, Springer, 2016, 228--245;
+author preprint \href{https://arxiv.org/abs/1605.00723}{arXiv:1605.00723}.
 \href{https://doi.org/10.1007/978-3-319-40970-2_15}{doi:10.1007/978-3-319-40970-2\_15}.
 
 \bibitem{HKWB12}
 M.~J.~H.~Heule, O.~Kullmann, S.~Wieringa and A.~Biere, \emph{Cube and
 conquer: Guiding CDCL SAT solvers by lookaheads}, in: Hardware and
 Software: Verification and Testing (HVC 2011), Lecture Notes in Comput.\
-Sci.\ \textbf{7261}, Springer, 2012, 50--65.
+Sci.\ \textbf{7261}, Springer, 2012, 50--65;
+author manuscript \url{https://www.cs.cmu.edu/~mheule/publications/cube.pdf}.
 \href{https://doi.org/10.1007/978-3-642-34188-5_8}{doi:10.1007/978-3-642-34188-5\_8}.
 
 \bibitem{HS24}
@@ -849,7 +673,8 @@ Bull.\ Lond.\ Math.\ Soc.\ \textbf{54} (2022), 609--623.
 \bibitem{MORS15}
 L.~Maherani, G.~R.~Omidi, G.~Raeisi and M.~Shahsiah, \emph{On three-color
 Ramsey number of paths}, Graphs Combin.\ \textbf{31} (2015), 2299--2308.
-\href{https://doi.org/10.1007/s00373-014-1507-0}{doi:10.1007/s00373-014-1507-0}.
+\href{https://doi.org/10.1007/s00373-014-1507-0}{doi:10.1007/s00373-014-1507-0};
+author preprint \href{https://arxiv.org/abs/1207.3771v1}{arXiv:1207.3771v1} (2012).
 
 \bibitem{Mathlib20}
 The mathlib Community, \emph{The Lean mathematical library}, in: Proc.\
@@ -898,7 +723,7 @@ Comput.\ Sci.\ \textbf{12652}, Springer, 2021, 223--241.
 
 \bibitem{Wes25}
 W.~J.~Wesley, \emph{New bounds for some small multicolor Ramsey numbers},
-preprint, 2025. \href{https://arxiv.org/abs/2509.03784}{arXiv:2509.03784}.
+preprint, 2025. \href{https://arxiv.org/abs/2509.03784v1}{arXiv:2509.03784v1}.
 
 \bibitem{WHH14}
 N.~Wetzler, M.~J.~H.~Heule and W.~A.~Hunt, \emph{DRAT-trim: Efficient
@@ -927,6 +752,9 @@ Leo-Y-Zhang, \emph{CycleRamsey}, software repository on GitHub, 2026. \url{https
 \bibitem{ZhJ26}
 J.~Zhang, \emph{erdos557}, software repository on GitHub, 2026.
 \url{https://github.com/zhangjun725/erdos557}.
+Its opening README identifies the imported proof as found by GPT-6 Astra
+and packaged by T.~Adamczewski in \emph{erdos548},
+\url{https://github.com/tadamcz/erdos548}.
 
 \end{thebibliography}
 

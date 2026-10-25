@@ -1,0 +1,435 @@
+% Labels and cross-references refer to paper/paper.tex.
+% This is a separate explanatory fragment, not an additional paper input.
+% Formal-development details relocated from the paper.
+\section{The Lean formalization}\label{sec:lean}
+The declarations below connect the certificate checks with the mathematical theorem.
+
+\subsection{The statement}
+The definitions use Mathlib's unordered pairs \texttt{Sym2}; a coloring of
+$K_n$ assigns a color to every pair, and the diagonal pairs are never
+used.
+\begin{Verbatim}
+abbrev Col (n : ℕ) := Sym2 (Fin n) → Fin 3
+
+def HasMonoPath (n m : ℕ) (X : Col n) : Prop :=
+  ∃ (c : Fin 3) (p : Fin m → Fin n), Function.Injective p ∧
+    ∀ (i : ℕ) (h : i + 1 < m), X s(p ⟨i, by omega⟩, p ⟨i + 1, h⟩) = c
+
+noncomputable def ramsey3Path (m : ℕ) : ℕ :=
+  sInf {n | ∀ X : Col n, HasMonoPath n m X}
+
+theorem K18_has_mono_P10 (X : Sym2 (Fin 18) → Fin 3) :
+    ∃ (c : Fin 3) (p : Fin 10 → Fin 18), Function.Injective p ∧
+      ∀ (i : ℕ) (h : i + 1 < 10), X s(p ⟨i, by omega⟩, p ⟨i + 1, h⟩) = c
+
+theorem K17_no_mono_P10 : ¬ HasMonoPath 17 10 k17Col
+
+theorem R3_P10_eq_18 : ramsey3Path 10 = 18
+\end{Verbatim}
+A path is an injective map $p$ from $\{0,\dots,m-1\}$ to the vertices whose
+consecutive pairs all have color $c$, which is the usual (not necessarily
+induced) path on $m$ vertices. \texttt{ramsey3Path m} is the least $n$ for
+which every coloring of $K_n$ has a monochromatic $P_m$; the proof of
+\texttt{R3\_P10\_eq\_18} shows that $18$ belongs to that set and that no
+smaller $n$ does, since a good coloring of $K_{17}$ restricts to one of any
+smaller complete graph.
+
+\subsection{What is proved}
+Lean defines a closed-form encoder \texttt{encode n k}, which produces
+the formula of Section~\ref{sec:encoding}, and proves for all $n$ and $k$
+that it is sound for the colorings: a coloring with the fixed path
+that satisfies every generator inequality, with the auxiliaries set to
+their meaning, satisfies every clause (\texttt{encode\_sat}); a good
+coloring satisfies every path clause (\texttt{paths\_ok}). It proves
+Lemma~\ref{lem:fix} (\texttt{relabel}), that every generator preserves the
+fixed path and goodness (\texttt{gens\_fix}, \texttt{act\_noMono}),
+Lemma~\ref{lem:lex} (\texttt{orbit\_min}), the rung argument
+(\texttt{rung}), Lemma~\ref{lem:cover} (\texttt{unsat\_of\_cubes}), the
+chain of rungs, and the lower bound (Section~\ref{sec:lower}). The facts
+about formulas are stated with the DIMACS semantics: a literal is a nonzero
+integer, an assignment is a predicate on variables, and
+\[
+\texttt{UnsatWithPaths n m F}
+\]
+says that $F$ together with \emph{every} path clause for $P_m$ in $K_n$
+has no model.
+
+The proof of \texttt{K18\_has\_mono\_P10} uses nine hypotheses of this
+kind: one for each of the seven rungs, one for the cover formula
+\texttt{encode 18 9 ++ finalCubes.map negCube}, and one for every cube $c$
+of \texttt{finalCubes}, \texttt{encode 18 9 ++ cubeUnits c} (one
+universally quantified hypothesis over the list, so $15{,}964$ instances
+in all). The list \texttt{finalCubes} is parsed in Lean from the
+accompanying cube lists, and the cover formula and the cube hypothesis
+use this same list.
+The conditional theorems \texttt{K18\_P10\_of\_certs} and
+\texttt{R3\_P10\_eq\_18\_of\_certs} take the nine facts as hypotheses and
+depend only on Lean's standard axioms \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}, as does
+\texttt{K17\_no\_mono\_P10}.
+
+\subsection{How the certificates enter}\label{sec:certs}
+Each instance is proved by a Boolean check
+\texttt{checkUnsat n m F paths proof} and its soundness theorem
+\[
+\texttt{checkUnsat\_sound :\ checkUnsat n m F paths proof = true →
+UnsatWithPaths n m F},
+\]
+proved in Lean. The check confirms that every literal of $F$ is nonzero;
+that each entry of \texttt{paths} (a color and $m$ distinct vertices below
+$n$) yields a path clause, which Lean rebuilds from the path itself; and
+that Lean's verified LRAT checker (\texttt{Std.Tactic.BVDecide.LRAT}, with
+its soundness theorem) accepts \texttt{proof} as a refutation of $F$
+together with those path clauses. The bridge between the two semantics is
+a proved lemma (\texttt{toStd\_eval}): under the nonzero-literal condition,
+an assignment satisfying the formula in the DIMACS semantics above gives an
+assignment satisfying its translation into the checker's clause type, so
+the checker's soundness theorem yields \texttt{UnsatWithPaths n m F}, the
+same predicate that the rung and cover arguments consume. Only the path
+clauses that the trimmed proof uses are included. Nothing outside Lean decides what counts as a
+path clause, and the formula checked is a Lean term, not a file: the base
+formula used in the cube checks is parsed from the accompanying $K_{18}$
+formula and proved equal to \texttt{encode 18 9} by a comparison that is
+itself natively evaluated.
+
+Each certificate is stored as a compact string (an LRAT proof with
+delta-coded hints and implicit clause identifiers). It is decoded by total
+functions written in Lean. The decoder is outside the logical trusted
+base: whatever it produces, acceptance implies unsatisfiability by
+\texttt{checkUnsat\_sound}. The check is a closed Boolean term,
+and the kernel accepts its value through \texttt{Lean.ofReduceBool}, which
+evaluates it with Lean's compiled code. The $15{,}956$ cube facts are
+checked in $162$ modules, each covering a contiguous range of indices; a
+final module joins the ranges into \texttt{K18.all}.
+
+\subsection{Axioms and native evaluation}
+The axiom report of both main theorems is
+\begin{Verbatim}
+'R3P10.K18_has_mono_P10' depends on axioms:
+  [propext, Classical.choice, Lean.ofReduceBool, Lean.trustCompiler, Quot.sound]
+'R3P10.R3_P10_eq_18' depends on axioms:
+  [propext, Classical.choice, Lean.ofReduceBool, Lean.trustCompiler, Quot.sound]
+\end{Verbatim}
+The two non-standard axioms come from the natively evaluated certificate
+checks (Lean v4.32.2, pinned in the accompanying project). The trusted base
+therefore has three parts: Lean's kernel, which checks all the mathematics,
+including the lower bound and the reduction from colorings to formulas;
+Lean's compiler and interpreter, whose evaluation of the closed Boolean
+certificate checks the kernel accepts without reducing them itself
+(\texttt{Lean.ofReduceBool}, \texttt{Lean.trustCompiler}); and the
+compiled modules a build imports, which Lean does not recheck. The evaluated code
+is the verified LRAT checker, the decoder and the clause and path builders;
+by \texttt{checkUnsat\_sound}, only the faithful execution of this code is
+trusted, not its correctness. Lean does not recheck imported compiled
+modules, so a reader who wants the whole proof checked on one machine
+rebuilds the $162$ certificate modules (see the accompanying checking record). The SAT
+solver, the proof converter, the external checkers and the scripts that
+produced the certificates are not part of the trusted base of the Lean
+theorem.
+
+
+
+\section{Additional formal conventions}
+In Lean the coloring is written out edge by edge, and the argument is a
+general lemma (for all $n$ and $m$: if each color has a labeling of the
+vertices that is constant along edges of that color and whose classes have
+fewer than $m$ vertices, there is no monochromatic $P_m$) together with two
+finite facts decided by the kernel's own reduction (\texttt{decide
++kernel}), without native evaluation.
+
+
+The following two conventions refer to the fixed-path and lex-leader
+lemmas in the paper, respectively.
+\begin{quote}
+Here ``good'' means having no monochromatic $P_m$, for the same $m$
+as in the preceding encoding. The following lemma fixes only path edges.
+
+In the following lemma, goodness still refers to $P_m$ and $\Gamma$ is
+the preceding list of path-preserving vertex and color permutations.
+\end{quote}
+
+\section{Further certificate and implementation details}
+The formal statement agrees with Theorem~\ref{thm:main} as follows.
+In namespace \texttt{R3P10}, the theorem without certificate hypotheses is
+\texttt{R3\_P10\_eq\_18 : ramsey3Path 10 = 18}.
+Here \texttt{Col n} is \texttt{Sym2 (Fin n) → Fin 3}: colors on unordered
+vertex pairs. Diagonal values are unused and arbitrary; colors $0,1,2$
+replace $1,2,3$. The predicate \texttt{HasMonoPath n m X} means that there
+exist a color and an injective map from $m$ vertices to $n$ vertices whose
+consecutive pairs have that color. It requires no condition on other
+pairs, so it means our non-induced $P_m$, with $m$ vertices, not edges.
+The definition \texttt{ramsey3Path m} is the infimum in the natural numbers
+of the $n$ for which every \texttt{Col n} satisfies that predicate.
+The proof establishes membership at $18$ and a countercoloring at $17$;
+restriction of that coloring excludes every smaller $n$. Thus this
+infimum is precisely the Ramsey number in Theorem~\ref{thm:main}, with
+no remaining certificate hypotheses.
+
+Lean proves the lower bound, symmetry reductions, encoding soundness and
+assembly of refutations. Its verified LRAT checker checks propositional refutations in which each
+step cites earlier clauses by number. The final theorem's axioms are
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound},
+\texttt{Lean.ofReduceBool} and \texttt{Lean.trustCompiler}.
+The last two support evaluation by compiled code of certificate checks,
+cube-list lengths and equality of the parsed and defined base formulas. The proof trusts Lean's kernel,
+compiler and imported compiled modules; rebuilding the certificate modules
+avoids trusting previously built copies. The SAT solver, converter and
+external checkers are outside this trusted base. Literature attributions,
+historical timings and reports of separate checker executions are outside
+Lean. The final section of this note gives the formal declarations; the accompanying
+checking notes give the certificate-import details.
+
+
+The recorded complete computation checked all cases twice,
+in 249 and 301 CPU-hours. The second used six independent batches of
+12 CPU cores; its longest batch took 7.5 hours. The accompanying
+completion record gives the phase timings and software versions. The
+archived certificates \cite{Gra26} allow the certificate checks to be
+repeated without repeating the search. The default Lean build proves
+the conditional theorem; building the final theorem requires all the
+certificate modules. The README gives the full and sample-check commands
+and the requirements.
+
+
+
+\subsection{Path clauses generated during the search}\label{sec:prop}
+The solver is CaDiCaL~\cite{BFF+24} with an external propagator attached
+through the IPASIR-UP interface~\cite{FNP+23,FNP+24}. The propagator
+follows the assignment of the color variables. Whenever an edge receives a
+color $c$, it searches for paths on $m$ vertices through that edge, in the
+graph of edges not yet excluded from color $c$, all of whose edges except
+at most one are already known to have color $c$. If all edges are known,
+it reports the path clause as a conflict; if exactly one is unknown, it
+sets that edge to ``not $c$'' with the path clause as the reason. When the
+solver reaches a complete assignment, the propagator searches it
+exhaustively for a monochromatic $P_m$ and, if it finds one, rejects the
+assignment with that path clause. Every clause handed to the solver is a
+path clause and is written to a log.
+
+The refuted formula is therefore the base formula plus the logged path
+clauses (plus a cube's unit clauses), a subset of the formula with
+\emph{all} path clauses. A refutation of the subset refutes the full
+formula; nothing about the completeness of the propagator is needed.
+Conversely, a satisfying assignment is accepted only after the exhaustive
+search, and every coloring the method reports is rechecked by a separate
+program.
+
+
+
+
+\subsection{The cubes}
+The
+cubes were produced by the solver itself, with the propagator attached.
+Walking the edges in edge order, at each edge it assumes each color in
+turn and runs unit propagation (including the path propagator); colors
+leading to a conflict are dropped, an edge with a single surviving color
+is fixed without counting as a split, and the walk stops after $10$ edges
+with at least two surviving colors. This produced $15{,}316$ cubes of
+$11$ to $20$ literals, and $18$ path clauses learned during generation.
+
+Sixteen of these cubes, each with $11$ literals, are listed in
+\path{data/k18/split/parents.txt}. Each was split once more in the same way, by four further split
+edges, into $41$ children, $656$ in all ($144$ more path clauses were
+learned during this split). The final list consists of the $15{,}300$
+remaining first-level cubes and the $656$ children: $15{,}956$ cubes.
+
+\subsection{The cover formula}\label{sec:cover}
+Cubes whose propagation fails are dropped during generation, so the list is
+not complete by construction. Its completeness is proved instead by one
+more certificate: the \emph{cover formula} of Section~\ref{sec:cnc}, which consists of the base
+formula, the $162$ path clauses learned during generation, and the
+negation of every final cube (one clause per cube), $30{,}790$ clauses in
+all, is unsatisfiable.
+
+With $F$ the $K_{18}$ base formula, Lemma~\ref{lem:cover} and the
+$15{,}957$ certificates give the unsatisfiability of the top rung, and the
+successive bounds then give $\R(P_{10})\le18$. In Lean this is the theorem combining
+the cover certificate with the per-cube certificates
+(\texttt{unsat\_of\_cubes}); the per-cube facts enter through
+\texttt{cubes\_of\_range}, which turns a theorem
+\texttt{K18.all :\ ∀ i, 0 ≤ i → i < 15956 → CubeOK i} over the list's
+indices into the statement for every member of the list, given that the
+list has length $15{,}956$.
+
+\section{Formal declarations}\label{note:declarations}
+The declarations below give the definitions used by the formal theorem.
+The coloring \texttt{k17Col} is the coloring of Section~\ref{sec:lower}.
+
+\begin{Verbatim}
+abbrev Col (n : ℕ) := Sym2 (Fin n) → Fin 3
+
+def HasMonoPath (n m : ℕ) (X : Col n) : Prop :=
+  ∃ (c : Fin 3) (p : Fin m → Fin n), Function.Injective p ∧
+    ∀ (i : ℕ) (h : i + 1 < m), X s(p ⟨i, by omega⟩, p ⟨i + 1, h⟩) = c
+
+noncomputable def ramsey3Path (m : ℕ) : ℕ :=
+  sInf {n | ∀ X : Col n, HasMonoPath n m X}
+
+theorem K18_has_mono_P10 (X : Sym2 (Fin 18) → Fin 3) :
+    ∃ (c : Fin 3) (p : Fin 10 → Fin 18), Function.Injective p ∧
+      ∀ (i : ℕ) (h : i + 1 < 10), X s(p ⟨i, by omega⟩, p ⟨i + 1, h⟩) = c
+
+theorem K17_no_mono_P10 : ¬ HasMonoPath 17 10 k17Col
+
+theorem R3_P10_eq_18 : ramsey3Path 10 = 18
+\end{Verbatim}
+
+\section{Complete verification statement and historical measurements}
+The formal theorem is
+\texttt{R3P10.R3\_P10\_eq\_18 : ramsey3Path 10 = 18}.
+Its colorings assign one of the colors $0,1,2$ to every unordered pair of
+vertices, including unused diagonal pairs. Relabeling the colors as
+$1,2,3$ gives the convention of Theorem~\ref{thm:main}.
+A formal monochromatic path is an injective map from $\{0,\dots,m-1\}$
+whose consecutive pairs all have one color, with no condition on the
+other pairs. Thus it is the same non-induced path on $m$ vertices used
+here. The formal Ramsey number is the natural-number infimum of the
+orders at which every coloring contains such a path. The proof shows
+that this set contains $18$ and excludes every smaller order by
+restricting the countercoloring on $17$ vertices. The final theorem has
+no certificate hypotheses; the finite coloring in its lower bound is
+exactly the construction of Section~\ref{sec:lower}.
+
+Lean proves the reductions, the lower bound and the soundness of the
+certificate checker. The certificate checks, the
+cube-list lengths and the equality of the parsed and defined formulas
+are evaluated by compiled code. The permitted axioms are
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound},
+\texttt{Lean.ofReduceBool} and \texttt{Lean.trustCompiler}.
+Accordingly, the proof depends on Lean's kernel, compiler and imported
+compiled modules. The SAT solver and proof converter produce certificates
+whose correctness is checked, rather than assumed; the separate checker
+executions, literature attributions and timing records are outside Lean.
+
+The default Lean build proves the conditional theorem; building the
+final theorem requires all the certificate modules.
+
+The complete computation was checked twice, in 249 and 301 CPU-hours.
+The second used six independent batches of 12 CPU cores; its longest
+batch took 7.5 hours. Source code, the completed-computation record and
+checking instructions accompany the paper. The archived
+certificates~\cite{Gra26} permit checking without repeating the search.
+
+
+\subsection{Previously quoted source passages}
+For this construction, Gyárfás, Ruszinkó, Sárközy and Szemerédi
+\cite[author manuscript, July 9, 2012, Section~1.1, paragraph following
+Theorem~1]{GRSS07} write: ``One type comes from a `blow-up' of a
+factorization of $K_4$.'' The odd and even part sizes are specified there;
+see also Dybizbański, Dzido and Radziszowski~\cite[arXiv:1207.5851v3,
+Section~2, paragraph following Conjecture~2]{DDR16}.
+
+The following excerpts and locators are retained from the earlier presentation; the paper now cites their mathematical content in prose. The full texts of Böving et al.\ \cite{BBC+25} and Kirchweger, Manrique and Szeider \cite{KMS26} were unavailable in the presentation review, so those quotations have not been independently reauthenticated here.
+
+The advance is the upper bound $\R(P_{10})\le18$.
+Gyárfás, Ruszinkó, Sárközy and Szemerédi proved
+$\R(P_n)=2n-2+(n\bmod2)$ for all sufficiently large $n$
+\cite[Theorem~1]{GRSS07}, with its corrigendum.
+Dybizbański, Dzido and Radziszowski proved $\R(P_8)=14$
+(Theorem~10) and $\R(P_9)\le17$ (Theorem~8), which with their Section~2
+lower bound gives $\R(P_9)=17$ \cite{DDR16}.
+Radziszowski's survey \cite[p.~65, Sections~6.4 and~6.4.1(c)]{Rad26}
+records the formula through $n=9$ and $P_{10}$ as the first open case.
+Our $K_{17}$ lower bound is the even-case blow-up in
+\cite[Section~1.1, after Theorem~1]{GRSS07}, also given in
+\cite[Section~2]{DDR16}.
+In their Conjecture~2, Dybizbański, Dzido and Radziszowski attribute
+the suggestion to Faudree and Schelp (1975), quoting ``they feel''.
+
+This paper settles $n=10$ of Conjecture~\ref{conj:FS}; the general
+conjecture remains open. The difficult step is obtaining a tractable case
+split without losing a coloring: fixing a guaranteed path and imposing
+symmetry constraints must be jointly sound, and discarded branches leave
+a coverage obligation. A lexicographic minimum and a separate refutation
+excluding all assignments outside the selected cases discharge these
+obligations. Dybizbański, Dzido and
+Radziszowski's closing remarks identify the difficulty:
+``the complexity of case analysis appears to be quite harder''
+\cite[Section~5]{DDR16}. Referring to their attempts at $P_{10}$ and
+$P_{11}$, they also state, ``We did not complete these proofs''
+\cite[Section~5]{DDR16}.
+
+The method combines cube-and-conquer with symmetry breaking and verified
+certificate checking. Heule, Kullmann, Wieringa and Biere's
+cube-and-conquer \cite[Section~3]{HKWB12} ``partitions a formula into many
+subformulas''. For certificate import we use the verified ``LRAT UNSAT
+proof checker'' of Böving et al.\ \cite[introduction and Section~4.4]{BBC+25}.
+LRAT certificates are propositional refutations whose steps refer to
+earlier clauses by number.
+Szeider's streaming tool \texttt{lrat-catcher} ``turns a certificate into a
+Lean theorem'' \cite[abstract]{Sze26}; our import uses the same checker
+with its own compact encoding. Kirchweger, Manrique and Szeider describe
+``a unified, machine-checked verification pipeline'' for graph generation
+\cite[abstract]{KMS26}.
+
+Computational precedents include Heule, Kullmann and Marek's
+Boolean Pythagorean triples proof \cite[Theorem~1]{HKM16}, Codish, Frank,
+Itzhakov and Miller's $R(4,3,3)=30$ \cite[abstract]{CFIM16}, and Heule and
+Scheucher's empty-hexagon theorem \cite{HS24}, with Subercaseaux et al.'s
+formal verification \cite{SNG+24}. In related Ramsey computations, Wesley
+proves $R(C_3,C_6,C_6)=R(C_5,C_6,C_6)=15$
+\cite[Theorems~3 and~4]{Wes25}; Galindez reports
+``$R(C_{10},C_{10},C_{10})\le26$'' \cite[title and description]{Gal26}, using
+cube-and-conquer and Kirchweger--Szeider's ``SAT modulo symmetries''
+\cite[title]{KS24}. Shao, Jiang, Xu and Wang provide a
+``reproduction package: $R(C_4,C_6,C_8)=12$'' \cite[title]{SJXW26}, and
+Leo-Y-Zhang provides \textit{CycleRamsey} \cite{Zha26}.
+Zhang's tree-bound corollary $R_k(T)\le k(n-2)+2$ for trees on $n\ge2$
+vertices \cite[README, opening paragraph]{ZhJ26} comes from the GPT-6 Astra
+proof packaged by Adamczewski; it gives $\R(P_{10})\le26$.
+
+Earlier path and cycle literature includes Dzido \cite{Dzi05},
+Dzido--Fidytek \cite{DF09}, Omidi--Raeisi \cite{OR11},
+Maherani et al.\ \cite[Theorem~1.1]{MORS15}, Benevides--Skokan
+\cite{BS09}, Figaj--Łuczak \cite{FL07} and Letzter \cite{Let22}.
+For small cases, see Irving, Yang--Rowlinson and Yang
+\cite{Irv74,YR94,YR92,Yan95}, and Radziszowski's survey
+\cite[p.~65, Section~6.4.1(c)]{Rad26}.
+The extremal background is due to Erdős--Gallai \cite{EG59},
+Faudree--Schelp \cite{FS75}, whose theorem is recalled by Dybizbański,
+Dzido and Radziszowski \cite[Theorem~4]{DDR16}. See also Kopylov's ``Maximal paths and cycles in a graph'' \cite[title]{Kop77}.
+Allen et al.\ study paths and cycles with few color changes
+\cite[title]{ABC+26}.
+We use de~Moura and Ullrich's Lean~4 \cite{MU21}, the mathlib Community's
+library \cite{Mathlib20}, Wetzler, Heule and Hunt's \texttt{drat-trim}
+\cite{WHH14} for conversion to Cruz-Filipe et al.'s LRAT format
+\cite{CHH+17}, and Tan, Heule and Myreen's \texttt{cake\_lpr}
+\cite{THM21} for the separate checks.
+
+\section{Source locators for the paper}
+The following pinpoints accompany the ordinary citations in the paper. Retained published-v5 locator strings reproduce that version's wording: its description of a README as ``pinned'' has no immutable upstream commit in the available evidence.
+\begin{itemize}
+\item \cite{DDR16}: Preprint locators: Conjecture~2, Theorems~4, 8 and~10; Section~2 (lower construction), Section~4 (the $P_9$ bound) and Section~5 (closing remarks on $P_{10}$ and $P_{11}$).
+\item \cite{GRSS07}: Author-manuscript locators: Theorem~1 and Section~1.1, paragraph following Theorem~1 (the odd and even blow-up constructions).
+\item \cite{Rad26}: Locator: p.~65, Sections~6.4 and~6.4.1(c).
+\item \cite{HKWB12}: Method locator: Section~3.
+\item \cite{BBC+25}: Checker locators: introduction and Section~4.4.
+\item \cite{Sze26}: Streaming-import description: abstract.
+\item \cite{KMS26}: Graph-generation description: abstract.
+\item \cite{Gal26}: Bound and method locators: record title and description.
+\item \cite{CGLR96}: Encoding locator: Section~3, Proposition~3.1 and the following auxiliary-variable clauses.
+\item \cite{ZhJ26}: Tree-bound corollary and imported-proof attribution: opening README paragraph.
+\item \cite{CFIM16}: abstract (the value $R(4,3,3)=30$).
+\item \cite{GRSS07}: retained published-v5 pinpoints: author manuscript, July 9, 2012, Theorem~1.
+\item \cite{DDR16}: retained published-v5 pinpoints: arXiv:1207.5851v3, Theorems~10 and~8 with Section~2; arXiv:1207.5851v3, Section~2; arXiv:1207.5851v3, Theorem~4; arXiv:1207.5851v3, Section~5; arXiv:1207.5851v3, Section~4.
+\item \cite{Rad26}: retained published-v5 pinpoints: revision~18, p.~65, Section~6.4.1(c); revision~18, p.~65, Sections~6.4 and~6.4.1(c).
+\item \cite{HKWB12}: retained published-v5 pinpoints: author manuscript, Section~3, Overview.
+\item \cite{BBC+25}: retained published-v5 pinpoints: version of record, introduction, contributions, and
+Section~4.4.
+\item \cite{Sze26}: retained published-v5 pinpoints: arXiv:2607.00815v2, abstract.
+\item \cite{KMS26}: retained published-v5 pinpoints: IJCAR 2026, abstract.
+\item \cite{HKM16}: retained published-v5 pinpoints: author preprint, Theorem~1.
+\item \cite{CFIM16}: retained published-v5 pinpoints: author preprint, abstract.
+\item \cite{HS24}: retained published-v5 pinpoints: TACAS 2024, title.
+\item \cite{SNG+24}: retained published-v5 pinpoints: ITP 2024, title.
+\item \cite{Wes25}: retained published-v5 pinpoints: arXiv:2509.03784v1.
+\item \cite{Gal26}: retained published-v5 pinpoints: Zenodo record title.
+\item \cite{KS24}: retained published-v5 pinpoints: TOCL 2024, title.
+\item \cite{SJXW26}: retained published-v5 pinpoints: Zenodo record title.
+\item \cite{Zha26}: retained published-v5 pinpoints: repository title.
+\item \cite{ZhJ26}: retained published-v5 pinpoints: pinned README, Ramsey corollary.
+\item \cite{ABC+26}: retained published-v5 pinpoints: arXiv:2607.03243v1, title.
+\item \cite{MORS15}: retained published-v5 pinpoints: arXiv:1207.3771v1, Theorem~1.1.
+\item \cite{CGLR96}: retained published-v5 pinpoints: technical report TR-1996-012, Section~3,
+Proposition~3.1 and the following auxiliary-variable clauses.
+\end{itemize}

@@ -6,6 +6,7 @@
 \usepackage[title]{appendix}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\setlength{\emergencystretch}{2em}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \hypersetup{pdftitle={The Thomson problem for N = 10},pdfauthor={P. Graham}}
 \newtheorem{theorem}{Theorem}
@@ -17,33 +18,23 @@
 \date{October 24, 2026}
 \begin{document}
 \maketitle
-\begin{center}Version 5\end{center}
+\begin{center}Version 6\end{center}
 \begin{abstract}
-Aravind Karthigeyan's AI-generated nine-point project~\cite[README,
-revision \texttt{168ff0c}]{n9} gives a Lean proof of ``global optimality
-and uniqueness for nine distinct points'' on the unit sphere: the
-$D_{3h}$ tricapped trigonal prism, with equality up to orthogonal
-transformation and permutation. We build directly on its proof design
-and reuse most of its MIT-licensed Lean code.
-For ten distinct points on the unit sphere, we prove that the
-bicapped square antiprism uniquely minimizes Coulomb energy, up to
-orthogonal maps and relabeling. This settles the ten-point case of
-Thomson's problem, associated with his 1904 atomic model. The height is
-the unique critical point in an exact rational interval. The new inputs
-are the ten-point energy, interval-classification and Hessian certificates.
-The proof first confines all competitors of no greater energy to one
-inner-product pattern, aligns them with the candidate, and applies a
-quantitative local energy bound. Lean checks the complete optimality
-and equality theorem from the definitions.
+For ten distinct points on the unit sphere, we prove that the bicapped
+square antiprism uniquely minimizes Coulomb energy, up to orthogonal
+transformations and relabeling.
+We build on the Lean proof directed by Aravind Karthigeyan of the
+tricapped trigonal prism's nine-point optimality and uniqueness.
+We use the three-point positivity method of Bachoc and Vallentin and of
+Cohn and Woo. A three-point semidefinite bound confines every competitor of
+no greater energy to short intervals around the candidate's inner
+products. Gram-determinant tests determine their assignment to pairs;
+orthogonal alignment and a quantitative local energy inequality
+then force congruence. The candidate's height is the unique critical point
+in a rational interval. We formalize the argument in Lean.
 \end{abstract}
 
-The proofs, the Lean formalization, the certificate checkers and the text
-were produced by AI models (from OpenAI and Anthropic), working under the
-author's direction.
-
-\section{Statement and candidate}\label{sec:candidate}
-This section specifies the configuration and the exact optimization
-problem. Every competitor consists of ten distinct unit vectors.
+\section{Introduction}\label{sec:candidate}
 For an injective map $x:\{0,\ldots,9\}\to S^2\subset\R^3$, put
 \[
   \E(x)=\sum_{0\leq i<j\leq9}\frac1{\|x_i-x_j\|}.
@@ -52,17 +43,13 @@ We call two configurations congruent when one is obtained from the other
 by an element of $O(3)$ and a permutation of the ten indices; reflections
 are allowed.
 
-For $0<h<1$, write $r=\sqrt{1-h^2}$ and $q=r/\sqrt2$. Define $p(h)$ by
-\begin{align*}
- p_0&=(0,0,1),&p_1&=(0,0,-1),\\
- p_2&=(r,0,h),&p_3&=(0,r,h),&p_4&=(-r,0,h),&p_5&=(0,-r,h),\\
- p_6&=(q,q,-h),&p_7&=(-q,q,-h),&p_8&=(-q,-q,-h),&p_9&=(q,-q,-h).
-\end{align*}
-The family energy is $F(h)=\E(p(h))$, with the explicit expression
+The candidate $p(h)$ is the bicapped square antiprism: two poles and two
+squares at opposite heights, rotated by $\pi/4$
+(Figure~\ref{fig:antiprism}); Section~\ref{app:candidate} gives its coordinates.
+The energy of this family is $F(h)=\E(p(h))$, with the explicit expression
 in~\eqref{eq:energy}. Write $S(h)=F'(h)$. Let $[a,b]$ be the exact
 rational interval in Appendix~\ref{app:interval}, and define $h_*$ by
-$S(h_*)=0$ and $h_*\in[a,b]$. Its decimal begins
-$0.422687424043986\ldots$.
+$S(h_*)=0$ and $h_*\in[a,b]$; numerically, $h_*\approx0.4226874$.
 
 \begin{theorem}\label{thm:main}
 The parameter $h_*$ exists and is unique in $[a,b]$. The configuration
@@ -76,209 +63,89 @@ $x:\{0,\ldots,9\}\to S^2$,
 \]
 \end{theorem}
 
-No symmetry is assumed of competitors. The candidate has two poles and
-two squares at opposite heights, rotated by $\pi/4$ (Figure~\ref{fig:antiprism}).
-Optimizing its height alone would not exclude asymmetric competitors.
+Thomson wrote \emph{On the structure of the atom}~\cite[p.~237]{thomson}.
+Our formalization reuses most of the nine-point Lean proof of optimality
+and uniqueness directed by Karthigeyan~\cite{n9}.
+For ten points, the new three-point, classification and Hessian bounds
+establish global optimality and uniqueness of the bicapped square antiprism.
+The main difficulty is making the three-point bound accurate enough to force
+the candidate's seven inner-product intervals.
 
-\paragraph{Context and contribution.}
-The historical reference is Thomson's 1904 paper~\cite[p.~237]{thomson},
-whose opening specifies the ``motion of a ring of $n$ negatively
-electrified particles''. For the general question, Cohn and Woo~\cite[Section~1.1, arXiv v2]{cohnwoo}
-use the phrase ``potential energy minimization''. Here the metric space
-is the unit sphere and the potential is inverse distance.
-This work builds directly on Aravind Karthigeyan's AI-generated
-nine-point project~\cite[README, revision \texttt{168ff0c}]{n9}.
-Its stated ``global optimality and uniqueness for nine distinct points''
-is for the $D_{3h}$ tricapped trigonal prism on the unit sphere, with
-equality up to orthogonal transformation and permutation.
-We reuse most of its MIT-licensed Lean code and follow its proof design:
-the statement structure, three-point certificate checks, Bernstein
-inequalities, interval classification, orthogonal alignment, higher-order
-error bound and interval Hessian method. The new inputs are the ten-point
-energy, interval-classification and Hessian certificates. The hardest step
-is the three-point energy certificate: its error must be small enough to
-force geometric localization. The interval centered at $-1$ contains
-the antipodal pole pair; a five-point counting argument supplies the
-linearly independent triple needed for classification.
+F\"oppl's list of stable arrangements includes
+$10=1+4+4+1$~\cite[p.~190]{foppl}.
+Yudin's simplex and cross-polytope optima and Andreev's icosahedron
+are credited by Cohn and Kumar~\cite[Section~1]{cohnkumar}; see also
+\cite{yudin,andreev}. Cohn and Kumar's universal-optimality result is
+Theorem~1.2 and Table~1 of~\cite{cohnkumar}.
+Schwartz proved the five-point case~\cite[Theorem~1.1]{schwartz}.
+For numerical data, see Erber and Hockney~\cite[Fermilab preprint, Table~1]{erber}
+and Wales and Ulker~\cite{cambridge}.
 
-\paragraph{Earlier and concurrent work.}
-F\"oppl's 1912 ICM contribution~\cite[p.~190]{foppl} calls the tetrahedral,
-octahedral and icosahedral arrangements ``stabile'', a stability statement.
-Cohn and Kumar~\cite[Section~1, arXiv v2]{cohnkumar} credit Yudin~\cite{yudin} with
-``regular simplex and cross polytope'' optima and Andreev~\cite{andreev} with the
-icosahedron; their own universal-optimality result is Theorem~1.2 and
-Table~1. Schwartz's five-point result is Theorem~1.1 of arXiv
-v5~\cite{schwartz}. The numerical ten-point predecessors are Erber and
-Hockney's Table~1~\cite{erber} and Wales and Ulker's database entry~\cite{cambridge}.
-Delsarte, Goethals and Seidel's~\cite{delsarte} lineage is credited in Bachoc and
-Vallentin's Section~1 (arXiv v4); Yudin's energy-bound lineage in Cohn and
-Woo's Section~1.1 (arXiv v2). Our three-point tools are their
-Corollary~3.5 and Theorem~5, respectively~\cite{bachoc,cohnwoo}.
+Bachoc and Vallentin~\cite[Section~1]{bachoc} credit the linear programming method to
+Delsarte, Goethals and Seidel~\cite{delsarte}. Cohn and
+Woo~\cite[Section~1.1]{cohnwoo} credit its first energy-minimization application to Yudin~\cite{yudin}.
+Our three-point bound uses Bachoc and Vallentin~\cite[Corollary~3.5]{bachoc}
+and Cohn and Woo~\cite[Theorem~5]{cohnwoo}.
 
-Nearby formal work includes Hung Tran's AI-assisted seven-point
-\nolinkurl{thomson_seven} and \nolinkurl{thomson_seven_unique}~\cite{n7},
-and Kryvonos, Liehr and Taylor's eight-point Theorem~1.1 (arXiv
-v1)~\cite{n8}. Joseph Tooby-Smith and Alex Zughaid separately give an
-eight-point ``warrant'', still ``a work in progress''~\cite{n8warrant}.
-Alex Zarco's five-point README states \nolinkurl{five_coulomb} and
-\nolinkurl{five_coulomb_unique}, with status ``produced by AI models''
-and ``not peer reviewed''~\cite[Opening; named Lean declarations]{zarco5};
-its ``Known results'' credits Schwartz. His seven-point README calls
-its result an ``AI-produced warrant'' for ``the logarithmic energy of
-seven points'', ``not peer reviewed''; its Coulomb section says it
-``uses Hung Tran's local lemma''~\cite[Opening; Coulomb]{zarco7}.
-Concurrent ten-point work by \texttt{saberwatchmanga} (formerly
-\texttt{terry2418}) includes the October 7 posting~\cite[README, revision
-\texttt{7ba9eb3}]{concurrent}, whose ``Thomson N=10 local minimum'' section
-states ``Global minimality is not proved.''
-The local project's Status section reports ``a local minimum in the full
-space of ten unit-sphere points''~\cite[Status]{concurrentlocal}. For ten distinct
-unit-sphere points, energy at most $32.717$ requires ``at least one pair
-farther apart than 1.935''~\cite[Opening]{concurrentchord}; that README
-says ``Global minimality is not proved.''
-Neither is a premise here. We share the cutoff $32.717$; whether our
-choice was independent or taken from that work cannot be established.
+Tran proves optimality and uniqueness of the pentagonal bipyramid for
+seven charges~\cite{n7}. Kryvonos, Liehr and Taylor prove optimality and
+uniqueness of the eight-point square antiprism~\cite[Theorem~1.1]{n8}.
+Tooby-Smith and Zughaid give a separate, ongoing Lean development
+for eight charges~\cite{n8warrant}.
+Zarco gives exact three-point certificates for the five-point Riesz
+energies with exponents one through six and Lean developments for exponents
+one and two~\cite{zarco5}. Zarco's seven-point project treats uniqueness
+of the pentagonal bipyramid for logarithmic and inverse-square energies;
+its Coulomb argument uses Tran's local lemma~\cite{zarco7}.
+Concurrent ten-point Lean work by \texttt{saberwatchmanga} (formerly
+\texttt{terry2418}) includes the October 7 local-minimum
+proof in the full space of ten unit-sphere points~\cite{concurrent,concurrentlocal}.
+The cutoff $32.717$ also appears in~\cite{concurrentchord}, which proves
+that energy at most this value forces a pair farther apart than $1.935$.
 
-\paragraph{Proof overview.}
-For a competitor of energy at most $\E(p)$, a two-point bound first gives
-$\langle x_i,x_j\rangle<13/20$ for distinct indices. A degree-16 polynomial
-minorant and a rational three-point certificate bound the total pairwise
-slack (pair energy minus its polynomial lower bound) by $L<10^{-30}$. Outside seven intervals of radius
-$\delta=10^{-10}$ around the candidate's inner products, even one pair's
-slack would be at least $10^{-30}$. A finite Gram-determinant classification
-forces a common interval pattern after relabeling. Orthogonal least-squares
-alignment then gives total displacement
-$\rho=(\sum_i\|y_i-p_i\|^2)^{1/2}\leq10000\delta=10^{-6}$
-for the aligned configuration $y$.
-Full spherical stationarity, a constrained-Hessian bound and a cubic
-remainder estimate give $\E(y)-\E(p)\geq\rho^2/200$ for an aligned
-configuration with $\rho\leq10^{-3}$. Hence $\rho=0$.
-Appendices~\ref{sec:global} and~\ref{sec:local} give every reduction.
+The proofs, the Lean formalization, the certificate checkers and the text
+were produced by AI models (from OpenAI and Anthropic), working under the
+author's direction. This work is checked in Lean from the definitions (Section~\ref{sec:verification}) and
+has not yet been reviewed by experts.
 
-% Formal bridge begin
-\paragraph{Formal theorem.}
-The closed Lean declarations have types
-{\small
-\begin{verbatim}
-ThomsonN10.thomson_ten_complete : ThomsonN10.Challenge.CompleteTarget
-ThomsonN10.candidate_admissible (h : ThomsonN10.CandidateParameter) :
-  ThomsonN10.IsSphereConfiguration (ThomsonN10.candidate h)
-\end{verbatim}
-}
-Here \texttt{CompleteTarget} asserts that exactly one real height in the
-specified interval satisfies the stationarity equation; and for every
-\texttt{CandidateParameter h} and every \texttt{Configuration x}
-satisfying \texttt{IsSphereConfiguration x}, \texttt{candidate h} has
-energy at most that of \texttt{x}, and \texttt{x} has that same energy
-if and only if \texttt{Congruent x (candidate h)}.
-The parameter subtype imposes precisely
-that interval and equation; \texttt{heightLower}, \texttt{heightUpper} and
-\texttt{stationarity} are $a$, $b$ and $S$ above. The existence clause
-prevents vacuous parameter quantification, and \texttt{candidate h} has
-the displayed coordinates.
-
-A \texttt{Configuration} is a map from \texttt{Fin 10} to
-\texttt{EuclideanSpace} over the reals on \texttt{Fin 3}, hence a labeled
-ten-point map into $\R^3$. The sphere predicate means unit norm at every
-index and injectivity. The formal \texttt{coulombEnergy} is the displayed
-sum over unordered pairs. Lean's real inverse at zero is zero: collisions
-are excluded by injectivity, rather than assigned infinite energy.
-The predicate \texttt{Congruent} uses a real-linear isometric equivalence
-and a permutation of \texttt{Fin 10}, exactly $O(3)$ (including reflections)
-and relabeling. The separate admissibility theorem supplies the candidate's
-unit norms and injectivity. Together these declarations give
-Theorem~\ref{thm:main}, without external certificate hypotheses.
-% Formal bridge end
-
-\paragraph{Checked scope and reproduction.}
-Lean proves the root assertion, candidate admissibility, global optimality
-and the entire equality equivalence from the definitions; all certificate
-obligations are discharged. The trust base is the Lean kernel, the standard
-axioms \texttt{propext}, \texttt{Classical.choice},
-\texttt{Quot.sound}, and
-the match between the formal definitions and the statement above. There is
-no native-computation axiom. The independent Python implementation checks
-the same rational three-point certificate and rejects its corruptions; it
-does not independently prove the geometric or local arguments. Its decimal
-energy enclosure and figure check are supplementary, outside the Lean
-theorem. The figure is drawn from the Lean
-definition of the candidate by \nolinkurl{checks/draw_antiprism.py}, which
-checks that the drawn points are the candidate's; it is not part of the
-proof.
-Appendix~\ref{app:formal} specifies these boundaries.
-
-With elan, Git, gzip and Python 3.10 or later installed, run from the
-result folder:
-\begin{verbatim}
-cd lean
-lake exe cache get
-lake build
-cd ..
-python3 -I checks/check.py
-\end{verbatim}
-The toolchain and dependencies are pinned. The guides in
-\nolinkurl{lean/README.md} and \nolinkurl{checks/README.md} give memory
-requirements and the certificate inputs.
-
-\clearpage
-\begin{appendices}
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=.85\linewidth]{../data/antiprism.pdf}
-\caption{The candidate $p(h_*)$. Left: a side view of the ten points and
-the edges of their convex hull, hidden edges dashed. The poles $p_0,p_1$
-are red, the upper square $p_2,\ldots,p_5$ at height $h=h_*$ is blue, and
-the lower square $p_6,\ldots,p_9$ at height $-h$ is orange; the dashed
-ellipses are the equator and the two circles of latitude. Right: the view
-from above, in which the lower square (dashed) is the upper square rotated
-by $\pi/4$. A label $i$ marks $p_i$.}
+\includegraphics[width=.70\linewidth]{../data/antiprism.pdf}
+\caption{The bicapped square antiprism, viewed from the side and from above.
+The labels identify the points in Section~\ref{app:candidate}.}
 \label{fig:antiprism}
 \end{figure}
 
-\section{Candidate details}\label{app:candidate}
-This appendix records the family energy and the quantitative parameter
-facts used in Theorem~\ref{thm:main}.
+\section{Proof of the main theorem}
+Optimizing its height alone would not exclude asymmetric competitors.
+The three-point bound forces pairwise inner products into short intervals;
+Gram-determinant tests determine their assignment to pairs,
+and orthogonal alignment brings the competitor into the region where a
+positive second variation and an explicit remainder bound apply.
+
+\subsection{The bicapped square antiprism}\label{app:candidate}
+We define the candidate and isolate its height.
+For $0<h<1$, write $r=\sqrt{1-h^2}$ and $q=r/\sqrt2$. Define $p(h)$ by
+\begin{align*}
+ p_0&=(0,0,1),&p_1&=(0,0,-1),\\
+ p_2&=(r,0,h),&p_3&=(0,r,h),&p_4&=(-r,0,h),&p_5&=(0,-r,h),\\
+ p_6&=(q,q,-h),&p_7&=(-q,q,-h),&p_8&=(-q,-q,-h),&p_9&=(q,-q,-h).
+\end{align*}
+
 These coordinates are preserved by rotation through $\pi/4$ about the
 polar axis followed by reflection in the equatorial plane, and by
 reflection in the vertical plane through $p_2$ and the poles. The
 16-element group generated by these maps is conventionally denoted
 $D_{4d}$.
 
-The 45 unordered pairs consist of one pole pair, eight neighboring and
-four opposite pairs within the squares, two classes of eight pairs
-between the squares, and sixteen pole--square pairs. Grouping them gives
-\begin{align}
- F(h)={}&\frac12+\frac{4\sqrt2+2}{\sqrt{1-h^2}}
- +\frac8{\sqrt{2-\sqrt2+(2+\sqrt2)h^2}}
- +\frac8{\sqrt{2+\sqrt2+(2-\sqrt2)h^2}}\nonumber\\
- &+\frac8{\sqrt{2-2h}}+\frac8{\sqrt{2+2h}}.\label{eq:energy}
-\end{align}
-The terms appear in that order: pole pair, pairs within the squares,
-the two between-square classes, and the two pole--square classes.
-Write $S(h)=F'(h)$ for the derivative of this energy with respect to
-height. Its explicit formula is given in Appendix~\ref{app:interval}.
-Let $[a,b]$ be the exact rational interval specified in
-Appendix~\ref{app:interval}. It satisfies $0<a<b<1$ and
-$b-a=1/(2D)<2^{-300}$, where the integer denominator $D$ is given there.
-For orientation, this narrow interval lies inside
-\[ [0.42268742404398,0.42268742404400]. \]
+
+
 The derivative $S$ is continuous and strictly increasing on $[a,b]$,
 and its endpoint signs satisfy $S(a)<0<S(b)$. The intermediate value
 theorem and strict monotonicity therefore give a unique zero in this
 interval. Define $h_*$ by $S(h_*)=0$ and $h_*\in[a,b]$.
-Its decimal begins $0.422687424043986\ldots$. The root existence and
-uniqueness in this specified interval are proved in Lean. This interval
-selects the candidate; the global theorem still compares it with every
-admissible configuration, including all other heights.
-
-
-
-Here and below, admissibility means precisely unit norm and injectivity.
-The candidate is admissible: in the coordinates above, unit norm follows
-from $r^2=1-h_*^2$ and $2q^2=r^2$. The two poles and the two squares
-have distinct heights; within each square the four planar coordinates
-are distinct because $r,q>0$. Thus the ten points are distinct. Appendix~\ref{app:statements} identifies the formal statements
-of both the optimization theorem and this candidate-validity assertion.
+An admissible configuration is an injective map to $S^2$.
+The coordinate verification is in Appendix~\ref{app:energydata}.
 
 The seven distinct inner products of the candidate are
 \[
@@ -286,85 +153,73 @@ The seven distinct inner products of the candidate are
  \frac{1-h_*^2}{\sqrt2}-h_*^2,\quad
  -\frac{1-h_*^2}{\sqrt2}-h_*^2.
 \]
-\paragraph{Remark (energy enclosure).}\label{sec:energy}
-A separate rigorous evaluation of the candidate energy gives
-\[
- 32.716949460147<\E(p)<32.716949460149,
-\]
-so the energy starts $32.71694946\ldots$. This rigorous rational-interval
-computation is separate from the formal theorem. Appendix~\ref{app:energy}
-gives the independent Python calculation and its exact inputs.
-
-\section{From energy bounds to a common interval pattern}\label{sec:global}
+\subsection{From energy bounds to a common interval pattern}\label{sec:global}
 We now show that every admissible competitor of energy at most the
 candidate's has nearly the same matrix of pairwise inner products, after
 relabeling. Let $f(t)=(2-2t)^{-1/2}$. For unit vectors, the pair energy is
 $f(\langle x_i,x_j\rangle)$. Throughout this section, $p=p(h_*)$ and
 $x$ is an arbitrary admissible configuration satisfying $\E(x)\leq\E(p)$.
 
-\subsection{Energy bounds force seven windows}
 We bound the energy lost by replacing the pair potential with a polynomial;
 this loss will force every pair into one of seven short intervals.
-\paragraph{Pair separation.}
-Rational interval evaluation gives $\E(p)\leq32717/1000$
-(Appendix~\ref{app:certificates}), so this is also an energy cap for
-the competitor.
-Let $g$ be the quartic polynomial specified in
-Appendix~\ref{app:separation}. It lies below $f$ on the whole interval
-$[-1,1)$ and has nonnegative coefficients in the Legendre basis.
-The spherical-harmonic addition identity therefore expresses the sum of
-$g(\langle x_i,x_j\rangle)$ over all ordered pairs, including the
-diagonal, as a constant plus nonnegative weighted squares. Each square
-is the square of the sum, over the ten points, of a fixed spherical
-harmonic of degree one through four. Subtracting the diagonal contribution
-and dividing by two gives a lower bound of
-$13111005315721/401353681050>32.666$ for the sum over unordered distinct pairs.
-If any pair had inner product at least $13/20$, its energy minus $g$
-would exceed $51/1000$. All other pair differences are nonnegative.
-Adding $51/1000$ to the exact polynomial lower bound exceeds
-$32717/1000$ by more than $0.00096$, a contradiction. Thus $\langle x_i,x_j\rangle<13/20$ for every $i\ne j$.
+\paragraph{Separation of points.}
+For a competitor of energy at most $\E(p)$, a two-point bound first gives
+$\langle x_i,x_j\rangle<13/20$ for distinct indices.
+The polynomial verification is given in Appendix~\ref{app:separation}.
 
 \paragraph{Three-point bound.}
 The next bound uses a fixed rational polynomial and a finite set of
 rational matrices; together these data form the \emph{three-point
 certificate}. Define
-$m(t)=\sum_{j=0}^{16}c_jt^j-2^{-130}$, where the coefficients $c_j$ are
-\texttt{hCoeff} in \nolinkurl{lean/ThomsonN10/Data.lean}. The downward
+$m(t)=\sum_{j=0}^{16}c_jt^j-2^{-130}$, where the coefficients $c_j$ are the \href{https://github.com/6/clank-lab/tree/e987408cf2d4c27c6e0c10d9f1a522ce3156c632/results/thomson-10}{rational data in the supplement}~\cite{supplement}. The downward
 shift ensures that $m$ lies below $f$ throughout $[-1,13/20]$.
-Let $U$ be the fixed rational \texttt{certU} in the same file. Interval
-evaluation of the candidate gives $\E(p)\leq U$, where
-$U\approx32.71694946014758815455705751969994$.
-Appendix~\ref{app:certificates} gives its exact value.
+Let $U$ be the fixed rational upper bound in the certificate.
 
 For three unit vectors $x_i,x_j,x_k$, use the argument convention
 $u=\langle x_i,x_j\rangle$, $v=\langle x_i,x_k\rangle$ and
 $t=\langle x_j,x_k\rangle$. The matrices specify two polynomials $K$
-and $W$. Define the residual polynomial $\mathcal R$ by
+and $W$. The data and kernel polynomials are defined in
+Appendices~\ref{app:kernels} and~\ref{app:certificates}. Define the residual polynomial $\mathcal R$ by
 \[
  \frac{m(u)+m(v)+m(t)}3-\frac{U-45\cdot2^{-130}}{45}
    =K(u,v,t)+W(u,v,t)+\mathcal R(u,v,t).
 \]
 
-The content of the certificate is threefold. First, the sum of $K$ over
+Here $\|\mathcal R\|_1$ is the sum of the absolute values of the residual's
+rational coefficients.
+
+First, the sum of $K$ over
 all ordered triples of distinct indices is nonnegative for every
-configuration of ten unit vectors. For exact prior statements see Bachoc--Vallentin~\cite[Corollary~3.5, arXiv v4]{bachoc}
-and Cohn--Woo~\cite[Theorem~5, arXiv v2]{cohnwoo}. The
-repeated-index corrections are specified in Appendix~\ref{app:kernels}.
+configuration of ten unit vectors.
+
+Define polynomials $C_n(\alpha,\beta)$ by
+\[
+ C_0=1,\qquad C_1=\alpha,\qquad
+ C_{n+2}=2\alpha C_{n+1}-\beta C_n,
+ \qquad T_k(u,v,t)=C_k(t-uv,(1-u^2)(1-v^2)).
+\]
+Here $u$ and $v$ are the inner products with the first, distinguished
+point, and $t$ is the inner product of the other two points.
+Fixing that
+first point and projecting the others onto its perpendicular plane
+identifies the projected vectors with complex numbers. The
+recurrence expresses real parts of their powers. Therefore the quadratic sums of $T_k$, with weights given by products
+of real point weights, are squared absolute values of complex sums and
+are nonnegative.
+This is the spherical three-point positivity used in the proof.
+
+For exact prior statements see Bachoc--Vallentin~\cite[Corollary~3.5]{bachoc}
+and Cohn--Woo~\cite[Theorem~5]{cohnwoo}. The
+repeated-index corrections are defined in Appendix~\ref{app:kernels}.
 Second, $W$ is a sum of weighted polynomial squares, and is nonnegative
-on the \emph{capped Gram domain}
+on the Gram domain defined by
 $u,v,t\in[-1,13/20]$, $1+2uvt-u^2-v^2-t^2\geq0$.
 The six weights are listed in Appendix~\ref{app:certificates}.
-Third, the sum $\|\mathcal R\|_1$ of the absolute values of the residual's
-rational coefficients is tiny:
-$\|\mathcal R\|_1\approx1.1673222012517146\cdot10^{-56}$.
+The residual estimate is given there as well.
 Every residual monomial has absolute value at most one on this domain,
 so this coefficient sum bounds the residual pointwise.
+Put $L=45(2^{-130}+\|\mathcal R\|_1)$.
 
-Put $L=45(2^{-130}+\|\mathcal R\|_1)$; numerically,
-$L\approx3.306077861687684\cdot10^{-38}<10^{-30}$.
-These decimals describe the exact rational data, and are not used as
-proof inputs. Averaging the defining identity over distinct triples
-and using the two positivity properties gives the following bound.
 \begin{lemma}[Certified energy bound]\label{lem:threepoint}
 For the fixed polynomial $m$ and constants $U,L$ just specified, every
 configuration of ten unit vectors with
@@ -374,14 +229,14 @@ $\langle x_i,x_j\rangle\leq13/20$ for all $i\ne j$ satisfies
  U-L\leq\sum_{i<j}m(\langle x_i,x_j\rangle),\qquad L<10^{-30}.
 \]
 \end{lemma}
-The candidate inequality in the display is the separately established
-interval bound above. For the pair-sum inequality, the unit-vector
-hypotheses put every triple in the Gram domain, while the pair cap gives
-$u,v,t\leq13/20$, where all weights of $W$ are nonnegative.
-Appendix~\ref{app:certificates} gives the triple-to-pair averaging and
-explains the factor 45 in $L$. The much weaker separation bound used
-Delsarte--Yudin linear programming; here the error is small enough to
-force every pair into a candidate window.
+
+Averaging the residual identity over the $10\cdot9\cdot8$ ordered
+triples of distinct indices turns its pair term into
+$\sum_{i<j}m(\langle x_i,x_j\rangle)/45$. This is because each of
+the 45 unordered pairs occurs equally often in the three positions.
+The polynomial shift $2^{-130}$ is included in $m$, so the reference
+constant is $(U-45\cdot2^{-130})/45$. Bounding the averaged residual
+by $\|\mathcal R\|_1$ and multiplying by 45 gives $U-L$.
 
 For each pair, call the nonnegative difference between its true energy
 and its polynomial lower bound its \emph{slack}. Their total is at most
@@ -391,38 +246,25 @@ $L$, because the energy is at most that of the candidate:
  =\E(x)-\sum_{i<j}m(\langle x_i,x_j\rangle)
  \leq\E(p)-(U-L)\leq L.
 \]
-\paragraph{Slack outside the windows.}
+\paragraph{Localization of inner products.}
 A \emph{window} is an open interval of radius $\delta=10^{-10}$ centered
-at one of the seven candidate inner products in Appendix~\ref{app:candidate}. The slack satisfies $f(t)-m(t)\geq10^{-30}$
+at one of the seven candidate inner products in Section~\ref{app:candidate}. The slack satisfies $f(t)-m(t)\geq10^{-30}$
 for every $t\in[-1,13/20]$ outside all seven windows. Since $L<10^{-30}$,
 even one pair outside the windows would exceed the total available
 slack. Every pair therefore belongs to a window.
 
-\subsection{The window pattern is the candidate's pattern}
+\subsubsection{Classification of inner-product assignments}
 We now classify which assignments of these seven windows to the pairs
 can arise from ten unit vectors in three dimensions.
 Number the seven candidate inner products by the colors zero through
-six, as in the table below. Assign a color to each pair
-according to the window containing its inner product. For example, the candidate's pole
-pair receives the color of the window centered at $-1$. The windows are
+six, as in the table in Appendix~\ref{app:classification}. Assign a color to each pair
+according to the window containing its inner product.  The windows are
 disjoint, so each pair has just one color.
-
-\begin{center}
-\begin{tabular}{ccl}
-Color & Candidate inner product & Number of pairs\\ \hline
-0 & $-1$ & 1\\
-1 & $h_*$ & 8\\
-2 & $-h_*$ & 8\\
-3 & $h_*^2$ & 8\\
-4 & $2h_*^2-1$ & 4\\
-5 & $(1-h_*^2)/\sqrt2-h_*^2$ & 8\\
-6 & $-(1-h_*^2)/\sqrt2-h_*^2$ & 8
-\end{tabular}
-\end{center}
 
 An \emph{anchor triple} consists of three points whose three-by-three
 Gram matrix has determinant greater than $1/100000$. Such a triple is
-linearly independent. For each sorted triple of pair colors, evaluate
+linearly independent.
+For each sorted triple of pair colors, evaluate
 the three-by-three Gram determinant over rational outer enclosures of
 the three windows. The resulting \emph{determinant interval} contains
 every determinant that those colors can realize. An anchor \emph{type}
@@ -430,7 +272,7 @@ is a sorted triple of pair colors. A type is
 \emph{eligible} when this interval's upper endpoint is greater than the
 threshold; every actual anchor triple has an eligible type.
 
-An anchor triple must exist. The determinant intervals show that a
+The determinant intervals show that a
 triangle with determinant at most the threshold can have only a color
 permutation of $(0,1,2)$, $(1,1,4)$ or $(2,2,4)$. Each such triangle has
 exactly one edge of color zero or four. If every triangle among the
@@ -438,14 +280,6 @@ five configuration points with indices zero through four had one of
 these types, counting these marked edges over the ten triangles would
 give ten. But each edge belongs to three triangles, so the same count
 must be divisible by three. This contradiction supplies an anchor triple.
-The subsequent enumeration treats all 43 eligible anchor types.
-Reorder the three anchor points so that the colors of their pairs
-(first, second), (first, third), (second, third) are nondecreasing.
-Permuting three vertices permits every permutation of their three edges,
-so such an order always exists. The node coordinates below use this
-fixed order. For example, the candidate triple $p_2,p_3,p_6$ has ordered
-pair colors $(3,5,5)$.
-
 Each of the remaining seven points determines a \emph{node}: the three
 colors of its pairs with the three anchor points. The four-by-four Gram
 determinant of this point and the anchor points vanishes because four
@@ -456,17 +290,17 @@ For two remaining points, form a four-by-four matrix with rows indexed
 by the three anchor points followed by the first point, and columns
 indexed by the same three anchor points followed by the second point.
 Each entry is the inner product of its row-index and column-index vectors.
-This is their \emph{cross-Gram matrix}. It has rank at most three, so its
+This matrix has rank at most three, so its
 determinant vanishes. Two nodes are \emph{compatible} with a proposed
 color between them when interval evaluation of this determinant contains
 zero. The nodes specify the windows for inner products with the anchor points,
 and the proposed color specifies the window for the one remaining entry.
 
-Join two nodes when at least one color survives the pair test, retaining
+Two nodes are adjacent when at least one color survives the compatibility condition, retaining
 the list of all surviving colors on that edge. A \emph{clique} is a set
 of seven nodes with an edge between every two. The seven remaining
 points of an actual configuration give such a clique. They give distinct
-nodes because the pair test excludes all seven colors when the two node
+nodes because the compatibility condition excludes all seven colors when the two node
 indices are equal; that test still allows the two points' inner products
 with the anchors to vary independently within the same windows.
 
@@ -476,9 +310,7 @@ and seven nodes to the candidate's ten indices. The witness preserves
 the anchor and node colors and checks \emph{every surviving color} on
 each clique edge against the candidate color. Thus no separate choice
 of edge colors is needed: all colors that an actual configuration could
-use are forced to agree with the same candidate labeling. The nine
-witnesses correspond to nine enumerated node subsets with their anchor
-types; all give the same candidate pattern up to relabeling.
+use are forced to agree with the same candidate labeling.
 
 \paragraph{Classification.}
 The finite classification proves that there exists a permutation
@@ -490,19 +322,13 @@ $\tau$ for which
 \end{equation}
 Thus each pair has been assigned the same window as the corresponding
 candidate pair. The permutation $\tau$ labels the competitor by the candidate indices.
-The conclusion fixes
-an interval pattern and bounds every Gram-matrix entry; it does not yet
-say that the inner products are equal. The certificate counts and its
-formal soundness statement are given in Appendix~\ref{app:certificates}.
-
-\section{Alignment and exact local rigidity}\label{sec:local}
+\subsection{Alignment and strict local minimality}\label{sec:local}
 This section proves that a competitor of no greater energy satisfying
 \eqref{eq:gram} is congruent to the candidate. We first align it with the
 candidate and then show that any remaining displacement raises energy.
 
-\subsection{From inner products to point displacements}
-We convert the bounds on inner products into a small displacement from
-the candidate. Among orthogonal maps, choose $Q$ minimizing the sum of
+\subsubsection{From inner products to point displacements}
+ Among orthogonal maps, choose $Q$ minimizing the sum of
 squared displacements from $p$, and put
 \[
  y_i=Qx_{\tau(i)},\qquad \eta_i=y_i-p_i,\qquad
@@ -510,23 +336,29 @@ squared displacements from $p$, and put
 \]
 Write $\eta\in\R^{30}$ for the concatenation of the ten displacement
 vectors $\eta_i$. The quantity $\rho$ is their total displacement.
-For alignment we choose the fixed candidate triple $p_2,p_3,p_6$ and the
-corresponding relabeled competitor triple. These need not be the anchor
-triple used during classification: \eqref{eq:gram} controls every pair,
-so it also controls these chosen triples. Aligning the anchor
-frames---the orthonormal bases obtained by Gram--Schmidt from these
-triples---controls their coordinates; the inner products with the anchor
-points then control the other points. The estimates in
-Appendix~\ref{app:conditioning} construct an alignment with total
-displacement at most $10000\delta$. A minimizing alignment is at least
-as good, so
+A quantitative Gram-stability argument turns~\eqref{eq:gram} into an
+orthogonal alignment. It uses the candidate anchor points $p_2,p_3,p_6$:
+the absolute values of the inner products of pairs $(2,3)$, $(2,6)$ and $(3,6)$ are at
+most $19/100$, $41/100$ and $41/100$, respectively. The corresponding
+pairs of relabeled competitor anchor points consequently satisfy the absolute
+inner-product bounds $1/5,5/12,5/12$. In Gram--Schmidt, each residual
+is the component of an anchor point orthogonal to the span of the
+preceding anchor points. The lengths of the two residuals are at least
+$2/3$ and $1/2$. Thus the divisions used to recover coordinates from
+inner products have denominators bounded away from zero.
+
+In the resulting orthonormal frames, the coordinate differences for each
+point are at most $\delta$, $22\delta$ and $646\delta$, respectively.
+These scalar estimates follow by applying the product, square-root and
+quotient difference bounds to the Gram--Schmidt formulas; they are
+proved by scalar perturbation estimates with rational constants. Relaxing each to
+$650\delta$ and summing the 30 coordinate squares gives
+$\rho^2\leq30(650\delta)^2\leq(10000\delta)^2$ for the constructed
+alignment. Minimality transfers this bound to the minimizing alignment.
+Thus
 \[
  \rho\leq10000\delta=10^{-6}.
 \]
-The global and local constants serve different steps. The windows have
-radius $10^{-10}$, and the coordinate estimate loses a factor of $10^4$.
-The resulting radius $10^{-6}$ is one thousand times smaller than the
-local energy estimate's permitted radius $10^{-3}$.
 
 Minimality of this orthogonal Procrustes alignment---least squares over
 orthogonal maps---also gives the skew conditions below. Here $k,l$ index
@@ -540,10 +372,8 @@ These equations make the displacement orthogonal to infinitesimal
 rotations. Each displacement
 also has the radial component
 $\langle p_i,\eta_i\rangle=-\|\eta_i\|^2/2$, by the exact unit-sphere identity.
-Thus the displacement itself need not lie in the tangent plane. Both
-properties enter the energy estimate below.
-
-\subsection{Stationarity and the full second variation}
+Thus the displacement itself need not lie in the tangent plane.
+\subsubsection{Stationarity and the full second variation}
 We establish stationarity and a positive quadratic bound for every
 perturbation after removing infinitesimal rotations.
 The candidate is stationary with respect to arbitrary tangent motions
@@ -567,15 +397,16 @@ More precisely,
 $\nabla_i\E(p)=\lambda_i p_i$, where
 $\lambda_i=-\tfrac12\sum_{j\ne i}\|p_i-p_j\|^{-1}$.
 We call $\lambda_i$ the radial coefficient; it is the spherical Lagrange
-multiplier. The gradient is the negative of the physical force. The
-corresponding formal lemmas are listed in Appendix~\ref{app:local}.
+multiplier.
 
-Let $H(h)$ be the $30\times30$ matrix given by the following blocks at
-$p(h)$, and abbreviate $H=H(h_*)$. At the stationary candidate, this is
-the constrained second variation. In the block formula at a general height,
+Let $H(h)$ be the $30\times30$ matrix at $p(h)$ defined by the following
+blocks, and abbreviate $H=H(h_*)$. At the stationary candidate it is
+the constrained second variation.
+In the block formula at a general height,
 the radial coefficient means
 $\lambda_i(h)=-\tfrac12\sum_{j\ne i}\|p_i(h)-p_j(h)\|^{-1}$;
-stationarity is asserted only at $h_*$. For a nonzero pair-difference vector $d$, the pair
+stationarity is asserted only at $h_*$.
+For a nonzero pair-difference vector $d$, the pair
 Hessian is
 \[
  B(d)=\frac{3dd^{\mathsf T}}{\|d\|^5}
@@ -586,6 +417,7 @@ negative of $B(p_i-p_j)$. The diagonal block at point $i$ is the sum of
 $B(p_i-p_j)$ over the other nine points, minus the radial coefficient at
 that point times the three-by-three identity. These blocks specify the sphere-constrained second variation, including
 the radial correction.
+
 Similarly, let $R(h)$ have as its three columns the standard
 coordinate-axis infinitesimal rotations of $p(h)$, each with unit angular
 speed, and abbreviate $R=R(h_*)$.
@@ -602,7 +434,7 @@ the left of~\eqref{eq:psd}, transforms it into one with
 strictly positive diagonal entries, each greater than the sum of the
 absolute values of the other entries in its row. This strict diagonal
 dominance proves positive definiteness; the inverse change of basis
-gives~\eqref{eq:psd}. Appendix~\ref{app:local} identifies the checked
+gives~\eqref{eq:psd}. Appendix~\ref{app:local} gives the
 matrix calculation.
 For the concatenated displacement $\eta$, equation~\eqref{eq:skew} gives
 $R^{\mathsf T}\eta=0$, and~\eqref{eq:psd} implies
@@ -611,9 +443,14 @@ maps; $R$ removes their continuous rotation directions. The estimate
 covers every nearby point of $(S^2)^{10}$ after orthogonal alignment,
 including perturbations that break $D_{4d}$ symmetry.
 
-\subsection{A finite-radius energy gap}
-To pass from the second variation to an energy inequality, we bound the
-higher-order error. For a nonzero pair-difference vector $d$ and its
+\subsection{Proof of Theorem~\ref{thm:main}}\label{sec:mainproof}
+Section~\ref{app:candidate} and Appendix~\ref{app:energydata} establish the candidate.
+Lemma~\ref{lem:threepoint}, the checked classification~\eqref{eq:gram} and alignment
+reduce competitors of no greater energy to the local estimate.
+Since $10^{-6}\leq1/1000$, its radius hypothesis is satisfied.
+We use~\eqref{eq:psd} and the following remainder bound.
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+For a nonzero pair-difference vector $d$ and its
 perturbation $w$, put $\ell=\|d\|>0$.
 
 \paragraph{Pair remainder bound.}
@@ -623,25 +460,7 @@ For $\|w\|\leq \ell/200$, the algebraic pair estimate is
  +\frac{3\langle d,w\rangle^2-\ell^2\|w\|^2}{2\ell^5}
  -\frac{51}{50}\frac{\|w\|^3}{\ell^4}.\label{eq:remainder}
 \end{align}
-For this second-order Taylor bound with cubic error, put
-$z=(2\langle d,w\rangle+\|w\|^2)/\ell^2$.
-The proof bounds $(1+z)^{-1/2}$ below by
-$1-z/2+3z^2/8-5z^3/16$ on $-1<z\leq1$, then applies this bound to the
-normalized pair displacement.
-Every candidate pair distance is at least one. For $d=p_i-p_j$,
-$w=\eta_i-\eta_j$, the geometric bounds are
-\[
- \|\eta_i-\eta_j\|\leq\tfrac32\rho,\qquad
- \sum_{i<j}\|\eta_i-\eta_j\|^3\leq15\rho^3.
-\]
-The first follows from $\|\eta_i-\eta_j\|\leq\sqrt2\rho\leq
-\tfrac32\rho$. For the second, the identity for the sum of squared
-pair differences gives $\sum_{i<j}\|\eta_i-\eta_j\|^2\leq10\rho^2$.
-Multiplying this by the largest pair displacement gives the cubic bound.
-For $\rho\leq1/1000$, these satisfy the hypothesis of~\eqref{eq:remainder}.
-Summing the error over all 45 pairs bounds it by
-$(51/50)15\rho^3=(153/10)\rho^3$.
-
+The summed remainder estimate is given in Appendix~\ref{app:localdetails}.
 The linear terms also have a quadratic expression on the sphere.
 By radial stationarity, their sum is the sum, over points, of the radial
 coefficient times $\langle p_i,\eta_i\rangle$. The exact sphere identity
@@ -666,67 +485,121 @@ permutations preserve energy. This proves both optimality and the
 equality case in Theorem~\ref{thm:main}. The candidate itself attains the
 minimum.
 
-\section{Formal proof and certificates}\label{app:formal}
-This appendix identifies the formal statements, certificates and
-independent computations behind the preceding argument. The distribution
-contains a normal Lake project, rational certificates and a checker using
-Python's standard library. The Lean theorem begins with the definitions of unit sphere,
-injectivity, Coulomb energy and congruence; no numerical optimization
-output is treated as an axiom. The final theorem combines the root proof, pair separation, three-point
-bound, polynomial lower bound, the slack bound outside the seven windows,
-classification of the interval patterns and quantitative local energy
-inequality described above.
-The formal trust base is the Lean kernel and the three axioms printed
-below, together with the faithful match between its statement and
-Theorem~\ref{thm:main}. Paths beginning with \texttt{lean/} or
-\texttt{checks/} are relative to the bundle root. Other Lean source paths
-below are relative to \texttt{lean/ThomsonN10/}.
+\end{proof}
 
-\paragraph{Checking artifacts.}
-The project uses Lean~4.34.1. Its Mathlib revision is
-\begin{center}\texttt{d13f23b723b8a846827a245b89c10fc7d3f11612}.\end{center}
-Both dependencies are pinned by the included toolchain and manifest.
-The build checks the theorem statements and the following
-\texttt{\#print axioms} outputs. Any change to an axiom list makes the
-build fail:
-\begin{quote}\small\ttfamily
-'ThomsonN10.thomson\_ten\_complete' depends on axioms:\\
-{}[propext, Classical.choice, Quot.sound]\\[3pt]
-'ThomsonN10.candidate\_admissible' depends on axioms:\\
-{}[propext, Classical.choice, Quot.sound]\\[3pt]
-'ThomsonN10.Cert.L1.Data.residual\_agrees\_JSON' depends on axioms:\\
-{}[propext, Classical.choice, Quot.sound]
+\section{Formal verification}\label{sec:verification}
+Theorem~\ref{thm:main} and its proof are formalized in Lean. The theorem
+\nolinkurl{ThomsonN10.thomson_ten_complete} states:
+\begin{quote}
+Exactly one real height $h\in[a,b]$ satisfies $S(h)=0$. For every such
+height and every injective map $x:\{0,\ldots,9\}\to S^2$,
+$\E(p(h))\leq\E(x)$, with equality if and only if $x$ is congruent to $p(h)$.
 \end{quote}
-Neither \texttt{native\_decide} nor \texttt{ofReduceBool} is used in the
-included Lean proof, including the decompressed certificate source.
-In particular, no native-computation axiom occurs in the printed
-transitive dependencies of the final theorem. These are the standard Lean
-axioms for propositional extensionality, classical choice and quotients.
+The interval, stationarity equation and candidate coordinates are the
+ones defined above. The formal hypotheses are unit
+norm and injectivity; the energy is the same unordered-pair sum, and
+orthogonal congruence includes reflections. The candidate's unit norms
+and distinctness are also proved in Lean. The
+\href{https://github.com/6/clank-lab/blob/thomson-10-v6/results/thomson-10/checks/README.md}{checking notes}
+give the definitions and standard logical axioms, and distinguish the
+supplementary numerical illustrations from the formal proof.
 
-The standard-library Python checker is an independent implementation
-that checks the same rational three-point certificate used by Lean.
-It expands the kernel and weighted-square polynomials from their definitions, checks
-the factor matrices and all 274 residual coefficients, bounds their total
-absolute error, and checks the candidate-energy upper bound over the
-entire height interval. The command \texttt{python3 -I checks/check.py}
-also runs eight corruption tests, all of which are rejected: it changes
-entries in each kind of factor matrix, a minorant coefficient, the
-candidate upper bound, row exponents, row exponents together with the
-residual, a residual entry, and the residual norm. The Python implementation does not check the scalar minorant,
-the slack bound outside the windows, exhaustive passage from spherical
-configurations to interval patterns, window classification, full stationarity,
-orthogonal alignment or local Hessian argument; those obligations are
-proved by Lean. Its precise inputs and obligations are documented in
-\texttt{checks/README.md}. Independence here concerns the implementation
-of the shared certificate checks, not a second independent proof of every
-step of the global theorem.
+\clearpage
+\begin{appendices}
+\section{Candidate energy and interval data}\label{app:energydata}
+We verify admissibility and evaluate the candidate energy.
+The candidate is admissible: in the coordinates above, unit norm follows
+from $r^2=1-h_*^2$ and $2q^2=r^2$. The two poles and the two squares
+have distinct heights; within each square the four planar coordinates
+are distinct because $r,q>0$. Thus the ten points are distinct.
+
+The 45 unordered pairs consist of one pole pair, eight neighboring and
+four opposite pairs within the squares, two classes of eight pairs
+between the squares, and sixteen pole--square pairs. Grouping them gives
+\begin{align}
+ F(h)={}&\frac12+\frac{4\sqrt2+2}{\sqrt{1-h^2}}
+ +\frac8{\sqrt{2-\sqrt2+(2+\sqrt2)h^2}}
+ +\frac8{\sqrt{2+\sqrt2+(2-\sqrt2)h^2}}\nonumber\\
+ &+\frac8{\sqrt{2-2h}}+\frac8{\sqrt{2+2h}}.\label{eq:energy}
+\end{align}
+The terms appear in that order: pole pair, pairs within the squares,
+the two between-square classes, and the two pole--square classes.
+Write $S(h)=F'(h)$ for the derivative of this energy with respect to
+height. Its explicit formula is given in Appendix~\ref{app:interval}.
+Let $[a,b]$ be the exact rational interval defined in
+Appendix~\ref{app:interval}. It satisfies $0<a<b<1$ and
+$b-a=1/(2D)<2^{-300}$, where the integer denominator $D$ is given there.
+For orientation, this narrow interval lies inside
+\[ [0.42268742404398,0.42268742404400]. \]
+Its decimal begins $0.422687424043986\ldots$. The root existence and
+uniqueness in this interval are proved in Lean.
 
 
+
+\section{Finite classification of interval assignments}\label{app:classification}
+The table records the candidate's distance classes.
+An anchor triple must exist.
+For example, the candidate's pole
+pair receives the color of the window centered at $-1$.
+The nine
+witnesses correspond to nine enumerated node subsets with their anchor
+types; all give the same candidate pattern up to relabeling.
+\begin{center}
+\begin{tabular}{ccl}
+Color & Candidate inner product & Number of pairs\\ \hline
+0 & $-1$ & 1\\
+1 & $h_*$ & 8\\
+2 & $-h_*$ & 8\\
+3 & $h_*^2$ & 8\\
+4 & $2h_*^2-1$ & 4\\
+5 & $(1-h_*^2)/\sqrt2-h_*^2$ & 8\\
+6 & $-(1-h_*^2)/\sqrt2-h_*^2$ & 8
+\end{tabular}
+\end{center}
+
+
+
+
+The subsequent enumeration treats all 43 eligible anchor types.
+Reorder the three anchor points so that the colors of their pairs
+(first, second), (first, third), (second, third) are nondecreasing.
+Permuting three vertices permits every permutation of their three edges,
+so such an order always exists. The node coordinates in Section~\ref{sec:global} use this
+fixed order. For example, the candidate triple $p_2,p_3,p_6$ has ordered
+pair colors $(3,5,5)$.
+
+The classification is proved in Lean; \href{https://github.com/6/clank-lab/blob/thomson-10-v6/results/thomson-10/checks/README.md}{the checking notes} identify its
+certificate and formal soundness statement.
+
+\section{Remainder estimates}\label{app:localdetails}
+The following estimates supply the pair bounds used in Section~\ref{sec:mainproof}.
+\subsection{Pair remainder and summed error}
+For this second-order Taylor bound with cubic error, put
+$z=(2\langle d,w\rangle+\|w\|^2)/\ell^2$.
+The proof bounds $(1+z)^{-1/2}$ below by
+$1-z/2+3z^2/8-5z^3/16$ on $-1<z\leq1$, then applies this bound to the
+normalized pair displacement.
+Every candidate pair distance is at least one. For $d=p_i-p_j$,
+$w=\eta_i-\eta_j$, the geometric bounds are
+\[
+ \|\eta_i-\eta_j\|\leq\tfrac32\rho,\qquad
+ \sum_{i<j}\|\eta_i-\eta_j\|^3\leq15\rho^3.
+\]
+The first follows from $\|\eta_i-\eta_j\|\leq\sqrt2\rho\leq
+\tfrac32\rho$. For the second, the identity for the sum of squared
+pair differences gives $\sum_{i<j}\|\eta_i-\eta_j\|^2\leq10\rho^2$.
+Multiplying this by the largest pair displacement gives the cubic bound.
+For $\rho\leq1/1000$, these satisfy the hypothesis of~\eqref{eq:remainder}.
+Summing the error over all 45 pairs bounds it by
+$(51/50)15\rho^3=(153/10)\rho^3$.
+
+\section{Certificate data}\label{app:formal}
+The following data give the rational bounds used in the proof.
 
 \subsection{The exact height interval}\label{app:interval}
-This subsection supplies the exact root interval and derivative formula.
+We define the rational interval and stationarity equation.
 For the rational height interval used in Section~\ref{sec:candidate},
-let $A$ and $D$ be the integers specified below, with $D$ the denominator.
+let $A$ and $D$ be the integers defined below, with $D$ the denominator.
 Its endpoints $a,b$ are defined by
 \[
  a=A/D,\qquad b=(2A+1)/(2D),
@@ -751,76 +624,25 @@ The derivative of the family energy is
  \label{eq:stationarity}
 \end{align}
 
-The root argument in Section~\ref{sec:candidate} is formalized in
-\nolinkurl{Param/Root.lean}.
-\nolinkurl{Param/Final.lean} identifies those functions and
-endpoints with \texttt{stationarity}, \texttt{heightLower} and
-\texttt{heightUpper}. It proves
-\nolinkurl{ParameterExistsUnique_holds}.
-
-The type \texttt{CandidateParameter} consists exactly of reals in this
-interval satisfying $S(h)=0$. Root uniqueness is asserted in this
-specified interval, not for all real heights.
-
-
-
-\subsection{Formal theorem statements}\label{app:statements}
-This subsection identifies the declarations that implement the theorem
-and their precise class of admissible competitors.
-The optimality and uniqueness assertions, together with parameter
-existence and uniqueness, form the declaration
-\nolinkurl{ThomsonN10.thomson_ten_complete}. Its type is
-\nolinkurl{ThomsonN10.Challenge.CompleteTarget}.
-
-The other declaration
-\nolinkurl{ThomsonN10.candidate_admissible} proves unit norm and injectivity for every
-\texttt{CandidateParameter}. Theorem~\ref{thm:main} combines these two
-declarations. Each certificate assertion used in the proof is itself
-proved in Lean.
-In Lean, a configuration is a map from \texttt{Fin 10} to Euclidean
-three-space, and \texttt{IsSphereConfiguration} means exactly that each
-vector has norm one and the map is injective. The total Lean function
-uses the field convention $0^{-1}=0$, so a collision is excluded by the
-injectivity hypothesis; it is not assigned infinite energy.
-
-The following are the definitions in \texttt{Basic.lean}, with the
-mathematical glyphs typeset:
-\begin{alltt}\small
-abbrev R3 := EuclideanSpace \(\mathbb{R}\) (Fin 3)
-abbrev Configuration := Fin 10 \(\to\) R3
-
-def IsSphereConfiguration (x : Configuration) : Prop :=
-  (\(\forall\) i, \(\|\)x i\(\|\) = 1) \(\land\) Function.Injective x
-
-noncomputable def coulombEnergy (x : Configuration) : \(\mathbb{R}\) :=
-  \(\sum\) i : Fin 10, \(\sum\) j \(\in\) Finset.Ioi i, (\(\|\)x i - x j\(\|\))\textsuperscript{-1}
-
-def Congruent (x y : Configuration) : Prop :=
-  \(\exists\) (g : R3 \(\simeq\)\textsubscript{li}[\(\mathbb{R}\)] R3) (p : Equiv.Perm (Fin 10)), \(\forall\) i, x i = g (y (p i))
-\end{alltt}
-Here the isometry-equivalence notation means a bijective real linear
-isometry, hence an element of $O(3)$. The challenge declarations in
-\texttt{lean/Challenge.lean} are:
-\begin{alltt}\small
-def ParameterExistsUnique : Prop :=
-  \(\exists\)! h : \(\mathbb{R}\), (heightLower : \(\mathbb{R}\)) \(\leq\) h \(\land\) h \(\leq\) (heightUpper : \(\mathbb{R}\)) \(\land\) stationarity h = 0
-
-def GlobalOptimality : Prop :=
-  \(\forall\) h : CandidateParameter, \(\forall\) x : Configuration,
-    IsSphereConfiguration x \(\to\) coulombEnergy (candidate h) \(\leq\) coulombEnergy x
-
-def GlobalUniqueness : Prop :=
-  \(\forall\) h : CandidateParameter, \(\forall\) x : Configuration,
-    IsSphereConfiguration x \(\to\)
-    (coulombEnergy x = coulombEnergy (candidate h) \(\leftrightarrow\) Congruent x (candidate h))
-
-def CompleteTarget : Prop := ParameterExistsUnique \(\land\) GlobalOptimality \(\land\) GlobalUniqueness
-\end{alltt}
-The first component specifies the height; the second is the lower bound;
-the third gives both directions of the equality case. Candidate validity
-is supplied by the separate theorem already identified above.
-
 \subsection{The separation polynomial}\label{app:separation}
+\paragraph{Separation of points.}
+Rational interval evaluation gives $\E(p)\leq32717/1000$
+(Appendix~\ref{app:certificates}), so this is also an energy cap for
+the competitor.
+Let $g$ be the quartic polynomial defined below. It lies below $f$ on the whole interval
+$[-1,1)$ and has nonnegative coefficients in the Legendre basis.
+The spherical-harmonic addition identity therefore expresses the sum of
+$g(\langle x_i,x_j\rangle)$ over all ordered pairs, including the
+diagonal, as a constant plus nonnegative weighted squares. Each square
+is the square of the sum, over the ten points, of a fixed spherical
+harmonic of degree one through four. Subtracting the diagonal contribution
+and dividing by two gives a lower bound of
+$13111005315721/401353681050>32.666$ for the sum over unordered distinct pairs.
+If any pair had inner product at least $13/20$, its energy minus $g$
+would exceed $51/1000$. All other pair differences are nonnegative.
+Adding $51/1000$ to the exact polynomial lower bound exceeds
+$32717/1000$ by more than $0.00096$, a contradiction. Thus $\langle x_i,x_j\rangle<13/20$ for every $i\ne j$.
+
 This records the quartic used to exclude too-close pairs before applying
 the three-point bound. Write $P_k$ for the Legendre polynomial of degree
 $k$, normalized by $P_k(1)=1$. The polynomial is
@@ -834,28 +656,12 @@ $k$, normalized by $P_k(1)=1$. The polynomial is
 The nonnegative coefficients give the spherical-harmonic sum identity.
 The inequalities $g(t)\leq f(t)$ on $[-1,1)$ and
 $f(t)-g(t)>51/1000$ on $[13/20,1)$ follow from exact polynomial
-identities with nonnegative Bernstein coefficients. The identities and
-harmonic expansion are in \nolinkurl{Cert/LP/Data.lean}; the scalar
-inequalities are in \nolinkurl{Cert/LP/Scalar.lean}. The sum bound and
-separation conclusion are in \nolinkurl{Cert/LP/Proof.lean}. The letter
-$g$ here denotes the polynomial called \texttt{h} in those files.
+identities with nonnegative Bernstein coefficients.
 
 \subsection{The three-point kernel polynomials}\label{app:kernels}
-This subsection specifies $K$ and explains its nonnegative triple sum.
-Define polynomials $C_n(\alpha,\beta)$ by
-\[
- C_0=1,\qquad C_1=\alpha,\qquad
- C_{n+2}=2\alpha C_{n+1}-\beta C_n,
- \qquad T_k(u,v,t)=C_k(t-uv,(1-u^2)(1-v^2)).
-\]
-Here $u$ and $v$ are the inner products with the first, distinguished
-point, and $t$ is the inner product of the other two points. Fixing that
-first point and projecting the others onto its perpendicular plane
-identifies the projected vectors with complex numbers. The
-recurrence expresses real parts of their powers. Therefore the quadratic sums of $T_k$, with weights given by products
-of real point weights, are squared absolute values of complex sums and
-are nonnegative.
-This is the spherical three-point positivity used in the proof.
+The kernel $K$ has a nonnegative sum over triples, as follows.
+
+
 
 For block $k$, let $J^{(k)}$ be its supplied factor matrix (the integer
 entries divided by $2^{200}$, with unused entries set to zero in an
@@ -884,178 +690,68 @@ has coefficient one, and the constant has coefficient $10/90=1/9$.
 Averaging $K_k$ over distinct triples gives exactly this normalized full
 sum. Its nonnegativity therefore gives the required distinct-triple
 positivity of $K$.
-The recurrence and projection argument are in
-\nolinkurl{Cert/SDP/CircleKernel.lean} and
-\nolinkurl{Cert/SDP/ProjectionComplex.lean}; the symmetrization and
-correction are in \nolinkurl{Cert/SDP/FactoredKernels.lean}.
 
-\subsection{Certificate data and finite classification}\label{app:certificates}
-This subsection specifies the rational data and weights used in
-Lemma~\ref{lem:threepoint}, then describes the finite classification.
-The coefficients $c_j$ are \texttt{hCoeff} in
-\nolinkurl{lean/ThomsonN10/Data.lean};
-\texttt{certU} there is the exact rational
+
+\subsection{The three-point certificate}\label{app:certificates}
+We record the exact certificate bounds.
+Interval
+evaluation of the candidate gives $\E(p)\leq U$, where\newline
+$U\approx32.71694946014758815455705751969994$.
+Its exact value is given below.
+
+The sum $\|\mathcal R\|_1$ of the absolute values of the residual's
+rational coefficients is tiny:
+$\|\mathcal R\|_1\approx1.1673222012517146\cdot10^{-56}$.
+
+
+Put $L=45(2^{-130}+\|\mathcal R\|_1)$; numerically,
+$L\approx3.306077861687684\cdot10^{-38}<10^{-30}$.
+Averaging the defining identity over distinct triples
+and using the two positivity properties gives Lemma~\ref{lem:threepoint}.
+
+The candidate inequality in Lemma~\ref{lem:threepoint} is the separately established
+interval bound above. For the pair-sum inequality, the unit-vector
+hypotheses put every triple in the Gram domain, while the pair cap gives
+$u,v,t\leq13/20$, where all weights of $W$ are nonnegative.
+The triple-to-pair averaging in Section~\ref{sec:global} explains the factor 45 in $L$. The much weaker separation bound used
+Delsarte--Yudin linear programming~\cite[Section~1]{bachoc}~\cite[Section~1.1]{cohnwoo}; here the error is small enough to
+force every pair into a candidate window.
+
+The following rational data and weights give Lemma~\ref{lem:threepoint}.
+The polynomial coefficients are the fixed rational data in the
+accompanying certificate. Its candidate-energy bound is the exact rational
 \begin{center}\small
 $U=\dfrac{52\,574\,110\,779\,609\,793\,015\,977\,559\,478\,279\,245\,057\,879\,406\,410\,836\,764\,596\,571\,436}{2^{200}}$.
 \end{center}
-These are fixed data, not optimization variables in the theorem.
-The candidate upper bound is verified by
-\nolinkurl{Cert/CandidateUpper.lean}.
-
 Write $\Delta=1+2uvt-u^2-v^2-t^2$ for the Gram determinant. Before
 averaging over permutations of $u,v,t$, the six weights multiplying
 polynomial squares are
 $1$, $1+u$, $13/20-u$, $\Delta$, $(1+u)(13/20-u)$ and
 $\Delta(1+u)(13/20-u)$. Each is used for two blocks, one symmetric and
 one antisymmetric under interchange of $v,t$; after squaring and
-permutation averaging all twelve blocks are nonnegative on the capped
-Gram domain. These weights are \texttt{domainWeight} in
-\nolinkurl{Cert/SDP/CertificateBound.lean}.
+permutation averaging all twelve blocks are nonnegative on the same
+Gram domain.
 
-Averaging the residual identity over the $10\cdot9\cdot8$ ordered
-triples of distinct indices turns its pair term into
-$\sum_{i<j}m(\langle x_i,x_j\rangle)/45$. This is because each of
-the 45 unordered pairs occurs equally often in the three positions.
-The polynomial shift $2^{-130}$ is included in $m$, so the reference
-constant is $(U-45\cdot2^{-130})/45$. Bounding the averaged residual
-by $\|\mathcal R\|_1$ and multiplying by 45 gives $U-L$.
-In particular, the shift is included once in the defined loss $L$.
-The displayed $10^{-30}$ bound is conservative: most of $L$ comes from
-the downward minorant shift, while the residual norm is about $10^{-56}$.
-No exact-sharpness assertion is inferred from these small numbers.
 
-The certificate stores 20 matrices of factors: eight nonzero matrices
-for the three-point kernels (called moment blocks in the data), and twelve
-for the weighted squares (called sum-of-squares blocks). It has 42,950
-integer entries and 274 residual coefficients; two zero moment blocks
-are omitted. Its compressed JSON file is 1,246,399 bytes and expands to
-2,670,249 bytes. Expanding these factors and bounding the coefficient
-sum are exact rational calculations. The identity is
-\nolinkurl{Cert.L1.l1_hidentity}; its summation is
-\nolinkurl{Cert.SDP.factored_certificate_pair_bound}.
 
-In the data, a \emph{norm test} is the four-by-four Gram-determinant
-interval test for one proposed node; an \emph{extension record} stores
-one retained node. A \emph{pair-color test} checks the cross-Gram
-determinant for two nodes and a proposed pair color. A
-\emph{seven-clique witness} is the color-preserving candidate labeling
-for seven compatible nodes and the three anchor points.
-
-The finite certificate treats
-84 sorted anchor-color triples, of which 43 are eligible. It contains
-14,749 norm tests, 79 extension records and 1,960 pair-color tests. Its
-nine seven-clique witnesses each give a bijective relabeling to the same
-reference interval pattern. The count is of witnesses in the enumeration,
-not of incongruent ten-point configurations.
-
-The interval-pattern conclusion is the theorem
-\nolinkurl{Windows.WindowClassification_holds}.
-
-\paragraph{Scalar checks and data formats.}
+\paragraph{Scalar inequalities.}
 The minorant and the slack bound outside the windows are certified by
 subdividing rational intervals and checking nonnegative Bernstein
 coefficients of integer polynomials. The substitution
 $t=1-2y^2$, with $y=\sqrt{(1-t)/2}>0$, turns the reciprocal-square-root
 inequalities into polynomial inequalities after multiplication by positive
-denominators. The soundness proof is in \texttt{Scalar/Checker.lean};
-\texttt{Scalar/Bridge.lean} carries out the substitution and
-\texttt{Scalar/Exterior.lean} proves the slack bound outside the windows.
+denominators.
 
-The compressed JSON file is input to the independent Python checker.
-Lean uses the corresponding coefficient tables as literal Lean data;
-it does not parse that JSON file during proof checking.
-The theorem \texttt{residual\_agrees\_JSON} equates the residual computed
-from those factors with the literal polynomial \texttt{JSONResidual}
-exported from the supplied table. The Python checker separately verifies
-the external JSON residual and its coefficient norm.
-The compressed file \texttt{AmbientKernelData.lean.gz} contains Lean
-source for the Hessian certificate, not JSON. The build expands that
-source before importing it; all its assertions are then kernel-checked.
-No proof generator is run as a trusted build step.
-
-\subsection{Conditioning of the anchor alignment}\label{app:conditioning}
-A quantitative Gram-stability argument turns~\eqref{eq:gram} into an
-orthogonal alignment. It uses the candidate anchor points $p_2,p_3,p_6$:
-the absolute values of the inner products of pairs $(2,3)$, $(2,6)$ and $(3,6)$ are at
-most $19/100$, $41/100$ and $41/100$, respectively. The corresponding
-pairs of relabeled competitor anchor points consequently satisfy the absolute
-inner-product bounds $1/5,5/12,5/12$. In Gram--Schmidt, each residual
-is the component of an anchor point orthogonal to the span of the
-preceding anchor points. The lengths of the two residuals are at least
-$2/3$ and $1/2$. Thus the divisions used to recover coordinates from
-inner products have denominators bounded away from zero.
-
-In the resulting orthonormal frames, the coordinate differences for each
-point are at most $\delta$, $22\delta$ and $646\delta$, respectively.
-These scalar estimates follow by applying the product, square-root and
-quotient difference bounds to the Gram--Schmidt formulas; they are
-proved in \nolinkurl{Local/GramStability.lean}. Relaxing each to
-$650\delta$ and summing the 30 coordinate squares gives
-$\rho^2\leq30(650\delta)^2\leq(10000\delta)^2$ for the constructed
-alignment. \nolinkurl{Local/GramAlignment.lean} transfers this bound to
-the minimizing alignment.
-
-
-\subsection{Local inequalities in Lean}\label{app:local}
-This subsection identifies the formal inequalities used for full
-stationarity and the finite-radius energy gap.
+\subsection{Interval matrix verification}\label{app:local}
 The interval Hessian calculation encloses the arithmetic and square-root
 operations over the full height interval. Its change-of-basis matrix is
 upper triangular with all diagonal entries equal to one, hence invertible.
 Interval bounds on the transformed matrix certify strict diagonal
-dominance. In \nolinkurl{Local/Certificates/AmbientKernelBounds.lean},
-the theorem \texttt{flattened\_posDef} proves positive definiteness.
-
-The theorem that proves~\eqref{eq:psd} for the explicitly defined
-Hessian is listed below its source file. The last line is the Lean
-namespace prefix for both this theorem and \texttt{flattened\_posDef}:
-\begin{quote}\small\ttfamily
-Local/Certificates/AmbientHessian.lean\\
-candidate\_augmented\_hessian\_posSemidef\\
-ThomsonN10.Local.Certificates.AmbientKernel
-\end{quote}
-
-The formal coordinate calculation rewrites the height equation as a
-relation among the seven inverse-cube distance weights, one for each
-candidate inner-product class, and checks the gradient at every point.
-The stationarity calculation in Section~\ref{sec:local} has the following
-formal correspondence. In \nolinkurl{Local/LocalStationarity.lean},
-\texttt{candidate\_force\_relation} converts that derivative equation to a
-linear relation among the seven inverse-cube distance weights. The
-identity \nolinkurl{orbit_force_balance} checks all force components and uses this relation
-to make each point's force radial;
-\nolinkurl{candidate_force_eq_radialCoefficient} identifies the multiplier
-with the exact spherical radial coefficient. This proves stationarity
-for arbitrary tangent perturbations at all ten points.
-
-
-The pair remainder inequality~\eqref{eq:remainder} is
-\texttt{pair\_potential\_algebraic\_lower}. The local estimate uses the
-exact unit-sphere identity $\langle p_i,y_i-p_i\rangle
-=-\|y_i-p_i\|^2/2$. Its final conclusion is
-$\E(y)-\E(p)\geq\rho^2/200$ for aligned displacement norm
-$\rho\leq1/1000$.
-
-\subsection{The separate energy calculation}\label{app:energy}
-This subsection explains how to check the separate energy enclosure
-in Section~\ref{sec:energy}. This calculation is checked only by Python.
-It is computed by
-rational interval evaluation of the candidate's 45 pair energies over
-$[a,b]$. Square roots are enclosed using integer square roots on a dyadic grid
-of spacing $2^{-420}$, rounding outward. Reciprocal and summation
-operations preserve the rational bounds. The script
-\nolinkurl{checks/energy_enclosure.py} performs this computation and prints
-the two endpoints in the energy remark in Section~\ref{sec:energy}. Lean proves that the
-height interval $[a,b]$ contains its unique stationary root; Python uses the interval as input and does not
-prove root existence or uniqueness.
-
-\subsection{Code and cutoff provenance}\label{app:provenance}
-The original code attribution, historical comparisons and cutoff account
-are retained in \nolinkurl{checks/context.md}; the file-level credits and
-full MIT notice remain in \nolinkurl{THIRD_PARTY.md}.
+dominance.
 
 \end{appendices}
 \clearpage
+\begingroup\raggedright
 \begin{thebibliography}{99}
 \small
 \bibitem{thomson}
@@ -1067,10 +763,9 @@ of the results to the theory of atomic structure,
 \href{https://doi.org/10.1080/14786440409463107}{doi:10.1080/14786440409463107}.
 
 \bibitem{n9}
-A. Karthigeyan (director and publisher), \emph{The Nine-Point Coulomb
-Thomson Problem}, MIT-licensed Lean project, revision \texttt{168ff0c},
-October 6, 2026.
-\url{https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e}.
+A. Karthigeyan, \emph{The Nine-Point Coulomb
+Thomson Problem}, Lean project (2026).
+\href{https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e}{Repository}.
 
 \bibitem{delsarte}
 P. Delsarte, J. M. Goethals and J. J. Seidel, Spherical codes and designs,
@@ -1090,14 +785,12 @@ semidefinite programming, \emph{Journal of the American Mathematical
 Society} 21 (2008), 909--924.
 \href{https://doi.org/10.1090/S0894-0347-07-00589-9}{doi:10.1090/S0894-0347-07-00589-9}.
 
-arXiv version 4, October 3, 2007.
-\url{https://arxiv.org/abs/math/0608426v4}.
+\href{https://arxiv.org/abs/math/0608426v4}{arXiv:math/0608426}.
 
 \bibitem{cohnwoo}
 H. Cohn and J. Woo, Three-point bounds for energy minimization,
 \emph{Journal of the American Mathematical Society} 25 (2012), 929--958.
-\href{https://arxiv.org/abs/1103.0485v2}{arXiv:1103.0485v2}.
-Version 2, June 24, 2013.
+\href{https://arxiv.org/abs/1103.0485v2}{arXiv:1103.0485}.
 
 
 \bibitem{foppl}
@@ -1109,19 +802,15 @@ Cambridge, 1912, vol.~II (Cambridge University Press, 1913), 188--191.
 \bibitem{andreev}
 N. N. Andreev, An extremal property of the icosahedron,
 \emph{East Journal on Approximations} 2 (1996), no.~4, 459--462.
-\href{https://www.mathnet.ru/eng/person9017}{Author's publication list}.
-Review: \href{https://zbmath.org/?q=an:0877.51021}{Zbl 0877.51021}.
 
 \bibitem{cohnkumar}
 H. Cohn and A. Kumar, Universally optimal distribution of points on spheres,
 \emph{Journal of the American Mathematical Society} 20 (2007), 99--148.
-arXiv version 2, October 19, 2006.
-\url{https://arxiv.org/abs/math/0607446v2}.
+\href{https://arxiv.org/abs/math/0607446v2}{arXiv:math/0607446}.
 
 \bibitem{schwartz}
-R. E. Schwartz, The 5 Electron Case of Thomson's Problem,
-arXiv version 5, February 8, 2010 (first posted January 21, 2010).
-\url{https://arxiv.org/abs/1001.3702v5}.
+R. E. Schwartz, The 5 Electron Case of Thomson's Problem (2010).
+\href{https://arxiv.org/abs/1001.3702v5}{arXiv:1001.3702}.
 
 \bibitem{erber}
 T. Erber and G. M. Hockney, Equilibrium configurations of $N$ equal charges
@@ -1132,54 +821,60 @@ on a sphere, \emph{Journal of Physics A: Mathematical and General}
 
 \bibitem{cambridge}
 D. J. Wales and S. Ulker, Cambridge Cluster Database, Thomson problem,
-ten-point entry, accessed October 24, 2026.
+ten-point entry.
 \url{https://www-wales.ch.cam.ac.uk/~wales/CCD/Thomson/table.html}.
 
 \bibitem{concurrent}
 \texttt{saberwatchmanga} (formerly \texttt{terry2418}),
-Lean-verified local minimality for ten charges on a sphere
-(October 7, 2026), and A Lean-checked distance restriction for ten charges
-on a sphere (October 11, 2026).
-\url{https://github.com/saberwatchmanga/-lean-finite-certificates}.
-October 7 posting, root README, revision \texttt{7ba9eb3}:
-\url{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/7ba9eb38db36c9cb957ff26758b66bbacc31d8bc/README.md}.
+\emph{Lean Certificates: Finite Results and Thomson N=10}.
+Lean project (2026).
+\href{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/7ba9eb38db36c9cb957ff26758b66bbacc31d8bc/README.md}{Repository}.
 
 \bibitem{n7}
 H. Tran, A Lean Proof of the Thomson Problem for Seven Electrons,
-Vals AI blog, September 28, 2026, Problem section.
+Vals AI blog (2026).
 \url{https://www.vals.ai/blogs/thomson-n7-lean-proof}.
 
 \bibitem{n8}
 L. Kryvonos, L. Liehr and M. A. Taylor, Energy minimization for eight
-points on the sphere, arXiv version 1, September 18, 2026.
-\url{https://arxiv.org/abs/2609.22077v1}.
+points on the sphere (2026).
+\href{https://arxiv.org/abs/2609.22077v1}{arXiv:2609.22077}.
 
 \bibitem{n8warrant}
-J. Tooby-Smith and A. Zughaid, A warrant for the N=8 Thomson problem, in Lean4,
-README, revision \texttt{2c35d62}, September 2026.
-\url{https://github.com/jstoobysmith/Thomson-N-8-Warrant/blob/2c35d62e07d72686931da4bc3e062d668e858eda/README.md}.
+J. Tooby-Smith and A. Zughaid, A warrant for the N = 8 Thomson problem, in Lean 4,
+Lean project (2026).
+\href{https://github.com/jstoobysmith/Thomson-N-8-Warrant/blob/2c35d62e07d72686931da4bc3e062d668e858eda/README.md}{Repository}.
 
 \bibitem{zarco5}
-A. Zarco (\texttt{alejandrozarco}), \texttt{five-points-riesz},
-README, revision \texttt{aeb4588}, October 2026.
-\url{https://github.com/alejandrozarco/five-points-riesz/blob/aeb4588ccbb1ccb91c315fedeb79a18042b5fe13/README.md}.
+A. Zarco (\texttt{alejandrozarco}), \emph{Five points on the sphere: exact three-point certificates for the
+Riesz energies $s = 1, \dots, 6$, and Lean formalisations for $s = 1$
+(Coulomb) and $s = 2$}, \texttt{five-points-riesz},
+Lean project (2026).
+\href{https://github.com/alejandrozarco/five-points-riesz/blob/aeb4588ccbb1ccb91c315fedeb79a18042b5fe13/README.md}{Repository}.
 
 \bibitem{zarco7}
 A. Zarco (\texttt{alejandrozarco}), \emph{The pentagonal bipyramid as the unique
 logarithmic-energy minimiser for seven points on the sphere: an unreviewed
 Lean 4 warrant (Conjecture 1 of Armentano et al.)},
-\texttt{thomson-n7-log}, README, revision \texttt{fd2f8b2}, October 2026,
-including its Coulomb section.
-\url{https://github.com/alejandrozarco/thomson-n7-log/blob/fd2f8b2e7eb0e89ba4f82f6d2c3e98862f89bc28/README.md}.
+\texttt{thomson-n7-log}, Lean project (2026).
+\href{https://github.com/alejandrozarco/thomson-n7-log/blob/fd2f8b2e7eb0e89ba4f82f6d2c3e98862f89bc28/README.md}{Repository}.
 
 \bibitem{concurrentlocal}
 \texttt{saberwatchmanga} (formerly \texttt{terry2418}),
-\texttt{Thomson10LocalMinimum}, README, revision \texttt{7ba9eb3}, October 2026.
-\url{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/7ba9eb38db36c9cb957ff26758b66bbacc31d8bc/Thomson10LocalMinimum/README.md}.
+\emph{Lean-verified local minimality for ten charges on a sphere},
+\texttt{Thomson10LocalMinimum}, Lean project (2026).
+\href{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/7ba9eb38db36c9cb957ff26758b66bbacc31d8bc/Thomson10LocalMinimum/README.md}{Repository}.
 
 \bibitem{concurrentchord}
 \texttt{saberwatchmanga} (formerly \texttt{terry2418}),
-\texttt{Thomson10Chord1935}, README, revision \texttt{bc74bc0}, October 2026.
-\url{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/bc74bc050f4c39123e894b3fd3873ba17f60289a/Thomson10Chord1935/README.md}.
+\emph{A Lean-checked distance restriction for ten charges on a sphere},
+\texttt{Thomson10Chord1935}, Lean project (2026).
+\href{https://github.com/saberwatchmanga/-lean-finite-certificates/blob/bc74bc050f4c39123e894b3fd3873ba17f60289a/Thomson10Chord1935/README.md}{Repository}.
+\bibitem{supplement}
+P. Graham, \emph{The Thomson problem for N = 10}, proof sources and
+certificates (2026).
+\href{https://github.com/6/clank-lab/tree/e987408cf2d4c27c6e0c10d9f1a522ce3156c632/results/thomson-10}{Repository}.
+
 \end{thebibliography}
+\endgroup
 \end{document}

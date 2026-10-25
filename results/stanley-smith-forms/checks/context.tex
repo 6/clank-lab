@@ -1,0 +1,418 @@
+% Supplementary computations, source pinpoints and certificate details.
+% Bibliography keys refer to paper/paper.tex; numbered results and appendices below refer to the accompanying paper.
+
+\section{The census for \texorpdfstring{$n\le8$}{n <= 8}}\label{sec:census}
+Where an unordered collection of invariant factors is meant, it is called a multiset.
+
+We computed the Smith form of $X_k$ on $S^\lambda_\Z$ for every
+$\lambda\vdash n\le8$ and every $1\le k\le n$, 416 cases in all, and compared
+it with Conjecture~7.4. The numbers of disagreements are:
+\[
+\begin{array}{l|cccccccc|c}
+n & 1&2&3&4&5&6&7&8&\text{total}\\\hline
+\text{cases} & 1&4&9&20&35&66&105&176&416\\
+\text{disagreements} & 0&0&0&0&2&5&23&64&94
+\end{array}
+\]
+The two disagreements at $n=5$ are those of Proposition~7.
+Stanley's example $\lambda=(5,1)$, $k=5$, is reproduced: the Smith form is
+$(1,1,3,3,12)$, as the survey states. Of the 94 disagreements, 23 have $k=3$
+and are accounted for by Corollary~4. Disagreements involve the
+prime $2$ in 79 cases and the prime $3$ in 30; they occur both for $k<n$ (85
+cases) and for $k=n$ (9 cases), and for two-row shapes from $n=7$ on, the
+first being $\lambda=(5,2)$.
+
+The weaker remark fails first at $n=7$, for $(5,2)$ and $(2,2,1,1,1)$ with
+$k=7$ (Proposition~2). Nor is the Smith form of $X_k$ always that
+of the diagonal matrix of its eigenvalues: this holds in 279 of the 416
+cases.
+
+What survives in the data is limited: the conjecture holds for all
+$n\le4$ (Proposition~7) and at $k=3$ for the shapes of
+Corollary~4, and the Smith forms of $\lambda$ and $\lambda'$ agree
+in every case. The modifications of the formula we tested all fail
+(\emph{Other readings and modifications of the formula}), and we propose no corrected form.
+
+\section{An open point}\label{sec:open}
+
+The documented facts are these. Stanley reports computations through
+$n\le7$, which he credits to Grinberg, and states that the conjecture was
+made on the basis of these data; the survey defines $W_{\lambda,k}$ through a
+basis of $\Z\sn$. Grinberg's later comment names the integral Specht module with its standard basis as the
+intended lattice. On that lattice the conjecture fails at $n=5$
+(Theorem~1), the weaker remark fails at $n=7$
+(Proposition~2), and the census finds 30 disagreements with
+$n\le7$. The data of
+the computations reported in the survey are not available to us, and why
+they supported the conjecture is not known to us. We attribute no error to these unavailable data.
+
+\section{Verification}\label{sec:verify}
+
+Three kinds of evidence are combined, and each result says which it has.
+Lean proves statements about explicit algebraic objects: the identity of
+Lemma~5; for the explicit matrices of
+Theorem~1 and Proposition~2, their Smith forms, the
+unreachability of the predicted forms, $AB=BA=2I$ for the first and
+$A(A-4I)=0$ and the eigenvalues for the second; the matrix step of
+Theorem~3; and the counting step of Corollary~4.
+Standalone certificate checkers establish, by recomputation from the
+definitions, that these matrices are those of $X_k$ on the integral Specht
+lattices in the standard polytabloid basis, and that the predicted lists are
+Stanley's; together with Lean this verifies Theorem~1 and
+Proposition~2. A third checker verifies
+Proposition~7 by exact computation over the 69 cases with
+$n\le5$. Theorem~3, Corollary~4,
+Proposition~8, Remark~6, the
+exterior-square derivation in Appendix~D and the general statements about other
+lattices are proved in writing and are not machine-checked; the census is
+supporting data for them. The checks run with \file{checks/check.py} and
+\texttt{lake build} in \file{lean/}. \emph{Scope of the checks} describes the
+checkers, the census construction and the Lean statements, with what each
+does not cover.
+
+
+\section{Formal statements and computing details}\label{sec:formal-statements}
+Lean verifies the following matrix and arithmetic statements. All declaration names below lie in the namespace \file{StanleySmithForms}. Here $M_d(\Z)$ denotes integer $d\times d$ matrices
+and $\operatorname{diag}$ forms a diagonal matrix.
+The integer matrix $A$ is displayed in Section~2; its fixed
+unimodular matrices $U,V$ are displayed in Appendix~A. The theorem \file{counterexample} states exactly
+\[
+\begin{gathered}
+(\det U,\det V\in\Z^\times\ \land\ UAV=\operatorname{diag}(1,1,1,1,2,2))\ \land\\
+\neg\exists P,Q\in M_6(\Z):\quad
+\det P,\det Q\in\Z^\times\ \land\ PAQ=\operatorname{diag}(1,1,1,1,1,4).
+\end{gathered}
+\]
+Here $\Z^\times=\{1,-1\}$, so both determinants are units in $\Z$.
+Two independent programs identify the matrix in Theorem~1:
+$A$ represents $X_3$ in the ordered standard polytabloid basis, with column
+$j$ the image of basis vector $j$, and the diagonal ruled out is the list conjectured in Theorem~1.
+Lean does not construct that Specht module.
+
+For the literal $14\times14$ matrices $A_{52},U_{52},V_{52}$ displayed here, the theorem \file{counterexample_52} states: $U_{52},V_{52}$
+have unit determinants and $U_{52}A_{52}V_{52}$ is the diagonal listed in
+Proposition~2; for every $\mu\in\Q$,
+$(\exists v\in\Q^{14}\setminus\{0\}: A_{52}v=\mu v)$ if and only if
+$\mu=0$ or $4$; and for every
+$P,Q\in M_{14}(\Z)$ with unit determinants and every vector $d$,
+$P\,A_{52}\,Q=\operatorname{diag}(d)$ implies some $d_i$ is divisible by $2$
+and not by $4$. The declarations\allowbreak{} \file{eigen_identity_52} and
+\file{charpoly_52} state, respectively, $A_{52}(A_{52}-4I)=0$ and
+$\operatorname{charpoly}(A_{52})=t^5(t-4)^9$. Here $t$ is the polynomial indeterminate; the latter supplies the
+multiplicities. The same column convention identifies $A_{52}$ with the matrix of $X_7$ in the standard polytabloid basis, and the programs check the conjectured list.
+
+For every natural $n\ge3$, \file{group_ring_identity} states both
+$X(X-T)=2$ and $(X-T)X=2$ in $\Z[\mathfrak S_n]$, where the transpositions defining $X$ and $T$ are $(0,2)+(1,2)$ and $(0,1)$ on $\{0,\dots,n-1\}$. These are the paper's letters
+$1,2,3$ shifted by one; $2$ means $2$ times the ring identity.
+The theorem \file{invariant_factors_of_mul_eq_two} states: for any finite
+index set (with decidable equality in Lean), integer square matrices $A,B,U,V$ and
+integer vector $d$, if $AB=2I$, $\det U,\det V$ are units and
+$UAV=\operatorname{diag}(d)$, then each $d_i\in\{1,-1,2,-2\}$ and
+$\#\{i:2\mid d_i\}=v_2(\det A)$, where $v_2$ is the $2$-adic valuation
+of $|\det A|$.
+It assumes a diagonalization; its entries may be signed and unordered.
+The paper normalizes signs and divisibility order.
+
+For natural $f,a,b$ with $a+b\le f$, \file{k3_counting} states
+\[
+\bigl(\forall r\in\{1,\dots,f\},\quad
+2^{[r\le a]+[r\le b]}=
+\begin{cases}2&r\le a+b,\\1&r>a+b\end{cases}\bigr)
+\ \Longleftrightarrow\ (a=0\ \lor\ b=0),
+\]
+where brackets are $0$--$1$ indicators. Here $a,b$ count
+tableaux with $3$ in $(1,3),(3,1)$, $f=f^\lambda$, and $r$ counts from the
+largest factor, corresponding to the paper's index $f-r+1$.
+In Theorem~3 and Corollary~4, the lattice passage from the group ring, the eigenvalue theorem, the count interpretations and the tableau extension/shape argument remain written. The census of \emph{The census for $n\le8$} agrees with both
+results for $n\le8$: in all 63 cases with $k=3$ every invariant factor is $1$
+or $2$, there are exactly $m$ factors equal to $2$, and the disagreements are
+exactly the shapes with $\lambda_1\ge3$ and at least three rows.
+A third Python checker establishes Proposition~7;
+the census, an enumeration of all pairs $(\lambda,k)$ with $\lambda\vdash n\le8$ and $1\le k\le n$, is supporting data.
+
+
+Lean~\cite{lean} and mathlib~\cite{mathlib} provide the formal proof
+infrastructure. The formal proofs use propositional extensionality, quotient soundness and classical choice; the counting identity does not use classical choice. The computation also depends on the Python interpreter and
+the two independent implementations of the Specht-matrix checkers.
+The computation also reproduces Stanley's example $\lambda=(5,1)$, $k=5$, with Smith form $(1,1,3,3,12)$~\cite[example following Conjecture~7.4]{stanley}. Certificate checking took about two seconds on one CPU core. Reproduction instructions and the
+pinned software versions are given in the accompanying README and
+checking notes.
+
+The recorded certificate check used one CPU core; its hardware model was not retained. The approximately two-second total is the retained certificate-check timing, not a new timing measurement. Full reproduction commands and software versions are in the README and the checker and Lean documentation.
+
+\section{The conjecture in the paper's notation}
+The matrix $W_{\lambda,k}$ is that
+of $X_k$ in the standard polytabloid basis, and its Smith form is that of
+$X_k$ as an endomorphism of $S^\lambda_\Z$, which does not depend on the
+basis.
+A rational eigenvalue description does not determine the integral Smith
+form. Stanley's Conjecture~7.4~\cite{stanley} predicts
+\[
+\alpha_{f^\lambda-r+1}=\pm\prod_{(i,j)\in S_r}(j-i)
+\qquad(1\le r\le f^\lambda),
+\]
+where $S_r$ consists of cells occupied by $k$ in at least $r$ standard
+tableaux, and $j-i$ is the content of row $i$, column $j$.
+
+\section{Sources and integral bases}\label{sec:sources}
+The paper uses Stanley's Conjecture~7.4 and the following
+paragraph~\cite{stanley}. The base lattice is the integral Specht module
+specified in Grinberg's comment on Question~1~\cite{mo}.
+
+An exact integral standard-basis reference is Grinberg's
+Theorem~5.9.1~\cite{grinberg} (June 12, 2026 version, page~361), with base
+ring $\Z$; his base-ring convention is on page~15. The content-spectrum
+assertion used in Sections~3--4 and Appendix~C is in the paragraph preceding Conjecture~7.4 in Stanley's arXiv version~2, page~15~\cite{stanley}. For the standard-basis references above, the exact statements are
+James~\cite[Theorem~8.4, page~29, and Corollary~8.6, page~30]{james}
+and Sagan~\cite[Theorem~2.6.5(1), page~74]{sagan}, in the editions listed;
+James's corollary gives integral spanning, whereas Sagan's displayed theorem
+is stated over $\mathbb C$. For the rational content eigenbasis used below,
+see Vershik and Okounkov~\cite[arXiv version~1, Corollary~2.10 and the following paragraph, page~13,
+Theorem~5.8, page~21, and Proposition~6.1, page~22]{vo}; the second sentence after
+that proposition's proof identifies the basis as Young's seminormal form.
+
+
+The original Jucys and Murphy full texts were unavailable. For Murphy's page range we follow Grinberg's June 12, 2026 bibliography entry [Murphy81], which gives 287--297. Vershik and Okounkov's bibliography entry [24] instead gives 287--291; the original-text access gap leaves that discrepancy unresolved. The mathematical eigenvalue formulation used here is pinned to Vershik and Okounkov above; their Introduction, page~4, credits the independent rediscovery of the elements to Jucys and Murphy.
+
+\section{Other readings and modifications of the formula}\label{app:readings}\label{sec:readings}
+
+\paragraph{Other lattices for the counterexample (written; not machine-checked).} By
+Theorem~3, the same Smith form arises on any lattice stable under
+the permutations of $\{1,2,3\}$ in a module isomorphic to $S^{(3,1,1)}_\Q$:
+for instance the lattices given by polytabloids built from column tabloids,
+by a left ideal generated by a Young symmetrizer, by the dual lattice, or by
+the saturated lattice $S^\lambda_\Q\cap M^\lambda_\Z$. No choice of lattice
+or basis of this kind restores the prediction.
+
+
+\paragraph{Other lattices in the census.} For $k=3$, Theorem~3 (proved in
+writing) covers every lattice stable under the permutations of
+$\{1,2,3\}$. Over the whole census the following were also compared. The
+dual lattice
+$\operatorname{Hom}(S^\lambda_\Z,\Z)$, with the contragredient action,
+carries the transposed matrix, since transpositions are their own inverses;
+its Smith form is the same. The saturated lattice
+$S^\lambda_\Q\cap M^\lambda_\Z$, which contains $S^\lambda_\Z$, gives the
+same Smith form as $S^\lambda_\Z$ in all 135 cases with $n\le6$; it was not
+computed for larger $n$. The census also finds that $\lambda$ and its
+conjugate $\lambda'$ have the same Smith form for every $k$, in all 416 cases,
+as one expects from the classical relation between $S^{\lambda'}$ and the
+dual of $S^\lambda$ twisted by the sign character~\cite[\S8]{james}, under
+which $X_k$ becomes $-X_k$. The statements about the dual lattice and this
+relation are written background, not machine-checked; the comparisons are
+finite computations.
+
+\paragraph{The literal group ring reading.} Read literally, the survey
+compares the Smith form of left multiplication by $X_k$ on $\Z\sn$ with that
+of a block diagonal matrix holding $f^\lambda$ copies of each predicted list.
+Grinberg's comment explains why this is not the intended statement, and it
+fails already for $n=4$, $k=4$. Writing $d^m$ for $m$ invariant factors equal
+to $d$, left multiplication by $X_4$ on $\Z\mathfrak{S}_4$ has invariant factors
+forming the multiset $\{0^4,1^{16},2^4\}$. The predicted lists are $(3)$ for $(4)$ and $(1^4)$,
+$(1,2,2)$ for $(3,1)$ and $(2,1,1)$, and $(0,0)$ for $(2,2)$; with
+multiplicities $f^\lambda$ the diagonal holds the multiset
+$\{0^4,1^6,2^{12},3^2\}$, whose Smith normalization has invariant factors
+forming the multiset $\{0^4,1^8,2^{10},6^2\}$. For $n\le3$ the two agree.
+
+\paragraph{Modifications of the formula.}\label{sec:corrected}
+
+We tested modifications of the formula against the census, the
+Smith forms of $X_k$ on $S^\lambda_\Z$ for all $\lambda\vdash n\le8$. Write
+$N_c$ for the number of standard tableaux of shape $\lambda$ in which $k$
+occupies the cell $c$, so that the formula as stated uses
+$S_r=\{c:N_c\ge r\}$. All sets of cells below consist of cells that $k$
+occupies, that is, cells with $N_c\ge1$. The readings are:
+\begin{itemize}\itemsep0pt
+\item \emph{as stated}: $\alpha_{f-r+1}=|\prod_{c\in S_r}\mathrm{content}(c)|$;
+\item \emph{multiset}: the Smith form of the diagonal matrix of these $f$
+products, ignoring their order;
+\item \emph{$\alpha_r$ indexing}: the $r$-th product assigned to $\alpha_r$
+instead of $\alpha_{f-r+1}$;
+\item \emph{exactly $r$, more than $r$, at most $r$}: $S_r$ replaced by
+$\{c:N_c=r\}$, $\{c:N_c>r\}$ or $\{c:1\le N_c\le r\}$;
+\item \emph{multiplicity classes}: one product for each positive value of
+$N_c$, over the cells with that value, the list padded with $1$s to length
+$f$ and assigned in increasing or decreasing order of $N_c$, or
+Smith-normalized;
+\item \emph{eigenvalue diagonal}: the Smith form of the diagonal matrix of
+all eigenvalues of $X_k$ on $S^\lambda_\Q$;
+\item \emph{zero contents dropped}: the formula as stated, with cells of
+content $0$ left out of the products, except that a nonempty set consisting
+only of cells of content $0$ gives $0$ (the empty set gives $1$);
+\item \emph{$X_{k\pm1}$}: the formula for $k$ compared with the Smith form of
+$X_{k+1}$ or of $X_{k-1}$;
+\item \emph{$Y_k$}: the formula for $k$ compared with the Smith form of
+$Y_k=\sum_{i>k}(i,k)$;
+\item \emph{$\lambda'$}: the formula for the conjugate shape $\lambda'$
+compared with $X_k$ on $S^\lambda$;
+\item \emph{fillings of $1,\dots,k$}: $N_c$ replaced by the number of
+distinct restrictions to the entries $1,\dots,k$ of standard tableaux of
+shape $\lambda$ with $k$ in $c$;
+\item \emph{weak form}: every nonzero invariant factor is a product of some
+of the absolute values of the eigenvalues, the remark following the
+conjecture.
+\end{itemize}
+A case matches when the predicted list equals the Smith form entry by entry.
+The actual Smith form is written nonnegative, its nonzero entries in
+increasing order and its zeros last. For the formula as stated, the
+$\lambda'$, $X_{k\pm1}$ and $Y_k$ comparisons and the fillings reading, the
+predicted list is put in the same order before the comparison. The ordered
+trial lists of the other readings ($\alpha_r$ indexing, exactly, more than
+or at most $r$, multiplicity classes, zero contents dropped) keep their
+assigned positions $\alpha_1,\dots,\alpha_f$, zeros included; their
+Smith-normalized versions are the Smith forms of the corresponding diagonal
+matrices. Where a reading has an ordered and a Smith-normalized version, the
+table gives the better count. The columns give
+the matches among the 240 cases with $n\le7$ and the 416 with $n\le8$ (196
+and 350 for $X_{k\pm1}$, where $k\pm1$ must lie in $1,\dots,n$), whether the
+reading reproduces Stanley's example $(1,1,3,3,12)$ for $\lambda=(5,1)$,
+$k=5$, and the first case, in order of $n$, where it fails.
+\[
+\begin{array}{lccll}
+\text{reading} & n\le7 & n\le8 & (5,1),\,k=5 & \text{first failure}\\\hline
+\text{as stated} & 210 & 322 & \text{yes} & (3,1,1),\ k=3\\
+\text{multiset} & 210 & 322 & \text{yes} & (3,1,1),\ k=3\\
+\lambda' & 210 & 322 & \text{yes} & (3,1,1),\ k=3\\
+\alpha_r\text{ indexing} & 122 & 181 & \text{no} & (3,1),\ k=3\\
+\text{exactly }r & 96 & 133 & \text{no} & (2,1),\ k=1\\
+\text{more than }r & 47 & 70 & \text{no} & (1),\ k=1\\
+\text{at most }r & 94 & 131 & \text{no} & (2,1),\ k=1\\
+\text{multiplicity classes} & 96 & 133 & \text{no} & (2,1),\ k=1\\
+\text{eigenvalue diagonal} & 177 & 279 & \text{yes} & (3,2),\ k=4\\
+\text{zero contents dropped} & 173 & 266 & \text{yes} & (3,2),\ k=4\\
+X_{k+1} & 3 & 3 & \text{no} & (2),\ k=1\\
+X_{k-1} & 3 & 3 & \text{no} & (2),\ k=2\\
+Y_k & 26 & 26 & \text{no} & (2),\ k=1\\
+\text{fillings of }1,\dots,k & 144 & 203 & \text{yes} & (2,1),\ k=1\\
+\text{weak form} & 238 & 410 & \text{yes} & (5,2),\ k=7
+\end{array}
+\]
+The multiset reading agrees with the formula as stated in every case, since
+$S_1\supseteq S_2\supseteq\cdots$ makes the stated products a divisibility
+chain. The $\lambda'$ reading agrees with it as well: conjugation moves the
+counts to transposed cells and changes the sign of the contents, and the
+census finds the same Smith form for $\lambda$ and $\lambda'$. So does the
+reading with the labels counted from $n$ downward, $Y_{n+1-k}=w_0X_kw_0$ with
+$w_0$ the reversal permutation, whose Smith form equals that of $X_k$ in all
+416 cases.
+
+The modifications we tested all fail on the data with $n\le7$. The best fit is the formula
+as stated, together with its equivalent readings; it matches 210 of the 240
+cases with $n\le7$ and first fails at $\lambda=(3,1,1)$, $k=3$. Every other
+reading that predicts the whole Smith form first fails at $n\le5$, most of
+them at $n\le3$. The weak form, which predicts only a property of it, holds
+for all $n\le6$ and fails at $n=7$, for $(5,2)$ and $(2,2,1,1,1)$ with $k=7$
+(Proposition~2). We propose no corrected form. The program for
+this comparison is included with the optional census programs; it needs the
+python-flint library.
+
+
+\section{Scope of the checks}\label{app:checks}
+
+\paragraph{Certificates and checkers.} The two counterexamples,
+$\lambda=(3,1,1)$ with $k=3$ and $\lambda=(5,2)$ with $k=7$, are given as
+certificates, each holding the standard tableaux in order, the
+matrix $A$ of $X_k$, unimodular $U$ and $V$ with $UAV$ diagonal, the Smith
+form and the prediction. Two standalone checkers, written independently and
+using only the Python standard library, read them; neither trusts the
+encoded matrix. The first enumerates the standard
+tableaux from all $n!$ fillings, proves that the standard polytabloids form a
+$\Z$-basis of the $\Z$-span of all $n!$ polytabloids, recomputes $A$ exactly
+from the tabloid module, checks $UAV=\operatorname{diag}(\text{snf})$ with
+integer $U,V$ of determinant $\pm1$ and a divisibility chain, and recomputes
+the prediction. The second, with separate code, enumerates the standard
+tableaux by lattice words, shows that the $\F_2$-span of all polytabloids has
+dimension $f^\lambda$, computes the rank of $X_k$ there without reference to
+a basis, compares it with the number of odd predicted factors, verifies
+$X_ke_{T_j}=\sum_iA_{ij}e_{T_i}$ in the tabloid module for every $j$, and
+checks $U$, $V$ and the Smith form with its own arithmetic. For a
+certificate that also claims the failure of the weak remark, both checkers,
+each with its own code, take as eigenvalues the contents of the cell holding
+$k$ in each standard tableau; verify $\prod_c(A-cI)=0$ over the distinct
+contents $c$, so that $A$ is diagonalizable with eigenvalues among them;
+check $\operatorname{tr}(A^j)=\sum c^j$ over the eigenvalue list for $1\le j$
+below the number of distinct contents, which fixes the multiplicities; and
+require some Smith entry that is not the absolute value of a product of a
+sub-multiset of the eigenvalues (the empty product being $1$). The checkers are independent: separate code, different
+enumerations of the standard tableaux (all $n!$ fillings, and lattice
+words), and different arithmetic (exact rational elimination, and Bareiss
+determinants with linear algebra over $\F_2$). Both reject eight corrupted certificates (a changed entry of $A$; the
+Smith form replaced by the prediction; a non-unimodular $U$; a rational $U$
+of determinant $\pm1$; an extra factor; a non-standard basis tableau; an
+altered prediction; and, in the weak-form certificate, a planted change to
+$A$ with $U$ adjusted so that $UAV$ is still the claimed diagonal matrix,
+rejected because $A(A-4I)\ne0$). Both also reject three controls: the
+agreeing case $\lambda=(5,1)$, $k=5$, as showing no discrepancy, and two
+weak-form claims about true statements, $(5,1)$ with $k=5$, where
+$12=4\cdot3$ is a product of eigenvalues, and $(3,1,1)$ with $k=3$, where
+$2=2\cdot1$ is one. A third checker, written separately from both and
+importing neither, recomputes every $\lambda\vdash n\le5$ and every $k$: it
+proves that the standard polytabloids form a $\Z$-basis, forms the matrix of
+$X_k$, computes its Smith form from determinantal divisors, and asserts
+Proposition~7 and Stanley's example $\lambda=(5,1)$, $k=5$.
+The entry point is \file{checks/check.py}, with the certificates in
+\file{data/}.
+
+\paragraph{Census.} The census was computed by two constructions. The first
+generates $S^\lambda_\Z$ inside $M^\lambda_\Z$ as the $\Z\sn$-span of one
+polytabloid, closing under simple transpositions with Hermite normal forms;
+it uses neither the standard basis nor straightening, and every Smith form
+is computed by two implementations. The second uses the standard polytabloid
+basis and exact rational linear algebra. They agree in all 135 cases with
+$n\le6$. The census output is included as \file{data/census-n8.json}; the
+census programs are optional and not part of the check.
+
+\paragraph{Lean.}\sloppy The checked statements are in Lean~4~\cite{lean} with
+mathlib~\cite{mathlib}, in the namespace \texttt{StanleySmithForms}.
+\begin{itemize}\itemsep0pt
+\item \texttt{group\_ring\_identity}: the identity of
+Lemma~5 in the integral group ring of $\sn$, for every
+$n\ge3$.
+\item \texttt{A\_det}: $\det A=-4$; \texttt{U\_det}, \texttt{V\_det}:
+$\det U=-1$, $\det V=1$; \texttt{smith\_form}:
+$UAV=\operatorname{diag}(1,1,1,1,2,2)$.
+\item \texttt{A\_mul\_B}, \texttt{B\_mul\_A}: $AB=BA=2I$ for the explicit
+integer matrix $B=2A^{-1}$.
+\item \texttt{rank\_mod\_two}: $A$ has rank $4$ over $\F_2$;
+\texttt{not\_predicted}: no integer matrices $P,Q$ with unit determinant
+satisfy $PAQ=\operatorname{diag}(1,1,1,1,1,4)$; \texttt{counterexample}
+combines the Smith form and the unreachability of the predicted form.
+\item \texttt{invariant\_factors\_of\_mul\_eq\_two}: for integer matrices
+$A,B$ with $AB=2I$, every unimodular diagonalization $UAV=\operatorname{diag}(d)$
+has $d_i\in\{\pm1,\pm2\}$, and the number of even $d_i$ is $v_2(\det A)$
+(applying it to the nonnegative Smith form of an arbitrary lattice is the
+written step of Theorem~3); \texttt{witness\_factors} applies it
+to the witness.
+\item For $\lambda=(5,2)$, $k=7$, with the explicit $14\times14$ matrix $A$:
+\texttt{smith\_form\_52}, \texttt{U52\_unimodular},
+\texttt{V52\_unimodular}: the Smith form via unimodular $U$, $V$;
+\texttt{eigen\_identity\_52}: $A(A-4I)=0$; \texttt{charpoly\_52}: the
+characteristic polynomial of $A$ is $x^5(x-4)^9$; \texttt{eigenvalues\_52}:
+the rational eigenvalues of $A$ are exactly $0$ and $4$;
+\texttt{weak\_remark\_fails\_52}: every unimodular diagonalization of $A$
+has an entry divisible by $2$ but not by $4$, proved from a parity certificate,
+integer vectors $x,y,w,z$ with $Ay=2x$, $w^{\mathsf T}A=2z^{\mathsf T}$ and
+$w\cdot x=1$; \texttt{counterexample\_52} combines the Smith form, the
+eigenvalues and this statement. The identities between explicit
+$14\times14$ matrices are checked by evaluation in the Lean kernel, which
+adds no axioms.
+\item \texttt{k3\_counting}: the counting step of Corollary~4, as
+stated in Section~4.
+\end{itemize}
+Lean does not construct Specht modules, Young's seminormal basis or standard
+tableaux. It does not check that the explicit matrices are those of $X_3$ on
+$S^{(3,1,1)}_\Z$ and of $X_7$ on $S^{(5,2)}_\Z$, nor that the predicted lists
+and the contents are Stanley's; the certificate checkers, which recompute
+these from $\lambda$ and $k$, cover that step for both counterexamples. It does not check the passage from the group ring to an
+arbitrary lattice, the content spectrum, or the facts about tableaux used in
+Theorem~3 and Corollary~4; those are written.\par\fussy
+
+
+
+
+\paragraph{The shape $(5,2)$ at $k=7$.}
+Here $N_c$ denotes the number of standard tableaux of shape $(5,2)$ in
+which $7$ occupies the cell $c$. We have $N_{(1,5)}=9$ and $N_{(2,2)}=5$.
+
+\paragraph{The finite calculation through $n\le5$.}
+The cases are all 69 pairs $(\lambda,k)$ with $\lambda\vdash n\le5$ and $1\le k\le n$. The standard basis property means that the standard polytabloids form a $\Z$-basis of their span. The program constructs these polytabloids from the definitions and establishes this property in every case. It computes Smith forms using determinantal divisors: $d_j$ is the gcd of all $j\times j$ minors, computed as exact integer determinants, and the $j$-th invariant factor is $d_j/d_{j-1}$. The separate enumeration through $n\le8$ agrees. The method is detailed in checks/README.md.

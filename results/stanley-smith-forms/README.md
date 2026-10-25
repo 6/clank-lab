@@ -8,7 +8,7 @@ $`X_k = (1\,k) + (2\,k) + \cdots + (k{-}1\,k)`$ act on each integral
 symmetric group, with eigenvalues given by the contents of standard Young
 tableaux. In his 2016 survey
 [Smith normal form in combinatorics](https://arxiv.org/abs/1602.00166)
-(Conjecture 7.4), Richard P. Stanley conjectured a formula for their Smith
+(arXiv version 2, Conjecture 7.4, page 15), Richard P. Stanley conjectured a formula for their Smith
 normal forms, based on Darij Grinberg's computations. Grinberg later
 clarified the intended lattice in reply to Alexander Chervov's
 [MathOverflow question](https://mathoverflow.net/questions/484782) about the
@@ -31,6 +31,20 @@ is a product of eigenvalues, fails too: for $\lambda = (5,2)$ and $k = 7$ the
 eigenvalues are only 0 and 4, but the Smith form
 $(1,1,1,1,2,4,4,4,4,0,0,0,0,0)$ contains a 2.
 
+The first and last standard tableaux of shape $(3,1,1)$ used for $X_3$ are
+
+```math
+T_1=\begin{array}{ccc}
+\boxed{1}&\boxed{2}&\boxed{3}\\
+\boxed{4}\\
+\boxed{5}
+\end{array}\qquad T_6=\begin{array}{ccc}
+\boxed{1}&\boxed{4}&\boxed{5}\\
+\boxed{2}\\
+\boxed{3}
+\end{array}
+```
+
 Lean checks the identity, both counterexamples' Smith forms and two steps of
 the general argument; independent programs confirm the matrices. The rest is
 a written proof.
@@ -42,6 +56,8 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23546377](https://doi.org/10.5281/zenodo.23546377)
+
+The DOI above and the DOI in Cite belong to the deposited prior version (v2); the prepared journal-style edition (v3) has no new DOI yet.
 
 ## Check it
 
@@ -68,7 +84,7 @@ controls and eight corrupted certificates. Stanley reports computations
 through $n \le 7$; the modifications of the formula we tested, against every
 case with $n \le 8$, all fail. A third checker recomputes every case with $n \le 5$ and
 confirms that the conjecture holds for $n \le 4$ and fails at $n = 5$ only for
-$\lambda = (3,1,1)$, with $k = 3$ and $k = 5$. [Checker documentation](checks/README.md) describes the
+$\lambda = (3,1,1)$, with $k = 3$ and $k = 5$. [Supplementary notes](checks/context.tex) give source pinpoints, the census, alternative readings and detailed check scope. [Checker documentation](checks/README.md) describes the
 certificate format and what each checker proves; the optional programs that
 computed every case with $n \le 8$ are described there too.
 
@@ -87,7 +103,7 @@ lake build
 
 Richard P. Stanley posed the conjecture in his survey of Smith normal forms
 in combinatorics. Stanley reports computations through $n \le 7$ by Darij Grinberg as its basis, and
-his MathOverflow comment fixed the lattice on which it is to be read.
+Grinberg's MathOverflow comment fixed the lattice on which it is to be read.
 Alexander Chervov asked on MathOverflow for its status. Lean, Mathlib and
 their contributors supplied the formal-proof infrastructure.
 
@@ -100,7 +116,8 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A counterexample to Stanley's conjecture on Smith forms of Jucys--Murphy elements}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-smith-forms-v2/results/stanley-smith-forms}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-smith-forms-v3/results/stanley-smith-forms}},
   doi          = {10.5281/zenodo.23546377}
 }
+% DOI: deposited v2. The URL identifies the prepared v3 journal-style edition.
 ```

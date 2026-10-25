@@ -73,7 +73,7 @@ writing outputs outside it. The programs write nothing into this folder.
   Smith forms of $X_k$ against `data/census-n8.json`, and prints one table row
   per reading: the cases that match for $n \leq 7$ and $n \leq 8$, whether it gives
   Stanley's $\lambda = (5,1)$, $k = 5$ example, and the first failure. This reproduces the
-  table in the paper's "Corrected readings" section in about a minute for
+  table in the checking notes' ["Other readings and modifications of the formula" section](../context.tex#L177) in about a minute for
   $n \leq 8$. With `--cache`, the Smith forms are stored in `PATH` and reused on
   the next run; without it nothing is written.
 

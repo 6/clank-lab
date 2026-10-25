@@ -12,8 +12,6 @@ The proofs, the search code, the enumeration checkers, the witness checkers and 
 
 Archived on Zenodo: [doi:10.5281/zenodo.23630685](https://doi.org/10.5281/zenodo.23630685)
 
-The release URL below names the journal-style edition, version 3. Both the archive link above and the retained DOI in the Cite entry identify the published version 2; a DOI for version 3 will be added after its deposit.
-
 
 ## Check it
 

@@ -7,10 +7,12 @@ Zenodo records.
 ## ekg-sequence v6 (October 24, 2026)
 
 - Journal-style edition: places the sieve, displacement estimates, counting, main proof and consequences in the main text; retains the formal theorem correspondence. Implementation details move to checking notes; the appendix table uses four places and the figure plots existing terms. Statements, full proofs, bibliography content and checked artifacts are unchanged.
+- Zenodo: [10.5281/zenodo.23621949](https://doi.org/10.5281/zenodo.23621949)
 
 ## steinberg-c4-c9 v6 (October 24, 2026)
 
 - Journal-style edition: presents the main proof in the main text, improves the mathematical prose and retains the corrected appendix headings. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23631783](https://doi.org/10.5281/zenodo.23631783)
 
 ## williamson-order-65 v3 (October 24, 2026)
 
@@ -21,6 +23,7 @@ Zenodo records.
 
 - Concise edition: shorten the main text and move detailed proofs to the appendix and background to the checking notes. The theorem and its checks are unchanged.
 - Correction: restore prominent credit to the large-path formula, small-case results, lower-bound construction, nearby work and checking methods; print named appendix headings and clarify the historical audit count and native-evaluation terminology. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23627699](https://doi.org/10.5281/zenodo.23627699)
 
 ## williamson-order-65 v2 (October 24, 2026)
 
@@ -34,6 +37,7 @@ Zenodo records.
 - Correction: restore prominent credit to Karthigeyan's AI-generated nine-point Lean proof and its substantial code and proof-design reuse, named prior and concurrent credits and four omitted references, and Zarco's corrected warrant title. Print explicit appendix headings. The mathematical statements and checked artifacts are unchanged.
 - Concise edition: shorten the main paper and move proof details to appendices and historical context to the checking guide. The theorem and its checks are unchanged.
 - Correction: add the omitted main-text bridge to the named Lean theorem and separate candidate-admissibility theorem, with their definitions, hypotheses, conventions and checked scope; the mathematical statements and checked artifacts are unchanged.
+- Zenodo: [10.5281/zenodo.23622084](https://doi.org/10.5281/zenodo.23622084)
 
 ## ekg-sequence v5 (October 24, 2026)
 

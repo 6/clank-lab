@@ -50,11 +50,9 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23572881](https://doi.org/10.5281/zenodo.23572881)
+Archived on Zenodo: [doi:10.5281/zenodo.23621949](https://doi.org/10.5281/zenodo.23621949)
 
 ## Check it
-
-The archived DOI identifies version 4; the version 6 DOI is pending.
 
 Install [elan](https://github.com/leanprover/elan#installation), then run:
 
@@ -104,6 +102,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{The second-order asymptotic of the EKG sequence}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v6/results/ekg-sequence}},
-  doi          = {10.5281/zenodo.23572881}
+  doi          = {10.5281/zenodo.23621949}
 }
 ```

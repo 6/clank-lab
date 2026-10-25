@@ -34,7 +34,10 @@ checks/check_u3/inputs/u3_vfs_p6.json
 checks/check_u3/ivla.py
 checks/check_u3/result_p6.json
 checks/check_u3/tcert.py
+checks/checking-notes.pdf
 checks/count_convention.py
+checks/edition-details.tex
+checks/edition-reference-map.md
 checks/encoding_correspondence.py
 checks/independent-merge-filter/affine_check.py
 checks/independent-merge-filter/aliases.json

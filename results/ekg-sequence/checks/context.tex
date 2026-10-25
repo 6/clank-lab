@@ -6,7 +6,7 @@ discovery. It starts with $1,2$ and then chooses the least unused positive
 integer having a common factor with the preceding term. It is
 \href{https://oeis.org/A064413}{A064413} in the On-Line Encyclopedia
 of Integer Sequences \cite{oeis}. Write $\U_t=\{a(1),\ldots,a(t)\}$.
-The rule is
+The defining rule is equation~(1) of the paper.
 Its first terms are $1,2,4,6,3,9,12,8,10,5,15,18,14,7,21$.
 All LRS conjecture numbers in this edition refer to arXiv version~1.
 Lagarias, Rains, and Sloane prove the permutation property, increasing
@@ -85,3 +85,315 @@ prime number theorem. Haver's cited manuscript is unrefereed.
 The reference to the sieve text supplies background only. The interval
 prime-capacity lemma is proved in full here; no estimate from that book is
 an imported hypothesis or an unchecked proof step.
+
+\section{Earlier source comparison}
+Lagarias, Rains and Sloane's arXiv v1 PDF \cite[abstract]{lrs} says
+``We conjecture that almost all $a(n)$ satisfy the asymptotic formula''
+and displays $a(n)=n(1+1/(3\log n))+o(n/\log n)$.
+Their opening credits the sequence as ``discovered by Jonathan Ayres'';
+Section~4 says of the three lines, ``This was also observed by Ayres''.
+Their arXiv Conjecture~2 uses ratio
+asymptotics, a weaker assertion. Hofman and Pilipczuk's smoothed sequence $a'_n$ replaces $p,3p$
+by $2p$ for every prime $p$, including $2$. Their Theorem~4.17 \cite{hp} gives $a'_n=n+O(n/\log\log\log n)$.
+This convention differs from $b$ at only finitely many indices.
+Haver's version~3 \cite[Corollary~2(e)]{haver} states the counting
+criterion; his Theorem~1(d) and Corollary~12(d) give the sharp upper
+bound $E(t)-t\leq(1/3+o(1))t/\log t$, where $E(t)$ is the least
+unused positive even integer after $t$ terms. Here the new work is the
+remaining lower bound and the transfer to all smoothed indices.
+The reduction and the estimates it uses are Haver's.
+The hard step is improving the displacement estimates from
+$O(x/\log x)$ to $o(x/\log x)$; multiplying the existing bounds
+leaves a fixed coefficient. The proof below supplies sparsity of the
+prime cofactors that those bounds alone do not detect.
+
+
+\subsection*{Further comparisons and conventions}
+These are the three lines observed by Ayres and by Lagarias, Rains, and
+Sloane \cite[Section~4]{lrs}. For large $k$ with $a(k)\in\{p,3p\}$ we have $b(k)=2p\leq2k$, so
+at most $2\pi(N)+O(1)=o(N)$ indices $k\leq N$ are of these two kinds.
+Hence the first line gives the formula of the LRS abstract for almost
+all $n$: this is the additive second-order interpretation. It implies
+the literal Conjecture 2, whose ratio limits were already proved
+by Hofman and Pilipczuk \cite[Theorem~4.17]{hp}. LRS Conjecture 3,
+$13n/28\leq a(n)\leq12n/7$ for every $n$, with equality only at $n=28$
+and $n=7$, respectively, is not settled here: an eventual asymptotic
+does not settle the required finite range. It is proved, with computer
+assistance, in our companion paper \cite[Theorem~1, version~1]{ekgbounds}. Nor do we address the
+unproved distributional suggestions for higher-order fluctuations in
+LRS Section 4 or their unnumbered cycle questions, beyond the bounded
+cycle lengths of Section~\ref{sec:consequences}.
+
+Section~\ref{sec:consequences} derives three consequences. For all
+large $n$, $a(n)>n$ exactly when $a(n)$ is composite, and
+$\#\{k\leq N:a(k)<k\}\sim N/(2\log N)$, so
+$\#\{k\leq N:a(k)>k\}/N\to1$. This proves two 2009 conjectures of
+Thomas Ordowski recorded in OEIS A064413: that $a(n)>n$ almost
+everywhere when $a(n)$ is not prime, which our eventual form
+strengthens, and the density statement. The equations
+$a(k)=k$, $2a(k)=k$ and $2a(k)=3k$ have finitely many solutions; this
+proves Artur Jasinski's 2008 conjectures that A152458 ($a(k)=k$) is
+finite and, on A152519, that the three lines carry finitely many points
+in total. And the permutation has finitely many cycles of each bounded
+length.
+
+Hofman and Pilipczuk's smoothed sequence $a'_n$ replaces $p,3p$
+by $2p$ for every prime $p$, including $2$. Their Theorem~4.17 \cite{hp} gives $a'_n=n+O(n/\log\log\log n)$.
+This convention differs from $b$ at only finitely many indices.
+
+
+We use these established estimates for the greedy sequence. The prime pattern goes back to
+Hofman and Pilipczuk \cite[Theorem~4.3]{hp}; we use its introduction formulation
+as proved in Haver's archive \cite[Section~2, (F2)]{haver}.
+The early-even bound follows from Haver's bound
+$K(t)\leq12\pi(\sqrt e)+720$ \cite[version~3, Theorem~1(a)]{haver}
+and elementary prime estimates.
+One may take $C_1=4\cdot793^2+2\cdot793$ in \eqref{eq:oldspan}.
+The printed sources of \eqref{eq:oldhole} and \eqref{eq:oldrate}
+are Haver's Theorem 11 and Corollary 12(c), respectively.
+The constants in \eqref{eq:early}--\eqref{eq:F} are convenient
+weakenings proved in the accompanying sources, rather than optimized
+constants: $793=12\cdot6+721$ and $802=13\cdot6+724$ follow from the
+eventual bound $\pi(\sqrt e)\leq6\sqrt e/\log e$ and
+$\sqrt e/\log e\geq1$, absorbing the additive constants.
+The prime estimate in \eqref{eq:F} does not require the
+prime number theorem.
+
+For the following comparison, write $e=E(t)$, let $D$ denote a positive
+displacement, let $r$ be the least prime factor of a predecessor, and let
+$h$ denote a missing composite. The quantities $k(t),K_0,F(e)$ and
+$\spf$ have been defined above.
+
+The coefficient has the counting heuristic of LRS Section 4 \cite{lrs}:
+\[
+ n\approx x-\frac{x}{2\log x}+\frac{x}{6\log x}
+       =x-\frac{x}{3\log x}.
+\]
+Our new step upgrades two $O(x/\log x)$ displacement bounds to
+little-$o$. For the upper bound, the old greedy inequality is
+$D\leq2rk(t)$, with $r\leq\sqrt{e+D}$ and
+$k(t)\leq K_0\sqrt e/\log e$. Multiplying these estimates leaves a
+fixed coefficient of $e/\log e$; it does not force that coefficient
+to vanish. For the lower bound,
+$D\leq2\spf(h)F(e)$ and $\spf(h)\leq\sqrt e$ have the same loss.
+Haver already identifies these rough-predecessor and rough-missing-composite
+obstructions in the remark after Corollary 12 \cite{haver}.
+The additional information is sparsity among the forced prime cofactors. Given a putative displacement $D\geq\delta x/\log x$, we
+instead select multiples $2rMj$ for a fixed auxiliary integer $M$ chosen
+after $\delta$ and positive integers $j$ and force their distinct neighbors
+to be products $rq_j$ with $q_j$ prime. There are at least
+$D/(4rM)-O(1)$ such cofactors in an interval of length
+$O(x/(r\log x))$. For each fixed $\delta>0$ their density is bounded
+below by a positive constant independent of $x$. It need not be
+independent of $\delta$: $M$ also depends on $\delta$. The sieve bound
+permits an arbitrarily small fixed upper density, chosen after $\delta$
+and $M$, which is exactly what the little-$o$ conclusion needs.
+
+The two estimates are an upper bound for the largest ordinary used
+value above the least unused even integer, and a lower bound on every
+unused composite below it. Sections~\ref{sec:upper} and
+\ref{sec:lower} prove them, then exact counting and the prime number
+theorem give the result. We extract no explicit remainder rate. No explicit cutoff $N(\eps)$ results.
+The nonquantitative step is the choice of a fixed sieve modulus for
+each $\delta$, followed by unspecified eventual cutoffs in localization
+and the qualitative prime number theorem. This is not a claim of an
+intrinsically ineffective obstruction: the sieve constants are
+computable, but this proof does not supply a function $N(\eps)$.
+
+\subsection*{Original numerical display}
+
+
+Table~\ref{tab:ratio-original} gives the normalized error
+$R(n)=(b(n)-n)\log n/n$, whose limit is $1/3$ by
+Theorem~\ref{thm:main}. These values illustrate the formula; they are
+not used in its proof and do not imply a monotone approach to the limit.
+\begin{table}[ht]
+\centering
+\begin{tabular}{r r c c}
+$n$ & $b(n)$ & $R(n)$ & $1/3$\\\hline
+1,000 & 1,043 & 0.297033477 & 0.333333333 \\
+10,000 & 10,361 & 0.332493287 & 0.333333333 \\
+100,000 & 103,088 & 0.355519138 & 0.333333333 \\
+1,000,000 & 1,024,686 & 0.341049694 & 0.333333333 \\
+10,000,000 & 10,210,804 & 0.339775904 & 0.333333333 \\
+100,000,000 & 101,839,957 & 0.338932605 & 0.333333333 \\
+500,000,000 & 508,457,544 & 0.338811220 & 0.333333333 \\
+\end{tabular}
+\caption{The smoothed EKG error, with absolute rounding error at most
+$5\cdot10^{-10}$ in each displayed ratio.}\label{tab:ratio-original}
+\end{table}
+
+
+\subsection*{Schematic critical lines}
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1.1cm,y=0.65cm]
+\draw[->] (0,0) -- (5.1,0) node[right] {$n$};
+\draw[->] (0,0) -- (0,7.7) node[above] {$a(n)$};
+\draw[blue] (0,0) -- (4.5,2.25) node[right,black] {$n/2$};
+\draw[blue] (0,0) -- (4.5,4.5) node[right,black] {$n$};
+\draw[blue] (0,0) -- (4.5,6.75) node[right,black] {$3n/2$};
+\end{tikzpicture}
+\caption{The three critical lines, shown schematically. This is not
+sequence data; Corollary~\ref{cor:branches} gives the positive
+second-order corrections, and Corollary~\ref{cor:lines} proves
+finiteness of intersections with these exact lines.}
+\label{fig:branches-schematic}
+\end{figure}
+\subsection*{Consequences and supplementary explanations}
+Ordowski's first conjecture asks only that $a(n)>n$ ``almost
+everywhere'' when $a(n)$ is not prime. The first statement, for all but
+finitely many $n$, is our stronger form; it implies his conjecture in
+the density-one reading of ``almost everywhere''. The last statement is his second
+conjecture. The count of prime values alone,
+$\#\{k\leq N:a(k)\text{ prime}\}\sim N/(2\log N)$, already follows from
+the ratio form; the new content is that these are, with finitely many
+exceptions, exactly the indices below the diagonal.
+
+Two related OEIS entries are also finite sets: Ordowski's ``exceptional
+numbers'' A155549, the values $a(n)$ that are not prime and satisfy
+$a(n)\leq n-1$ (its terms $16,26,49,\ldots$ occur at the indices
+$n=17,27,50,\ldots$), and A064420, the $k$ with $a(k+1)=k$. Both are
+listed as ``probably complete''. By Corollary~\ref{cor:sign} the indices
+$n$ with $a(n)$ not prime and $a(n)\leq n-1$ form a finite set, so its
+image A155549 is finite. For the
+second, $a(n)=n-1$ fails for large $n$: a prime value has
+$a(n)\leq2n/3$ and any other value has $a(n)>n$. De Vlieger
+\cite{devlieger} remarked that it is ``not surprising'' that A064420
+is finite.
+
+
+
+Lagarias, Rains and Sloane \cite[Section~7]{lrs} note that the
+permutation appears to have infinitely many finite cycles and
+infinitely many infinite cycles, and expect both to be hard to prove.
+The next result implies that infinitely many finite cycles, if they
+exist, have unbounded lengths.
+
+The letters $M$ and $L$ used locally for an integer
+or a cycle length are independent of the function $L(x)$ and of each
+other; $\N$ always denotes the natural numbers.
+
+Haver identifies these obstructions in the remark after Corollary~12
+\cite{haver}. The cofactor argument and the order of its constants
+are described in the comparison above.
+
+We first bound the used ordinary values above $E(t)$, then the unused
+composites below it. The finite-prefix argument used below is the
+maximum-of-initial-values argument preceding \eqref{eq:adjacent}.
+The terms frontier before and after a value mean $E(j-1)$ and $E(j)$
+at its occurrence index $j$; the upper-excursion cutoff is the index
+threshold supplied by the first proposition.
+
+The clock estimates in the following proof refer to \eqref{eq:clock};
+finite seed exclusions are the finitely many initial indices omitted by
+the eventual estimates. The two excursion propositions are
+Propositions~\ref{prop:upper} and \ref{prop:lower}.
+
+Its sequence is the canonical
+greedy sequence of \eqref{eq:rule}, shifted from zero-based to one-based
+indexing, with \eqref{eq:smooth} applied only to odd primes and their
+triples; $2$ and $6$ stay fixed. At $n=0$ it sets $a(0)=1$, outside the
+stated range. The inequality is over the reals with natural logarithms.
+
+Lean \cite{lean}, mathlib \cite{mathlib} and the prime number theorem
+library \cite{pntcode} support the formal proof; the literal definitions
+and source correspondence are in the accompanying checking notes.
+
+Lagarias, Rains and Sloane credit Ayres with the discovery and the
+three lines \cite[Section~1, first paragraph; Section~4]{lrs}; their abstract conjectures
+the displayed second-order formula at almost all indices
+\cite[abstract]{lrs}. Their Conjecture~2 instead asks for ratio limits,
+proved by Hofman and Pilipczuk \cite[Theorem~4.17]{hp}.
+
+\subsection*{Additional source and estimate details}
+Consequences
+include an eventual strengthening of Ordowski's inequality conjecture
+and his density-one conjecture, Jasinski's finiteness conjectures on the
+three critical lines, the below-diagonal counting asymptotic and finiteness
+of cycles of each bounded length.
+
+The proof is formalized in Lean, as described in Section~\ref{sec:lean};
+the three-branch formulas and the sharper complementary count are written
+deductions from the checked results.
+
+The constants $793=12\cdot6+721$ and $802=13\cdot6+724$ are convenient
+weakenings using $\pi(\sqrt e)\leq6\sqrt e/\log e$ and
+$\sqrt e/\log e\geq1$ eventually; $C_1=4\cdot793^2+2\cdot793$ suffices.
+
+Equation~\eqref{eq:oldrate} also bounds adjacent ordinary values.
+If $y=a(j)$ is unchanged by smoothing and $e/2<y<2e$, then, uniformly
+as $e\to\infty$, the occurrence index $j$ tends to infinity.
+To see this, choose any fixed index cutoff and exceed the maximum
+of the finitely many preceding values. Equation~\eqref{eq:oldrate}
+then gives $j/2\leq y\leq3j/2$ and hence $e/3<j<4e$.
+If an adjacent value $d=a(j-1)$ or $a(j+1)$ is also unchanged by
+smoothing, \eqref{eq:oldrate} at both indices gives
+\begin{equation}\label{eq:adjacent-notes}
+ |d-y|\leq C L(j)+C L(j\pm1)+1=O(L(e)).
+\end{equation}
+The constant is uniform. Here the constant depends only on \eqref{eq:oldrate}.
+
+
+
+The bound $O=o(L(e))$ proves the remaining hypothesis of the equivalence
+stated in Haver's Corollary 2(e) and proved in Corollary 12(d);
+the counting criterion itself is not new here.
+
+The proof uses Lean \cite{lean}, mathlib \cite{mathlib} and the prime
+number theorem library \cite{pntcode}; the checking notes give the source correspondence.
+
+\subsection*{Convention and consequence comments}
+The smoothing of Hofman and Pilipczuk also replaces $2$, and differs
+from ours at only finitely many indices \cite[Theorem~4.17]{hp}.
+
+Corollary~\ref{cor:sign} also implies finiteness of Ordowski's exceptional
+values A155549 and the indices A064420. The checking notes give the
+short deductions and De Vlieger's ``not surprising'' observation
+about A064420 \cite{devlieger}.
+
+The bounded-cycle question comes from LRS \cite[Section~7]{lrs}.
+The next result forces any infinite collection of finite cycles to
+have unbounded lengths.
+
+The Lean theorem \texttt{ekg\_sharp\_all\_index} states that, for every
+real $\eps>0$, there is a natural $N\geq3$ such that every natural
+$n\geq N$ satisfies \eqref{eq:epsilon}.
+
+Haver's archive supplies the general counting identities
+\cite[Corollary~12(b)]{haver}; our formalization establishes their
+prime-interval and tick endpoint hypotheses and derives the coefficient
+and transfer to all indices.
+
+In the proofs, the old rate and old span mean \eqref{eq:oldrate} and
+\eqref{eq:oldspan}, respectively. The new step replaces the two
+$O(L(e))$ displacement bounds by $o(L(e))$ bounds.
+
+The interval-prime
+bound below gives the contradiction. The fixed sieve modulus and eventual
+cutoffs yield no explicit function $N(\eps)$ in this proof.
+
+All logarithms are natural; $\N$ denotes the natural numbers.
+
+\subsection*{Additional conjecture context}
+Theorem~\ref{thm:main} has the following consequences for questions
+recorded in the OEIS \cite{oeis}. On A064413, Thomas Ordowski
+conjectured on January 23, 2009, ``If $a(n)\neq p$, then almost
+everywhere $a(n)>n$'' and ``$\lim\#(a_n>n)/n=1$''. Artur Jasinski, in
+December 2008, called $a(k)=k$, $2a(k)=3k$ and $2a(k)=k$ the three
+critical lines of the sequence. His entry A152458, the indices with
+$a(k)=k$, records the conjecture that it is finite, and on A152519 (the
+indices with $2a(k)=3k$) he conjectured that the number of points on the
+three lines is finite, asking also whether the listed points are
+complete. Below, $p$ denotes a prime.
+
+Amiram Eldar recorded in 2024 that neither sequence has a
+further term below $10^5$ \cite{oeis}. These computations are distinct
+from the eventual finiteness result.
+
+All LRS section, figure and conjecture numbers used here and in the
+article follow arXiv v1, identified in the unchanged bibliography.
+Haver's Theorem~1(b), with Theorem~8(b), gives the non-tick span estimate
+\eqref{eq:oldspan}. His Corollary~12(b) gives the counting identity in
+prime-interval form; the article displays the corresponding prime-count
+form and its boundary corrections.

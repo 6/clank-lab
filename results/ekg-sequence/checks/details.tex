@@ -1,5 +1,5 @@
 % Supplementary source and checking details; not an additional theorem.
-\section{Lean formalization and verification}\label{sec:lean}
+\section{Lean formalization and verification}\label{sec:lean-notes}
 
 The project \texttt{lean/} uses Lean 4 \cite{lean} and mathlib
 \cite{mathlib}. The complete chain from the literal greedy rule
@@ -15,8 +15,10 @@ hypotheses or added axioms. The archive provides, among others,
 estimates, the endpoint hypotheses of the counting identity, and the final
 transfer close the chain.
 The elementary constants used to weaken Haver's bounds are also proved.
+These are results about the actual greedy sequence, not hypotheses
+added to Theorem~\ref{thm:main}.
 
-The type transliterated beside Theorem~\ref{thm:main} is independently fixed by
+The type in the section "Literal definitions and theorem type" below is independently fixed by
 \texttt{EndpointStatement} in \path{Statement.lean}.
 \path{Check.lean} requires \texttt{ekg\_sharp\_all\_index} to have that type.
 For the rule, \texttt{actualA\_properties}, \texttt{actualA\_gcd\_rule}
@@ -117,3 +119,159 @@ endpoint errors as hypotheses. We discharge those hypotheses by proving
 that the missing-prime count is $P_1+\theta_1$ and the tick count is
 $P_2-\theta_2$, and by evaluating the interval endpoints through $I$
 and $\theta$ as above.
+
+\section{Formal theorem correspondence and reproduction}
+The formal theorem is \texttt{ekg\_sharp\_all\_index} in
+\path{lean/SolutionEndpoint.lean}. Its statement is exactly: for every
+real $\eps$, if $0<\eps$, there exists a natural $N$ with $3\leq N$
+such that, for every natural $n$, $N\leq n$ implies
+\eqref{eq:epsilon}, with $b(n)$ equal to
+\texttt{EKG.CanonicalEndpoint.b n}. Natural numbers in that inequality
+are coerced to real numbers, and the logarithm is \texttt{Real.log}.
+This is the independently defined \texttt{EndpointStatement} in
+\path{lean/Statement.lean}; \path{lean/Check.lean} checks the theorem
+against that type. Thus the formal quantifiers are exactly those of
+Theorem~\ref{thm:main}, including one cutoff for all later indices.
+
+In \path{lean/EKG/EndpointDefinitions.lean}, the formal $a(n)$ is
+\texttt{EKG.canonical.a (n - 1)}. The canonical sequence is the
+zero-based \texttt{actualA} in \path{lean/EKG/Canonical.lean}, starting
+at $1,2$; its \texttt{chooseNext} is proved in \path{lean/EKG/Basic.lean}
+to select the least positive unused value sharing a prime factor with
+the preceding term, equivalently having gcd greater than $1$.
+This gives \eqref{eq:rule} for $n\geq1$; truncated natural subtraction
+also sets $a(0)=1$, outside the theorem's range $n\geq N\geq3$.
+The formal $b$ applies \texttt{smoothValue} to $a$: its two branches
+select odd primes and exactly three times odd primes, respectively.
+It is precisely \eqref{eq:smooth}, leaving $2$ and $6$ fixed.
+
+The declaration has no additional sequence or analytic hypotheses.
+The imported estimates are proved dependencies, not assumptions to be
+supplied by the reader. \path{lean/Check.lean} guards its actual axiom
+list: \texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound} (propositional extensionality, classical choice,
+and quotient soundness).
+
+The standard Lake project in \path{lean/} checks Theorem~\ref{thm:main}
+from the literal greedy rule, including existence, leastness and the
+smoothing convention. Haver's estimates and the prime number theorem
+are imported proved theorems, recompiled with the proof; their provenance
+and licenses are in \path{THIRD_PARTY.md}. The build checks each proof against its independently stated type and
+allows only Lean's standard logical axioms. The unrelated admitted
+statements in the imported prime-number-theorem project are outside the
+checked proofs. The detailed source map and axiom output are in
+\path{checks/details.tex} and \path{lean/README.md}.
+
+The Lean-checked consequences are the eventual sign, below-diagonal
+asymptotic, density-one conclusion, three-line finiteness, the two
+exceptional-set finiteness statements, and bounded-cycle finiteness.
+The three-branch corollary and the sharper complementary count are
+written deductions, not separate Lean theorems. The trusted base is
+Lean's kernel and its standard logical axioms; the written deductions
+are supplied in full. No human expert has reviewed this work.
+
+Install elan, then from the public folder run:
+\begin{verbatim}
+cd lean
+lake exe cache get
+lake build
+\end{verbatim}
+The toolchain and dependencies are pinned in \path{lean/lean-toolchain}
+and \path{lean/lake-manifest.json}. The optional numerical table and
+its generator in \path{data/} are not part of the proof.
+\path{lean/README.md} identifies the exact theorem roots, independent
+statement checks and finite controls.
+
+
+\subsection*{Formal definitions}
+The canonical sequence in the theorem is
+\texttt{EKG.canonical.a (n - 1)}, defined by the zero-based
+\texttt{actualA}. Its \texttt{chooseNext} is proved to select the least
+positive unused integer with gcd greater than $1$ with the preceding
+term. Applying \texttt{smoothValue} gives
+\texttt{EKG.CanonicalEndpoint.b n}, and the theorem is compared with the
+independent statement \texttt{EndpointStatement}.
+
+\section{Literal definitions and theorem type}
+For comparison with \eqref{eq:rule}, the Lean construction in
+\path{EKG/Canonical.lean} is transliterated below (\texttt{Nat} denotes the
+natural numbers). It is zero-based internally; \texttt{chooseNext}
+selects the least positive unused eligible value, with existence and
+minimality proved in \path{EKG/Basic.lean}.
+\begin{verbatim}
+noncomputable def actualA (n : Nat) : Nat :=
+  if n = 0 then 1 else if n = 1 then 2 else
+  chooseNext (fun i : Fin n => actualA i.val)
+    (actualA (n-1))
+termination_by n
+decreasing_by all_goals omega
+\end{verbatim}
+The one-based interface in \path{EKG/EndpointDefinitions.lean} uses\\
+\texttt{a n := EKG.canonical.a (n - 1)}. Its value at zero is an
+unused total extension. Section~\ref{sec:lean} explains the checked
+existence, gcd eligibility and minimality statements, not additional
+assumptions on this construction.
+
+In particular, $s(2)=2$ and $s(6)=6$. OEIS A256417 includes the prime
+$2$ in both replacements \cite{oeis}; it differs from $b$ only at
+indices $2,4$, where our values are $2,6$ and its values are $4,4$.
+Here is the corresponding Lean definition, transliterated from
+\path{EKG/EndpointDefinitions.lean}, using ASCII type names:
+\begin{verbatim}
+def smoothValue (m : Nat) : Nat :=
+  if And m.Prime (Not (m = 2)) then 2 * m
+  else if And (m / 3).Prime
+      (And (Not (m / 3 = 2)) (m = 3 * (m / 3))) then
+    2 * (m / 3)
+  else m
+noncomputable def b (n : Nat) : Nat := smoothValue (a n)
+\end{verbatim}
+Here \texttt{And} and \texttt{Not} are Lean's logical constructors;
+the distributed source uses the usual symbolic notation. All logarithms are natural.
+
+The Lean type, transliterated using \texttt{abs}, \texttt{And} and \texttt{Exists}
+for the usual logical notation and opening \texttt{EKG.CanonicalEndpoint},
+is
+\begin{verbatim}
+theorem ekg_sharp_all_index :
+  forall eps : Real, 0 < eps ->
+    Exists (fun N : Nat => And (3 <= N)
+      (forall n : Nat, N <= n ->
+        abs ((b n : Real) - (n : Real) -
+          (n : Real) / (3 * Real.log (n : Real))) <=
+        eps * ((n : Real) / Real.log (n : Real))))
+\end{verbatim}
+The theorem has no sequence-estimate hypotheses. The separate statement
+in \path{Statement.lean} and its type check in \path{Check.lean} fix
+exactly these quantifiers and casts.
+
+
+\section{Numerical generation and validation}
+The included \path{data/ekg-table.cpp} generates exact integer
+terms using a bitmap and one least-unused-multiple cursor per prime,
+as in the method of LRS Section 3. Every eligible value is a multiple
+of a prime divisor of the preceding term, so the minimum of these
+cursors gives the next value. The storage bound is checked at every
+selection; exhausting it aborts rather than truncating the candidate
+search. A separate direct gcd scan validates the first $4096$ terms
+and rejects an altered prefix. All first $4096$ smoothed values are
+also checked by trial division. The table file records $18$ selected
+indices through $5\cdot10^8$, with integer digests in
+\path{data/ekg-table-summary.json}.
+
+The ratios were certified by bounding $\log n$ with exact
+rational sums for $2\operatorname{atanh}z$. After reducing the argument
+to $[1,2]$, one uses $60$ positive terms with $0\leq z\leq1/3$ and tail
+at most $2z^{121}/(121(1-z^2))$. This certifies an absolute error
+at most $10^{-17}$ in the recorded ratios and correct rounding to
+nine decimal places in the original display,
+Table~\ref{tab:ratio-original}. The current paper rounds the same
+values to four decimal places in Table~\ref{tab:ratio}.
+
+
+\section{License of the article and sources}
+\paragraph{Acknowledgment and license.}
+The author thanks Tomer Haver for the estimates, counting identity,
+reduction and accompanying Lean sources. Copyright \textcopyright\ 2026
+the author named in this paper. Apache-2.0 (see the repository's LICENSE),
+except for the third-party material listed in \path{THIRD_PARTY.md}.

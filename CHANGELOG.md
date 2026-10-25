@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-sequence v6 (October 24, 2026)
+
+- Journal-style edition: places the sieve, displacement estimates, counting, main proof and consequences in the main text; retains the formal theorem correspondence. Implementation details move to checking notes; the appendix table uses four places and the figure plots existing terms. Statements, full proofs, bibliography content and checked artifacts are unchanged.
+
 ## steinberg-c4-c9 v6 (October 24, 2026)
 
 - Journal-style edition: presents the main proof in the main text, improves the mathematical prose and retains the corrected appendix headings. The theorem and its checks are unchanged.

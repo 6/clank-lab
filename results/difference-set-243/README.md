@@ -66,6 +66,8 @@ The final Lean nonexistence theorem assumes the 1,038 semantic assertions
 not infer these assertions from digest strings or verify C++ execution.
 The conditional boundary and the complete separately written third kernel
 are explained in the paper and [checking details](checks/README.md).
+The [edition checking notes](checks/edition-notes.md) retain the conventions,
+source-access qualifications and recorded formal checks.
 
 ## Credits
 
@@ -90,7 +92,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Nonexistence of (243,121,60) difference sets in C3 × C9 × C9}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v2/results/difference-set-243}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v3/results/difference-set-243}},
   doi          = {10.5281/zenodo.23591106}
 }
 ```

@@ -4,37 +4,42 @@
 \usepackage{lmodern}
 \input{glyphtounicode}
 \pdfgentounicode=1
+\pdftrailerid{}
+\usepackage[title]{appendix}
 \usepackage{amsmath,amssymb,amsthm,geometry,hyperref}
 \geometry{margin=1in}
+\AtBeginDocument{\setlength{\abovedisplayskip}{6pt plus 2pt minus 2pt}%
+  \setlength{\belowdisplayskip}{6pt plus 2pt minus 2pt}}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={Nonexistence of (243,121,60) difference sets in C3 × C9 × C9},pdfauthor={P. Graham},pdfsubject={Computer-assisted nonexistence in one finite abelian group},pdfkeywords={difference set, multiplier, exhaustive search, Lean}}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \title{Nonexistence of $(243,121,60)$ difference sets\\ in $C_3$ $\times$ $C_9$ $\times$ $C_9$}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 22, 2026}
+\date{October 25, 2026}
 \begin{document}
 \maketitle
+
+
 \begin{abstract}
-A $(v,k,\lambda)$ difference set in a finite group of order $v$ is a
-$k$-element subset in which every nonidentity element occurs exactly
-$\lambda$ times as an ordered difference. We prove, by exhaustive
-computation, that no $(243,121,60)$ difference set exists in
-$C_3\times C_9\times C_9$. This group-specific case appears as unresolved
-in the 1997 table of Vera L\'opez and Garc\'ia S\'anchez and was singled
-out by Gordon in 2019 as the ``Smallest Open Case.'' A multiplier-fixed
-translate has thirteen points in the subgroup of elements annihilated
-by three. Moment identities, singleton congruences, and legal affine
-normalizations reduce the problem to eight quotient multiplicity arrays,
-each with a complete ternary lifting tree. Integer difference-count
-searches exhaust these trees, with separate checks of decomposition
-completeness. Lean proves the multiplier reduction, normalization,
-lifting coverage, and pruning lemmas; its final nonexistence theorem is
-explicitly conditional on the externally established search assertions.
+We prove, by exhaustive computation, that no $(243,121,60)$ difference
+set exists in $C_3\times C_9\times C_9$. A difference set with these
+parameters is a 121-element subset whose ordered differences represent
+every nonzero group element exactly 60 times. Vera L\'opez and Garc\'ia
+S\'anchez recorded this group-specific case as unresolved, and Gordon
+singled it out in his presentation on the La Jolla Difference Set Repository.
+The reduction builds on the classical multiplier and character methods
+of Hall, Menon and Turyn and the multiplier searches of Vera L\'opez
+and Garc\'ia S\'anchez. A multiplier-fixed translate has thirteen points
+in the subgroup of elements annihilated by three. Moment identities,
+singleton congruences and affine normalizations reduce the problem to
+eight quotient multiplicity arrays. Complete ternary lifting searches
+exclude all eight. Lean proves the algebraic reduction, normalization,
+lifting coverage and pruning lemmas; the final formal nonexistence
+theorem assumes the search assertions established by the external
+integer computations.
 \end{abstract}
 
-The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-
-\section{The result and its historical setting}
+\section{Introduction}
 
 Write $C_m=\mathbb Z/m\mathbb Z$ additively. For a subset $P$ of an
 abelian group, put
@@ -53,165 +58,48 @@ $|D|=121$ and
 \]
 \end{theorem}
 
-The theorem is computer-assisted. Its scope is exactly these parameters
-in this group. The mathematical reduction and its coverage are proved
-in Lean; the exhaustive integer computations that reject the covered
-leaves are external to Lean. Section~\ref{sec:formal} states this
-boundary precisely.
+Vera L\'opez and Garc\'ia S\'anchez record these parameters in this
+group as unresolved in their Table~1, p.~105 of~\cite{VeraGarcia1997}, with
+the question-mark convention of p.~101. Gordon singles out this case
+in~\cite[slide~38]{Gordon2019}; his repository's archived version~1.3
+also lists $\operatorname{DS}(243,121,60,[3,9,9])$ as
+Open~\cite{GordonData}. The neighboring abelian groups and the relevant
+published restrictions are reviewed in Appendix~\ref{sec:context}.
 
-Vera L\'opez and Garc\'ia S\'anchez undertook a systematic study of
-abelian difference sets with $100<k\leq150$~\cite{VeraGarcia1997}.
-Their Table~1, printed page~105, marks the present group and parameters
-with a question mark, meaning unknown according to their convention on
-page~101. That paper was published in 1997; the publisher gives
-February~28, 1997. This supplies a published unresolved-status record,
-without asserting that it was the first occasion on which the question
-was asked.
-
-Gordon's La Jolla Difference Set Repository has made such group-specific
-questions accessible and maintained their connection with the
-literature. In his presentation of August~3, 2019, Gordon singled out
-the present case as the ``Smallest Open Case''~\cite[slide~38]{Gordon2019}.
-Here slide~38 is physical PDF page~49. The repository's archived
-version~1.3, dated April~24, 2026, also records the exact entry
-$\operatorname{DS}(243,121,60,[3,9,9])$ as Open~\cite{GordonData}.
-The entry has a status and an empty comment, with no per-entry date.
-The archive date therefore does not date the original insertion or
-last review of this entry. Similarly, the website's September~3, 2026
-update label is a site-level date. The entry's original insertion and
-last-review dates have not been recovered.
-
-These sources also put the question in perspective. For the same
-parameters, the other six abelian groups of order $243$ are already
-recorded as follows; this is historical context, not a new proof of
-those entries:
-\[
-\begin{array}{c|c|l}
-\text{group}&\text{recorded answer}&\text{attribution}\\\hline
-C_{243}&\text{No}&\text{Lander}\\
-C_3\times C_{81}&\text{No}&\text{Lander}\\
-C_9\times C_{27}&\text{No}&\text{Arasu--Ma}\\
-C_3^2\times C_{27}&\text{No}&\text{Vera L\'opez--Garc\'ia S\'anchez}\\
-C_3^3\times C_9&\text{No}&\text{Vera L\'opez--Garc\'ia S\'anchez}\\
-C_3^5&\text{Yes}&\text{Paley's finite-field construction}
-\end{array}
-\]
-The source for the complete list and its attributions is
-Gordon~\cite{GordonData}.\footnote{This small status summary is selected
-and reformatted from Daniel M. Gordon's repository data, copyright
-2024 Daniel M. Gordon, under
-\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
-Group notation and presentation are changed; the source status
-values are unchanged. No endorsement is implied.}
-The 1997 table credits the negative entry for $C_{243}$ to
-Lander's Theorem~4.38 with $q=3$ (its reference~10). For
-$C_3\times C_{81}$, $C_3^2\times C_{27}$, and $C_3^3\times C_9$,
-it uses method~21, multiplier-orbit enumeration with multiplier~61.
-Arasu and
-Ma~\cite{ArasuMa2001} subsequently resolved $C_9\times C_{27}$.
-For $C_3^5$, Paley's quadratic-residue construction~\cite{Paley1933}
-in the additive group of $\mathbb F_{243}$ gives the stated parameters.
-The 1997 table cites Emma Lehmer~\cite{Lehmer1953} for its positive entry.
-The nonexistence at issue here concerns
-the remaining group $C_3\times C_9\times C_9$.
+The new step is the complete finite reduction and lifting exhaustion
+for this remaining group. A translate fixed by the multiplier still
+has many possible unions of orbits; the difficult step is to reduce
+these possibilities far enough that all lifts can be tested.
+Section~\ref{sec:multiplier} first obtains a fixed translate and the
+coset moment identities. Section~\ref{sec:singletons} uses those
+identities to find its thirteen fixed points and the congruences they
+satisfy. A finite classification shows that all such thirteen-point
+sets lie in one orbit under the affine maps of
+Section~\ref{sec:symmetry}. Section~\ref{sec:quotient} then recovers
+the quotient multiplicities from the sums on its hyperplanes and
+reduces them to eight cases. Finally,
+Section~\ref{sec:lifting} lifts each case by choosing orbits of length
+three in its cosets, pruning a partial choice whenever an ordered
+difference count exceeds 60. The proof depends on the external integer
+computations described in Section~\ref{sec:formal}; the finite
+classification and the complete lifting search are computational steps.
 
 The work uses the classical multiplier and character methods developed
-by Hall~\cite{Hall1956}, Menon, Turyn, and others, and the systematic multiplier searches
+by Hall~\cite{Hall1956}, Menon, Turyn, and others~\cite[Theorem~5]{Miller2025},~\cite{Turyn1965}, and the systematic multiplier searches
 of Vera L\'opez and Garc\'ia S\'anchez. It also benefits from the later
 nonexistence and field-descent theory of Arasu, Ma, Leung, Schmidt, and
-Miller. These contributions supply both the historical question and
+Miller~\cite{ArasuMa2001,LeungMaSchmidt2004,LeungSchmidt2005,Miller2025}. These contributions supply both the historical question and
 the algebraic framework for reducing it to a finite computation.
 The contributors to Lean, mathlib, and the declared library dependencies
 are also acknowledged for the formal-development infrastructure.
 
-\section{Published restrictions and their hypotheses}\label{sec:context}
-
-Set
-\[
- v=243=3^5,\qquad k=121,\qquad\lambda=60,\qquad
- n=k-\lambda=61,\qquad\exp(G)=9.
-\]
-The parameter identity $k(k-1)=\lambda(v-1)$ holds. The odd-order
-Bruck--Ryser--Chowla equation $61x^2-60y^2=z^2$ has the nonzero
-solution $x=y=z=1$. These elementary necessary conditions do not
-exclude the parameters.
-
-Turyn's character restrictions~\cite{Turyn1965} allow this application:
-$\operatorname{ord}_3(61)=1$ is odd. At the nontrivial character
-orders $3$ and $9$, the prime $61$ is not self-conjugate. Indeed, its
-powers modulo $3$ equal $1$, and modulo $9$ cycle through $7,4,1$,
-never $-1$. Obstructions requiring a common prime divisor of $n$ and
-$v$ have no such prime here; in particular that ingredient of the
-Lander-type restrictions in Leung--Ma--Schmidt~\cite{LeungMaSchmidt2004}
-is absent. That comparison uses the stated common-prime setting,
-without claiming a full reading of that paper's proof.
-The multiplier theorem does apply and provides symmetry,
-as proved in Section~\ref{sec:multiplier}; that symmetry alone is
-not a nonexistence result.
-
-For the field-descent function of Leung and
-Schmidt~\cite[Definition~2.6]{LeungSchmidt2005}, one obtains
-$F(9,61)=3$. Here $\operatorname{ord}_3(61)=1$ and
-$61\not\equiv1\pmod9$, so the exponent $b_3=1$ is permitted in
-that definition. Taking their factor $A$ to be the entire group and
-the complementary factor trivial, Theorem~4.3 gives
-\[
- \exp(G)\leq243\sqrt{\frac{3^2}{4\cdot61\cdot\varphi(3)}}
- =\frac{729}{\sqrt{488}}\approx33.0003,
-\]
-which permits exponent~9. Their Theorem~A cannot instead split off a
-$C_9$ factor: its coprimality condition would require
-$\gcd(9,\exp(C_3\times C_9))=1$, whereas this gcd is~9.
-Theorem~4.1 requires a cyclic Sylow subgroup, also absent here.
-
-Arasu and Ma's 2001 nonexistence result~\cite{ArasuMa2001} resolves
-$C_9\times C_{27}$. The relevant theorem, as explicitly restated and
-extended by Miller~\cite[Theorems~1 and~3]{Miller2025}, assumes
-\[
- G=C_{p^e}\times J,\qquad e\geq2,\qquad
- \exp(\operatorname{Syl}_p J)<p^e.
-\]
-Splitting off $C_9$ in the present group leaves another $C_9$, so
-the strict exponent inequality fails. The forbidden-multiplier
-congruences would demand both $t\equiv4\pmod9$ and
-$t\equiv1\pmod9$. Although the older numerical condition
-$4(p-1)n=488>243$ holds, it cannot repair the failed group
-hypothesis. This comparison uses Miller's restatement; the full
-2001 original was not available for a complete reading.
-
-Chen, Xiang, and Sehgal~\cite{ChenXiangSehgal1994} study skew Hadamard
-abelian difference sets, which satisfy the additional partition
-$G=\{0\}\mathbin{\dot\cup}D\mathbin{\dot\cup}(-D)$.
-The present parameters do not supply this hypothesis. Consequently
-a skew-only exponent bound cannot be applied to the ordinary
-difference-set question. This scope distinction follows from the
-published abstract; the full original was not obtained, and no
-numerical specialization of its bound is needed here.
-
-Recent work on signed difference sets by He and
-Wu~\cite{HeWu2026} includes ordinary difference sets but does not
-yield this exclusion by the criteria considered here. Their
-Theorem~3.2 has the same failed self-conjugacy test for~61;
-Theorem~4.2 requires even $v$; Theorem~4.4 requires $k=v-1$;
-and Theorem~4.7 requires an elementary abelian group and a defect
-bound, whereas this group is not elementary abelian and the defect
-is $d=122>5$. Miller's and
-He--Wu's cited versions are preprints, not claimed here as verified
-journal publications.
-
-These are explicit applications and failures of hypotheses, not a
-claim to have exhausted all uses of these methods. The historical
-Open entries document the question; they cannot establish an
-exhaustive priority claim. Some older originals, including Lander's
-Theorem~4.38~\cite{Lander1983} and the Hall, Paley, and Lehmer works
-cited for historical credit, were not read in full. Hall's survey is
-not used to infer that a cyclic-group statement alone covers every
-abelian hypothesis of the multiplier specialization.
-Theorem~\ref{thm:main} rests on the
-reduction and exhaustion given here, rather than on an inference
-from an Open label or from the absence of a located earlier answer.
+The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+The result is computer-assisted and has not yet been reviewed by experts.
 
 \section{Multiplier fixedness and quotient moments}\label{sec:multiplier}
+
+The multiplier theorem supplies the symmetry used throughout the proof;
+the moment identities then restrict the intersection numbers with cosets.
 
 Use coordinates $G=C_3\times C_9\times C_9$ and put
 \[
@@ -222,9 +110,13 @@ Use coordinates $G=C_3\times C_9\times C_9$ and put
 \]
 Thus $|H|=27$, $|K|=9$, and
 $Q=G/K\cong C_3^3$. In particular, $H$ and $K$ are different
-subgroups. Elements of $G$ are encoded by $81x+9y+z$, using the
-least nonnegative coordinate representatives; elements of $Q$ by
-$9x+3\bar y+\bar z$.
+subgroups.
+
+Set
+\[
+ v=243=3^5,\qquad k=121,\qquad\lambda=60,\qquad
+ n=k-\lambda=61,\qquad\exp(G)=9.
+\]
 
 \begin{lemma}\label{lem:fixed}
 If $D$ is a difference set as in Theorem~\ref{thm:main}, then a
@@ -247,6 +139,8 @@ For $u=7s$ we therefore have $60u=g$, whence
 Take $D_0=D-u$.
 \end{proof}
 
+In what follows, fixed means fixed by multiplication by~61, and a
+singleton is an orbit of this action having one point.
 The initial translating element $u$ can be anywhere in $G$.
 Subsequent normalizing translations will lie in $H$.
 Multiplication by $61$, equivalently by $7$ modulo $9$, has order
@@ -269,7 +163,8 @@ difference lies in $U$ gives
  \sum_{a+U}r_U(a+U)=121,\qquad
  \sum_{a+U}r_U(a+U)^2=121+60(|U|-1).
 \end{equation}
-More generally, projected autocorrelation equals
+Projected autocorrelation counts ordered differences after passage to
+the quotient, with coset multiplicities retained. More generally, projected autocorrelation equals
 $121+60(|U|-1)$ at zero and $60|U|$ elsewhere.
 For an index-three subgroup, the three coset counts consequently
 satisfy
@@ -282,6 +177,12 @@ $(36,40,45)$. This small finite assertion is checked both in
 the finite enumerations and in Lean.
 
 \section{The thirteen singleton points}\label{sec:singletons}
+
+The fixed points of the multiplier form $H$. We determine how a fixed
+difference set can meet $H$, then classify the resulting subsets under
+the affine maps specified in Section~\ref{sec:symmetry}. The word legal
+below refers to those maps, whose linear parts are automorphisms and
+whose translations lie in $H$.
 
 Assume from now on that $D_0$ is fixed, and put $S=D_0\cap H$.
 There are four projective nonzero linear forms on
@@ -321,32 +222,39 @@ length three. Therefore
 A $(4,0,9)$ layer pattern has intersection four with its
 translate by $(1,0,0)$, so cannot satisfy \eqref{eq:congruence}.
 
-For an explicit finite encoding, the point $(x,3u,3w)\in H$
-has mask bit $9x+3u+w$, with bit zero the least significant bit.
+A mask here is simply an encoding of a subset of $H$.
 The layer conditions above describe exactly
 \begin{equation}\label{eq:maskcount}
  6\left[\binom94+\binom94\binom93\binom96\right]
  =5{,}335{,}092
 \end{equation}
-distinct subsets of $H$. This is a count of candidate singleton
-subsets, not of difference sets or of all fixed 121-point sets.
+distinct subsets of $H$. For each candidate subset, the test evaluates $|S\cap(S+h)|$ for
+every $h\in H\setminus\{0\}$; these are the 26 congruences in
+\eqref{eq:congruence}. The factor six in \eqref{eq:maskcount} orders
+the three distinct layer sizes, and the binomial factors choose the
+points in each layer of nine points. The retained subsets are then
+compared as a set with the affine orbit of the specified representative.
 Exhaustive testing of all 26 congruences leaves exactly 7,776
 masks. An enumeration scanning every one of the
 $\binom{27}{13}=20{,}058{,}300$ thirteen-point subsets
 independently reproduces both counts.
 
+
 The surviving set of masks is exactly the orbit of
-\begin{equation}\label{eq:mask}
- S_0:\quad\text{mask }24909666,
- \qquad (a,b,c)=(4,3,6),
-\end{equation}
-under the legal affine maps described next. Equality of these
+$S_0$, specified in Appendix~\ref{app:finite},
+under the legal affine maps described below. Equality of these
 two finite sets, with normalization witnesses, establishes
 normalization; agreement of their cardinalities alone would
 not do so. Thus every hypothetical difference set has a fixed
 legal image with $H$-part exactly $S_0$.
 
-\section{Legality of the normalizing symmetries}\label{sec:symmetry}
+\section{Affine normalization}\label{sec:symmetry}
+
+The normalizations must preserve both differences and fixedness under
+the multiplier. We give the coordinate maps and show why they do so.
+The letters $a,b,c$ in this section are coefficients of a map;
+the three layer sizes used in Section~\ref{sec:singletons} are fixed
+when the representative $S_0$ is chosen.
 
 Use $F=A+t$ with $t=(t_0,3t_1,3t_2)\in H$, where
 \begin{equation}\label{eq:affine}
@@ -369,9 +277,7 @@ that $p\in3G=K$. On $K$, the map is again given by
 $B\pmod3$, which is invertible; hence $p=0$.
 Thus $A$ is an automorphism. Translation preserves differences,
 and $60t=0$ gives $F(61p)=61F(p)$. Consequently $F$ preserves
-the difference-set property and scalar fixedness. The affine
-map $F$ need not fix zero; it is its linear part $A$ that is
-a group automorphism.
+the difference-set property and scalar fixedness.
 
 For $b=c=0$, the induced $H$-actions, writing its last two
 coordinates as a vector $\boldsymbol u\in C_3^2$, are
@@ -381,12 +287,11 @@ coordinates as a vector $\boldsymbol u\in C_3^2$, are
 \]
 They form a group of order
 $2\cdot3\cdot48\cdot9\cdot9=23{,}328$.
+The factors count $a,t_0,B,\boldsymbol d,\boldsymbol t$, respectively.
 Each has an explicit full-$G$ lift of \eqref{eq:affine}.
-All these lifts have been checked on the full 243-point group
-for bijectivity, translation in $H$, scalar commutation, and
-additivity of the linear part on every generator edge.
-The generator-edge identities imply additivity for arbitrary
-pairs by telescoping along a coordinate-generator path.
+Here a lift extends the displayed action on $H$ to the whole group $G$.
+
+
 The orbit of $S_0$ has size 7,776, so its stabilizer in this
 $H$-action group has order three.
 
@@ -394,25 +299,21 @@ Since the three layer sizes of $S_0$ are distinct, an
 $S_0$-stabilizing $H$-action has $a=1,t_0=0$. Each of its
 three possibilities has nine $(b,c)$ extensions. These induce
 27 distinct permutations on $Q$, forming a group of order~27.
-Their chosen full-$G$ lifts preserve $S_0$, commute with the
-scalar, and act consistently on every $K$-coset. These facts
-are checked for the actual point maps, including full
-pairwise additivity in the separate quotient-map check.
-The chosen lifts need not themselves form a 27-element
-subgroup of affine maps on $G$. The stabilizer of order three
-on $H$ and the induced group of order~27 on $Q$ refer to
-different actions; neither is asserted to be the full affine
-stabilizer of $S_0$ on $G$.
 
-\section{Complete quotient multiplicity classification}\label{sec:quotient}
+
+\section{Quotient multiplicities}\label{sec:quotient}
+
+The sums over the thirteen projective families of hyperplanes determine
+all the intersection numbers with $K$-cosets. In this section a cell
+means a $K$-coset, indexed by its image in $Q$. The three special cells
+are those indexed by $(x,0,0)$.
 
 Normalize $S$ to $S_0$ and define
 \[
  r(q)=|D_0\cap(q+K)|\qquad(q\in Q).
 \]
 The notation now refers to the normalized fixed image of $D_0$.
-This is an integer multiplicity array on $G/K$, not a subset
-of $G$ and not an array on $G/H$. Its special entries
+Its special entries
 $r(x,0,0)$ are $(4,3,6)$; initially each of the other 24
 entries may be any of $0,3,6,9$.
 
@@ -436,7 +337,10 @@ Therefore
 \begin{equation}\label{eq:inversion}
  \sum_Lt_L(L(q))=13r(q)+4(121-r(q))=484+9r(q).
 \end{equation}
-This identity proves completeness of the following finite
+The coefficient of $r(q)$ in \eqref{eq:inversion} is nine, so the
+prescribed hyperplane sums determine $r(q)$ uniquely.
+The incidence inversion mentioned in the final proof is the recovery
+of $r$ from these hyperplane sums. This identity proves completeness of the following finite
 procedure. Enumerate all $2^{13}=8192$ ways of ordering
 $(36,45)$ in \eqref{eq:lines}; recover $r(q)$ from
 \eqref{eq:inversion}; retain integer coefficients between
@@ -449,21 +353,282 @@ Exactly 144 arrays survive. Each has projected
 autocorrelation 601 at zero and 540 at every nonzero
 element of $Q$, as required by \eqref{eq:moment} and its
 nonzero counterpart. Each has twelve nonspecial entries
-equal to three and twelve equal to six. The absence of
-zero and nine is an enumeration result, not an assumption
-used to exclude possible arrays. A separate depth-first
+equal to three and twelve equal to six.
+
+The divisibility condition in the finite procedure is the
+union-of-triples condition from Section~\ref{sec:singletons}.
+The group of 27 induced $S_0$-stabilizing quotient
+permutations partitions these arrays into eight orbits.
+
+
+Their orbits are disjoint and their union is the full
+144-array set. Each nine-digit string lists
+$r(x,\bar y,\bar z)$ for fixed $x$, with
+$3\bar y+\bar z=0,\ldots,8$ in increasing order.
+
+For each array an explicit legal map sends it to its
+representative while preserving $S_0$.
+These maps are part of the finite normalization witnesses.
+
+\section{Lifting and the proof of nonexistence}\label{sec:lifting}
+
+For each quotient representative, selecting multiplier orbits in the
+$K$-cosets gives a ternary tree. We first prove that these choices cover
+all possible sets and then give the rejection rule for its search.
+
+Fix a case in Table~\ref{tab:cases}. Each of its 24
+nonspecial $K$-cosets has nine points, partitioned into
+three scalar triples. A multiplicity-three cell must
+select exactly one triple, and a multiplicity-six cell
+exactly two. In either case there are exactly three
+choices, namely all members of the appropriate
+$\binom31$ or $\binom32$ family.
+
+Points and quotient cells are ordered lexicographically by their
+least nonnegative coordinate representatives. Number a cell's triples $0,1,2$ by their least encoded
+point. A digit $j$ in a multiplicity-three cell selects
+triple $j$; in a multiplicity-six cell it omits triple
+$j$. Order the cells by placing the twelve six-cells
+first in increasing $Q$-index, followed by the twelve
+three-cells in increasing $Q$-index. Denote the resulting
+set for a case $c$ and digit word
+$\boldsymbol d\in\{0,1,2\}^{24}$ by
+$\mathcal L(c,\boldsymbol d)$.
+
+\begin{lemma}\label{lem:lifting}
+For a fixed case, the map $\boldsymbol d\mapsto
+\mathcal L(c,\boldsymbol d)$ is a bijection onto all
+scalar-fixed subsets with singleton part $S_0$ and that
+quotient multiplicity array. Every such set has 121 points.
+\end{lemma}
+\begin{proof}
+The union of $S_0$ and the chosen cell options has size
+$13+12\cdot6+12\cdot3=121$, is scalar-fixed, and has
+the prescribed multiplicities. Conversely, any fixed
+set with those multiplicities intersects each cell
+in an invariant subset of the required size, hence
+in one of the three stated options. This proves
+surjectivity. Intersecting the union with each of
+the disjoint cells recovers its option and unique
+digit, proving injectivity.
+\end{proof}
+
+For each of the eight representatives, a full choice is a word of
+length~24 in three digits. Its first twelve digits determine a subtree,
+whose completions are all possible twelve-digit tails. Every full word
+has exactly one such prefix, so the subtrees partition the eight
+lifting families. Appendix~\ref{app:computation} records their numerical
+indexing and the intervals $I_r$ used to collect consecutive prefixes.
+
+If $P\subseteq P'$, then $d_P(g)\leq d_{P'}(g)$
+for every $g$. Thus a partial set for which some
+nonzero difference count exceeds 60 has no
+difference-set extension. This is the only
+difference-count rejection needed by the search.
+At a complete 121-point leaf,
+\[
+ \sum_{g\ne0}d_P(g)=121\cdot120=242\cdot60.
+\]
+Consequently all counts being at most 60 is equivalent
+to every count being exactly 60.
+
+For every prefix, depth-first search tries all
+three digits at each remaining position, unless
+the monotone rejection rule applies.
+
+The exhaustive computations give zero difference-set leaves in each
+of the eight cases. Two searches using different difference-count
+representations agree, and a separately written third lifting program
+exhausts all the same ranges. The common finite inputs are checked by
+independent enumerations and by the formal coverage proof. The recorded
+counts and the certificate comparisons are in
+Appendix~\ref{app:computation} and the checking notes.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Suppose $D$ were such a difference set.
+Lemma~\ref{lem:fixed} gives a fixed translate.
+The singleton conditions and complete
+classification send its $H$-part legally to
+$S_0$. The incidence inversion places its
+quotient in the complete 144-array set, and a
+legal $S_0$-stabilizing map sends that array
+to Table~\ref{tab:cases}. By
+Lemma~\ref{lem:lifting}, the resulting
+difference set is a leaf of that case. Its
+prefix lies in exactly one interval
+\eqref{eq:ranges}. Exhaustion rejects every
+leaf under that interval by tests that
+reject no difference set, a contradiction.
+\end{proof}
+
+\section{Computational verification}\label{sec:formal}
+
+The computation excludes every lift, while the formal proof establishes
+that every hypothetical difference set is one of these lifts. The
+following statements describe precisely how the two parts fit together.
+
+The Lean definition of the
+group is the product of the
+three residue groups of
+moduli $3,9,9$. Its
+\texttt{IsDiffSet} predicate
+is exactly cardinality~121
+and ordered-difference
+count~60 at every nonzero
+element. The singleton and quotient classifications are proved in Lean using
+finite tables; the programs separately enumerate the subsets and
+multiplicity arrays. For the final implication, each
+$\operatorname{RangeClear}(r)$ asserts that every lift with a prefix in
+the interval $I_r$ fails to be a difference set. The intervals cover the
+prefix subtrees described in Section~\ref{sec:lifting}; their exact
+indexing and the full coverage statement are given in
+Appendix~\ref{app:computation}.
+
+In the equivalent range-assertion formulation checked in the formal
+development,\newline
+\texttt{DS243.no\_difference\_set} states
+\[
+ \left(\forall r<1038,\
+   \operatorname{RangeClear}(r)\right)
+ \ \Longrightarrow\
+ \neg\exists D\subseteq G,\ \operatorname{IsDiffSet}(D).
+\]
+The conclusion is exactly
+Theorem~\ref{thm:main}: the product of residue groups is $G$, and
+$\operatorname{IsDiffSet}$ uses the cardinality and ordered differences
+in that theorem. The correspondence between the formal leaf table and the executable
+options, and the exhaustive range assertions, are external checks.
+The \href{../checks/edition-notes.md}{checking notes} in the accompanying
+\href{https://github.com/6/clank-lab/tree/difference-set-243-v3/results/difference-set-243}{source bundle} identify the exact formal statement types, the logical
+axioms and the reproduction commands.
+
+\begin{appendices}
+
+\section{Known nonexistence criteria}\label{sec:context}
+
+These sources also put the question in perspective. For the same
+parameters, the other six abelian groups of order $243$ are already
+recorded as follows; this is historical context, not a new proof of
+those entries:
+\[
+\begin{array}{c|c|l}
+\text{group}&\text{recorded answer}&\text{attribution}\\\hline
+C_{243}&\text{No}&\text{Lander}\\
+C_3\times C_{81}&\text{No}&\text{Lander}\\
+C_9\times C_{27}&\text{No}&\text{Arasu--Ma}\\
+C_3^2\times C_{27}&\text{No}&\text{Vera L\'opez--Garc\'ia S\'anchez}\\
+C_3^3\times C_9&\text{No}&\text{Vera L\'opez--Garc\'ia S\'anchez}\\
+C_3^5&\text{Yes}&\text{Paley's finite-field construction}
+\end{array}
+\]
+The source for the complete list and its attributions is
+Gordon~\cite{GordonData}.\footnote{This small status summary is selected
+and reformatted from Daniel M. Gordon's repository data, copyright
+2024 Daniel M. Gordon, under
+\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
+Group notation and presentation are changed; the source status
+values are unchanged. No endorsement is implied.}
+For $C_3\times C_{81}$ the two records give different attributions;
+the displayed table follows Gordon, while the following description
+follows the 1997 table. The 1997 table credits the negative entry for $C_{243}$ to
+Lander's Theorem~4.38~\cite{Lander1983} with $q=3$ (its reference~10). For
+$C_3\times C_{81}$, $C_3^2\times C_{27}$, and $C_3^3\times C_9$,
+it uses method~21, multiplier-orbit enumeration with multiplier~61.
+Here 21 is the table marker used in the source for that enumeration.
+Arasu and
+Ma~\cite{ArasuMa2001} subsequently resolved $C_9\times C_{27}$.
+For $C_3^5$, Paley's quadratic-residue construction~\cite{Paley1933}
+in the additive group of $\mathbb F_{243}$ gives the stated parameters.
+The 1997 table cites Emma Lehmer~\cite{Lehmer1953} for its positive entry.
+The nonexistence at issue here concerns
+the remaining group $C_3\times C_9\times C_9$.
+
+The parameter identity $k(k-1)=\lambda(v-1)$ holds. The odd-order
+Bruck--Ryser--Chowla equation $61x^2-60y^2=z^2$ has the nonzero
+solution $x=y=z=1$. These elementary necessary conditions do not
+exclude the parameters.
+
+Turyn's character restrictions~\cite{Turyn1965} allow this application:
+$\operatorname{ord}_3(61)=1$ is odd. At the nontrivial character
+orders $3$ and $9$, the prime $61$ is not self-conjugate. Indeed, its
+powers modulo $3$ equal $1$, and modulo $9$ cycle through $7,4,1$,
+never $-1$. Obstructions requiring a common prime divisor of $n$ and
+$v$ have no such prime here; in particular that ingredient of the
+Lander-type restrictions in Leung--Ma--Schmidt~\cite{LeungMaSchmidt2004}
+is absent.
+
+In the following paragraph $F$ denotes the published field-descent
+function, rather than an affine map. For the field-descent function of Leung and
+Schmidt~\cite[Definition~2.6]{LeungSchmidt2005}, one obtains
+$F(9,61)=3$. Here $\operatorname{ord}_3(61)=1$ and
+$61\not\equiv1\pmod9$, so the exponent $b_3=1$ is permitted in
+that definition. Taking their factor $A$ to be the entire group and
+the complementary factor trivial, Theorem~4.3 gives
+\[
+ \exp(G)\leq243\sqrt{\frac{3^2}{4\cdot61\cdot\varphi(3)}}
+ =\frac{729}{\sqrt{488}}\approx33.0003,
+\]
+which permits exponent~9. Their Theorem~A~\cite[Theorem~A]{LeungSchmidt2005} cannot instead split off a
+$C_9$ factor: its coprimality condition would require
+$\gcd(9,\exp(C_3\times C_9))=1$, whereas this gcd is~9.
+Theorem~4.1~\cite[Theorem~4.1]{LeungSchmidt2005} requires a cyclic Sylow subgroup, also absent here.
+
+Arasu and Ma's 2001 nonexistence result~\cite{ArasuMa2001} resolves
+$C_9\times C_{27}$. The relevant theorem, as explicitly restated and
+extended by Miller~\cite[Theorems~1 and~3]{Miller2025}, assumes
+\[
+ G=C_{p^e}\times J,\qquad e\geq2,\qquad
+ \exp(\operatorname{Syl}_p J)<p^e.
+\]
+The displayed group hypothesis is from Miller's Theorem~1; his
+Theorem~3 gives the subsequent multiplier bound. Splitting off $C_9$ in the present group leaves another $C_9$, so
+the strict exponent inequality fails. The forbidden-multiplier
+congruences would demand both $t\equiv4\pmod9$ and
+$t\equiv1\pmod9$. Although the older numerical condition
+$4(p-1)n=488>243$ holds, it cannot repair the failed group
+hypothesis.
+
+Chen, Xiang, and Sehgal~\cite{ChenXiangSehgal1994} study skew Hadamard
+abelian difference sets, which satisfy the additional partition
+$G=\{0\}\mathbin{\dot\cup}D\mathbin{\dot\cup}(-D)$.
+The present parameters do not supply this hypothesis. Consequently
+a skew-only exponent bound cannot be applied to the ordinary
+difference-set question.
+
+For the following comparison the defect is $d=v-k$, the notation of
+He and Wu\cite[Theorem~4.7]{HeWu2026}.
+Recent work on signed difference sets by He and
+Wu~\cite{HeWu2026} includes ordinary difference sets but does not
+yield this exclusion by the criteria considered here. Their
+Theorem~3.2 has the same failed self-conjugacy test for~61;
+Theorem~4.2 requires even $v$; Theorem~4.4 requires $k=v-1$;
+and Theorem~4.7 requires an elementary abelian group and a defect
+bound, whereas this group is not elementary abelian and the defect
+is $d=122>5$.
+
+Source-access qualifications for these historical comparisons are recorded
+in the accompanying checking notes.
+
+\section{Finite classification data}\label{app:finite}
+
+The following data specify the representative used in the main proof
+and record the finite classification checks.
+
+For an explicit finite encoding, the point $(x,3u,3w)\in H$
+has mask bit $9x+3u+w$, with bit zero the least significant bit.
+\begin{equation}\label{eq:mask}
+ S_0:\quad\text{mask }24909666,
+ \qquad (a,b,c)=(4,3,6),
+\end{equation}
+
+A separate depth-first
 enumeration assigns $\{0,3,6,9\}$ to the 24 nonspecial
 cells and enforces all index-three moment triples,
 without assuming which fiber has count~40. It gives
 exactly the same set of 144 arrays.
 
-The group of 27 induced $S_0$-stabilizing quotient
-permutations partitions these arrays into eight orbits.
 Representatives in the order used for lifting are given
-in Table~\ref{tab:cases}. Each nine-digit string lists
-$r(x,\bar y,\bar z)$ for fixed $x$, with
-$3\bar y+\bar z=0,\ldots,8$ in increasing order.
-\begin{table}[ht]
+in Table~\ref{tab:cases}. \begin{table}[ht]
 \centering
 \begin{tabular}{c|r|ccc}
 case $c$&orbit size&$x=0$&$x=1$&$x=2$\\\hline
@@ -479,13 +644,12 @@ case $c$&orbit size&$x=0$&$x=1$&$x=2$\\\hline
 \caption{The eight quotient multiplicity representatives.}
 \label{tab:cases}
 \end{table}
-Their orbits are disjoint and their union is the full
-144-array set. The orbit sizes are
-$27,27,9,9,27,27,9,9$; their stabilizers in the induced
+
+
+The orbit sizes are
+\[27,27,9,9,27,27,9,9;\]
+their stabilizers in the induced
 27-element group have orders $1,1,3,3,1,1,3,3$.
-For each array an explicit legal map sends it to its
-representative while preserving $S_0$. No search count is
-divided by one of these symmetry orders.
 
 \subsection{A centered coset invariant}\label{sec:invariant}
 
@@ -521,70 +685,9 @@ Thus $j=1$: the eight off-$H$ cosets have multiplicities
 \end{equation}
 with one opposite pair $\{9,18\}$ and three
 $\{12,15\}$. All 144 arrays satisfy this invariant.
-It is a consequence of the classification, not an
-additional unexplained pruning condition. For an
-uncentered translate the distinguished thirteen-point
-coset can move; $|D\cap H|=13$ is not asserted for an
-arbitrary translate of the original difference set.
 
-\section{Lifting completeness and the search partition}\label{sec:lifting}
 
-Fix a case in Table~\ref{tab:cases}. Each of its 24
-nonspecial $K$-cosets has nine points, partitioned into
-three scalar triples. A multiplicity-three cell must
-select exactly one triple, and a multiplicity-six cell
-exactly two. In either case there are exactly three
-choices, namely all members of the appropriate
-$\binom31$ or $\binom32$ family.
-
-Number a cell's triples $0,1,2$ by their least encoded
-point. A digit $j$ in a multiplicity-three cell selects
-triple $j$; in a multiplicity-six cell it omits triple
-$j$. Order the cells by placing the twelve six-cells
-first in increasing $Q$-index, followed by the twelve
-three-cells in increasing $Q$-index. Denote the resulting
-set for a case $c$ and digit word
-$\boldsymbol d\in\{0,1,2\}^{24}$ by
-$\mathcal L(c,\boldsymbol d)$.
-
-\begin{lemma}\label{lem:lifting}
-For a fixed case, the map $\boldsymbol d\mapsto
-\mathcal L(c,\boldsymbol d)$ is a bijection onto all
-scalar-fixed subsets with singleton part $S_0$ and that
-quotient multiplicity array. Every such set has 121 points.
-\end{lemma}
-\begin{proof}
-The union of $S_0$ and the chosen cell options has size
-$13+12\cdot6+12\cdot3=121$, is scalar-fixed, and has
-the prescribed multiplicities. Conversely, any fixed
-set with those multiplicities intersects each cell
-in an invariant subset of the required size, hence
-in one of the three stated options. This proves
-surjectivity. Intersecting the union with each of
-the disjoint cells recovers its option and unique
-digit, proving injectivity.
-\end{proof}
-
-There are $3^{24}=282{,}429{,}536{,}481$ syntactic
-leaves per case before difference-count pruning.
-The bijection does not require enumeration of all
-these leaves. Different representative arrays give
-disjoint families because their quotient arrays differ;
-no assertion is made that all these leaves represent
-distinct affine-equivalence classes.
-
-The local families have been checked independently of
-the search tables: scalar orbits were reconstructed
-from modular coordinates and all their required
-subfamilies formed, then compared as sets with every
-option emitted by each compiled search kernel.
-A separate completeness check also enumerated all
-three-point and six-point subsets of each nine-point
-cell and tested scalar closure directly. Both checks
-cover all $8\cdot24\cdot3=576$ labeled options and
-the thirteen initial points. The comparison definition
-comes from scalar fixedness and subset size, rather
-than from treating an existing option table as complete.
+\section{Search data and indexing}\label{app:computation}\label{sec:search}
 
 Split each 24-digit word after twelve digits. With
 leading zeroes retained, give its first half the
@@ -605,307 +708,20 @@ Each ID specifies the full cylinder of all $3^{12}$
 possible tails. Different prefixes define disjoint
 cylinders and every full digit word has exactly one
 prefix, so these cylinders partition all eight trees.
-A prefix rejected before depth twelve must still have
-an explicit completed record; pruning is not a reason
-to omit its ID from the partition.
 
-Separate checks reconstruct every prefix's rank,
-digits, and cylinder endpoints and compare them with
-both complete decoder output streams. They check
-all $N$ IDs and exact endpoints, not a sample or
-aggregate length alone. The interval walk checks
-that the first endpoint is zero, each start equals
-the previous stop, and the last stop is $N$.
-Those finite comparisons establish the contents of
-the supplied decoder outputs; identifying the outputs
-with executions of the intended compiled decoders is
-an external provenance assertion, not a Lean theorem.
 
-\section{Sound pruning and exhaustive computation}\label{sec:search}
 
-If $P\subseteq P'$, then $d_P(g)\leq d_{P'}(g)$
-for every $g$. Thus a partial set for which some
-nonzero difference count exceeds 60 has no
-difference-set extension. This is the only
-difference-count rejection needed by the search.
-At a complete 121-point leaf,
-\[
- \sum_{g\ne0}d_P(g)=121\cdot120=242\cdot60.
-\]
-Consequently all counts being at most 60 is equivalent
-to every count being exactly 60. The direct kernel
-also checks the exact leaf condition explicitly.
+In $\operatorname{digits}(\operatorname{id},\boldsymbol t)$, the
+first twelve entries and the tail are concatenated.
+Here the first twelve digits
+are the leading-zero-preserving
+base-three expansion of
+$\operatorname{id}\bmod531441$
+and the last twelve are
+$\boldsymbol t$.
 
-All partial sets are unions of scalar orbits, so
-$d_P(61g)=d_P(g)$. Reversing ordered pairs gives
-$d_P(-g)=d_P(g)$ as well. There are 36 classes
-outside $H$ under $g\mapsto\pm61^ig$, each of
-size six, and thirteen nonzero classes inside $H$,
-each of size two. Thus there are 49 nonzero
-difference classes. The compressed kernel stores
-the common count on each class and uses precomputed
-option contributions. The direct kernel instead
-adds and removes points and maintains the full
-elementwise difference vector. Compression is
-justified by constancy of contributions on these
-classes, rather than by averaging counts.
 
-For every prefix, depth-first search tries all
-three digits at each remaining position, unless
-the monotone rejection rule applies. An explicit
-completion state is required for each prefix;
-an absent result, interruption, or partial
-continuation is not evidence of exhaustion.
-Production searches use the bound~60 and exclude
-the relaxed-bound features used for controls.
-
-The two production passes agree on the complete
-ordered rows of ID, prefix-validity, node count,
-and solution count for all 4,251,528 IDs,
-and on node counts in every
-one of the 1,038 ranges. With their common node-count
-convention, the totals are
-\[
-\begin{array}{c|r}
-\text{depth-twelve prefixes}&4{,}251{,}528\\
-\text{search nodes}&108{,}733{,}222{,}341\\
-\text{difference-set leaves}&0.
-\end{array}
-\]
-These are traversal counts, not numbers of
-inequivalent subsets or an assertion that all
-$8\cdot3^{24}$ leaves were visited individually.
-
-A complete additional direct replay reproduced
-every range. A separately written third lifting
-kernel also exhausted all 1,038 ranges, matching
-each range's validity, node, and solution counts
-and the digest of its canonical per-prefix row
-stream. That kernel has its own recursive
-traversal, difference arithmetic, option
-construction, ID decoder, and driver. Its
-six-cell labeling convention was selected by
-testing the two conventions against one range;
-this fixes labels only. Permuting the labels
-cannot add or remove a subset, and the complete
-pass then matched every range.
-
-The compact computational certificate records
-each interval and its counts and row-stream
-digest. A static check verifies interval geometry
-and consistency, while replay recomputes the
-rows and compares their counts and digests.
-The digest binds a comparison to a particular
-row stream; it is not a proof of a universal
-nonexistence assertion. The exhaustive executions
-and their arithmetic and coverage checks supply
-the external computational part of the proof.
-
-\begin{proof}[Proof of Theorem~\ref{thm:main}]
-Suppose $D$ were such a difference set.
-Lemma~\ref{lem:fixed} gives a fixed translate.
-The singleton conditions and complete
-classification send its $H$-part legally to
-$S_0$. The incidence inversion places its
-quotient in the complete 144-array set, and a
-legal $S_0$-stabilizing map sends that array
-to Table~\ref{tab:cases}. By
-Lemma~\ref{lem:lifting}, the resulting
-difference set is a leaf of that case. Its
-prefix lies in exactly one interval
-\eqref{eq:ranges}. Exhaustion rejects every
-leaf under that interval by tests that
-reject no difference set, a contradiction.
-\end{proof}
-
-\section{Completeness checks, controls, and independence}\label{sec:controls}
-
-Agreement of the production kernels alone
-does not establish that their shared
-decomposition is complete. The proof uses
-the full local option-family comparisons,
-the separately written exhaustive lifting
-pass, the independent finite cover, and
-the Lean coverage implication, in addition
-to production agreement.
-
-The finite cover checks exact equality of
-the singleton sets and legal-map orbit,
-the derived quotient set and covered
-case orbits, every local option family,
-all prefix cylinders, and the range
-partition. Three semantic gap controls
-exercise these obligations. One deletes
-ID~4095 and compensates by duplicating
-another ID while preserving the number
-of interval records and their summed
-length. A second duplicates one legal
-option while retaining its cell and
-cardinality. A third duplicates a case
-of the same orbit size. Each is rejected
-with a missing ID, subset, or quotient
-image witness, respectively. Their
-rejection does not rely on unchanged
-file digests or aggregate counts.
-
-Further mutation tests reject altered
-scalar partitions, missing maps,
-nonimages in the case list, and two
-representatives from one quotient
-orbit. Replacing a representative
-by another member of its own orbit
-is accepted, as it should be. An
-altered range digest is rejected
-by both fresh production kernels.
-A changed node count, even with its
-aggregate total updated consistently,
-is rejected by fresh replay although
-it passes the static consistency
-check. These tests distinguish
-semantic checking from integrity
-and formatting checks.
-
-There is a genuine positive discovery
-control at parameters $(121,40,13)$
-in $C_{121}$: three generic
-implementations, without a supplied
-witness, recover 88 multiplier-invariant
-difference sets at 996,935 nodes.
-These are invariant sets without
-equivalence reduction. The same
-parameters in $C_{11}^2$ give a
-negative control; that negative
-outcome is not positive discovery
-evidence for the present search.
-
-The actual order-243 ternary path
-has additional positive controls.
-Eight independently constructed
-fixed 121-point sets, one in each
-case, are supplied through forced
-digit paths with relaxed test-only
-bound $M=\max_{g\ne0}d_P(g)$.
-Both production kernels recover
-their exact points at their
-specified depth-twelve IDs and
-reject bound $M-1$:
-\[
-\begin{array}{c|r|r}
-c&\operatorname{id}&M\\\hline
-0&91{,}615&66\\
-1&815{,}056&72\\
-2&1{,}486{,}729&69\\
-3&1{,}750{,}181&72\\
-4&2{,}473{,}622&69\\
-5&3{,}145{,}295&69\\
-6&3{,}214{,}101&69\\
-7&3{,}937{,}542&72
-\end{array}
-\]
-For example, the case-zero word is
-\[
-\texttt{011122200011122200011122}.
-\]
-It has prefix ID~91,615 and $M=66$.
-Each test returns one exact witness
-and thirteen tail nodes. These are
-bounded-count lifting and witness
-controls, not $(243,121,60)$
-difference sets: their bounds are
-66--72. Neighboring IDs are checked
-against their own reconstructed
-sets; a neighbor is not assumed
-to have no solution at a relaxed
-bound. Tests of omitted options,
-serialized continuation versus
-uninterrupted execution, and
-residual symmetries also agree.
-Residual symmetries are used for
-controls, not for reducing the
-production search domain.
-
-A separate 10,000-ID comparison
-matches all per-ID rows between
-the production kernels and an
-additional coordinate-based
-implementation. This is a sample
-control and does not replace
-the complete third-kernel pass
-or prove coverage of a range.
-
-The scope of independence is
-specific. The compressed and
-direct production kernels share
-a compilation unit, task and
-serialization code, prefix
-convention, $S_0$, scalar-partition
-and case inputs, cell order,
-and option contents. Their
-difference representations,
-updates, and traversals differ;
-they are not independent
-derivations of the entire
-reduction. The third complete
-kernel shares no search or
-certificate-driver code with
-them, but reads the same
-validated scalar-partition
-and case files and uses $S_0$.
-It reconstructs its own options
-and validates orbit membership;
-it does not itself discover
-the singleton class or quotient
-representatives.
-
-Those common mathematical
-inputs are instead validated
-by separate programs that
-regenerate scalar orbits,
-enumerate all singleton
-candidates, classify quotient
-arrays in two different ways,
-and check legal full-group
-maps and exact case coverage.
-Thus the evidence composes
-independent input-completeness
-checks with a complete separate
-lifting exhaustion. A complete
-search fed directly by a newly
-self-generated chain of all
-front-end data is not claimed.
-The common mathematical
-implications are justified by
-the arguments and formalization,
-not inferred from matching
-search totals.
-
-\section{The exact formalization boundary}\label{sec:formal}
-
-The Lean definition of the
-group is the product of the
-three residue groups of
-moduli $3,9,9$. Its
-\texttt{IsDiffSet} predicate
-is exactly cardinality~121
-and ordered-difference
-count~60 at every nonzero
-element. The formalization
-proves the first-multiplier
-specialization by the
-classical group-ring argument,
-as well as centering, the
-index-three moments, the
-singleton congruences,
-legal normalizations,
-quotient inversion, lifting,
-pruning, and ID partition.
-
-In particular,
-\texttt{coverage} proves the
-following implication, with
-no hypotheses about outputs
-of a finite enumerator or
-of a search: if $D$ is a
+The formal coverage implication says: if $D$ is a
 difference set, then there
 exist $u\in G$, a word $w$
 of legal affine maps, an
@@ -919,46 +735,10 @@ $\boldsymbol t$ such that
  \operatorname{digits}(\operatorname{id},\boldsymbol t)
  \right).
 \end{equation}
-Here the first twelve digits
-are the leading-zero-preserving
-base-three expansion of
-$\operatorname{id}\bmod531441$
-and the last twelve are
-$\boldsymbol t$. The map
+The map
 $F_w$ is an additive
 automorphism followed by a
 translation in $H$.
-This is an existence
-statement; the normalizing
-map or normalized
-representative for the
-original $D$ need not be
-unique. The interval of
-each ID is unique.
-
-The formal singleton proof
-uses its own finite
-classification: fourteen
-layer-zero representatives,
-64 layer-one shear classes,
-52,220 patterns, and twelve
-survivors with legal words
-to $S_0$. These numbers
-describe that classification,
-not the 5,335,092-mask
-enumeration in
-\eqref{eq:maskcount}.
-The quotient proof checks
-all $2^{13}$ assignments
-and the legal witnesses
-to the eight actual
-case rows. Generated
-witness tables have their
-required properties and
-completeness checked in
-the kernel; they are not
-imported as axioms.
-
 For an interval $I_r$,
 define the semantic
 assertion
@@ -973,84 +753,24 @@ assertion
  \right)\text{ is not a difference set.}
 \end{split}
 \end{equation}
-The final Lean theorem
-\texttt{no\_difference\_set}
+The formal nonexistence result
 is conditional on the family
 \[
  \forall r<1038,\qquad
  \operatorname{RangeClear}(r).
 \]
-These are 1,038 semantic
-assertions. A receipt
-formulation packages each
-assertion as the
-\texttt{clear} field of
-$\operatorname{Receipt}(r,\operatorname{digest}_r)$;
-the digest is only a
-label, not additional
-mathematical evidence.
-Lean does not compute
-SHA-256 here, interpret
-C++ output, or derive
-the assertions from
-digest strings. The external
-exhaustive computations
-in Section~\ref{sec:search}
-supply that part of the
-computer-assisted proof.
 
-Equality of the Lean
-leaf table with the
-implemented search
-options is also an
-external comparison,
-covering all 576 options
-and thirteen singleton
-points, strengthened by
-the complete compiled
-option dumps and separate
-definition-based checks.
-It is neither an omitted
-hypothesis of
-\texttt{coverage} nor a
-formal proof of the C++
-implementation, compiler,
-or execution environment.
-The finite cover's
-decoder comparisons
-likewise retain the
-execution-provenance
-boundary stated in
-Section~\ref{sec:lifting}.
+The recorded exhaustive searches have the following totals.
+\[
+\begin{array}{c|r}
+\text{depth-twelve prefixes}&4{,}251{,}528\\
+\text{search nodes}&108{,}733{,}222{,}341\\
+\text{difference-set leaves}&0.
+\end{array}
+\]
 
-The recorded kernel
-checks of the reductions
-and conditional final
-theorem use only
-\texttt{propext},
-\texttt{Classical.choice},
-and \texttt{Quot.sound}.
-Planted formal errors
-are rejected: dropping
-the last range, pruning
-when a count reaches
-$\lambda$ rather than
-exceeds it, weakening
-the exact leaf criterion
-to $\lambda+1$, and
-omitting an admissible
-singleton survivor.
-The first three false
-statements also have
-formal counterexamples.
-These checks establish
-the stated reduction
-scope; they do not
-turn the external
-search into a
-whole-theorem Lean
-proof from the
-definitions.
+
+\end{appendices}
 
 \begin{thebibliography}{99}
 

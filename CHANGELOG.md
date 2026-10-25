@@ -7,6 +7,7 @@ Zenodo records.
 ## steinberg-c4-c9 v7 (October 25, 2026)
 
 - Lean now checks the existing rational straight-line drawing directly, completing the formal proof of planarity, the cycle exclusions and non-three-colorability. The mathematical statements and credits are unchanged.
+- Zenodo: [10.5281/zenodo.23644204](https://doi.org/10.5281/zenodo.23644204)
 
 ## noncrossing-symmetric-chains v2 (October 25, 2026)
 

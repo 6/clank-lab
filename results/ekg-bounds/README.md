@@ -56,6 +56,8 @@ The proofs, the Lean formalization, the programs and the text were produced by A
 
 Archived on Zenodo: [doi:10.5281/zenodo.23572754](https://doi.org/10.5281/zenodo.23572754)
 
+This DOI archives version 2.
+
 ## Check it
 
 The Lean proof is a standard Lake project. Install
@@ -98,7 +100,9 @@ recorded checkpoint; it takes about three hours and needs about 72 GB and
 
 ## Credits
 
-The conjecture, the definition and the rule that each term is the least
+Jonathan Ayres discovered the sequence, as Lagarias, Rains and Sloane
+credit in their [Introduction](https://arxiv.org/abs/math/0204011).
+The conjecture, the published definition and the rule that each term is the least
 unused multiple of a prime factor of its predecessor are due to
 [Lagarias, Rains and Sloane (2002)](https://doi.org/10.1080/10586458.2002.10504486).
 [Hofman and Pilipczuk (2008)](https://cs.uwaterloo.ca/journals/JIS/VOL11/Hofman/hofman1.html)
@@ -131,7 +135,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Sharp linear bounds for the EKG sequence}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v2/results/ekg-bounds}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v3/results/ekg-bounds}},
   doi          = {10.5281/zenodo.23572754}
 }
 ```

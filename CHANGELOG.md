@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-bounds v3 (October 25, 2026)
+
+- Concise edition and journal-style edition: the main text retains the proof and its key lemmas; routine checking details are in appendices. The theorem, computed premises and checks are unchanged.
+- Correction: The paper and README now credit Jonathan Ayres's discovery of the sequence.
+
 ## cubelike-cospectrality v2 (October 25, 2026)
 
 - Concise edition and journal-style edition: the main text presents the proof and its key lemmas, with routine certificate details in appendices and implementation details in the checking notes. The mathematical statements and checked artifacts are unchanged.

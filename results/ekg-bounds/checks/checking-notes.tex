@@ -1,0 +1,69 @@
+% Supplementary checking notes. References use the labels of paper/paper.tex.
+% This file is documentation, not an input to a proof or checker.
+
+A cover exists: we found one with first row $M=28{,}017$ and checked it as
+described in Section~\ref{sec:trust}. Its tightest inequalities are (B),
+(Hc) and $Q\le(Y+\frac12)/(2(M+1))$, each satisfied with a ratio of about
+$1-10^{-9}$, and (Od), with ratio about $1-2\cdot10^{-6}$.
+
+\paragraph{What is computed, and how it is checked.}
+The four premises are not proved inside Lean; they are computed.
+\begin{itemize}
+\item (Fa), (Fb), (Fc) are produced by two programs that share no code:
+  one keeps a smallest-prime-factor table and one pointer per prime, the
+  other factors by segmented sieving with a paged cursor store and
+  computes $K$ by a different formula. Both run to $n=L$ and report the
+  same equality cases, no violations, the same frontier thresholds, and
+  identical checkpoints every $10^8$ terms: $(n,a(n),E,K,\max K)$ and a
+  64-bit hash of $a(1),\dots,a(n)$. A third program, which uses neither
+  pointers nor factorization, checks the defining property of every term
+  up to $10^8$ (each smaller multiple of a prime factor of $a(n-1)$ appears
+  earlier); swapping two terms or changing one is detected both by it and
+  by the hash.
+\item The cover is produced with interval arithmetic and checked by a
+  separate program written from the Lean statement of
+  Definition~\ref{def:cover} alone, using ball arithmetic (Arb) at 256
+  bits and exact rationals and integers; every inequality is proved with
+  the correct strictness. It accepts the cover and rejects corrupted ones
+  (a gap, a decreased $M$, a $Q$ above its bound, $b_q=5$, $h_c=14$, a
+  moved start and a short end).
+\end{itemize}
+
+\paragraph{Trusted base.}
+Beyond Lean's kernel, the proof trusts: the two prefix programs, their
+compilers and their recorded runs; the cover checker and the Arb library;
+and the correspondence between the programs and the Lean definitions,
+which was checked by reading rather than by machine: that both programs
+compute \lean{EKG.actualA} by the pointer rule, that their $E$ and $K$ are
+Lean's \lean{frontier} and \lean{earlyEvenCount} at the matching state
+(the program's state $n$ is Lean's state $n-1$), and that the program
+outputs give the premises as stated. The two prefix programs could in
+principle share a misreading of the definition; the direct minimality
+check covers only the first $10^8$ terms.
+
+\paragraph{Files.}
+The Lean project, the programs, the certificate and the expected outputs
+accompany this paper. The Lean build takes about an hour on two cores, with up to about
+$7.5$~GB of memory per Lean process. A
+quick check of the premises (minutes) checks the cover and its
+corruptions and replays the first $10^8$ terms; the full replay of the
+first $L$ terms takes about three hours and about $72$ and $33$ GB of
+memory for the two programs.
+
+
+The correspondence between the statements in the paper and the formal
+names is as follows.
+\begin{center}
+\begin{tabular}{ll}
+Lemma~\ref{lem:A} & \lean{EKG3.lemmaA}\\
+Corollary~\ref{cor:A} & \lean{EKG3.boundedCorollaryA}\\
+Lemma~\ref{lem:C} & \lean{EKG3.lemmaC}\\
+Lemma~\ref{lem:D} & \lean{EKG3.lemmaD}\\
+Theorem~\ref{thm:T} & \lean{EKG3.P3.theoremT}\\
+Lemma~\ref{lem:F} & \lean{EKG3.P3.lemmaF}
+\end{tabular}
+\end{center}
+
+
+The suffix P3 in the formal names identifies the fixed prime-counting
+bounds used here; it is an identifier, not a mathematical parameter.

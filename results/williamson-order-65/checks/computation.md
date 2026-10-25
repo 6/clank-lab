@@ -447,3 +447,198 @@ arXiv:2605.08661v2, September 6, 2026.
 First posted May 9, 2026 as version 1 by H. Kharaghani, A. Mohammadian
 and B. Tayfeh-Rezaie, titled *A search for Hadamard matrices of Williamson type*.
 <https://arxiv.org/html/2605.08661v2>.
+
+## Implementation details accompanying the journal-style edition
+
+The following details were moved from the paper without changing the implementation.
+They specify the original build, key constants, and record fields. The mathematical
+arguments for complete matching and conservative arithmetic remain in the paper.
+
+```text
+The public build invokes GCC with \texttt{-O3 -fopenmp} and links
+\texttt{libm}; it invokes G++ with \texttt{-O3 -std=c++17 -fopenmp}
+for the second checker. The recorded CPU search additionally used
+\texttt{-march=native}. No build uses \texttt{-ffast-math}. The coefficients $R_s$ are the successive outputs of the public
+\texttt{splitmix64} function, initialized with the hexadecimal seed
+\texttt{5713a1d2c0ffee65}, with the low bit set to one. The outputs are indexed from $s=0$ to $32$, with indices $1$ through $32$
+used in $f$. The fixed multiplier $R$ is hexadecimal
+\texttt{d6e8feb86659fd93}. The complete key function is specified in
+\texttt{checks/search.c}. A receipt is a record for one
+unit: the four classes, pairing, designated row, list sizes, enumerated
+pair counts, survivor counts, matching keys, solutions, and number of
+passes. A pass processes one part of the pair lists, as defined in
+Appendix~\ref{app:join}; every order-$65$ unit uses one pass. A key match
+is a surviving left pair and a surviving right pair with equal keys.
+A surviving pair is counted once for each side of each unit where it occurs.
+The complete receipt collection has no unresolved unit.
+
+```
+
+The lower spectral enclosure has the following qualification, retained from the paper:
+"No strictly positive gap is claimed after clamping."
+
+## Historical statements and source locators
+
+These detailed source formulations accompany the narrative history in the paper.
+The TeX source notation is retained here to preserve exact quotations and statements.
+
+```text
+Turyn's 1972 abstract records ``it has been conjectured that one such exists
+of any order $4t$'' and ``An infinite family is constructed here''~\cite{Turyn}.
+Koukouvinos and Kounias (1990, Section 1, p.~162) credit Baumert, Golomb
+and Hall (1962) with ``Williamson matrices for $m=23$'' (Hadamard order $92$),
+and Baumert and Hall (1965) with ``all solutions for $3\leq m\leq23$''
+(at odd block orders)~\cite{KK1990,BGH,BH}.
+\DJ okovi\'c's 1995 note (Section 5, p.~174) records ``An exhaustive computer
+search for non-equivalent solutions'' by Sawade (1977), Koukouvinos and
+Kounias (1988, 1990), and \DJ okovi\'c (1992, 1993); its Table 1 corrects
+the order-$25$ count~\cite{Sawade,KK1988,KK1990,Djokovic1992,Djokovic,Djokovic1995}.
+The same note (Section 1, p.~172), citing his 1993 paper, records
+``it has none for $n=35$'', disproving the odd-order conjecture; Section 5
+records corrections at $33$ and $39$~\cite{Djokovic1995,Djokovic}.
+Holzmann, Kharaghani and Tayfeh-Rezaie enumerate odd orders through $59$,
+with none at $47$, $53$ and $59$: December 12, 2007 manuscript,
+Section 4, Table 1~\cite{HKT}.
+Bright, Kotsireas and Ganesh's version 2, p.~3, reports ``the order 61 was
+enumerated by Lang and Schneider (2012)''~\cite{BKG,LS}; the latter paper's
+title specifies Turyn type.
+
+Nearby work includes Egan, Kotsireas, London and \'O Cath\'ain's
+October 19, 2026 survey (version 1, Section 2.1: ``Williamson matrices do
+not exist at every odd order'', listing $35,47,53,59$)~\cite{EKLO},
+Bennett, Bright, Colinot and Nayak's quaternionic perfect-sequence
+enumeration (version 1, abstract: ``does not require the sequences to be
+symmetric'')~\cite{BBCN}, and Zhang's April 2, 2026 AI-assisted
+account~\cite[Section 7.4]{Zhang}.
+
+```
+
+## Normalization and storage details
+
+The original sequence normalization and complete storage argument are retained below.
+
+```text
+A symmetric row of order $65$, normalized to start with $+1$, is
+encoded by its $32$ remaining signs. Row sums and Fourier eigenvalues
+supply necessary conditions. Summing entries in each residue class modulo
+$13$ compresses each row to an integer vector. Rows are grouped by row sum
+and compression, and four classes form an admissible tuple when their
+compressed autocorrelations satisfy the required equations. A lift chooses
+one full row from each class.
+
+Surviving pairs on one side are stored by linear probing in a table whose
+size exceeds twice the number of entries. No entry is deleted or
+overwritten. A probe continues through every equal key until the first
+empty slot, so repeated keys and repeated rows are retained. A capacity
+overflow abandons the whole attempt and restarts in passes partitioned by
+the high bits of this same key on both sides. Equal keys always belong to
+the same pass. Every reported order-$65$ unit completed in one pass.
+```
+
+The historical question was documented in the following original source formulation:
+
+```text
+The existence question belongs to the Williamson construction of Hadamard
+matrices; see Bright, Kotsireas and Ganesh, arXiv version 2,
+Theorem 2 and Definition 5~\cite{BKG}. Bright's research statement, dated
+March 20, 2019, Section 4.2~\cite{BrightStatement}, calls $65$
+``currently the smallest order for which it is unknown'' whether Williamson
+matrices exist. For the neighboring near-Williamson question, see
+Kharaghani, Mohammadian, Tayfeh-Rezaie and Zaitsev, arXiv version 2,
+Definition 1.1 and Table 6~\cite{KMTZ}.
+
+```
+
+## Terminology in the stored enumeration
+
+The programs call a compressed orbit representative a unit. The paper uses
+the mathematical name; the original definition and associated mathematical
+paragraphs remain exactly as originally stated below.
+
+```text
+\setcounter{theorem}{3}
+\begin{lemma}\label{lem:cover}
+Let one representative of each orbit of admissible sorted class tuples
+under $(\Z/13\Z)^*/\{1,-1\}$ be retained. Every order-$65$ Williamson
+solution is equivalent, by a common multiplier and a permutation of its
+rows, to a lift of a retained tuple.
+\end{lemma}
+\begin{proof}
+A solution's tuple is admissible by Lemma~\ref{lem:compression}.
+Choose a multiplier carrying it to its orbit representative, lift that
+multiplier modulo $65$, and apply it to all four full rows. Re-sort rows
+of equal absolute row sum. The resulting solution has the representative
+tuple. All lifts of the representative are searched, even if more than one
+multiplier carries the original tuple to it. Multipliers permute the exact
+eigenvalues. Transformed solution rows therefore still satisfy
+$\lambda_x(k)^2\leq260$ and pass the numerical filter with its proved
+margin.
+\end{proof}
+The stored enumeration uses the following label.
+A \emph{unit} is one representative in this lemma. The cover check computes
+the exact compressed tuples and verifies membership of their representatives
+in the supplied unit list. It checks invalid and duplicate representatives
+as well as missing ones.
+
+A further symmetry reduces one row list in each unit. The subgroup
+\[
+ K=\{u\in(\Z/65\Z)^*:u\equiv1\pmod{13}\}=\{1,14,27,53\}
+\]
+fixes every compressed vector. Choose one designated position in the unit
+and retain only rows whose mask is least in its $K$-orbit.
+Applying a common element of $K$ that minimizes that row preserves a
+solution in the same unit. It is essential that this restriction applies
+to only one designated row; independent minimization of all four rows
+would not be justified.
+
+\begin{lemma}\label{lem:pair}
+Every pair belonging to a solution in the four lists passes
+\eqref{eq:pair} on both sides.
+\end{lemma}
+\begin{proof}
+For its complementary rows $c,d$, equation~\eqref{eq:spectral} gives
+$64(\lambda_a(k)^2+\lambda_b(k)^2)=Q-64\lambda_c(k)^2-64\lambda_d(k)^2$.
+Replacing each square by the appropriate lower or upper enclosure proves
+the inequalities before clamping. Raising a negative upper bound to zero
+only weakens the upper test. Raising a negative lower bound to zero changes
+nothing, because $h_a+h_b$ is nonnegative.
+\end{proof}
+If a list is empty there is no solution in the unit. The implementation details are given in Appendix~\ref{app:join}.
+```
+
+### Navigation in the journal-style edition
+
+The opening guide above describes the earlier layout. In version 3,
+Section 2 treats rows, autocorrelations and spectra; Section 3 gives
+compression and the multiplier orbits; and Section 4 develops pair
+filtering and product matching, followed by the proof of Theorem 1 in
+Section 4.4. All five key lemmas and their proofs are in the main text.
+Section 5 reports computational verification. Appendix A gives the
+enumeration totals, Appendix B the numerical error bound, and Appendix C
+the exact hashing and storage checks. The verbatim passages retained above
+preserve earlier definitions and implementation explanations; their
+original labels refer to the paper rather than to numbered sections of
+this Markdown companion.
+
+### Historical hardware and validation in version 3
+
+The archived CPU enumeration used four ranges with 12-thread jobs and
+recorded 271.326 CPU-hours; its processor models and full elapsed time
+were not recorded. The primary GPU enumeration recorded 23.805 GPU-hours.
+A separately written GPU implementation used four NVIDIA GB10 GPUs for
+about 2.060 GPU-hours of search, or 2.143 GPU-hours including setup and
+smaller-order checks. These are historical measures from different filters,
+not a controlled performance comparison. The GPU sources are not part of
+this CPU archive, and not all original primary GPU records were rechecked.
+
+The paper's table through order 33 describes the archived unfiltered
+baseline enumeration. The default checker uses row-sum grouping through
+23 and also a single-row PSD filter at 25–33; `--full-controls` selects
+the unfiltered baseline through 33 and discovery at 55. The full validation
+at 55 discovers the solution with both compression factors 5 and 11
+without supplying a witness. The existing commands above distinguish these
+checks from the exhaustive order-65 search.
+
+The verbatim historical passages above retain earlier source locators.
+For Zhang, the current paper uses the Zenodo record description; the
+earlier Section 7.4 locator was not independently confirmed.

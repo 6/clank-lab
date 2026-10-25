@@ -7,14 +7,17 @@ Zenodo records.
 ## uniform-5-polytopes v4 (October 25, 2026)
 
 - Concise edition and journal-style edition, with the main argument and its key lemmas together in the main text. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23647462](https://doi.org/10.5281/zenodo.23647462)
 
 ## thomson-10 v7 (October 25, 2026)
 
 - Correction: credit Jingxing Huang's separate nine-point proof candidate and correct the README and index wording about nine-point proofs (October 25, 2026). The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23647395](https://doi.org/10.5281/zenodo.23647395)
 
 ## difference-set-243 v4 (October 25, 2026)
 
 - Correction (October 25, 2026): The paper, README and index omitted Keita Baba's prior proof of October 4, 2026. They now credit Baba first and describe ours as an independent proof by a different method. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23647301](https://doi.org/10.5281/zenodo.23647301)
 
 ## steinberg-c4-c9 v7 (October 25, 2026)
 

@@ -4,15 +4,17 @@
 
 A [proper three-coloring](https://en.wikipedia.org/wiki/Graph_coloring) assigns three colors to a graph's vertices so that adjacent vertices differ. [Problem 1.2 of Kang, Jin and Wang, arXiv:1506.04629v1](https://arxiv.org/abs/1506.04629v1), attributed there to Lu, Wang, Wang, Bu, Montassier and Raspaud (2009), asks which lengths from five through nine, together with length four, force this property for planar graphs. Here an 82-vertex planar graph without four- or nine-cycles has no proper three-coloring, answering the length-nine case. Cohen-Addad, Hebdige, Král', Li and Salgado's [Theorem 3, arXiv:1604.05108v2](https://arxiv.org/abs/1604.05108v2), concerns the four-and-five pair. No minimum-order claim is made.
 
-<img src="data/graph.svg" width="420" alt="The 82-vertex counterexample (illustration only; not part of the proof).">
+<img src="data/graph.svg" width="420" alt="The 82-vertex counterexample (the rational drawing is checked in Lean).">
 
-Computer-assisted; not yet reviewed by experts.
+Checked in Lean from the definitions; not yet reviewed by experts.
 
 The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23631783](https://doi.org/10.5281/zenodo.23631783)
+
+This DOI archives version 6; the version 7 DOI is pending.
 
 ## Check it
 
@@ -31,7 +33,7 @@ Python 3.10 or later, a C compiler and a POSIX shell check the retained certific
 sh checks/check.sh
 ```
 
-No Python packages are required. Lean checks a connected genus-zero rotation certificate, exclusion of four- and nine-cycles, and non-three-colorability. The passage from that certificate to a planar embedding is a written topological argument in the paper. [Lean documentation](lean/README.md) gives the exact formal statement. [Checker documentation](checks/README.md) explains the retained criticality, construction and independent executable checks.
+No Python packages are required. Lean checks a crossing-free straight-line drawing with rational coordinates, exclusion of four- and nine-cycles, and non-three-colorability, proving the counterexample from the definitions. The paper also gives written arguments and executable checks for the Ore construction, four-criticality and edge minimum. [Lean documentation](lean/README.md) gives the exact formal statement. [Checker documentation](checks/README.md) explains the retained criticality, construction and independent executable checks.
 
 ## Credits
 
@@ -48,7 +50,8 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A planar graph without four- or nine-cycles that is not three-colorable}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v6/results/steinberg-c4-c9}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v7/results/steinberg-c4-c9}},
+  % DOI for archived version 6; awaiting the version 7 deposit.
   doi          = {10.5281/zenodo.23631783}
 }
 ```

@@ -74,7 +74,7 @@ reject_drat 'the truncated proof' "$work/col3.cnf" "$C/col3-truncated.drat"
 reject 'Ore tree with a repeated K4 vertex' "$PY" checks/check_ore.py data/graph.txt "$C/ore-tree-invalid.json" data/rotation.txt data/deletion-colorings.json
 echo 'PASS: planar, no C4/C9/C10, 4-critical, 27 K4 leaves and 26 Ore joins; all ten corruption checks passed'
 
-# Optional illustration, separate from the proof and its controls above.
+# Independent replay of the rational drawing also checked by Lean.
 "$PY" checks/draw_graph.py --check
 reject_drawing() {
     expected=$1

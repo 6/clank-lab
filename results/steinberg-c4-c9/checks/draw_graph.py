@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce the optional illustration using only the published bundle.
+"""Reproduce the rational drawing using only the published bundle.
 
 With Python 3.10 or later, run ``python3 checks/draw_graph.py`` to write
 data/graph.svg and data/graph.pdf; add --check to check the supplied files
@@ -25,8 +25,9 @@ commands, SVG styling and its fixed y-axis reversal. This is not a general
 SVG/PDF validator. PDF points and SVG user units have identical numeric values.
 
 --corruption FILE applies a published control to the generated SVG before
-checking it, and must exit 1 with REJECT. This illustration is not part of
-the proof of the graph's properties.
+checking it, and must exit 1 with REJECT. The rendered rational coordinates
+are also checked directly by the Lean proof; this script is not trusted by
+that proof.
 """
 
 import argparse

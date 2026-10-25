@@ -126,8 +126,12 @@ control, certifies criticality.
 
 The Lean proof is checked separately with `lake exe cache get` followed by
 `lake build` from `lean/`; see [its documentation](../lean/README.md). It
-checks non-three-colorability and exclusion of four- and nine-cycles for
-the parsed graph, together with the explicit spherical rotation certificate.
+checks a crossing-free rational straight-line drawing, non-three-colorability
+and exclusion of four- and nine-cycles for the parsed graph, together with
+the retained spherical rotation certificate. The geometric segments range
+over all real affine parameters, including both endpoints. The formal
+axioms are exactly `propext`, `Classical.choice` and `Quot.sound`; no
+compiled or native proof evaluation is used.
 The criticality, Ore reconstruction, ten-cycle exclusion and edge-bound
 consequence retain the executable checks and written arguments described
 above. The C and Python programs are independent implementation paths;
@@ -248,3 +252,6 @@ PDF. The figure illustrates the graph and is not part of the proof.
 
 The graph, certificates and programs are archived with version 5 at
 <https://doi.org/10.5281/zenodo.23572996>.
+
+The graph and its preexisting finite certificates are unchanged from the
+[archived version 6](https://doi.org/10.5281/zenodo.23631783).

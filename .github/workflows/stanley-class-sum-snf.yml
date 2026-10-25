@@ -56,4 +56,3 @@ jobs:
 
       - name: Build proof, statement and axiom checks
         run: lake build
-

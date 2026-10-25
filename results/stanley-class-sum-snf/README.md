@@ -10,7 +10,7 @@ a_r=\begin{cases}2,&r\equiv n\pmod 2,\\1,&r\not\equiv n\pmod 2,\end{cases}
 \qquad 1\leq r<n.
 ```
 
-This confirms both conjectures and establishes a formula for every positive $n$. The proof builds on classical character theory of the symmetric group and determines the integral lattices needed to pass from character values to Smith normal form; [Stanley's survey](https://arxiv.org/abs/1602.00166) gives the broader combinatorial context. Lean checks the image-lattice theorem and the divisor chain directly from permutation and group-ring definitions, including the character formula used in the proof. The equivalent diagonal form and the two prime cases are derived in the written proof.
+This confirms both conjectures and establishes a formula for every positive $n$. The proof builds on classical character theory of the symmetric group and determines the integral lattices needed to pass from character values to Smith normal form; [Stanley's survey](https://arxiv.org/abs/1602.00166v2) gives the broader combinatorial context. Lean checks the image-lattice theorem and the divisor chain directly from permutation and group-ring definitions, including the character formula used in the proof. The equivalent diagonal form and the two prime cases are derived in the written proof.
 
 Checked in Lean from the definitions; not yet reviewed by experts.
 
@@ -19,6 +19,7 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23591100](https://doi.org/10.5281/zenodo.23591100)
+
 
 ## Check it
 
@@ -30,7 +31,7 @@ lake exe cache get
 lake build
 ```
 
-The build checks the proof, the final statement, and its permitted logical dependencies. No separate computation or certificate checker is needed. The [Lean guide](lean/README.md) explains the formal statement and its correspondence with the paper.
+The build checks the proof, the final statement, and its permitted logical dependencies. No separate computation or certificate checker is needed. The [Lean guide](lean/README.md) explains the formal statement and its correspondence with the paper; [checking notes](lean/checking-notes.tex) retain the detailed declarations and logical dependencies.
 
 ## Credits
 
@@ -45,7 +46,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Smith normal form of the n-cycle class sum}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-class-sum-snf-v3/results/stanley-class-sum-snf}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-class-sum-snf-v4/results/stanley-class-sum-snf}},
   doi          = {10.5281/zenodo.23591100}
 }
 ```

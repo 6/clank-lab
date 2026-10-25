@@ -7,6 +7,7 @@ Zenodo records.
 ## williamson-order-65 v3 (October 24, 2026)
 
 - Journal-style edition: the main text now presents the proof, with standard terminology, narrative credit and the recorded smaller-order validation and computation times. Mathematical statements and checked artifacts are unchanged.
+- Zenodo: [10.5281/zenodo.23630685](https://doi.org/10.5281/zenodo.23630685)
 
 ## path-ramsey v5 (October 24, 2026)
 

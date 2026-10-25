@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## multitwist-exceptions v3 (October 25, 2026)
+
+- Concise edition and journal-style edition: reorganize the presentation around the proofs, with algebraic and topology checking details in appendices and notes. The theorems and their checks are unchanged.
+
 ## locked-trominoes v3 (October 25, 2026)
 
 - Concise edition and journal-style edition: the complete argument stays in the main text, with routine checking details and additional illustrations in appendices. The theorem and its checks are unchanged.

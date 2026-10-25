@@ -10,10 +10,10 @@ references for the question and the edge bound. No priority claim is made.
 The retained bibliography credits Kang, Jin, Liu and Wang (journal order;
 Jin, Kang, Liu and Wang in arXiv:2001.00166v1), Kang, Jin and Zhu, Dai,
 Wang and Xu, Chen, Dai, Nie, Wang and Yu, and Xiao and Huang.
-Full-paper coverage is incomplete. The retained Chen, Dai, Nie, Wang and Yu
-PDF supports its Theorem 1.4; Dai, Wang and Xu is available only through its
-title in Chen and coauthors' reference list, and Xiao and Huang only through
-its title and metadata. Their abstract/theorem text is unavailable here. Ang and Leo's full text,
+Full-paper coverage is incomplete. Chen, Dai, Nie, Wang and Yu's Theorem 1.4
+was read in their paper; Dai, Wang and Xu's paper was read only through its
+title in Chen and coauthors' reference list, and Xiao and Huang's only through
+its title and metadata, so neither one's abstract or theorems were read. Ang and Leo's full text,
 Bu, Wang and Wang's updated *On Coloring Problems*, and Li, Niu and Tian's
 *On the strong Bordeaux Conjecture* remain unread. These are explicit
 source-coverage gaps, including for any priority assessment.
@@ -42,13 +42,10 @@ edition:
   are (2,0,0)-colorable” ([publisher](https://doi.org/10.1360/N012018-00129)).
   These defective colorings allow monochromatic edges and are compatible
   with the counterexample's failure of proper three-colorability.
-- Xiao and Huang's title, *A weak DP-coloring of planar graphs without 4- and
-  9-cycles*, and bibliographic metadata are retained. The current independent
-  review has only a publisher redirect stub, not the abstract or introduction.
-  The earlier weak-DP quotation and forest-class convention remain
-  **UNVERIFIABLE** in this pass; they are preserved verbatim in the checking
-  notes as historical wording, rather than asserted from unread source text.
-
+- Xiao and Huang's paper, *A weak DP-coloring of planar graphs without 4- and
+  9-cycles* ([publisher](https://doi.org/10.1016/j.dam.2023.10.004)), was read
+  through its title and bibliographic metadata only; nothing about its
+  content is asserted here.
 
 The historical status statement is Problem 1.2 and its following paragraph
 in Jin, Kang, Liu and Wang, [arXiv:2001.00166v1](https://arxiv.org/abs/2001.00166v1)
@@ -73,19 +70,3 @@ forbidden pair.
 The discovery route is historical context; the unchanged certificate
 checks apply directly to the final edge list. The drawing is an
 illustration, with its original exact geometry and corruption checks.
-
-## Historical access wording
-
-The following older access claim is retained as evidence, not as the current
-reviewer's reading history. The present audit could not reproduce it:
-
-- Xiao and Huang's [publisher abstract and introduction](https://doi.org/10.1016/j.dam.2023.10.004)
-  uses weak DP-$`(\mathcal F_2,\mathcal F_2,\mathcal F_0)`$-coloring, with
-  classes $\mathcal F_d$ of forests of maximum degree at most $d$.
-  It likewise does not assert proper three-colorability.
-
-## Historical summary of access
-
-This earlier summary is retained as evidence, not as the current access claim:
-
-> Full-paper coverage is incomplete: the defective and weak DP results were read through publisher abstracts or excerpts.

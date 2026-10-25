@@ -12,9 +12,7 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23572996](https://doi.org/10.5281/zenodo.23572996)
-
-This DOI archives version 5; the version 6 DOI is pending.
+Archived on Zenodo: [doi:10.5281/zenodo.23631783](https://doi.org/10.5281/zenodo.23631783)
 
 ## Check it
 
@@ -51,7 +49,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{A planar graph without four- or nine-cycles that is not three-colorable}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/steinberg-c4-c9-v6/results/steinberg-c4-c9}},
-  % DOI for archived version 5; awaiting the version 6 deposit.
-  doi          = {10.5281/zenodo.23572996}
+  doi          = {10.5281/zenodo.23631783}
 }
 ```

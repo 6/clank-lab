@@ -53,7 +53,7 @@ code re-checked every piece. The upper bounds for $n \le 9$ that the
 computation uses, $R(P_9, P_9, P_9) \le 17$ among them, are re-derived by the
 same method rather than taken from the literature.
 
-Computer-assisted; not yet reviewed by experts.
+Checked in Lean from the definitions, with compiled evaluation; not yet reviewed by experts.
 
 The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 

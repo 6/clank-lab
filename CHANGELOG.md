@@ -7,6 +7,7 @@ Zenodo records.
 ## cameron-donkin v1 (October 26, 2026)
 
 - A congruence construction answers Donkin’s question on arbitrarily long finite avoidance of 3 by prime-seeded Euclid–Mullin sequences, extending Booker and Irvine’s factor-path method to enforce the least-factor rule.
+- Zenodo: [10.5281/zenodo.23666671](https://doi.org/10.5281/zenodo.23666671)
 
 ## uniform-5-polytopes v4 (October 25, 2026)
 

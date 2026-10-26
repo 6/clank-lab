@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## cameron-donkin v1 (October 26, 2026)
+
+- A congruence construction answers Donkin’s question on arbitrarily long finite avoidance of 3 by prime-seeded Euclid–Mullin sequences, extending Booker and Irvine’s factor-path method to enforce the least-factor rule.
+
 ## uniform-5-polytopes v4 (October 25, 2026)
 
 - Concise edition and journal-style edition, with the main argument and its key lemmas together in the main text. The theorem and its checks are unchanged.

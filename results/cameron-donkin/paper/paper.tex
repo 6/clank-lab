@@ -1,0 +1,277 @@
+\documentclass[11pt]{article}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,fullpage,amsmath,amssymb,amsthm}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Arbitrarily long avoidance of 3 in Euclid--Mullin sequences},
+ pdfauthor={P. Graham},pdfsubject={Prime-seeded least-prime-factor sequences},
+ pdfkeywords={Euclid-Mullin sequence, Donkin question, Chinese remainder theorem, Lean}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\lpf}{\operatorname{lpf}}
+\title{Arbitrarily long avoidance of 3 in Euclid--Mullin sequences}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a prime seed $p_1$, define $p_{k+1}$ to be the least prime divisor of
+$1+p_1\cdots p_k$. For every positive integer $n$, there is a prime seed
+for which none of the first $n$ terms is $3$. This answers the first of
+Donkin's two questions in Cameron's problem list. The proof chooses a
+finite increasing sequence of auxiliary primes and forces the sequence
+to begin with the seed, $2$, and those primes. Booker and Irvine used the
+Chinese remainder theorem to prescribe prime-divisor paths, including
+constructions from prime starting values. Here congruences also exclude every smaller
+prime factor, making the prescribed divisors the least factors.
+Dirichlet's theorem then supplies a prime seed. The argument, including
+the congruence construction and its translation into the sequence, is
+formalized in Lean. The separate question of a single prime seed whose
+sequence avoids $3$ forever remains open.
+\end{abstract}
+
+\section{Introduction}
+
+The Euclid--Mullin rule extends a finite list of primes by the least
+prime divisor of one plus their product. Starting at $5$, for example,
+the sequence begins $5,2,11,3$. Mullin's original least-factor sequence
+starts at $2$, so its second term is $3$ \cite{mullin}. Write $\lpf(a)$ for the least prime
+divisor of an integer $a>1$. Throughout this paper a prime seed $p_1$
+determines the sequence
+\begin{equation}\label{eq:sequence}
+ p_{k+1}=\lpf(1+p_1\cdots p_k)\qquad(k\geq1).
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+For every positive integer $n$, there is a prime $p_1$ for which the
+sequence \eqref{eq:sequence} satisfies $p_j\ne3$ for $1\leq j\leq n$.
+\end{theorem}
+
+This is the first question of Problem~19 in Cameron's archived list,
+attributed there to Steve Donkin \cite[Problem~19]{cameron}.
+The seed is included among the first $n$ terms and may depend on $n$.
+Cameron's later Problem~109 and blog discussion report John Bray's computations of the first
+position at which $3$ appears for prime seeds up to two million
+\cite[Problem~109]{cameron}, \cite{cameron-blog}.
+The least seeds whose first $3$ appears at each position from $1$ to $15$
+were tabulated by Labos Elemer and extended by David Wasserman
+\cite{oeis}. The second question in Problem~19 asks for one prime
+seed avoiding $3$ forever; it remains open.
+
+The closest method is Booker and Irvine's use of the Chinese remainder
+theorem to prescribe successive prime divisors from a chosen starting
+value. Their Lemma~2.2 gives an arithmetic progression, coprime to its
+modulus, of starting values for which the specified primes divide the
+numbers formed by adding one to the current product, allowing any prime
+factor, not necessarily the least, at each step. Remark~2.16 obtains prime
+starting values for loops (two distinct paths between the same two nodes) in their graph
+\cite{booker-irvine}. Here we also exclude every divisor smaller than the prescribed
+prime. Counting supplies a residue for each sufficiently large prime modulus;
+the essential choice is to make all auxiliary primes congruent to $1$
+modulo the small primes, where counting alone does not suffice.
+
+Paris's related Lean formalization proves that a fixed sequence of prime
+factors, each at most $y$, is preserved when the starting values agree
+modulo an integer divisible by every prime at most $y$
+\cite[\S4.3, item~(i)]{paris}.
+
+Other Euclid--Mullin variants use different selection rules.
+For the rule permitting prime factors of sums of complementary
+subproducts, Booker's Theorem~1 shows that any finite set of primes can
+be extended to a sequence containing every prime \cite{booker-variant}.
+Booker proved that the largest-factor sequence starting at $2$ omits
+infinitely many primes \cite[Theorem~1]{booker-second}; Pollack and Trevi\~no gave
+an elementary proof
+\cite[\S1, Theorem (Booker)]{pollack-trevino}.
+
+The proof chooses increasing auxiliary primes with the small-prime
+congruences just described. It then selects compatible seed residues at
+each prime, combines them by the Chinese remainder theorem, and obtains
+a prime seed by Dirichlet's theorem. Section~2 gives the construction;
+Section~3 identifies the formal theorem and its accompanying proof.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+
+\section{Proof of the main theorem}
+
+We prescribe an initial segment $p,2,q_1,\ldots,q_m$ and find a prime
+seed $p$ by congruences. Fix a positive integer $m$. Let
+\[
+ m+2<q_1<\cdots<q_m
+\]
+be primes satisfying $q_i\equiv1\pmod\ell$ for every prime
+$\ell\leq m+2$. Such primes exist by Dirichlet's theorem in the
+progression $1$ modulo the product of those small primes. Define
+\[
+ C_i=2\prod_{j<i}q_j\qquad(1\leq i\leq m),
+\]
+where an empty product is $1$. If a seed $p$ is followed by $2,q_1,\ldots$,
+the integer whose least factor must be $q_i$ is $pC_i+1$.
+
+\begin{lemma}\label{lem:local}
+For each prime $\ell$, one can choose a nonzero residue $r_\ell$
+modulo $\ell$ so that $r_2=1$ and, for every $1\leq i\leq m$,
+\begin{align*}
+ C_i r_\ell+1&\equiv0\pmod\ell &&\text{if }\ell=q_i,\\
+ C_i r_\ell+1&\not\equiv0\pmod\ell &&\text{if }\ell<q_i.
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+There are three cases. If $\ell\leq m+2$, then $C_i\equiv2\pmod\ell$
+for every $i$. For $\ell=2$, take $r_2=1$; every $C_i r_2+1$ is odd.
+For odd $\ell\leq m+2$, take $r_\ell=-1$; then
+$C_i r_\ell+1\equiv-1\pmod\ell$. None of the $q_i$ equals such an
+$\ell$, so these choices give all the required conditions.
+
+Suppose next that $\ell=q_k$ for some $k$. The number $C_k$ is
+invertible modulo $\ell$, since its prime factors are $2$ and the
+earlier, smaller $q_j$. Take $r_\ell=-C_k^{-1}$.
+This residue is nonzero and makes $C_k r_\ell+1$ vanish.
+For $i>k$, the product $C_i$ contains $q_k$, so
+$C_i r_\ell+1\equiv1\pmod\ell$. For $i<k$, the inequality
+$\ell<q_i$ does not hold, and no exclusion is required.
+
+Finally, suppose that $\ell>m+2$ and that $\ell$ is not one of the
+$q_i$. For each $i$, the equation $C_i r+1=0$ in the field
+$\mathbb Z/\ell\mathbb Z$ excludes at most one residue. Together with $r=0$, at most $m+1$ residues are forbidden.
+Since $m+1<\ell$, a permitted residue exists. It satisfies the
+stronger condition $C_i r+1\ne0$ for every $i$.
+\end{proof}
+
+\begin{lemma}\label{lem:lift}
+For primes $q_1,\ldots,q_m$ with $m+2<q_1<\cdots<q_m$ and
+$q_i\equiv1\pmod\ell$ for every prime $\ell\leq m+2$, there is a prime $p>3$ whose sequence
+\eqref{eq:sequence} begins $p,2,q_1,\ldots,q_m$.
+\end{lemma}
+
+\begin{proof}
+Set $B=q_m$ and let $M$ be the product of all primes at most
+$B$. For each prime $\ell\leq B$, choose the residue supplied by
+Lemma~\ref{lem:local}. The Chinese remainder theorem gives a residue
+$a$ modulo $M$ satisfying $a\equiv r_\ell\pmod\ell$ for every such
+$\ell$. Every $r_\ell$ is nonzero, so $\gcd(a,M)=1$.
+Dirichlet's theorem therefore gives a prime $p>3$ with
+$p\equiv a\pmod M$.
+
+The first term after $p$ is $2$, because $p$ is odd. For each $i$,
+the congruences give $q_i\mid pC_i+1$ and exclude every prime
+$\ell<q_i$ from dividing $pC_i+1$. All these primes were included
+among the moduli, since $q_i\leq B$. Thus
+\[
+ \lpf(pC_i+1)=q_i.
+\]
+Induction on $i$ now proves the claimed prefix: after $p,2,q_1,\ldots,q_{i-1}$,
+the product of the terms already obtained is exactly $pC_i$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Given $n\geq1$, choose the auxiliary primes with $m=n$ and apply
+Lemma~\ref{lem:lift}. The resulting prefix is $p,2,q_1,\ldots,q_n$.
+Here $p>3$, and each $q_i>n+2\geq3$.
+Consequently all these terms avoid $3$, in particular the first $n$.
+\end{proof}
+
+\section{Formal verification}
+
+The argument is formalized in Lean~4 \cite{lean} using mathlib
+\cite{mathlib}. The accompanying Lean project is supplied as
+\href{https://github.com/6/clank-lab/tree/cameron-donkin-v1/results/cameron-donkin}{supplementary material},
+with checking instructions in \texttt{lean/README.md}.\footnote{\url{https://github.com/6/clank-lab/tree/cameron-donkin-v1/results/cameron-donkin}}
+The formal theorem \texttt{Donkin.arbitraryDelay} states
+\[
+ \begin{aligned}
+ &\forall n\in\mathbb N,\quad n>0\ \Longrightarrow\\
+ &\qquad \exists p\in\mathbb N,\quad p\text{ is prime}\ \land
+ \bigl(\forall j\in\mathbb N,\ j<n\Longrightarrow\mathrm{term}(p,j)\ne3\bigr).
+ \end{aligned}
+\]
+The formal least-factor function is \texttt{Nat.minFac}.
+The definition has $\mathrm{term}(p,0)=p$ and
+\[
+ \mathrm{term}(p,k+1)=\lpf(P(p,k)+1),\qquad
+ P(p,0)=p,\quad
+ P(p,k+1)=P(p,k)\lpf(P(p,k)+1).
+\]
+Thus $P(p,k)$ is the product of terms with indices $0,\ldots,k$;
+the term with index $j$ is $p_{j+1}$ in \eqref{eq:sequence}.
+For a prime seed, $P(p,k)+1\geq3$, within the domain of $\lpf$.
+
+Lemmas~\ref{lem:local} and~\ref{lem:lift}, including the induction
+establishing the prefix, are checked in Lean. Dirichlet's theorem is
+supplied by mathlib's formal proof. Every mathematical step is formalized;
+the proofs use only Lean's standard classical axioms, specified in the
+supplementary checking notes.
+
+\begin{thebibliography}{99}
+\raggedright
+\bibitem{mullin}
+A.~A. Mullin, \emph{Recursive function theory (a modern look at a
+Euclidean idea)}, Bulletin of the American Mathematical Society
+\textbf{69} (1963), 737.
+\href{https://doi.org/10.1090/S0002-9904-1963-11017-4}{doi:10.1090/S0002-9904-1963-11017-4}.
+
+\bibitem{cameron}
+P.~J. Cameron, \emph{Problems}, archived problem list, page dated August~31, 2013.
+\url{https://cameroncounts.github.io/web/QM/oldprob.html}.
+Accessed October~26, 2026.
+
+\bibitem{cameron-blog}
+P.~J. Cameron, \emph{A prime problem}, October~5, 2012.
+\url{https://cameroncounts.wordpress.com/2012/10/05/a-prime-problem/}.
+
+\bibitem{oeis}
+Labos Elemer, \emph{A093780}, The On-Line Encyclopedia of Integer
+Sequences, May~3, 2004; extended by David Wasserman, April~12, 2007.
+\url{https://oeis.org/A093780}.
+Accessed October~26, 2026.
+
+\bibitem{booker-irvine}
+A.~R. Booker and S.~A. Irvine,
+\emph{The Euclid--Mullin graph},
+Journal of Number Theory \textbf{165} (2016), 30--57.
+\href{https://doi.org/10.1016/j.jnt.2016.01.013}{doi:10.1016/j.jnt.2016.01.013}.
+Numbering follows
+\href{https://arxiv.org/abs/1508.03039v2}{arXiv:1508.03039v2}.
+
+\bibitem{paris}
+M.~Paris, \emph{The Euclid--Mullin sequence as an orbit: reformulations,
+a composite floor, and population laws (with a Lean 4 formalization)},
+preprint, repository snapshot
+September~24, 2026.
+\texttt{paper/short/main.tex}.
+\href{https://github.com/marcellop71/EM/blob/d04b90f5d132a452e29df91ee09ea903b811ad92/paper/short/main.tex}{github.com/marcellop71/EM, commit d04b90f}.
+
+\bibitem{booker-variant}
+A.~R. Booker, \emph{A variant of the Euclid--Mullin sequence containing
+every prime}, Journal of Integer Sequences \textbf{19} (2016), Article 16.6.4.
+\href{https://arxiv.org/abs/1605.08929v1}{arXiv:1605.08929v1}.
+
+\bibitem{booker-second}
+A.~R. Booker, \emph{On Mullin's second sequence of primes},
+Integers \textbf{12A} (2012), Article A4.
+\href{https://arxiv.org/abs/1107.3318v2}{arXiv:1107.3318v2}.
+
+\bibitem{pollack-trevino}
+P.~Pollack and E.~Trevi\~no, \emph{The primes that Euclid forgot},
+American Mathematical Monthly \textbf{121} (2014), 433--437.
+\href{https://doi.org/10.4169/amer.math.monthly.121.05.433}{doi:10.4169/amer.math.monthly.121.05.433}.
+
+\bibitem{lean}
+L.~de Moura and S.~Ullrich, \emph{The Lean 4 theorem prover and programming
+language}, in Automated Deduction---CADE 28, Lecture Notes in Computer
+Science \textbf{12699} (2021), 625--635.
+\href{https://doi.org/10.1007/978-3-030-79876-5_37}{doi:10.1007/978-3-030-79876-5\_37}.
+
+\bibitem{mathlib}
+The mathlib Community, \emph{The Lean mathematical library},
+Proceedings of the 9th ACM SIGPLAN International Conference on Certified
+Programs and Proofs (2020), 367--381.
+\href{https://doi.org/10.1145/3372885.3373824}{doi:10.1145/3372885.3373824}.
+\end{thebibliography}
+\end{document}

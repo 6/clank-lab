@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## makonzi-invariants v1 (October 27, 2026)
+
+- An elementary proof establishes Makonzi’s Conjecture 5.2 kernel equality for every triple of arm lengths at least two over the complex numbers. Lean checks the complete equality; Makonzi’s generation theorem supplies the invariant-ring presentation.
+
 ## cameron-donkin v1 (October 26, 2026)
 
 - A congruence construction answers Donkin’s question on arbitrarily long finite avoidance of 3 by prime-seeded Euclid–Mullin sequences, extending Booker and Irvine’s factor-path method to enforce the least-factor rule.

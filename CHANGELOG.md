@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## monotone-query-gap v3 (October 27, 2026)
+
+- Correction: add the missing review-status disclosure at the end of the introduction. The theorem, proofs, data and checks are unchanged.
+- Mechanical correction: rename the first heading to Introduction; the theorem and its checks are unchanged.
+
 ## makonzi-invariants v1 (October 27, 2026)
 
 - An elementary proof establishes Makonzi’s Conjecture 5.2 kernel equality for every triple of arm lengths at least two over the complex numbers. Lean checks the complete equality; Makonzi’s generation theorem supplies the invariant-ring presentation.

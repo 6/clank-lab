@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## lit-only-sigma v4 (October 27, 2026)
+
+- Correction: add the missing review-status disclosure and credit Huang’s work on nondegenerate lit-only sigma games. The theorem and its checks are unchanged.
+- Mechanical correction: rename the first heading to Introduction; the theorem and its checks are unchanged.
+
 ## monotone-query-gap v3 (October 27, 2026)
 
 - Correction: add the missing review-status disclosure at the end of the introduction. The theorem, proofs, data and checks are unchanged.

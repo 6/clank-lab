@@ -47,7 +47,9 @@ Both checkers accept the certificate and reject a copy with one required configu
 
 John Goldwasser, Xinmao Wang and Yaokun Wu studied the difference parameter, gave the motivating examples, and posed [Conjecture 5 in their paper on unicyclic and grid graphs](https://doi.org/10.37236/701), published October 31, 2011. Their earlier theoretical and experimental investigations are the starting point of this question.
 
-Yaokun Wu and Ziqing Xiang's [2019 survey](https://ziqing.org/data/The%20lit-only%20sigma-game%20-%20Some%20Mathematics%20behind%20a%20puzzle%20for%20kids.pdf) restates the implication as Conjecture 3.3 and describes their computational exploration of the game's phase spaces. Wu's [line-graph work](https://doi.org/10.1016/j.ejc.2008.02.003) and Jonas Sjöstrand's [general reachability theory](https://arxiv.org/abs/2312.03933), first posted in December 2023 and published in 2025, provide related orbit descriptions. The present proof uses the explicit finite certificate and does not require those classifications. No code or data from those works are included.
+Yaokun Wu and Ziqing Xiang's [The lit-only σ-game: some mathematics behind a puzzle for kids](https://ziqing.org/data/The%20lit-only%20sigma-game%20-%20Some%20Mathematics%20behind%20a%20puzzle%20for%20kids.pdf) (2019) restates the implication as Conjecture 3.3 and describes their computational exploration of the game's phase spaces. Wu's [line-graph work](https://doi.org/10.1016/j.ejc.2008.02.003) and Jonas Sjöstrand's [general reachability theory](https://arxiv.org/abs/2312.03933), first posted in December 2023 and published in 2025, provide related orbit descriptions. The present proof uses the explicit finite certificate and does not require those classifications. No code or data from those works are included.
+
+Hau-wen Huang's [2015 paper](https://doi.org/10.1007/s10801-014-0540-7) describes lit-only orbits and gives light-number bounds for nondegenerate graphs that are not line graphs (Theorems 3.1 and 3.2). Our seven-vertex witness is degenerate and lies outside that class; no result, code or data from that work is used here.
 
 An outside AI model suggested the three-type description and the uniform blow-up extension proved here.
 
@@ -60,7 +62,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A counterexample to a lit-only sigma-game conjecture}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/lit-only-sigma-v3/results/lit-only-sigma}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/lit-only-sigma-v4/results/lit-only-sigma}},
   doi          = {10.5281/zenodo.23608956}
 }
 ```

@@ -36,7 +36,7 @@ The counterexample and this family are proved in Lean from the definitions.
 
 \noindent The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
-\section{The conjecture and the counterexample}
+\section{Introduction}
 We define the gap between the two games, state the conjecture about large
 gaps, and give a counterexample.
 A configuration on a finite undirected graph $G$ assigns to each vertex
@@ -116,6 +116,13 @@ Their investigations form the background to the present question.
 An outside AI model suggested the three-type description and uniform
 blow-up extension proved here.
 
+Hau-wen Huang describes the lit-only orbits of nondegenerate graphs that
+are not line graphs and proves that they are 2-lit, with a criterion for
+being 1-lit \cite[Theorems~3.1 and~3.2]{Huang}. Our loopless seven-vertex
+witness is degenerate: its adjacency matrix over $\mathbb F_2$ has the
+all-ones vector in its kernel. It therefore lies outside that class
+\cite[Lemma~2.1]{Huang}. No result, code or data from that work is used here.
+
 Nearby algebraic work includes Wu's analysis of lit-only games on line
 graphs~\cite{Wu}, and Sj\"ostrand's reachability characterization,
 first posted in 2023 and
@@ -137,6 +144,8 @@ graph. For the family, every move from a uniform state projects to a base
 move and preserves uniformity; every base move lifts. Weights therefore
 scale by $m$. Section~\ref{sec:checks} describes the
 Lean proof, the certificate's independent checkers, and their scope.
+
+This work has not yet been reviewed by experts.
 
 \section{The finite certificate}\label{sec:proof}
 We give all graph and configuration data needed to prove
@@ -359,6 +368,11 @@ Y.~Wu and Z.~Xiang,
 \emph{The lit-only $\sigma$-game: some mathematics behind a puzzle for kids},
 Mathematics Student \textbf{88} (2019), 67--98.
 \href{https://ziqing.org/data/The\%20lit-only\%20sigma-game\%20-\%20Some\%20Mathematics\%20behind\%20a\%20puzzle\%20for\%20kids.pdf}{Author manuscript}.
+
+\bibitem{Huang}
+H.-w. Huang, \emph{Lit-only sigma-game on nondegenerate graphs},
+Journal of Algebraic Combinatorics \textbf{41} (2015), 385--395.
+\url{https://doi.org/10.1007/s10801-014-0540-7}.
 
 \bibitem{Sjostrand}
 J.~Sj\"ostrand,

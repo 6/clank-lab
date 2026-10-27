@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: add the missing review-status disclosure and credit Huang’s work on nondegenerate lit-only sigma games. The theorem and its checks are unchanged.
 - Mechanical correction: rename the first heading to Introduction; the theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23709807](https://doi.org/10.5281/zenodo.23709807)
 
 ## monotone-query-gap v3 (October 27, 2026)
 

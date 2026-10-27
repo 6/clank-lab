@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="250" viewBox="0 0 620 250" role="img" aria-labelledby="title desc">
+  <title id="title">Three doubled paths with common endpoints</title>
+  <desc id="desc">Each pair of curves abbreviates a path with p_i edges and its reverse; intermediate vertices are suppressed. Downward products are D_1, D_2, D_3, with reverse products U_1, U_2, U_3.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="black"/></marker></defs>
+  <g fill="none" stroke="black" stroke-width="1.6" marker-end="url(#arrow)">
+    <path d="M100 125 C170 10 450 10 520 125"/>
+    <path d="M520 125 C445 40 175 40 100 125"/>
+    <path d="M100 119 L520 119"/>
+    <path d="M520 131 L100 131"/>
+    <path d="M100 125 C170 240 450 240 520 125"/>
+    <path d="M520 125 C445 210 175 210 100 125"/>
+  </g>
+  <g fill="black" font-family="serif" font-size="19" text-anchor="middle">
+    <text x="310" y="28">D₁</text><text x="310" y="69">U₁</text>
+    <text x="310" y="112">D₂</text><text x="310" y="153">U₂</text>
+    <text x="310" y="236">D₃</text><text x="310" y="194">U₃</text>
+    <text x="78" y="130">s</text><text x="542" y="130">q</text>
+  </g>
+  <circle cx="100" cy="125" r="4" fill="black"/><circle cx="520" cy="125" r="4" fill="black"/>
+</svg>

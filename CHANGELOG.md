@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## game-grundy-gap v3 (October 28, 2026)
+
+- Correction: wording of credits. The theorem and its checks are unchanged.
+- Credit the outside AI suggestion of the clique and degree observations used for the exact values.
+- The paper states that this work has not yet been reviewed by experts.
+
 ## thomson-10 v8 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged.

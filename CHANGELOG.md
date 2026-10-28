@@ -9,6 +9,7 @@ Zenodo records.
 - Correction: wording of credits. The theorem and its checks are unchanged.
 - Credit the outside AI suggestion of the clique and degree observations used for the exact values.
 - The paper states that this work has not yet been reviewed by experts.
+- Zenodo: [10.5281/zenodo.23745096](https://doi.org/10.5281/zenodo.23745096)
 
 ## thomson-10 v8 (October 28, 2026)
 

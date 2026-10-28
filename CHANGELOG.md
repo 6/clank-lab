@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## locally-toroidal-polytopes v3 (October 28, 2026)
+
+- Correction: add the missing review-status disclosure, name related work in the README credits, and remove an unsupported historical exclusivity sentence from the result index. The theorem, proofs, data and checks are unchanged.
+- Mechanical correction: retain the accepted appendix heading formatting.
+
 ## lned-counterexample v1 (October 28, 2026)
 
 - A half-step specialization of Zhao's Bernoulli membership criterion gives a counterexample to the E-derivation part of the LNED conjecture over every characteristic-zero field. Lean checks every nonzero univariate shift and unit shifts in any chosen variable.

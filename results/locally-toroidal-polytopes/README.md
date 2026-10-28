@@ -32,7 +32,9 @@ The project selects its Lean version automatically. The build checks the theorem
 
 ## Credits
 
-The proof builds on Peter McMullen and Egon Schulte's theory of abstract regular polytopes and H. S. M. Coxeter and W. O. J. Moser's presentations of toroidal maps. Egon Schulte and Asia Ivić Weiss formulated the classification problem. The earlier finite example with periods 3 and 5 and its dual are recorded in McMullen–Schulte's book, which credits G. Havas's coset enumeration and Leytem's group identification. Barry Monson and Egon Schulte developed related constructions over finite fields. Maria Elisa Fernandes and Claudio Alexandre Piedade studied faithful permutation representations of toroidal maps and regular polytopes of type $`\{4,4,4\}`$. The paper gives the references and distinguishes these results from the existence theorem proved here. The Lean project uses Lean and Mathlib.
+Peter McMullen and Egon Schulte's [Abstract Regular Polytopes](https://doi.org/10.1017/CBO9780511546686) supplies the polytope theory, Conjecture 10C7 and the finite example, crediting G. Havas's enumeration and Leytem's group identification. Egon Schulte and Asia Ivić Weiss posed the classification question in [Problems on polytopes, their groups, and realizations](https://arxiv.org/abs/math/0608397). H. S. M. Coxeter and W. O. J. Moser's [Generators and Relations for Discrete Groups](https://doi.org/10.1007/978-3-662-21943-0) supplies the toroidal-map presentations used here.
+
+McMullen and Schulte's [Regular polytopes of type {4,4,3} and {4,4,4}](https://doi.org/10.1007/BF01204723) provides locally toroidal background. The formal proof uses [Lean](https://github.com/leanprover/lean4) and [Mathlib](https://github.com/leanprover-community/mathlib4), developed by their contributors. Wei-Juan Zhang's [More on chiral polytopes of type {4, 4, …, 4} with solvable automorphism groups](https://doi.org/10.1515/jgth-2022-0124) gives related chiral constructions. Claudio Alexandre Piedade's [Faithful permutation representations of C-groups](https://hdl.handle.net/10773/33912) gives related representations. Egon Schulte's [Regular incidence-polytopes with Euclidean or toroidal faces and vertex-figures](https://doi.org/10.1016/0097-3165(85)90093-7) and [Amalgamation of Regular Incidence-Polytopes](https://doi.org/10.1112/plms/s3-56.2.303) provide related frameworks. The full work-by-work list, including related constructions and representations, is in [Further credits](checks/README.md#further-credits).
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -43,7 +45,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Existence of locally toroidal regular 4-polytopes}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/locally-toroidal-polytopes-v2/results/locally-toroidal-polytopes}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/locally-toroidal-polytopes-v3/results/locally-toroidal-polytopes}},
   doi          = {10.5281/zenodo.23607973}
 }
 ```

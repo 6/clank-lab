@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \pagestyle{plain}
+\usepackage[title]{appendix}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,booktabs}
 \usepackage[T1]{fontenc}
@@ -22,16 +23,12 @@
 \newcommand{\tor}[1]{\{4,4\}_{(#1,0)}}
 \setlength{\emergencystretch}{2em}
 \raggedbottom
-\title{Existence of locally toroidal regular 4-polytopes}
+\title{Existence of locally toroidal regular 4-polytopes\thanks{The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction. This work has not yet been reviewed by experts.}}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
 \date{October 24, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={Existence of locally toroidal regular 4-polytopes}}
 \begin{document}
 \maketitle
-\begingroup
-\renewcommand{\thefootnote}{}
-\footnotetext{The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.}
-\endgroup
 \begin{abstract}
 We prove the existence half of Schulte--Weiss Problem 16 (2006) and
 McMullen--Schulte Conjecture 10C7 (2002): the universal regular
@@ -138,6 +135,7 @@ local orders. Section~\ref{sec:intersection} proves the hard intersection
 equality. Section~\ref{sec:universal} lifts it to the presented group and
 constructs the universal polytope. Section~\ref{sec:lean} describes the
 scope of the formal proof.
+
 
 \section{Proof overview}\label{sec:overview}
 We explain how a finite matrix representation establishes existence of the
@@ -603,7 +601,7 @@ are \path{P16c.Main.p16c} and
 \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.}
 Trust rests on the Lean kernel and the stated foundational definitions.
 
-\appendix
+\begin{appendices}
 \section{Matrix calculations}\label{app:matrices}
 We give the explicit translation matrices and collect the multiplication
 identities used in Section~\ref{sec:matrices}. The notation is that of
@@ -647,6 +645,8 @@ These are identities in characteristic two with the parameter relations
 \eqref{eq:nonzero}. The displayed matrices exhibit $T_{13}=1$,
 $V_{11}=0$ and $(q_\tau(V))_{11}=\tau\ne0$, which are the nonvanishing
 entries used in Lemma~\ref{lem:translations}.
+
+\end{appendices}
 
 \begin{thebibliography}{99}
 \bibitem{CM}

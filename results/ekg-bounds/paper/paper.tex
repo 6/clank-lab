@@ -26,9 +26,12 @@
 \newcommand{\piU}{\pi^{+}}
 \newcommand{\piL}{\pi^{-}}
 \newcommand{\lean}[1]{\texttt{#1}}
-\title{Sharp linear bounds for the EKG sequence}
+\title{Sharp linear bounds for the EKG sequence\thanks{The proofs, the Lean formalization, the programs and the text were
+produced by AI models (from OpenAI and Anthropic), working under the
+author's direction.
+This work has not yet been reviewed by experts.}}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 25, 2026}
+\date{October 26, 2026}
 \begin{document}
 \maketitle
 
@@ -43,10 +46,10 @@ Sloane, who established coarse bounds at every index. Hofman and Pilipczuk
 proved the limits $1/2$, $3/2$ and $1$ of $a(n)/n$ on primes, their
 triples and the other terms, and Haver made these estimates explicit and
 formalized them in Lean. Our earlier
-second-order asymptotic also builds on Haver's work. The new step is a
-self-improving bound for the number of used even values above the least
-unused even number. The large sieve makes this bound effective in a
-range that meets a finite computation. Lean checks the deduction from
+second-order asymptotic also builds on Haver's work. We sharpen Haver's
+self-improving early-even bound with a shorter prime window and effective
+large-sieve constants, and control odd terms so that the analytic range
+meets a finite computation. Lean checks the deduction from
 the definition, conditional on computed premises; independent programs
 check those premises, and their correspondence with the formal
 statements was checked by reading the code.
@@ -108,40 +111,44 @@ Drawn from the computed sequence.}
 \end{figure}
 
 \paragraph{Prior work.}
-Lagarias, Rains and Sloane \cite[Theorems~1--3 and Lemma~1]{lrs} defined the sequence, proved the
-linear bounds above and the rule that $a(n)$ is the least unused multiple
-of some prime factor of $a(n-1)$, and conjectured both the sharp bounds
-of Theorem~\ref{thm:main} and the asymptotics $a(n)\sim n$,
-$a(n)\sim n/2$ and $a(n)\sim 3n/2$ on the three lines. Hofman and
-Pilipczuk \cite[Theorems~4.3, 4.17 and Lemma~4.5]{hp} proved that every odd prime $p$ is immediately
-preceded by $2p$, bounded the crossings of a level by composite terms,
-and proved the asymptotics. Haver made these arguments
-explicit and formalized them in Lean \cite[(F2), Theorems~5, 8, 11]{haver}: he completes the pattern
-$2p,p,3p$, reduces its computed base to the primes $p\le43$, bounds the
+Lagarias, Rains and Sloane give the pointer rule as an alternative
+definition \cite[eq.~(2)]{lrs} and prove the coarse bounds above
+\cite[Theorems~2--3]{lrs}. Their Conjecture~2 states
+$a(n)\sim n(1+1/(3\log n))$ when $a(n)$ is neither $p$ nor $3p$ for a
+prime $p$, $a(n)\sim(n/2)(1+1/(3\log n))$ when $a(n)=p$, and
+$a(n)\sim(3n/2)(1+1/(3\log n))$ when $a(n)=3p$ \cite[Conjecture~2]{lrs}.
+Hofman and Pilipczuk
+\cite[Theorems~4.3, 4.17, Lemma~4.5 and Corollary~4.12]{hp} proved the full pattern
+$2p,p,3p$ for odd primes, bounded the crossings of a level by composite terms,
+and proved the leading limits $a(n)/n\to1/2$, $3/2$ and $1$ for prime,
+triple-prime and remaining terms, respectively. Haver made these arguments
+explicit and formalized them in Lean
+\cite[(F2), Theorems~5, 8, 11 and Corollary~12(b)]{haver},
+reducing the pattern's computed base to the primes $p\le43$, bounding the
 number of used even numbers above the least missing even number, the
-spread of the terms above it, and the unused composites below it, and relates the index to
+spread of the terms above it, and the unused composites below it, and relating the index to
 that even number by a counting identity. The author \cite{graham}
 then obtained a second-order asymptotic, $n+n/(3\log n)+o(n/\log n)$, for
-a smoothed version of the sequence (each $p$ and $3p$ replaced by $2p$),
+a smoothed version of the sequence (each odd prime $p$ and $3p$ replaced by $2p$),
 on Haver's Lean foundation. The present proof uses Haver's Lean
-definition of the sequence and his estimates, and the author's exact form
+definition of the sequence and Haver's estimates, and the author's exact form
 of the counting identity, as proved Lean theorems.
 
-Our new step replaces Haver's bound on used even values above the least
-unused even number by a self-improving inequality. The large sieve makes
-its constants small enough for the analytic range to meet a finite
-computation. Obtaining constants that close the argument at a computable
-threshold is the hardest step.
+Haver already closes a self-improving early-even inequality and obtains
+its leading asymptotic constant by Brun--Titchmarsh
+\cite[Lemma~4, Theorem~5, Remark~6(b)]{haver}. The hardest step is to make
+that inequality close at a frontier reached by a finite computation;
+Haver's explicit bound is too weak at that frontier. We shorten the
+prime window from $4K+3$ to $3K+2$ integers, where $K$ counts the used
+even numbers above the least missing even number; effective large-sieve constants
+and odd-term control make the analytic range meet a finite computation.
 
 The proof uses Lean and computations of a finite prefix and an
 interval-arithmetic certificate. Section~\ref{sec:trust} gives the formal
 statement and its relation to the theorem; Appendix~\ref{app:checks}
 describes the computed premises and their checks.
 
-The proofs, the Lean formalization, the programs and the text were
-produced by AI models (from OpenAI and Anthropic), working under the
-author's direction. The result is computer-assisted and has not yet been
-reviewed by experts.
+ The result is computer-assisted. 
 
 \section{Notation and known facts}\label{sec:notation}
 
@@ -173,7 +180,7 @@ We use the following facts; each is a Lean theorem in the foundation
 statements recalled here.
 
 \begin{itemize}
-\item[(F1)] \emph{Pointer rule} \cite{lrs}. $a(n)=\min\{B_q(n-1):q\text{
+\item[(F1)] \emph{Pointer rule} \cite[eq.~(2)]{lrs}. $a(n)=\min\{B_q(n-1):q\text{
   prime},\ q\mid a(n-1)\}$ for $n\ge3$.
 \item[(F2)] \emph{Prime pattern.}
   For each odd prime $p$ there is an index $N_p$ with $a(N_p)=2p=E(N_p-1)$,
@@ -191,7 +198,9 @@ statements recalled here.
   $t$ if $a(i)$ is prime and $a(i)<E(t)\le a(i+1)$; it is \emph{paired} if
   $a(i+1)$ is odd and $a(i+2)<E(t)$, and \emph{unpaired} otherwise. Then
   $K(t)\le\pi(\sqrt{E(t)})+1+\#\{\text{unpaired prime ups at }t\}$.
-\item[(CL)] \emph{Counting identity} \cite{haver}, in the exact form of
+  Pairing uses only terms already placed at state $t$, so $i+2\le t$ is
+  required; a prime up with $i+1=t$ is unpaired.
+\item[(CL)] \emph{Counting identity} \cite[Corollary~12(b)]{haver}, in the exact form of
   \cite{graham}. For $t\ge9$ and $e=E(t)$,
   \[ e-t=A(e)+H(t)-K(t)-O(t)+c(t),\qquad 1\le c(t)\le5 .\]
 \end{itemize}
@@ -208,11 +217,16 @@ The following two forms of the large sieve are proved in Lean.
 \item[(BT)] \emph{Primes in short intervals.} For real $x>0$, $y\ge1$ and
   integers $Q\ge6$,
   \[\pi(x+y)-\pi(x)\le\frac{y+Q^2}{\log(Q+1)+1.07}+\pi(Q).\]
-  This is the large sieve \cite{montgomery,mv} with
+  We use the additive inequality of Montgomery and Vaughan
+  \cite[Theorem~1]{mv} and their arithmetic lower bound
+  \cite[(2.7)]{mv}, which they credit to Montgomery \cite{montgomery}.
+  OpenAI's formalization \cite{oaimath} already supplies the arithmetic
+  large sieve with Farey separation $1/Q^2$. For (BT) we use separation
+  $1/(Q^2-1)$ to obtain the numerator $y+Q^2$. We also prove
   $G(Q)=\sum_{d\le Q}\mu^2(d)/\varphi(d)>\log(Q+1)+1.07$, the form
-  in the proof of \cite[Lemma~7]{mv}, which states
+  in the proof of \cite[Lemma~7]{mv}, whose printed statement is
   $G(z)\ge\log z+1.07$ for real $z\ge6$.
-\item[(LS)] \emph{Arithmetic large sieve} \cite{montgomery,mv}. A set of
+\item[(LS)] \emph{Arithmetic large sieve} \cite{montgomery,mv}. For an integer $Q\ge2$, a set of
   integers in an interval of $N$ consecutive integers that avoids one
   residue class modulo every prime $p\le Q$ has at most
   $(N+Q^2)/\log Q$ elements.
@@ -243,20 +257,15 @@ indices into three ranges:
 \item $n\ge10^{156}$: Haver's bounds alone (Section~\ref{sec:far}).
 \end{enumerate}
 The ranges overlap, so every $n$ is covered. Range~2 requires the bound
-on $K$ already at $e=1.3\cdot10^{10}$.
+on $K$ already at $e=1.3328\cdot10^{10}$.
 
 \paragraph{The early-even bound.}
-The bounds of Lagarias, Rains and Sloane hold at every $n$ but are far
-from sharp; the later results are asymptotic, and the explicit forms
-apply only from enormous thresholds. Theorem~\ref{thm:main} needs the
-sharp constants at every $n$, and its margin is small: the lower line
-$a(n)/n\to1/2$ sits only $1/28$ above $13/28$. The obstacle is the
-number $K$ of \emph{early evens}: at a given moment, the even numbers
-already used that exceed the least even number $E$ not yet used. With Haver's bound
+Theorem~\ref{thm:main} needs sharp constants at every $n$: the lower line
+$a(n)/n\to1/2$ sits only $1/28$ above $13/28$. With Haver's bound
 $K\le12\pi(\sqrt E)+720$ \cite[Theorem~5]{haver} the argument closes
 only for very large $n$; we use it that way for $n\ge10^{156}$
 (Lemma~\ref{lem:F}), far beyond any computation.
-The new step is a self-improving bound
+The quantitative improvement uses a shorter prime window
 (Lemma~\ref{lem:A}, Corollary~\ref{cor:A}): the primes responsible for
 the excess of $K$ lie among the $3K+2$ integers just below $E/2$, so
 $K\le\pi(\sqrt E)+2+\#\{\text{primes among }3K+2\text{ consecutive integers}\}$, and a
@@ -274,8 +283,8 @@ $1.41\cdot10^{10}$ by $n=1.393\cdot10^{10}$) and settle every smaller $n$.
 
 \section{Early evens}\label{sec:K}
 
-For a state $t$ let
-$K^{<}(t)=\max\{K(s):1\le s<t\}$.
+We bound the primes responsible for early evens. For a state $t$ let
+$K^{<}(t)=\max\{K(s):1\le s<t\}$, with $K^{<}(1)=0$.
 
 \begin{lemma}\label{lem:A}
 Let $t$ be a state and $e=E(t)$. Every unpaired prime up $i$ at state $t$
@@ -331,13 +340,13 @@ $2y/\log y\approx6M/\log M$, so \eqref{eq:boot} holds once $M$ is a little large
 $\pi(\sqrt e)/(1-6/\log M)$. This is $(1+o(1))\pi(\sqrt e)$ as
 $e\to\infty$, and about $2.6\,\pi(\sqrt e)$ at $e=1.3328\cdot10^{10}$. Haver's argument counted the same primes through their
 residues modulo $210$, which bounds them only by a fixed fraction of the
-window; this is where his factor $12$ comes from.
+window; this is where Haver's factor $12$ comes from.
 
 \section{Holes and odd terms above the frontier}\label{sec:HO}
 
 The next two lemmas bound $H$ and $O$ in terms of a bound $M$ on $K$.
 Lemma~\ref{lem:C} is Haver's hole bound \cite[Theorem~11]{haver} with an
-arbitrary nondecreasing bound $M$ in place of his explicit one, and with the
+arbitrary nondecreasing bound $M$ in place of Haver's explicit one, and with the
 hypothesis needed only at earlier states.
 
 \begin{lemma}[Holes]\label{lem:C}
@@ -383,6 +392,11 @@ whence $r>R$. If $c<X$ the step $c\to v$ crosses the level $X$ upward,
 which happens at most $\pi(\sqrt X)$ times by (F3); otherwise $c$ is
 counted by $Z$, and $v\mapsto c$ is injective.
 \end{proof}
+
+The proof uses (F3) at the real level $X$. For the cover we weaken its
+crossing term to $\pi(\sqrt{e+Y+1})$, as in the formal lemma, which
+counts the odd non-tick excess above the integer $e+Y$. The remaining odd
+values contribute at most $\lceil Y/2\rceil$.
 
 By (SP) the numbers counted by $Z$ lie in an interval of at most
 $S-Y$ integers, $S=2k^2+2k\sqrt{k^2+e}$, and they avoid the residue $0$
@@ -499,7 +513,7 @@ $7a(n)<12n$.
 At the states $t\ge n-3$ the hypothesis forces $E(t)>9\cdot10^{155}$. From
 (P) one derives $0.921\,x/\log x\le\pi(x)\le1.045\,x/\log x$ for
 $x\ge10^{76}$. Inserted into Haver's bounds $K\le12\pi(\sqrt e)+720$
-\cite[Theorem~5]{haver}, (SP), his hole bound and (CL) (with
+\cite[Theorem~5]{haver}, (SP), Haver's hole bound and (CL) (with
 $O\le(T-e)/2+1$), this gives $0.997\,e<t$, $t+3<1.0766\,e$ and $T(t)<1.153\,e$ at
 each such state $t$, with $e=E(t)$, and shows that every hole exceeds
 $e/1.1543$. Then the three cases of the proof of Theorem~\ref{thm:T}
@@ -548,6 +562,15 @@ Lean's standard axioms. Appendix~\ref{app:checks} describes the computational ch
 dependencies. Reproduction commands and implementation details are in the
 supplementary checking notes.
 
+\paragraph{Related work.}
+Haver's subsequent work on the Yellowstone permutation
+\cite{haverY3,haverYFrontier,haverY6,haverY7,haverY8} concerns a different
+greedy permutation; nothing from those papers is used here.
+Other nearby visiting rules include Applegate, Havermann, Selcoe,
+Shevelev, Sloane and Zumkeller's Yellowstone permutation~\cite{yellowstoneOriginal},
+Basistha and Iona\c{s}cu's coprime permutation~\cite{basisthaIonascu}, and
+Na's real-multiplier process~\cite{naVisiting}. Nothing from these works is used here.
+
 \begin{appendices}
 \section{Prime-counting bounds}\label{app:prime}
 
@@ -583,7 +606,7 @@ $R(x)=c\sqrt x+\frac{c}{\log2}x^{1/3}\log x$.
   smaller $p$ by the computation of $10^7$ terms in \cite{lrs}; Haver
   \cite[Remark~3]{haver} closes the same count for every $p>43$, leaving
   $p\le43$, which the first $82$ terms show. The rest, $2p=E(N_p-1)$, the
-  term $3p$, its uniqueness and the spacing, is proved in
+  uniqueness of $3p$ and the spacing, is proved in
   \cite[(F2)]{haver}. In the Lean proof the primes $p\le43$ are
   checked on the first terms, $43<p<4096$ by a finite computation, and
   larger $p$ by explicit prime bounds.
@@ -619,8 +642,15 @@ The foundation is Haver's Lean archive \cite{haver} as extended in
 Rosser and Schoenfeld's Theorem~12 and a form of Chebyshev's lower bound from the
 IEANTN project \cite{ieantn} (with interval tools from LeanCert
 \cite{leancert}), and the arithmetic large sieve from OpenAI's
-formalizations \cite{oaimath}. The bound $G(Q)>\log(Q+1)+1.07$, the
-Brun--Titchmarsh form (BT) and the bounds (P) are proved here.
+formalizations \cite{oaimath}, specifically
+\texttt{OAI.Ostmann.publishedAdditiveLargeSieve} in
+\texttt{lean/OAI/NumberTheory/Ostmann/Preliminaries/AdditiveSieveProof.lean}.
+The port preserves the retained statements and proofs; its imports are
+adapted to the pinned local toolchain. OpenAI's arithmetic sieve already
+uses Farey separation $1/Q^2$. Building on that sieve, we use the stronger
+separation $1/(Q^2-1)$ for (BT), prove the bound
+$G(Q)>\log(Q+1)+1.07$ from the proof of \cite[Lemma~7]{mv}, and derive
+(BT) and the bounds (P).
 
 
 \subsection{Interval certificate}\label{app:cover}
@@ -651,6 +681,27 @@ $b_q$ & $90$
 \end{appendices}
 
 \begin{thebibliography}{99}
+
+\bibitem{haverY3}
+T. Haver, \emph{The Yellowstone permutation, III: few large terms}, October 22, 2026.
+\href{https://doi.org/10.5281/zenodo.23557280}{doi:10.5281/zenodo.23557280}.
+
+\bibitem{haverYFrontier}
+T. Haver, \emph{The prime frontier of the Yellowstone permutation is linear}, October 22, 2026.
+\href{https://doi.org/10.5281/zenodo.23558450}{doi:10.5281/zenodo.23558450}.
+
+\bibitem{haverY6}
+T. Haver, \emph{The prime frontier of the Yellowstone permutation falls behind time: limsup R(t)/t < 1}, October 23, 2026.
+\href{https://doi.org/10.5281/zenodo.23604646}{doi:10.5281/zenodo.23604646}.
+
+\bibitem{haverY7}
+T. Haver, \emph{The Yellowstone permutation: limsup R(t)/t $\leq$ 0.68605, liminf $n_p/p>1.4576$, and Conjecture 7 for large n}, October 23, 2026.
+\href{https://doi.org/10.5281/zenodo.23604811}{doi:10.5281/zenodo.23604811}.
+
+\bibitem{haverY8}
+T. Haver, \emph{The Yellowstone permutation: Conjecture 7 for all n reduced to a riser law on a finite range, the normality and entry times of primes, and a run certificate}, October 23, 2026.
+\href{https://doi.org/10.5281/zenodo.23604970}{doi:10.5281/zenodo.23604970}.
+
 
 \bibitem{chebyshev}
 P. L. Chebyshev, M\'emoire sur les nombres premiers,
@@ -688,7 +739,8 @@ Akula and contributors; Chebyshev bound by T. Tao.
 J. C. Lagarias, E. M. Rains, and N. J. A. Sloane,
 The EKG sequence, \emph{Experimental Math.} \textbf{11} (2002), 437--446.
 \href{https://doi.org/10.1080/10586458.2002.10504486}{doi:10.1080/10586458.2002.10504486};
-\href{https://arxiv.org/abs/math/0204011}{arXiv:math/0204011}.
+\href{https://arxiv.org/abs/math/0204011v1}{arXiv:math/0204011v1}.
+Numbered locators refer to arXiv version~1 unless marked ``journal version''.
 
 \bibitem{leancert}
 LeanCert contributors, \emph{LeanCert}, Lean sources, commit
@@ -721,6 +773,28 @@ entry \href{https://oeis.org/A064413}{A064413}.
 J. B. Rosser and L. Schoenfeld, Approximate formulas for some functions
 of prime numbers, \emph{Illinois J. Math.} \textbf{6} (1962), 64--94.
 \href{https://doi.org/10.1215/ijm/1255631807}{doi:10.1215/ijm/1255631807}.
+
+
+\bibitem{yellowstoneOriginal}
+David L. Applegate, Hans Havermann, Robert G. Selcoe, Vladimir Shevelev,
+N. J. A. Sloane and Reinhard Zumkeller,
+\emph{The Yellowstone Permutation},
+arXiv:1501.01669, first posted January 7, 2015; version~2, March 8, 2015.
+\url{https://arxiv.org/abs/1501.01669v2}.
+
+\bibitem{basisthaIonascu}
+Amit Kumar Basistha and Eugen J. Iona\c{s}cu,
+\emph{A special sequence and primorial numbers},
+arXiv:2302.02838, first posted February 6, 2023; version~5, November 22, 2023.
+Rev. Roumaine Math. Pures Appl. 70 (2025), 235--255.
+\url{https://arxiv.org/abs/2302.02838v5}.
+\url{https://doi.org/10.59277/rrmpa.2025.235.255}.
+
+\bibitem{naVisiting}
+Sungsoo Na,
+\emph{An integer-visiting process with real multipliers: coverage and rates},
+version~1.0.0, October 4, 2026.
+\url{https://doi.org/10.5281/zenodo.23138274}.
 
 \end{thebibliography}
 

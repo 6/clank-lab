@@ -13,8 +13,7 @@ Zenodo records.
 
 ## thomson-10 v8 (October 28, 2026)
 
-- Correction: wording of credits. The theorem and its checks are unchanged.
-- Correction: use the house review-status sentence at the end of the introduction. Add related-work credits in the README; the theorem, proofs, data and checks are unchanged.
+- Correction: credit wording, related-work credits in the README, and the review-status and AI-assistance sentences, now in a footnote on the title. The theorem and its checks are unchanged.
 - Zenodo: [10.5281/zenodo.23744816](https://doi.org/10.5281/zenodo.23744816)
 
 ## path-ramsey v7 (October 28, 2026)

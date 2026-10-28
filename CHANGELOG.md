@@ -13,6 +13,7 @@ Zenodo records.
 
 - Correction: add the missing review-status disclosure, name related work in the README credits, and remove an unsupported historical exclusivity sentence from the result index. The theorem, proofs, data and checks are unchanged.
 - Mechanical correction: retain the accepted appendix heading formatting.
+- Zenodo: [10.5281/zenodo.23743790](https://doi.org/10.5281/zenodo.23743790)
 
 ## lned-counterexample v1 (October 28, 2026)
 

@@ -1,4 +1,10 @@
 % Supplementary source context; citations refer to the paper bibliography.
+% This is a companion note, read with the paper, not a standalone proof.
+Here $L(x)=x/\log x$ for $x>1$, $N_p$ is the first index whose
+value is divisible by $p$, and $O$ counts odd non-tick used values
+above the frontier in the state under discussion, as in the paper.
+The notation and estimates are collected in the paper's Section~2.
+
 The EKG sequence was discovered by Jonathan Ayres, who entered it in
 the OEIS in September 2001 \cite{oeis}, and was studied by
 Lagarias, Rains, and Sloane \cite{lrs}, who credit Ayres with its
@@ -50,9 +56,9 @@ values, used values above the least unused even integer, and missing
 composites below it. Haver's Corollary 2(e), in version 3 dated October 4,
 2026, reduces the second-order assertion at these even integers to a
 negligible count of odd non-tick used values above them. Haver's Theorem 1(d)
-(also stated in his abstract) and Corollary 12(d) already give
+(also stated in Haver's abstract) and Corollary 12(d) already give
 $E(t)-t\leq(1/3+o(1))t/\log t$ and
-$N_p\geq2p-(2/3+o(1))p/\log p$, with sharp constants.
+$N_p\geq2p-(2/3+o(1))p/\log p$, with the conjectured coefficients, whose sharpness follows from the matching asymptotic.
 Our contribution is the lower half of the clock,
 $E(t)-t\geq(1/3-o(1))t/\log t$, and the transfer from frontier times
 to the full sequence of indices.
@@ -69,7 +75,7 @@ The argument completes the second-order program of Haver \cite{haver},
 using the structural work of Lagarias, Rains, and Sloane \cite{lrs} and
 Hofman and Pilipczuk \cite{hp}. Haver's Theorem 1(d) and Corollary 12(d)
 already prove the upper half of the frontier clock with sharp constant
-$1/3$ in his manuscript; his Lean sources do not cover the sharp
+$1/3$ in Haver's manuscript; Haver's Lean sources do not cover the sharp
 coefficient or the Corollary 2(e) criterion. The new contribution is the
 lower half plus the transfer to the full sequence of indices.
 Haver also proves the exact counting identity and the equivalence stated
@@ -97,7 +103,7 @@ asymptotics, a weaker assertion. Hofman and Pilipczuk's smoothed sequence $a'_n$
 by $2p$ for every prime $p$, including $2$. Their Theorem~4.17 \cite{hp} gives $a'_n=n+O(n/\log\log\log n)$.
 This convention differs from $b$ at only finitely many indices.
 Haver's version~3 \cite[Corollary~2(e)]{haver} states the counting
-criterion; his Theorem~1(d) and Corollary~12(d) give the sharp upper
+criterion; Haver's Theorem~1(d) and Corollary~12(d) give the sharp upper
 bound $E(t)-t\leq(1/3+o(1))t/\log t$, where $E(t)$ is the least
 unused positive even integer after $t$ terms. Here the new work is the
 remaining lower bound and the transfer to all smoothed indices.
@@ -243,8 +249,8 @@ finiteness of intersections with these exact lines.}
 \subsection*{Consequences and supplementary explanations}
 Ordowski's first conjecture asks only that $a(n)>n$ ``almost
 everywhere'' when $a(n)$ is not prime. The first statement, for all but
-finitely many $n$, is our stronger form; it implies his conjecture in
-the density-one reading of ``almost everywhere''. The last statement is his second
+finitely many $n$, is our stronger form; it implies Ordowski's conjecture in
+the density-one reading of ``almost everywhere''. The last statement is Ordowski's second
 conjecture. The count of prime values alone,
 $\#\{k\leq N:a(k)\text{ prime}\}\sim N/(2\log N)$, already follows from
 the ratio form; the new content is that these are, with finitely many
@@ -290,7 +296,7 @@ finite seed exclusions are the finitely many initial indices omitted by
 the eventual estimates. The two excursion propositions are
 Propositions~\ref{prop:upper} and \ref{prop:lower}.
 
-Its sequence is the canonical
+The formalized sequence is the canonical
 greedy sequence of \eqref{eq:rule}, shifted from zero-based to one-based
 indexing, with \eqref{eq:smooth} applied only to odd primes and their
 triples; $2$ and $6$ stay fixed. At $n=0$ it sets $a(0)=1$, outside the
@@ -309,7 +315,7 @@ proved by Hofman and Pilipczuk \cite[Theorem~4.17]{hp}.
 \subsection*{Additional source and estimate details}
 Consequences
 include an eventual strengthening of Ordowski's inequality conjecture
-and his density-one conjecture, Jasinski's finiteness conjectures on the
+and Ordowski's density-one conjecture, Jasinski's finiteness conjectures on the
 three critical lines, the below-diagonal counting asymptotic and finiteness
 of cycles of each bounded length.
 
@@ -381,9 +387,9 @@ recorded in the OEIS \cite{oeis}. On A064413, Thomas Ordowski
 conjectured on January 23, 2009, ``If $a(n)\neq p$, then almost
 everywhere $a(n)>n$'' and ``$\lim\#(a_n>n)/n=1$''. Artur Jasinski, in
 December 2008, called $a(k)=k$, $2a(k)=3k$ and $2a(k)=k$ the three
-critical lines of the sequence. His entry A152458, the indices with
+critical lines of the sequence. Jasinski's entry A152458, the indices with
 $a(k)=k$, records the conjecture that it is finite, and on A152519 (the
-indices with $2a(k)=3k$) he conjectured that the number of points on the
+indices with $2a(k)=3k$) Jasinski conjectured that the number of points on the
 three lines is finite, asking also whether the listed points are
 complete. Below, $p$ denotes a prime.
 
@@ -394,6 +400,6 @@ from the eventual finiteness result.
 All LRS section, figure and conjecture numbers used here and in the
 article follow arXiv v1, identified in the unchanged bibliography.
 Haver's Theorem~1(b), with Theorem~8(b), gives the non-tick span estimate
-\eqref{eq:oldspan}. His Corollary~12(b) gives the counting identity in
+\eqref{eq:oldspan}. Haver's Corollary~12(b) gives the counting identity in
 prime-interval form; the article displays the corresponding prime-count
 form and its boundary corrections.

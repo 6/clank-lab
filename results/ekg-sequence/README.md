@@ -3,7 +3,7 @@
 [![Checks](https://github.com/6/clank-lab/actions/workflows/ekg-sequence.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/ekg-sequence.yml)
 
 The [EKG sequence](https://mathworld.wolfram.com/EKGSequence.html)
-([OEIS A064413](https://oeis.org/A064413)), discovered by Jonathan Ayres,
+([OEIS A064413 entry](https://oeis.org/A064413)), discovered by Jonathan Ayres,
 starts with 1 and 2, then
 repeatedly takes the smallest unused positive integer that shares a factor
 with the previous term. Its graph looks like an electrocardiogram, hence the
@@ -37,12 +37,14 @@ conjectured in 2009 that $a(n) > n$ almost everywhere when $a(n)$ is not
 prime, and that the proportion of $k \le N$ with $a(k) > k$ tends to 1. We
 prove both, the first in a stronger form: for all large $n$, $a(n) > n$
 exactly when $a(n)$ is composite. Jasinski conjectured in 2008 that
-[A152458](https://oeis.org/A152458) ($a(n) = n$) is finite and that the
+[OEIS A152458 entry](https://oeis.org/A152458) ($a(n) = n$) is finite and that the
 three lines $a(n) = n$, $2a(n) = n$ and $2a(n) = 3n$ carry only finitely
-many points ([A152519](https://oeis.org/A152519)); we prove both.
+many points ([OEIS A152519 entry](https://oeis.org/A152519)); we prove both.
 These consequences are checked in Lean too. The paper also derives the
 three separate branch formulas by a short algebraic argument; those
 corollary statements are not separately formalized in Lean.
+
+The paper also proves finiteness of [OEIS A155549 entry](https://oeis.org/A155549), the nonprime values $a(n)<n$, and [OEIS A064420 entry](https://oeis.org/A064420), the integers $k$ with $a(k+1)=k$. It distinguishes the odd-prime smoothing used here from the all-prime convention of [OEIS A256417 entry](https://oeis.org/A256417).
 
 Checked in Lean from the definitions; not yet reviewed by experts.
 
@@ -53,6 +55,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 Archived on Zenodo: [doi:10.5281/zenodo.23621949](https://doi.org/10.5281/zenodo.23621949)
 
 ## Check it
+
+The archived DOI identifies version 6. This is the unreleased version 7 correction.
 
 Install [elan](https://github.com/leanprover/elan#installation), then run:
 
@@ -81,16 +85,22 @@ pattern $2p, p, 3p$, the bounds on early even values, on the span of used
 values and on missing composites, and the rate $b(n) = n + O(n/\log n)$.
 Haver's manuscript states the counting criterion
 (Corollary 2(e)) and sharp upper bound (Theorem 1(d)); these second-order
-assertions lie outside his Lean archive's verified core. That archive
+assertions lie outside Haver's Lean archive's verified core. That archive
 already proves the general counting identities. Our Lean proof establishes
 the endpoint prime-interval and tick counts, discharges the hypotheses of
-his interval-count identity, and derives the sharp coefficient and transfer
+Haver's interval-count identity, and derives the sharp coefficient and transfer
 to all smoothed indices. The conjecture is due to
 [Lagarias, Rains and Sloane (2002)](https://doi.org/10.1080/10586458.2002.10504486),
 and [Hofman and Pilipczuk (2008)](https://cs.uwaterloo.ca/journals/JIS/VOL11/Hofman/hofman1.html)
 proved the ratio form (LRS Conjecture 2). The prime number theorem in Lean comes from
 the [PrimeNumberTheoremAnd project](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)
 (A. Kontorovich, T. Tao et al.).
+
+Haver's subsequent [Yellowstone work](https://doi.org/10.5281/zenodo.23604970) concerns a different greedy permutation; nothing from those papers is used here.
+
+Related October 17–18 work by Haver treats the [lag-two EKG sequence (10.5281/zenodo.23437539)](https://doi.org/10.5281/zenodo.23437539), [general greedy-sieve processes (10.5281/zenodo.23437752)](https://doi.org/10.5281/zenodo.23437752), [a near-linear Yellowstone bound (10.5281/zenodo.23437783)](https://doi.org/10.5281/zenodo.23437783), [eight EKG-type rules (10.5281/zenodo.23437809)](https://doi.org/10.5281/zenodo.23437809), [closed Yellowstone-ladder results (10.5281/zenodo.23437816)](https://doi.org/10.5281/zenodo.23437816), and [Yellowstone II (10.5281/zenodo.23449375)](https://doi.org/10.5281/zenodo.23449375). These concern adjacent rules or retain a conditional EKG criterion; no additional theorem or code from these six papers is used here.
+
+Other nearby rules are the [Yellowstone permutation of Applegate, Havermann, Selcoe, Shevelev, Sloane and Zumkeller](https://arxiv.org/abs/1501.01669v2), [Basistha and Ionaşcu's coprime permutation](https://arxiv.org/abs/2302.02838v5), and [Na's real-multiplier visiting process](https://doi.org/10.5281/zenodo.23138274). Nothing from these works is used here.
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -101,7 +111,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The second-order asymptotic of the EKG sequence}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v6/results/ekg-sequence}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v7/results/ekg-sequence}},
   doi          = {10.5281/zenodo.23621949}
 }
 ```

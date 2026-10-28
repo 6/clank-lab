@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-sequence v7 (October 28, 2026)
+
+- Correction: wording of credits. The theorem and its checks are unchanged.
+- The paper states that this work has not yet been reviewed by experts.
+
 ## lit-only-sigma v4 (October 27, 2026)
 
 - Correction: add the missing review-status disclosure and credit Huang’s work on nondegenerate lit-only sigma games. The theorem and its checks are unchanged.

@@ -36,7 +36,8 @@ runs everything. `--sample S` and `--seed X` choose the sampled cubes
 
 `full` re-solves every one of the 15,956 cubes and checks every cube in
 Lean, then the ladder and the cover: 249 and 301 CPU-hours in our two runs, using every core
-(`--jobs`). With `--cross-check` it also runs the independent check that
+(`--jobs`). Together, the two runs used about twenty-three days of processor
+time. With `--cross-check` it also runs the independent check that
 doesn't use Lean on every cube (`check_paths.py`, `check_inputs.py` and
 cake_lpr). It splits the cubes into the 162 chunks of
 [`../data/chunks.json`](../data/chunks.json), one Lean module
@@ -147,3 +148,98 @@ independent check of the formula files.
 - `pack.py`: the certificate packer for Lean.
 - `planted_certs.py`, `planted_lean.py`: the planted errors.
 - `audit/`: the encoding auditor; `controls/`: the path-clause controls.
+
+## Further credits
+
+- R. J. Faudree and R. H. Schelp, [Path Ramsey numbers in multicolorings](https://doi.org/10.1016/0095-8956(75)90080-5) — origin of the conjectured formula.
+- J. Dybizbański, T. Dzido and S. Radziszowski, [On some three-color Ramsey numbers for paths](https://arxiv.org/abs/1207.5851v3) — conjecture, lower bound and preceding cases.
+- A. Gyárfás, M. Ruszinkó, G. N. Sárközy and E. Szemerédi, [Three-color Ramsey numbers for paths](https://doi.org/10.1007/s00493-007-0043-4), with [corrigendum](https://doi.org/10.1007/s00493-008-2395-9) — large-path theorem and lower-bound construction.
+- A. Figaj and T. Łuczak, [The Ramsey number for a triple of long even cycles](https://doi.org/10.1016/j.jctb.2006.09.001) — asymptotic background.
+- S. Letzter, [An improvement on Łuczak's connected matchings method](https://doi.org/10.1112/blms.12587) — related method.
+- R. W. Irving, [Generalised Ramsey numbers for small graphs](https://doi.org/10.1016/0012-365X(74)90008-9) — small-graph background.
+- Yang Yuansheng and P. Rowlinson, [The third Ramsey numbers for graphs with at most four edges](https://doi.org/10.1016/0012-365X(94)90182-1) — preceding cases.
+- Yang Yuansheng and P. Rowlinson, [On the third Ramsey numbers of graphs with five edges](../checks/bibliography-background.tex) — preceding cases.
+- Yang Yuansheng, [On the third Ramsey numbers of graphs with six edges](../checks/bibliography-background.tex) — preceding cases.
+- N. F. Galindez, [An upper bound for the three-colour Ramsey number of the ten-cycle](https://doi.org/10.5281/zenodo.22000000) — related cycle bound.
+- Z. Shao, H. Jiang, X. Xu and S. Wang, [Native Windows reproduction package: R(C4,C6,C8)=12](https://doi.org/10.5281/zenodo.23230189) — related computational work.
+- J. Zhang, [erdos557](https://github.com/zhangjun725/erdos557) — related formalization.
+- M. Kirchweger, P. Manrique and S. Szeider, [Formally verified graph generation with SAT modulo symmetries and Lean](https://doi.org/10.1007/978-3-032-32589-1_8) — related method.
+- Thibault Gauthier and Chad E. Brown, [A Formal Proof of R(4,5)=25](https://arxiv.org/abs/2404.01761v2) — formal Ramsey context.
+- Zhengyu Li, Conor Duggan, Curtis Bright and Vijay Ganesh, [Verified Certificates via SAT and Computer Algebra Systems for the Ramsey R(3,8) and R(3,9) Problems](https://doi.org/10.24963/ijcai.2025/292) — certificate context.
+- Farideh Khoeini and Tomasz Dzido, [On some three color Ramsey numbers for paths, cycles, stripes and stars](https://arxiv.org/abs/1707.06955) — mixed-graph context.
+- A. Biere and CaDiCaL contributors, [CaDiCaL 2.0](https://doi.org/10.1007/978-3-031-65627-9_7) — SAT solver.
+- K. Fazekas, A. Niemetz, M. Preiner, M. Kirchweger, S. Szeider and A. Biere, [IPASIR-UP: User propagators for CDCL](https://doi.org/10.4230/LIPIcs.SAT.2023.8) — solver interface.
+- N. Wetzler, M. J. H. Heule and W. A. Hunt, [DRAT-trim](https://doi.org/10.1007/978-3-319-09284-3_31) — proof conversion and checking.
+- Y. K. Tan, M. J. H. Heule and M. O. Myreen, [cake_lpr](https://doi.org/10.1007/978-3-030-72013-1_12) — verified certificate checking.
+- Lean, LRAT and Mathlib contributors, [Lean](https://github.com/leanprover/lean4) and [Mathlib](https://github.com/leanprover-community/mathlib4) — formal-proof infrastructure.
+
+## Sources used during development
+
+The source scope and development account below is retained from the landing page. The short credit account is in the [result README](../README.md#credits).
+
+The prior path and cycle Ramsey literature is credited to
+R. J. Faudree and R. H. Schelp; J. Dybizbański, T. Dzido and
+S. Radziszowski; A. Figaj and T. Łuczak; A. Gyárfás, M. Ruszinkó,
+G. N. Sárközy and E. Szemerédi; S. Letzter; R. W. Irving;
+Yang Yuansheng and P. Rowlinson; N. F. Galindez; Z. Shao, H. Jiang,
+X. Xu and S. Wang; and J. Zhang. The paper retains their bibliographic
+credits; the preceding edition's full credit and historical account remain
+in [its landing page](../checks/landing-page-background.md) and the checking
+background. Nearby method credit also belongs to M. Kirchweger,
+P. Manrique and S. Szeider, [IJCAR 2026, abstract and Section 1](https://doi.org/10.1007/978-3-032-32589-1_8).
+Formal Ramsey context also includes Thibault Gauthier and Chad E. Brown's
+[*A Formal Proof of R(4,5)=25*](https://arxiv.org/html/2404.01761v2),
+which formalizes the theorem in HOL4 using SAT gluing and checked case
+coverage. Zhengyu Li, Conor Duggan, Curtis Bright and Vijay Ganesh's
+[*Verified Certificates via SAT and Computer Algebra Systems for the Ramsey
+R(3,8) and R(3,9) Problems*](https://doi.org/10.24963/ijcai.2025/292)
+provides independently checkable SAT and computer-algebra certificates;
+formal verification of the encoding and the custom validation script is
+left open there. Farideh Khoeini and Tomasz Dzido's
+[*On some three color Ramsey numbers for paths, cycles, stripes and
+stars*](https://arxiv.org/abs/1707.06955) uses bipartite Ramsey bounds for
+mixed path, cycle and matching problems. We use no results, code or data
+from these three related works.
+
+The
+computation
+uses A. Biere's CaDiCaL solver and its user-propagator interface by
+K. Fazekas, A. Niemetz, M. Preiner, M. Kirchweger, S. Szeider and A. Biere;
+drat-trim by N. Wetzler, M. Heule and W. Hunt; and cake_lpr by Y. K. Tan,
+M. Heule and M. Myreen. Lean, its LRAT checker and Mathlib, with their
+contributors, supplied the formal-development infrastructure.
+
+### Checking scope and retained records
+
+The full check re-solves every one of the 15,956 cubes and checks each of
+them in Lean, together with the smaller cases and the cover, then builds the
+final theorem `R3_P10_eq_18 : ramsey3Path 10 = 18` with
+`lake build R3P10Final`; only this step establishes the value in Lean. It
+uses as many cores as are available, resumes when rerun and needs about
+70 GB of disk; it took 249 and 301 CPU-hours in our two runs (the second
+is recorded in [COMPLETION.md](../COMPLETION.md)):
+
+```sh
+python3 checks/check.py full --work /tmp/path-ramsey-work
+```
+
+Adding `--cross-check` to that command also runs the independent check that
+doesn't use Lean on every cube: the path-clause checker, the input checker
+and the verified checker cake_lpr. The record of a completed full check,
+with its axiom output and toolchain, is in [COMPLETION.md](../COMPLETION.md).
+
+[Corrections and interpretation of historical records](../checks/CORRECTIONS.md)
+explain the control-count and documentation errors retained in the earlier
+text, and distinguish preserved measurements from this edition's checks.
+
+Details for specialists are in [the Lean notes](../lean/README.md) and
+[the checking notes](../checks/README.md). The preceding edition's detailed background and credits are retained in
+[the historical background](../checks/historical-background.tex), and its
+independent checks, computing costs and replay account in
+[the checking record](../checks/checking-record.tex), with
+[the formal-development details](../checks/formal-development.tex),
+[the formalization controls](../checks/formal-controls.tex) and the earlier
+[construction credit](../checks/construction-credit.tex) and
+[ladder context](../checks/ladder-context.tex), with the earlier
+[bibliography](../checks/bibliography-background.tex) and
+[cube context](../checks/cube-context.tex).

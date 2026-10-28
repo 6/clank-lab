@@ -92,58 +92,23 @@ be rejected. It takes about fifteen minutes:
 python3 checks/check.py quick --work /tmp/path-ramsey-work
 ```
 
-The full check re-solves every one of the 15,956 cubes and checks each of
-them in Lean, together with the smaller cases and the cover, then builds the
-final theorem `R3_P10_eq_18 : ramsey3Path 10 = 18` with
-`lake build R3P10Final`; only this step establishes the value in Lean. It
-uses as many cores as are available, resumes when rerun and needs about
-70 GB of disk; it took 249 and 301 CPU-hours in our two runs (the second
-is recorded in [COMPLETION.md](COMPLETION.md)):
+The full check establishes `R3_P10_eq_18 : ramsey3Path 10 = 18` by
+checking all 15,956 pieces, the smaller cases and the cover in Lean:
 
 ```sh
 python3 checks/check.py full --work /tmp/path-ramsey-work
 ```
 
-Adding `--cross-check` to that command also runs the independent check that
-doesn't use Lean on every cube: the path-clause checker, the input checker
-and the verified checker cake_lpr. The record of a completed full check,
-with its axiom output and toolchain, is in [COMPLETION.md](COMPLETION.md).
-
-[Corrections and interpretation of historical records](checks/CORRECTIONS.md)
-explain the control-count and documentation errors retained in the earlier
-text, and distinguish preserved measurements from this edition's checks.
-
-Details for specialists are in [the Lean notes](lean/README.md) and
-[the checking notes](checks/README.md). The preceding edition's detailed background and credits are retained in
-[the historical background](checks/historical-background.tex), and its
-independent checks, computing costs and replay account in
-[the checking record](checks/checking-record.tex), with
-[the formal-development details](checks/formal-development.tex),
-[the formalization controls](checks/formal-controls.tex) and the earlier
-[construction credit](checks/construction-credit.tex) and
-[ladder context](checks/ladder-context.tex), with the earlier
-[bibliography](checks/bibliography-background.tex) and
-[cube context](checks/cube-context.tex).
+It needs about 70 GB of disk and resumes when rerun. Add `--cross-check`
+to check every piece independently with cake_lpr and the input and path-clause
+checkers. [Checking notes](checks/README.md) give resource measurements,
+completed-check records, historical corrections and development background.
 
 ## Credits
 
-The prior path and cycle Ramsey literature is credited to
-R. J. Faudree and R. H. Schelp; J. Dybizbański, T. Dzido and
-S. Radziszowski; A. Figaj and T. Łuczak; A. Gyárfás, M. Ruszinkó,
-G. N. Sárközy and E. Szemerédi; S. Letzter; R. W. Irving;
-Yang Yuansheng and P. Rowlinson; N. F. Galindez; Z. Shao, H. Jiang,
-X. Xu and S. Wang; and J. Zhang. The paper retains their bibliographic
-credits; the preceding edition's full credit and historical account remain
-in [its landing page](checks/landing-page-background.md) and the checking
-background. Nearby method credit also belongs to M. Kirchweger,
-P. Manrique and S. Szeider, [IJCAR 2026, abstract and Section 1](https://doi.org/10.1007/978-3-032-32589-1_8).
-The
-computation
-uses A. Biere's CaDiCaL solver and its user-propagator interface by
-K. Fazekas, A. Niemetz, M. Preiner, M. Kirchweger, S. Szeider and A. Biere;
-drat-trim by N. Wetzler, M. Heule and W. Hunt; and cake_lpr by Y. K. Tan,
-M. Heule and M. Myreen. Lean, its LRAT checker and Mathlib, with their
-contributors, supplied the formal-development infrastructure.
+R. J. Faudree and R. H. Schelp's [Path Ramsey numbers in multicolorings](https://doi.org/10.1016/0095-8956(75)90080-5) is the origin of the conjectured formula. J. Dybizbański, T. Dzido and S. Radziszowski's [On some three-color Ramsey numbers for paths](https://arxiv.org/abs/1207.5851v3) supplies the conjecture, lower bound and preceding cases. A. Gyárfás, M. Ruszinkó, G. N. Sárközy and E. Szemerédi's [Three-color Ramsey numbers for paths](https://doi.org/10.1007/s00493-007-0043-4), with its [corrigendum](https://doi.org/10.1007/s00493-008-2395-9), supplies the large-path theorem and lower-bound construction.
+
+The computation uses A. Biere and contributors' [CaDiCaL 2.0](https://doi.org/10.1007/978-3-031-65627-9_7) SAT solver, the [IPASIR-UP](https://doi.org/10.4230/LIPIcs.SAT.2023.8) interface of K. Fazekas and coauthors, and N. Wetzler, M. J. H. Heule and W. A. Hunt's [DRAT-trim](https://doi.org/10.1007/978-3-319-09284-3_31). Certificate checking uses Y. K. Tan, M. J. H. Heule and M. O. Myreen's [cake_lpr](https://doi.org/10.1007/978-3-030-72013-1_12) and the work of Lean, LRAT and [Mathlib](https://github.com/leanprover-community/mathlib4) contributors. Related work includes Farideh Khoeini and Tomasz Dzido's [On some three color Ramsey numbers for paths, cycles, stripes and stars](https://arxiv.org/abs/1707.06955), Thibault Gauthier and Chad E. Brown's [A Formal Proof of R(4,5)=25](https://arxiv.org/abs/2404.01761v2), and Zhengyu Li, Conor Duggan, Curtis Bright and Vijay Ganesh's [Verified Certificates via SAT and Computer Algebra Systems for the Ramsey R(3,8) and R(3,9) Problems](https://doi.org/10.24963/ijcai.2025/292). The full work-by-work list is in [Further credits](checks/README.md#further-credits).
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -154,7 +119,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The three-color Ramsey number of the 10-vertex path}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v6/results/path-ramsey}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v7/results/path-ramsey}},
   doi          = {10.5281/zenodo.23634505}
 }
 ```

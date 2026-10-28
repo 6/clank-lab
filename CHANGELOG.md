@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## path-ramsey v7 (October 28, 2026)
+
+- Correction: wording of credits. The theorem and its checks are unchanged.
+- Correction: use the house review-status sentence at the end of the introduction; add related-work credits and correct citation locators and draft status; clarify path order, "good" and the distinction between color and cube symbols; move the processor-time detail to the checking guide. The theorem, proofs, data and checks are unchanged.
+
 ## tight-cycle-c5-turan v1 (October 28, 2026)
 
 - The limiting edge density of tight-five-cycle-free three-uniform hypergraphs is $2\sqrt3-3$, matching Mubayi–Rödl’s construction. The upper bound builds on Bodnár–León–Liu–Pikhurko’s partition reduction, with new certificates for the five-cycle alone and an explicit finite-sampling proof. Lean checks the full theorem with compiled evaluation.

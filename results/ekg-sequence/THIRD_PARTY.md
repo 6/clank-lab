@@ -30,7 +30,7 @@ none has been changed.
 
 Downloaded Lean, mathlib and other dependencies retain their respective
 licenses and are not redistributed in this small source bundle.
-The following files derive from Haver and retain Haver's CC BY 4.0 notice,
+The following files derive from Haver and are listed here with Haver's CC BY 4.0 attribution,
 including the four modified files identified above:
 
 ```text
@@ -70,5 +70,4 @@ lean/EKG/VerifiedSpans.lean
 ```
 
 All other Lean files in `lean/`, except the PNT subtree identified
-above, are new sources covered by the repository's root `LICENSE`. No proof source was changed
-when adding these license notices.
+above, are new sources covered by the repository's root `LICENSE`. This attribution correction changes no proof source.

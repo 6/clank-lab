@@ -22,9 +22,11 @@
 \newcommand{\ind}[1]{\mathbf{1}_{\{#1\}}}
 \newcommand{\pos}[1]{\max\{#1,0\}}
 \newcommand{\eps}{\varepsilon}
-\title{The second-order asymptotic of the EKG sequence}
+\title{The second-order asymptotic of the EKG sequence\thanks{The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+This work has not yet been reviewed by experts.}}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 24, 2026}
+\date{October 26, 2026}
 \begin{document}
 \maketitle
 
@@ -98,7 +100,7 @@ The companion proves LRS Conjecture~3's uniform linear bounds with
 computer assistance \cite[Theorem~1]{ekgbounds}.
 Haver's criterion \cite[Corollary~2(e)]{haver} reduces the
 asymptotic for the least unused even integer to counting used odd values
-above it, excluding $3p$ for odd primes $p$; his Theorem~1(d) and
+above it, excluding $3p$ for odd primes $p$; Haver's Theorem~1(d) and
 Corollary~12(d) give the sharp upper bound. We prove the lower half and transfer to all smoothed indices.
 The reduction and the estimates it uses are Haver's.
 Haver writes ``Our spans are only $O(t/\log t)$ because of rough predecessors''
@@ -106,9 +108,8 @@ and ``rough missing composites'' \cite[remark after Corollary~12]{haver};
 these have large least prime factors.
 The hard step in Propositions~\ref{prop:upper}--\ref{prop:lower} improves
 the two displacement bounds from $O(x/\log x)$ to $o(x/\log x)$.
-The proofs, the Lean formalization and the text were produced by AI models
-(from OpenAI and Anthropic), working under the author's direction.
-This computer-assisted work has not yet been reviewed by experts.
+
+
 
 \section{Preliminaries}\label{sec:inputs}
 We collect the bounds on used values and missing composites that the sieve will sharpen.
@@ -125,7 +126,7 @@ LRS prove that $a$ permutes the positive integers \cite[Theorem~1]{lrs};
 hence $E(t)$ is nondecreasing and divergent.
 Haver's sharp upper bound is
 $E(t)-t\leq(1/3+o(1))t/\log t$ \cite[Theorem~1(d), Corollary~12(d)]{haver}.
-His reduction states that
+Haver's reduction states that
 \[
  E(t)=t+\frac{t}{3\log t}+o(t/\log t)
  \quad\Longleftrightarrow\quad
@@ -151,7 +152,7 @@ transfers to all indices.
 In the proofs, ``old rate'' and ``old span'' mean \eqref{eq:oldrate} and \eqref{eq:oldspan}.
 
 Haver's estimates are: \eqref{eq:early}
-uses his Theorem~1(a), \eqref{eq:oldspan} is Theorem~1(b),
+uses Haver's Theorem~1(a), \eqref{eq:oldspan} is Theorem~1(b),
 \eqref{eq:oldhole} is Theorem~11, and
 \eqref{eq:oldrate} is Corollary~12(c) \cite{haver}.
 The prime pattern is Hofman--Pilipczuk's Theorem~4.3 \cite{hp}, as formulated
@@ -689,7 +690,7 @@ and $\eta$ is arbitrary. The second count is $N$ minus the first and
 minus the finitely many $k$ with $a(k)=k$.
 \end{proof}
 
-Corollary~\ref{cor:sign} strengthens Ordowski's first conjecture and proves his second.
+Corollary~\ref{cor:sign} strengthens Ordowski's first conjecture and proves Ordowski's second.
 
 Corollary~\ref{cor:sign} also gives finiteness of Ordowski's A155549,
 the nonprime values $a(n)<n$, and A064420, the $k$ with $a(k+1)=k$.
@@ -765,13 +766,13 @@ number theorem library \cite{pntcode}. Our Lean proof imports Haver's formal pro
 (Proposition~\ref{prop:inputs}) and checks their weakenings from the
 canonical definition. The formal proof derives the asymptotic directly
 from these estimates and counting identities. Haver's upper bound and
-criterion enter only the comparison with his results.
+criterion enter only the comparison with Haver's results.
 
 Haver's Lean archive already proves the general counting identities
 \cite[Corollary~12(b)]{haver};
 our proof discharges their prime-interval and tick endpoint hypotheses
-and derives the coefficient and all-index transfer. His sharp upper bound and second-order
-criterion lie outside his archive's verified core
+and derives the coefficient and all-index transfer. Haver's sharp upper bound and second-order
+criterion lie outside Haver's archive's verified core
 \cite[verification note, ``Claims outside the checked coverage'']{haver}. Lean also checks the sign, density, below-diagonal count, three-line and
 exceptional-set finiteness, and bounded-cycle finiteness; the three-branch
 formulas (Corollary~\ref{cor:branches}) and the second count in
@@ -881,9 +882,38 @@ $n$ & $b(n)$ & $R(n)$\\\hline
 \caption{The normalized smoothed error, rounded to four decimal places; Theorem~\ref{thm:main} gives its limit $1/3$.}\label{tab:ratio}
 \end{table}
 
+\paragraph{Related work.}
+Haver's Yellowstone papers \cite{haverY3,haverYFrontier,haverY6,haverY7,haverY8} are unused.
+
 \end{appendices}
 \clearpage
+Other nearby visiting rules include Applegate, Havermann, Selcoe,
+Shevelev, Sloane and Zumkeller's Yellowstone permutation~\cite{yellowstoneOriginal},
+Basistha and Iona\c{s}cu's coprime permutation~\cite{basisthaIonascu}, and
+Na's real-multiplier process~\cite{naVisiting}. Nothing from these works is used here.
+
 \begin{thebibliography}{99}
+
+\bibitem{haverY3}
+T. Haver, \emph{The Yellowstone permutation, III: few large terms}, October 22, 2026.
+\href{https://doi.org/10.5281/zenodo.23557280}{doi:10.5281/zenodo.23557280}.
+
+\bibitem{haverYFrontier}
+T. Haver, \emph{The prime frontier of the Yellowstone permutation is linear}, October 22, 2026.
+\href{https://doi.org/10.5281/zenodo.23558450}{doi:10.5281/zenodo.23558450}.
+
+\bibitem{haverY6}
+T. Haver, \emph{The prime frontier of the Yellowstone permutation falls behind time: limsup R(t)/t < 1}, October 23, 2026.
+\href{https://doi.org/10.5281/zenodo.23604646}{doi:10.5281/zenodo.23604646}.
+
+\bibitem{haverY7}
+T. Haver, \emph{The Yellowstone permutation: limsup R(t)/t $\leq$ 0.68605, liminf n\_p/p $>$ 1.4576, and Conjecture 7 for large n}, October 23, 2026.
+\href{https://doi.org/10.5281/zenodo.23604811}{doi:10.5281/zenodo.23604811}.
+
+\bibitem{haverY8}
+T. Haver, \emph{The Yellowstone permutation: Conjecture 7 for all n reduced to a riser law on a finite range, the normality and entry times of primes, and a run certificate}, October 23, 2026.
+\href{https://doi.org/10.5281/zenodo.23604970}{doi:10.5281/zenodo.23604970}.
+
 
 \bibitem{sievebook}
 A. C. Cojocaru and M. R. Murty, \emph{An Introduction to Sieve Methods
@@ -956,6 +986,28 @@ entries \href{https://oeis.org/A064413}{A064413},
 \href{https://oeis.org/A152519}{A152519},
 \href{https://oeis.org/A155549}{A155549} and
 \href{https://oeis.org/A256417}{A256417}.
+
+
+\bibitem{yellowstoneOriginal}
+David L. Applegate, Hans Havermann, Robert G. Selcoe, Vladimir Shevelev,
+N. J. A. Sloane and Reinhard Zumkeller,
+\emph{The Yellowstone Permutation},
+arXiv:1501.01669, first posted January 7, 2015; version~2, March 8, 2015.
+\url{https://arxiv.org/abs/1501.01669v2}.
+
+\bibitem{basisthaIonascu}
+Amit Kumar Basistha and Eugen J. Iona\c{s}cu,
+\emph{A special sequence and primorial numbers},
+arXiv:2302.02838, first posted February 6, 2023; version~5, November 22, 2023.
+Rev. Roumaine Math. Pures Appl. 70 (2025), 235--255.
+\url{https://arxiv.org/abs/2302.02838v5}.
+\url{https://doi.org/10.59277/rrmpa.2025.235.255}.
+
+\bibitem{naVisiting}
+Sungsoo Na,
+\emph{An integer-visiting process with real multipliers: coverage and rates},
+version~1.0.0, October 4, 2026.
+\url{https://doi.org/10.5281/zenodo.23138274}.
 
 \end{thebibliography}
 

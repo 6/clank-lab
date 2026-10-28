@@ -27,7 +27,7 @@ that theorem, for the one-based sequence `a` (A064413):
 - `EventualSignStatement`: for all large n, a(n) < n if a(n) is prime and
   a(n) > n if not (Ordowski's first conjecture on A064413);
 - `OrdowskiDensityStatement`: #{1 <= k <= N : k < a(k)} / N tends to 1
-  (his second conjecture). The paper's sharper form,
+  (Ordowski's second conjecture). The paper's sharper form,
   #{k <= N : a(k) > k} = N - (1/2 + o(1)) N/log N, follows from the next
   statement and the finiteness of {k : a(k) = k} but is not a separate
   Lean theorem;

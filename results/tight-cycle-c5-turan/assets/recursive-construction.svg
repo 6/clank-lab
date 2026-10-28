@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 200" role="img" aria-labelledby="title desc">
+<title id="title">Mubayi–Rödl recursive construction</title><desc id="desc">One illustrated triple has two vertices in A and one in B. All such triples are included; recursion continues in B.</desc>
+<rect width="620" height="200" fill="white"/>
+<g fill="none" stroke="rgb(51,51,51)" stroke-width="2"><ellipse cx="105" cy="100" rx="75" ry="55"/><ellipse cx="420" cy="100" rx="160" ry="75"/><ellipse cx="470" cy="100" rx="65" ry="38"/></g>
+<g font-family="serif" font-size="23" text-anchor="middle" fill="rgb(34,34,34)"><text x="105" y="28">A</text><text x="420" y="18">B</text><text x="470" y="108" font-size="20">repeat</text></g>
+<path d="M 80 80 L 80 120 L 300 100 Z" fill="rgba(50,116,178,0.06274509803921569)" stroke="rgb(36,92,166)" stroke-width="2"/>
+<g fill="rgb(34,34,34)"><circle cx="80" cy="80" r="4"/><circle cx="80" cy="120" r="4"/><circle cx="300" cy="100" r="4"/></g>
+</svg>

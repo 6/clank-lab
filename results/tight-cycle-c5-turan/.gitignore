@@ -1,0 +1,11 @@
+# Materialized inputs and public dependency/build outputs are regenerated.
+lean/*.lean
+!lean/PublicGuard.lean
+lean/.lake/
+lean/endpoint-report.txt
+data/p32/
+data/p33-1/
+data/p33-3999/
+**/__pycache__/
+*.pyc
+**/.materialize-*

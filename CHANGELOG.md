@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-bounds v4 (October 28, 2026)
+
+- Correction: wording of credits. The theorem and its checks are unchanged.
+
 ## coinvariant-lefschetz v2 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged.

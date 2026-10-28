@@ -3,7 +3,7 @@
 [![Checks](https://github.com/6/clank-lab/actions/workflows/ekg-bounds.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/ekg-bounds.yml)
 
 The [EKG sequence](https://mathworld.wolfram.com/EKGSequence.html)
-([OEIS A064413](https://oeis.org/A064413)) starts with 1 and 2, then
+([OEIS A064413 entry](https://oeis.org/A064413)) starts with 1 and 2, then
 repeatedly takes the smallest unused positive integer that shares a factor
 greater than 1 with the previous term: 1, 2, 4, 6, 3, 9, 12, 8, 10, 5, 15, …
 Most terms $a(n)$ are close to $n$. Each odd prime $p$ comes right after
@@ -29,11 +29,12 @@ to $3/2$ when $a(n)$ is three times a prime, and to $1$ otherwise. Tomer
 Haver's *Explicit rates for the EKG sequence* (2026) made these limits
 explicit and checked them in Lean, and our earlier
 [second-order asymptotic](https://doi.org/10.5281/zenodo.23493113) built on
-his work. None of these gives the sharp constants at every $n$: the
-explicit estimates apply only from astronomically large thresholds. The
-new step is a self-improving bound on how many even numbers larger than
-the smallest unused even number are already used, closed with the large
-sieve.
+Haver's work. These do not give the sharp constants at every $n$; using
+their explicit estimates for this purpose requires enormous thresholds.
+Haver already closes a self-improving early-even inequality and obtains
+its leading asymptotic constant ([Lemma 4, Theorem 5 and Remark 6(b)](https://zenodo.org/records/23129632/files/EKG-rates-paper.pdf)). We shorten its prime window from $4K+3$
+to $3K+2$ integers and combine effective large-sieve constants with odd-term
+control.
 It makes the explicit estimates work once that smallest unused even number
 passes about $1.3 \times 10^{10}$, which happens within the first
 $1.6 \times 10^{10}$ terms; those terms are computed.
@@ -55,6 +56,8 @@ The proofs, the Lean formalization, the programs and the text were produced by A
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23638042](https://doi.org/10.5281/zenodo.23638042)
+
+This DOI archives version 3. This is the version 4 correction.
 
 ## Check it
 
@@ -104,25 +107,34 @@ The conjecture, the published definition and the rule that each term is the leas
 unused multiple of a prime factor of its predecessor are due to
 [Lagarias, Rains and Sloane (2002)](https://doi.org/10.1080/10586458.2002.10504486).
 [Hofman and Pilipczuk (2008)](https://cs.uwaterloo.ca/journals/JIS/VOL11/Hofman/hofman1.html)
-proved that each odd prime $p$ is immediately preceded by $2p$ (by a
+proved the full pattern $2p,p,3p$ for odd primes (by a
 crossing count for $p > 25000$, and below that from Lagarias, Rains and
 Sloane's computation) and the crossing lemma used throughout. Tomer Haver's
 [*Explicit rates for the EKG sequence*](https://doi.org/10.5281/zenodo.23129632)
 (version 3, October 2026, whose Lean archive is the one deposited with
-version 2, unchanged) closes that crossing count for every $p > 43$ and
-proves the rest of the pattern $2p, p, 3p$: the term $3p$, that it occurs
-only there, and the spacing of these patterns. It supplies the Lean
+version 2, unchanged) reduces that crossing count's computed base to
+$p \le 43$ and formalizes the pattern and its consequences. Haver supplies the Lean
 definition of the sequence, the counting identity and the explicit bounds
 on early even terms, spans and missing composites, used here as proved Lean
 theorems and sharpened in the middle range. The prime-counting bounds rest
 on Rosser and Schoenfeld's (1962) bound for $\psi(x)$ and a form of
 Chebyshev's (1852) lower bound, formalized
 in [IEANTN](https://github.com/teorth/IEANTN) (T. Tao and contributors)
-with [LeanCert](https://github.com/alerad/leancert); the arithmetic large
-sieve of Montgomery (1968) and Montgomery and Vaughan (1973) comes from
-OpenAI's [mathematics formalizations](https://github.com/openai/math).
+with [LeanCert (https://github.com/alerad/leancert)](https://github.com/alerad/leancert); the arithmetic large
+sieve of Montgomery (1968) and Montgomery and Vaughan (1973) uses
+OpenAI's [`OAI.Ostmann.publishedAdditiveLargeSieve`](https://github.com/openai/math/blob/1581d4cbdd69a0faf34b2089614fe2a814316a6a/lean/OAI/NumberTheory/Ostmann/Preliminaries/AdditiveSieveProof.lean#L59),
+the additive inequality for arbitrary complex weights, a shifted integer interval,
+and reduced fractions with denominators at most $Q$. The retained statements
+and proofs are preserved; imports are adapted to the local toolchain before
+the arithmetic residue-avoidance inequality is deduced.
 Lean, mathlib and their contributors supplied the formal infrastructure,
 and the cover checker uses Arb through python-flint.
+
+Haver's subsequent [Yellowstone work](https://doi.org/10.5281/zenodo.23604970) concerns a different greedy permutation; nothing from those papers is used here.
+
+Related October 17–18 work by Haver treats the [lag-two EKG sequence (10.5281/zenodo.23437539)](https://doi.org/10.5281/zenodo.23437539), [general greedy-sieve processes (10.5281/zenodo.23437752)](https://doi.org/10.5281/zenodo.23437752), [a near-linear Yellowstone bound (10.5281/zenodo.23437783)](https://doi.org/10.5281/zenodo.23437783), [eight EKG-type rules (10.5281/zenodo.23437809)](https://doi.org/10.5281/zenodo.23437809), [closed Yellowstone-ladder results (10.5281/zenodo.23437816)](https://doi.org/10.5281/zenodo.23437816), and [Yellowstone II (10.5281/zenodo.23449375)](https://doi.org/10.5281/zenodo.23449375). These treat variants and general frameworks, including an EKG instance of the asymptotic theory in the general greedy-sieve paper; no additional theorem or code from these six papers is used here.
+
+Other nearby rules are the [Yellowstone permutation of Applegate, Havermann, Selcoe, Shevelev, Sloane and Zumkeller](https://arxiv.org/abs/1501.01669v2), [Basistha and Ionaşcu's coprime permutation](https://arxiv.org/abs/2302.02838v5), and [Na's real-multiplier visiting process](https://doi.org/10.5281/zenodo.23138274). Nothing from these works is used here.
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -133,7 +145,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Sharp linear bounds for the EKG sequence}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v3/results/ekg-bounds}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v4/results/ekg-bounds}},
   doi          = {10.5281/zenodo.23638042}
 }
 ```

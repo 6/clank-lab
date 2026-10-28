@@ -18,8 +18,7 @@ Zenodo records.
 
 ## path-ramsey v7 (October 28, 2026)
 
-- Correction: wording of credits. The theorem and its checks are unchanged.
-- Correction: use the house review-status sentence at the end of the introduction; add related-work credits and correct citation locators and draft status; clarify path order, "good" and the distinction between color and cube symbols; move the processor-time detail to the checking guide. The theorem, proofs, data and checks are unchanged.
+- Correction: disclosures (the review-status and AI-assistance sentences, now in a footnote on the title), credits, citations and wording. The theorem and its checks are unchanged.
 - Zenodo: [10.5281/zenodo.23744229](https://doi.org/10.5281/zenodo.23744229)
 
 ## tight-cycle-c5-turan v1 (October 28, 2026)

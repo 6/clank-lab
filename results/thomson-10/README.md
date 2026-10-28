@@ -2,7 +2,7 @@
 
 [![Checks](https://github.com/6/clank-lab/actions/workflows/thomson-10.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/thomson-10.yml)
 
-For ten equal charges on a sphere, does the bicapped square antiprism minimize Coulomb energy? This is the ten-point case of the [Thomson problem](https://en.wikipedia.org/wiki/Thomson_problem), associated with J. J. Thomson's 1904 atomic model. We build directly on [Aravind Karthigeyan's AI-generated nine-point Lean proof](https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e), reusing most of its MIT-licensed Lean code and its proof design. Jingxing Huang also reports a separate nine-point Lean proof candidate with conditional independent Python checking ([repository, revision of October 25, 2026](https://github.com/Stickerbug/thomson-n9-proof/tree/5f8492931e40e62e2064a162f978ff0e2541a2f6), [Zenodo record 23573472](https://doi.org/10.5281/zenodo.23573472)). We prove global optimality among all ten distinct unit-sphere points, with equality exactly up to orthogonal maps (including reflections) and relabeling.
+For ten equal charges on a sphere, does the bicapped square antiprism minimize Coulomb energy? This is the ten-point case of the [Thomson problem](https://en.wikipedia.org/wiki/Thomson_problem), associated with J. J. Thomson's 1904 atomic model. We build directly on [Aravind Karthigeyan's AI-generated nine-point Lean proof](https://github.com/aravindkarthigeyan/thomson-n9-lean/tree/168ff0c98cab4dfda0460ba55f8d169070ac385e), reusing most of its MIT-licensed Lean code and its proof design. Jingxing Huang also reports [related nine-point work](https://doi.org/10.5281/zenodo.23573472). We prove global optimality among all ten distinct unit-sphere points, with equality exactly up to orthogonal maps (including reflections) and relabeling.
 
 ![The bicapped square antiprism: a side view with the heights h of the two squares marked, and the view from above, where the lower square is the upper one turned by π/4 (illustration only; not part of the proof).](data/antiprism.svg)
 
@@ -34,9 +34,9 @@ The Python checker independently implements checks of the same rational certific
 
 ## Credits
 
-Aravind Karthigeyan's pinned October 6, 2026 [README](https://github.com/aravindkarthigeyan/thomson-n9-lean/blob/168ff0c98cab4dfda0460ba55f8d169070ac385e/README.md) states “global optimality and uniqueness for nine distinct points” and calls the project “a research release requesting external review”. That AI-generated proof establishes the D3h tricapped trigonal prism as minimizer, with equality up to orthogonal transformation and permutation. We reuse most of its MIT-licensed Lean code and follow its proof design. [THIRD_PARTY.md](THIRD_PARTY.md) preserves the file-level attribution, changes and full license notice.
+Aravind Karthigeyan's [thomson-n9-lean](https://github.com/aravindkarthigeyan/thomson-n9-lean) supplies most of the MIT-licensed Lean code and the proof design. Jingxing Huang's [Thomson n=9 proof and manuscript](https://doi.org/10.5281/zenodo.23573472) is related nine-point work; Huang's [ten-point stationarity continuation](https://github.com/Stickerbug/thomson-n9-proof/blob/fce398ce69c369a8de5b10d194af137cf33edd54/proof_work/publication_validation/formal/ThomsonCertificate/N10StationarityRightTerm3Final.lean) proves the related endpoint-sign theorem `d4dStationarity_right_endpoint_positive`. L. Föppl's [Stabile Anordnungen von Elektronen im Atom](https://doi.org/10.1515/crll.1912.141.251) records the candidate's history.
 
-The prior and concurrent credits remain in [historical context](checks/context.md), including Föppl; Yudin; Schwartz; Andreev; Cohn and Kumar; Hung Tran; Kryvonos, Liehr and Taylor; Joseph Tooby-Smith and Alex Zughaid; Alex Zarco; Delsarte, Goethals and Seidel; Bachoc and Vallentin; Cohn and Woo; saberwatchmanga (formerly terry2418); Erber and Hockney; and the Cambridge Cluster Database. That account also preserves the shared-cutoff provenance qualification. No priority claim is made.
+The bound framework builds on P. Delsarte, J. M. Goethals and J. J. Seidel's [Spherical codes and designs](https://doi.org/10.1007/BF03187604), C. Bachoc and F. Vallentin's [New upper bounds for kissing numbers from semidefinite programming](https://arxiv.org/abs/math/0608426), and H. Cohn and J. Woo's [Three-point bounds for energy minimization](https://arxiv.org/abs/1103.0485). V. A. Yudin's [Minimum potential energy of a point system of charges](https://doi.org/10.1515/dma.1993.3.1.75) provides energy-bound background. The full work-by-work list, including preceding exact cases, numerical configurations and concurrent results, is in [Further credits](checks/README.md#further-credits).
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -47,7 +47,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The Thomson problem for N = 10}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v7/results/thomson-10}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v8/results/thomson-10}},
   doi          = {10.5281/zenodo.23647395}
 }
 ```

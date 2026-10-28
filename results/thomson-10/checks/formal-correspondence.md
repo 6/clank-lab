@@ -534,7 +534,7 @@ Neither is a premise here.
 The following coordinates and energy formula specify the candidate in
 Theorem~\ref{thm:main}.
 
-His seven-point README calls
+Zarco's seven-point README calls
 ```
 
 The following exact formal dependency locators accompany the mathematical
@@ -814,7 +814,7 @@ eight-point ``warrant'', still ``a work in progress''~\cite{n8warrant}.
 Alex Zarco's five-point README states \nolinkurl{five_coulomb} and
 \nolinkurl{five_coulomb_unique}, with status ``produced by AI models''
 and ``not peer reviewed''~\cite[Opening; named Lean declarations]{zarco5};
-its ``Known results'' credits Schwartz. His seven-point README calls
+its ``Known results'' credits Schwartz. Zarco's seven-point README calls
 its result an ``AI-produced warrant'' for ``the logarithmic energy of
 seven points'', ``not peer reviewed''; its Coulomb section says it
 ``uses Hung Tran's local lemma''~\cite[Opening; Coulomb]{zarco7}.
@@ -1117,7 +1117,7 @@ Corollary~3.5 and Theorem~5, respectively~\cite{bachoc,cohnwoo}.
 Tran proves optimality and uniqueness of the pentagonal bipyramid for
 seven charges in \nolinkurl{thomson_seven} and
 \nolinkurl{thomson_seven_unique}~\cite[theorems thomson\_seven and thomson\_seven\_unique]{n7};
-his account describes giving the agents two fixed Lean statements.
+Tran's account describes giving the agents two fixed Lean statements.
 Kryvonos, Liehr and Taylor prove the eight-point square antiprism's
 optimality and uniqueness~\cite[Theorem~1.1]{n8}, also formalized in Lean by
 Tooby-Smith and Zughaid, who describe their development as ongoing

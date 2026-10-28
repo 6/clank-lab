@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## thomson-10 v8 (October 28, 2026)
+
+- Correction: wording of credits. The theorem and its checks are unchanged.
+- Correction: use the house review-status sentence at the end of the introduction. Add related-work credits in the README; the theorem, proofs, data and checks are unchanged.
+
 ## path-ramsey v7 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged.

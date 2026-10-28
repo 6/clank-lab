@@ -12,7 +12,7 @@ The proofs, the certificate checkers and the text were produced by AI models (fr
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23605134](https://doi.org/10.5281/zenodo.23605134)
+Archived on Zenodo: [doi:10.5281/zenodo.23722904](https://doi.org/10.5281/zenodo.23722904)
 
 ## Check it
 
@@ -41,6 +41,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{The strong Lefschetz property for complex reflection coinvariants}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/coinvariant-lefschetz-v2/results/coinvariant-lefschetz}},
-  doi          = {10.5281/zenodo.23605134}
+  doi          = {10.5281/zenodo.23722904}
 }
 ```

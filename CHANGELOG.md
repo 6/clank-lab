@@ -8,11 +8,13 @@ Zenodo records.
 
 - Correction: wording of credits. The theorem and its checks are unchanged.
 - The paper states that this work has not yet been reviewed by experts. It credits the joint McDaniel–Smith embedding announcement and the McDaniel–Smith–Wachi base-SLP precedent, including the scope of Smith’s announced deduction.
+- Zenodo: [10.5281/zenodo.23722904](https://doi.org/10.5281/zenodo.23722904)
 
 ## ekg-sequence v7 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged.
 - The paper states that this work has not yet been reviewed by experts.
+- Zenodo: [10.5281/zenodo.23722210](https://doi.org/10.5281/zenodo.23722210)
 
 ## lit-only-sigma v4 (October 27, 2026)
 

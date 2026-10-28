@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## lned-counterexample v1 (October 28, 2026)
+
+- A half-step specialization of Zhao's Bernoulli membership criterion gives a counterexample to the E-derivation part of the LNED conjecture over every characteristic-zero field. Lean checks every nonzero univariate shift and unit shifts in any chosen variable.
+
 ## scattering-coefficients v4 (October 28, 2026)
 
 - Correction: credits/wording. The theorem and its checks are unchanged.

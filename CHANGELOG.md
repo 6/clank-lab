@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## tight-cycle-c5-turan v1 (October 28, 2026)
+
+- The limiting edge density of tight-five-cycle-free three-uniform hypergraphs is $2\sqrt3-3$, matching Mubayi–Rödl’s construction. The upper bound builds on Bodnár–León–Liu–Pikhurko’s partition reduction, with new certificates for the five-cycle alone and an explicit finite-sampling proof. Lean checks the full theorem with compiled evaluation.
+
 ## locally-toroidal-polytopes v3 (October 28, 2026)
 
 - Correction: add the missing review-status disclosure, name related work in the README credits, and remove an unsupported historical exclusivity sentence from the result index. The theorem, proofs, data and checks are unchanged.

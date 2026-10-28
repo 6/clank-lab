@@ -1,0 +1,86 @@
+name: Tight five-cycle certificate checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/tight-cycle-c5-turan/**'
+      - '.github/workflows/tight-cycle-c5-turan.yml'
+  pull_request:
+    paths:
+      - 'results/tight-cycle-c5-turan/**'
+      - '.github/workflows/tight-cycle-c5-turan.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tight-cycle-c5-turan-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  certificates:
+    name: Exact certificates (part ${{ matrix.part }}/8)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/tight-cycle-c5-turan
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Install Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.14"
+      - name: Install exact checker dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgmp-dev g++
+          python3 -m pip install -r checks/requirements.txt
+      # The full Lean source rebuild takes about 48 CPU-hours, beyond CI's
+      # two-hour limit. This bounded check does not rebuild the endpoint.
+      - name: Verify finite certificates and semantic rejection controls
+        run: |
+          proof_cpus=$(python3 -c 'import os; print(len(os.sched_getaffinity(0)))')
+          python3 -I checks/quickcheck.py --cpus "$proof_cpus" --part "${{ matrix.part }}/8"
+
+  sources:
+    name: Formal-source reconstruction controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/tight-cycle-c5-turan
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Install Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.14"
+      - name: Check deterministic reconstruction controls
+        run: |
+          python3 -I checks/test_bootstrap.py
+          python3 -I checks/generate_public_guard.py --check
+
+  check:
+    name: Check tight-cycle-c5-turan
+    needs: [certificates, sources]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful certificate and source checks
+        env:
+          CERTIFICATE_RESULT: ${{ needs.certificates.result }}
+          SOURCE_RESULT: ${{ needs.sources.result }}
+        run: |
+          test "$CERTIFICATE_RESULT" = success
+          test "$SOURCE_RESULT" = success

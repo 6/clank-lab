@@ -158,3 +158,34 @@ formal proof in a proof assistant. The short induction and the reduction
 from greedy blocking to a color greater than 5 are written arguments in
 the paper. The drawing comparison checks the supplied figure sources;
 rendering them additionally trusts the SVG and LaTeX renderers.
+
+## Further credits
+
+- Frédéric Havet and Xuding Zhu, [The game Grundy number of graphs](https://inria.hal.science/inria-00600738v1/document) — question, game definitions and calibration examples.
+- Lawrence Hollom, [`On monotonicity in Maker-Breaker graph colouring games`](https://arxiv.org/abs/2308.03528v2) — restatement, ordered-game obstruction and calibration example.
+- Tomasz Krawczyk and Bartosz Walczak, [Asymmetric coloring games on incomparability graphs](https://arxiv.org/abs/1503.04748) — context for the reverse comparison.
+- Carlos V. G. C. Lima, Thiago Marcilon, Nicolas Martins and Rudini Sampaio, [The connected greedy coloring game](https://doi.org/10.1016/j.tcs.2022.10.034) — related game variant.
+- Thiago Marcilon and Ariane Ribeiro, [Results on the connected greedy coloring game](https://doi.org/10.1007/s44425-025-00018-3) — related game variant.
+- Ana Luísa C. Furtado, Simone Dantas, Celina M. H. de Figueiredo and Miguel Del-Rio-Palma, [Coloring game on complete multipartite with singletons and equal sized parts](https://doi.org/10.1016/j.disc.2026.115291) — related graph-class results.
+- Yash Chawda, Saraswati Girish Nanoti, Brahadeesh Sankarnarayanan and Eshwar Srinivasan, [Structural and computational aspects of majority coloring games](https://arxiv.org/abs/2609.37796) — related majority games.
+- Daša Mesarič Štesl, [Connected Coloring Games on Corona Products of Graphs](https://arxiv.org/abs/2610.29650) — related connected games.
+- Lawrence Hollom, [On graphs with maximum difference between game chromatic number and chromatic number](https://arxiv.org/abs/2309.01583v3) — related comparison.
+- Eurinardo Rodrigues Costa, Victor Lage Pessoa, Rudini Sampaio and Ronan Pardo Soares, [PSPACE-completeness of two graph coloring games](https://doi.org/10.1016/j.tcs.2020.03.022) — complexity context.
+- Thiago Marcilon, Nicolas Almeida Martins and Rudini Sampaio, [Hardness of some variants of the graph coloring game](https://arxiv.org/abs/1911.10363) — complexity context.
+- Eder Figueiredo and Vinícius Fernandes dos Santos, [Two-Turn Assymetric Graph Coloring Games](https://doi.org/10.1007/s44425-025-00025-4) — related game variant.
+- Mou, Sun and Zhang, [The game chromatic number of generalized Mycielski graphs of paths and cycles](https://arxiv.org/abs/2609.02283) — related ordinary-game bounds.
+- Chawda, Nanoti and Sankarnarayanan, [On the majority game chromatic number of forests and other graphs](https://arxiv.org/abs/2609.23803) — related majority constraint.
+
+## Sources used during development
+
+The source scope and development account below is retained from the landing page. The short credit account is in the [result README](../README.md#credits).
+
+An outside AI model suggested the clique and degree observations used for the exact values.
+
+Frédéric Havet and Xuding Zhu introduced the game Grundy number and posed the question. Their Proposition 2 (crowns and the isolated-vertex reversal), Remark 7 (the seven-vertex path) and the four-cycle base of Theorem 10 provided checks of the game rules. Lawrence Hollom restated the question and supplied the ordered-game obstruction and the Figure 1 example at parameter $r=1$ as another calibration example. The graph here gives a counterexample when both players may choose any uncolored vertex, starting with Alice and without passes.
+
+Tomasz Krawczyk and Bartosz Walczak [answered a different question in 2015](https://arxiv.org/abs/1503.04748): the game chromatic number cannot be bounded by a function of the static Grundy number, and consequently cannot be bounded by the game Grundy number. That reverse comparison is distinct from the inequality addressed here.
+
+Nearby work covers [connected greedy coloring](https://doi.org/10.1016/j.tcs.2022.10.034), [Marcilon–Ribeiro’s connected variant](https://doi.org/10.1007/s44425-025-00018-3), [complete multipartite graphs](https://doi.org/10.1016/j.disc.2026.115291), [majority games](https://arxiv.org/abs/2609.37796), [corona products](https://arxiv.org/abs/2610.29650), [Hollom’s comparison with ordinary chromatic number](https://arxiv.org/abs/2309.01583v3), [complexity of the ordinary and greedy games](https://doi.org/10.1016/j.tcs.2020.03.022), [hardness of variants](https://arxiv.org/abs/1911.10363), and [two-turn asymmetric games](https://doi.org/10.1007/s44425-025-00025-4). Nothing from these nearby works is used.
+
+Related work also includes Mou, Sun and Zhang’s [The game chromatic number of generalized Mycielski graphs of paths and cycles](https://arxiv.org/abs/2609.02283), on ordinary-game bounds for those graph classes, and Chawda, Nanoti and Sankarnarayanan’s [On the majority game chromatic number of forests and other graphs](https://arxiv.org/abs/2609.23803), on the different majority-coloring constraint. Nothing from either work is used here.

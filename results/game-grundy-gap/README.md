@@ -8,7 +8,7 @@ $$
 \chi_g(G) = 5, \qquad \Gamma_g(G) = 6.
 $$
 
-This answers only the first part of Havet and Zhu's question. Whether the gap can be arbitrarily large remains open.
+This example does not resolve the second part of Havet and Zhu's question, concerning arbitrarily large game Grundy number compared with game chromatic number.
 
 Computer-assisted; not yet reviewed by experts.
 
@@ -32,9 +32,9 @@ The command checks the three strategy certificates with two independent implemen
 
 ## Credits
 
-Frédéric Havet and Xuding Zhu introduced the game Grundy number and posed the question. Their examples provided checks of the game rules. Lawrence Hollom restated the question and supplied the ordered-game obstruction and another calibration example. The graph here gives a counterexample when both players may choose any uncolored vertex, starting with Alice and without passes.
+Frédéric Havet and Xuding Zhu's [The game Grundy number of graphs](https://inria.hal.science/inria-00600738v1/document) introduced the game Grundy number and posed the question. Their crowns, isolated-vertex reversal, seven-vertex path and four-cycle examples provided checks of the game rules. Lawrence Hollom's [`On monotonicity in Maker-Breaker graph colouring games`](https://arxiv.org/abs/2308.03528v2) restated the question, explained the ordered-game obstruction and supplied another calibration example.
 
-Tomasz Krawczyk and Bartosz Walczak [answered a different question in 2015](https://arxiv.org/abs/1503.04748): the game chromatic number cannot be bounded by a function of the static Grundy number, and consequently cannot be bounded by the game Grundy number. That reverse comparison is distinct from the inequality addressed here.
+An outside AI model suggested the clique and degree observations used for the exact values. Tomasz Krawczyk and Bartosz Walczak's [Asymmetric coloring games on incomparability graphs](https://arxiv.org/abs/1503.04748) supplies context for the reverse comparison. Related work includes Mou, Sun and Zhang's [The game chromatic number of generalized Mycielski graphs of paths and cycles](https://arxiv.org/abs/2609.02283), on ordinary-game bounds, and Chawda, Nanoti and Sankarnarayanan's [On the majority game chromatic number of forests and other graphs](https://arxiv.org/abs/2609.23803), on the majority constraint. The full work-by-work list, including connected, majority and other coloring-game variants and complexity results, is in [Further credits](checks/README.md#further-credits).
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -45,7 +45,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{Greedy play can require more colors in the coloring game}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/game-grundy-gap-v2/results/game-grundy-gap}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/game-grundy-gap-v3/results/game-grundy-gap}},
   doi          = {10.5281/zenodo.23608437}
 }
 ```

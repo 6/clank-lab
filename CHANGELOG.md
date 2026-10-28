@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## scattering-coefficients v4 (October 28, 2026)
+
+- Correction: credits/wording. The theorem and its checks are unchanged.
+- Restore the explicit Lean-kernel and Mathlib credit in the verification section and credit nearby work on Artin-algebra scattering diagrams.
+- Credit OpenAI's closely related September 24, 2026 quantum scattering framework; identify the five-and-one incoming pattern as our observation, with implication of the exact all-j formula or cubic unresolved. Restore Burcroff and coauthors' index credit, clarify the printed convention and growth-rate attribution, and define the sequence notation at first use. The paper retains the expert-review status.
+
 ## ekg-bounds v4 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged.

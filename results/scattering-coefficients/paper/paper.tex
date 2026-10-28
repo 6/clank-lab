@@ -44,9 +44,12 @@
 \DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
 \setlength{\emergencystretch}{2em}
 \raggedbottom
-\title{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}
+\title{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients\thanks{The proofs, the Lean
+formalization and the text were produced by AI models (from OpenAI and
+Anthropic), working under the author's direction.
+This work has not yet been reviewed by experts.}}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 25, 2026}
+\date{October 27, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}}
 \begin{document}
 \maketitle
@@ -59,14 +62,16 @@ Elgin, Reading and Stella's table and code. This proves Elgin, Reading
 and Stella's Conjecture~13. Elgin, Reading and Stella provided extensive computations and stated
 eighteen conjectures on rank-two cluster scattering coefficients. Burcroff, Lee, Mou,
 Musiker and Reineke proved Conjectures~1--3, 5--10 and 14--18, leaving
-Conjecture~13 unresolved and mysterious from both the quiver-moduli and
-tight-grading points of view. Kontsevich and Soibelman provided ordered
+Conjecture~13 unresolved and ``mysterious from both the quiver moduli and
+tight grading points of view.'' Kontsevich and Soibelman provided ordered
 factorization, and Gross, Hacking, Keel and Kontsevich provided the
 change of lattice used here. The binomial sum was already recorded by
 Vladimir Kruchinin, with functional equations by Paul D. Hanna;
 Burcroff and coauthors identified its algebraicity and growth rate
-conditionally on the conjecture. The new step identifies these numbers
-with the scattering coefficients. After a change of lattice and a
+conditionally on the conjecture. We identify these numbers
+with the scattering coefficients. We observe that OpenAI's closely related
+quantum scattering framework admits the same five-and-one incoming multiplicities; whether it implies the
+coefficient formula or cubic remains unresolved. After a change of lattice and a
 monomial substitution, the fifth power of the wall function becomes the
 diagonal factor of an explicit Poisson automorphism. A grading separates
 that factor from the other walls and yields a differential equation
@@ -97,57 +102,53 @@ $S$ is the unique power series with constant term $1$ satisfying
 
 This proves Elgin, Reading and Stella's Conjecture~13
 \cite[Conjecture~13]{ERS}, posed in their first preprint on April~17, 2024.
-The convention matters: their printed definition interchanges $b,c$
-relative to their table and code; we follow the table and code
-\cite{scatcoef}, as does \cite[(2.2)]{BLMMR}
-(Remark~\ref{rem:reading}). The first values are $2,5,17,64,259$.
+We follow their table and code \cite{scatcoef}, as does
+\cite[(2.2)]{BLMMR}; Remark~\ref{rem:reading} quotes the printed
+definition and explains the convention.
 
-Thomas Elgin, Nathan Reading and Salvatore Stella \cite{ERS} computed
-these coefficients symbolically to high degree; the conjectures, data
-and code \cite{scatcoef} are theirs. Amanda Burcroff, Kyungyong Lee, Lang Mou, Gregg
-Musiker and Markus Reineke \cite[Theorem~1.4]{BLMMR} (first posted on arXiv on
-November~18, 2025; published in 2026) proved Conjectures~1--3, 5--10 and
-14--18 of \cite{ERS}, combining the change-of-lattice relation between
+
+OpenAI's closely related quantum scattering framework includes the case in which ``simple incoming data
+are replaced by allowed products of elementary units'' \cite[Proposition~4.2]{OpenAI}.
+Its elementary units include $D_p=E_{p,-1}=\prod_{k\geq0}(1+v^{-1-2k}X_p)$
+for a simple lattice root $p$, with quantum parameter $v$ and torus monomial $X_p$
+\cite[(3.2), Theorem~3.1 and \S4.1]{OpenAI}.
+``Occurrences, including repeated units, are counted separately'' \cite[\S4.2]{OpenAI}.
+Five $D_{e_1}$ and one $D_{e_2}$ match the multiplicities of our
+changed-lattice incoming data $(1+t)^5,1+t$.
+The manuscript is dated September~24, 2026; our first version is dated
+October~22, 2026\footnote{The public tag
+\href{https://github.com/6/clank-lab/tree/scattering-coefficients-v1/results/scattering-coefficients}{scattering-coefficients-v1}
+identifies our October~22 first version.}.
+The classical passage remains unverified; implication of our all-$j$ formula
+or cubic remains unresolved.
+
+Thomas Elgin, Nathan Reading and Salvatore Stella \cite{ERS} supplied
+the conjectures, high-degree symbolic computations, data and code \cite{scatcoef}. Amanda Burcroff, Kyungyong Lee, Lang Mou, Gregg
+Musiker and Markus Reineke \cite[Theorem~1.4]{BLMMR} proved Conjectures~1--3, 5--10 and
+14--18 of \cite{ERS}, using the change of lattice between
 $\mathfrak{D}(1+x^b,1+y^c)$ and $\mathfrak{D}((1+x)^c,(1+y)^b)$ (from
 \cite[Example~1.15]{GHKK}), Euler characteristics of quiver moduli through
 the refined GW/Kronecker correspondence of Reineke and Weist \cite{RW},
-and the tight gradings of Burcroff, Lee and Mou \cite{BLM}. They wrote
-that Conjectures~4, 12 and~13 remain unsolved, and that the formula of
-Conjecture~13 is mysterious from both the quiver moduli and tight
-grading points of view \cite[\S1.3]{BLMMR}. Ryota Akagi \cite[Proposition~1.3]{Akagi}
-(first posted on arXiv on July~29, 2025)
-proved Conjectures~1, 2, 3, 5, 6, 11 and~15 (the proof of~11 there is
-due to Burcroff, Lee and Mou \cite[Remark~1.4]{Akagi}), with results related to 14 and 16--18, by
-translating a description of rank-two cluster scattering diagrams through
-dilogarithm elements into power series, building on Akagi's earlier explicit
-forms of rank-two cluster scattering diagrams in low degrees
-\cite{Akagi23} (first posted on arXiv on September~27, 2023). Amanda
-Burcroff and Kyungyong Lee \cite{BL} study broken lines and compatible
-pairs for rank-two quantum cluster algebras. The ordered-product
-factorization on which everything rests is due to Kontsevich and
+and Burcroff, Lee and Mou's tight gradings \cite{BLM}. They listed
+Conjectures~4, 12 and~13 as unsolved and~13 as ``mysterious from both
+the quiver moduli and tight grading points of view'' \cite[\S1.3]{BLMMR}. Ryota Akagi \cite[Proposition~1.3]{Akagi} proved Conjectures~1, 2, 3, 5, 6, 11 and~15 (proof of~11 due to Burcroff, Lee and Mou \cite[Remark~1.4]{Akagi}), with results related to 14 and 16--18. Akagi's earlier low-degree forms
+\cite{Akagi23} (first posted September~27, 2023) and Amanda Burcroff and
+Kyungyong Lee's \emph{Broken lines and compatible pairs for rank 2 quantum
+cluster algebras} \cite{BL} are nearby work; nothing from either is used here. The ordered factorization is due to Kontsevich and
 Soibelman \cite[Theorem~6]{KS06}, \cite[Factorization Property]{KS08}; we use the formulation of Gross,
 Pandharipande and Siebert \cite[\S1.3]{GPS}.
 
-The right side of \eqref{eq:ers} was known as a sequence before the
-conjecture. Vladimir Kruchinin's OEIS entry A217596 (March 19, 2013), the
-expansion of $x/\mathrm{reversion}(x-x^2-x^3)$, lists exactly this
-binomial sum, so that the right side of \eqref{eq:ers} is
-$-\mathrm{A217596}(j+1)$ \cite{OEIS}; in our notation its generating
-function is $1-t\Sst$, with $\Sst$ the series of Theorem~\ref{thm:main}.
-The same day Paul D. Hanna added functional equations for this
-generating function $A$, the first being $A=1-t/A-t^2/A^2$; clearing
-denominators gives the cubic $A^3=A^2-tA-t^2$, which Burcroff, Lee, Mou,
-Musiker and Reineke used to note that the conjectured wall function is
-algebraic \cite[\S9.3]{BLMMR}, and which is equivalent to
-\eqref{eq:cubic} under $A=1-tS$. According to a comment of Muhammed
-Sefa Saydam on the entry (January 27, 2025), $-\mathrm{A217596}(n)$ counts
-the dissections of a convex $(n+2)$-gon into triangles and
-quadrilaterals by noncrossing diagonals none of which passes through a
-chosen vertex; so $\tau^{1,5}(2j,j)$ is this count for a $(j+3)$-gon
-(for example $2$ for a square and $5$ for a pentagon). We do not use
-this interpretation. What was open is that the scattering
-coefficients equal these numbers; this is what Theorem~\ref{thm:main}
-proves.
+Vladimir Kruchinin's OEIS entry A217596 (March~19, 2013) lists the
+binomial sum in \eqref{eq:ers} as $-\mathrm{A217596}(j+1)$ \cite{OEIS}.
+Its generating function is $A=1-t\Sst$, where
+$\Sst=(1+\xi)/(1-\xi-\xi^2)$ for the series $\xi$ in Theorem~\ref{thm:main}.
+Paul D. Hanna's functional equation (March~19, 2013)
+$A=1-t/A-t^2/A^2$ gives $A^3=A^2-tA-t^2$, which Burcroff, Lee, Mou,
+Musiker and Reineke used to deduce algebraicity \cite[\S9.3]{BLMMR};
+substituting $A=1-tS$ gives \eqref{eq:cubic}.
+Muhammed Sefa Saydam's polygon-dissection interpretation (January~27, 2025)
+is described in Appendix~\ref{rem:sequence}; nothing from it is used here.
+Theorem~\ref{thm:main} identifies these numbers with the scattering coefficients.
 The entry also credits Bala's 2015 recurrence
 (Appendix~\ref{sec:formal-details}).
 Scattering diagrams were introduced by Kontsevich and Soibelman
@@ -159,10 +160,7 @@ the change of lattice (which we reprove in the form needed) and the
 pentagon identity.
 
 
-The coefficient identity is formalized in Lean from the definitions (Section~\ref{sec:lean}). The proofs, the Lean
-formalization and the text were produced by AI models (from OpenAI and
-Anthropic), working under the author's direction. The result has not yet
-been reviewed by experts.
+The coefficient theorem is formalized in Lean (Section~\ref{sec:lean}).  
 
 \section{Outline of the proof}\label{sec:overview}
 To identify the sequence with the scattering coefficients, the hardest
@@ -785,7 +783,8 @@ $\lceil(j+1)/2\rceil\leq\ell\leq j+1$. Lemma~\ref{lem:solution} gives
 \eqref{eq:cubic} and its uniqueness.
 \end{proof}
 \section{Formal verification}\label{sec:lean}
-The formal theorem uses the following definitions. Here \texttt{Slope} is $\mathbb Q_{\geq0}$ with a top element for the
+Lean checks the coefficient theorem for the following formal definitions.
+Here \texttt{Slope} is $\mathbb Q_{\geq0}$ with a top element for the
 vertical ray; $5/2$ represents $(2,5)$. A family assigns a series in
 $\ps{t}$ to each slope. The predicate \texttt{IsConsistentFamily}
 requires constant term $1$ and Definition~\ref{def:consistent}'s
@@ -812,10 +811,12 @@ and intermediate factorizations; the $\xi$-parametrization, uniqueness
 of the series in \eqref{eq:cubic} and Lagrange inversion are written arguments
 (Appendix~\ref{sec:formal-details}).
 
-The formal coefficient proof instead uses Bala's recurrence. Logical
-dependencies and build instructions are in the checking notes. The scattering-diagram
+The Lean proof uses Bala's recurrence in place of the written proof's
+Lagrange inversion. The public Lean guide, linked from the result's README,
+gives the logical dependencies, axiom list and build instructions. The scattering-diagram
 interpretation and convention comparison are outside Lean, as is
 Remark~\ref{rem:general}.
+Checking relies on Lean's kernel and Mathlib.
 
 \begin{appendices}
 \section{Ordered factorization and routine identities}\label{sec:factor-details}
@@ -939,14 +940,15 @@ $(n+1,n)$ and $(n,n+1)$, as found in \cite[\S1.3]{GPS}.
 
 \begin{remark}[Reading the definition in \cite{ERS}]\label{rem:reading}
 The convention of Definition~\ref{def:tau} is that of the table of
-$\tau^{3,2}(i,j)$, $0\leq i,j\leq7$, printed in \cite[\S2]{ERS}, all of whose entries it reproduces (we
-compared them one by one), and of the code published with \cite{ERS}
+$\tau^{3,2}(i,j)$, $0\leq i,j\leq7$, printed in \cite[\S2]{ERS}, all of whose entries it reproduces, and of the
+code published with \cite{ERS}
 (the method \texttt{wall\_hom} of \texttt{scatcoef.py} in \cite{scatcoef});
 it is also the convention in which \cite{BLMMR} restate the conjectures.
-A reader comparing with the definition in \cite[\S2]{ERS} should note that,
-read literally, it attaches the exponents $b$ and $c$ to the two initial
-walls the other way round, so that its coefficient $\tau^{b,c}(i,j)$
-would be $\tau^{c,b}(i,j)$ in the convention used here. Under that
+The printed definition in \cite[\S2]{ERS} says
+``$\zeta_1=z_2^c$ and $\zeta_2=z_1^{-b}$.''
+Reading those substitutions literally interchanges $b,c$ relative to the
+table/code convention: its coefficient $\tau^{b,c}(i,j)$ would be
+$\tau^{c,b}(i,j)$ in the convention used here. Under that
 reading $\tau^{3,2}(3,1)$ would be $1$, whereas the table in \cite{ERS}
 prints $0$, which is its value under Definition~\ref{def:tau}; and
 Conjecture~13 would already fail at $j=1$, since $\tau^{5,1}(2,1)=0$. We
@@ -961,7 +963,8 @@ conjecture. Vladimir Kruchinin's OEIS entry A217596 (March 19, 2013), the
 expansion of $x/\mathrm{reversion}(x-x^2-x^3)$, lists exactly this
 binomial sum, so that the right side of \eqref{eq:ers} is
 $-\mathrm{A217596}(j+1)$ \cite{OEIS}; in our notation its generating
-function is $1-t\Sst$, with $\Sst$ the series of Theorem~\ref{thm:main}.
+function is $1-t\Sst$, where $\Sst=(1+\xi)/(1-\xi-\xi^2)$ for the
+series $\xi$ in Theorem~\ref{thm:main}.
 The same day Paul D. Hanna added functional equations for this
 generating function $A$, the first being $A=1-t/A-t^2/A^2$; clearing
 denominators gives the cubic $A^3=A^2-tA-t^2$, which Burcroff, Lee, Mou,
@@ -984,8 +987,9 @@ $\mathfrak{D}(1+x,1+y^5)$ is algebraic over $\Q(x^2y^5)$, by
 and an exponential growth rate $27/5$ of the coefficients, from the
 conjectured formula \cite[\S9.3]{BLMMR}, in connection with the question,
 which they attribute to Kontsevich, whether every wall function of a
-cluster scattering diagram is algebraic. Theorem~\ref{thm:main} makes
-both statements unconditional for this ray.
+cluster scattering diagram is algebraic. Theorem~\ref{thm:main}, together
+with the deduction in \cite[\S9.3]{BLMMR}, makes both statements
+unconditional for this ray.
 \end{remark}
 
 \begin{remark}[Other exponents]\label{rem:general}
@@ -1027,6 +1031,10 @@ in Definition~\ref{def:tau}. The identification with the coefficients
 in \cite{ERS} is the reading explained in Remark~\ref{rem:reading}.
 
 \end{appendices}
+
+\paragraph{Nearby work.}
+Hipolito Treffinger \cite{Treffinger} studies scattering diagrams for
+Artin algebras; nothing from that work is used here.
 
 \begin{thebibliography}{99}
 
@@ -1122,7 +1130,14 @@ V.~Kruchinin (with functional equations by P.~D.~Hanna, a recurrence by
 P.~Bala, a comment and formulas by M.~S.~Saydam, and additions by others),
 \emph{Expansion of g.f.\ $x/\mathrm{reversion}(x-x^2-x^3)$}, sequence
 A217596 in The On-Line Encyclopedia of Integer Sequences, 2013,
+revision~63 (July~29, 2025), accessed October~27, 2026,
 \url{https://oeis.org/A217596}.
+
+\bibitem{OpenAI}
+OpenAI,
+\emph{Elementary positivity of chromatic quasisymmetric functions},
+manuscript dated September 24, 2026.
+\href{https://github.com/openai/math/tree/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/Elementary-Positivity-of-Chromatic-Quasisymmetric-Functions-September-24-2026}{Pinned manuscript and source}.
 
 \bibitem{RW}
 M.~Reineke and T.~Weist,
@@ -1130,6 +1145,12 @@ M.~Reineke and T.~Weist,
 Math. Ann. \textbf{355} (2013), no.~1, 17--56.
 \href{https://doi.org/10.1007/s00208-012-0778-0}{doi:10.1007/s00208-012-0778-0};
 \href{https://arxiv.org/abs/1103.5283}{arXiv:1103.5283}.
+
+\bibitem{Treffinger}
+H.~Treffinger,
+\emph{Scattering diagrams for Artin algebras},
+preprint, first posted August 4, 2026.
+\href{https://arxiv.org/abs/2608.04233}{arXiv:2608.04233}.
 
 \end{thebibliography}
 \end{document}

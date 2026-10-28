@@ -10,6 +10,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23735733](https://doi.org/10.5281/zenodo.23735733)
+
 ## Check it
 
 Install [elan](https://github.com/leanprover/elan), Git and a C/C++ toolchain. From this folder, run:
@@ -43,6 +45,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A counterexample to the E-derivation part of the LNED conjecture}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/lned-counterexample-v1/results/lned-counterexample}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/lned-counterexample-v1/results/lned-counterexample}},
+  doi          = {10.5281/zenodo.23735733}
 }
 ```

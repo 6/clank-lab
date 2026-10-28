@@ -7,6 +7,7 @@ Zenodo records.
 ## ekg-bounds v4 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23732014](https://doi.org/10.5281/zenodo.23732014)
 
 ## coinvariant-lefschetz v2 (October 28, 2026)
 

@@ -55,9 +55,7 @@ The proofs, the Lean formalization, the programs and the text were produced by A
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23638042](https://doi.org/10.5281/zenodo.23638042)
-
-This DOI archives version 3. This is the version 4 correction.
+Archived on Zenodo: [doi:10.5281/zenodo.23732014](https://doi.org/10.5281/zenodo.23732014)
 
 ## Check it
 
@@ -146,6 +144,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Sharp linear bounds for the EKG sequence}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-bounds-v4/results/ekg-bounds}},
-  doi          = {10.5281/zenodo.23638042}
+  doi          = {10.5281/zenodo.23732014}
 }
 ```

@@ -1,9 +1,30 @@
 # Corrections and interpretation of historical records
 
 The earlier background, checking account, bibliography and landing page are
-retained without rewriting them. The following annotations correct their
-reporting and explain the boundary of the records. The theorem, Lean
-sources, checkers, inputs and certificates are unchanged.
+retained with the bounded citation corrections recorded below. The following
+annotations correct their reporting and explain the boundary of the records.
+The theorem, Lean sources, checkers, inputs and certificates are unchanged.
+
+## Exposition corrections in this edition
+
+Lemmas 4.1 and 4.2 now state the path order and the meaning of a good
+coloring. Lemma 4.3 uses a separate symbol for a cube and a color. The
+approximate total processor time has moved from the paper to this checking
+guide. These changes clarify the exposition; the theorem, mathematical
+argument, Lean sources, checkers, data and certificates are unchanged.
+
+## Citation corrections in this edition
+
+The survey pinpoint for the first open path case is Section 6.4, page 65.
+Zhang's stronger tree bound is now located at `multicolourRamsey_le_tight`
+in `Erdos557/Tight.lean` at the pinned commit, rather than the weaker
+opening README headline. Its source credits an AI-found Erdős–Sós proof
+packaged by T. Adamczewski; that credit is retained. Galindez's cited note
+is a draft dated August 18, 2026, and explicitly reports that no DRAT/LRAT
+proof certificate was logged or checked. These qualifications are now stated
+in the paper and the retained background. The correct LNAI volume 16688
+entry is unchanged. No proof or certificate from either nearby project
+is used in this result.
 
 ## Audit controls
 

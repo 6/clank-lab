@@ -142,7 +142,8 @@ Dybizbański, Dzido and Radziszowski's $\R(P_8)=14$ and
 $\R(P_9)=17$~\cite{DDR16}, by hand. Each covers one value of $n$; none
 bounds $\R(P_{10})$ from above by less than the counting bound $23$ below,
 and the only other results bounding $\R(P_{10})$ that we found are
-Galindez's computation $\R(C_{10})\le26$~\cite{Gal26} and Zhang's Lean
+Galindez's draft reporting $\R(C_{10})\le26$~\cite{Gal26}, without a
+DRAT/LRAT proof certificate, and Zhang's Lean
 proof of a bound for all trees~\cite{ZhJ26}, each giving
 $\R(P_{10})\le26$. On October
 21, 2026 we rechecked the indexed forward citations of the canonical
@@ -155,8 +156,8 @@ method, whose ingredients have precedents~\cite{HKWB12,HS24,SNG+24,Sze26}.
 The companion case $n=11$, $\R(P_{11})=21$, remains open; Dybizbański,
 Dzido and Radziszowski showed that it would follow from the conjectured
 value $\R(C_{10})=20$ for the $10$-cycle~\cite{DDR16}, which is itself the
-first open case of the conjecture $\R(C_{2m})=4m$ for $m\ge3$, which
-Dzido made in his 2005 thesis~\cite[Section~6.3.1(b)]{Rad26}; Benevides and
+first open case of the conjecture $\R(C_{2m})=4m$ for $m\ge3$, stated in
+Dzido's 2005 thesis~\cite[Section~6.3.1(b)]{Rad26}; Benevides and
 Skokan~\cite{BS09} proved it for large $m$.
 
 The proof is a computation, built directly on the work of Dybizbański,
@@ -195,17 +196,19 @@ import (Section~\ref{sec:certs}) relies on the same checker, with its own
 compact certificate encoding. On multicolor cycle
 Ramsey numbers, Wesley~\cite{Wes25} used SAT solvers to prove
 $R(C_3,C_6,C_6)=R(C_5,C_6,C_6)=15$ together with new bounds, and
-Galindez~\cite{Gal26} has posted an exhaustive SAT computation, using SAT
-Modulo Symmetries~\cite{KS24} and cube-and-conquer, giving
-$\R(C_{10})\le 26$. That bound implies $\R(P_{10})\le 26$, since a
+Galindez's draft~\cite[Theorem~1]{Gal26} reports a SAT computation, using SAT
+Modulo Symmetries~\cite{KS24} and cube-and-conquer, for
+$\R(C_{10})\le 26$; it explicitly reports no DRAT/LRAT proof certificate.
+The reported bound implies $\R(P_{10})\le 26$, since a
 $10$-cycle contains a $P_{10}$. Shao, Jiang, Xu and Wang~\cite{SJXW26}
 have posted a reproduction package for $R(C_4,C_6,C_8)=12$: after a hand
 reduction in their paper, nine SAT instances, each refuted with a RUP
 certificate. A public SAT project on three-color cycle
 Ramsey numbers~\cite{Zha26} is also active. For trees, Zhang~\cite{ZhJ26}
-has posted a Lean proof that $R_k(T)\le k(n-2)+2$ for every tree $T$ on
-$n\ge2$ vertices, as a corollary of a machine-checked proof of the
-Erdős--Sós conjecture found by GPT-6 Astra and packaged by Adamczewski; for three colors and $P_{10}$
+states $R_k(T)\le k(n-2)+2$ for every tree $T$ on
+$n\ge2$ vertices in \texttt{multicolourRamsey\_le\_tight},
+\texttt{Erdos557/Tight.lean}, at the commit pinned in the bibliography.
+This uses an AI-found Erdős--Sós proof packaged by T.~Adamczewski; for three colors and $P_{10}$
 it gives $26$. Three-color Ramsey numbers of
 paths of different lengths, and of paths against cycles, have been
 determined in many further cases~\cite{Dzi05,DF09,OR11,MORS15}, and

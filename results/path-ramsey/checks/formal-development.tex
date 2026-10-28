@@ -328,7 +328,7 @@ $\R(P_n)=2n-2+(n\bmod2)$ for all sufficiently large $n$
 Dybizbański, Dzido and Radziszowski proved $\R(P_8)=14$
 (Theorem~10) and $\R(P_9)\le17$ (Theorem~8), which with their Section~2
 lower bound gives $\R(P_9)=17$ \cite{DDR16}.
-Radziszowski's survey \cite[p.~65, Sections~6.4 and~6.4.1(c)]{Rad26}
+Radziszowski's survey \cite[Section~6.4, p.~65]{Rad26}
 records the formula through $n=9$ and $P_{10}$ as the first open case.
 Our $K_{17}$ lower bound is the even-case blow-up in
 \cite[Section~1.1, after Theorem~1]{GRSS07}, also given in
@@ -368,15 +368,17 @@ Itzhakov and Miller's $R(4,3,3)=30$ \cite[abstract]{CFIM16}, and Heule and
 Scheucher's empty-hexagon theorem \cite{HS24}, with Subercaseaux et al.'s
 formal verification \cite{SNG+24}. In related Ramsey computations, Wesley
 proves $R(C_3,C_6,C_6)=R(C_5,C_6,C_6)=15$
-\cite[Theorems~3 and~4]{Wes25}; Galindez reports
-``$R(C_{10},C_{10},C_{10})\le26$'' \cite[title and description]{Gal26}, using
+\cite[Theorems~3 and~4]{Wes25}; Galindez's draft reports
+``$R(C_{10},C_{10},C_{10})\le26$'' \cite[Theorem~1]{Gal26}, using
 cube-and-conquer and Kirchweger--Szeider's ``SAT modulo symmetries''
-\cite[title]{KS24}. Shao, Jiang, Xu and Wang provide a
+\cite[title]{KS24}; it explicitly reports no DRAT/LRAT proof certificate.
+Shao, Jiang, Xu and Wang provide a
 ``reproduction package: $R(C_4,C_6,C_8)=12$'' \cite[title]{SJXW26}, and
 Leo-Y-Zhang provides \textit{CycleRamsey} \cite{Zha26}.
 Zhang's tree-bound corollary $R_k(T)\le k(n-2)+2$ for trees on $n\ge2$
-vertices \cite[README, opening paragraph]{ZhJ26} comes from the GPT-6 Astra
-proof packaged by Adamczewski; it gives $\R(P_{10})\le26$.
+vertices is \texttt{multicolourRamsey\_le\_tight} in
+\texttt{Erdos557/Tight.lean} \cite{ZhJ26}. It uses an AI-found
+Erdős--Sós proof packaged by T.~Adamczewski and gives $\R(P_{10})\le26$.
 
 Earlier path and cycle literature includes Dzido \cite{Dzi05},
 Dzido--Fidytek \cite{DF09}, Omidi--Raeisi \cite{OR11},
@@ -406,9 +408,9 @@ The following pinpoints accompany the ordinary citations in the paper. Retained 
 \item \cite{BBC+25}: Checker locators: introduction and Section~4.4.
 \item \cite{Sze26}: Streaming-import description: abstract.
 \item \cite{KMS26}: Graph-generation description: abstract.
-\item \cite{Gal26}: Bound and method locators: record title and description.
+\item \cite{Gal26}: Draft note, August 18, 2026, Theorem~1 and Section~5.3; the limitations explicitly report no DRAT/LRAT certificate.
 \item \cite{CGLR96}: Encoding locator: Section~3, Proposition~3.1 and the following auxiliary-variable clauses.
-\item \cite{ZhJ26}: Tree-bound corollary and imported-proof attribution: opening README paragraph.
+\item \cite{ZhJ26}: Tree-bound corollary: \texttt{Erdos557/Tight.lean}, \texttt{multicolourRamsey\_le\_tight}, commit \texttt{9d26a79d9ad04ff605167d022e512984a76ea3fa}; imported-proof attribution: the README at that commit.
 \item \cite{CFIM16}: abstract (the value $R(4,3,3)=30$).
 \item \cite{GRSS07}: retained published-v5 pinpoints: author manuscript, July 9, 2012, Theorem~1.
 \item \cite{DDR16}: retained published-v5 pinpoints: arXiv:1207.5851v3, Theorems~10 and~8 with Section~2; arXiv:1207.5851v3, Section~2; arXiv:1207.5851v3, Theorem~4; arXiv:1207.5851v3, Section~5; arXiv:1207.5851v3, Section~4.

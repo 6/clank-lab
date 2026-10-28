@@ -48,7 +48,7 @@
 \newcommand{\R}{R_3}
 \setlength{\emergencystretch}{3em}
 
-\title{The three-color Ramsey number of the 10-vertex path}
+\title{The three-color Ramsey number of the 10-vertex path\thanks{The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction. This work has not yet been reviewed by experts.}}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
 \date{October 25, 2026}
 
@@ -92,7 +92,7 @@ $\R(P_n)=2n-2+(n\bmod2)$ for all sufficiently large $n$
 Dybizbański, Dzido and Radziszowski proved $\R(P_8)=14$
 (Theorem~10) and $\R(P_9)\le17$ (Theorem~8), which with their
 lower bound gives $\R(P_9)=17$ \cite{DDR16}.
-Radziszowski's survey \cite{Rad26}
+Radziszowski's survey \cite[Section~6.4, p.~65]{Rad26}
 records the formula through $n=9$ and $P_{10}$ as the first open case.
 Our $K_{17}$ lower bound is the even-case blow-up in
 \cite{GRSS07}, also given in
@@ -132,15 +132,17 @@ Itzhakov and Miller's $R(4,3,3)=30$ \cite{CFIM16}, and Heule and
 Scheucher's empty-hexagon theorem \cite{HS24}, with Subercaseaux et al.'s
 formal verification \cite{SNG+24}. In related Ramsey computations, Wesley
 proves $R(C_3,C_6,C_6)=R(C_5,C_6,C_6)=15$
-\cite[Theorems~3 and~4]{Wes25}; Galindez reports
-$R(C_{10},C_{10},C_{10})\le26$ \cite{Gal26}, using
+\cite[Theorems~3 and~4]{Wes25}; Galindez's draft reports
+$R(C_{10},C_{10},C_{10})\le26$ \cite[Theorem~1]{Gal26}, using
 cube-and-conquer and Kirchweger--Szeider's SAT modulo symmetries
-\cite{KS24}. Shao, Jiang, Xu and Wang provide a
+\cite{KS24}; the draft explicitly reports no DRAT/LRAT proof certificate.
+Shao, Jiang, Xu and Wang provide a
 reproduction package for $R(C_4,C_6,C_8)=12$ \cite{SJXW26}, and
 Leo-Y-Zhang provides \textit{CycleRamsey} \cite{Zha26}.
 Zhang's tree-bound corollary $R_k(T)\le k(n-2)+2$ for trees on $n\ge2$
-vertices \cite{ZhJ26} comes from the GPT-6 Astra
-proof packaged by Adamczewski; it gives $\R(P_{10})\le26$.
+vertices is \texttt{multicolourRamsey\_le\_tight} in
+\texttt{Erdos557/Tight.lean} \cite{ZhJ26}. It uses an AI-found
+Erdős--Sós proof packaged by T.~Adamczewski and gives $\R(P_{10})\le26$.
 
 Earlier path and cycle literature includes Dzido \cite{Dzi05},
 Dzido--Fidytek \cite{DF09}, Omidi--Raeisi \cite{OR11},
@@ -162,8 +164,6 @@ library \cite{Mathlib20}, Wetzler, Heule and Hunt's \texttt{drat-trim}
 
 The proof uses Boolean satisfiability certificates and Lean;
 Section~\ref{sec:verification} describes this dependence.
-The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-The proof is computer-assisted and has not been reviewed by human experts.
 
 \section{Proof overview}
 The lower bound is the $K_4$ blow-up in Figure~\ref{fig:lower}: every
@@ -269,7 +269,8 @@ $g=(\pi,\sigma)$. On edges, $\pi\{a,b\}=\{\pi(a),\pi(b)\}$. They map good colori
 The following lemma fixes only the edges of the guaranteed path.
 
 \begin{lemma}[fixed path]\label{lem:fix}
-Let $k\le n$ and suppose every $3$-coloring of $K_n$ contains a
+Fix a path order $m$, and call a coloring good if it has no monochromatic
+$P_m$. Let $k\le n$ and suppose every $3$-coloring of $K_n$ contains a
 monochromatic $P_k$. Then every good coloring of $K_n$ is equivalent under
 $S_n\times S_3$ to a good coloring $X$ with $X(\{t,t+1\})=0$ for
 $0\le t\le k-2$.
@@ -301,7 +302,8 @@ many moves from $\Gamma$. A least member of an orbit gives simultaneous
 symmetry inequalities, as follows.
 
 \begin{lemma}[lex-leader]\label{lem:lex}
-Let $S$ be the set of good colorings with color $0$ on the fixed path.
+Fix a path order $m$. Let $S$ be the set of good colorings of $K_n$
+(those with no monochromatic $P_m$) with color $0$ on the fixed path.
 Each $g\in\Gamma$ maps $S$ to itself. Consequently, if $S$ is nonempty it
 contains a coloring $X^*$ with $X^*\lex g\cdot X^*$ for every
 $g\in\Gamma$.
@@ -388,20 +390,21 @@ refutation, are unsatisfiable. For each formula, Lean's verified LRAT
 checker accepts a propositional refutation. The resulting 15,957 certificates, together
 with the seven smaller-formula certificates, give 15,964 in all.
 The following lemma combines the cover refutation with the cube
-refutations. In this lemma $c$ denotes a cube, and $\mathcal P$ includes
+refutations. In this lemma $Q$ denotes a cube, distinct from the color
+symbol $c$, and $\mathcal P$ includes
 every path clause for the given path order.
 
 \begin{lemma}\label{lem:cover}
 Let $F$ be a formula, $\mathcal C$ a list of cubes, and $\mathcal P$ the
-set of all path clauses. If $F\cup\mathcal P\cup\{\neg c: c\in\mathcal C\}$
-is unsatisfiable and $F\cup\mathcal P\cup c$ is unsatisfiable for every
-$c\in\mathcal C$, then $F\cup\mathcal P$ is unsatisfiable.
+set of all path clauses. If $F\cup\mathcal P\cup\{\neg Q: Q\in\mathcal C\}$
+is unsatisfiable and $F\cup\mathcal P\cup Q$ is unsatisfiable for every
+$Q\in\mathcal C$, then $F\cup\mathcal P$ is unsatisfiable.
 \end{lemma}
 
 \begin{proof}
-A model of $F\cup\mathcal P$ satisfies some cube $c\in\mathcal C$, since
+A model of $F\cup\mathcal P$ satisfies some cube $Q\in\mathcal C$, since
 otherwise it falsifies a literal of every cube and so satisfies every
-$\neg c$. It is then a model of $F\cup\mathcal P\cup c$.
+$\neg Q$. It is then a model of $F\cup\mathcal P\cup Q$.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
@@ -444,8 +447,7 @@ Lean proves the reductions, the lower bound and the soundness of the
 certificate checker. The finite certificate checks are evaluated by compiled code, so their
 validity also relies on faithful compiled evaluation. The checking notes
 specify the logical assumptions and reproduction instructions.
-The refutations were checked twice, using a total of about twenty-three
-days of processor time. The archived certificates \cite{Gra26} permit
+The refutations were checked twice. The archived certificates \cite{Gra26} permit
 checking without repeating the search.
 
 \clearpage
@@ -601,7 +603,7 @@ multicolorings}, J.~Combin.\ Theory Ser.~B \textbf{19} (1975), 150--160.
 \href{https://doi.org/10.1016/0095-8956(75)90080-5}{doi:10.1016/0095-8956(75)90080-5}.
 
 \bibitem{Gal26}
-N.~F.~Galindez, \emph{An upper bound for the three-colour Ramsey number of the ten-cycle: $R(C_{10},C_{10},C_{10})\le 26$}, Zenodo, 2026.
+N.~F.~Galindez, \emph{An upper bound for the three-colour Ramsey number of the ten-cycle: $R(C_{10},C_{10},C_{10})\le 26$}, draft note, August 18, 2026, Zenodo, version 1.0.0.
 \href{https://doi.org/10.5281/zenodo.22000000}{doi:10.5281/zenodo.22000000}.
 
 \bibitem{Gra26}
@@ -750,11 +752,12 @@ graphs with five edges}, J.~Combin.\ Math.\ Combin.\ Comput.\ \textbf{11}
 Leo-Y-Zhang, \emph{CycleRamsey}, software repository on GitHub, 2026. \url{https://github.com/Leo-Y-Zhang/CycleRamsey}.
 
 \bibitem{ZhJ26}
-J.~Zhang, \emph{erdos557}, software repository on GitHub, 2026.
-\url{https://github.com/zhangjun725/erdos557}.
-Its opening README identifies the imported proof as found by GPT-6 Astra
-and packaged by T.~Adamczewski in \emph{erdos548},
-\url{https://github.com/tadamcz/erdos548}.
+J.~Zhang, \emph{erdos557}, \texttt{Erdos557/Tight.lean},
+\texttt{multicolourRamsey\_le\_tight}, commit
+\texttt{9d26a79d9ad04ff605167d022e512984a76ea3fa}, October 10, 2026.
+\url{https://github.com/zhangjun725/erdos557/blob/9d26a79d9ad04ff605167d022e512984a76ea3fa/Erdos557/Tight.lean}.
+The pinned README credits an AI-found proof packaged by T.~Adamczewski
+in \emph{erdos548}, \url{https://github.com/tadamcz/erdos548}.
 
 \end{thebibliography}
 

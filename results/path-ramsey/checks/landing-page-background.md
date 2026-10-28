@@ -123,10 +123,13 @@ the upper bounds up to $n = 9$ and starts from their bound for $n = 9$. R. W. Ir
 P. Rowlinson found the values for $n = 4$ to $7$. S. Radziszowski's dynamic survey records
 the problem's status and the sources of the earlier values. The paper
 also credits related work on other three-color path and cycle Ramsey
-numbers, including N. F. Galindez's recent SAT bound for 10-cycles,
+numbers, including N. F. Galindez's draft SAT bound for 10-cycles,
+which reports no DRAT/LRAT proof certificate,
 Z. Shao, H. Jiang, X. Xu and S. Wang's certificates for
-$R(C_4, C_6, C_8) = 12$, and J. Zhang's Lean bound for trees, which also
-gives 26 for this case. The
+$R(C_4, C_6, C_8) = 12$, and J. Zhang's tree-bound corollary
+`multicolourRamsey_le_tight` in
+[`Erdos557/Tight.lean`](https://github.com/zhangjun725/erdos557/blob/9d26a79d9ad04ff605167d022e512984a76ea3fa/Erdos557/Tight.lean),
+which also gives 26 for this case. Its AI-found proof was packaged by T. Adamczewski. The
 computation
 uses A. Biere's CaDiCaL solver and its user-propagator interface by
 K. Fazekas, A. Niemetz, M. Preiner, M. Kirchweger, S. Szeider and A. Biere;

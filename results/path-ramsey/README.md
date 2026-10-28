@@ -59,7 +59,7 @@ The proofs, the Lean formalization, the search code, the certificate checkers an
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23634505](https://doi.org/10.5281/zenodo.23634505)
+Archived on Zenodo: [doi:10.5281/zenodo.23744229](https://doi.org/10.5281/zenodo.23744229)
 
 ## Check it
 
@@ -120,6 +120,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{The three-color Ramsey number of the 10-vertex path}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/path-ramsey-v7/results/path-ramsey}},
-  doi          = {10.5281/zenodo.23634505}
+  doi          = {10.5281/zenodo.23744229}
 }
 ```

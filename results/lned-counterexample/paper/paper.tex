@@ -1,0 +1,295 @@
+\documentclass[11pt]{article}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage{fullpage,amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={A counterexample to the E-derivation part of the LNED conjecture},
+ pdfauthor={P. Graham},pdfsubject={Mathieu-Zhao subspaces and polynomial differences},
+ pdfkeywords={LNED conjecture, E-derivation, Mathieu-Zhao subspace, Bernoulli polynomials, Lean}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\E}{\mathcal{E}}
+\title{A counterexample to the $\mathcal{E}$-derivation part of the LNED conjecture\thanks{\aidisclosure}}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 25, 2026}
+\begin{document}
+\newcommand{\aidisclosure}{This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.}
+\maketitle
+\begin{abstract}
+For a field $K$ of characteristic zero and $c\in K\setminus\{0\}$, let
+$\delta_c f(x)=f(x)-f(x+c)$ and $J_c=(x(x-c/2))\subset K[x]$.
+We prove that $\delta_c$ is a locally nilpotent $K$-$\E$-derivation
+such that the image of $J_c$ under $\delta_c$ contains $x^{2m}$ and excludes $x^{2m+1}$ for every
+$m\ge1$, refuting the $\E$-derivation part of Zhao's locally nilpotent
+derivation and $\E$-derivation (LNED) conjecture already in one variable.
+The proof specializes Zhao's Bernoulli-polynomial membership criterion
+for images of quadratic ideals at $x=c/2$.
+For any $v$ in an index set $T$, the shift $x_v\mapsto x_v+1$ in
+$K[x_i:i\in T]$, fixing the other variables, gives the same
+failure of the Mathieu--Zhao condition for the corresponding quadratic ideal.
+\end{abstract}
+
+\noindent 2020 \emph{Mathematics Subject Classification}: 13N15, 11B68.\\
+\emph{Keywords}: Mathieu--Zhao subspace, LNED conjecture, Bernoulli polynomials.
+
+\section{Introduction}
+
+A $K$-linear subspace $V$ of a commutative $K$-algebra $A$ is a
+\emph{Mathieu--Zhao subspace} if, whenever $w^m\in V$ for all integers
+$m\ge1$, every $b\in A$ satisfies $bw^m\in V$ for all sufficiently large
+$m$. For example, every ideal has this property. A $K$-$\E$-derivation is a
+map $\delta=\operatorname{id}-\phi$, where $\phi$ is a $K$-algebra
+endomorphism. It satisfies
+\[
+ \delta(fg)=\delta(f)g+f\delta(g)-\delta(f)\delta(g).
+\]
+Such a map is \emph{locally nilpotent} if for each $f$ some positive
+iterate $\delta^N(f)$ vanishes.
+
+\begin{theorem}\label{thm:main}
+Let $K$ be any field of characteristic zero and $c\in K$ be nonzero.
+On $K[x]$, define $\phi_c(f)(x)=f(x+c)$,
+$\delta_c=\operatorname{id}-\phi_c$, and $J_c=(x(x-c/2))$.
+Then $\delta_c$ is a locally nilpotent $K$-$\E$-derivation, and
+\[
+ x^{2m}\in\delta_c(J_c),\qquad
+ x^{2m+1}\not\in\delta_c(J_c)\qquad(m\ge1).
+\]
+In particular, $\delta_c(J_c)$ is not a Mathieu--Zhao subspace.
+\end{theorem}
+
+Zhao's locally nilpotent derivation and $\E$-derivation (LNED) conjecture,
+proposed in \cite[Conjecture~1.6]{zhao-general}\footnote{Statement numbers refer to the arXiv versions:
+\cite{essen-zhao-lfed} uses arXiv:1708.05813v2
+(2022), \cite{zhao-general} arXiv:1701.05992v2 (2022), and \cite{zhao-univariate}
+arXiv:1701.06125v1 (2017).} and restated for
+commutative algebras in \cite[Conjecture~1.4]{zhao-univariate},
+asserts that every locally
+nilpotent $K$-derivation or $K$-$\E$-derivation of a commutative
+$K$-algebra, over a field $K$ of characteristic zero, sends every ideal
+to a Mathieu--Zhao subspace.
+The original formulation also allows noncommutative algebras.
+Theorem~\ref{thm:main} disproves the
+$\E$-derivation assertion.
+
+Zhao introduced Mathieu subspaces \cite[Definition~1.1]{zhao-origin}
+and developed their associative-algebra definition
+\cite[Definitions~1.1--1.2]{zhao-assoc}. The terminology Mathieu--Zhao
+follows van den Essen \cite[\S\S1--2]{essen-intro}. Van den Essen and Zhao
+give a structural criterion for univariate polynomial algebras
+\cite[Theorem~4.1]{essen-zhao-univariate}; van den Essen and van Hove
+give criteria over an algebraically closed field of characteristic zero
+for subspaces containing an ideal of finite codimension
+\cite[Theorem~1]{essen-hove}.
+
+In arXiv:1701.06125v1, Zhao proved the ordinary-derivation case for ideals
+$(u)$ in $K[x]$
+and the translation case when $u=0$, $\deg u\le1$, or $u$ has a
+repeated root \cite[Theorem~1.6(1),(3)]{zhao-univariate}.
+Zhao's 2017 arXiv version \cite[Theorem~1.6 and the following paragraph]{zhao-univariate}
+leaves open nonzero translations with squarefree generators of degree at least two.
+The later journal version was not available to us in full; the statement
+compared here is arXiv:1701.06125v1, posted in January 2017.
+Our generator has the two
+distinct roots $0,c/2$.
+For quadratic ideals $(x(x-\alpha))$, Zhao gives a Bernoulli-polynomial
+membership criterion \cite[Lemma~4.5 and Corollary~4.6]{zhao-univariate};
+we give the proof of its monomial instance at $\alpha=c/2$ below.
+Zhao's Examples~2.4 and~3.6 \cite{zhao-univariate} already give the even/odd failure of the
+Mathieu--Zhao condition for
+$x\,d/dx$ and for $\operatorname{id}-\phi$ with $\phi(x)=qx$,
+$q\in K^\times$ not a root of unity, respectively; those operators are
+not locally nilpotent. The specialization here produces this failure
+for the locally nilpotent map $\delta_c$.
+
+Section 2 proves Theorem~\ref{thm:main} and its several-variable
+consequence. Section 3 gives the correspondence with the Lean statements,
+and Section 4 discusses the remaining questions.
+
+\section{Bernoulli polynomials and the counterexample}
+
+
+The proof compares the values of a polynomial preimage at the two
+roots of $x(x-c/2)$. Zhao's criterion then reduces even- and odd-power
+membership to Bernoulli values at one half. Write $B_n(t)$ for the
+Bernoulli polynomials with $B_1(t)=t-1/2$, and $B_n=B_n(0)$.
+We regard $\Q$ as a subfield of $K$.
+
+\begin{lemma}[Monomial case of Zhao's membership criterion]\label{lem:membership}
+For each integer $n\ge0$, put
+\[
+ H_{n,c}(x)=-\frac{c^n}{n+1}\bigl(B_{n+1}(x/c)-B_{n+1}\bigr).
+\]
+Then $\delta_c H_{n,c}=x^n$, $H_{n,c}(0)=0$, and
+$x^n\in\delta_c(J_c)$ if and only if $H_{n,c}(c/2)=0$.
+\end{lemma}
+\begin{proof}
+The difference identity $B_{n+1}(t+1)-B_{n+1}(t)=(n+1)t^n$
+\cite[Eq.~24.4.1]{dlmf} gives the first two statements. If $q$ has degree
+$d\ge1$ and leading coefficient $q_d$, then $\delta_c q$ has leading
+term $-dc q_d x^{d-1}$. Consequently the kernel of $\delta_c$ consists
+of constants, and every preimage of $x^n$ is $H_{n,c}+k$ for some $k\in K$.
+Since $c/2\ne0$, membership in $J_c$ is equivalent to vanishing at $0$
+and $c/2$.
+The first root forces $k=0$, and the second gives the equivalence.
+This is the monomial instance of Zhao's criterion
+\cite[Lemma~4.5 and Corollary~4.6]{zhao-univariate}.
+\end{proof}
+
+In particular, the value at the second root is
+\begin{equation}\label{eq:half}
+ H_{n,c}(c/2)=-\frac{c^n}{n+1}(2^{-n}-2)B_{n+1},
+\end{equation}
+by $B_j(1/2)=(2^{1-j}-1)B_j$ \cite[Eq.~24.4.27]{dlmf}.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Since $\phi_c$ is multiplicative,
+$\delta_c(fg)=fg-\phi_c(f)\phi_c(g)$, which expands to the
+product identity in Section 1.
+The degree computation in Lemma~\ref{lem:membership} shows that
+$\delta_c^{d+1}q=0$ whenever $\deg q\le d$, proving local nilpotence.
+
+The standard Bernoulli facts give $B_{2m+1}=0$ for $m\ge1$ and
+$B_{2k}\ne0$ for $k\ge1$ \cite[Eq.~24.2.2]{dlmf}.
+For $n=2m$ with $m\ge1$, equation~\eqref{eq:half} vanishes since
+$B_{2m+1}=0$. For $n=2m+1$, it is nonzero since $B_{2m+2}\ne0$ and
+$2^{-(2m+1)}-2\ne0$. Lemma~\ref{lem:membership} gives the two power
+assertions. Taking $w=x^2$ and $b=x$, one has $bw^m=x^{2m+1}$ outside
+the image for every $m\ge1$, violating the Mathieu--Zhao condition.
+\end{proof}
+
+\begin{corollary}\label{cor:variables}
+Let $K$ have characteristic zero, let $T$ be any index set, and choose
+$v\in T$. In $K[x_i:i\in T]$, let $\phi$ send $x_v$ to $x_v+1$ and fix
+the other variables. Then $\delta=\operatorname{id}-\phi$ is a locally
+nilpotent $K$-$\E$-derivation, and the image of $(x_v(x_v-1/2))$ contains $x_v^{2m}$ and
+excludes $x_v^{2m+1}$ for every $m\ge1$. The image is not a Mathieu--Zhao subspace.
+\end{corollary}
+\begin{proof}
+Regarding each polynomial as a polynomial in $x_v$, its degree in that
+variable drops under $\delta$. The univariate even-power preimages embed
+in this algebra. If an odd power had a preimage in the indicated ideal,
+evaluation of all other variables at zero, which commutes with $\delta$,
+would give a preimage in $(x_v(x_v-1/2))\subset K[x_v]$, contrary to
+Theorem~\ref{thm:main} with $c=1$. Take $w=x_v^2$ and $b=x_v$.
+\end{proof}
+
+\section{Formalization}
+
+The Lean formalization proves Theorem~\ref{thm:main} and
+Corollary~\ref{cor:variables}, using the two-sided form $bw^me\in V$
+of the Mathieu--Zhao definition. For $V=\delta_c(J_c)$ this condition is
+\[
+ \forall w,\ (\forall m\ge1,\ w^m\in V)\ \Longrightarrow\
+ \forall b,e,\ \exists N,\ \forall m\ge N,\ bw^me\in V,
+\]
+where $w,b,e\in K[x]$ and $m,N\in\mathbb N$; the corollary uses the same
+condition in $K[x_i:i\in T]$. The formalization verifies linearity, local
+nilpotence, the $\E$-derivation identity and both power assertions, and
+proves the negation of this condition. Its Bernoulli value and
+nonvanishing lemmas use Mathlib's Bernoulli and zeta-value results.
+For commutative algebras this condition is equivalent to that in Section 1:
+one direction takes $e=1$, and the other absorbs $e$ into $b$.
+The equivalence follows from commutativity and is not part of the formalization.
+The Lean sources and checking notes, including the exact declarations,
+specialized membership criterion and Bernoulli identities, are available as
+\href{https://github.com/6/clank-lab/tree/lned-counterexample-v1/results/lned-counterexample/lean}{supplementary material}.
+
+\section{Concluding remarks}
+
+For a fixed nonzero $c$, the natural remaining problem is to classify
+squarefree polynomials $u$ for which $\delta_c((u))$ is a
+Mathieu--Zhao subspace. Theorem~\ref{thm:main} treats $u=x(x-c/2)$.
+The Mathieu--Zhao property depends on $u$: for example,
+$u=x^2$ gives a Mathieu--Zhao image by Zhao's repeated-root case
+\cite[Theorem~1.6(3)]{zhao-univariate}, whereas our squarefree quadratic does not.
+For $c=0$, the image of every ideal under $\delta_c$ is zero.
+
+The locally finite derivation and $\E$-derivation (LFED) conjecture \cite[Conjecture~1.5]{zhao-general} concerns the image of the
+whole algebra under a map whose iterates of each element span a
+finite-dimensional subspace. Here $\delta_c(K[x])=K[x]$, since
+Lemma~\ref{lem:membership} gives preimages of all monomials; hence this
+example satisfies that assertion. In the same arXiv version, Zhao proves the LFED conjecture for $K[x]$
+\cite[Theorem~1.5]{zhao-univariate}, and both conjectures for
+finite-dimensional characteristic-zero algebras
+\cite[Proposition~2.4]{zhao-algebraic}. Van den Essen and Zhao prove LFED
+for rational-function and formal-power-series algebras
+\cite[Corollaries~2.5 and~2.8]{essen-zhao-lfed}, and for Laurent
+formal-power-series algebras \cite[Theorems~3.1--3.2]{essen-zhao-lfed}. The ordinary-derivation
+part of LNED is unaffected by our counterexample.
+
+\begin{thebibliography}{10}
+\raggedright
+\bibitem{dlmf}
+F. W. J. Olver et al. (eds.),
+\href{https://dlmf.nist.gov/}{\emph{NIST Digital Library of Mathematical
+Functions}}, Release 1.2.8, September 15, 2026.
+
+\bibitem{essen-intro}
+Arno van den Essen, \emph{An introduction to Mathieu subspaces},
+\href{https://arxiv.org/abs/1907.06107v1}{arXiv:1907.06107v1} (2019).
+
+\bibitem{essen-hove}
+Arno van den Essen and Loes van Hove, \emph{Mathieu-Zhao spaces of
+polynomial rings},
+\href{https://arxiv.org/abs/1907.06106v1}{arXiv:1907.06106v1} (2019).
+
+\bibitem{essen-zhao-univariate}
+Arno van den Essen and Wenhua Zhao, \emph{Mathieu subspaces of univariate
+polynomial algebras}, \emph{Journal of Pure and Applied Algebra}
+\textbf{217} (2013), no.~7, 1316--1324,
+\href{https://doi.org/10.1016/j.jpaa.2012.10.006}{doi:10.1016/j.jpaa.2012.10.006}.
+\href{https://arxiv.org/abs/1012.2017v1}{arXiv:1012.2017v1}.
+
+\bibitem{essen-zhao-lfed}
+Arno van den Essen and Wenhua Zhao, \emph{On images of locally finite
+derivations and $\mathcal E$-derivations}, \emph{Journal of Pure and
+Applied Algebra} \textbf{223} (2019), no.~4, 1689--1698,
+\href{https://doi.org/10.1016/j.jpaa.2018.07.002}{doi:10.1016/j.jpaa.2018.07.002}.
+\href{https://arxiv.org/abs/1708.05813v2}{arXiv:1708.05813v2} (2022).
+
+\bibitem{zhao-origin}
+Wenhua Zhao, \emph{Generalizations of the image conjecture and the
+Mathieu conjecture}, \emph{Journal of Pure and Applied Algebra}
+\textbf{214} (2010), no.~7, 1200--1216,
+\href{https://doi.org/10.1016/j.jpaa.2009.10.007}{doi:10.1016/j.jpaa.2009.10.007}.
+\href{https://arxiv.org/abs/0902.0212v3}{arXiv:0902.0212v3}.
+
+\bibitem{zhao-assoc}
+Wenhua Zhao, \emph{Mathieu subspaces of associative algebras},
+\emph{Journal of Algebra} \textbf{350} (2012), 245--272,
+\href{https://doi.org/10.1016/j.jalgebra.2011.09.036}{doi:10.1016/j.jalgebra.2011.09.036}.
+\href{https://arxiv.org/abs/1005.4260v2}{arXiv:1005.4260v2}.
+
+\bibitem{zhao-algebraic}
+Wenhua Zhao, \emph{The LNED and LFED conjectures for algebraic algebras},
+\emph{Linear Algebra and its Applications} \textbf{534} (2017), 181--194,
+\href{https://doi.org/10.1016/j.laa.2017.08.016}{doi:10.1016/j.laa.2017.08.016}.
+\href{https://arxiv.org/abs/1701.05990v1}{arXiv:1701.05990v1}.
+
+\bibitem{zhao-general}
+Wenhua Zhao, \emph{Some open problems on locally finite or locally
+nilpotent derivations and $\mathcal E$-derivations},
+\emph{Communications in Contemporary Mathematics} \textbf{20} (2018),
+no.~4, 1750056, 25 pp.,
+\href{https://doi.org/10.1142/S0219199717500560}{doi:10.1142/S0219199717500560}.
+\href{https://arxiv.org/abs/1701.05992v2}{arXiv:1701.05992v2} (2022).
+
+\bibitem{zhao-univariate}
+Wenhua Zhao, \emph{Images of ideals under derivations and
+$\mathcal E$-derivations of univariate polynomial algebras over a field of
+characteristic zero},
+\href{https://arxiv.org/abs/1701.06125v1}{arXiv:1701.06125v1} (2017).
+Published version: \emph{Journal of Algebra and Its Applications}
+\textbf{23} (2024), no.~6, 2450128,
+\href{https://doi.org/10.1142/S0219498824501287}{doi:10.1142/S0219498824501287}.
+\end{thebibliography}
+\end{document}

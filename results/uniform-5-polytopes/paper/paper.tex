@@ -47,7 +47,7 @@
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
 \hypersetup{pdfauthor={P. Graham},
   pdftitle={The convex uniform 5-polytopes: a computer-assisted classification}}
-\date{October 25, 2026}
+\date{October 26, 2026}
 
 \begin{document}
 \maketitle
@@ -57,7 +57,7 @@ on the cited lower-dimensional classifications, the written reductions and
 the certificate checkers. Its members are Wythoff's constructions of types
 $A_5$, $B_5$, $D_5$, prisms over uniform 4-polytopes, and products of regular
 polygons with uniform polyhedra. Conway and Guy announced the four-dimensional classification; Möller
-gave a complete computer-assisted proof. We extend his neighborhood and
+gave a complete computer-assisted proof. We extend these neighborhood and
 radius methods to dimension five. Coxeter's and Johnson's constructions
 supply the known families. Unbounded polygon sizes require products, forced by neighbor distances and prism cells. Lean checks a conditional implication from explicit premises.
 \end{abstract}
@@ -120,9 +120,9 @@ The configuration and large-polygon clauses follow by inspecting these lists.
 
 Möller's complete four-dimensional proof \cite[Section 1.1]{Moller2004thesis}
 and its published account \cite{Moller2004} follow Conway--Guy's announcement
-\cite[pp.~38--39]{ConwayGuy1965}. His radius calculations, edge neighborhoods
+\cite[pp.~38--39]{ConwayGuy1965}. Möller's radius calculations, edge neighborhoods
 and vertex completion \cite[Chapters 4--7 and 9]{Moller2004thesis}
-are our foundation. Finite neighborhood enumeration cannot bound polygon
+are foundational. Finite neighborhood enumeration cannot bound polygon
 sizes. Our additional argument forces products for all large sizes.
 Schulte reports a complete list only for $d=4$
 \cite[Section 18.5]{Schulte2017}; Winter records as unknown whether
@@ -138,10 +138,10 @@ Their prism cells propagate translates and force products.
 
 The proofs, the Lean formalization and the text were produced by AI models
 (from OpenAI and Anthropic), working under the author's direction.
-This computer-assisted work has not yet been reviewed by experts.
+This work has not yet been reviewed by experts.
 
 \section{Local geometry}\label{sec:prelim}
-We relate angles, radius and neighbors.
+Berestovskii--Nikonorov proved separation~\cite[Theorem~3.1]{BN2023}.
 Let $P$ be five-dimensional, with centroid $c$ and circumradius $R$.
 Face centers are the orthogonal projections of $c$
 (Lemma~\ref{lem:sphere}).
@@ -1403,6 +1403,11 @@ Russian).
 M.~Winter, \emph{Spectral Realizations of Symmetric Graphs, Spectral
 Polytopes and Edge-Transitivity}, Dissertation, TU Chemnitz, 2021,
 Appendix E.3, urn:nbn:de:bsz:ch1-qucosa2-752155.
+
+\bibitem{BN2023}
+V.~N. Berestovskii and Yu.~G. Nikonorov, On $m$-point homogeneous
+polytopes in Euclidean spaces, \emph{Filomat} 37(25) (2023), 8405--8424.
+doi:10.2298/FIL2325405B.
 
 \end{thebibliography}
 

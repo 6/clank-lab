@@ -83,3 +83,38 @@ tectonic paper/paper.tex
 ```
 
 Apache-2.0 (see the [repository's LICENSE](../../../LICENSE)), except the font material listed in [THIRD_PARTY.md](../THIRD_PARTY.md).
+
+## Sources used during development
+
+The DOI identifies v4; v5 is prepared and has not been released.
+
+The text of the reported October 12, 2026 forum discussion “Regular spherical polygons” was unavailable for this edition.
+
+## Further credits
+
+Möller's edge-neighborhood enumeration, forced-radius comparison and
+vertex-neighborhood completion are the direct methodological foundation
+([dissertation](https://ediss.sub.uni-hamburg.de/handle/ediss/689),
+[*4-dimensionale Archimedische Polytope*](https://doi.org/10.1007/BF03322887)).
+The proof uses the 3-D classification (see
+[Schulte, §18.5](https://web.archive.org/web/20240415194537/https://www.csun.edu/~ctoth/Handbook/chap18.pdf) and
+[Grünbaum](https://doi.org/10.4171/EM/120)) and the 4-D classification of
+Conway–Guy and Möller.
+[Winter's 2021 dissertation, Appendix E.3](https://martinwintermath.github.io/pdf/phd/thesis.pdf)
+states the open question of non-prismatic non-Wythoffian uniform polytopes
+in dimension five or above.
+[Càllisto's honeycomb work](https://doi.org/10.5281/zenodo.22881686) is a
+methodological precedent for the division between Lean arguments and
+external finite certificate checks.
+
+Berestovskii and Nikonorov's [Theorem 3.1](https://doi.org/10.2298/FIL2325405B)
+already proves the Separation lemma's nearest-vertex adjacency statement.
+In January 29, 2024 posts [29042](https://web.archive.org/web/20250929203245id_/http://hi.gher.space/forum/viewtopic.php?p=29042#p29042)
+and [29043](https://web.archive.org/web/20250929203245id_/http://hi.gher.space/forum/viewtopic.php?p=29043#p29043) in the thread
+“Re: General Approach—can 3D methods be generalized?”,
+mr_e_man proposes a conditional dimensional-enumeration scheme using
+lower-dimensional faces, spherical subpolytopes and rigidity, and suggests
+using vertex figures to enumerate edge figures of polytera. The stated premise is
+“Assuming we’ve enumerated all CRH polytopes in the previous dimension”.
+The reported October 12, 2026 forum discussion “Regular spherical polygons”
+is also acknowledged.

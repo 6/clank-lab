@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## uniform-5-polytopes v5 (October 28, 2026)
+
+- Correction: wording of credits. The theorem and its checks are unchanged.
+- The paper credits Berestovskii and Nikonorov's prior separation theorem and uses the standard expert-review disclosure sentence.
+- The README adds forum acknowledgments and states explicitly that the Lean premises have not been jointly instantiated and that their connection to the certificates remains external.
+
 ## game-grundy-gap v3 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged.

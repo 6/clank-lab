@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## locked-trominoes v4 (October 28, 2026)
+
+- Correction: wording of credits, the source's unverified narrow-grid frontier check, and the coordinate source and block-verification description. The theorem and its checks are unchanged.
+
 ## density-seven v5 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged.

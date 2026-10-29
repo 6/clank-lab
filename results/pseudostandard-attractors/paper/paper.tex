@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+\usepackage[title]{appendix}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -18,7 +19,7 @@
 \newcommand{\file}[1]{\texttt{\detokenize{#1}}}
 \title{A generalized pseudostandard prefix with no string attractor of size four}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 22, 2026}
+\date{October 26, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -44,7 +45,7 @@ computer. A second example has length 43.
 
 \noindent The proofs, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
-\medskip\noindent Status: Computer-assisted; not yet reviewed by experts.
+\medskip\noindent Status: Computer-assisted. This work has not yet been reviewed by experts.
 
 \section{Introduction}
 
@@ -130,9 +131,11 @@ of positions each must contain.}
 \end{figure}
 
 \subsection*{What is new, and the hard step}
-Dvořáková and Hendrychová's conjecture rests on their computer experiments,
-and their proved results concern three subclasses; Theorem~\ref{thm:main}
-does not touch those results. The word $w_5$ has ten distinct factors of length four,
+Dvořáková and Hendrychová's conjecture rests on their computer experiments.
+The subclass results---Dvořáková's standard Sturmian
+result~\cite{d-epi}, restated and re-proved in~\cite{dh}, and the
+pseudostandard and standard complementary-symmetric Rote results of
+Dvořáková and Hendrychová~\cite{dh}---are untouched by Theorem~\ref{thm:main}. The word $w_5$ has ten distinct factors of length four,
 while a Sturmian sequence has five and a Rote sequence eight~\cite{rote}, so
 $w_5$ is a factor of neither; and $w_5$ is a palindrome, not one of the
 antipalindromic prefixes that \cite[Theorem~8]{dh} describes. What this note
@@ -359,8 +362,8 @@ The set $\Gamma=\{3,7,15,21,25\}$ is a string attractor of $w_5$.
 \end{proposition}
 
 \begin{proof}
-The six gap words are $\w{010}$, $\w{100}$, $\w{1010110}$, $\w{01101}$,
-$\w{100}$ and $\w{1010011010}$. Together they have $48$ distinct factors.
+The six gap words are $\w{010}$, $\w{100}$, $\w{0101100}$, $\w{01101}$,
+$\w{011}$ and $\w{1010011010}$. Together they have $48$ distinct factors.
 Table~\ref{tab:gaps} in Appendix~\ref{app:table} gives, for each, a starting
 position of an occurrence and a position of $\Gamma$ that this occurrence
 contains. Lemma~\ref{lem:gaps} completes the proof.
@@ -412,14 +415,16 @@ short argument like Lemma~\ref{lem:seven} for $w_6$.
 Dvořáková and Hendrychová based the conjecture on computer experiments, and
 the bound four is attained by the Thue--Morse sequence~\cite{kutsukake};
 Theorem~\ref{thm:main} shows that it is exceeded already at length $36$.
-Their results for standard Sturmian, pseudostandard and standard
-complementary-symmetric Rote sequences are untouched, since
+The standard Sturmian result of Dvořáková~\cite{d-epi}, restated and
+re-proved in~\cite{dh}, and the pseudostandard and standard
+complementary-symmetric Rote results of Dvořáková and
+Hendrychová~\cite{dh} are untouched, since
 Theorem~\ref{thm:main} concerns a directive bi-sequence outside those
 classes. We do not claim that $w_5$ is the shortest counterexample. Whether
 some constant bounds the attractor sizes of all these prefixes, and if so the
 best constant, remains open.
 
-\appendix
+\begin{appendices}
 
 \section{The 48 factors of the gap words}\label{app:table}
 
@@ -487,6 +492,8 @@ closure type, five positions that are not an attractor, a Thue--Morse prefix
 (which has an attractor of size four), and, for the second program, a missing
 occurrence or factor in the obstruction or the table. The whole check takes a
 few seconds.
+
+\end{appendices}
 
 \begin{thebibliography}{9}
 

@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## game-grundy-gap v4 (October 29, 2026)
+
+- Correction: layout: the review-status and AI-assistance sentences move from a footnote on the title to a paragraph under the abstract. The theorem and its checks are unchanged.
+
 ## thomson-10 v9 (October 29, 2026)
 
 - Correction: layout: the review-status and AI-assistance sentences move from a footnote on the title to a paragraph under the abstract. The theorem and its checks are unchanged.

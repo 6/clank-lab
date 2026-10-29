@@ -1,5 +1,7 @@
 # Exact certificates and packaging checks
 
+The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+
 The [formalization guide](FORMALIZATION.md) states the exact endpoint,
 trust boundary and scope of the recorded replay and adapter checks.
 
@@ -326,7 +328,7 @@ The toolchain and library revision are pinned. Internet access is needed to inst
 
 ## Further credits
 
-Every work credited in the README before it was shortened, with what the result takes from it.
+Further works credited by this result, with what it takes from each.
 
 - Mubayi–Rödl, [On the Turán Number of Triple Systems](https://doi.org/10.1006/jcta.2002.3284)—gives construction.
 - Razborov, [On 3-Hypergraphs with Forbidden 4-Vertex Configurations](https://doi.org/10.1137/090747476)—gives preceding bound.
@@ -446,6 +448,6 @@ Every work credited in the README before it was shortened, with what the result 
 - awesome_theorems contributors, [AIM-derived tight-5-cycle conjecture candidate and curation decision](https://github.com/weiyangzen/awesome_theorems/blob/32e5f75412a804463a0b0c6fff1362d4ab5275b3/Docs/catalog/v5/sources/aimpl/candidates.jsonl)—supports source checking.
 - Google DeepMind, [Google DeepMind Superhuman/Aletheia/FutureMath pinned README indexes](https://github.com/google-deepmind/superhuman/blob/9b620a92886b3a7655b30ddcfe36e725e9596509/README.md)—supports source checking.
 - Vibe Mathing, [Erdős Problem 107: Happy Ending exact bound — pinned ProblemContract](https://github.com/vibemathing/problem-erdosproblems-107/blob/c4e0f8443a7f149755975b5ffa0add4cf5bee34a/problem-library/records/canonical-problems.jsonl)—supports source checking.
-- Lee–Seo, [`Lower bounds for multivariate independence polynomials and their generalisations`](https://arxiv.org/abs/2602.02450)—supports source checking.
+- Lee–Seo, [Lower bounds for multivariate independence polynomials and their generalisations](https://arxiv.org/abs/2602.02450)—supports source checking.
 - Conlon–Fox–Gunby–He–Mubayi–Suk–Verstraete, [On off-diagonal hypergraph Ramsey numbers](https://arxiv.org/abs/2404.02021)—supplies Ramsey context.
 - Xizhi Liu, [Xizhi Liu's pinned publication-page and notebook collection](https://github.com/xliu2022/xliu2022.github.io/tree/1b5c8b15c545ea15587f8240bd2149a29aaba857)—supports source checking.

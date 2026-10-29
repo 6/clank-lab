@@ -18,9 +18,7 @@
 \newcommand{\ind}{\mathbf 1}
 \newcommand{\Cfive}{C_5^3}
 \newcommand{\fall}[2]{(#1)_{#2}}
-\title{The Turán density of the tight five-cycle\thanks{This work has not yet been reviewed by experts.
-The proofs, the Lean formalization and the text were produced by AI models
-(from OpenAI and Anthropic), working under the author's direction.}}
+\title{The Turán density of the tight five-cycle}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
 \date{October 27, 2026}
 \begin{document}
@@ -38,8 +36,11 @@ estimates needed for the five-cycle alone by exact rational certificates,
 using weighted link inequalities to include configurations containing a
 complete four-vertex hypergraph. We give the finite counting argument
 that turns the certificates into these estimates and then into the density
-bound. The theorem, including this passage, is formalized in Lean with
-compiled evaluation.
+bound. The whole proof, including this counting argument, is checked in Lean; its finite computations run as compiled code, so the check trusts Lean's compiler as well as its kernel.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
 \end{abstract}
 
 \section{Introduction}

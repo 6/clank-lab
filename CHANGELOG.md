@@ -9,6 +9,7 @@ Zenodo records.
 - Correction: wording of credits. The theorem and its checks are unchanged.
 - The paper credits Berestovskii and Nikonorov's prior separation theorem and uses the standard expert-review disclosure sentence.
 - The README adds forum acknowledgments and states explicitly that the Lean premises have not been jointly instantiated and that their connection to the certificates remains external.
+- Zenodo: [10.5281/zenodo.23751484](https://doi.org/10.5281/zenodo.23751484)
 
 ## game-grundy-gap v3 (October 28, 2026)
 

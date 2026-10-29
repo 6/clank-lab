@@ -18,7 +18,9 @@ not a disjoint count. It extends Möller's enumeration method and is
 conditional on the cited three-dimensional classification, the
 four-dimensional classification (Conway–Guy 1965, proved complete by Möller
 2004), the written reductions and the certificate checkers. Lean checks
-only a conditional implication and selected geometric lemmas.
+only a conditional implication and selected geometric lemmas. The explicit
+premises have not been jointly instantiated in Lean; their connection to the
+certificates remains external.
 
 Computer-assisted; not yet reviewed by experts.
 
@@ -48,20 +50,11 @@ retain the supporting derivations and the earlier section locators.
 
 ## Credits
 
-Möller's edge-neighborhood enumeration, forced-radius comparison and
-vertex-neighborhood completion are the direct methodological foundation
-([dissertation](https://ediss.sub.uni-hamburg.de/handle/ediss/689),
-[*4-dimensionale Archimedische Polytope*](https://doi.org/10.1007/BF03322887)).
-The proof uses the 3-D classification (see
-[Schulte, §18.5](https://web.archive.org/web/20240415194537/https://www.csun.edu/~ctoth/Handbook/chap18.pdf) and
-[Grünbaum](https://doi.org/10.4171/EM/120)) and the 4-D classification of
-Conway–Guy and Möller.
-[Winter's 2021 dissertation, Appendix E.3](https://martinwintermath.github.io/pdf/phd/thesis.pdf)
-states the open question of non-prismatic non-Wythoffian uniform polytopes
-in dimension five or above.
-[Càllisto's honeycomb work](https://doi.org/10.5281/zenodo.22881686) is a
-methodological precedent for the division between Lean arguments and
-external finite certificate checks.
+Möller's [Vierdimensionale Archimedische Polytope](https://ediss.sub.uni-hamburg.de/handle/ediss/689) and [4-dimensionale Archimedische Polytope](https://doi.org/10.1007/BF03322887) are the direct methodological foundation: edge-neighborhood enumeration, forced-radius comparison and vertex-neighborhood completion. The proof uses the three-dimensional classification recorded in Schulte's [Symmetry of polytopes and polyhedra, §18.5](https://web.archive.org/web/20240415194537/https://www.csun.edu/~ctoth/Handbook/chap18.pdf) and the four-dimensional classification announced by Conway and Guy and proved complete by Möller.
+
+Theorem 3.1 in Berestovskii and Nikonorov's [On m-point homogeneous polytopes in Euclidean spaces](https://doi.org/10.2298/FIL2325405B) proves the Separation lemma's nearest-vertex adjacency statement. M. Càllisto's [The 28 convex uniform honeycombs: a completeness theorem](https://doi.org/10.5281/zenodo.22881686) provides a methodological precedent for dividing verification between Lean arguments and external finite certificate checks. The manuscript also credits the Lean and Mathlib contributors and the arithmetic and numerical libraries used by the checkers.
+
+The checking documentation also gives further credits and source notes.
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -72,7 +65,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The convex uniform 5-polytopes: a computer-assisted classification}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/uniform-5-polytopes-v4/results/uniform-5-polytopes}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/uniform-5-polytopes-v5/results/uniform-5-polytopes}},
   doi          = {10.5281/zenodo.23647462}
 }
 ```

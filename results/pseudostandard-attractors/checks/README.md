@@ -43,3 +43,20 @@ a Thue–Morse prefix (which has an attractor of size four), and, for
 `check_proof.py`, an occurrence or factor missing from the obstruction or the
 table. Last, it confirms that the figure `data/word.svg` matches the data;
 `draw_word.py` draws it and is not part of the proof.
+
+## Sources used during development
+
+This DOI archives v2; v3 is prepared and not yet published.
+
+## Further credits
+
+- Ľubomíra Dvořáková and Veronika Hendrychová, [String attractors of Rote sequences](https://doi.org/10.46298/dmtcs.12385) — supplies the conjecture, definitions and control examples.
+- Dominik Kempa and Nicola Prezza, [At the roots of dictionary compression: string attractors](https://doi.org/10.1145/3188745.3188814) — introduces string attractors.
+- Aldo de Luca and Alessandro De Luca, [Pseudopalindrome closure operators in free monoids](https://www.sciencedirect.com/science/article/pii/S0304397506004245) — introduces generalized pseudostandard sequences.
+- Alexandre Blondin Massé, Geneviève Paquin, Hugo Tremblay and Laurent Vuillon, [On generalized pseudostandard words over binary alphabets](https://cs.uwaterloo.ca/journals/JIS/VOL16/Blondin/blondin.pdf) — supplies the description of Rote sequences used here.
+- Günter Rote, [Sequences with subword complexity 2n](https://doi.org/10.1006/jnth.1994.1012) — supplies the count of factors of Rote sequences.
+- Josef Florian and Ľubomíra Dvořáková, [On periodicity of generalized pseudostandard words](https://doi.org/10.37236/4771) — supplies the periodicity criterion.
+- Ľubomíra Dvořáková, [String attractors of episturmian sequences](https://doi.org/10.1016/j.tcs.2023.114341) — supplies minimal attractors of standard Sturmian prefixes.
+- Kanaru Kutsukake, Takuya Matsumoto, Yuto Nakashima, Shunsuke Inenaga, Hideo Bannai and Masayuki Takeda, [On repetitiveness measures of Thue–Morse words](https://arxiv.org/abs/2005.09524) — supplies the Thue–Morse attractors used here.
+- Simone Faro, Francesco Pio Marino and Arianna Pavone, [Smallest string attractors and minimal coverage certificates of Thue–Morse words](https://arxiv.org/abs/2610.10950) — describes smallest attractors and the same kind of lower-bound certificate.
+- Mutsunori Banbara, Hideo Bannai, Peaker Guo, Dominik Köppl, Takuya Mieno and Yoshio Okamoto, [The smallest string attractors of Fibonacci, period-doubling, and Thue–Morse words](https://arxiv.org/abs/2602.16152) — also describes smallest Thue–Morse attractors.

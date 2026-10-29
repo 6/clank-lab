@@ -10,7 +10,7 @@ The proofs, the search code, the certificate checkers and the text were produced
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23572685](https://doi.org/10.5281/zenodo.23572685)
+Archived on Zenodo: [doi:10.5281/zenodo.23752609](https://doi.org/10.5281/zenodo.23752609)
 
 ## Check it
 
@@ -47,6 +47,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{The seventh ternary density Hales--Jewett number}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v5/results/density-seven}},
-  doi          = {10.5281/zenodo.23572685}
+  doi          = {10.5281/zenodo.23752609}
 }
 ```

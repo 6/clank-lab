@@ -110,7 +110,7 @@ limits of their retained evidence. The per-unit comparisons below are
 between the CPU search and the NumPy join, not between the GPU searches.
 The public CPU implementation supplies a full replay without a GPU.
 
-## Two independent record checkers
+## Two record checkers
 The record checks establish the cover and its arithmetic accounting.
 The first regenerates CPU inputs using the CPU generators, but checks the
 cover with separately written code. The second has its own row, cosine,
@@ -119,9 +119,10 @@ Their row sets agree byte for byte, and both accept the complete cover
 and pair totals. Neither rederives survivor or key-match counts.
 [Record-checking and control details](#record-checking-and-control-details) describes their scope and input sharing.
 
-Here and throughout, independent means separately implemented, not
-produced by separate human teams or independently replicated by outside
-institutions. The AI provenance is stated on the first page.
+The cover and record-checking code is separately written, but the first
+checker reuses the CPU row generator. Both share the compression model,
+ordering conventions and receipt files. No outside-team replication is
+claimed. The AI provenance is stated on the first page.
 
 Both checkers reject deliberately altered records and an incomplete
 cover. [Corruption controls](#corruption-controls) states the changes tested.
@@ -223,7 +224,7 @@ estimate for a replay, not the cost of the short record checks.
 
 
 ## Corruption controls
-This appendix records deliberate alterations that the independent
+This appendix records deliberate alterations that both record
 checkers must reject. They test whether the checks detect the particular
 coverage and accounting errors for which they are designed.
 
@@ -493,7 +494,7 @@ and Baumert and Hall (1965) with ``all solutions for $3\leq m\leq23$''
 search for non-equivalent solutions'' by Sawade (1977), Koukouvinos and
 Kounias (1988, 1990), and \DJ okovi\'c (1992, 1993); its Table 1 corrects
 the order-$25$ count~\cite{Sawade,KK1988,KK1990,Djokovic1992,Djokovic,Djokovic1995}.
-The same note (Section 1, p.~172), citing his 1993 paper, records
+The same note (Section 1, p.~172), citing Đoković's 1993 paper, records
 ``it has none for $n=35$'', disproving the odd-order conjecture; Section 5
 records corrections at $33$ and $39$~\cite{Djokovic1995,Djokovic}.
 Holzmann, Kharaghani and Tayfeh-Rezaie enumerate odd orders through $59$,

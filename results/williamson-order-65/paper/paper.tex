@@ -15,28 +15,24 @@
 \setlength{\emergencystretch}{2em}
 \title{Nonexistence of Williamson matrices of order 65}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 24, 2026}
+\date{October 28, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={Nonexistence of Williamson matrices of order 65}}
 \begin{document}
 \maketitle
 \begin{abstract}
-Williamson introduced the construction of Hadamard matrices from four
-symmetric circulant $\{1,-1\}$ matrices. Holzmann, Kharaghani and
-Tayfeh-Rezaie classified the odd orders through $59$, using row and pair spectral bounds and Williamson's product identity.
-\DJ okovi\'c and Kotsireas developed compression of complementary
-sequences, which Bright, Kotsireas and Ganesh incorporated into their
-Williamson enumeration. Bright's research statement records the order-$65$
-existence question. Building on these methods, we prove by exhaustive
-computation that Williamson matrices of order $65$ do not exist: no four
-symmetric circulant $\{1,-1\}$ matrices of that order have squares summing
-to $260$ times the identity. Compression to length $13$ and common
-multipliers reduce the enumeration to finitely many classes of quadruples.
-Conservative power spectral density bounds and the product identity then
-reduce the matching of pairs of sequences, followed by exact integer
-autocorrelation tests. The difficult step is exhausting the full sequences
-above every admissible compressed quadruple. The smaller-order enumerations
-reproduce known results; separately written implementations
-check the compressed enumeration and provide corroborating computations.
+We prove by exhaustive computation that Williamson matrices of order
+$65$ do not exist: no four symmetric circulant sign matrices of that
+order have squares summing to $260$ times the identity. Compression to
+length $13$, common multipliers, conservative power spectral density
+bounds and Williamson's product identity reduce the search to matching
+pairs of full sequences. The CPU computation took about $271$ CPU-hours.
+Two checkers verify the compressed enumeration: one reuses the search's row
+generator, and one regenerates rows with separately written code. They
+share the compression model and per-representative enumeration records;
+neither repeats the decisive
+full-row lift search. Full-pipeline controls reproduce known smaller-order counts.
+The search is computational under stated arithmetic assumptions and is
+not formally verified.
 \end{abstract}
 
 \section{Introduction}
@@ -54,10 +50,13 @@ $65$ satisfying $A^2+B^2+C^2+D^2=260I_{65}$.
 \end{theorem}
 
 The proof uses the written reductions below and the exhaustive computation
-described in Section~\ref{sec:computation}. This settles the symmetric circulant
-case at order $65$. Order $67$ remains open~\cite[Section 2.3]{KMTZ}.
-Bright records the order-$65$ question in Section 4.2 of his research
-statement~\cite{BrightStatement}.
+described in Section~\ref{sec:computation}. This settles the existence of
+Williamson matrices of order $65$. Kharaghani, Mohammadian, Tayfeh-Rezaie and Zaitsev
+list $65$ and $67$ among orders where ordinary Williamson matrices had
+not been found~\cite[Section~2.3]{KMTZ}. Their order-$65$ construction is
+near-Williamson: only three of its blocks must be symmetric
+\cite[Definition~1.1, Table~6]{KMTZ}. Bright had identified $65$ as the
+smallest unresolved odd order~\cite[Section~4.2]{BrightStatement}.
 
 Williamson's construction~\cite{Williamson} is described historically by
 Koukouvinos and Kounias~\cite[Section 1, p.~162]{KK1990}. Turyn gave an
@@ -68,16 +67,27 @@ classification at odd orders through $23$~\cite{BGH,BH}.
 \DJ okovi\'c's note~\cite[Sections 1 and 5, Table 1]{Djokovic1995}
 lists the searches of Sawade, Koukouvinos and Kounias, and
 \DJ okovi\'c~\cite{Sawade,KK1988,KK1990,Djokovic1992,Djokovic},
-with the corrected count at $25$, discrepancies reported at $33$ and $39$,
+with the corrected count at $25$ and incomplete earlier enumerations at
+$33$ and $39$,
 and nonexistence at $35$. Holzmann, Kharaghani and Tayfeh-Rezaie's classification through
 $59$ gives nonexistence at $47$, $53$ and $59$~\cite[Section 4, Table 1]{HKT}.
 Egan, Kotsireas, London and \'O Cath\'ain summarize nonexistence
 at $35$, $47$, $53$ and $59$~\cite[Section 2.1]{EKLO}.
-Lang and Schneider studied Turyn-type Williamson matrices, as described
-in their title and abstract~\cite{LS};
-Bright, Kotsireas and Ganesh credit their order-$61$
-enumeration~\cite[p.~3]{BKG}.
+Lang and Schneider searched the Turyn-type subclass through order $99$
+\cite{LS}. Bright, Kotsireas and Ganesh attribute the order-$61$
+enumeration to them \cite[Section~2]{BKG}; the latter paper itself
+enumerates order $63$, finding two equivalence classes, one from Turyn's
+construction and one new. Thus all odd orders below $65$ were settled:
+the nonexistence orders are $35,47,53,59$, and the others have examples
+\cite[Section~2]{BKG}. The present result settles the smallest remaining
+odd order identified by Bright \cite[Section~4.2]{BrightStatement},
+completing the existence classification through odd order $65$.
+The order-$39$ nonexistence claim in \cite{KK1990} was incorrect,
+as witnessed by the later examples and enumeration \cite{Djokovic,HKT}.
 
+Fourier and PSD tests for complementary sequences were used earlier by
+Fletcher, Gysin and Seberry \cite{FGS}; compression and its spectral
+consequences are developed by \DJ okovi\'c and Kotsireas \cite{DK}.
 We reuse Holzmann, Kharaghani and Tayfeh-Rezaie's row and pair
 spectral bounds, expressed below as power spectral density (PSD) bounds,
 and product-identity elimination~\cite[Eq.~(2), Theorem 1, algorithm 2(c--d)]{HKT}.
@@ -93,38 +103,39 @@ Our contribution is the complete order-$65$ enumeration.
 The compressed conditions are necessary; their admissible tuples still
 require a full-row search. Exhausting those lifts is the hard step.
 
-We first translate the matrix equation into conditions on autocorrelations.
-Compression to length $13$ and common multipliers then give representatives
-of compressed tuples. Two enumerations check that these representatives
-cover the compressed possibilities. For each representative, a common
-multiplier fixing its compression restricts only one row list. Pairs of
-full rows are matched using the PSD bounds and product identity, and any
-match is checked by exact autocorrelations. The lemmas show that every
-solution survives these operations, so the exhaustive absence of matches
-completes the proof.
+The proof translates the matrix equation into autocorrelations, then
+exhausts full-row lifts of compressed representatives. The reductions
+preserve every solution; the final autocorrelation comparison is exact.
 
 Nearby work includes Kharaghani, Mohammadian, Tayfeh-Rezaie and Zaitsev's
 near-Williamson matrices~\cite[Definition 1.1, Table 6]{KMTZ} and
 Bennett, Bright, Colinot and Nayak's enumeration allowing nonsymmetric
-blocks~\cite[abstract]{BBCN}. Zhang's AI-assisted account describes work on
-Hadamard order $668$ and Williamson order $65$, reporting
-``novel non-existence evidence and mathematical insights'' while leaving
-both problems unsolved~\cite[Zenodo record description]{Zhang}.
+blocks~\cite[abstract]{BBCN}. Zhang's account of an AI research system reports a prediction that Williamson
+matrices of order $65$ are ``very likely non-existent'', based on reported
+computational and structural evidence~\cite[\S7.4]{Zhang}.
+The account explicitly distinguishes this assessment from a formal proof
+and states that exhaustive search or a SAT+CAS nonexistence proof would be
+required for mathematical certainty~\cite[\S7.5]{Zhang}.
+The exhaustive computation here confirms that prediction;
+no code or reductions from Zhang's account are used.
 
 The proofs, the search code, the enumeration checkers, the witness checkers
 and the text were produced by AI models (from OpenAI and Anthropic),
-working under the author's direction. This work is computer-assisted and not yet reviewed by experts.
+working under the author's direction. This work has not yet been reviewed by experts.
 
 \section{Rows, autocorrelations, and spectra}\label{sec:rows}
 The row sum and power spectral density give the necessary conditions for
 individual sequences.
 
-Lowercase $a,b,c,d$ denote the four first rows; the letters in the
-order-$5$ example below are local scalars.
+Lowercase $a,b,c,d$ denote the four first rows. For the equivalence counts
+below, two quadruples are equivalent under the relation generated by row
+negations, permutations of the four rows, and a common invertible
+multiplier of the cyclic indices.
 
 All indices are taken modulo the odd order $n$, and $H=(n-1)/2$.
 For example, at order $5$ a normalized symmetric first row has the form
-$(1,a,b,b,a)$, with $a,b\in\{1,-1\}$. In general a normalized row is a
+$(1,\varepsilon,\eta,\eta,\varepsilon)$, with
+$\varepsilon,\eta\in\{1,-1\}$. In general a normalized row is a
 sequence $x=(x_i)_{i\in\Z/n\Z}$ with $x_0=1$ and $x_i=x_{-i}$.
 Define its periodic autocorrelation by
 \[
@@ -194,6 +205,7 @@ For $n=qL$, with compression factor $q$, define the compression of a row $x$ by
 \[
  X_j=\sum_{t=0}^{q-1}x_{j+Lt},\qquad j\in\Z/L\Z.
 \]
+Symmetry gives $X_{-j}=X_j$, and $\sum_jX_j=\sum_ix_i$.
 Here $q=5$ and $L=13$. Write
 $\PAF_X(s)=\sum_{j\in\Z/L\Z}X_jX_{j+s}$ for compressed autocorrelation.
 Write $A,B,C,D$ for the compressions of $a,b,c,d$, respectively.
@@ -201,7 +213,7 @@ Write $A,B,C,D$ for the compressions of $a,b,c,d$, respectively.
 For four rows satisfying \eqref{eq:paf}, their compressions satisfy
 \[
  \PAF_A(s)+\PAF_B(s)+\PAF_C(s)+\PAF_D(s)
- =\begin{cases}4n,&s=0\pmod L,\\0,&s\ne0\pmod L.\end{cases}
+ =\begin{cases}4n,&s\equiv0\pmod L,\\0,&s\not\equiv0\pmod L.\end{cases}
 \]
 \end{lemma}
 
@@ -215,13 +227,15 @@ For $s=0$ exactly one is zero. Summing over the four rows proves the claim.
 A \emph{multiplier} is an invertible residue $u$ modulo $65$, acting on
 a row by $x_i\mapsto x_{ui}$. It preserves \eqref{eq:paf}, since it
 permutes the shifts. Its action on the compression depends only on its
-residue modulo $13$. Opposite multipliers act identically on symmetric
+residue modulo $13$: the compression of the transformed row at $j$ is
+$\sum_{t=0}^4x_{uj+13ut}=X_{uj\bmod13}$, since $\gcd(u,5)=1$ makes
+$ut$ run through all residues modulo $5$. Opposite multipliers act identically on symmetric
 rows. Every invertible residue modulo $13$ lifts to an invertible residue
 modulo $65$: among $u,u+13,\ldots,u+52$, exactly one is divisible by $5$,
 so the other four are coprime to $65$.
 
 A class consists of the retained rows with the
-same signed row sum and compressed vector.
+same compressed vector; its signed row sum is already the sum of that vector.
 
 Call a tuple of four classes \emph{admissible} when its compressed
 vectors satisfy Lemma~\ref{lem:compression} and its row sums satisfy
@@ -230,7 +244,7 @@ one from each class; it need not itself solve the matrix equation.
 These are compression classes, rather than multiplier orbits; lifting
 recovers the uncompressed sequences.
 The enumeration producing compressed tuples is called the generator;
-the independent enumeration checking its completeness is called the cover check.
+the separately written enumeration checking completeness is called the cover check.
 Both use the following ordering convention.
 Classes are ordered lexicographically by the seven entries
 $(X_0,\ldots,X_6)$ of their symmetric compression. A class identifier is
@@ -244,7 +258,7 @@ The admissible class tuples are enumerated by matching sums of two exact
 compressed autocorrelation vectors to the complementary pair sums.
 Every ordered class pair is included; equal classes are permitted.
 Sorting positions of equal absolute row sum removes only row permutations.
-The complete tuple set is also enumerated independently by matching the
+The complete tuple set is also enumerated by separate code matching the
 exact integer vectors themselves.
 
 \begin{lemma}\label{lem:cover}
@@ -265,7 +279,7 @@ $\lambda_x(k)^2\leq260$ and pass the numerical filter with its proved
 margin.
 \end{proof}
 The compressed orbit representatives are checked for invalid, duplicate
-or missing entries by independently enumerating the exact compressed tuples.
+or missing entries by separately enumerating the exact compressed tuples.
 
 A further symmetry reduces one row list in each orbit representative. The subgroup
 \[
@@ -282,7 +296,10 @@ would not be justified.
 The PSD test and product identity retain every solution when pairs of
 sequences are matched. A pairing is one of the three splits
 $(a,b)\mid(c,d)$, $(a,c)\mid(b,d)$, or $(a,d)\mid(b,c)$.
-The implementation may choose any of these pairings and any designated row; these choices affect cost only.
+For each representative the computation minimizes the sum of the two pair
+counts over these three pairings and the four choices of designated row,
+using the list sizes after that row's multiplier restriction. Ties take
+the first choice in the displayed order and row order $a,b,c,d$.
 The displayed splits specify the left and right sides.
 
 For a fixed representative, its four classes supply four lists of full
@@ -351,7 +368,7 @@ If a list is empty there is no solution in the representative. The implementatio
 
 \subsection{Williamson's product identity}
 The second matching condition is Williamson's classical product identity
-\cite[Theorem 14]{BKG}. We include its short argument to fix the normalization.
+\cite{Williamson}; see the modern statement \cite[Theorem~14]{BKG}. We include its short argument to fix the normalization.
 
 In set notation the negative positions form supports; their weights give
 the row sums, and symmetric difference corresponds to exclusive-or in
@@ -365,13 +382,21 @@ $m_a\mathbin{\oplus}m_b\mathbin{\oplus}m_c\mathbin{\oplus}m_d=2^H-1$,
 where $\oplus$ is bitwise exclusive-or on $H$ bits.
 \end{lemma}
 \begin{proof}
-In the integral group ring of the cyclic group of order $n$, write
+In the integral group ring of the cyclic group $G$ of order $n$, write
 $J$ for the sum of all group elements and $T_x$ for the sum of the
-positions where row $x$ is negative. Then $x=J-2T_x$ and
+positions where row $x$ is negative. Symmetry means $x$ is fixed by the
+involution $g\mapsto g^{-1}$, so
+$x^2=x x^{(-1)}=\sum_{s\in G}\PAF_x(s)s$.
+Then $x=J-2T_x$ and
 $x^2=nJ-4|T_x|J+4T_x^2$. Symmetry and normalization make $|T_x|$ even.
-Modulo $2$, the square $T_x^2$ equals the sum of the squares of its
-individual group elements, because mixed terms occur twice. Reducing
-$\sum_x x^2=4n\,1$ modulo $8$ and dividing by $4$ modulo $2$ gives
+Substituting in $\sum_x x^2=4n\,1$ and dividing by $4$ in $\Z[G]$ gives
+\[
+ nJ-\Bigl(\sum_x|T_x|\Bigr)J+\sum_xT_x^2=n\,1.
+\]
+Reducing modulo $2$, with $n$ odd and each $|T_x|$ even, gives
+$\sum_xT_x^2\equiv1+J$. Modulo $2$, each $T_x^2$ equals the sum of the
+squares of its individual group elements, because mixed terms occur twice.
+Thus
 \[
  \sum_x\sum_{t\in T_x}t^2=1+J\pmod2.
 \]
@@ -390,16 +415,22 @@ normalized. Lemma~\ref{lem:rowsum} and the PSD bound retain its four rows.
 A common invertible index change permutes autocorrelation shifts, preserving
 \eqref{eq:paf}. Applying such a change to all four rows and permuting them
 carries their compressions to a retained representative
-(Lemmas~\ref{lem:compression} and~\ref{lem:cover}). Among the index changes
-fixing all four compressions, choose one minimizing a designated row.
-Applying it to all rows preserves the solution; only that position is restricted.
+(Lemmas~\ref{lem:compression} and~\ref{lem:cover}). Choose $u\in K$
+minimizing the designated row's mask. Since $K$ fixes every compressed
+vector, the class tuple is unchanged. Applying $u$ to all rows preserves
+the solution; only that position is restricted.
 
 For $1\leq s\leq H$, equation~\eqref{eq:paf} gives
 $\PAF_a(s)+\PAF_b(s)=-(\PAF_c(s)+\PAF_d(s))$.
 The conservative PSD tests retain these pairs (Lemma~\ref{lem:pair}),
 and their product condition holds by Lemma~\ref{lem:product}.
-Equal integer inputs give equal matching keys in Appendix~\ref{app:matching},
-so every solution produces a retained key match. The exhaustive computation
+For the fixed linear hash $f(x)=\sum_{s=1}^{H}R_s\PAF_x(s)$ modulo
+$2^{64}$, these equalities give
+$f(a)+f(b)=-f(c)-f(d)$ and
+$m_a\oplus m_b=(2^H-1)\oplus m_c\oplus m_d$.
+Both sides apply the same key function to these two values. A solution
+therefore produces equal keys. Collisions can only add candidates, each
+of which is tested by the exact autocorrelations in~\eqref{eq:paf}. The exhaustive computation
 finds none (Table~\ref{tab:counts}), completing the exclusion.
 \end{proof}
 
@@ -412,48 +443,23 @@ and correct compiler, hardware, integer and IEEE binary64 arithmetic,
 including the interval checks in Appendix~\ref{app:numerics}; the search
 has not been formally verified and the records of the enumeration do not
 constitute a short proof certificate.
-One checker reuses the CPU row generator with separate compressed-enumeration
-code; the other has independent row, cosine, enumeration and record-checking
-code. They check completeness of the compressed enumeration and the
+One checker reuses the search's row generator with separate compressed-enumeration
+code; the other has separately written row, cosine, enumeration and
+record-checking code. Both share the compression model, ordering conventions
+and per-representative records of list sizes, pair counts, survivor counts
+and matches. They check completeness of the compressed enumeration and the
 recorded totals, without independently rederiving all survivor or key-match
-counts or recomputing every pair comparison. The distributed full search
-is the way to repeat the decisive computation. Its implementation and
+counts or recomputing every pair comparison. A separately written NumPy
+filter-and-join implementation exactly reproduces list sizes
+and both survivor counts for $312$ order-$65$ representatives
+($300$ random and the $12$ largest by pair count) and $301$ at order $55$.
+At order-$65$ representative $5200$, a $32$-bit-key positive join test
+exercises key matching and exact verification; independent NumPy
+pair regeneration recounts matches and confirms zero
+exact solutions. These checks do not replace rerunning the full search,
+which takes about $271$ CPU-hours. Its implementation and
 numerical details are in Appendices~\ref{app:join} and~\ref{app:numerics},
-with commands and historical records in the accompanying checker documentation.
-
-The archived unfiltered baseline enumeration, separate from the full-row
-search, reproduces the published numbers of equivalence classes through
-odd order $33$~\cite[Table 1]{HKT}; the counts are listed in
-Appendix~\ref{app:exhaustion}.
-
-The validation also recovers the known solutions at $39$, $45$ and
-$55$~\cite[Section 4, Table 1]{HKT}; the full validation with
-both compression factors $5$ and $11$ discovers the order-$55$ solution
-without a supplied witness. A separate NumPy implementation agrees on
-all $3{,}309$ compressed representatives at order $45$ and recovers its solution.
-
-The CPU computation took about $271$ CPU-hours; its processor models and
-full elapsed time were not recorded. Two separately written GPU implementations
-also found no solutions. The primary computation recorded about $23.8$
-GPU-hours; the second used four NVIDIA GB10 GPUs for about $2.06$
-GPU-hours of search ($2.14$ including setup and smaller-order checks).
-Their different pair filters give different intermediate counts.
-These historical computations share the mathematical specification and
-were produced by the same team. The earlier GPU programs are not included
-in the distributed CPU bundle, and not all original primary GPU records
-were rechecked.
-
-The search programs, input data and checker documentation accompany the
-paper. The unchanged programs and data are archived with version 2 at
-\url{https://doi.org/10.5281/zenodo.23622210}.
-
-\clearpage
-\begin{appendices}
-\section{Enumeration totals}\label{app:exhaustion}
-The CPU search regenerates its inputs from the problem definition;
-Table~\ref{tab:counts} summarizes the resulting enumeration. Pair counts
-sum both sides for each representative, counting their occurrences separately.
-The complete enumeration has no unresolved quadruple of classes.
+with commands in the accompanying checker documentation.
 
 \begin{table}[!ht]
 \centering
@@ -475,6 +481,48 @@ Solutions & $0$\\
 \caption{Counts in the complete CPU enumeration at order $65$.}
 \label{tab:counts}
 \end{table}
+
+The archived unfiltered baseline enumeration, separate from the full-row
+search, reproduces the published numbers of equivalence classes through
+odd order $33$~\cite[Table 1]{HKT}; the counts are listed in
+Appendix~\ref{app:exhaustion}.
+
+All controls described here use the programs distributed with this paper.
+Full-pipeline controls at $25$, $35$, $45$ and $55$, all with compression
+factor $5$, reproduce respectively $10$, $0$, $1$ and $1$ equivalence classes
+\cite[Table~1]{HKT}. They exhaust all $43$, $195$, $3{,}309$ and $9{,}409$ compressed
+representatives. Their solution closures under the equivalences above
+contain $1{,}500$, $0$, $144$ and $240$ normalized ordered quadruples.
+At $25$ and $35$, the reference is the separate unfiltered baseline.
+At $45$ and $55$, the closures of the witnesses discovered by our search
+contain the witnesses printed in \cite[Table~3]{HKT}; each has one
+equivalence class, matching \cite[Table~1]{HKT}. The reference
+quadruples are read only after the search, never supplied as seeds.
+These controls exercise row generation, compression, multiplier reduction,
+the designated-row restriction, both PSD bounds and the hash join.
+
+The programs also recover known solutions without supplied witnesses
+at $39$ with compression factors $3,13$, at $45$ with factors $3,5,9,15$,
+and at $55$ with factors $5,11$~\cite[Section~4, Table~1]{HKT}.
+A separate NumPy implementation agrees on
+all $3{,}309$ compressed representatives at order $45$ and recovers its solution.
+
+The CPU computation took about $271$ CPU-hours; its processor models and
+full elapsed time were not recorded.
+
+The search programs, input data and checker documentation accompany the
+paper. The mathematical programs and data are unchanged from those archived at
+\url{https://doi.org/10.5281/zenodo.23622210}.
+
+\clearpage
+\begin{appendices}
+\section{Enumeration totals}\label{app:exhaustion}
+The CPU search regenerates its inputs from the problem definition;
+Table~\ref{tab:counts} summarizes the resulting enumeration. Pair counts
+sum both sides for each representative, counting their occurrences separately.
+The complete enumeration has no unresolved quadruple of classes.
+
+
 
 The smaller-order enumeration reported in
 Section~\ref{sec:computation} gives the following counts:
@@ -669,7 +717,13 @@ arXiv:2601.22337v1, first posted January 29, 2026.
 \url{https://arxiv.org/abs/2601.22337v1}.
 \bibitem{Zhang}
 S. Y. Zhang, Programmable Emergence via Cognitive Engine: Longitudinal
-Evidence of AI Research Maturation, April 2, 2026.
+Evidence of AI Research Maturation, Zenodo record 19392279, version posted April 2, 2026.
 \url{https://doi.org/10.5281/zenodo.19392279}.
+\bibitem{FGS}
+R. J. Fletcher, M. Gysin and J. Seberry,
+\emph{Application of the discrete Fourier transform to the search for
+generalised Legendre pairs and Hadamard matrices},
+Australasian Journal of Combinatorics \textbf{23} (2001), 75--86.
+\url{https://ajc.maths.uq.edu.au/pdf/23/ocr-ajc-v23-p75.pdf}.
 \end{thebibliography}
 \end{document}

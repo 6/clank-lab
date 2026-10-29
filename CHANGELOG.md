@@ -7,6 +7,7 @@ Zenodo records.
 ## game-grundy-gap v4 (October 29, 2026)
 
 - Correction: layout: the review-status and AI-assistance sentences move from a footnote on the title to a paragraph under the abstract. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23758053](https://doi.org/10.5281/zenodo.23758053)
 
 ## thomson-10 v9 (October 29, 2026)
 

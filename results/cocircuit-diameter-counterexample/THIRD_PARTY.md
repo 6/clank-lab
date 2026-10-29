@@ -1,0 +1,18 @@
+# Licenses and numerical-source provenance
+
+The original proof sources and checking programs are distributed under the Apache License 2.0 in `LICENSE`. The numerical instance is attributed to the non-Hirsch polytope of Benjamin Matschke, Francisco Santos and Christophe Weibel, [The width of five-dimensional prismatoids](https://arxiv.org/abs/1202.4701v2). The source certification work of Xavier Allamigeon, Quentin Canu and Pierre-Yves Strub is described in [A formal disproof of Hirsch conjecture](https://arxiv.org/abs/2301.04060). The later pinned numerical file was compared entrywise with our transcription, but not with MSW Table 1, the original Coq input or Weibel's attachments. Our own certificate establishes the needed properties of this numerical instance independently of that historical identification. No Coq proof object, Coq source or external enumeration program is a checking input here.
+
+The numerical H-matrix in `data/msw-input.json` is an exact rational transcription of all 40 rows and 21 columns of [poly20dim21.ine](https://github.com/Coq-Polyhedra/Coq-Polyhedra/blob/f8b8ce8ebf2516ea1ee4aa6385435204c04d0b5a/enumeration/test/data/poly20dim21/lrs/poly20dim21.ine). Only serialization and rational spelling differ; all 840 entries agree as rational numbers. `lean/MSWSource.lean` factors its constant first column and its second column into a literal Lean transcription. `data/chart.json` records the integral chart used by the exact source kernel. The certificate in `data/source-certificate.json.gz.part00` and `part01` is the locally generated exact ray, label, edge and potential certificate for those rows; it is not a copy of the upstream Coq certificate. The eight-vertex control certificate is a separate locally generated certificate. These certificates are checked from their contents rather than from the success of an enumeration program.
+
+The H-matrix transcription is based on Coq-Polyhedra, a library for formalizing convex polyhedra. Coq-Polyhedra credits Xavier Allamigeon, Ricardo D. Katz and Pierre-Yves Strub. Its published copyright metadata lists Xavier Allamigeon and Ricardo D. Katz, 2017–2021, and Pierre-Yves Strub, 2019–2021, for its theory files. The numerical data file carries no separate copyright header. The repository's [CeCILL-B license](https://github.com/Coq-Polyhedra/Coq-Polyhedra/blob/f8b8ce8ebf2516ea1ee4aa6385435204c04d0b5a/LICENSE) is reproduced below, conservatively retaining its terms for the reused numerical data and its transcriptions. Its warranty and liability limitations, especially Articles 8 and 9, apply to that material. This acknowledgment must accompany distribution and remain accessible on the page describing the bundle. The data are not represented as newly constructed here.
+
+Lean and mathlib are obtained separately from their public repositories. Lean uses Apache-2.0; mathlib uses Apache-2.0. Python dependencies are obtained separately: python-flint package metadata declares MIT AND LGPL-3.0-or-later (its wheel includes numerical libraries), and psutil uses BSD-3-Clause. Their binary distributions and upstream license notices are not bundled here.
+
+## CeCILL-B license for the numerical-source material
+
+The complete, unmodified license is in [CeCILL-B-LICENSE.txt](data/CeCILL-B-LICENSE.txt).
+
+
+## Figure fonts
+
+The optional figure uses DejaVu Sans supplied by Matplotlib. Its embedded glyphs retain the Bitstream/DejaVu/Arev notices in [FONT-LICENSE.txt](data/FONT-LICENSE.txt). Matplotlib and its dependencies are installed separately from the pinned figure requirements; no library binary is bundled.

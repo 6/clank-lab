@@ -12,6 +12,8 @@ The proofs, the Lean formalization, the certificate checkers and the text were p
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23765670](https://doi.org/10.5281/zenodo.23765670)
+
 ## Check it
 
 With [elan](https://github.com/leanprover/elan) installed:
@@ -69,6 +71,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A counterexample to the cocircuit diameter conjecture}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/cocircuit-diameter-counterexample-v1/results/cocircuit-diameter-counterexample}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/cocircuit-diameter-counterexample-v1/results/cocircuit-diameter-counterexample}},
+  doi          = {10.5281/zenodo.23765670}
 }
 ```

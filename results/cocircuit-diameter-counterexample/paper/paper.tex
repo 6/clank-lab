@@ -1,0 +1,844 @@
+\documentclass[11pt]{article}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={A counterexample to the cocircuit diameter conjecture},
+ pdfauthor={P. Graham},pdfsubject={Cocircuit graphs of realizable uniform oriented matroids},
+ pdfkeywords={oriented matroid, cocircuit graph, diameter, uniform perturbation}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\title{A counterexample to the cocircuit diameter conjecture}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A rationally realizable uniform rank-41 oriented matroid on 80 elements
+has cocircuit-graph diameter at least $42>41=n-r+2$, refuting the
+general cocircuit diameter conjecture. We build on the rank-21 example
+of Adler, De Loera, Klee and Zhang, the non-Hirsch polytope of
+Matschke, Santos and Weibel, Santos's product construction, and the
+source certification of Allamigeon, Canu and Strub. A count of negative
+coordinates confines every potentially shorter walk to two affine sections;
+projection to the product factors then gives the lower bound.
+Two rational perturbations make the resulting oriented matroid uniform.
+Lean~4 separately verifies the matrix existence and walk lower bound
+for a different realizing matrix; the printed perturbations are proved here,
+not checked in Lean.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+
+\noindent 2020 \emph{Mathematics Subject Classification}: 52C40, 05C12, 52B05.\\
+\emph{Keywords}: cocircuit graph, oriented matroid, diameter, uniform perturbation.
+
+\section{Introduction}
+
+Let $A\in\R^{n\times r}$ have rank $r$. Its sign covectors are
+$\sgn(Ax)$, $x\in\R^r$, with values in $\{-1,0,1\}^n$.
+Its \emph{cocircuits} are the nonzero covectors of minimal support.
+Write $X^0=\{i:X_i=0\}$ and
+$S(X,Y)=\{i:X_i=-Y_i\ne0\}$ for the separation set. When every $r$-row minor of $A$ is nonzero,
+the associated oriented matroid is \emph{uniform}; every cocircuit has
+$r-1$ zeros. Its \emph{full cocircuit graph} $G^*(A)$ has all signed cocircuits
+as vertices, with distinct $X,Y$ adjacent when
+$S(X,Y)=\varnothing$ and $|X^0\cap Y^0|=r-2$.
+Rational realizability means $A$ can be chosen over $\Q$.
+Cocircuits $X,Y$ are \emph{antipodal} if $Y=-X$, and nonantipodal otherwise.
+Write $d_H$ for distance in $H$.
+
+Adler, De Loera, Klee and Zhang's (ADKZ) Conjecture~1 states that every rank-$r$ oriented matroid on
+$n$ elements has cocircuit-graph diameter at most $n-r+2$
+\cite[Conjecture~1]{adkz}. Babson, Finschi and Fukuda's early
+farthest-pairs question \cite[final remarks, pp.~13--14]{bff} and
+Felsner, G\'omez, Knauer, Montellano-Ballesteros and Strausz's
+Question~4.2 \cite{felsner} precede ADKZ's formulation. ADKZ report Fukuda's personal communication
+that the bound is folklore. Klee's report attributes its introduction
+to Fukuda and Terlaky \cite[p.~2425]{klee}.
+
+\begin{theorem}\label{thm:main}
+There exists a rationally realizable uniform oriented matroid of rank 41
+on 80 elements whose cocircuit graph has diameter at least
+$42>41=80-41+2$.
+\end{theorem}
+
+ADKZ state a uniform rank-21 example on 40 elements with nonantipodal
+cocircuits at distance at least 21 \cite[Proposition~8]{adkz}.
+Their proof uses the 20-dimensional non-Hirsch polytope of Matschke,
+Santos and Weibel (MSW), with 40 facets
+\cite[Theorem~1.3]{msw}, obtained using Santos's construction
+\cite[Theorem~2.6]{santos}. Allamigeon, Canu and Strub (ACS) proved
+its diameter 21 in Coq \cite[\S5, PDF p.~12]{acs}.
+We reuse their numerical inequality data and check a new certificate for
+the designated pair. Product amplification is standard
+\cite[Lemma~6.1 and \S6]{santos}, where Santos cites Klee--Walkup,
+Proposition~1.3.
+
+We must control walks that leave the product's nonnegative section.
+The lifted source matrix $M_0$ is not uniform: rows 5, 7--10 and 27--29
+are supported on the first six columns (Appendix~\ref{app:certificate}).
+We first perturb it to a uniform rank-21 factor, preserving
+the pair at distance 21. Two factors give 80 inequalities in rank 41:
+the product pair is 42 edges apart; the conjectured bound is
+$80-41+2=41$. To exclude shorter cocircuit walks,
+Lemma~\ref{lem:count} generalizes ADKZ's count of sign-coordinate changes
+\cite[Lemma~5 and proof of Proposition~8]{adkz}: a walk of at most 41
+edges can visit at most one negative coordinate. Such a walk stays in
+the union of two sections. A second uniform perturbation preserves
+these sections; projection to the factors still requires $21+21$ edges.
+
+\section{A lower bound on walk length}
+
+Fix an inequality matrix $M\in\R^{n\times r}$ and put
+$C_0(M)=\{z:Mz\ge0\}$ and
+$C_e(M)=\{z:(Mz)_e\le0,\ (Mz)_i\ge0\ (i\ne e)\}$.
+Choose a rational linear functional $c$ positive on every nonzero vector
+in these cones. The \emph{affine section} of a cone $C$ is $C\cap\{c(z)=1\}$;
+positivity makes it bounded (Lemma~\ref{lem:stability}(a)).
+The sections of $C_0$ and $C_e$ are
+nonnegative and singly reversed, respectively. A row is \emph{tight} when equality holds;
+the tight row labels form the \emph{active set}.
+When $M$ is uniform and the section is full-dimensional, we identify
+a section vertex $z$ with the cocircuit $\sgn(Mz)$; its active set is
+its zero set (Lemma~\ref{lem:cells}).
+A $d$-dimensional section is
+\emph{simple} if each vertex lies on exactly $d$ facets.
+
+\begin{samepage}
+\begin{lemma}\label{lem:count}
+Let $G^*$ be the cocircuit graph of a uniform rank-$(d+1)$ oriented
+matroid on $2d$ elements. Suppose that $X^0,Y^0$ are complementary
+$d$-element sets and $X,Y$ are positive elsewhere. For a walk of length
+$L$ from $X$ to $Y$, let $k$ be the number of coordinates that are
+negative at any vertex of the walk. Then
+\[
+                      2d+2k\le2L.
+\]
+\end{lemma}
+\end{samepage}
+\begin{proof}
+Adjacent cocircuits have $d$ zeros each, sharing $d-1$.
+Exactly one zero becomes nonzero and one nonzero becomes zero.
+All other nonzero entries agree because the separation set is empty.
+Thus exactly two coordinates change, each by absolute amount one.
+The complementary endpoint zero sets make every coordinate go from
+$0$ to $1$ or from $1$ to $0$. Its total absolute change is at least one,
+or at least three if it visits $-1$. Summing gives $2d+2k\le2L$.
+\end{proof}
+
+For $d=40$ and $L\le41$, the walk uses at most one fixed negative
+coordinate $e$, so every vertex lies in $C_0$ or $C_e$.
+If none is negative, any $e$ works.
+
+\begin{lemma}\label{lem:cells}
+Let $M\in\Q^{n\times r}$ have rank $r\ge2$ and be uniform. Let a rational
+linear functional $c$ be positive on every nonzero vector of $C_0(M)$
+and every $C_e(M)$. Suppose each section by $c(z)=1$ is bounded
+and has dimension $r-1$.
+Each section graph is the restriction of $G^*(M)$ to cocircuits satisfying its
+sign requirements $X_i\ge0$ for $C_0$, or $X_e\le0$ and $X_i\ge0$
+for $i\ne e$ for $C_e$. For every row index $e$, every walk whose negative coordinates
+are contained in $\{e\}$ lies in the union of the graphs of the sections
+of $C_0(M)$ and $C_e(M)$.
+\end{lemma}
+\begin{proof}
+The $r-1$ zero rows of a cocircuit are independent. Their kernel is a line;
+choosing the signs selects a ray. Positivity of $c$ gives exactly one
+representative with $c(z)=1$, and excludes the antipodal ray from that cone.
+This representative is a section vertex.
+Conversely, a section vertex needs $r-1$ independent
+tight rows; uniformity forbids more, so its sign vector is a cocircuit.
+These $r-1$ independent active rows give local coordinates in the
+$(r-1)$-dimensional section, so it is simple. Two vertices sharing $r-2$ tight rows
+are the endpoints of their common one-dimensional face, and every edge
+has such endpoints. Conversely, full-graph adjacency between section
+vertices requires these $r-2$ shared zeros, so gives such a section edge.
+Separation is empty inside one of these cones; thus its
+graph is the induced cocircuit subgraph on those vertices.
+For an adjacent pair with no negative coordinates outside $e$, if either
+has a negative entry at $e$, the other has a nonpositive entry there:
+opposite nonzero signs are excluded by adjacency. Both then lie in $C_e$.
+Otherwise both lie in $C_0$. When both signs at $e$ vanish, both vertices lie on the shared facet
+and the edge lies in both graphs. Every walk edge therefore belongs to
+one of the two section graphs.
+\end{proof}
+
+\section{The construction}
+
+Put $P=C_0(M_0)\cap\{z:c(z)=1\}$, with the rational matrix $M_0$ and
+functional $c$ specified in Appendix~\ref{app:certificate}.
+The source certificate \cite{supplement}, detailed in Appendix~\ref{app:cover},
+gives a simple 20-dimensional $P$ and $d_P(u,v)=21$ for vertices $u,v$
+with active rows 1--20 and 21--40, respectively.
+The inequality data are \texttt{poly20dim21.ine} in Coq-Polyhedra
+(Allamigeon, Katz and Strub). ACS attribute the supplied inequalities
+to Weibel \cite[\S5, PDF p.~11, footnote~6]{acs}; Allamigeon, Id-Sahra
+and Strub likewise credit MSW for the 20- and 23-dimensional non-Hirsch
+polytopes they consider \cite[\S1]{cert26}.
+We use the documented attribution for credit; the source file was not compared
+entrywise with MSW's table. The proof uses the exact matrix and certificate
+specified here; the supplement records the source version and comparisons.
+Clearing each row's reduced denominators by their least common multiple gives
+$M_0\in\mathbb Z^{40\times21}$, leaving every sign unchanged.
+Let
+$\sigma_e\in\{-1,1\}^{40}$ have entries $\sigma_{e,i}$:
+$\sigma_0$ is all positive, and $\sigma_e$ reverses row $e$ for $e>0$.
+Appendix~\ref{app:certificate} gives a rational row vector $c$ and weights
+$\lambda_{e,i}\ge1$ satisfying
+\[
+ c=\sum_{i=1}^{40}\lambda_{e,i}\sigma_{e,i}(M_0)_i,
+ \qquad(0\le e\le40).
+\]
+These exact identities, with $\operatorname{rank}M_0=21$, imply
+$c(z)>0$ on every nonzero vector of each closed cone: its signed slacks
+are nonnegative and not all zero.
+
+
+\begin{lemma}[Stability of bounded simple sections]\label{lem:stability}
+Let $M\in\R^{n\times r}$ and let $\Sigma\subseteq\{-1,1\}^n$ be finite.
+Suppose a linear functional $c$ is positive on every nonzero vector of
+\[
+ C_\sigma(M)=\{z:\sigma_i(Mz)_i\ge0\text{ for all }i\},
+ \qquad \sigma\in\Sigma.
+\]
+\textup{(a)} For all $M'$ in a sufficiently small neighborhood of $M$ in
+$\R^{n\times r}$, the same positivity
+holds and the sections $C_\sigma(M')\cap\{c=1\}$ are uniformly bounded.
+\textup{(b)} For each $\sigma$ whose original section has dimension $r-1$ and
+exactly $r-1$ independent active rows at every vertex, its perturbed
+section has the same dimension and face lattice,
+with the same row labels and nonzero signs. For two patterns
+$\sigma,\sigma'$ satisfying these hypotheses, their perturbed sections
+intersect in the face where all rows on which $\sigma$ and $\sigma'$
+differ are tight. This is the continuation of their original common face,
+and the two continuation maps agree on its vertices and edges.
+\end{lemma}
+\begin{proof}
+\emph{Positivity and boundedness.} Failure of positivity along $M'\to M$ would give unit vectors in
+perturbed cones with $c\le0$; a convergent subsequence contradicts the
+original positivity. Unbounded normalized sections similarly give a unit
+limit in an original cone with $c=0$.
+\emph{Vertices.} For a full-dimensional original section, a point with all inequalities
+strict remains feasible, preserving dimension. Each original vertex continues uniquely through its nonsingular
+active-row system and $c=1$. Every inactive signed slack was strictly
+positive; by continuity it remains so, giving exactly the original active set.
+
+Suppose additional vertices appeared along $M'\to M$. Uniform boundedness
+gives a convergent subsequence with limit $z$. Finiteness of row
+subsets gives a further subsequence with a fixed set $I$ of $r-1$
+independent tight rows at the perturbed vertices. These rows need not
+a priori be independent at $M$. The original bounded face with $I$
+tight contains $z$ by continuity of every signed inequality and tight
+equation. This nonempty bounded polyhedral face has a vertex $w$.
+Its active set contains $I$ and has the same cardinality $r-1$, so equals $I$. Thus $M_I$ has rank
+$r-1$, and $M_Iz=0$, $c(z)=1$ uniquely determines $w$.
+For sufficiently small perturbations the system remains nonsingular;
+the alleged additional vertex is the continuation of $w$.
+
+\emph{Faces.} Identify each vertex with its unique continuation, retaining its active
+set and nonzero signs. For a row subset $I_0$, the face cut out by making
+$I_0$ tight has precisely the vertices whose active sets contain $I_0$.
+The continuation map preserves this vertex set and its emptiness,
+for each section satisfying the stated dimension and active-row hypotheses.
+Every face of an inequality polytope has this form and is the convex hull
+of its vertices. Thus equal faces, and inclusion between faces, are
+preserved in both directions. This gives a face-lattice bijection,
+preserving edges and their endpoint pairs.
+
+\emph{Common faces.} If two patterns differ on $I_0$, the intersection of their sections is
+the face obtained by making $I_0$ tight in either section. Every vertex of this face is a vertex of both sections: in a convex
+decomposition into section points, all signed slacks on $I_0$ are nonnegative
+and average to zero, so both points lie in the common face. A nontrivial
+decomposition would contradict its being a vertex there.
+A row is tight precisely
+when its linear form is zero, independently of the sign pattern.
+The active set $I$ is thus the same in both sections, has exactly
+$r-1$ rows, and contains $I_0$. Its continuation is the unique
+solution of $M'_Iz=0$, $c(z)=1$ in either section. The identifications,
+full sign vectors and common-face edges consequently agree.
+Intersecting the neighborhoods for the finitely many sections and vertex
+systems gives one neighborhood for every $\sigma\in\Sigma$.
+\end{proof}
+
+Set $F=M_0+\varepsilon J$, where $J_{ij}=(i+1)^{j-1}$ has 21 columns.
+Each 21-row minor is a polynomial in $\varepsilon$ with nonzero
+Vandermonde leading coefficient, so all are nonzero for sufficiently
+small rational $\varepsilon>0$. Apply Lemma~\ref{lem:stability} with
+$\Sigma=\{\sigma_0,\sigma_1,\ldots,\sigma_{40}\}$: $c$ stays positive
+on these 41 cones.
+Each vertex of $P$ has exactly 20 independent tight rows, as the
+certificate checks. The section $P$ of $C_0(M_0)$ is therefore simple, so
+Lemma~\ref{lem:stability} preserves its graph with the active row labels.
+Let $F\in\Q^{40\times21}$ be the resulting uniform matrix, and $U,V$
+the unique continuations of $u,v$. Write $H_0,H_e$ for the section
+graphs of $C_0(F),C_e(F)$, respectively.
+\begin{lemma}\label{lem:facetcross}
+Each reversed section $C_e(F)\cap\{c=1\}$ has dimension 20,
+and every vertex has exactly 20 independent tight rows.
+\end{lemma}
+\begin{proof}
+All reversed sections are bounded by Lemma~\ref{lem:stability}, applied
+above with all 41 patterns. (1) Every row is active at $U$ or $V$. There the twenty independent
+active constraints are local coordinates on $c=1$. Keeping one zero
+and making the other nineteen positive gives a 19-dimensional face.
+Thus every row defines a facet of the nonnegative section.
+
+(2) A facet's affine span in $c=1$ spans a linear hyperplane in
+$\R^{21}$. Two rows defining the same facet therefore vanish on the same
+hyperplane and are proportional, contradicting a nonzero 21-row minor
+of the uniform matrix $F$. Distinct rows define distinct facets.
+
+(3) At a relative-interior point of facet $e$, any other tight row would
+vanish on the facet's affine span: a nonnegative affine form vanishing
+at an interior point vanishes identically there. This would make its
+facet equal to facet $e$, since both are facets by (1), contradicting (2). Thus only row $e$ is tight.
+Crossing its hyperplane within $c=1$ makes row $e$ negative and all
+others positive, giving a 20-dimensional reversed section.
+
+(4) At every reversed-section vertex at least twenty independent
+constraints are tight. Uniformity forbids 21 tight rows, whose common
+kernel would be zero. Thus exactly twenty rows are tight and independent.
+\end{proof}
+By Lemma~\ref{lem:cells}, $H_0,H_e$ are subgraphs of $G^*(F)$,
+identified by sign vectors. Their union is the induced subgraph on the
+cocircuits satisfying either set of sign inequalities.
+$H_0$ inherits $P$'s graph and row labels,
+giving $d_{H_0}(U,V)=21$.
+Their active labels still partition the 40 facets, so the cocircuits
+corresponding to $U,V$ have complementary zero sets and are positive elsewhere.
+
+\begin{lemma}\label{lem:factor}
+Every $U$--$V$ walk in $G^*(F)$ has length at least 21.
+\end{lemma}
+\begin{proof}
+This is ADKZ's Proposition~8 count applied to $F$.
+For a walk of length at most 20, Lemma~\ref{lem:count} with $d=20$
+gives $k=0$. Its vertices are nonnegative, so Lemma~\ref{lem:cells} puts it
+in $H_0$, contradicting $d_{H_0}(U,V)=21$.
+
+\end{proof}
+
+Choose rational coordinates $(s,x)\in\R\times\R^{20}$ with $s=c(z)$,
+so the affine sections lie in $s=1$. After this rational invertible
+change of coordinates we may assume that
+$F=(\beta\ R)$ with $\beta\in\Q^{40}$ and $R\in\Q^{40\times20}$,
+so $F(s,x)=\beta s+Rx$. The change preserves all sign vectors and
+nonvanishing maximal minors. In product coordinates $(s,x,y)$,
+the inequality matrix is
+\[
+ B=\begin{pmatrix}\beta&R&0\\\beta&0&R\end{pmatrix}\in\Q^{80\times41}.
+\]
+The section of $C_0(B)$ is a product of two 20-dimensional polytopes.
+Its vertices are pairs of factor sign vectors; each edge moves one factor.
+For a flip in the first factor, the reversed section graph is
+$H_e\square H_0$. We use only the inclusion
+\[
+ (H_0\square H_0)\cup(H_e\square H_0)
+ \ \subseteq\ (H_0\cup H_e)\square H_0.
+\]
+Here $\square$ is the Cartesian product of graphs. The second-factor case
+is symmetric.
+
+
+For the second perturbation, set $W\in\Q^{80\times41}$ with
+$W_{ij}=(i+1)^{j-1}$ and seek
+$A=B+\delta W$ with rational $\delta>0$ sufficiently small.
+
+\begin{lemma}\label{lem:preserve}
+For some rational $\delta>0$, the matrix $A=B+\delta W$ is uniform.
+The functional $s$ is positive on every nonzero vector of $C_0(A)$ and
+all $C_e(A)$. Their sections by $s=1$ are bounded, have dimension 40,
+and have the same
+graphs and common faces as the corresponding sections for $B$,
+identifying vertices by active rows together with their sign vectors.
+\end{lemma}
+\begin{proof}
+Fix $F$ and $s$ before choosing $\delta$. Every factor section has dimension 20,
+by the construction of $P$ for $H_0$ and Lemma~\ref{lem:facetcross} for $H_e$.
+Uniformity of $F$ gives exactly 20 independent active rows at each vertex,
+with all other signed inequalities strict. All 81 sections (the nonnegative section and one reversal for each
+of the 80 rows) thus have dimension 40.
+Fixing $s=1$ makes the two factor blocks independent. Each product-section
+vertex is a pair of factor-section vertices. The active equations in
+the $x$ and $y$ variables form two nonsingular blocks of size 20,
+giving exactly 40 independent active equations. The remaining signed
+inequalities are strict.
+On each product cone the two factor vectors belong to $C_0(F)$ or one
+$C_e(F)$ and share the coordinate $s$. Positivity of the factor functional
+forces $s\ge0$; if $s=0$, both factor vectors vanish. Thus $s>0$ on
+every nonzero vector of all 81 product cones. Their sections in the
+common hyperplane $s=1$ are bounded. The product may be nonuniform.
+For any 41-row set $I$,
+$\det(B_I+\delta W_I)$ has degree 41: its top coefficient $\det W_I$ is the
+Vandermonde determinant of 41 distinct integers and is nonzero.
+All finitely many maximal-minor polynomials are therefore nonzero for
+sufficiently small $\delta>0$.
+Use $\Sigma$ consisting of the all-positive pattern and each of its
+80 single reversals. Lemma~\ref{lem:stability} applies: the functional $s$ remains positive, the sections remain
+uniformly bounded, and their labeled graphs and shared faces are preserved.
+\end{proof}
+
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Lemma~\ref{lem:preserve} gives a uniform $A$, positivity of $s$, and
+bounded sections of dimension 40. Thus Lemma~\ref{lem:cells} applies.
+In the section of $C_0(A)$ choose the vertices labeled $(U,U)$ and
+$(V,V)$. Their zero sets are complementary 40-element sets and
+both are positive elsewhere. Suppose
+there were a full-graph walk of length $L\le41$ between them.
+Lemmas~\ref{lem:count} and~\ref{lem:cells} confine its vertices and edges
+to the sections of $C_0(A)$ and one fixed $C_e(A)$.
+Lemma~\ref{lem:preserve} transports the walk to $B$, preserving active
+rows and sign vectors. The common-face clause of
+Lemma~\ref{lem:stability}(b) makes the two section maps agree on every
+shared vertex and edge.
+If the fixed coordinate $e$ belongs to the first factor,
+the resulting walk is in $(H_0\cup H_e)\square H_0$.
+The first-factor projection lies in $H_0\cup H_e$ and the second in
+$H_0$. By Lemma~\ref{lem:cells} applied to $F$, both $H_0$ and $H_e$
+are subgraphs of $G^*(F)$.
+Project the whole walk to each factor and delete consecutive repetitions. Each
+edge moves exactly one factor, so the lengths of the projected walks
+sum to $L$. Lemma~\ref{lem:factor}
+requires at least 21 first-factor edges, and
+$d_{H_0}(U,V)=21$ requires at least 21 second-factor edges. Thus $L\ge42$, a contradiction. The second-factor case is identical.
+Every 41-row minor of $A$ is nonzero, so its rank is 41. Its real sign
+covectors give the standard realizable oriented matroid, uniform by these
+minors and rationally realizable since $A$ is rational.
+\end{proof}
+
+\begin{remark}\label{rem:path}
+The distance between these two vertices is exactly 42. The two
+21-edge paths in $P$, continued to $H_0$, give the path
+\[
+ (U,U),\ldots,(V,U),\ldots,(V,V)
+\]
+in the product section. Lemma~\ref{lem:preserve} preserves its edges
+after the second perturbation. This gives the upper bound 42, matching
+the lower bound in the proof of Theorem~\ref{thm:main}.
+\end{remark}
+
+
+
+
+
+\section{Formal verification}
+
+The Lean theorem
+\nolinkurl{ADKZPricing.Generated.source_frozen_endpoint}
+asserts that there is
+$A'\in\Q^{80\times41}$ with every 41-row minor nonzero and real signed
+cocircuits $X,Y$ having complementary 40-element zero sets and positive
+entries elsewhere, such that no walk of at most 41 edges joins them.
+This is Theorem~\ref{thm:main} for a different matrix from Section~3.
+The walks allow arbitrary signed intermediate cocircuits and repetitions;
+antipodal sign vectors are distinct vertices.
+
+In the formal definitions, cocircuits are nonzero covectors minimal
+under conformality: a conformal face $Z$ of $X$ has
+$Z_i\in\{0,X_i\}$ for every $i$. Adjacency is defined by composition,
+$(X\circ Y)_i=X_i$ if $X_i\ne0$ and $Y_i$ otherwise: for distinct
+$X,Y$, the compositions $X\circ Y$ and $Y\circ X$ must agree and be a
+covector having exactly $X,Y$ as cocircuit conformal faces. In the uniform
+case, Lean proves that conformality-minimality agrees with support-minimality
+and that this adjacency agrees with Section~1: empty separation set and
+39 common zeros. Thus the formal walk bound has the stated full-graph
+meaning; the passage from real matrix sign covectors to the standard
+realizable oriented matroid is the usual mathematical interpretation.
+
+Lean uses a different positive functional for the same $M_0$ and the
+same product-and-perturb strategy. Its rational perturbations are chosen
+nonconstructively; the endpoint theorem specifies $A'$ existentially,
+without printing its entries.
+The printed Vandermonde perturbations are not checked in Lean; their
+proofs and Remark~\ref{rem:path}'s upper bound are written. The formal
+statement, axioms and reproduction instructions are given in
+\cite{supplement}.
+
+\section{Further questions}
+
+The diameter of the full cocircuit graph of this example is unknown. What is the least counterexample rank?
+What sharp bound replaces $n-r+2$?
+
+Fukuda's linear-bound question remains \cite[\S3.7.2, PDF p.~16]{survey};
+see also \cite[Open Problem~5]{finschi}.
+
+\begin{appendices}
+\section{An exact positive-functional certificate}\label{app:certificate}
+% BEGIN EXPLICIT CERTIFICATE
+This appendix specifies the source matrix $M_0$ and a positive functional
+for the cones obtained by reversing at most one row. Row and column labels
+are one-based: $1\le i\le40$, $1\le j\le21$; $e=0$ denotes the
+nonnegative cone and $e=1,\ldots,40$ reverses row $e$.
+
+\subsection*{The integer source matrix}
+Let $u_j$ denote the $j$th coordinate row of $\mathbb Z^{21}$ and let $m_i$
+be row $i$ of $M_0$. For the rows in the following table set
+\[
+ m_i=s_i(u_1+100\eta_i u_2)+a_i u_3+b_i u_4+p_i u_5+q_i u_6+T_i,
+ \qquad \eta_i=\begin{cases}1&i\le20,\\-1&i\ge21.\end{cases}
+\]
+\begin{center}\small
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{r|rrrrr|l}
+$i$&$s_i$&$a_i$&$b_i$&$p_i$&$q_i$&$T_i$\\\hline
+1&1&0&0&21&-7&$u_{17}+u_{18}$\\
+2&1&0&0&16&-15&$u_{18}+u_{19}$\\
+3&1&0&0&0&-32&$u_{19}+u_{20}$\\
+4&1&0&0&-16&-15&$u_{20}+u_{21}$\\
+5&1&0&0&-21&-7&$0$\\
+6&1&0&0&-20&-4&$u_{21}$\\
+7&1&0&0&0&32&$0$\\
+8&1&0&0&20&-4&$0$\\
+9&100&3&-2&0&-3000&$0$\\
+10&100&-3&-2&0&3000&$0$\\
+11&2000&-3&7&0&63600&$2000u_{16}$\\
+21&1&30&0&0&0&$u_{9}+u_{10}$\\
+22&1&4&-15&0&0&$u_{10}+u_{11}$\\
+23&2&0&-33&0&0&$2u_{11}+2u_{12}$\\
+24&1&-1&-16&0&0&$u_{12}+u_{13}$\\
+25&2&-55&0&0&0&$2u_{13}+2u_{14}$\\
+26&1&-17&18&0&0&$u_{14}$\\
+27&1&0&38&0&0&$0$\\
+28&1&22&17&0&0&$0$\\
+29&5&-50&0&1&-1&$0$\\
+30&100&2999&0&-12&-20&$100u_{9}$\\
+31&10000&299999&0&0&100&$10000u_{8}$\\
+32&20000&-549000&0&4&25&$20000u_{7}$\\
+\end{tabular}
+\end{center}
+The remaining seventeen rows are specified by two triangular recipes. Define
+\[
+ \begin{aligned}
+ \alpha&=2000u_1+200000u_2+3u_3+7u_4-63600u_6+2000u_{15},\\
+ (t_7,\ldots,t_{14})&=2(10^{10},10^{10},10^{10},10^{13},10^{14},10^{14},10^{14},10^{14}).
+ \end{aligned}
+\]
+Then
+\[
+ m_{12}=\alpha+\sum_{k=7}^{14}t_ku_k,\qquad
+ m_{j+6}=\alpha+\sum_{k=7}^{j-1}t_ku_k-t_ju_j\quad(7\le j\le14).
+\]
+Likewise define
+\[
+ \begin{aligned}
+ \gamma&=2000u_1-200000u_2-54000u_3+4u_5-25u_6,\\
+ (h_{15},\ldots,h_{21})&=2(10^8,10^{10},10^{10},10^{10},10^{11},10^{11},10^{12}).
+ \end{aligned}
+\]
+Then
+\[
+ m_{33}=\gamma+\sum_{k=15}^{21}h_ku_k,\qquad
+ m_{j+19}=\gamma+\sum_{k=15}^{j-1}h_ku_k-h_ju_j\quad(15\le j\le21).
+\]
+Empty sums are zero, and all entries not specified by these recipes are zero.
+These recipes give exactly the $40\times21$ integer matrix obtained by clearing
+each source row's reduced denominators by their least common multiple.
+\subsection*{The functional and weights}
+Set $c(z)=40000\sum_{j=1}^{21}v_jz_j$, where the integers $v_j$ are
+\begin{center}\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{r r|r r|r r}
+$j$&$v_j$&$j$&$v_j$&$j$&$v_j$\\\hline
+1&$7\,889\,496\,505\,278\,816$&8&$16\,770\,653\,889\,890$&15&$11\,008\,963\,417$\\
+2&-$788\,643\,250\,921\,389\,998$&9&$16\,773\,144\,135\,505$&16&$193\,944\,140\,058$\\
+3&-322873814&10&$2\,918\,818\,204\,673\,914$&17&$570\,600\,902\,642$\\
+4&$73\,889\,176\,985\,687\,161$&11&$2\,039\,103\,229\,854\,373$&18&$574\,335\,730\,279$\\
+5&0&12&$1\,964\,406\,684\,567\,592$&19&$186\,741\,363\,964$\\
+6&-$8\,399\,586\,269\,177$&13&$2\,477\,284\,371\,671\,404$&20&$112\,044\,818\,677$\\
+7&$16\,778\,123\,544\,418$&14&$2\,402\,587\,826\,384\,623$&21&$373\,482\,727\,181$\\
+\end{tabular}
+\end{center}
+Let $\sigma_{0,i}=1$ for every $i$; for $1\le e\le40$ let
+$\sigma_{e,e}=-1$ and $\sigma_{e,i}=1$ for $i\ne e$.
+For each $e$, specify an increasing list $B_e=(\ell_1,\ldots,\ell_{21})$ as follows:
+\[
+ \begin{gathered}
+ K=\{2,5,7,13,14,15,16,17,18,19,20,21,25,27,33,35,36,37,38,39,40\},\\
+ B_e=\operatorname{sort}\bigl((K\setminus R_e)\cup S_e\bigr).
+ \end{gathered}
+\]
+In the table, $\mathcal D=\{2,4,6,8,10,11,22,23,24,26,28,29,30,31,32\}$.
+Each displayed comma-separated entry denotes a set, and a multi-label row
+assigns the same sets to every listed $e$.
+\begin{center}\scriptsize
+\setlength{\tabcolsep}{14pt}
+\renewcommand{\arraystretch}{1.03}
+\begin{tabular}{r|l|l}
+$e$&$R_e$ (delete from $K$)&$S_e$ (add to $K$)\\\hline
+$0,1$&$\varnothing$&$\varnothing$\\
+$\mathcal D$&$2$&$1$\\
+$3$&$2,19,25$&$8,12,34$\\
+$5$&$2,5,7,38$&$1,6,12,34$\\
+$7$&$2,7$&$1,11$\\
+$9$&$5,7,33,38,39$&$1,4,6,11,12$\\
+$12$&$2,5,27$&$3,4,26$\\
+$13$&$2,5,13,16,21,25$&$4,6,12,28,30,34$\\
+$14$&$2,14,25,27$&$3,12,28,32$\\
+$15$&$2,5,15,21,25,27$&$4,12,26,28,31,34$\\
+$16$&$2,5,16,21,25$&$3,12,30,31,34$\\
+$17$&$2,5,17,18$&$3,6,22,26$\\
+$18$&$2,5,13,18,19$&$3,4,12,22,26$\\
+$19$&$2,5,19,25,27$&$3,6,12,26,34$\\
+$20$&$2,5,16,18,20$&$3,4,12,22,24$\\
+$21$&$2,5,13,15,21,25$&$1,6,12,22,32,34$\\
+$25$&$5,7,25,33,38,39$&$1,4,6,12,32,34$\\
+$27$&$2,5,19,27$&$1,6,26,34$\\
+$33$&$2,5,7,25,33,37$&$1,4,8,11,12,24$\\
+$34,38,39$&$5,33,38,39$&$1,4,6,12$\\
+$35$&$2,5,7,33,35,38$&$1,3,6,8,11,12$\\
+$36$&$5,36,39$&$1,6,12$\\
+$37$&$5,36,37$&$3,4,12$\\
+$40$&$2,35,38,40$&$1,3,6,12$\\
+\end{tabular}
+\end{center}
+Write $c^{\mathsf T}=40000(v_1,\ldots,v_{21})^{\mathsf T}$ and define
+\[
+ \begin{gathered}
+ N_e=[\,\sigma_{e,\ell_1}m_{\ell_1}^{\mathsf T}\ \cdots\
+       \sigma_{e,\ell_{21}}m_{\ell_{21}}^{\mathsf T}\,],\qquad \Delta_e=\det N_e,\\
+ d_e=c^{\mathsf T}-\sum_{i=1}^{40}\sigma_{e,i}m_i^{\mathsf T}.
+ \end{gathered}
+\]
+Let $N_e[r\leftarrow d_e]$ mean replace column $r$ of $N_e$ by $d_e$, and put
+\[
+ \lambda_{e,i}=\begin{cases}
+ 1+\det(N_e[r\leftarrow d_e])/\Delta_e,&i=\ell_r\ (1\le r\le21),\\
+ 1,&i\notin B_e.
+ \end{cases}
+\]
+Evaluating these integer determinants exactly gives
+\[
+ \Delta_e\ne0\quad(0\le e\le40),\qquad
+ \frac{\det(N_e[r\leftarrow d_e])}{\Delta_e}>8
+ \quad(0\le e\le40,\ 1\le r\le21).
+\]
+Thus all weights are at least $1$ (basis weights exceed $9$), and Cramer's rule gives
+$c=\sum_{i=1}^{40}\lambda_{e,i}\sigma_{e,i}m_i$ for every $e$.
+Also $\Delta_0\ne0$ gives $\operatorname{rank}M_0=21$. If $z\ne0$ has all
+signed slacks $\sigma_{e,i}m_i z\ge0$, full column rank makes at least one
+slack positive, so $c(z)>0$. Every datum needed for these finite checks is
+printed in this appendix. An exact checker of these formulas is included
+in \cite{supplement}.
+% END EXPLICIT CERTIFICATE
+
+For example, the first row is
+$m_1=u_1+100u_2+21u_5-7u_6+u_{17}+u_{18}$.
+The supplement's exact checker reconstructs every entry from these
+recipes, compares them with the rational inequality data, and verifies
+the displayed weight identities. The positive functional used in Lean
+differs from the one printed here.
+
+\section{Completeness of the vertex certificate}\label{app:cover}
+
+The following local certificate criterion explains the completeness fact
+used in Section~3. The large finite list is in \cite{supplement};
+completeness is a consequence, not a premise supplied by the list.
+The labeled pair, potential, path and local source data are supplied
+only in the supplement and checked there; their large tables are not
+printed here. The pair has the complementary-zero-set form used in
+\cite[proof of Proposition~8]{adkz}.
+
+\begin{lemma}\label{lem:cover}
+Let $\mathcal Q=\{x\in\R^d:Lx\ge\zeta\}$ be full-dimensional.
+Suppose a nonempty finite set $\mathcal V\subset\mathcal Q$ is given, each $v\in \mathcal V$
+having exactly $d$ tight rows, whose matrix $L_v$ is invertible.
+For each of these rows $j$, suppose a point $v_j\in \mathcal V$ satisfies
+\[
+ L_v(v_j-v)=g_j\mathbf e_j,\qquad g_j>0,
+\]
+where $\mathbf e_j$ is the $j$th coordinate vector. Then $\mathcal V$ is the complete
+vertex set, $\mathcal Q$ is simple, and its neighbors at $v$ are precisely
+the points $v_j$.
+\end{lemma}
+\begin{proof}
+For a linear objective $f$, choose $v\in \mathcal V$ maximizing $f$ on this finite
+set. For every $x\in\mathcal Q$, the vector $\kappa=L_v(x-v)$ has
+nonnegative coordinates and
+\[
+ x-v=\sum_{j=1}^d\frac{\kappa_j}{g_j}(v_j-v).
+\]
+Since $f(v_j-v)\le0$, this proves $f(x)\le f(v)$: the list contains a
+global maximizer for every linear objective.
+
+Let $x$ be any vertex and choose $d$ independent tight rows $I$ there.
+The objective $f(y)=-\sum_{i\in I}L_i y$ is maximized precisely where
+all these rows are tight, because their slacks are nonnegative.
+Its unique feasible maximizer is $x$. A listed maximizer must therefore
+equal $x$. Conversely each listed point is a vertex by its nonsingular
+tight system, so the list is complete and every vertex has exactly $d$
+tight rows. Each such row defines a distinct facet locally. Releasing one
+row while retaining the other $d-1$ defines an edge. The distinct vertices
+$v,v_j$ lie on that one-dimensional face and hence are its two endpoints.
+Every edge at a simple vertex arises this way.
+\end{proof}
+
+Here are the exact formal interfaces for these inputs; all names have
+prefix \nolinkurl{ADKZPricing}.
+For the literal matrix $M_0$, \nolinkurl{Generated.source_valid} proves
+\nolinkurl{IntegerSourceValid} for the supplied 36,425 rays, their
+20-element bases and their neighbors. Its field hypotheses are checked
+finite arithmetic: positive normalizing coordinates, feasible rays,
+injective and exact active labels, and a neighbor retaining every basis
+row except the released one. The resulting
+\nolinkurl{Generated.sourceCertificate} is a
+\nolinkurl{SourceVertexCertificate}.
+For this certificate, the theorems
+\nolinkurl{SourceVertexCertificate.covers_active_labels},
+\nolinkurl{SourceVertexCertificate.active_count} and
+\nolinkurl{SourceVertexCertificate.basis_nonsingular} give
+\[
+ \operatorname{Vert}(P)=\{w_v:v\in\mathcal V\},\qquad
+ |I(w_v)|=20,\qquad
+ \operatorname{rank}(M_0)_{I(w_v)}=20,
+\]
+where $\mathcal V$ is the supplied list, $w_v$ its ray normalized by
+$c(w_v)=1$, and $I(w_v)$ its tight-row set. In particular, $P$ is simple.
+The normalization changes only the scale of each ray, preserving vertices,
+facets and their incidence; Lemma~\ref{lem:cover} is the corresponding
+written local-to-global argument.
+
+The theorem \nolinkurl{msw_integral_real_vertices} verifies the endpoints
+with tight rows 1--20 and 21--40.
+The theorems \nolinkurl{Generated.source_local_potential} and
+\nolinkurl{Generated.source_specified_gap} verify the local potential
+inequalities and endpoint gap at least 21.
+Applying \nolinkurl{SourceVertexCertificate.potential_edge} and
+\nolinkurl{SourceVertexCertificate.specified_distance_lower_bound}
+therefore gives a 1-Lipschitz potential on every geometric edge and
+$d_P(u,v)\ge21$, with no assumed completeness or distance premise.
+The separate exact checkers \texttt{check\_fraction.py} and
+\texttt{check\_rational.py} verify the supplied 21-edge path, giving
+$d_P(u,v)=21$; this upper bound is not a Lean distance-equality theorem.
+These source facts and Appendix~\ref{app:certificate}'s identities are
+the complete computational input to the written construction.
+No enumeration of the final 80-element cocircuit graph is used.
+
+\section{Earlier farthest-pair questions}
+
+The diameter conjecture is related to earlier questions about which pairs
+of cocircuits are farthest apart; we distinguish those questions here.
+For uniform oriented matroids, Babson, Finschi and Fukuda prove antipodal distance $n-r+2$
+\cite[Lemma~2]{bff} and equality exactly for antipodal pairs in uniform
+ranks two and three \cite[Lemma~6]{bff}. ADKZ answer Finschi's Open Problem~2
+and refute the equality half of \cite[Question~4.2]{felsner}
+with their nonantipodal example \cite[Proposition~8 and preceding paragraph]{adkz}.
+Their proof already uses a pair at distance 21 in the source polytope;
+here an explicit path gives equality for the source matrix specified in Appendix~\ref{app:certificate}.
+Finschi's Open Problem~4 asks whether a uniform cocircuit graph can
+have an antipodal pair whose distance differs from the diameter, or a
+nonantipodal pair attaining the diameter \cite[p.~90]{finschi}; this is
+the farthest-pairs question in \cite[final remarks, pp.~13--14]{bff}.
+ADKZ's lower-bound argument answers it affirmatively once the source
+example is made uniform, as in Lemmas~\ref{lem:facetcross}--\ref{lem:factor}:
+if the diameter is 21, the nonantipodal pair attains it; if larger,
+antipodal pairs are not farthest.
+Here every antipodal pair is shorter than some nonantipodal pair.
+This refutes the diameter half of Question~4.2 and ADKZ's Conjecture~1.
+
+A \emph{crabbed path} from $X$ to $Y$ has
+$Z^+\subseteq X^+\cup Y^+$ and $Z^-\subseteq X^-\cup Y^-$ at every
+vertex $Z$, where $Z^+=\{i:Z_i=1\}$ and $Z^-=\{i:Z_i=-1\}$.
+ADKZ exhibit a realizable rank-four example on nine elements in which a
+shortest path is shorter than every crabbed path \cite[Theorem~9]{adkz}.
+
+Adjacent work concerns e-positive circuit graphs of oriented matroid
+polyhedra and embracing exchange distance
+(B\'erczi, Knauer, Montejano and N\'ador \cite[Corollary~1.4 and Definition~2.1]{embracing}),
+smaller non-Hirsch polytopes (\'Swirszcz and collaborators \cite[\S4.1]{hopper}),
+and polyhedron certification (Allamigeon, Id-Sahra and Strub
+\cite[abstract and \S1]{cert26}).
+
+\end{appendices}
+
+\begin{thebibliography}{99}
+\footnotesize\raggedright
+\setlength{\baselineskip}{10pt}
+\setlength{\itemsep}{0pt}
+\bibitem{bff}
+E.~Babson, L.~Finschi and K.~Fukuda,
+\emph{Cocircuit graphs and efficient orientation reconstruction in oriented
+matroids}, European Journal of Combinatorics \textbf{22} (2001), 587--600.
+\href{https://doi.org/10.1006/eujc.2001.0481}{doi:10.1006/eujc.2001.0481}.
+Statement locators refer to the \href{https://finschi.com/math/publ/2001-05-04_Babson-Finschi-Fukuda_Cocircuit-Graphs-Orientation-Reconstruction.pdf}{May~4, 2001 author version}.
+\bibitem{finschi}
+L.~Finschi, \emph{A graph theoretical approach for reconstruction and
+generation of oriented matroids}, doctoral thesis, ETH Z\"urich, 2001.
+\href{https://doi.org/10.3929/ethz-a-004255224}{doi:10.3929/ethz-a-004255224}.
+\href{https://finschi.com/math/publ/2001-08-31_Finschi_A-Graph-Theoretical-Approach-for-Reconstruction-and-Generation-of-Oriented-Matroids.pdf}{Author copy}.
+\bibitem{felsner}
+S.~Felsner, R.~G\'omez, K.~Knauer, J.~J.~Montellano-Ballesteros and R.~Strausz,
+\emph{Cubic time recognition of cocircuit graphs of uniform oriented matroids},
+European Journal of Combinatorics \textbf{32} (2011), 60--66.
+\href{https://doi.org/10.1016/j.ejc.2010.07.012}{doi:10.1016/j.ejc.2010.07.012}.
+\href{https://arxiv.org/abs/1001.3534v1}{arXiv:1001.3534v1} (2010;
+statement numbering).
+\bibitem{adkz}
+I.~Adler, J.~A.~De~Loera, S.~Klee and Z.~Zhang,
+\emph{Diameters of cocircuit graphs of oriented matroids: an update},
+Electronic Journal of Combinatorics \textbf{28} (2021), no.~4, P4.40.
+\href{https://doi.org/10.37236/9653}{doi:10.37236/9653}.
+\bibitem{survey}
+G.~M.~Ziegler, L.~Anderson and K.~Knauer,
+\emph{Oriented matroids today}, Electronic Journal of Combinatorics,
+Dynamic Survey DS4, version~4, April~16, 2024.
+\href{https://www.combinatorics.org/files/Surveys/ds4/ds4v4-2024.pdf}{Version~4}.
+\bibitem{msw}
+B.~Matschke, F.~Santos and C.~Weibel,
+\emph{The width of five-dimensional prismatoids}, Proceedings of the London
+Mathematical Society (3) \textbf{110} (2015), 647--672.
+\href{https://doi.org/10.1112/plms/pdu064}{doi:10.1112/plms/pdu064}.
+\href{https://arxiv.org/abs/1202.4701v2}{arXiv:1202.4701v2}
+(statement numbering).
+\bibitem{santos}
+F.~Santos, \emph{A counterexample to the Hirsch conjecture},
+Annals of Mathematics \textbf{176} (2012), 383--412.
+\href{https://doi.org/10.4007/annals.2012.176.1.7}{doi:10.4007/annals.2012.176.1.7}.
+Statement numbering refers to the Annals version.
+\bibitem{acs}
+X.~Allamigeon, Q.~Canu and P.-Y.~Strub,
+\emph{A Formal Disproof of the Hirsch Conjecture}, Proceedings of the 12th ACM
+SIGPLAN International Conference on Certified Programs and Proofs (2023), 17--29.
+\href{https://doi.org/10.1145/3573105.3575678}{doi:10.1145/3573105.3575678}.
+\href{https://arxiv.org/abs/2301.04060v1}{arXiv:2301.04060v1}
+(statement and page numbering).
+\bibitem{embracing}
+K.~B\'erczi, K.~Knauer, L.~P.~Montejano and B.~N\'ador,
+\emph{Embracing exchange sequences and oriented matroid polyhedron diameter},
+\href{https://arxiv.org/abs/2606.19573v2}{arXiv:2606.19573v2} (2026).
+\bibitem{hopper}
+G.~\'Swirszcz, A.~Z.~Wagner, G.~Williamson, S.~Blackwell, B.~Georgiev,
+A.~Davies, A.~Eslami, S.~Racani\`ere, T.~Weber and P.~Kohli,
+\emph{Advancing Geometry with AI: Multi-agent Generation of Polytopes},
+\href{https://arxiv.org/abs/2502.05199v1}{arXiv:2502.05199v1} (2025).
+\bibitem{cert26}
+X.~Allamigeon, Y.~Id-Sahra and P.-Y.~Strub,
+\emph{Formally Certifying the Vertex Set of a Polyhedron Faster than Informal
+Enumeration},
+\href{https://arxiv.org/abs/2610.11913v1}{arXiv:2610.11913v1} (2026).
+\bibitem{supplement}
+P.~Graham, \emph{Supplementary material for A counterexample to the cocircuit
+diameter conjecture}, version~1 (2026).
+\href{https://github.com/6/clank-lab/tree/cocircuit-diameter-counterexample-v1/results/cocircuit-diameter-counterexample}{Supplementary data and Lean formalization}.
+\bibitem{klee}
+S.~Klee, \emph{Diameter bounds on cocircuit graphs of oriented matroids},
+Oberwolfach Report 39/2019, pp.~2424--2426 (joint work with I.~Adler,
+J.~A.~De~Loera and Z.~Zhang).
+\href{https://ems.press/content/serial-article-files/46818}{Report}.
+\end{thebibliography}
+\end{document}

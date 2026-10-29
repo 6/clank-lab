@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## cocircuit-diameter-counterexample v1 (October 29, 2026)
+
+- A rationally realizable uniform oriented matroid of rank 41 on 80 elements has cocircuit-graph diameter at least 42, exceeding the conjectured bound of 41. The construction builds on the MSW polytope, Santos's products, ADKZ's equality example and sign count, and the source certification of Allamigeon, Canu and Strub.
+
 ## game-grundy-gap v4 (October 29, 2026)
 
 - Correction: layout: the review-status and AI-assistance sentences move from a footnote on the title to a paragraph under the abstract. The theorem and its checks are unchanged.

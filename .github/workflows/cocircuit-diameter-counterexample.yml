@@ -1,0 +1,86 @@
+name: Quick cocircuit diameter checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/cocircuit-diameter-counterexample/**'
+      - '.github/workflows/cocircuit-diameter-counterexample.yml'
+  pull_request:
+    paths:
+      - 'results/cocircuit-diameter-counterexample/**'
+      - '.github/workflows/cocircuit-diameter-counterexample.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cocircuit-diameter-counterexample-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Quick certificate and Lean control
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/cocircuit-diameter-counterexample
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.14"
+
+      - name: Install checker dependencies
+        run: python3 -m pip install -r checks/requirements.txt
+
+      - name: Install Lean through elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean/lean-toolchain)"
+          elan default "$(cat lean/lean-toolchain)"
+          lean --version
+
+      - name: Restore proof build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/cocircuit-diameter-counterexample/lean/.lake/build
+          key: cocircuit-diameter-counterexample-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/cocircuit-diameter-counterexample/lean/lean-toolchain', 'results/cocircuit-diameter-counterexample/lean/lake-manifest.json', 'results/cocircuit-diameter-counterexample/lean/lakefile.toml', 'results/cocircuit-diameter-counterexample/lean/**/*.lean', '!results/cocircuit-diameter-counterexample/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: cd lean && lake exe cache get
+
+      # The full source-size proof exceeds the two-hour CI threshold.
+      # This checks source geometry, corruptions, a bounded Lean control and
+      # the published-definition bridges; it does not build the endpoint.
+      - name: Check certificates, small Lean control, and definition bridges
+        run: |
+          proof_cpus=$(python3 -c 'import os; print(len(os.sched_getaffinity(0)))')
+          python3 checks/quickcheck.py --cpus "$proof_cpus" \
+            --work "$RUNNER_TEMP/cocircuit-quick" \
+            --checkpoint "$RUNNER_TEMP/cocircuit-results/quick.json" \
+            --cpu-hours 1
+
+  check:
+    name: Check cocircuit-diameter-counterexample
+    needs: [lean]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful quick checks
+        env:
+          LEAN_RESULT: ${{ needs.lean.result }}
+        run: test "$LEAN_RESULT" = success

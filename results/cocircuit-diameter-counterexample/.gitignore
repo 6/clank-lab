@@ -1,0 +1,6 @@
+# Exact generated modules; recover with checks/bootstrap_kernel.py before Lake.
+/lean/SourceKernel*.lean
+/lean/ControlKernel*.lean
+**/.lake/
+**/__pycache__/
+*.pyc

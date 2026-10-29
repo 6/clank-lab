@@ -53,7 +53,7 @@ python3 checks/independent.py data/palette.json
 3. Controls: `enumerate_controls.py` lists every tiling of the
    $6 \times 4$ and $6 \times 6$ rectangles all of whose pairs are rigid,
    with no symmetry reduction, and finds 26 (7 up to symmetry, as
-   Tucker-Foltz reports) and 50 (as he reports). Both checkers accept one
+   Tucker-Foltz reports) and 50 (as Tucker-Foltz reports). Both checkers accept one
    tiling from each symmetry class.
 4. Corruptions: both checkers reject a repeated cell, a cell outside its
    block, a non-integer coordinate, two straight trominoes that recombine,

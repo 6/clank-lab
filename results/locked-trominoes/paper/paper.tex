@@ -30,7 +30,7 @@
   seam/.style={red!80!black,line width=1.6pt,dashed}}
 \title{Locked tromino tilings of rectangles}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 25, 2026}
+\date{October 28, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -38,17 +38,21 @@ An $m\times n$ rectangle has a locked tromino tiling if and only if
 $3\mid mn$ and $\min(m,n)\ge4$. A tromino consists of three grid cells
 connected through shared sides; a tiling is locked if no pair of tiles can
 be recombined into a different pair and the rectangle has another tiling.
-We prove the existence direction, completing Tucker-Foltz's classification.
-He excluded rectangles with a side of length at most three, constructed
+We prove the existence direction of Tucker-Foltz's conjecture.
+Tucker-Foltz showed that rectangles with a side of length at most three
+have none, constructed
 locked tilings when one side is divisible by three and at least six and
 the other is at least one hundred, and conjectured that four suffices.
-Following his construction by compatible rectangular blocks, we supply the
-remaining narrow widths and glue them along full rows and columns.
+Following Tucker-Foltz's construction by compatible rectangular blocks,
+we supply the remaining cases and glue them along full rows and columns.
 Aanjaneya and Pal earlier proved existence on the same rectangles for the
-different condition of fault-free L-tromino tilings. The existence proof, including the gluing argument, arithmetic and blocks,
-is formalized in Lean; two independent programs also check the blocks.
-Together with Tucker-Foltz's theorem for narrow rectangles, this settles
-the classification.
+different condition of fault-free L-tromino tilings. Lean formalizes the existence theorem for $3\mid m$, $m\ge6$, $n\ge4$,
+including the gluing argument, arithmetic and finite blocks, using only
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+Two separately written programs, sharing no code, check the blocks and seams.
+The classification uses Tucker-Foltz's preprint theorem for narrow
+rectangles, whose proof leaves the $m=3$ frontier check to the reader
+there; we neither repeat nor formalize that check.
 \end{abstract}
 
 \section{Introduction}
@@ -82,36 +86,45 @@ Let $m$ and $n$ be integers with $3\mid m$, $m\ge6$ and $n\ge4$. Then the
 $m\times n$ rectangle has a locked tromino tiling.
 \end{theorem}
 
-The block method is Tucker-Foltz's: his strips of lengths 22, 19 and 8
-supply heights 6 and 9 for widths at least 100~\cite[proof of Theorem~3.2]{tf}.
-We supply the remaining cases, each with a side shorter than 100, including
-those outside his construction from $6\times6$ copies. The difficult step
+The block method is Tucker-Foltz's: the blocks in
+\cite[Figure~7 and proof of Theorem~3.2]{tf} cover the family
+$m=6u+9v$, $n=22x+19y+8z$, where $u,v,y,z\ge0$, $u+v\ge1$ and $x\ge1$,
+and its transposes; in particular they cover $3\mid m$, $m\ge6$, $n\ge100$.
+Tucker-Foltz also reports locked tilings of the $6\times4$ rectangle
+\cite[Section~3]{tf}; Tucker-Foltz's $6\times6$ example extends by flipped copies
+to every $6r\times6s$, $r,s\ge1$ \cite[Section~1, Figures~2--3]{tf}. Our blocks cover all the
+rectangles in Theorem~\ref{thm:conj}, including the remaining cases. We use
+compatible blocks as in Tucker-Foltz's construction. The difficult step
 is finding blocks at narrow widths that remain rigid against one another
 in both orders and against copies of themselves. Section~\ref{sec:overview}
 explains how finitely many such blocks suffice. The existence proof,
 including their compatibility, is formalized in Lean~4~\cite{lean}.
 
-Up to transposition, the smallest permitted rectangles are $6\times4$,
+Up to transposition, the smallest permitted rectangles by area are $6\times4$,
 $6\times5$, $6\times6$ and $9\times4$; only the $6\times4$ and $6\times6$
-cases were settled before~\cite[Sections~1 and~3]{tf}. This classification concerns
+cases among these four were settled before~\cite[Sections~1 and~3]{tf}. This classification concerns
 the grid model with three-cell districts. Related irreducibility results
-allow slightly unequal district sizes on triangular and square grids
-(Cannon~\cite[Theorem~1]{cannon}; Akitaya, Dituro, Gonczi, Korman, Souvaine, Stock and
-T\'oth~\cite[abstract]{akitaya}; for their size tolerance, see
-\cite[Section~1.2]{emre}). Emre, Jerison and Veomett~\cite[Theorem~3]{emre} treat
-exactly balanced cases including a $3\times n$ grid with three districts.
+include Cannon's theorem for three simply connected districts in a
+triangular region of the triangular lattice, allowing district sizes to
+vary by at most one vertex~\cite{cannon}. Akitaya, Dituro, Gonczi,
+Korman, Souvaine, Stock and T\'oth simplify the proof, weaken Cannon's
+hypotheses, and prove a square-grid analogue~\cite{akitaya}; both allow
+size tolerance, as discussed in \cite[Section~1.2]{emre}. Emre, Jerison
+and Veomett prove connectivity for a $3\times n$ grid with three
+districts of size $n$~\cite[Theorem~3]{emre}.
 
-Aanjaneya and Pal~\cite[Theorem~2]{faultfree} proved that the same
-rectangles admit fault-free L-tromino tilings, also by extending finitely
+Aanjaneya and Pal~\cite[Theorem~2]{faultfree} proved that every rectangle
+with $m,n\ge4$ and $3\mid mn$ admits a fault-free L-tromino tiling,
+also by extending finitely
 many small rectangles. A fault line is a full horizontal or vertical cut
 that crosses no tile; fault-free means no such cut exists. Locked tilings
 instead forbid two-tile recombinations and allow straight and L-trominoes.
-Our block joins are fault lines, so their earlier theorem concerns a
-different property.
+These are different conditions: tilings assembled from multiple blocks
+have fault lines along their joins, while lockedness concerns two-tile recombinations.
 
 The proofs, the Lean formalization, the certificate checkers and the text
 were produced by AI models (from OpenAI and Anthropic), working under the
-author's direction. The result is not yet reviewed by experts.
+author's direction. This work has not yet been reviewed by experts.
 
 \begin{figure}[ht]
 \centering
@@ -222,13 +235,17 @@ from at least one of the two.
 \end{proof}
 
 
-The necessary condition uses Tucker-Foltz's narrow-grid theorem, in his
-notation: $G(m,n)$ is the $m\times n$ grid graph.
+The necessary condition uses Tucker-Foltz's narrow-grid theorem, stated in
+that paper's notation: $G(m,n)$ is the $m\times n$ grid graph.
 
 \begin{theorem}[{Tucker-Foltz~\cite[Theorem~3.1]{tf}}]\label{thm:narrow}
 For any positive integers $m$ and $n$ such that $m\le3$, $M(G(m,n),3)$ is
 connected.
 \end{theorem}
+
+For $m=3$, Tucker-Foltz's proof reduces to an exhaustive list of frontier
+configurations (their Figure~6), whose verification is left to the reader
+there; we neither repeat it nor formalize it.
 
 
 \section{Proof overview}\label{sec:overview}
@@ -244,7 +261,7 @@ Heights 6 and 9 generate every multiple of three from six onward. At each
 width from 4 to 55, one column of blocks suffices, except that width 5 uses
 heights 9 and 12 and separate tilings at heights 6 and 15, which are not
 sums of nines and twelves. For widths at
-least 56, sums of eights and nines allow a grid of four blocks with heights
+least 56, sums of eights and nines allow a grid built from four block types with heights
 6 and 9 and widths 8 and 9. We prove the gluing assertion, state the finite
 construction, and then assemble the tilings using these arithmetic facts.
 
@@ -288,7 +305,8 @@ rectangle, say that $X$ \emph{stacks on} $Y$ if, after $Y$ is moved down by
 $h$ rows, every tile of $X$ forms a rigid pair with every tile of the moved
 $Y$; the line between them is the seam. Similarly, for equal heights, $X$
 \emph{fits left of} $Y$ if this holds after $Y$ is moved right by the width
-of $X$. A block is \emph{rigid} if all pairs of its tiles are.
+of $X$. We also call a rectangular tiling a block when its tile partition is
+understood. A tiling or block is \emph{rigid} if all pairs of its tiles are.
 Figure~\ref{fig:stack} shows the four stacks of the two width-4 blocks, and
 Figure~\ref{fig:palette} the four blocks for large widths, with both kinds of
 seam.
@@ -310,7 +328,7 @@ translate of $P_{h_k,w_l}$ in block $(k,l)$ has only rigid pairs.
 \end{corollary}
 
 \begin{proof}
-Both are Lemma~\ref{lem:glue}. In (ii), condition (a) is the rigidity of the
+Both follow from Lemma~\ref{lem:glue}. In (ii), condition (a) is the rigidity of the
 blocks, and for side neighbors $(k,l)$ above $(k+1,l)$ or left of $(k,l+1)$,
 condition (b) is the statement that $P_{h_k,w_l}$ stacks on
 $P_{h_{k+1},w_l}$ or fits left of $P_{h_k,w_{l+1}}$, translated into place.
@@ -319,8 +337,11 @@ Part (i) is the case of a single column of blocks.
 
 \section{The block construction}\label{sec:blocks}
 
-The blocks were found by computer search and are listed by coordinates in
-the accompanying data. For each one, the finite verification establishes
+The blocks were found by a SAT encoding of tile placements and forbidden
+recombinations. Their coordinates are in the \file{data/} folder released
+with this paper (Appendix~\ref{app:data}), archived at
+\url{https://doi.org/10.5281/zenodo.23638798}~\cite{GrahamArchive}.
+For each block, the finite verification establishes
 that the cells are partitioned into connected triples. It then enumerates
 every partition of the six cells of a pair of tiles into two connected
 triples, checking that only the original pair occurs. This is done inside
@@ -329,8 +350,8 @@ rigid by Lemma~\ref{lem:apart}.
 
 \Needspace{7\baselineskip}
 \begin{proposition}\label{prop:blocks}
-The following tilings exist, and are given explicitly in the folder
-\file{data/} (Appendix~\ref{app:data}).
+The following tilings exist and are given explicitly in the \file{data/}
+folder (Appendix~\ref{app:data}).
 \begin{enumerate}
 \item[(i)] For each width $w$ with $4\le w\le55$ and $w\ne5$, rigid blocks
 $B_{6,w}$ and $B_{9,w}$ of sizes $6\times w$ and $9\times w$, each of which
@@ -343,6 +364,9 @@ and $w\in\{8,9\}$, such that $P_{h,w}$ stacks on $P_{h',w}$ and fits left of
 $P_{h,w'}$ for all $h,h'\in\{6,9\}$ and $w,w'\in\{8,9\}$.
 \end{enumerate}
 \end{proposition}
+
+The width-5 construction uses heights 9 and 12; no nonexistence claim for
+a compatible height-6 block is needed or established here.
 
 Figures~\ref{fig:stack}, \ref{fig:palette} and~\ref{fig:five} show the
 width-4 blocks, the four blocks for large widths and the width-5 tilings.
@@ -1069,7 +1093,10 @@ Proposition~\ref{prop:blocks}. Theorem~\ref{thm:main} additionally uses the
 written deduction in Section~\ref{sec:main} and Tucker-Foltz's
 Theorem~3.1, which remains outside Lean.
 
-Lean's kernel checks the finite assertions by evaluation. Two separately
+Lean's kernel checks the finite assertions by reduction, using
+\texttt{decide} and \texttt{rfl}, without \texttt{native\_decide} or
+\texttt{Lean.ofReduceBool}. The main existence theorem depends on exactly
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. Two separately
 written programs, sharing no code, independently enumerate all partitions
 of each six-cell union into two trominoes. The small-count comparison is
 in Appendix~\ref{app:checks}. Checking notes supplied with the paper give
@@ -1124,10 +1151,10 @@ the $6\times6$ rectangle agree with Tucker-Foltz's reported counts
 \cite[Figure~2 and Section~3]{tf}.
 
 For the finite rigidity checks, only touching pairs need be considered by
-Lemma~\ref{lem:apart}. They fall into 162 shapes up to translation and
+Lemma~\ref{lem:apart}. The touching pairs occurring in the blocks and seams fall into 162 shapes up to translation and
 order. Each shape is checked once, then reused by translation invariance.
 The checking notes describe the cell lists, the complete neighbor lists,
-the two independent programs and their checks on incorrect data.
+the two separately written programs and their checks on incorrect data.
 
 \section{Additional illustrations}\label{app:figures}
 
@@ -1641,7 +1668,7 @@ pairs are rigid is locked.}
 %% END FIGURE width-five
 \caption{Width 5. Left: the blocks $B_{9,5}$ and $B_{12,5}$ stacked in both
 orders, seams dashed (each also stacks on itself). Right: the single tilings
-of the $6\times5$ and $15\times5$ rectangles, the two heights that are not
+of the $6\times5$ and $15\times5$ rectangles, the two admissible heights that are not
 sums of nines and twelves.}
 \label{fig:five}
 \end{figure}
@@ -1650,18 +1677,18 @@ sums of nines and twelves.}
 \clearpage
 
 \begin{thebibliography}{9}
+\bibitem{faultfree}
+M.~Aanjaneya and S.~P. Pal,
+\emph{Faultfree tromino tilings of rectangles},
+arXiv:math/0610925, 2006.
+\url{https://arxiv.org/abs/math/0610925}.
+
 \bibitem{akitaya}
 H.~A. Akitaya, K.~Dituro, A.~Gonczi, M.~Korman, D.~L. Souvaine, F.~Stock and
 C.~D. T\'oth,
 \emph{Redistricting in triangular and square grids},
 in: 2026 Symposium on Simplicity in Algorithms (SOSA), SIAM, 2026, 12--25.
 \href{https://doi.org/10.1137/1.9781611978964.2}{doi:10.1137/1.9781611978964.2}.
-
-\bibitem{faultfree}
-M.~Aanjaneya and S.~P. Pal,
-\emph{Faultfree tromino tilings of rectangles},
-arXiv:math/0610925, 2006.
-\url{https://arxiv.org/abs/math/0610925}.
 
 \bibitem{cannon}
 S.~Cannon,
@@ -1683,6 +1710,12 @@ M.~Emre, D.~C. Jerison and E.~Veomett,
 arXiv:2606.10152v2, September 8, 2026.
 \url{https://arxiv.org/abs/2606.10152v2}.
 
+\bibitem{GrahamArchive}
+P.~Graham,
+\emph{Locked tromino tilings of rectangles}, version~3,
+Zenodo, 2026.
+\href{https://doi.org/10.5281/zenodo.23638798}{doi:10.5281/zenodo.23638798}.
+
 \bibitem{lean}
 L.~de Moura and S.~Ullrich,
 \emph{The Lean~4 theorem prover and programming language},
@@ -1694,7 +1727,7 @@ in: Automated Deduction -- CADE 28, Lecture Notes in Computer Science
 J.~Tucker-Foltz,
 \emph{Locked polyomino tilings},
 arXiv:2307.15996v4, December 10, 2024.
-\url{https://arxiv.org/abs/2307.15996}.
+\url{https://arxiv.org/abs/2307.15996v4}.
 \end{thebibliography}
 
 \end{document}

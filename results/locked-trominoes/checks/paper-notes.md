@@ -22,9 +22,9 @@ Tucker-Foltz reports 7 symmetry classes of locked 6 by 4 tilings and 50
 locked 6 by 6 tilings in Section 1, Figure 2; the 6 by 4 count is in
 Section 3. The enumeration accompanying this paper
 finds 26 locked 6 by 4 tilings; the count 26 is ours. Its 7 symmetry classes
-and the 50 locked 6 by 6 tilings reproduce his counts. His construction
+and the 50 locked 6 by 6 tilings reproduce Tucker-Foltz's counts. Tucker-Foltz's construction
 from copies of a locked 6 by 6 tiling handles sides divisible by six;
-his strips of lengths 22, 19 and 8 give widths at least 100. The present
+Tucker-Foltz's strips of lengths 22, 19 and 8 give widths at least 100. The present
 blocks complete the remaining cases using the same gluing method.
 
 The paper's figures and their generated drawing commands are retained

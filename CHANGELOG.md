@@ -7,6 +7,7 @@ Zenodo records.
 ## ekg-sequence v8 (October 29, 2026)
 
 - Correction: layout: the review-status and AI-assistance sentences move from a footnote on the title to a paragraph under the abstract. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23754333](https://doi.org/10.5281/zenodo.23754333)
 
 ## coinvariant-lefschetz v3 (October 29, 2026)
 

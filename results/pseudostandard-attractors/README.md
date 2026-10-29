@@ -22,7 +22,7 @@ The proofs, the certificate checkers and the text were produced by AI models (fr
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23572812](https://doi.org/10.5281/zenodo.23572812)
+Archived on Zenodo: [doi:10.5281/zenodo.23751684](https://doi.org/10.5281/zenodo.23751684)
 
 ## Check it
 
@@ -52,6 +52,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{A generalized pseudostandard prefix with no string attractor of size four}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/pseudostandard-attractors-v3/results/pseudostandard-attractors}},
-  doi          = {10.5281/zenodo.23572812}
+  doi          = {10.5281/zenodo.23751684}
 }
 ```

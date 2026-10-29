@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: wording of credits. The theorem and its checks are unchanged.
 - The paper uses the standard review-status disclosure and describes adjacent Hales–Jewett work. It corrects the version history, distinguishes the original drat-trim campaign from the FRAT-rs and cake_lpr regenerations, and tabulates their recorded CNF identity matches. Formal verification is limited to HOL4/CakeML certificate checking; the written reductions, formulas and computational checks are unchanged. Proved-cap notation and wording/notation ambiguities are clarified.
+- Zenodo: [10.5281/zenodo.23752609](https://doi.org/10.5281/zenodo.23752609)
 
 ## pseudostandard-attractors v3 (October 28, 2026)
 

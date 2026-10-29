@@ -7,6 +7,7 @@ Zenodo records.
 ## williamson-order-65 v4 (October 28, 2026)
 
 - Correction: credit wording, descriptions of independent sample and join checks and smaller-order comparisons, and precision in the compression, product-identity and symmetry arguments. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23753091](https://doi.org/10.5281/zenodo.23753091)
 
 ## locked-trominoes v4 (October 28, 2026)
 

@@ -27,11 +27,15 @@ This checks the complete reduction and witness, and a small refutation with corr
 python3 checks/check.py --full --tools /tmp/density-tools --work /tmp/density-full
 ```
 
-Allow roughly 100 CPU-hours for solver and proof-checker work, plus drat-trim checking, audits and stream handling, and several days elapsed. The completed cake_lpr checks used heaps up to about 59 GiB. About 1.56 TB of generated proof text passes through pipes rather than being saved. The paper separates the measured historical computation from the eight additional cake_lpr checks. The quick CI check does not replay the main refutations. [Checking details and dependencies](checks/README.md).
+Allow roughly 100 CPU-hours plus checking overhead, several days elapsed, and more than 59 GiB of memory for the largest cases. The quick CI check does not replay the main refutations. [Checking details and dependencies](checks/README.md).
 
 ## Credits
 
-D.H.J. Polymath gave the known lower bound, the conjecture and the finite-density framework. The proof checking uses CaDiCaL (Armin Biere and its contributors), FRAT-rs (Mario Carneiro), drat-trim (Marijn Heule) and cake_lpr (Marijn Heule, Magnus Myreen and Yong Kiam Tan).
+D.H.J. Polymath's [Density Hales–Jewett and Moser numbers](https://arxiv.org/abs/1002.0374v2) supplies the lower bound, conjecture and finite-density framework for this result. The witness realizes that known lower bound; the upper-bound computation establishes that no larger set exists in the seven-letter ternary grid. Y. Mouhib's [Lower Bounds for the Hales-Jewett Numbers via Symmetric and One-Weight Colorings](https://arxiv.org/html/2606.22155v2) provides adjacent coloring bounds.
+
+The certificate computation uses Armin Biere and contributors' [CaDiCaL](https://github.com/arminbiere/cadical). Mario Carneiro's [FRAT-rs](https://github.com/digama0/frat) checks the proof certificates, and Marijn Heule's [drat-trim](https://github.com/marijnheule/drat-trim) supplies the standalone LRAT checker. Marijn Heule, Magnus Myreen and Yong Kiam Tan's [cake_lpr](https://github.com/tanyongkiam/cake_lpr) independently checks the proof certificates used to establish the upper bound.
+
+The checking documentation also gives further credits and source notes.
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -42,7 +46,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{The seventh ternary density Hales--Jewett number}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v4/results/density-seven}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/density-seven-v5/results/density-seven}},
   doi          = {10.5281/zenodo.23572685}
 }
 ```

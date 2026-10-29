@@ -76,3 +76,16 @@ pdflatex -output-directory=/tmp paper/paper.tex
 ```
 
 The resulting `/tmp/paper.pdf` is the paper. This typesetting step is separate from the theorem check.
+
+## Sources used during development
+
+The completed cake_lpr checks used heaps up to about 59 GiB. About 1.56 TB of generated proof text passes through pipes rather than being saved. The paper separates the measured historical computation from the eight additional cake_lpr checks.
+
+## Further credits
+
+- D.H.J. Polymath, [Density Hales–Jewett and Moser numbers](https://arxiv.org/abs/1002.0374v2) — supplies the lower bound, conjecture and finite-density framework.
+- Armin Biere and contributors, [CaDiCaL](https://github.com/arminbiere/cadical) — generates the proof certificates.
+- Mario Carneiro, [FRAT-rs](https://github.com/digama0/frat) — checks the proof certificates.
+- Marijn Heule, [drat-trim](https://github.com/marijnheule/drat-trim) — supplies the standalone LRAT checker.
+- Marijn Heule, Magnus Myreen and Yong Kiam Tan, [cake_lpr](https://github.com/tanyongkiam/cake_lpr) — independently checks the proof certificates.
+- Y. Mouhib, [Lower Bounds for the Hales-Jewett Numbers via Symmetric and One-Weight Colorings](https://arxiv.org/html/2606.22155v2) — provides adjacent coloring bounds.

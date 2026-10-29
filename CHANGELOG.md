@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## density-seven v5 (October 28, 2026)
+
+- Correction: wording of credits. The theorem and its checks are unchanged.
+- The paper uses the standard review-status disclosure and describes adjacent Hales–Jewett work. It corrects the version history, distinguishes the original drat-trim campaign from the FRAT-rs and cake_lpr regenerations, and tabulates their recorded CNF identity matches. Formal verification is limited to HOL4/CakeML certificate checking; the written reductions, formulas and computational checks are unchanged. Proved-cap notation and wording/notation ambiguities are clarified.
+
 ## pseudostandard-attractors v3 (October 28, 2026)
 
 - Correction: wording of credits. The theorem and its checks are unchanged. Clarified that the standard Sturmian attractor result is Dvořáková's, restated and re-proved by Dvořáková and Hendrychová.

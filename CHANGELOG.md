@@ -7,6 +7,7 @@ Zenodo records.
 ## tight-cycle-c5-turan v2 (October 29, 2026)
 
 - Correction: layout and wording: the review-status and AI-assistance sentences move from a footnote on the title to a paragraph under the abstract, and the abstract states plainly what Lean checks. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23757663](https://doi.org/10.5281/zenodo.23757663)
 
 ## path-ramsey v8 (October 29, 2026)
 

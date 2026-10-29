@@ -9,6 +9,7 @@ Zenodo records.
 - Correction: wording of credits. The theorem and its checks are unchanged. Clarified that the standard Sturmian attractor result is Dvořáková's, restated and re-proved by Dvořáková and Hendrychová.
 - Two printed gap words in Proposition 8's proof were wrong; the third and fifth are corrected to `0101100` and `011`. The theorem, checks, and existing 48-factor table and witnesses are unchanged. The earlier printed list had 47 distinct factors.
 - The paper now states explicitly: This work has not yet been reviewed by experts. The previously prepared appendix markup correction is included. The README clarifies that each corrupted input is rejected by the checker or checkers that read it; the three proof-table inputs are read only by the proof checker.
+- Zenodo: [10.5281/zenodo.23751684](https://doi.org/10.5281/zenodo.23751684)
 
 ## uniform-5-polytopes v5 (October 28, 2026)
 

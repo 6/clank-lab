@@ -1,5 +1,7 @@
 # Checking the formal proof
 
+The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+
 The [formalization guide](../checks/FORMALIZATION.md) distinguishes the
 accepted full replay from the exercised adapter/probe. A plain standalone
 `lake build` was not exercised by that adapter check; the commands below

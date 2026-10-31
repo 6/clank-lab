@@ -7,6 +7,7 @@ Zenodo records.
 ## sts-broken-spectrum v1 (October 31, 2026)
 
 - A Steiner triple system of order 39 has bicolorings with exactly three and exactly five colors but none with exactly four, disproving Gionfriddo's 2003 conjecture that the feasible set of every bicolorable Steiner triple system has no gaps. The class sizes come from the tables of Colbourn, Dinitz and Rosa.
+- Zenodo: [10.5281/zenodo.23838456](https://doi.org/10.5281/zenodo.23838456)
 
 ## cocircuit-diameter-counterexample v1 (October 29, 2026)
 

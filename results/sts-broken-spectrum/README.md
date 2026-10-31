@@ -12,6 +12,8 @@ The proofs, the search code, the certificate checkers and the text were produced
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23838456](https://doi.org/10.5281/zenodo.23838456)
+
 ## Check it
 
 Python 3.9 or later and a C compiler are enough; [checks/requirements.txt](checks/requirements.txt) lists the requirements. From this folder, run:
@@ -37,6 +39,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, P.},
   title        = {{A Steiner triple system with a broken chromatic spectrum}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/sts-broken-spectrum-v1/results/sts-broken-spectrum}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/sts-broken-spectrum-v1/results/sts-broken-spectrum}},
+  doi          = {10.5281/zenodo.23838456}
 }
 ```

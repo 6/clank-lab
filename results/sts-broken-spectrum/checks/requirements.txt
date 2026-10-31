@@ -1,0 +1,2 @@
+# Python 3.9 or later; standard library only, no pip packages.
+# checks/verify.py also needs a C compiler (cc, or the one named by CC) to build checks/drat-trim.c.

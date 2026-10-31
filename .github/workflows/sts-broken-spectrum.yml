@@ -1,0 +1,32 @@
+name: STS broken spectrum checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/sts-broken-spectrum/**'
+      - '.github/workflows/sts-broken-spectrum.yml'
+  pull_request:
+    paths:
+      - 'results/sts-broken-spectrum/**'
+      - '.github/workflows/sts-broken-spectrum.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sts-broken-spectrum-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Check sts-broken-spectrum
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Check the design, the bicolorings and the DRAT proof
+        working-directory: results/sts-broken-spectrum
+        run: python3 -I checks/verify.py

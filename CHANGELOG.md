@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## sts-broken-spectrum v1 (October 31, 2026)
+
+- A Steiner triple system of order 39 has bicolorings with exactly three and exactly five colors but none with exactly four, disproving Gionfriddo's 2003 conjecture that the feasible set of every bicolorable Steiner triple system has no gaps. The class sizes come from the tables of Colbourn, Dinitz and Rosa.
+
 ## cocircuit-diameter-counterexample v1 (October 29, 2026)
 
 - A rationally realizable uniform oriented matroid of rank 41 on 80 elements has cocircuit-graph diameter at least 42, exceeding the conjectured bound of 41. The construction builds on the MSW polytope, Santos's products, ADKZ's equality example and sign count, and the source certification of Allamigeon, Canu and Strub.

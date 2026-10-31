@@ -1,0 +1,380 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={A Steiner triple system with a broken chromatic spectrum},pdfauthor={P. Graham}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\title{A Steiner triple system with a broken chromatic spectrum}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 31, 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+A bicoloring of a Steiner triple system colors its points so that every
+block receives exactly two colors, and the feasible set of the system is
+the set of integers $k$ for which some bicoloring uses exactly $k$ colors.
+Mario Gionfriddo conjectured in 2003 that the feasible set of every
+bicolorable Steiner triple system has no gaps; Tuza and Voloshin listed the
+question as open in 2008, and Gionfriddo restated the conjecture in 2025.
+In 2014 Gionfriddo, Guardo, Milazzo and Voloshin left open whether a
+system of order 39 has feasible set $\{3,5\}$. We give a Steiner triple
+system of order 39 that has bicolorings with exactly three and exactly
+five colors but none with exactly four, so the conjecture is false. With
+their theorem that bicolorings of systems of order 39 use three, four or
+five colors, its feasible set is $\{3,5\}$. The class sizes of the two
+bicolorings come from the tables of Colbourn, Dinitz and Rosa. The
+absence of a four-color bicoloring is proved by computer: a SAT solver's
+clausal refutation of a direct encoding, checked by DRAT-trim and by a
+separate unit-propagation checker.
+
+This work has not yet been reviewed by experts.
+The proofs, the search code, the certificate checkers and the text were
+produced by AI models (from OpenAI and Anthropic), working under the
+author's direction.
+\end{abstract}
+\medskip
+
+\noindent\textit{Mathematics Subject Classification:} 05B07, 05C15, 05C65.
+\textit{Keywords:} Steiner triple system, bicoloring, mixed hypergraph,
+feasible set, chromatic spectrum.
+
+\section{Introduction}
+
+A \emph{Steiner triple system} of order $v$, an STS$(v)$, is a pair
+$(X,\mathcal{B})$ where $X$ is a set of $v$ points and $\mathcal{B}$ is a
+family of $3$-element subsets of $X$, the \emph{blocks}, such that every
+pair of distinct points lies in exactly one block. Such a system exists
+exactly when $v\equiv 1$ or $3 \pmod 6$. The smallest nontrivial example is
+the Fano plane, with $7$ points and $7$ blocks.
+
+\begin{definition}
+Let $S=(X,\mathcal{B})$ be a Steiner triple system and $k$ a positive
+integer. A \emph{$k$-bicoloring} of $S$ is a surjective map
+$f\colon X\to\{1,\dots,k\}$ such that every block $B\in\mathcal{B}$
+satisfies $|f(B)|=2$. The \emph{feasible set} $\Omega(S)$ is the set of
+all $k$ for which $S$ has a $k$-bicoloring. A \emph{gap} of $\Omega(S)$ is
+an integer $k\notin\Omega(S)$ with elements of $\Omega(S)$ both below and
+above $k$.
+\end{definition}
+
+For example, coloring a point of the Fano plane $1$, the two other points
+of one block through it $2$, and the remaining four points $3$ gives a
+$3$-bicoloring, and the Fano plane has feasible set $\{3\}$.
+Bicolorings are the strict colorings of the system viewed as a mixed
+hypergraph in Voloshin's sense~\cite{Voloshin95}, in which every block is
+both a C-edge (it has two points of the same color) and a D-edge (it has
+two points of different colors). Since a block is never monochromatic,
+each color class of a bicoloring is an independent set, and a Steiner
+triple system with more than three points has no $1$- or
+$2$-bicoloring~\cite[Section~1]{CDR}. The
+feasible set of a mixed hypergraph can have gaps: Jiang, Mubayi, Tuza,
+Voloshin and West showed this in \emph{The chromatic spectrum of mixed
+hypergraphs}~\cite{JMTVW}.
+
+For Steiner triple systems, Gionfriddo conjectured the opposite in a
+lecture at Messina in 2003, published in~\cite{Gionfriddo03}. Tuza and
+Voloshin's survey of open problems on mixed hypergraphs, in its Section~7
+on Steiner systems, records that ``M. Gionfriddo conjectured in [21] that
+every BSTS has a gap-free chromatic spectrum'' (their [21]
+is~\cite{Gionfriddo03}), where a BSTS is a Steiner
+triple system whose blocks are both C-edges and D-edges, and lists ``Prove
+or disprove that all BSTS have gap-free chromatic spectrum'' as Open
+problem~2~\cite{TV08}. Gionfriddo's 2025 survey states the conjecture
+again, as Conjecture [M. Gionfriddo 2003] in its
+Section~4~\cite{Gionfriddo25}, in the terminology of chromatic spectra:
+the spectrum is \emph{broken} when the feasible set has a gap. Gionfriddo, Guardo, Milazzo and
+Voloshin~\cite{GGMV14} wrote that ``The problem to find a bicolorable STS
+with a gap in its feasible set still remains an open problem'', listed
+``Determine whether there exist systems $S$ with a gap in their
+$\Omega(S)$'' as problem~4 of their conclusion, and, in the table closing
+their Section~3, listed $\Omega(S)=\{3,5\}$ for an STS$(39)$ as open.
+
+\subsection{Main results}
+
+Let $S_{39}$ be the Steiner triple system on the points $0,1,\dots,38$
+whose $247$ blocks are listed in Appendix~\ref{app:data}.
+
+\begin{theorem}\label{thm:main}
+The Steiner triple system $S_{39}$ has a $3$-bicoloring and a
+$5$-bicoloring, and it has no $4$-bicoloring. Hence $4$ is a gap of
+$\Omega(S_{39})$, and Gionfriddo's conjecture is false.
+\end{theorem}
+
+The bicolorings in Theorem~\ref{thm:main} have color classes of sizes
+$10,12,17$ and $1,2,4,16,16$. The nonexistence of a $4$-bicoloring is
+proved by computer, by a clausal proof of unsatisfiability checked by two
+independent programs (Section~\ref{sec:verification}).
+
+Gionfriddo, Guardo, Milazzo and Voloshin~\cite[Theorem~3.7]{GGMV14} state
+that the union of the feasible sets of all STS$(39)$s is $\{3,4,5\}$.
+Together with Theorem~\ref{thm:main} this gives the following.
+
+\begin{corollary}\label{cor:omega}
+$\Omega(S_{39})=\{3,5\}$.
+\end{corollary}
+
+This is the entry left open for order $39$ in the table
+of~\cite{GGMV14}. The analogous question for the union of the feasible
+sets over all systems of one order was settled earlier: Colbourn, Dinitz
+and Rosa found that this union is $\{3,5\}$ for order~$31$ and remarked
+that it ``is not necessarily an interval''~\cite[Section~4]{CDR}, while
+Gionfriddo, Guardo, Milazzo and Voloshin proved that no single STS$(31)$
+has feasible set $\{3,5\}$~\cite[Theorem~3.1]{GGMV14}. Theorem~\ref{thm:main}
+concerns one system with both colorings at once.
+
+The class sizes we used come from Colbourn, Dinitz and Rosa~\cite{CDR}.
+Their list of $3$-splits in Section~2 contains $(17,12,10)$ for $v=39$,
+and their Table~2 of $5$-splits contains $(16,16,4,2,1)$, each marked as
+realized by some STS$(39)$. These realizations are separate systems. The
+STS$(39)$ with a $5$-bicoloring described in the proof
+of~\cite[Theorem~3.7]{GGMV14} ``does not admit two distinct disjoint
+independent sets of cardinalities 9, 14, 16 and 10, 12, 17, i.e., it is
+not 3-bicolorable.'' What is new here is a single system that carries a
+$3$-bicoloring and a $5$-bicoloring together while admitting no
+$4$-bicoloring; the difficult step is the last one, a nonexistence
+statement over all colorings of $39$ points.
+
+\section{The construction}\label{sec:construction}
+
+We looked for the system and its two bicolorings at the same time. Fix
+the $5$-coloring $g$ of $\{0,\dots,38\}$ with the classes
+\[
+\{0\},\quad \{1,2\},\quad \{3,4,5,6\},\quad \{7,\dots,22\},\quad \{23,\dots,38\}.
+\]
+A Boolean variable for each triple of points receiving exactly two colors
+under $g$ records whether the triple is a block; the constraints require
+every pair of points to lie in exactly one chosen triple. Further
+variables describe a second coloring $h$ with three classes of sizes
+$10$, $12$ and $17$, and every chosen triple must receive exactly two
+colors under $h$. Every solution is therefore a Steiner triple system with
+the $5$-bicoloring $g$ and a $3$-bicoloring $h$. The SAT solver
+CaDiCaL~\cite{CaDiCaL} returned a solution, and $S_{39}$ is that solution,
+with $h$ the coloring of Appendix~\ref{app:data}.
+
+Nothing in this search excludes a $4$-bicoloring. That is proved separately,
+for the system found, by the argument of the next section.
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+We encode $k$-bicolorings as satisfying assignments of a propositional
+formula. For a Steiner triple system $S=(X,\mathcal{B})$ with
+$X=\{0,\dots,v-1\}$ and an integer $k\ge 1$, let $\Phi_k(S)$ be the formula
+in the variables $p_{x,c}$ ($x\in X$, $1\le c\le k$), read ``$x$ has color
+$c$'', with the clauses
+\begin{align*}
+&p_{x,1}\vee\dots\vee p_{x,k} \quad\text{and}\quad \neg p_{x,c}\vee\neg p_{x,c'}
+  &&\text{for } x\in X \text{ and } c<c',\\
+&p_{0,c}\vee p_{1,c}\vee\dots\vee p_{v-1,c} &&\text{for } 1\le c\le k,\\
+&\neg p_{x,a}\vee \neg p_{y,b}\vee\neg p_{z,c} &&\text{for }
+  \{x,y,z\}\in\mathcal{B} \text{ and colors } a,b,c \text{ with } |\{a,b,c\}|\in\{1,3\}.
+\end{align*}
+In the last line each block is written once as $\{x,y,z\}$, and
+$(a,b,c)$ runs over the assignments of colors to $x,y,z$ that give the
+block one or three distinct colors; for $k=4$ there are $4+24=28$ of them.
+
+\begin{lemma}\label{lem:encoding}
+The satisfying assignments of $\Phi_k(S)$ correspond bijectively to the
+$k$-bicolorings of $S$, by $f(x)=c$ exactly when $p_{x,c}$ is true.
+\end{lemma}
+
+\begin{proof}
+The clauses of the first line hold exactly when each point has exactly
+one color, so they correspond to maps $f\colon X\to\{1,\dots,k\}$. Given
+such a map, the clauses of the second line hold exactly when $f$ is
+surjective. For a block $\{x,y,z\}$, the clauses of the third line hold
+exactly when $(f(x),f(y),f(z))$ is not an assignment with one or three
+distinct colors, that is, when $|f(\{x,y,z\})|=2$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The first two assertions are finite checks. The $247$ blocks of
+Appendix~\ref{app:data} cover every pair of points exactly once, and the
+two colorings given there are surjective and give every block exactly two
+colors; both facts are verified directly from the definitions
+(Section~\ref{sec:verification}).
+
+For the third assertion take $k=4$. The formula $\Phi_4(S_{39})$ has $156$
+variables and $39\cdot 7+4+247\cdot 28=7{,}193$ clauses, and by
+Lemma~\ref{lem:encoding}, $S_{39}$ has a $4$-bicoloring if and only if
+$\Phi_4(S_{39})$ is satisfiable. CaDiCaL produced a proof of
+unsatisfiability of $\Phi_4(S_{39})$ in the DRAT format~\cite{DRATtrim}: a
+sequence of clause additions and deletions, ending with the empty clause,
+in which every added clause follows from the formula and the clauses kept
+so far by unit propagation. This proof is checked as described in
+Section~\ref{sec:verification}. Hence $\Phi_4(S_{39})$ is unsatisfiable and
+$S_{39}$ has no $4$-bicoloring.
+\end{proof}
+
+The encoding contains no symmetry breaking, no fixed colors and no
+assumption on class sizes, so the refutation covers every map from the
+$39$ points onto four colors.
+
+\section{Computational verification}\label{sec:verification}
+
+The system, its two bicolorings, the formula $\Phi_4(S_{39})$ in DIMACS
+format and the DRAT proof are distributed with this paper, together with
+the programs that check them; the result's README gives the single
+command that runs every check, in a few seconds on a laptop. The checks
+are as follows.
+\begin{enumerate}
+\item A direct check that the $247$ blocks are distinct $3$-subsets of
+  $\{0,\dots,38\}$ covering every pair exactly once, and that both colorings
+  are surjective and give every block exactly two colors.
+\item An independent construction of $\Phi_4(S_{39})$ from the blocks,
+  in which the block clauses are produced by listing all $4^3$ color
+  assignments of each block and keeping those with one or three colors.
+  It is compared, clause by clause as a multiset, with the distributed
+  formula.
+\item The DRAT proof is checked against the formula by
+  DRAT-trim~\cite{DRATtrim}. Every lemma in its verified core is a
+  unit-propagation consequence, so the proof needs no
+  resolution-asymmetric-tautology step.
+\item The same proof is checked by a short separate program that accepts an
+  added clause only when unit propagation from its negation, over the
+  formula and the clauses accepted before it, yields a conflict, and that
+  ignores deletions. It accepts all $6{,}374$ nonempty added clauses and
+  the final empty clause. Ignoring deletions keeps the check sound.
+\end{enumerate}
+As calibration, the same definitions give feasible set $\{3\}$ for the
+Fano plane and for the affine plane of order $3$, by listing all set
+partitions of their points, in agreement with~\cite[table at the end of
+Section~3]{GGMV14}. For the Fano plane and $k=2,3,4$, the formula
+$\Phi_k$ holds at exactly the $k$-bicolorings among all $k^7$ colorings.
+Both proof checkers reject a proof consisting only of the empty clause,
+the first half of the proof, and the proof applied to the satisfiable
+formula $\Phi_5(S_{39})$; the design checker rejects altered blocks and
+altered colorings.
+
+Beyond the correctness of these programs and of the C compiler and Python
+interpreter running them, the proof relies on nothing further. The
+system was found by search, but the search is not part of the proof.
+Corollary~\ref{cor:omega} relies in addition on~\cite[Theorem~3.7]{GGMV14}.
+
+\section*{Acknowledgments}
+The question is Mario Gionfriddo's, and the colorings were guided by the
+class-size tables of Charles Colbourn, Jeffrey Dinitz and Alexander Rosa
+and by the study of small feasible sets by Mario Gionfriddo, Elena Guardo,
+Lorenzo Milazzo and Vitaly Voloshin. The SAT solver CaDiCaL is by Armin
+Biere and collaborators; DRAT-trim is by Nathan Wetzler, Marijn Heule and
+Warren Hunt.
+
+\begin{thebibliography}{99}
+
+\bibitem{CaDiCaL}
+A.~Biere, T.~Faller, K.~Fazekas, M.~Fleury, N.~Froleyks and F.~Pollitt,
+\emph{CaDiCaL 2.0}, in: Computer Aided Verification (CAV 2024), Lecture
+Notes in Comput. Sci. 14681, Springer, 2024, 133--152.
+\href{https://doi.org/10.1007/978-3-031-65627-9_7}{doi:10.1007/978-3-031-65627-9\_7}.
+
+\bibitem{CDR}
+C.~J. Colbourn, J.~H. Dinitz and A.~Rosa, \emph{Bicoloring Steiner triple
+systems}, Electron. J. Combin. \textbf{6} (1999), \#R25.
+\href{https://doi.org/10.37236/1457}{doi:10.37236/1457}.
+
+\bibitem{Gionfriddo03}
+M.~Gionfriddo, \emph{Colourings of hypergraphs and mixed hypergraphs},
+Rend. Sem. Mat. Messina Ser.~II \textbf{9} (2003), 87--97.
+
+\bibitem{Gionfriddo25}
+M.~Gionfriddo, \emph{Some problems and conjectures about Voloshin triple
+systems}, Mathematics \textbf{14} (2026), no.~1, 42, published
+December 22, 2025.
+\href{https://doi.org/10.3390/math14010042}{doi:10.3390/math14010042}.
+
+\bibitem{GGMV14}
+M.~Gionfriddo, E.~Guardo, L.~Milazzo and V.~Voloshin, \emph{Feasible sets
+of small bicolorable STSs}, Australas. J. Combin. \textbf{59} (2014),
+107--119.
+\url{https://ajc.maths.uq.edu.au/pdf/59/ajc_v59_p107.pdf}.
+
+\bibitem{JMTVW}
+T.~Jiang, D.~Mubayi, Zs.~Tuza, V.~Voloshin and D.~B. West, \emph{The
+chromatic spectrum of mixed hypergraphs}, Graphs Combin. \textbf{18}
+(2002), 309--318.
+\href{https://doi.org/10.1007/s003730200023}{doi:10.1007/s003730200023}.
+
+\bibitem{TV08}
+Zs.~Tuza and V.~Voloshin, \emph{Problems and results on colorings of
+mixed hypergraphs}, in: Horizons of Combinatorics, Bolyai Soc. Math.
+Stud. 17, Springer, 2008, 235--255.
+\href{https://doi.org/10.1007/978-3-540-77200-2_12}{doi:10.1007/978-3-540-77200-2\_12}.
+Quoted from the authors' copy,
+\url{https://spectrum.troy.edu/voloshin/horizon-pf.pdf}.
+
+\bibitem{Voloshin95}
+V.~I. Voloshin, \emph{On the upper chromatic number of a hypergraph},
+Australas. J. Combin. \textbf{11} (1995), 25--45.
+
+\bibitem{DRATtrim}
+N.~Wetzler, M.~J.~H. Heule and W.~A. Hunt, Jr., \emph{DRAT-trim: efficient
+checking and trimming using expressive clausal proofs}, in: Theory and
+Applications of Satisfiability Testing (SAT 2014), Lecture Notes in
+Comput. Sci. 8561, Springer, 2014, 422--429.
+\href{https://doi.org/10.1007/978-3-319-09284-3_31}{doi:10.1007/978-3-319-09284-3\_31}.
+
+\end{thebibliography}
+
+\begin{appendices}
+\section{The system and its bicolorings}\label{app:data}
+
+The row for $x$ lists the pairs $y~z$ with $x<y<z$ such that
+$\{x,y,z\}$ is a block of $S_{39}$; every block appears once, in the row
+of its smallest point.
+
+{\small
+\noindent
+\begin{tabularx}{\textwidth}{@{}r>{\raggedright\arraybackslash}X@{}}
+\toprule
+$x$ & blocks $\{x,y,z\}$ with $x<y<z$, written $y~z$\\
+\midrule
+0 & 1~2; 3~6; 4~5; 7~9; 8~15; 10~13; 11~17; 12~21; 14~19; 16~22; 18~20; 23~33; 24~32; 25~26; 27~30; 28~29; 31~37; 34~35; 36~38 \\
+1 & 3~5; 4~6; 7~17; 8~9; 10~12; 11~22; 13~16; 14~15; 18~19; 20~21; 23~38; 24~31; 25~32; 26~33; 27~28; 29~37; 30~34; 35~36 \\
+2 & 3~4; 5~6; 7~20; 8~14; 9~16; 10~19; 11~21; 12~17; 13~15; 18~22; 23~26; 24~25; 27~35; 28~37; 29~30; 31~32; 33~36; 34~38 \\
+3 & 7~21; 8~11; 9~13; 10~15; 12~22; 14~16; 17~18; 19~20; 23~30; 24~37; 25~31; 26~36; 27~32; 28~33; 29~34; 35~38 \\
+4 & 7~15; 8~22; 9~20; 10~18; 11~12; 13~17; 14~21; 16~19; 23~36; 24~35; 25~37; 26~29; 27~31; 28~34; 30~32; 33~38 \\
+5 & 7~11; 8~17; 9~18; 10~22; 12~16; 13~14; 15~20; 19~21; 23~24; 25~30; 26~28; 27~29; 31~36; 32~35; 33~34; 37~38 \\
+6 & 7~22; 8~18; 9~12; 10~14; 11~16; 13~20; 15~19; 17~21; 23~35; 24~30; 25~33; 26~34; 27~38; 28~36; 29~31; 32~37 \\
+7 & 8~31; 10~25; 12~26; 13~37; 14~24; 16~33; 18~23; 19~28; 27~36; 29~38; 30~35; 32~34 \\
+8 & 10~38; 12~35; 13~33; 16~27; 19~24; 20~34; 21~36; 23~28; 25~29; 26~32; 30~37 \\
+9 & 10~26; 11~23; 14~29; 15~35; 17~31; 19~38; 21~37; 22~36; 24~27; 25~34; 28~32; 30~33 \\
+10 & 11~34; 16~29; 17~30; 20~32; 21~23; 24~36; 27~37; 28~31; 33~35 \\
+11 & 13~35; 14~37; 15~31; 18~38; 19~27; 20~30; 24~26; 25~28; 29~33; 32~36 \\
+12 & 13~30; 14~31; 15~36; 18~34; 19~25; 20~27; 23~37; 24~29; 28~38; 32~33 \\
+13 & 18~28; 19~34; 21~27; 22~24; 23~32; 25~38; 26~31; 29~36 \\
+14 & 17~23; 18~32; 20~38; 22~33; 25~27; 26~30; 28~35; 34~36 \\
+15 & 16~32; 17~29; 18~24; 21~33; 22~28; 23~25; 26~37; 27~34; 30~38 \\
+16 & 17~37; 18~36; 20~26; 21~25; 23~34; 24~38; 28~30; 31~35 \\
+17 & 19~32; 20~28; 22~35; 24~34; 25~36; 26~38; 27~33 \\
+18 & 21~29; 25~35; 26~27; 30~31; 33~37 \\
+19 & 22~26; 23~29; 30~36; 31~33; 35~37 \\
+20 & 22~25; 23~31; 24~33; 29~35; 36~37 \\
+21 & 22~30; 24~28; 26~35; 31~34; 32~38 \\
+22 & 23~27; 29~32; 31~38; 34~37 \\
+\bottomrule
+\end{tabularx}
+}
+
+\medskip
+The $3$-bicoloring has the color classes
+\begin{align*}
+&\{6,8,11,14,15,17,20,24,27,36\},\\
+&\{0,3,10,16,18,19,26,30,32,34,37,38\},\\
+&\{1,2,4,5,7,9,12,13,21,22,23,25,28,29,31,33,35\},
+\end{align*}
+and the $5$-bicoloring is the coloring $g$ of
+Section~\ref{sec:construction}, with the classes $\{0\}$, $\{1,2\}$,
+$\{3,4,5,6\}$, $\{7,\dots,22\}$ and $\{23,\dots,38\}$.
+\end{appendices}
+
+\end{document}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="650" height="250" viewBox="0 0 650 250" role="img" aria-labelledby="title desc">
+<title id="title">Missing edges of the twelve-vertex counterexample</title>
+<desc id="desc">A four-cycle and two disjoint three-leaf stars. The graph in the theorem is the complement of this drawing.</desc>
+<rect width="650" height="250" fill="white"/>
+<path d="M50 80 L150 80" stroke="#294763" stroke-width="3"/>
+<path d="M50 80 L50 180" stroke="#294763" stroke-width="3"/>
+<path d="M150 80 L150 180" stroke="#294763" stroke-width="3"/>
+<path d="M150 180 L50 180" stroke="#294763" stroke-width="3"/>
+<path d="M325 135 L250 205" stroke="#294763" stroke-width="3"/>
+<path d="M325 135 L400 205" stroke="#294763" stroke-width="3"/>
+<path d="M325 135 L325 50" stroke="#294763" stroke-width="3"/>
+<path d="M550 135 L475 205" stroke="#294763" stroke-width="3"/>
+<path d="M550 135 L625 205" stroke="#294763" stroke-width="3"/>
+<path d="M550 135 L550 50" stroke="#294763" stroke-width="3"/>
+<circle cx="50" cy="80" r="6" fill="#294763"/>
+<circle cx="150" cy="80" r="6" fill="#294763"/>
+<circle cx="150" cy="180" r="6" fill="#294763"/>
+<circle cx="50" cy="180" r="6" fill="#294763"/>
+<circle cx="325" cy="135" r="6" fill="#294763"/>
+<circle cx="250" cy="205" r="6" fill="#294763"/>
+<circle cx="400" cy="205" r="6" fill="#294763"/>
+<circle cx="325" cy="50" r="6" fill="#294763"/>
+<circle cx="550" cy="135" r="6" fill="#294763"/>
+<circle cx="475" cy="205" r="6" fill="#294763"/>
+<circle cx="625" cy="205" r="6" fill="#294763"/>
+<circle cx="550" cy="50" r="6" fill="#294763"/>
+</svg>

@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## acyclic-root-extrema v1 (November 1, 2026)
+
+- A twelve-vertex graph answers both parts of Barton, Brown and Pike's Question 2.17 negatively: its acyclic polynomial has a real root below every real root of their proposed graph and of greater modulus than every complex root of that graph.
+- The paper gives an elementary proof; the accompanying Lean formalization checks the complete statement from the graph definitions.
+
 ## queueing-polynomial-convexity v1 (November 1, 2026)
 
 - Proves Brosch, Laurent and Steenkamp's Conjecture 1 for all numbers of servers, edge sizes and degrees at least two, with a stronger theorem on the nonnegative orthant. Includes the paper and a standalone Lean proof.

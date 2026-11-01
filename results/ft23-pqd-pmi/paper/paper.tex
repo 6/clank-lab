@@ -1,0 +1,392 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[title]{appendix}
+\DeclareUnicodeCharacter{2227}{\ensuremath{\land}}
+\DeclareUnicodeCharacter{00AC}{\ensuremath{\neg}}
+\DeclareUnicodeCharacter{211D}{\ensuremath{\mathbb{R}}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
+\DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
+\DeclareUnicodeCharacter{2264}{\ensuremath{\leq}}
+\DeclareUnicodeCharacter{00D7}{\ensuremath{\times}}
+\DeclareUnicodeCharacter{02E2}{\ensuremath{{}^{\mathrm{s}}}}
+\DeclareUnicodeCharacter{03BC}{\ensuremath{\mu}}
+\DeclareUnicodeCharacter{2203}{\ensuremath{\exists}}
+\DeclareUnicodeCharacter{207B}{\ensuremath{{}^{-}}}
+\DeclareUnicodeCharacter{00B9}{\ensuremath{{}^{1}}}
+\DeclareUnicodeCharacter{2260}{\ensuremath{\ne}}
+\DeclareUnicodeCharacter{22A4}{\ensuremath{\top}}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+pdfauthor={P. Graham},
+pdftitle={A counterexample on two kinds of positive dependence}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{A counterexample on two kinds of positive dependence}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 31, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We construct a strict bivariate Archimedean copula that is positively
+quadrant dependent but is not positive measure inducing. This disproves
+the forward implication in the equivalence conjectured by Sebastian
+Fuchs and Marco Tschimpke. Their work introduced the positive measure
+inducing property through a reflected copula sum and established the
+equivalence for the Frank family. Our example separates the two
+properties in the full Archimedean class. Its inverse generator is the
+maximum of two exponential functions. Convexity gives copula validity,
+and a piecewise linear inequality in logarithmic coordinates gives
+positive quadrant dependence throughout the unit square. A rectangle
+strictly inside the open square $(0,1/2)^2$ has a negative increment for the
+reflected sum, excluding the positive measure required by the definition.
+All corner estimates use rational arithmetic and squaring, without a
+density assumption. The complete argument, including generator
+admissibility, boundary values and the measure-theoretic contradiction,
+is formalized in Lean. The converse implication and the separate
+negative-dependence equivalence are not resolved by this example.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{Mathematics Subject Classification (2020):} 60E05, 62H05.\\
+\textit{Keywords:} Archimedean copula, positive quadrant dependence,
+positive measure inducing dependence.
+
+\section{Introduction}
+\begin{theorem}\label{thm:main}
+For $t\geq0$ and $0<u\leq1$, put
+\[
+ \psi(t)=\max\{e^{-t},\tfrac14 e^{-t/2}\},\qquad
+ \phi(u)=\max\{-\log u,-2\log u-\log16\}.
+\]
+The function $\phi$, extended by $\phi(0)=\infty$, is a strict Archimedean
+generator in the sense of \cite{ft}, and $\psi$ is its inverse on
+$[0,\infty)$. The function on $[0,1]^2$ defined by
+\[
+ C(u,v)=
+ \begin{cases}\psi(\phi(u)+\phi(v)),&u,v>0,\\0,&uv=0\end{cases}
+\]
+is a copula, satisfies $C(u,v)\geq uv$ everywhere, and is not positive
+measure inducing in the sense of Fuchs and Tschimpke.
+\end{theorem}
+
+A copula is a two-increasing function on the unit square, zero on the
+lower edges and with uniform margins $C(u,1)=u$ and $C(1,v)=v$.
+The inequality in the theorem is positive quadrant dependence (PQD).
+For example, the independence copula $\Pi(u,v)=uv$ has PQD with equality.
+For any function $F$ of two variables write its rectangle increment as
+\[
+ \Delta F[a,b;d,e]=F(b,e)-F(a,e)-F(b,d)+F(a,d).
+\]
+Two-increasing means that these increments are nonnegative whenever
+$a\leq b$ and $d\leq e$ in the unit interval.
+
+Fuchs and Tschimpke's Definition 1 and equation (2.2) in
+\cite{ft}, with numbering from the arXiv version specified there,
+define the positive measure inducing property (PMI) by requiring that
+\begin{equation}\label{eq:E}
+ E_C(u,v)=C(u,v)+C(1-u,v)+C(u,1-v)+C(1-u,1-v)-1
+\end{equation}
+induce a positive measure on $(0,1/2)^2$. Thus every half-open rectangle
+$(a,b]\times(d,e]$ compactly contained in that square must have
+nonnegative $E_C$-increment. For independence, $E_\Pi$ is identically zero.
+Example 6 of \cite{ft} gives the PQD--PMI equivalence for Frank copulas.
+Conjecture 1 proposes it for all Archimedean copulas; Theorem~\ref{thm:main}
+disproves the implication PQD $\Rightarrow$ PMI. The conjecture's reverse
+implication and its separate NMI equivalence are outside this conclusion.
+
+The generator description is classical: the bivariate case of
+McNeil and Ne\v{s}lehov\'a's Theorem 2.2 in \cite{mn} uses decreasing convex
+inverse generators. We verify those properties and the copula axioms
+directly. The distinction between a positive measure and a density is
+essential: Remark 1(2) of \cite{ft} gives a density criterion under absolute
+continuity, whereas our proof uses Definition 1 itself. Lean checks the
+full statement from these definitions, as described in Section~\ref{sec:formal}.
+The superadditivity criterion behind our PQD argument appears in
+M\"uller and Scarsini's Theorem 2.7 in the working version of \cite{ms},
+attributed there to Joe, \emph{Multivariate Models and Dependence Concepts}
+(1997), page 109.
+Fern\'andez S\'anchez and Trutschnig's Corollary 4 in the preprint of
+\cite{fst} expresses the mass of an Archimedean level curve in terms of
+one-sided generator derivatives. That formula motivates attention to
+corners; here direct rectangle increments suffice.
+
+\section{Proof overview}
+The maximum of two exponentials remains convex and strictly decreasing.
+In logarithmic coordinates its inverse has two affine branches, whose
+maximum is superadditive. These two observations establish the global
+copula and PQD assertions. The separation of PMI occurs at the change of
+branch: near a reflected corner, the copula is a maximum of a product
+and a square root of that product. The alternating sum of sixteen corner
+values over one small rectangle is negative. Exact rational enclosures
+make this last sign calculation elementary and avoid differentiating
+across the change of branch.
+
+\section{The generator and positive quadrant dependence}
+\begin{lemma}\label{lem:gen}
+On $(0,1]$ and $[0,\infty)$, respectively, the functions $\phi$ and $\psi$
+in Theorem~\ref{thm:main} are continuous, strictly decreasing and convex. They are inverse to each other,
+with $\phi(1)=0$, $\phi(u)\to\infty$ as $u\downarrow0$,
+$\psi(0)=1$ and $\psi(t)\to0$ as $t\to\infty$.
+Their construction defines a copula on the closed unit square.
+\end{lemma}
+\begin{proof}
+Each branch has the claimed continuity, monotonicity and convexity;
+taking a maximum preserves these properties, including strict decrease.
+The branches of $\psi$ meet at $t=\log16$, at value $1/16$.
+Inverting on the two sides gives $-\log u$ for $u\geq1/16$ and
+$-2\log u-\log16$ for $u\leq1/16$, exactly $\phi$.
+The endpoint values and limits follow from these formulas.
+
+The inverse identities give the margins, and the definition gives the
+zero edges. For a positive rectangle with $a\leq b$ and $d\leq e$ set
+\[
+ s=\phi(b)+\phi(e),\quad h=\phi(a)-\phi(b)\geq0,\quad
+ k=\phi(d)-\phi(e)\geq0.
+\]
+Its $C$-increment is
+$\psi(s+h+k)-\psi(s+h)-\psi(s+k)+\psi(s)$, which is nonnegative:
+for a convex function, an increment of fixed nonnegative length is
+nondecreasing in its starting point. If $a=0$, the increment is
+$C(b,e)-C(b,d)\geq0$ by monotonicity; the case $d=0$ is the same,
+and repeated endpoints give zero. Thus all closed-square rectangle
+increments are nonnegative. The margins and groundedness also imply
+$0\leq C(u,v)\leq\min(u,v)$.
+\end{proof}
+
+\begin{lemma}\label{lem:pqd}
+The copula in Theorem~\ref{thm:main} satisfies $C(u,v)\geq uv$ for every
+$(u,v)\in[0,1]^2$.
+\end{lemma}
+\begin{proof}
+Let $L=\log4$ and $f(x)=\max(x,2x-2L)$ for $x\geq0$.
+This function is superadditive. If $x,y\leq2L$, then
+$f(x)+f(y)=x+y\leq f(x+y)$. If $x\geq2L\geq y$, then
+$f(x)+f(y)=2x-2L+y\leq2(x+y)-2L\leq f(x+y)$.
+The symmetric case is identical. If both exceed $2L$, the sum is
+$2(x+y)-4L\leq f(x+y)$.
+For positive $u,v\leq1$, take $x=-\log u$ and $y=-\log v$.
+Then $\phi(u)+\phi(v)\leq\phi(uv)$, so the decreasing inverse gives
+$C(u,v)\geq\psi(\phi(uv))=uv$. The zero edges give equality.
+\end{proof}
+
+\section{A negative reflected rectangle}
+Set
+\[
+ a=\frac{63}{256},\quad b=\frac{65}{256},\quad
+ d=\frac{61}{768},\quad e=\frac{67}{768}.
+\]
+These endpoints satisfy $0<a<b<1/2$ and $0<d<e<1/2$.
+Every coordinate of each reflected corner lies in $[1/16,1]$.
+On this interval $\phi(u)=-\log u$, hence
+\begin{equation}\label{eq:corner}
+ C(u,v)=\max\{uv,\sqrt{uv}/4\}.
+\end{equation}
+Put $D=196608$ and $q(n)=\sqrt{n/D}/4$. Table~\ref{tab:corners}
+lists all sixteen values needed in \eqref{eq:E}. The branch follows by
+comparing $uv$ with $1/16$, or its numerator with $D/16=12288$.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ccccc}
+\toprule
+$(u,v)$ & $C(u,v)$ & $C(1-u,v)$ & $C(u,1-v)$ & $C(1-u,1-v)$\\
+\midrule
+$(b,e)$ & $q(4355)$ & $12797/D$ & $45565/D$ & $133891/D$\\
+$(a,e)$ & $q(4221)$ & $12931/D$ & $44163/D$ & $135293/D$\\
+$(b,d)$ & $q(3965)$ & $q(11651)$ & $45955/D$ & $135037/D$\\
+$(a,d)$ & $q(3843)$ & $q(11773)$ & $44541/D$ & $136451/D$\\
+\bottomrule
+\end{tabular}
+\caption{Reflected corner values for the negative rectangle.}\label{tab:corners}
+\end{table}
+
+\begin{lemma}\label{lem:neg}
+For the displayed rectangle, $\Delta E_C[a,b;d,e]<0$.
+\end{lemma}
+\begin{proof}
+The following integers $k$ satisfy $k/10^6\leq q(n)\leq(k+1)/10^6$:
+\[
+\begin{array}{c|rrrrrr}
+n&4355&4221&3965&11651&3843&11773\\\hline
+k&37207&36630&35502&60858&34952&61176
+\end{array}
+\]
+Each enclosure follows by squaring nonnegative numbers: its two checks
+are $16Dk^2\leq10^{12}n\leq16D(k+1)^2$.
+In the alternating sum of Table~\ref{tab:corners}, use upper endpoints
+in the first and fourth rows, and lower endpoints in the second and
+third rows. The constant terms in \eqref{eq:E} cancel, and this gives
+\[
+ \Delta E_C[a,b;d,e]\leq
+ \frac{37208-36630-35502-60858+34953+61177}{10^6}
+ -\frac{134}{196608}
+ =-\frac{512347}{1536000000}<0.
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Lemma~\ref{lem:gen} establishes strict generator admissibility and all
+copula axioms, and Lemma~\ref{lem:pqd} proves PQD. If $C$ were PMI, its
+induced positive measure on the open square $(0,1/2)^2$ would assign the
+rectangle $(a,b]\times(d,e]$ the value $\Delta E_C[a,b;d,e]$.
+Lemma~\ref{lem:neg} makes this value negative, a contradiction.
+\end{proof}
+
+\section{Formal verification}\label{sec:formal}
+The complete theorem has the following Lean statement, in namespace
+\texttt{FT23}:
+\begin{verbatim}
+theorem conjecture_counterexample :
+    StrictGenerator phi psi ∧ IsCopula C ∧
+    PQD C ∧ ¬ PrimaryPMI C
+\end{verbatim}
+Here the logical symbols are conjunction and negation.
+\texttt{StrictGenerator} records the continuity, strict decrease,
+convexity, inverse identities and endpoint limits of both displayed
+functions. \texttt{IsCopula} includes groundedness, uniform margins and
+two-increasingness for all rectangles in the closed square, including
+repeated endpoints. \texttt{PQD} quantifies over that whole square.
+\texttt{PrimaryPMI} asserts the existence of a positive Borel measure on
+the open square $(0,1/2)^2$ whose finite half-open rectangle values equal
+the corresponding increments of $E_C$. Thus its negation has the
+measure-theoretic meaning used above, rather than merely rejecting a
+smooth density test. Appendix~\ref{app:definitions} quotes the definitions
+and makes the endpoint convention explicit.
+
+The formal proof establishes the generator identities and analytic
+inequalities, then bounds the same sixteen corner values by exact
+rational numbers. Its enclosures are tighter than the displayed ones.
+The independence example checks that $E_\Pi$ and all its increments
+vanish.
+Only Lean's standard axioms of propositional extensionality, classical
+choice and quotient soundness occur. The build checks this axiom list
+and the final theorem's type; no compiled numerical evaluation is used.
+
+The accompanying Lean project contains all proof sources and pinned
+library dependencies. Its README gives the standard Lake commands;
+after the dependencies are available, checking takes a few minutes.
+Reproducing the theorem requires Lean and mathlib but no search code,
+external certificate, or unproved analytic premise.
+
+\begin{thebibliography}{9}
+\bibitem{ft}
+S. Fuchs and M. Tschimpke,
+\emph{A novel positive dependence property and its impact on a popular
+class of concordance measures},
+Journal of Multivariate Analysis \textbf{200} (2024), 105259.
+\href{https://doi.org/10.1016/j.jmva.2023.105259}{doi:10.1016/j.jmva.2023.105259}.
+Statement numbering follows
+\href{https://arxiv.org/abs/2306.09676v1}{arXiv:2306.09676v1}, June 16, 2023.
+
+\bibitem{mn}
+A. J. McNeil and J. Ne\v{s}lehov\'a,
+\emph{Multivariate Archimedean copulas, $d$-monotone functions and
+$\ell_1$-norm symmetric distributions},
+Annals of Statistics \textbf{37} (2009), 3059--3097.
+\href{https://doi.org/10.1214/07-AOS556}{doi:10.1214/07-AOS556}.
+Theorem 2.2; \href{https://arxiv.org/abs/0908.3750v1}{arXiv:0908.3750v1}.
+\bibitem{ms}
+A. M\"uller and M. Scarsini,
+\emph{Archimedean copulae and positive dependence},
+Journal of Multivariate Analysis \textbf{93} (2005), 434--445.
+\href{https://doi.org/10.1016/j.jmva.2004.04.003}{doi:10.1016/j.jmva.2004.04.003}.
+Theorem 2.7 in the
+\href{https://www.bemservizi.unito.it/repec/icr/wp2003/Scarsini25-03.pdf}{2003 working version}.
+
+\bibitem{fst}
+J. Fern\'andez S\'anchez and W. Trutschnig,
+\emph{Singularity aspects of Archimedean copulas},
+Journal of Mathematical Analysis and Applications \textbf{432} (2015), 103--113.
+\href{https://doi.org/10.1016/j.jmaa.2015.06.036}{doi:10.1016/j.jmaa.2015.06.036}.
+Corollary 4 in the \href{https://www.trutschnig.net/p21.pdf}{June 22, 2015 preprint}.
+\end{thebibliography}
+
+\begin{appendices}
+\section{Lean definitions}\label{app:definitions}
+The following declarations are quoted verbatim from the formalization,
+in namespace \texttt{FT23}; \texttt{Set}, \texttt{Filter} and
+\texttt{MeasureTheory} are open. The real-valued Lean \texttt{phi} is used
+only on $(0,1]$: since \texttt{Real.log 0 = 0}, its value at zero is zero,
+while the extended value $\phi(0)=\infty$ is represented by the
+\texttt{StrictGenerator.phi\_at\_zero} right-limit condition; the zero
+edges of \texttt{C} are defined directly.
+
+The definition of \texttt{C} is the strict Archimedean construction of
+\cite[Section 2]{ft}, with those zero edges.
+\begingroup
+\footnotesize
+\begin{verbatim}
+def C (u v : ℝ) : ℝ := if 0 < u ∧ 0 < v then psi (phi u + phi v) else 0
+
+def delta (F : ℝ → ℝ → ℝ) (a b d e : ℝ) : ℝ :=
+  F b e - F a e - F b d + F a d
+\end{verbatim}
+\endgroup
+Here \texttt{delta} is the half-open rectangle increment used to
+interpret the induced measure in \cite[Definition 1]{ft}.
+The reflection definitions below give \texttt{E}; the proved identity
+\texttt{E\_expanded} is exactly \cite[equation (2.2)]{ft}.
+\begingroup
+\footnotesize
+\begin{verbatim}
+def nu1 (F : ℝ → ℝ → ℝ) (u v : ℝ) : ℝ := v - F (1-u) v
+def nu2 (F : ℝ → ℝ → ℝ) (u v : ℝ) : ℝ := u - F u (1-v)
+def nu (F : ℝ → ℝ → ℝ) (u v : ℝ) : ℝ := u + v - 1 + F (1-u) (1-v)
+def E (F : ℝ → ℝ → ℝ) (u v : ℝ) : ℝ :=
+  F u v - nu1 F u v - nu2 F u v + nu F u v
+
+lemma E_expanded (F : ℝ → ℝ → ℝ) (u v : ℝ) :
+    E F u v = F u v + F (1-u) v + F u (1-v) + F (1-u) (1-v) - 1 := by
+  unfold E nu1 nu2 nu
+  ring
+\end{verbatim}
+\endgroup
+The definition of \texttt{PQD} is the inequality in
+\cite[Section 2]{ft}, extended to the closed square, where the margins
+and zero edges give the boundary cases.
+\begingroup
+\footnotesize
+\begin{verbatim}
+def PQD (F : ℝ → ℝ → ℝ) : Prop :=
+  ∀ u ∈ Icc (0:ℝ) 1, ∀ v ∈ Icc (0:ℝ) 1, u*v ≤ F u v
+\end{verbatim}
+\endgroup
+The predicate \texttt{ValidRect} places all four endpoints strictly
+inside the square of \cite[Definition 1]{ft}; \texttt{HalfSquare} is that
+square as a subtype, and \texttt{rect} is a half-open rectangle.
+\begingroup
+\footnotesize
+\begin{verbatim}
+def ValidRect (a b d e : ℝ) : Prop :=
+  0 < a ∧ a < b ∧ b < 1/2 ∧ 0 < d ∧ d < e ∧ e < 1/2
+
+def halfSquare : Set (ℝ × ℝ) := Ioo (0:ℝ) (1/2) ×ˢ Ioo (0:ℝ) (1/2)
+abbrev HalfSquare := {z : ℝ × ℝ // z ∈ halfSquare}
+def rect (a b d e : ℝ) : Set (ℝ × ℝ) := Ioc a b ×ˢ Ioc d e
+\end{verbatim}
+\endgroup
+The predicate \texttt{PrimaryPMI} is the necessary rectangle-value
+consequence of \cite[Definition 1]{ft}: a positive Borel measure on the
+open square has each indicated finite value equal to the corresponding
+increment of \texttt{E}. The clause \texttt{≠ ⊤} excludes infinite measure
+before \texttt{toReal} converts its value to a real number; negating this
+necessary condition therefore rules out PMI itself.
+\begingroup
+\footnotesize
+\begin{verbatim}
+def PrimaryPMI (F : ℝ → ℝ → ℝ) : Prop :=
+  ∃ μ : Measure HalfSquare, ∀ a b d e : ℝ, ValidRect a b d e →
+    μ (Subtype.val ⁻¹' rect a b d e) ≠ ⊤ ∧
+    (μ (Subtype.val ⁻¹' rect a b d e)).toReal = delta (E F) a b d e
+\end{verbatim}
+\endgroup
+\end{appendices}
+\end{document}

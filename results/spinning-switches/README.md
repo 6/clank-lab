@@ -14,6 +14,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23853844](https://doi.org/10.5281/zenodo.23853844)
+
 ## Check it
 
 Install [elan](https://github.com/leanprover/elan), Git, and a C compiler. From this folder run:
@@ -39,6 +41,7 @@ The proof tracks configurations excluded by the moves and uses elementary finite
   author = {Graham, P.},
   title = {{A classification of solvable spinning-switches puzzles}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/spinning-switches-v1/results/spinning-switches}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/spinning-switches-v1/results/spinning-switches}},
+  doi          = {10.5281/zenodo.23853844}
 }
 ```

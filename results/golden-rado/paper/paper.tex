@@ -1,0 +1,322 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,fontspec,fancyvrb}
+\usepackage[title]{appendix}
+\setmonofont{DejaVu Sans Mono}[Scale=0.8]
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={A conjecture of Hopkins on golden Rado numbers},pdfauthor={P. Graham}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Rg}{R_0^{\varphi}}
+\title{A conjecture of Hopkins on golden Rado numbers}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 31, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A 2-coloring of $\{1,\dots,N\}$ satisfies the golden mean shift if no two
+consecutive integers both receive color~1. For $1\le a\le b$, Hopkins
+defined the golden Rado number $\Rg(a,b)$ as the least $N$ such that
+every such coloring with $1$ colored~$0$ contains a monochromatic
+solution of $ax+by=z$, and conjectured that
+$\Rg(a,\ell a)=a^2(\ell+1)^2$ for all positive integers $a$ and $\ell$.
+Hopkins proved the case $\ell=1$, and determined $\Rg(1,b)$ for every
+$b$; that evaluation shows the formula fails when $a=1$ and $\ell\ge2$.
+We prove the formula for every $a\ge2$ and $\ell\ge1$, which settles all
+the remaining cases of the conjecture. The lower bound is the coloring
+that gives color~1 exactly to the multiples of $a$ that are at least
+$a(\ell+1)$. The upper bound is a forcing argument: a descent in steps
+of $\ell$ shows that a residue $r\le\min(a,\ell)$ has color~1, and two
+families of solutions then make color~1 invariant under shifts by $\ell$
+on an initial interval, which leads to a contradiction. The proof is
+elementary, and the theorem, both bounds included, is checked in the
+Lean proof assistant from the definitions.
+
+This work has not yet been reviewed by experts. The proofs, the Lean
+formalization and the text were produced by AI models (from OpenAI and
+Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+
+\noindent 2020 \emph{Mathematics Subject Classification}: 05D10, 11B75.\\
+\emph{Keywords}: Rado number, golden mean shift, Schur-type problem,
+Lean.
+
+\section{Introduction}
+
+\subsection{Main result}
+A \emph{golden coloring} of $[1,N]=\{1,\dots,N\}$ is a map
+$\Delta:[1,N]\to\{0,1\}$ with $\Delta(1)=0$ and no $i$ with
+$\Delta(i)=\Delta(i+1)=1$. For positive integers $a,b$, a solution
+$(x,y,z)$ of $ax+by=z$ in $[1,N]$ is \emph{monochromatic} if
+$\Delta(x)=\Delta(y)=\Delta(z)$; the entries $x$ and $y$ may be equal.
+Following Hopkins~\cite[Definition~2]{Hopkins}, for $1\le a\le b$ the
+golden Rado number $\Rg(a,b)$ is the least positive integer $N$ such
+that every golden coloring of $[1,N]$ contains a monochromatic solution
+of $ax+by=z$. (Hopkins writes $R_0^S$ for a binary shift $S$ and
+$\Rg$ for the golden mean shift; the subscript records $\Delta(1)=0$.)
+For example, $\Rg(1,1)=4$~\cite[Section~2]{Hopkins}. Suppose a golden
+coloring of $[1,4]$ has no monochromatic solution of $x+y=z$. Then
+$\Delta(2)=1$ because of $(1,1,2)$, so $\Delta(3)=0$, and either color
+of $4$ completes $(1,3,4)$ or $(2,2,4)$, a contradiction; the coloring
+$0,1,0$ of $[1,3]$ avoids all solutions.
+
+\begin{theorem}\label{thm:main}
+For all integers $a\ge2$ and $\ell\ge1$,
+\[
+\Rg(a,\ell a)=a^2(\ell+1)^2 .
+\]
+\end{theorem}
+
+Hopkins stated the formula as follows~\cite[Conjecture~1]{Hopkins}:
+``Given positive integers $a$ and $\ell$, the golden Rado number for the
+case $\Delta(1)=0$ is $\Rg(a,\ell a)=(\ell+1)^2a^2$.'' The case $\ell=1$
+is Hopkins's Theorem~2, $\Rg(a,a)=4a^2$~\cite[Theorem~2]{Hopkins}.
+For $a=1$, Hopkins's Theorem~1 gives $\Rg(1,b)=2b+2$ for odd $b$ and
+$\Rg(1,b)=2b$ for even $b$~\cite[Theorem~1]{Hopkins}; this equals
+$(b+1)^2$ only for $b=1$, so the conjectured formula holds at $a=1$ only
+when $\ell=1$. Theorem~\ref{thm:main} proves it in every other case.
+
+\subsection{Background}
+Without the coloring constraint, the 2-color Rado number of $ax+by=z$
+for $1\le a\le b$ is $a(a+b)^2+b$, as conjectured by Hopkins and
+Schaal~\cite{HopkinsSchaal} and proved by Guo and Sun~\cite{GuoSun} (we
+quote the formula as stated in~\cite[equation~(1)]{Hopkins}). Hopkins
+introduced shift-constrained Rado numbers in~\cite{Hopkins}, where the
+colorings are required to be words of a binary shift from symbolic
+dynamics~\cite{LindMarcus}; the golden mean shift forbids two
+consecutive ones. Since the color of $1$ can no longer be fixed by
+symmetry, Hopkins treats $\Delta(1)=0$ and $\Delta(1)=1$ separately and
+writes that ``a full understanding of $R_0^\varphi(a,b)$,
+$R_1^\varphi(a,b)$ is desired''~\cite[Section~5]{Hopkins}. Hopkins
+supported Conjecture~1 with computations and acknowledges earlier
+exploration of these topics by Katrina Luckenbach and Matthew Vieira as
+undergraduate research students~\cite[p.~13]{Hopkins}. Background on
+Rado numbers is in Landman and Robertson's book~\cite[Chapter~9]{LR}.
+
+\subsection{What is new}
+Hopkins's proof of the case $\ell=1$ and the descent below both start
+from the solution $(1,1,a+a\ell)$. For $\ell=1$ a single descent
+already reaches a contradiction. For $\ell\ge2$ the descent stops at a
+residue $r\ge2$, and the new step is the second stage: two families of
+solutions that make color~$1$ invariant under shifts by $\ell$ on the
+interval $[1,a\ell(r+1)]$. The lower-bound coloring is the same for all
+$\ell$, and it is the hypothesis $a\ge2$ that makes it a golden
+coloring.
+
+\section{Proof overview}
+Write $s=a(\ell+1)$, so the claimed value is $s^2$, and let
+$b=a\ell$. Every positive solution of $ax+by=z$ has $z=a(x+\ell y)$,
+a multiple of $a$ that is at least $s$. Coloring exactly these numbers
+with~$1$ forces any monochromatic solution to have $x,y\ge s$, hence
+$z\ge s^2$; this is the lower bound (Section~\ref{sec:lower}).
+
+For the upper bound (Section~\ref{sec:upper}) take a golden coloring of
+$[1,s^2]$ without monochromatic solutions. Because $1$ has color~$0$, the
+solution $(1,1,s)$ gives $s$ color~$1$. The identity
+$a(t-\ell)+b(t+1)=st=at+bt$ moves color~$1$ from $t$ down to $t-\ell$,
+so color~$1$ descends from $s$ to its least positive residue $r$
+modulo $\ell$. Then $r\ge2$, and both neighbors of $r$ have color~$0$.
+Solutions with $y\in\{r-1,r,r+1\}$ propagate color~$1$ by $\pm\ell$
+on $[1,T]$, where $T=b(r+1)$. Whatever the color of $\ell$, propagation
+contradicts one of the solutions $(\ell,1,2b)$ and $(\ell,r,T)$. All
+entries stay inside $[1,s^2]$ because $r\le\min(a,\ell)$.
+
+\section{The lower bound}\label{sec:lower}
+\begin{lemma}\label{lem:lower}
+Let $a\ge2$, $\ell\ge1$ and $s=a(\ell+1)$. Color $t$ with $1$ exactly
+when $a$ divides $t$ and $t\ge s$. For every $M$ with $1\le M<s^2$, the
+restriction to $[1,M]$ is a golden coloring with no monochromatic
+solution of $ax+a\ell y=z$.
+\end{lemma}
+\begin{proof}
+Since $a\ge2$, the integer $1$ is not a multiple of $a$, and two
+consecutive integers are never both multiples of $a$; so the coloring
+is golden. Let $(x,y,z)$ be a solution with entries in $[1,M]$. Then
+$z=a(x+\ell y)$ is a multiple of $a$ and $z\ge a(1+\ell)=s$, so $z$ has
+color~$1$. If $x$ and $y$ also had color~$1$, then $x,y\ge s$ and
+$z\ge a(s+\ell s)=s^2>M$, which is impossible.
+\end{proof}
+
+For $a=1$ every integer $t\ge s$ receives color~$1$, so the coloring is
+not golden; this is where the hypothesis $a\ge2$ enters.
+
+\section{The upper bound}\label{sec:upper}
+Fix $a,\ell\ge1$, put $s=a(\ell+1)$ and $b=a\ell$, and let $\Delta$ be a
+golden coloring of $[1,s^2]$ with no monochromatic solution of
+$ax+by=z$. We derive a contradiction, which proves that every golden
+coloring of $[1,s^2]$ contains a monochromatic solution. Two facts are
+used throughout. If $(x,y,z)$ is a solution in $[1,s^2]$ and
+$\Delta(x)=\Delta(y)$, then $\Delta(z)\ne\Delta(x)$; and if
+$\Delta(y)=\Delta(z)$, then $\Delta(x)\ne\Delta(y)$. Also, a number of
+color~$1$ has both neighbors in $[1,s^2]$ of color~$0$.
+
+Let $r$ be the integer with $1\le r\le\ell$ and $r\equiv a\pmod\ell$,
+that is, $r=((a-1)\bmod \ell)+1$. Then $r\le a$, so
+$r\le\min(a,\ell)$, and $s=a+b\equiv a\equiv r\pmod\ell$.
+
+\begin{lemma}[Descent]\label{lem:descent}
+$\Delta(s)=1$, and $\Delta(t)=1$ with $\ell<t\le s$ implies
+$\Delta(t-\ell)=1$. Consequently $\Delta(r)=1$, $r\ge2$ (so
+$\ell\ge2$), and $\Delta(r-1)=\Delta(r+1)=0$.
+\end{lemma}
+\begin{proof}
+The solution $(1,1,s)$ has $\Delta(1)=0$, so $\Delta(s)=1$. Let
+$\ell<t\le s$ with $\Delta(t)=1$. The solution $(t,t,st)$, with
+$st\le s^2$, gives $\Delta(st)=0$, and $\Delta(t+1)=0$ because the
+coloring is golden. Since
+\[
+a(t-\ell)+b(t+1)=at+bt=st,
+\]
+the solution $(t-\ell,t+1,st)$ has $\Delta(t+1)=\Delta(st)=0$, so
+$\Delta(t-\ell)=1$. Starting from $s$ and stepping down by $\ell$ while
+the current value exceeds $\ell$, we stay in the residue class of $s$
+modulo $\ell$ and stop at $r$; hence $\Delta(r)=1$. As $\Delta(1)=0$, we
+get $r\ge2$, and the golden condition gives $\Delta(r\pm1)=0$.
+\end{proof}
+
+In particular, for $\ell=1$ we have $r=1$, and Lemma~\ref{lem:descent}
+is already a contradiction. From now on $\ell\ge2$. Put
+\[
+T=b(r+1)=a\ell(r+1),\qquad K=a(\ell+1)^2,
+\]
+so that $aK=s^2$. Since $r\le\min(a,\ell)$,
+\begin{equation}\label{eq:range}
+T+\ell r=a\ell r+a\ell+\ell r\le a\ell^2+2a\ell<K,\qquad 3b\le T.
+\end{equation}
+
+\begin{lemma}[Shifts]\label{lem:shift}
+Let $1\le t$ and $t+\ell\le T$. Then $\Delta(t)=1$ if and only if
+$\Delta(t+\ell)=1$.
+\end{lemma}
+\begin{proof}
+Let $u\le T$ be a positive integer with $\Delta(u)=1$. The solution
+$(u,r,a(u+\ell r))$ has both inputs of color~$1$ by
+Lemma~\ref{lem:descent}, and its output is at most $a(T+\ell r)<aK=s^2$
+by~\eqref{eq:range}; so $\Delta(a(u+\ell r))=0$.
+
+If $\Delta(t)=1$, apply this with $u=t$. The identity
+$a(t+\ell)+b(r-1)=a(t+\ell r)$ gives the solution
+$(t+\ell,r-1,a(t+\ell r))$, whose last two entries have color~$0$ (the
+middle one by Lemma~\ref{lem:descent}, and $r-1\ge1$). Hence
+$\Delta(t+\ell)=1$.
+
+If $\Delta(t+\ell)=1$, apply it with $u=t+\ell$: the output
+$a(t+\ell+\ell r)=at+b(r+1)$ has color~$0$. The solution
+$(t,r+1,at+b(r+1))$ has its last two entries of color~$0$, so
+$\Delta(t)=1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Lemma~\ref{lem:lower}, no positive $M<s^2$ has the forcing
+property, so $\Rg(a,\ell a)\ge s^2$. For the upper bound, suppose
+$\Delta$ is as above, with $\ell\ge2$. The multiples
+$\ell,2\ell,\dots,T$ of $\ell$ all lie in $[1,T]$, so by
+Lemma~\ref{lem:shift} they all have the same color.
+
+If $\Delta(\ell)=0$, the solution $(\ell,1,2b)$ has
+$\Delta(\ell)=\Delta(1)=0$, so the multiple $2b=2a\ell\le T$ of $\ell$
+has color~$1$, a contradiction. If $\Delta(\ell)=1$, then $\Delta(T)=1$;
+but $a\ell+br=b(r+1)=T$, so $(\ell,r,T)$ is a solution with
+$\Delta(\ell)=\Delta(r)=1$ and therefore $\Delta(T)=0$, again a
+contradiction. Thus every golden coloring of $[1,s^2]$ contains a
+monochromatic solution, and $\Rg(a,\ell a)=s^2=a^2(\ell+1)^2$.
+\end{proof}
+
+\begin{remark}
+The upper-bound argument does not use $a\ge2$: for every $a,\ell\ge1$,
+each golden coloring of $[1,a^2(\ell+1)^2]$ contains a monochromatic
+solution of $ax+a\ell y=z$. For $a=1$ and $\ell\ge2$ this bound is not
+sharp, by Hopkins's Theorem~1.
+\end{remark}
+
+\section{Formal verification}
+The theorem is proved in Lean~4 \cite{Lean} with Mathlib
+\cite{Mathlib}, from the following definitions (the file
+\texttt{Hopkins/Definitions.lean}). A coloring is a function
+$c:\mathbb N\to\{\mathrm{false},\mathrm{true}\}$, with
+$\mathrm{true}$ playing the role of color~$1$; only its values on
+$[1,N]$ matter.
+\begin{Verbatim}
+def Valid (N : ℕ) (c : ℕ → Bool) : Prop :=
+  c 1 = false ∧ ∀ i : ℕ, 1 ≤ i → i + 1 ≤ N →
+    ¬ (c i = true ∧ c (i + 1) = true)
+
+def Mono (a b N : ℕ) (c : ℕ → Bool) : Prop :=
+  ∃ x y z : ℕ, 1 ≤ x ∧ x ≤ N ∧ 1 ≤ y ∧ y ≤ N ∧
+    1 ≤ z ∧ z ≤ N ∧ a * x + b * y = z ∧ c x = c y ∧ c y = c z
+
+def Forces (a b N : ℕ) : Prop :=
+  ∀ c : ℕ → Bool, Valid N c → Mono a b N c
+
+def ForcingSet (a b : ℕ) : Set ℕ := {N | 1 ≤ N ∧ Forces a b N}
+
+noncomputable def R0phi (a b : ℕ) : ℕ := sInf (ForcingSet a b)
+\end{Verbatim}
+Thus \texttt{Valid N c} says that $c$ restricts to a golden coloring of
+$[1,N]$, \texttt{Mono} asks for a monochromatic solution with all
+entries in $[1,N]$ (with $x=y$ allowed), and \texttt{R0phi a b} is the
+least positive $N$ with the forcing property, which is Hopkins's
+$\Rg(a,b)$. The main theorems are
+\begin{Verbatim}
+theorem Hopkins.formula_isLeast (a ell : ℕ) (ha : 2 ≤ a) (hell : 1 ≤ ell) :
+    IsLeast (ForcingSet a (a * ell)) (a ^ 2 * (ell + 1) ^ 2)
+theorem Hopkins.formula (a ell : ℕ) (ha : 2 ≤ a) (hell : 1 ≤ ell) :
+    R0phi a (a * ell) = a ^ 2 * (ell + 1) ^ 2
+\end{Verbatim}
+The first says that $a^2(\ell+1)^2$ has the forcing property and that no
+smaller positive integer does, which is Theorem~\ref{thm:main}; the
+second deduces the value of the infimum from it, so no convention about
+the infimum of an empty set is involved. The development also proves
+the two bounds separately: \texttt{Hopkins.upper} (forcing at
+$a^2(\ell+1)^2$ for all $a,\ell\ge1$) and \texttt{Hopkins.lower}
+(Lemma~\ref{lem:lower}, with the coloring \texttt{lowerColor}). As
+checks on the definitions, it proves Hopkins's values $\Rg(1,1)=4$ and
+$\Rg(1,2)=4$ from Hopkins's Theorem~1, the second showing the failure of the
+printed formula at $a=1$, $\ell=2$.
+
+The proof uses only Lean's standard logical axioms, with no added
+axioms and no compiled evaluation. The README in the \texttt{lean} folder
+accompanying this paper gives the versions, the commands that reproduce
+the check and its axiom report.
+
+\begin{thebibliography}{9}
+\bibitem{GuoSun}
+S.~Guo and Z.-W.~Sun, Determination of the two-color Rado number for
+$a_1x_1+\dots+a_mx_m=x_0$, \emph{J. Combin. Theory Ser. A} \textbf{115}
+(2008), 345--353. \url{https://doi.org/10.1016/j.jcta.2007.06.001}
+
+\bibitem{Hopkins}
+B.~Hopkins, Introducing shift-constrained Rado numbers,
+\emph{Integers} \textbf{21A} (2021), \#A16, published August 23, 2021.
+\url{https://math.colgate.edu/~integers/graham16/graham16.pdf}.
+Reprinted in \emph{Number Theory and Combinatorics: A Collection in
+Honor of the Mathematics of Ronald Graham}, De Gruyter, 2022.
+\url{https://doi.org/10.1515/9783110754216-016}
+
+\bibitem{HopkinsSchaal}
+B.~Hopkins and D.~Schaal, On Rado numbers for
+$\sum_{i=1}^{m-1}a_ix_i=x_m$, \emph{Adv. in Appl. Math.} \textbf{35}
+(2005), 433--441. \url{https://doi.org/10.1016/j.aam.2005.05.003}
+
+\bibitem{LR}
+B.~M.~Landman and A.~Robertson, \emph{Ramsey Theory on the Integers},
+2nd ed., American Mathematical Society, Providence, RI, 2014.
+
+\bibitem{Lean}
+L.~de Moura and S.~Ullrich, The Lean 4 theorem prover and programming
+language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in
+Comput. Sci. \textbf{12699}, Springer, 2021, 625--635.
+
+\bibitem{LindMarcus}
+D.~Lind and B.~Marcus, \emph{An Introduction to Symbolic Dynamics and
+Coding}, 2nd ed., Cambridge University Press, Cambridge, 2021.
+
+\bibitem{Mathlib}
+The mathlib Community, The Lean mathematical library, in
+\emph{Proceedings of the 9th ACM SIGPLAN International Conference on
+Certified Programs and Proofs (CPP 2020)}, ACM, 2020, 367--381.
+\end{thebibliography}
+\end{document}

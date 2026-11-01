@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## golden-rado v1 (November 1, 2026)
+
+- First version: a proof of Hopkins's 2021 conjecture that the golden Rado number of $ax + \ell ay = z$ is $a^2(\ell+1)^2$, for every $a \ge 2$ and $\ell \ge 1$. Lean checks the theorem from the definitions.
+
 ## maximal-matching-logconcavity v1 (November 1, 2026)
 
 - A graph on 76 vertices has maximal-matching counts that are not log-concave, answering the question of Došlić, Short and Zubac negatively. The paper gives the reduction and exact counts, with a standalone computation.

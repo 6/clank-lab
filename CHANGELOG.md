@@ -35,6 +35,7 @@ Zenodo records.
 - Classifies solvable spinning-switches puzzles for nontrivial finite groups and faithful finite actions: both groups must have orders that are powers of the same prime.
 - Includes a Lean proof and credits Kagey's sufficient condition and abelian classification.
 - Credits ndkrempel's December 7, 2025 report of the Theorem 26 failure and Kagey's acknowledgment the following day that Example 27 fails.
+- Zenodo: [10.5281/zenodo.23853844](https://doi.org/10.5281/zenodo.23853844)
 
 ## sts-broken-spectrum v1 (October 31, 2026)
 

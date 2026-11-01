@@ -1,0 +1,303 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={P. Graham},pdftitle={The queueing polynomial is convex}]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\title{The queueing polynomial is convex}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 31, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove that the hypergraph polynomial arising in redundancy scheduling is
+convex on the nonnegative orthant for every number of vertices, every
+positive edge size, and every nonnegative degree. This proves Conjecture~1
+of Brosch, Laurent and Steenkamp, posed in their work on job occupancy,
+which asks for convexity on the standard simplex for all parameters at
+least two. They proved convexity for edge size two and degree three;
+Polak's Theorem~1.1 extends the edge-size-two case through degree nine.
+Marshall and Olkin's classical exponential construction gives a moment
+representation that yields convexity directly. We apply this construction
+to the conjecture and give a finite proof checked in Lean. A vertex-deletion
+recurrence expresses the original ordered-tuple polynomial as an average
+of complete homogeneous symmetric polynomials at nonnegative linear forms.
+Their convexity follows from McLeod's classical inequality; we give a
+coefficientwise Hessian proof suited to formal verification. The
+representation and the full simplex statement are checked in Lean.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{Keywords:} convex polynomial, redundancy scheduling,
+complete homogeneous symmetric polynomial, formal proof.
+
+\section{Introduction}
+
+Let $[n]=\{1,\ldots,n\}$ and let $E=\binom{[n]}{L}$ be the set of
+all $L$-element subsets. An edge describes a set of servers to which a job
+may be assigned. For $n=L=2$, there is a single edge $e$, and the
+degree-$d$ polynomial below is $(x_e/2)^d$. In general, for $L\geq1$ define
+\begin{equation}\label{eq:f}
+ f_d(x)=\sum_{(e_1,\ldots,e_d)\in E^d}
+       \prod_{i=1}^d\frac{x_{e_i}}{|e_1\cup\cdots\cup e_i|},
+       \qquad x\in\R^E,\quad d\in\N.
+\end{equation}
+Tuples are ordered and may repeat edges. Every denominator includes the
+current edge and is positive. The empty product convention gives $f_0=1$.
+Write $\R_+^E=\{x:x_e\geq0\text{ for every }e\}$ and
+$\Delta_E=\{x\in\R_+^E:\sum_{e\in E}x_e=1\}$.
+
+\begin{theorem}\label{thm:main}
+For every $n,d\in\N$ and every integer $L\geq1$, the polynomial $f_d$
+is convex on $\R_+^E$. In particular, for all integers $n,L,d\geq2$,
+it is convex on $\Delta_E$.
+\end{theorem}
+
+The second assertion is exactly Conjecture~1 of Brosch, Laurent and
+Steenkamp \cite[Section~4, p.~2242]{BLS}. Their paper first appeared in
+2020. They prove convexity for $L=2,d=3$ in Section~4.2, Proposition~4.5
+and the paragraph preceding it; this gives their Theorem~1.2 on the
+minimizer. Their related polynomial \cite[equation~(1.2)]{BLS} is
+\[
+ p_d(x)=\sum_{(e_1,\ldots,e_d)\in E^d}
+          \frac{x_{e_1}\cdots x_{e_d}}{|e_1\cup\cdots\cup e_d|}
+          \qquad(d\geq2).
+\]
+Its convexity is established in the proof of Theorem~1.1, concluding
+after Corollary~3.8. Since $|e_1|=L$, we have $f_2=p_2/L$, which gives
+the degree-two case as noted after their Conjecture~1. Polak
+\cite[Theorem~1.1]{Polak} proves convexity for $L=2$ and $d\leq9$.
+Theorem~\ref{thm:main} removes both the edge-size and degree restrictions
+and enlarges the domain to the nonnegative orthant. If $L>n$, then $E$ is
+empty and $\Delta_E$ is empty, so the simplex assertion includes this
+degenerate case.
+
+The coefficients in \eqref{eq:f} belong to an established product-form
+queueing framework; see Gardner and Righter
+\cite[Theorem~3.3]{GR}. The moment representation from Marshall and
+Olkin's classical shared-exponential-minimum construction
+\cite[pp.~14--18, especially (4.2)--(4.6)]{MO} gives convexity directly;
+the remark after Lemma~\ref{lem:rep} states the identity and its precise
+relation to the finite average. Our contribution is its application to
+BLS Conjecture~1 with a self-contained finite proof checked in Lean. The convexity
+ingredient is also classical: McLeod's inequality
+\cite[Section~1, inequality~(iii)]{McLeod} makes $h_d^{1/d}$ subadditive,
+and hence convex by homogeneity; composing with the increasing convex
+power function gives convexity of $h_d$ on the orthant.
+The proof below supplies a direct finite argument for both ingredients,
+so that the Lean theorem starts with the literal sum \eqref{eq:f}.
+
+\section{A finite representation}
+
+The idea is to delete the vertices in a uniformly random order. At each
+stage, sum the coordinates of the edges still present and divide by the
+number of surviving vertices. The resulting list consists of nonnegative
+linear functions of $x$. We will show that $f_d$ is the average of the
+degree-$d$ complete homogeneous polynomial of these lists. Convexity then
+passes through linear substitution and finite averaging.
+
+For $S\subseteq[n]$, let $q_d(S;x)$ denote the sum in \eqref{eq:f}
+restricted to tuples whose edges all lie in $S$. All coordinates remain
+indexed by the original $E$. Define
+\[
+ r(S;x)=\sum_{\substack{e\in E\\e\subseteq S}}x_e,
+ \qquad a(S;x)=\frac{r(S;x)}{|S|}\quad(S\ne\varnothing).
+\]
+In particular, $q_d([n];x)=f_d(x)$, $q_0(S;x)=1$, and
+$q_d(\varnothing;x)=0$ for $d>0$.
+
+\begin{lemma}\label{lem:delete}
+For $L\geq1$, every $S\subseteq[n]$, every $d\geq1$, and every
+$x\in\R^E$,
+\begin{equation}\label{eq:delete}
+ |S|q_d(S;x)=r(S;x)q_{d-1}(S;x)
+                    +\sum_{v\in S}q_d(S\setminus\{v\};x).
+\end{equation}
+\end{lemma}
+\begin{proof}
+For a tuple $s=(e_1,\ldots,e_d)$ supported in $S$, let $U(s)$ be its
+union and $w(s)$ its summand in \eqref{eq:f}. The last denominator of
+$w(s)$ is $|U(s)|$. Canceling it and summing over the last edge gives
+\[
+ \sum_{s\in\binom{S}{L}^d}|U(s)|w(s)
+       =r(S;x)q_{d-1}(S;x).
+\]
+The tuple occurs in $q_d(S\setminus\{v\};x)$ precisely when $v\notin U(s)$,
+so its multiplicity in the deletion sum is $|S|-|U(s)|$.
+Adding these two identities proves \eqref{eq:delete}.
+The cancellation is valid because $d,L\geq1$; empty sums cause no exception.
+\end{proof}
+
+For a list $y=(y_1,\ldots,y_m)$, write
+\[
+ h_d(y)=\sum_{\substack{\alpha\in\N^m\\|\alpha|=d}}y^\alpha,
+ \qquad |\alpha|=\sum_i\alpha_i,\qquad
+ y^\alpha=\prod_i y_i^{\alpha_i}.
+\]
+Thus $h_2(u,v)=u^2+uv+v^2$. For the empty list, $h_0=1$ and
+$h_d=0$ for $d>0$. Separating the exponent of the first variable gives
+\begin{equation}\label{eq:hrec}
+ h_d(a,y)=\sum_{k=0}^d a^k h_{d-k}(y).
+\end{equation}
+
+Choose an ordering of the vertices of $S$ uniformly, and let
+$S_m=S,S_{m-1},\ldots,S_1$ be the successive nonempty surviving sets,
+where $m=|S|$. An expectation over such orderings below means a finite
+average, including the single empty ordering if $S=\varnothing$.
+
+\begin{lemma}\label{lem:rep}
+For $L\geq1$, every $S\subseteq[n]$ with $m=|S|$, every $d\in\N$,
+and every $x\in\R^E$,
+\begin{equation}\label{eq:rep}
+ q_d(S;x)=\mathbb E\,h_d\bigl(a(S_m;x),\ldots,a(S_1;x)\bigr).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Induct on $|S|$. The empty set follows from the conventions above.
+For nonempty $S$, put
+$b_j=|S|^{-1}\sum_{v\in S}q_j(S\setminus\{v\};x)$ and $a=a(S;x)$.
+Lemma~\ref{lem:delete} gives $q_j(S;x)=a q_{j-1}(S;x)+b_j$ for $j>0$,
+while $q_0(S;x)=b_0=1$. Iterating this scalar recurrence yields
+\[
+ q_d(S;x)=\frac1{|S|}\sum_{v\in S}\sum_{k=0}^d
+        a(S;x)^k q_{d-k}(S\setminus\{v\};x).
+\]
+Apply the induction hypothesis to each smaller set and use
+\eqref{eq:hrec}. Choosing the first deleted vertex uniformly and then
+a uniform ordering of the remaining vertices gives a uniform ordering
+of $S$, exactly as in \eqref{eq:rep}.
+\end{proof}
+
+\paragraph{Relation to the classical exponential construction.}
+Let $(T_v)_{v\in[n]}$ be independent exponential random variables of
+rate one, and put $Y_e=\min_{v\in e}T_v$. This is the shared-minimum
+construction in Marshall--Olkin \cite[p.~18; see also (4.2)--(4.6)]{MO},
+specialized to vertex shocks. For every $x\in\R^E$ and $d\in\N$ it gives
+\begin{equation}\label{eq:moment}
+ f_d(x)=\frac1{d!}\,\mathbb E\!\left[\left(\sum_{e\in E}x_eY_e\right)^d\right].
+\end{equation}
+Indeed, conditional on the order in which the vertices die, the successive
+waiting times $\Delta_k$ with $k$ vertices surviving are independent
+exponentials of rates $k$. Hence
+$\sum_e x_eY_e=\sum_{k=1}^n r(S_k;x)\Delta_k$.
+The multinomial expansion and $\mathbb E\Delta_k^j=j!/k^j$ show that its
+conditional $d$th moment divided by $d!$ equals
+$h_d(a(S_n;x),\ldots,a(S_1;x))$.
+The death order is uniform, so averaging gives \eqref{eq:moment} by
+Lemma~\ref{lem:rep}; the same argument on $S$ gives that lemma's formula.
+For $x\geq0$, each realization of $\sum_e x_eY_e$ is a nonnegative linear
+form, whose $d$th power is convex (constant when $d=0$).
+Thus the classical construction also proves the orthant convexity
+directly. The finite argument above and below avoids integration in Lean.
+
+\section{Convexity}
+
+Here is a direct proof of the classical convexity fact in the form used
+by the formalization. It avoids introducing probability measures or
+integrals into the argument.
+
+\begin{lemma}\label{lem:h}
+For every $m,d\in\N$, the function $h_d$ is convex on $\R_+^m$.
+\end{lemma}
+\begin{proof}
+Degrees zero and one are immediate. For $d\geq2$, fix a direction
+$z\in\R^m$. The coefficient of $y^\alpha$, $|\alpha|=d-2$, in the
+second directional derivative $D_z^2h_d(y)$ is
+\begin{align*}
+ &\sum_i(\alpha_i+2)(\alpha_i+1)z_i^2
+       +2\sum_{i<j}(\alpha_i+1)(\alpha_j+1)z_i z_j\\
+ &\hspace{1cm}=
+       \left(\sum_i(\alpha_i+1)z_i\right)^2
+          +\sum_i(\alpha_i+1)z_i^2\ \geq\ 0.
+\end{align*}
+All other coefficients vanish. Thus $D_z^2h_d(y)\geq0$ whenever $y\geq0$.
+On every line segment in the orthant, the polynomial consequently has
+nonnegative second derivative and satisfies the convexity inequality.
+This includes the boundary and the zero-dimensional orthant.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+For each fixed deletion ordering, the map
+$x\mapsto(a(S_n;x),\ldots,a(S_1;x))$ is linear and sends $\R_+^E$
+into $\R_+^n$. Lemma~\ref{lem:h} makes the corresponding summand of
+\eqref{eq:rep} convex on $\R_+^E$. A finite average with nonnegative
+weights is convex, so Lemma~\ref{lem:rep} with $S=[n]$ proves the orthant
+assertion. The simplex is a convex subset of that orthant; restriction
+gives the second assertion.
+\end{proof}
+
+\section{Formal verification}
+
+The Lean theorem \texttt{BLSFinal.source\_orthant} states, with natural
+parameters $n,L,d$ and the hypothesis $1\leq L$,
+\[
+ \operatorname{ConvexOn}\ \R\
+ \{x:\texttt{Edge}\ n\ L\to\R\mid\forall e,\ 0\leq x(e)\}\
+ (\texttt{sourcePolynomial}\ n\ L\ d).
+\]
+The theorem \texttt{BLSFinal.fullEndpoint} states, for every $n,L,d\in\N$,
+that $2\leq n$, $2\leq L$, and $2\leq d$ imply
+\[
+ \operatorname{ConvexOn}\ \R\
+ (\texttt{stdSimplex}\ \R\ (\texttt{Edge}\ n\ L))\
+ (\texttt{sourcePolynomial}\ n\ L\ d).
+\]
+Here \texttt{Edge} consists of all $L$-element subsets of \texttt{Fin n};
+this replaces the vertex labels $1,\ldots,n$ by $0,\ldots,n-1$.
+The definition \texttt{sourcePolynomial} is exactly \eqref{eq:f}, with
+\texttt{Fin d}-indexed ordered tuples and inclusive prefix unions.
+Mathlib's \texttt{stdSimplex} imposes coordinate nonnegativity and sum one,
+and \texttt{ConvexOn} is the usual two-point convexity inequality on a
+convex domain. No representation or convexity hypothesis remains in
+either exported theorem.
+
+The kernel checks the deletion recurrence, finite representation, Hessian
+argument, and both endpoint theorems. Their axiom dependencies are
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+Statement checks and small examples are part of the default Lake build:
+degree zero, the two-variable quadratic $h_2$, repeated-edge prefixes,
+and $n=2,L=3$ with empty simplex. The acceptance check was same-family:
+its AI model family had also contributed to the proof.
+
+The accompanying standalone Lean project pins the compiler and Mathlib.
+Fetching the Mathlib cache and invoking the standard Lake build reproduces
+the checks; the exact commands and requirements are in the accompanying
+README. The comparison to the published conjecture and the historical
+attributions are mathematical reading, rather than kernel assertions.
+
+\begin{thebibliography}{9}
+\bibitem{BLS} D. Brosch, M. Laurent and A. Steenkamp,
+Optimizing hypergraph-based polynomials modeling job-occupancy in queuing
+with redundancy scheduling, \emph{SIAM J. Optim.} \textbf{31} (2021),
+2227--2254. Published version.
+\href{https://doi.org/10.1137/20M1369592}{doi:10.1137/20M1369592}.
+\bibitem{Polak} S. C. Polak,
+Symmetry reduction to optimize a graph-based polynomial from queueing
+theory, \emph{SIAM J. Appl. Algebra Geom.} \textbf{6} (2022), 243--266.
+\href{https://doi.org/10.1137/21M1413298}{doi:10.1137/21M1413298};
+Theorem~1.1 also in \href{https://arxiv.org/abs/2104.08264v2}{arXiv:2104.08264v2}.
+\bibitem{GR} K. Gardner and R. Righter,
+Product forms for FCFS queueing models with arbitrary server-job
+compatibilities: an overview, \emph{Queueing Systems} \textbf{96}
+(2020), 3--51.
+\href{https://doi.org/10.1007/s11134-020-09668-6}{doi:10.1007/s11134-020-09668-6};
+Theorem~3.3 in \href{https://arxiv.org/abs/2006.05979v1}{arXiv:2006.05979v1}.
+\bibitem{MO} A. W. Marshall and I. Olkin,
+A multivariate exponential distribution, \emph{J. Amer. Statist. Assoc.}
+\textbf{62} (1967), 30--44.
+\href{https://doi.org/10.1080/01621459.1967.10482885}{doi:10.1080/01621459.1967.10482885}.
+Page and equation references are to the
+\href{https://purl.stanford.edu/kb905zm7154}{Stanford technical report, 1966}.
+\bibitem{McLeod} J. B. McLeod,
+On four inequalities in symmetric functions,
+\emph{Proc. Edinburgh Math. Soc.} \textbf{11} (1959), 211--219.
+\href{https://doi.org/10.1017/S0013091500021921}{doi:10.1017/S0013091500021921}.
+\end{thebibliography}
+\end{document}

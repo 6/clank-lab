@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## queueing-polynomial-convexity v1 (November 1, 2026)
+
+- Proves Brosch, Laurent and Steenkamp's Conjecture 1 for all numbers of servers, edge sizes and degrees at least two, with a stronger theorem on the nonnegative orthant. Includes the paper and a standalone Lean proof.
+
 ## ft23-pqd-pmi v1 (November 1, 2026)
 
 - An explicit Archimedean copula is positively quadrant dependent but not positive measure inducing, disproving the forward implication of Fuchs and Tschimpke's Conjecture 1.

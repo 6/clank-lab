@@ -1,0 +1,44 @@
+name: Pentagon tetrad checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/pentagon-tetrads/**'
+      - '.github/workflows/pentagon-tetrads.yml'
+  pull_request:
+    paths:
+      - 'results/pentagon-tetrads/**'
+      - '.github/workflows/pentagon-tetrads.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pentagon-tetrads-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Check pentagon-tetrads
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/pentagon-tetrads
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Install requirements
+        run: python3 -m pip install -r checks/requirements.txt
+
+      - name: Check the maps, the cover, every certificate and a corrupted one
+        run: python3 checks/check.py

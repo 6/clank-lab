@@ -1,0 +1,308 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,columns=fullflexible,keepspaces=true,
+  literate={Ω}{{$\Omega$}}1 {∃}{{$\exists$}}1 {→}{{$\to$}}1
+  {↔}{{$\leftrightarrow$}}1 {ℕ}{{$\mathbb N$}}1 {∧}{{$\land$}}1}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+  pdftitle={A classification of solvable spinning-switches puzzles},pdfauthor={P. Graham}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\K}{G^{\Omega}}
+\newcommand{\al}{\alpha}
+\title{A classification of solvable spinning-switches puzzles}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{October 31, 2026}
+\pagestyle{plain}
+\begin{document}
+\maketitle
+\begin{abstract}
+Spinning-switches puzzles ask for a predetermined sequence of moves that
+works despite hidden permutations of the switches. Kagey formulated the
+problem using a finite group of switch states and a permutation group of
+positions, proved solvability when both groups are $p$-groups for one
+prime $p$, and classified the case of abelian switch groups. We prove the
+converse without an abelian hypothesis: for nontrivial finite groups $G$
+and $H$, with $H$ acting faithfully on a finite set $\Omega$, a surjective
+strategy for $G\wr_\Omega H$ exists exactly when $G$ and $H$ are $p$-groups
+for the same prime. This answers Kagey's Open Question 31. The necessity
+proof restricts the adversary to a prime-order element and tracks excluded
+configurations by cosets of prime-power subgroups. We also give a central-series
+proof of the known sufficient condition. The classification and its
+consequences for $S_3\wr C_2$ and $A_4\wr C_3$ are formalized in Lean.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textbf{MSC 2020:} 20D15, 05E18.\quad
+\textbf{Keywords:} spinning switches, wreath products, finite groups.
+
+\section{Introduction}
+A player changes hidden switches while an adversary permutes their positions.
+The player must choose the moves in advance. Kagey's model~\cite{Kagey}
+assigns a group $G$ to each switch and lets a group $H$ act on the set of
+positions $\Omega$. Write $K=\K$ for the configuration group, with
+pointwise multiplication, and put
+\[
+  (\al_hx)(\omega)=x(h^{-1}\omega),\qquad
+  W=K\rtimes_\al H,\qquad
+  (x,h)(y,a)=(x\al_h(y),ha).
+\]
+A move is an arbitrary element of $K$; in particular, it may change several
+switches at once. For fixed moves $k_1,\ldots,k_N$ and adversary choices
+$h_1,\ldots,h_N$, put $P_0=1$ and
+$P_j=(k_1,h_1)\cdots(k_j,h_j)$. Write $P_j=(b_j,a_j)$.
+Following Definition 9 of~\cite[arXiv v1]{Kagey}, the moves form a
+\emph{surjective strategy} if, for every adversary sequence,
+$\{b_j:0\leq j\leq N\}=K$. Equivalently, from every initial configuration
+$x_0$, some $x_0b_j$ equals $1$. No observation of the spins is available.
+
+\begin{theorem}\label{thm:main}
+Let $G$ and $H$ be nontrivial finite groups, and let $H$ act faithfully on
+a finite set $\Omega$. There is a surjective strategy for $G\wr_\Omega H$
+if and only if there is a prime $p$ for which both $G$ and $H$ are $p$-groups.
+\end{theorem}
+
+The action need not be transitive. A $p$-group here means a finite group
+whose order is a power of $p$. The nontriviality assumptions matter:
+trivial switches need no moves, and a trivial adversary permits a tour of
+any finite configuration group. If $N$ is the kernel of the action, each
+$b_j$ depends only on the images of the $h_i$ in $H/N$, so
+$G\wr_\Omega H$ has a surjective strategy if and only if
+$G\wr_\Omega(H/N)$ does. Hence in general a surjective strategy exists
+if and only if $G=1$, or $H$ acts trivially, or $G$ and $H/N$ are
+$p$-groups for one prime $p$.
+
+All statement numbers below refer to arXiv:2210.09408v1, posted
+October 17, 2022, of Kagey's 2023 paper~\cite{Kagey}.
+Theorem 22 gives the sufficient condition in Theorem~\ref{thm:main}.
+Theorem 23 gives the equivalence when $G$ is abelian.
+Open Question 31 asks for the finite wreath products admitting a
+surjective strategy. Our contribution is necessity for arbitrary finite
+switch groups, including nonabelian groups; Section~\ref{sec:suff}
+reproves the known sufficiency for a complete formal proof.
+Earlier rotating-table and blind-bartender puzzles were studied by
+Bar Yehuda, Etzion and Moran~\cite{BYEM} and Ehrenborg and
+Skinner~\cite{ES}; Rabinovich's linear-action criterion~\cite{Rabinovich},
+stated as Theorem 13 of~\cite[arXiv v1]{Kagey}, says that a faithful
+linear action on a finite-field vector space of characteristic $p$
+admits a strategy exactly when the acting group is a $p$-group.
+That linear setting does not cover nonabelian switch groups; our coset
+invariant supplies necessity in this case.
+
+Theorem 26 of that version asserts solvability for $G\wr C_2$ when $G$
+is generated by involutions. This assertion was already corrected:
+ndkrempel reported on MathOverflow on December 7, 2025 that Theorem 26
+fails, and Kagey acknowledged the error there on December 8, 2025,
+noting that Example 27 fails~\cite{MO}.
+The classification, not that correction, is the claim of this paper.
+For example, it implies that $S_3\wr C_2$, with $C_2$ interchanging two
+positions, is unsolvable, refuting Conjecture 32 (already implicit in
+the Theorem 26 correction). It refutes Conjecture 33 for every $n\geq4$:
+$A_n\wr C_3$ on three cyclically permuted positions is unsolvable
+because $|A_n|$ is even; the $n=3$ case holds by Theorem 22.
+For a nontrivial $p$-group $H$ acting faithfully, it settles Conjecture 34
+exactly: a strategy exists precisely when $G$ is a $p$-group; the trivial
+adversary case is always solvable, as above. The formalized negative
+instances are $S_3\wr C_2$ and $A_4\wr C_3$, with group orders $6,2$
+and $12,3$, respectively.
+
+\section{The prime-order obstruction}
+Fix a prime $q$, an element $h\in H$ of order $q$, and a position $\omega$
+that $h$ moves. Its orbit $O$ has $q$ elements. Restrict the adversary to
+$\langle h\rangle$. For $k\in K$ and $E\subseteq K$, define
+\begin{equation}\label{eq:step}
+ T_k(E)=\{1\}\cup
+ \{y\in K:(a\mapsto y(h^na))k^{-1}\in E\text{ for every }n\geq0\}.
+\end{equation}
+For a move sequence, set $E_0=\{1\}$ and $E_i=T_{k_i}(E_{i-1})$.
+These are configurations excluded from surviving play, expressed in the
+adversary's moving coordinates.
+
+\begin{lemma}\label{lem:back}
+If $E_N\neq K$, the moves $k_1,\ldots,k_N$ are not a surjective strategy.
+\end{lemma}
+\begin{proof}
+Choose $z_N\notin E_N$. Recursively,~\eqref{eq:step} gives $n_i$ such that
+$z_{i-1}=(a\mapsto z_i(h^{n_i}a))k_i^{-1}\notin E_{i-1}$.
+Every $z_i$ is nonidentity. Set $h_i=h^{-n_i}$ and $x_0=z_0$.
+The multiplication in $W$ gives, inductively,
+\begin{equation}\label{eq:moving}
+\begin{aligned}
+ x_0b_i &= x_0b_{i-1}\al_{a_{i-1}}(k_i)
+          = \al_{a_{i-1}}(z_{i-1}k_i),\\
+ \al_{a_i^{-1}}(x_0b_i)
+        &= \al_{h_i^{-1}}(z_{i-1}k_i)=z_i,
+\end{aligned}
+\end{equation}
+since $a_i=a_{i-1}h_i$. Thus $x_0b_i\neq1$ for every prefix,
+so the base projections miss $x_0^{-1}$.
+\end{proof}
+
+Say that $y\in K$ is \emph{$P$-aligned on $O$}, for a subgroup $P\leq G$,
+if $y(a)^{-1}y(b)\in P$ for all $a,b\in O$. This means its values on $O$
+lie in one left coset of $P$.
+
+\begin{lemma}\label{lem:coset}
+If every member of $E$ is $P$-aligned on $O$ for a $q$-subgroup $P\leq G$,
+then there is a $q$-subgroup $P'\leq G$ such that every member of
+$T_k(E)$ is $P'$-aligned on $O$.
+\end{lemma}
+\begin{proof}
+For $y\in T_k(E)$ with $y\neq1$, rotate any $t\in O$ to any $a\in O$
+in~\eqref{eq:step} and apply alignment at $t,ht$. This gives
+\begin{equation}\label{eq:diff}
+ k(t)\bigl(y(a)^{-1}y(ha)\bigr)k(ht)^{-1}\in P
+ \qquad(a,t\in O).
+\end{equation}
+Put
+\[
+ R=\bigcap_{t\in O}k(t)^{-1}Pk(t),\qquad
+ C=\bigcap_{t\in O}k(t)^{-1}Pk(ht).
+\]
+If $T_k(E)=\{1\}$, take $P'=1$. Otherwise~\eqref{eq:diff} supplies
+$c\in C$. We have $C=Rc$: indeed, $d\in C$ exactly when
+$d c^{-1}\in R$. Also $c$ normalizes $R$. To see this, write
+$v_t=k(t)c k(ht)^{-1}\in P$; for $r\in R$,
+\[
+ k(t)c r c^{-1}k(t)^{-1}
+   =v_t\bigl(k(ht)r k(ht)^{-1}\bigr)v_t^{-1}\in P.
+\]
+This proves $cRc^{-1}\subseteq R$, hence equality by finiteness.
+Multiplying $v_t v_{ht}\cdots v_{h^{q-1}t}$ shows
+$k(t)c^q k(t)^{-1}\in P$, so $c^q\in R$.
+
+The subgroup $R$ is a $q$-group, being contained in a conjugate of $P$.
+Consequently $P'=\langle R,c\rangle=R\langle c\rangle$ is a $q$-group:
+$R$ is normal in $P'$ and $P'/R$ is cyclic of order dividing $q$.
+Equation~\eqref{eq:diff} puts every consecutive difference
+$y(a)^{-1}y(ha)$ in $C\subseteq P'$. Multiplying consecutive differences
+around $O$ gives $y(a)^{-1}y(b)\in P'$ for all $a,b\in O$.
+The identity configuration satisfies the same conclusion.
+\end{proof}
+
+\begin{proof}[Necessity in Theorem~\ref{thm:main}]
+Suppose a surjective strategy exists. For any prime $q$ dividing $|H|$,
+Cauchy's theorem supplies an element $h$ of order $q$; faithfulness supplies
+a position it moves. Starting with the trivial subgroup and $E_0=\{1\}$,
+Lemma~\ref{lem:coset} gives a $q$-subgroup $P_N$ such that all of $E_N$
+is $P_N$-aligned on $O$. Lemma~\ref{lem:back} forces $E_N=K$.
+For each $g\in G$, choose a configuration with value $1$ at $\omega$ and
+$g$ at $h\omega$. Alignment forces $g\in P_N$. Thus $G=P_N$ is a
+$q$-group.
+
+Choose a prime $p\mid |H|$, possible since $H\neq1$. Then $G$ is a
+$p$-group. Because $G\neq1$, it cannot also be a $q$-group for a different
+prime $q$. Every prime divisor of $|H|$ is therefore $p$, and $H$ is a
+$p$-group as well.
+\end{proof}
+
+\section{Sufficiency and the formal theorem}\label{sec:suff}
+Here is a self-contained proof of Kagey's sufficient condition. For the
+full adversary, replace~\eqref{eq:step} by
+\[
+ T^H_k(E)=\{1\}\cup\{y:\al_a(y)k^{-1}\in E\text{ for all }a\in H\}.
+\]
+Let $E^H(s)$ be the result of applying these operations to $\{1\}$ along
+a sequence $s$. If a play from $x_0$ never reaches $1$, its moving
+configuration $z_j=\al_{a_j^{-1}}(x_0b_j)$ stays outside the corresponding
+excluded set: using~\eqref{eq:moving} with $a=h_j$ in the universal
+condition gives $\al_{h_j}(z_j)k_j^{-1}=z_{j-1}$, so induction excludes
+$z_j$ from $T^H_{k_j}(E^H(k_1,\ldots,k_{j-1}))$.
+Hence $E^H(s)=K$ implies that $s$ is surjective.
+
+\begin{lemma}\label{lem:extension}
+Let $M\lhd K$ be $H$-invariant. Suppose a sequence $s$ of moves in $M$
+satisfies $M\subseteq E^H(s)$. If $u\in K\setminus M$ commutes modulo $M$
+with every element of $W$, the same assertion holds for the strictly
+larger normal, $H$-invariant subgroup $L=M\langle u\rangle$.
+\end{lemma}
+\begin{proof}
+The commutator hypothesis makes $L$ normal in $K$ and $H$-invariant,
+and makes $H$ fix each coset $Mu^j$. Form a sequence consisting of $r$
+copies of $s$ separated by the move $u^{-1}$, where $r$ is the order of $u$.
+After $i+1$ copies, the excluded set contains
+$M\cup Mu^{-1}\cup\cdots\cup Mu^{-i}$. This follows by induction.
+The separating move sends each guaranteed coset $Mu^{-j}$ to
+$Mu^{-(j+1)}$ in the recurrence. Each subsequent move in $s$ preserves
+these shifted cosets, because they are $H$-invariant and closed under
+right multiplication by $M$. Meanwhile the block $s$ restores $M$:
+every excluded set contains $1$, and the recurrence is monotone in $E$.
+After $r$ copies all of $L$ is excluded. All moves used lie in $L$.
+\end{proof}
+
+\begin{proof}[Sufficiency in Theorem~\ref{thm:main}]
+If $G$ and $H$ are $p$-groups, then $W$ is a finite $p$-group and so is
+nilpotent. Begin with $M=1$ and the empty sequence. For $M\neq K$, let
+$Z_i(W)$ be the upper central series, and choose the least $i$ with
+$K\cap Z_i(W)\nsubseteq M$. Choose $u$ in this difference. Its commutators
+with $W$ lie in $K\cap Z_{i-1}(W)\subseteq M$.
+Lemma~\ref{lem:extension} enlarges $M$ while preserving the sequence
+property. Finiteness makes this process reach $M=K$, giving a sequence
+with $E^H(s)=K$, hence a surjective strategy.
+\end{proof}
+
+The accompanying Lean project proves the full statement, in namespace
+\texttt{SpinningSwitches}, with the following parameters and type:
+\begin{lstlisting}
+variable {G H Ω : Type*} [Group G] [Group H] [MulAction H Ω]
+theorem classification [Finite G] [Finite H] [Finite Ω]
+    [FaithfulSMul H Ω] [Nontrivial G] [Nontrivial H] :
+    (∃ ks : List (Ω → G), IsSurjectiveStrategy H ks) ↔
+      ∃ p : ℕ, p.Prime ∧ IsPGroup p G ∧ IsPGroup p H
+\end{lstlisting}
+Here \texttt{IsSurjectiveStrategy} quantifies over every equally long list
+of adversary moves and every base configuration, requiring a prefix
+index from zero through the list length whose base projection equals
+that configuration. It is exactly the definition in Section 1.
+For finite groups, Mathlib's \texttt{IsPGroup} is equivalent to having
+prime-power order. The development also checks the two unsolvable
+examples stated above. It does not assert an optimal strategy length.
+
+To reproduce the check, install elan, Git, and a C compiler, enter
+\texttt{lean/} in the accompanying bundle, and run
+\texttt{lake exe cache get}, then \texttt{lake build}.
+The project pins Lean 4.34.0 and its Mathlib dependencies. The build checks
+the proof, its statement type, small examples, and axiom guards.
+The theorem uses only Lean's standard axioms \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound}; no compiled evaluation
+is used. This relies on Lean's kernel and the stated formal definitions.
+The formalization uses Mathlib's finite-group and nilpotency
+libraries~\cite{Mathlib}. A cached build takes several minutes.
+
+\begin{thebibliography}{9}
+\bibitem{Kagey}
+P. Kagey, \emph{Spinning switches on a wreath product},
+Journal of Combinatorial Theory, Series A \textbf{200} (2023), 105795.
+\href{https://doi.org/10.1016/j.jcta.2023.105795}{doi:10.1016/j.jcta.2023.105795}.
+Statement numbers refer to
+\href{https://arxiv.org/abs/2210.09408v1}{arXiv:2210.09408v1}, October 17, 2022.
+\bibitem{MO}
+ndkrempel and P. Kagey, comments of December 7 and December 8, 2025,
+on Kagey's answer to \emph{Game on groups (generalization of spinning switches puzzle)},
+MathOverflow, \url{https://mathoverflow.net/a/423643}.
+\bibitem{BYEM}
+R. Bar Yehuda, T. Etzion and S. Moran,
+\emph{Rotating-table games and derivatives of words},
+Theoretical Computer Science \textbf{108} (1993), 311--329.
+\href{https://doi.org/10.1016/0304-3975(93)90196-Z}{doi:10.1016/0304-3975(93)90196-Z}.
+\bibitem{ES}
+R. Ehrenborg and C. M. Skinner, \emph{The blind bartender's problem},
+Journal of Combinatorial Theory, Series A \textbf{70} (1995), 249--266.
+\href{https://doi.org/10.1016/0097-3165(95)90092-6}{doi:10.1016/0097-3165(95)90092-6}.
+\bibitem{Rabinovich}
+Y. Rabinovich, \emph{A generalization of the Blind Rotating Table game},
+Information Processing Letters \textbf{176} (2022), 106233.
+\href{https://doi.org/10.1016/j.ipl.2021.106233}{doi:10.1016/j.ipl.2021.106233}.
+\bibitem{Mathlib}
+The mathlib Community, \emph{The Lean mathematical library},
+Proceedings of CPP 2020, 367--381.
+\href{https://doi.org/10.1145/3372885.3373824}{doi:10.1145/3372885.3373824}.
+\end{thebibliography}
+\end{document}

@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## spinning-switches v1 (October 31, 2026)
+
+- Classifies solvable spinning-switches puzzles for nontrivial finite groups and faithful finite actions: both groups must have orders that are powers of the same prime.
+- Includes a Lean proof and credits Kagey's sufficient condition and abelian classification.
+- Credits ndkrempel's December 7, 2025 report of the Theorem 26 failure and Kagey's acknowledgment the following day that Example 27 fails.
+
 ## sts-broken-spectrum v1 (October 31, 2026)
 
 - A Steiner triple system of order 39 has bicolorings with exactly three and exactly five colors but none with exactly four, disproving Gionfriddo's 2003 conjecture that the feasible set of every bicolorable Steiner triple system has no gaps. The class sizes come from the tables of Colbourn, Dinitz and Rosa.

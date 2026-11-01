@@ -1,0 +1,69 @@
+name: Spinning-switches checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/spinning-switches/**'
+      - '.github/workflows/spinning-switches.yml'
+  pull_request:
+    paths:
+      - 'results/spinning-switches/**'
+      - '.github/workflows/spinning-switches.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spinning-switches-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/spinning-switches/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean through elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore proof build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/spinning-switches/lean/.lake/build
+          key: spinning-switches-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/spinning-switches/lean/lean-toolchain', 'results/spinning-switches/lean/lake-manifest.json', 'results/spinning-switches/lean/lakefile.toml', 'results/spinning-switches/lean/**/*.lean', '!results/spinning-switches/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof, statement checks, and axiom guards
+        run: lake build
+
+  check:
+    name: Check spinning-switches
+    needs: [lean]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful proof build
+        env:
+          LEAN_RESULT: ${{ needs.lean.result }}
+        run: test "$LEAN_RESULT" = success

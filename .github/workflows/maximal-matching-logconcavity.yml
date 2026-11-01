@@ -1,0 +1,27 @@
+name: Maximal matching log-concavity checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/maximal-matching-logconcavity/**'
+      - '.github/workflows/maximal-matching-logconcavity.yml'
+  pull_request:
+    paths:
+      - 'results/maximal-matching-logconcavity/**'
+      - '.github/workflows/maximal-matching-logconcavity.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check maximal-matching-logconcavity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Check graph and maximal matching counts
+        working-directory: results/maximal-matching-logconcavity
+        run: python3 -I checks/verify.py

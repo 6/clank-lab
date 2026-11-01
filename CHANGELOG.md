@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## pentagon-tetrads v1 (November 1, 2026)
+
+- No four congruent simple pentagons, convex or not and mirror images allowed, form a tetrad without a hole, proving Walter Trump's 2020 conjecture. Triangles and quadrilaterals cannot either, so six is the least number of sides for a holeless tetrad of congruent polygons. The proof is computer-assisted, with exact certificates checked by a separately written verifier.
+
 ## spinning-switches v1 (October 31, 2026)
 
 - Classifies solvable spinning-switches puzzles for nontrivial finite groups and faithful finite actions: both groups must have orders that are powers of the same prime.

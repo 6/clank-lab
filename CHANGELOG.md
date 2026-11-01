@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ft23-pqd-pmi v1 (November 1, 2026)
+
+- An explicit Archimedean copula is positively quadrant dependent but not positive measure inducing, disproving the forward implication of Fuchs and Tschimpke's Conjecture 1.
+- Includes the paper and a complete Lean proof from the definitions.
+
 ## golden-rado v1 (November 1, 2026)
 
 - First version: a proof of Hopkins's 2021 conjecture that the golden Rado number of $ax + \ell ay = z$ is $a^2(\ell+1)^2$, for every $a \ge 2$ and $\ell \ge 1$. Lean checks the theorem from the definitions.

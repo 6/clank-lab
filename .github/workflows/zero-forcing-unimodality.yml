@@ -1,0 +1,28 @@
+name: Zero-forcing unimodality checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/zero-forcing-unimodality/**'
+      - '.github/workflows/zero-forcing-unimodality.yml'
+  pull_request:
+    paths:
+      - 'results/zero-forcing-unimodality/**'
+      - '.github/workflows/zero-forcing-unimodality.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check zero-forcing-unimodality
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Check the graph, polynomial and coverage
+        working-directory: results/zero-forcing-unimodality
+        run: python3 -I checks/check.py

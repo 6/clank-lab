@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## zero-forcing-unimodality v1 (November 1, 2026)
+
+- A 73-vertex graph has a nonunimodal zero-forcing polynomial, answering the question of Boyer and coauthors with Wang's compression method.
+- The result is new as far as we could check; the paper and README name seven related sources read only in part and say why none answers the question. The explicit graph and independent exact checkers are included.
+
 ## base-r-ehrhart v1 (November 1, 2026)
 
 - The base-14 five-dimensional simplex of Solus's family has Ehrhart polynomial $1-\tfrac{268}{15}t+\tfrac{3955}{12}t^2+\tfrac{5833}{2}t^3+\tfrac{10343}{12}t^4+\tfrac{67228}{15}t^5$, whose linear coefficient is negative. This disproves Solus's conjecture, stated by Liu and by Liu and Solus, that every base-r simplex is Ehrhart positive.

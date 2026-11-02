@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## base-r-ehrhart v1 (November 1, 2026)
+
+- The base-14 five-dimensional simplex of Solus's family has Ehrhart polynomial $1-\tfrac{268}{15}t+\tfrac{3955}{12}t^2+\tfrac{5833}{2}t^3+\tfrac{10343}{12}t^4+\tfrac{67228}{15}t^5$, whose linear coefficient is negative. This disproves Solus's conjecture, stated by Liu and by Liu and Solus, that every base-r simplex is Ehrhart positive.
+- Includes the complete Lean proof, checked from the definition of the convex hull, with pinned dependencies.
+
 ## acyclic-root-extrema v1 (November 1, 2026)
 
 - A twelve-vertex graph answers both parts of Barton, Brown and Pike's Question 2.17 negatively: its acyclic polynomial has a real root below every real root of their proposed graph and of greater modulus than every complex root of that graph.

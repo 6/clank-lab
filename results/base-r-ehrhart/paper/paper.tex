@@ -1,0 +1,225 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{newunicodechar}
+\newunicodechar{∀}{\ensuremath{\forall}}
+\newunicodechar{ℕ}{\ensuremath{\mathbb{N}}}
+\newunicodechar{ℚ}{\ensuremath{\mathbb{Q}}}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={P. Graham},pdftitle={A base-r simplex that is not Ehrhart positive}]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\conv}{\operatorname{conv}}
+\title{A base-$r$ simplex that is not Ehrhart positive}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 1, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For integers $r\ge2$ and $d\ge1$, Solus's base-$r$ $d$-simplex is the convex hull of the standard basis vectors of $\RR^d$ and the point $-(r-1)(1,r,\dots,r^{d-1})$. Solus introduced these simplices through numeral systems, proved that their $h^*$-polynomials are real-rooted, and observed that computations suggest they are also Ehrhart positive. Fu Liu recorded this as Solus's conjecture that every base-$r$ $d$-simplex is Ehrhart positive, and Liu and Solus restated it for all $r\ge2$ and $d\ge1$. We show that the conjecture fails: the base-$14$ $5$-simplex has Ehrhart polynomial
+\[
+1-\tfrac{268}{15}t+\tfrac{3955}{12}t^2+\tfrac{5833}{2}t^3+\tfrac{10343}{12}t^4+\tfrac{67228}{15}t^5,
+\]
+whose linear coefficient is negative. The proof is an explicit bijection between the lattice points of each dilate and pairs consisting of a residue modulo $14^5$ and a vector of nonnegative integers, which reduces the count to the distribution of one integer-valued height function over the $537{,}824$ residues. Lean checks the whole statement from the definition of the convex hull, including the finite height distribution, by kernel evaluation.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textbf{MSC 2020:} 52B20, 05A15.\quad\textbf{Keywords:} Ehrhart polynomial, Ehrhart positivity, lattice simplex, numeral system.
+
+\section{Introduction}
+For a lattice polytope $P\subset\RR^d$ and an integer $t\ge0$, let $i(P,t)=|tP\cap\ZZ^d|$ count the lattice points in the $t$-th dilate. Ehrhart's theorem says that $i(P,t)$ agrees with a polynomial of degree $\dim P$ in $t$, the Ehrhart polynomial of $P$; its leading coefficient, its second coefficient and its constant term are always positive, but the remaining coefficients can be negative~\cite[Theorem~1.1 and the discussion after it]{Liu}. A polytope is \emph{Ehrhart positive} if all coefficients of its Ehrhart polynomial are positive. Liu's survey~\cite{Liu} collects the families known or conjectured to have this property.
+
+For $q=(q_1,\dots,q_d)$ a vector of positive integers, write
+\[
+\Delta_{(1,q)}=\conv\Bigl(e_1,\dots,e_d,\ -\sum_{i=1}^d q_ie_i\Bigr)\subset\RR^d .
+\]
+For integers $r\ge2$ and $d\ge1$, Solus~\cite[Section~4]{Solus} defined the \emph{base-$r$ $d$-simplex} $B_{(r,d)}=\Delta_{(1,q)}$ with $q=\bigl(r-1,(r-1)r,\dots,(r-1)r^{d-1}\bigr)$. For example, $B_{(2,2)}$ is the triangle with vertices $(1,0)$, $(0,1)$ and $(-1,-2)$. Solus proved that the $h^*$-polynomial of $B_{(r,d)}$ is real-rooted and unimodal~\cite[Section~4.2]{Solus}, and closed with the observation that ``computations suggest that the simplices $B_{(r,n)}$ are also Ehrhart positive''~\cite[Section~5]{Solus}. Liu's survey states this as
+\begin{quote}
+Conjecture 5.1.1 (Solus). The base-$r$ $d$-simplex is Ehrhart positive.~\cite[Section~5.1.1]{Liu}
+\end{quote}
+and Liu and Solus restate it as their Conjecture~2.2: ``For $r\ge2$ and $d\ge1$, the base-$r$ $d$-simplex is Ehrhart positive''~\cite[Section~2.3]{LiuSolus}.
+
+\begin{theorem}\label{main}
+Let $B=B_{(14,5)}=\conv\bigl(e_1,\dots,e_5,\,-(13,182,2548,35672,499408)\bigr)\subset\RR^5$. For every integer $t\ge0$,
+\[
+|tB\cap\ZZ^5| = 1-\frac{268}{15}\,t+\frac{3955}{12}\,t^2+\frac{5833}{2}\,t^3+\frac{10343}{12}\,t^4+\frac{67228}{15}\,t^5 .
+\]
+In particular the linear coefficient of the Ehrhart polynomial of $B_{(14,5)}$ is $-268/15<0$, so $B_{(14,5)}$ is not Ehrhart positive.
+\end{theorem}
+
+Theorem~\ref{main} answers Solus's observation in the negative: Conjecture~5.1.1 of~\cite{Liu} and Conjecture~2.2 of~\cite{LiuSolus} are false. The real-rootedness of the $h^*$-polynomial, which Solus proved for every base-$r$ simplex, is not affected. We make no statement about other values of $r$ and $d$, or about the smallest counterexample. The proof rests on a finite computation over $14^5=537{,}824$ residues; Lean checks it, together with the rest of the argument (Section~\ref{sec:lean}).
+
+\paragraph{What is new.} The ingredients of the proof are standard: the lattice points of a dilated simplex are organized by their residues modulo the normalized volume, and the count follows from the distribution of a height function on these residues. What we add is the specific simplex, the exact distribution of heights for it, and the observation that this distribution makes the linear coefficient negative. In dimension~$5$ the leading two coefficients and the constant term are positive for every lattice polytope, so the first possible failure is in the coefficients of $t$, $t^2$ or $t^3$; here it is the coefficient of $t$.
+
+\paragraph{Prior work.} Negative Ehrhart coefficients are known in other families. Ferroni and Higashitani~\cite[Section~4.1]{FH} collect such examples; their Theorem~4.1, from work of Hibi, Higashitani, Tsuchiya and Yoshida, states that ``for every $d\ge3$, there exists a lattice polytope $P$ such that all coefficients of degree $1,\dots,d-2$ of $E_P(x)$ are negative.'' None of their examples is a base-$r$ simplex, so they leave Conjecture~5.1.1 of~\cite{Liu} open. Bajo, Braun, Codenotti, Hofscheier and Vindas-Mel\'endez~\cite{Bajo} study ``lattice simplices presented in Hermite normal form with a single non-trivial row'' through their local $h^*$-polynomials, not their Ehrhart coefficients. A MathOverflow question titled ``Ehrhart positivity question associated to key polynomials''~\cite{MO}, posted on October 8, 2026, has been removed by its author, so its answers and comments are not public and we could not read them; its title concerns key polynomials. Theorem~\ref{main} is new as far as we could check; the accompanying checking notes list the sources read.
+
+\section{Proof overview}
+Throughout, $d=5$, $r=14$,
+\[
+c=(c_1,\dots,c_5)=(13,\,182,\,2548,\,35672,\,499408),\qquad c_i=13\cdot14^{i-1},
+\]
+and $D=1+c_1+\dots+c_5=14^5=537{,}824$, the normalized volume of $B$. Write $\NN=\{0,1,2,\dots\}$.
+
+A point of $tB$ is a nonnegative combination of the six vertices with total weight $t$. For a lattice point $x$, the weight on the vertex $-c$ is forced to be $k/D$ with $k=t-\sum_ix_i$ an integer (Lemma~\ref{membership}). Dividing $k$ by $D$ with remainder $b$ splits $x$ into an integral part, which is an arbitrary vector of six nonnegative integers, and a fractional part, which depends only on $b$ and contributes an integer \emph{height} $h(b)\in\{0,\dots,5\}$ to the total weight (Lemma~\ref{bijection}). Counting the integral parts by stars and bars gives
+\[
+|tB\cap\ZZ^5|=\sum_{j=0}^{5} h_j\binom{t-j+5}{5},\qquad h_j=\#\{0\le b<D: h(b)=j\},
+\]
+where a binomial coefficient with $t<j$ is read as $0$; this is the familiar expression of the Ehrhart polynomial through the $h^*$-vector~\cite[(1.1)]{Liu}. The vector $(h_0,\dots,h_5)$ is computed exactly (Proposition~\ref{histogram}), and the linear coefficient is read off. Of the coefficients of $t$ in $\binom{t-j+5}{5}$, those for $j=2$ and $j=4$ are $-1/20$, while that for $j=3$ is only $1/30$. For $B_{(14,5)}$ most residues have height $2$, $3$ or $4$, and the negative contributions from heights $2$ and $4$ outweigh the rest.
+
+\section{Proof of Theorem~\ref{main}}\label{sec:proof}
+
+\begin{lemma}\label{membership}
+Let $t\in\NN$ and $x\in\ZZ^5$, and put $k=t-\sum_{i=1}^5x_i$. Then $x\in tB$ if and only if
+\[
+k\ge0\qquad\text{and}\qquad Dx_i+c_ik\ge0\quad\text{for } i=1,\dots,5 .
+\]
+\end{lemma}
+
+\begin{proof}
+A point $x$ lies in $tB$ exactly when $x=\sum_{i=1}^5\mu_ie_i-\mu_0c$ for some $\mu_0,\dots,\mu_5\ge0$ with $\mu_0+\dots+\mu_5=t$; for $t=0$ both sides describe $\{0\}$. Given such $\mu$, summing coordinates gives $\sum_ix_i=(t-\mu_0)-\mu_0(D-1)=t-D\mu_0$, so $\mu_0=k/D$ and $\mu_i=x_i+c_ik/D$ for $i\ge1$. Hence $\mu\ge0$ is equivalent to the displayed inequalities. Conversely, if they hold, these formulas define nonnegative weights with $x=\sum_i\mu_ie_i-\mu_0c$ and total weight $k/D+\sum_ix_i+(D-1)k/D=t$.
+\end{proof}
+
+For a residue $b\in\{0,1,\dots,D-1\}$ define its \emph{height}
+\[
+h(b)=\frac{1}{D}\Bigl(b+\sum_{i=1}^5\bigl(c_ib\bmod D\bigr)\Bigr).
+\]
+This is an integer: $b+\sum_ic_ib=bD\equiv0\pmod D$. Since each remainder is at most $D-1$ and $b<D$, we have $0\le h(b)\le5$. Equivalently,
+\begin{equation}\label{floorsum}
+\sum_{i=1}^5\Bigl\lfloor\frac{c_ib}{D}\Bigr\rfloor=\frac{(D-1)b-\sum_i(c_ib\bmod D)}{D}=b-h(b).
+\end{equation}
+
+\begin{lemma}\label{bijection}
+For every $t\in\NN$ the map
+\[
+x\longmapsto\Bigl(b,\ \bigl(q,\ x_1+c_1q+\lfloor c_1b/D\rfloor,\ \dots,\ x_5+c_5q+\lfloor c_5b/D\rfloor\bigr)\Bigr),
+\qquad t-\textstyle\sum_ix_i=Dq+b,\ 0\le b<D,
+\]
+is a bijection from $tB\cap\ZZ^5$ to the set of pairs $(b,n)$ with $0\le b<D$, $n\in\NN^6$ and $h(b)+n_0+\dots+n_5=t$.
+\end{lemma}
+
+\begin{proof}
+Let $x\in tB\cap\ZZ^5$ and $k=t-\sum_ix_i=Dq+b$. By Lemma~\ref{membership}, $k\ge0$, so $q\ge0$. For $i\ge1$ the same lemma gives $x_i+c_iq+c_ib/D=(Dx_i+c_ik)/D\ge0$; since $x_i+c_iq$ is an integer, $n_i=x_i+c_iq+\lfloor c_ib/D\rfloor\ge0$. Using~\eqref{floorsum} and $1+\sum_ic_i=D$,
+\[
+\sum_{j=0}^5n_j=q+\sum_ix_i+q(D-1)+b-h(b)=k+\sum_ix_i-h(b)=t-h(b).
+\]
+Conversely, given $(b,n)$ with $h(b)+\sum_jn_j=t$, set $q=n_0$ and $x_i=n_i-c_iq-\lfloor c_ib/D\rfloor$. Using~\eqref{floorsum}, $\sum_{i\ge1}n_i=t-h(b)-q$ and $\sum_ic_i=D-1$,
+\[
+\sum_ix_i=\bigl(t-h(b)-q\bigr)-(D-1)q-\bigl(b-h(b)\bigr)=t-Dq-b,
+\]
+so $k=Dq+b\ge0$, and
+\[
+Dx_i+c_ik=Dn_i+\bigl(c_ib-D\lfloor c_ib/D\rfloor\bigr)=Dn_i+(c_ib\bmod D)\ge0,
+\]
+so $x\in tB$ by Lemma~\ref{membership}. Division with remainder is unique, so the two maps are mutually inverse.
+\end{proof}
+
+\begin{corollary}\label{count}
+For every $t\in\NN$,
+$\displaystyle |tB\cap\ZZ^5|=\sum_{j=0}^5h_j\binom{t-j+5}{5}$, where $h_j=\#\{0\le b<D:h(b)=j\}$ and $\binom{t-j+5}{5}=0$ for $t<j$.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{bijection}, the points with residue $b$ correspond to vectors $n\in\NN^6$ with $\sum_jn_j=t-h(b)$. By stars and bars there are $\binom{t-h(b)+5}{5}$ of them when $h(b)\le t$, and none otherwise. Summing over $b$ and grouping by height gives the formula.
+\end{proof}
+
+\begin{proposition}\label{histogram}
+The height distribution of $B_{(14,5)}$ is
+\[
+(h_0,h_1,h_2,h_3,h_4,h_5)=(1,\ 8567,\ 130403,\ 278187,\ 114478,\ 6188).
+\]
+\end{proposition}
+
+\begin{proof}
+This is a finite computation: evaluate $h(b)$ for each of the $537{,}824$ residues $b$ and count. In the Lean proof the count is checked by the kernel as $38$ identities, each summing $R^{h(b)}$ over a consecutive block of residues with $R=2^{20}$ (Appendix~\ref{app:certificate}). As consistency checks, the entries sum to $D$, $h_0=1$ comes from $b=0$ alone (since $Dh(b)\ge b$), and $h_1+6=8573=|B\cap\ZZ^5|$, the value of the polynomial at $t=1$, in agreement with~\cite[(1.2)]{Liu}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{main}]
+For $t\ge5$ every binomial coefficient in Corollary~\ref{count} is the polynomial $\binom{t-j+5}{5}=\frac{1}{120}\prod_{m=1}^5(t-j+m)$. Substituting Proposition~\ref{histogram} and expanding gives the displayed polynomial (Appendix~\ref{app:expansion}). For $0\le t\le4$ the terms with $j>t$ are absent from Corollary~\ref{count}, but the polynomial $\frac1{120}\prod_m(t-j+m)$ vanishes at those $t$, since one factor is $0$. So the identity holds for every $t\in\NN$, including $t=0$, where both sides equal $1$. The linear coefficient is
+\begin{align*}
+&\frac{137}{60}h_0+\frac15h_1-\frac1{20}h_2+\frac1{30}h_3-\frac1{20}h_4+\frac15h_5\\
+&\qquad=\frac{137+102804-391209+556374-343434+74256}{60}=-\frac{1072}{60}=-\frac{268}{15}. \qedhere
+\end{align*}
+\end{proof}
+
+\section{Formal verification}\label{sec:lean}
+Lean~4 with Mathlib checks Theorem~\ref{main} from the definition of the convex hull. The statement, in \texttt{BaseREhrhart/Statement.lean}, defines \texttt{simplex} as Mathlib's \texttt{convexHull} over $\RR$ of the six points $e_1,\dots,e_5$ and $-c$ in $\texttt{Fin 5}\to\RR$, with $c$ written out as the five integers above; \texttt{dilate t} as the image of \texttt{simplex} under $y\mapsto t\cdot y$; and \texttt{LatticePoints t} as the type of integer vectors $x\in\texttt{Fin 5}\to\ZZ$ whose real coordinates lie in \texttt{dilate t}. The main theorem is
+\begin{verbatim}
+theorem BaseREhrhart.allTEhrhart : ∀ t : ℕ,
+  (Nat.card (LatticePoints t) : ℚ) =
+    1 - (268/15)*t + (3955/12)*t^2 + (5833/2)*t^3 +
+      (10343/12)*t^4 + (67228/15)*t^5
+\end{verbatim}
+It is declared as \texttt{allTEhrhart : AllTEhrhartClaim}; the display is that proposition unfolded, which \texttt{Checks.lean} type-checks against the theorem. This is the identity of Theorem~\ref{main} for every natural $t$, including $t=0$, where the dilate is the single point $0$. The theorem
+\begin{center}\texttt{actual\_lattice\_count\_and\_negative\_coefficient}\end{center}
+restates it as evaluation of a polynomial in $\mathbb{Q}[X]$ whose coefficient of $X$ is $-268/15<0$, and \texttt{vertices\_affineIndependent} shows that the six points span a $5$-simplex. Lean also proves that each \texttt{LatticePoints t} is finite, so \texttt{Nat.card} is an ordinary count.
+
+The formal proof follows Section~\ref{sec:proof}: Lemma~\ref{membership} is \texttt{mem\_dilate\_iff\_integerCone}, Lemma~\ref{bijection} is \texttt{latticeEquivPieces}, and the remaining steps are stars and bars, Corollary~\ref{count}, the expansion of the binomial coefficients, and Proposition~\ref{histogram}, which is \texttt{height\_histogram}. The height distribution is proved by ordinary kernel reduction of \texttt{decide} proofs, without \texttt{native\_decide} or any compiled-code axiom. The axioms used are propositional extensionality, classical choice and quotient soundness, and the build checks this with guarded axiom reports for the main theorems. There are no hypotheses on the final theorems.
+
+The accompanying README gives the commands to rebuild the proof. As supplementary checks, which are not distributed and on which the proof does not rest, we confirmed that the kernel rejects two altered certificates (one block value increased by one, the last block of residues omitted), and separately written programs recomputed the distribution of Proposition~\ref{histogram} and the counts $|tB\cap\ZZ^5|$ for $0\le t\le8$ directly from the inequalities of Lemma~\ref{membership}, in agreement with Theorem~\ref{main}.
+
+\begin{thebibliography}{9}\small
+\bibitem{Bajo} E. Bajo, B. Braun, G. Codenotti, J. Hofscheier and A. R. Vindas-Mel\'endez,
+\emph{Local $h^*$-polynomials for one-row Hermite normal form simplices},
+Preprint \href{https://arxiv.org/abs/2309.01186v4}{arXiv:2309.01186v4}, 2025.
+\bibitem{FH} L. Ferroni and A. Higashitani,
+\emph{Examples and counterexamples in Ehrhart theory},
+Preprint \href{https://arxiv.org/abs/2307.10852v4}{arXiv:2307.10852v4}, 2024.
+\bibitem{Liu} F. Liu,
+\emph{On positivity of Ehrhart polynomials},
+in: Recent Trends in Algebraic Combinatorics, Association for Women in Mathematics Series, Springer, 2019, 189--237.
+\href{https://doi.org/10.1007/978-3-030-05141-9_6}{doi:10.1007/978-3-030-05141-9\_6}.
+Preprint \href{https://arxiv.org/abs/1711.09962v2}{arXiv:1711.09962v2}.
+\bibitem{LiuSolus} F. Liu and L. Solus,
+\emph{On the relationship between Ehrhart unimodality and Ehrhart positivity},
+Ann. Comb. 23 (2019), 347--365.
+\href{https://doi.org/10.1007/s00026-019-00429-8}{doi:10.1007/s00026-019-00429-8}.
+Preprint \href{https://arxiv.org/abs/1804.08258v1}{arXiv:1804.08258v1}.
+\bibitem{MO} \emph{Ehrhart positivity question associated to key polynomials},
+MathOverflow question 515853, posted October 8, 2026, removed by its author;
+\url{https://mathoverflow.net/questions/515853}, accessed November 1, 2026.
+\bibitem{Solus} L. Solus,
+\emph{Simplices for numeral systems},
+Trans. Amer. Math. Soc. 371 (2019), 2089--2107.
+\href{https://doi.org/10.1090/tran/7424}{doi:10.1090/tran/7424}.
+Preprint \href{https://arxiv.org/abs/1706.00480v2}{arXiv:1706.00480v2}.
+\end{thebibliography}
+
+\begin{appendices}
+\section{Expansion of the count}\label{app:expansion}
+Write $\beta_j(t)=\binom{t-j+5}{5}=\frac1{120}\prod_{m=1}^5(t-j+m)$. The coefficients of these polynomials are:
+\begin{center}
+\begin{tabular}{@{}crrrrrr@{}}
+\toprule
+$j$ & $1$ & $t$ & $t^2$ & $t^3$ & $t^4$ & $t^5$\\
+\midrule
+$0$ & $1$ & $137/60$ & $15/8$ & $17/24$ & $1/8$ & $1/120$\\
+$1$ & $0$ & $1/5$ & $5/12$ & $7/24$ & $1/12$ & $1/120$\\
+$2$ & $0$ & $-1/20$ & $-1/24$ & $1/24$ & $1/24$ & $1/120$\\
+$3$ & $0$ & $1/30$ & $0$ & $-1/24$ & $0$ & $1/120$\\
+$4$ & $0$ & $-1/20$ & $1/24$ & $1/24$ & $-1/24$ & $1/120$\\
+$5$ & $0$ & $1/5$ & $-5/12$ & $7/24$ & $-1/12$ & $1/120$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Multiplying the rows by $h_0,\dots,h_5$ from Proposition~\ref{histogram} and adding gives the coefficients $1$, $-268/15$, $3955/12$, $5833/2$, $10343/12$ and $67228/15$. The leading coefficient is $D/120=537824/120=67228/15$, the normalized volume divided by $5!$, as it must be.
+
+\section{The finite certificate}\label{app:certificate}
+Let $R=2^{20}=1048576$. Since $D<R$, each $h_j$ is less than $R$, so the six numbers $h_0,\dots,h_5$ are the base-$R$ digits of
+\[
+S=\sum_{b=0}^{D-1}R^{h(b)}=\sum_{j=0}^5h_jR^j .
+\]
+The residues $0,\dots,D-1$ are split into $38$ consecutive blocks of lengths $2^{14}$ ($32$ blocks), $2^{13},2^{12},2^{10},2^7,2^6$ and $2^5$, which add up to $D$. For each block, Lean evaluates $\sum_bR^{h(b)}$ over the block, by binary subdivision so that the recursion depth stays logarithmic, and the kernel checks the resulting identity. A separate lemma proves that the blocks cover $\{0,\dots,D-1\}$ exactly, and uniqueness of base-$R$ digits then recovers the six counts of Proposition~\ref{histogram}.
+\end{appendices}
+\end{document}

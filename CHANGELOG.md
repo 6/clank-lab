@@ -19,6 +19,7 @@ Zenodo records.
 
 - Refutes Conjecture 12 of Arpino, Dmitriev and Grometto: for random hitting set instances with $m=k$, $n=k^{10}$ and $p=1/(10k^4)$, greedy exceeds the linear programming value by a fixed factor with fixed positive probability for every $k\ge10^{20}$, so their ratio does not converge to one in probability.
 - The same holds when greedy breaks ties uniformly at random. Includes a short paper and a standalone Lean development checking both theorems from the definitions.
+- Zenodo: [10.5281/zenodo.23915338](https://doi.org/10.5281/zenodo.23915338)
 
 ## independent-monophonic-ng v1 (November 3, 2026)
 

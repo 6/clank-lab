@@ -12,6 +12,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23915348](https://doi.org/10.5281/zenodo.23915348)
+
 ## Check it
 
 Install Lean through [elan](https://github.com/leanprover/elan). From this folder, run:
@@ -39,6 +41,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{Symmetry of hook+column coefficients in iterated plethysms}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/iterated-plethysm-v1/results/iterated-plethysm}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/iterated-plethysm-v1/results/iterated-plethysm}},
+  doi          = {10.5281/zenodo.23915348}
 }
 ```

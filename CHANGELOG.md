@@ -15,6 +15,7 @@ Zenodo records.
 - Answers Gutiérrez and Rosas's Question 1: every iterated plethysm of complete homogeneous functions has symmetric hook+column coefficient sequences.
 - Proves the stronger coefficient reflection for every homogeneous rational outer function and every inner complete homogeneous function of degree at least two, including the vanishing statements.
 - Includes the paper and a standalone Lean proof with pinned dependencies.
+- Zenodo: [10.5281/zenodo.23915348](https://doi.org/10.5281/zenodo.23915348)
 
 ## random-hitting-set-greedy v1 (November 3, 2026)
 

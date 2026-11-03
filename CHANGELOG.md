@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## iterated-plethysm v1 (November 3, 2026)
+
+- Answers Gutiérrez and Rosas's Question 1: every iterated plethysm of complete homogeneous functions has symmetric hook+column coefficient sequences.
+- Proves the stronger coefficient reflection for every homogeneous rational outer function and every inner complete homogeneous function of degree at least two, including the vanishing statements.
+- Includes the paper and a standalone Lean proof with pinned dependencies.
+
 ## random-hitting-set-greedy v1 (November 3, 2026)
 
 - Refutes Conjecture 12 of Arpino, Dmitriev and Grometto: for random hitting set instances with $m=k$, $n=k^{10}$ and $p=1/(10k^4)$, greedy exceeds the linear programming value by a fixed factor with fixed positive probability for every $k\ge10^{20}$, so their ratio does not converge to one in probability.

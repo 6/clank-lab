@@ -1,0 +1,13 @@
+# Checking the continuous gluing theorem
+
+From this directory run `lake exe cache get`, then `lake build`. No file outside this directory is needed. The default targets include the proof, the source-definition bridge, semantic controls and axiom guards.
+
+The toolchain is Lean 4.34.0 (`leanprover/lean4:v4.34.0`). The Lean release identifies source commit `293d5d0c0c3f3dded4688b3ccd6a33939ac5102b`; its Linux x86-64 archive has SHA-256 `caaa98356098c85dc0fcbbd28e1ec66f39eb6551829972b752ff20e1286b646b` (GitHub release asset digest). Mathlib is pinned to commit `5ed2965256430c3649e86755f9576b54eca72435`; `lake-manifest.json` pins all transitive packages to commits. CI installs elan 4.2.4 from its Linux x86-64 release archive, with SHA-256 `42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63`.
+
+`Endpoint.lean` defines planar containment with expanding maps between coordinate projections, ambient openness, the closed square, area and the real supremum. `Representation.lean` proves the equivalence with real-valued coordinate witnesses. `Compactness.lean` proves compactness of witness spaces and their anchor images. `Gluing.lean` proves anchored gluing and the partition. `MeasureTransfer.lean` supplies open avoiding neighborhoods and the measurable-set area bound. `Solution.lean` proves `Geneson.geneson_conjecture_6_3` for arbitrary planar subsets and every positive real side length.
+
+`SourceBridge.lean` restates the source definitions in a separate vocabulary, proves them equivalent to the endpoint definitions, and derives `SrcCheck.conjecture_6_3_source`. Its difference inequalities are equivalent to the source's ratio inequalities because the denominators are positive. The source excludes the anchor from its quadrant conditions; the bridge restores it using equality.
+
+`Audit.lean` checks the full theorem type and guards the axiom reports for the endpoint, its bridge and the principal analytic lemmas. They use only `propext`, `Classical.choice` and `Quot.sound`; there are no additional axioms or compiled-evaluation steps. `Controls.lean` checks singleton area zero, containment of a translated closed segment, failure of containment in an open strip of equal width, and failure of a strict version of the final bound for singleton patterns. These checks are part of the ordinary build.
+
+The proof relies on Lean's kernel and mathlib's formalized mathematics. Rebuilding the proof does not provide a second kernel implementation. A cached build took about a minute and roughly 7 GB peak memory; downloading dependencies can take longer. The paper can be rebuilt with pdfLaTeX by running `pdflatex paper.tex` twice in `paper/`.

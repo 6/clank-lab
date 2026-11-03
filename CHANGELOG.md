@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## geneson-continuous-gluing v1 (November 3, 2026)
+
+- Proves Geneson's continuous gluing conjecture (Conjecture 6.3): the maximum avoiding area for two arbitrary planar patterns joined at opposite corners is at most the sum of their separate maxima, for every positive square side length.
+- Includes the proof, a standalone Lean formalization, and checks of the statement and boundary conventions.
+
 ## cd13-universal-dynamics v1 (November 3, 2026)
 
 - Proves Collina and D'Andrea's conjecture: for every finite directed acyclic graph, finite local updates faithfully represent its Hecke–Kiselman monoid and characterize its universal dynamics.

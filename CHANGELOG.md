@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that deciding whether a planar graph has a graceful 4-coloring is NP-complete, even for maximum degree three, answering the question of Antony, Laavanya and Devi Yamini; disconnected graphs are allowed, as in their question.
 - Includes the paper and a standalone Lean project checking the correspondence between graceful 4-colorings of doubly subdivided cubic graphs and perfect matching cuts.
+- Zenodo: [10.5281/zenodo.23915538](https://doi.org/10.5281/zenodo.23915538)
 
 ## iterated-plethysm v1 (November 3, 2026)
 

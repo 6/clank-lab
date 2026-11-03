@@ -10,6 +10,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23915538](https://doi.org/10.5281/zenodo.23915538)
+
 ## Check it
 
 Install Lean using [elan](https://github.com/leanprover/elan). A network connection is needed to download the dependencies and their compiled cache. Allow about ten minutes for the download and under a minute for the build, with about 6 GB of memory.
@@ -37,6 +39,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{Graceful 4-coloring of planar graphs is NP-complete}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/planar-graceful-coloring-v1/results/planar-graceful-coloring}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/planar-graceful-coloring-v1/results/planar-graceful-coloring}},
+  doi          = {10.5281/zenodo.23915538}
 }
 ```

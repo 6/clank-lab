@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="260" viewBox="0 0 600 260" role="img" aria-labelledby="title desc">
+<title id="title">Patterns sharing a corner</title><desc id="desc">P lies southwest and Q northeast of their common anchor. Boundary points are allowed. This is an illustration, not a restriction to finite patterns.</desc>
+<rect width="600" height="260" fill="white"/>
+<path d="M100 130H500M300 25V235" stroke="rgb(136,149,167)" stroke-dasharray="5 5"/>
+<rect x="100" y="130" width="200" height="105" fill="rgb(228,237,250)" opacity="0.7"/><rect x="300" y="25" width="200" height="105" fill="rgb(252,232,212)" opacity="0.7"/>
+<g fill="rgb(36,98,164)"><circle cx="150" cy="205" r="6"/><circle cx="220" cy="175" r="6"/><circle cx="265" cy="220" r="6"/><circle cx="190" cy="130" r="6"/></g>
+<g fill="rgb(183,85,19)"><circle cx="350" cy="75" r="6"/><circle cx="410" cy="100" r="6"/><circle cx="465" cy="45" r="6"/><circle cx="300" cy="55" r="6"/></g>
+<circle cx="300" cy="130" r="7" fill="rgb(23,35,50)"/>
+<g font-family="serif" font-size="22"><text x="120" y="165" fill="rgb(36,98,164)">P</text><text x="460" y="100" fill="rgb(183,85,19)">Q</text><text x="310" y="152" fill="rgb(23,35,50)">(c,d)</text></g>
+</svg>

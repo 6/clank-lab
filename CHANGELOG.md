@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## random-hitting-set-greedy v1 (November 3, 2026)
+
+- Refutes Conjecture 12 of Arpino, Dmitriev and Grometto: for random hitting set instances with $m=k$, $n=k^{10}$ and $p=1/(10k^4)$, greedy exceeds the linear programming value by a fixed factor with fixed positive probability for every $k\ge10^{20}$, so their ratio does not converge to one in probability.
+- The same holds when greedy breaks ties uniformly at random. Includes a short paper and a standalone Lean development checking both theorems from the definitions.
+
 ## independent-monophonic-ng v1 (November 3, 2026)
 
 - Disprove the monophonic sum inequality of Conjecture 9.3 of Chandran, Di Stefano, Haritha, Thomas and Tuite: a subdivided six-clique has lower bounds 8 and 15, whose sum exceeds its order plus one.

@@ -10,6 +10,8 @@ The proofs, the code and the text were produced by AI models (from OpenAI and An
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23915321](https://doi.org/10.5281/zenodo.23915321)
+
 <img src="data/graph.svg" alt="Six original vertices in black and fifteen subdivision vertices in blue; crossings without dots are not vertices." width="650">
 
 ## Check it
@@ -35,6 +37,7 @@ The proof classifies the permitted color classes and counts the members of a cov
   author = {Graham, P.},
   title = {{A subdivided 6-clique breaks a conjectured sum bound for independent monophonic-position colorings}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/independent-monophonic-ng-v1/results/independent-monophonic-ng}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/independent-monophonic-ng-v1/results/independent-monophonic-ng}},
+  doi          = {10.5281/zenodo.23915321}
 }
 ```

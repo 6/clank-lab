@@ -1,0 +1,419 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Graceful 4-coloring of planar graphs is NP-complete},pdfauthor={P. Graham}}
+\newcommand{\GFC}{\textup{\textsc{Graceful 4-Colorability}}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\title{Graceful 4-coloring of planar graphs is NP-complete}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 3, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A graceful $k$-coloring of a graph is a proper vertex coloring with colors
+$1,\dots,k$ such that, at every vertex, the incident edges receive distinct
+differences of their endpoint colors. Cyriac Antony, Laavanya D. and Devi
+Yamini S. proved that deciding graceful $k$-colorability is NP-complete for
+planar graphs when $k\ge 5$, and for $k=4$ on graphs of maximum degree three,
+and they left open the complexity of graceful 4-colorability of planar graphs.
+We prove that this problem is NP-complete, even for planar graphs of maximum
+degree three (inputs, as in their formulation, may be disconnected). The
+hardness comes from the reduction of \'Edouard Bonnet, Dibyayan Chakraborty
+and Julien Duron, who proved that deciding whether a cubic planar graph has a
+perfect matching cut (a perfect matching that is exactly the set of edges
+leaving some vertex set) is NP-hard; we apply their construction to every
+instance. What we add is an exact correspondence: for every finite cubic graph
+$H$, the graph obtained by subdividing each edge of $H$ twice has a graceful
+4-coloring if and only if $H$ has a perfect matching cut. This equivalence is
+proved in Lean from the definitions.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{2020 Mathematics Subject Classification.} 05C15, 05C78, 68Q17.
+\textit{Keywords.} Graceful coloring, perfect matching cut, planar graphs, NP-completeness.
+
+\section{Introduction}
+
+All graphs are finite and simple. For a graph $G$ and a map
+$f\colon V(G)\to\{1,2,3,4\}$, the \emph{difference} of an edge $uv$ is
+$|f(u)-f(v)|$. The map $f$ is a \emph{graceful $4$-coloring} if adjacent
+vertices receive distinct colors and any two edges sharing an endpoint have
+distinct differences. Thus a vertex of color $1$ with neighbors colored
+$2,3,4$ is fine, while a vertex of color $2$ cannot have three neighbors,
+because only the differences $1$ and $2$ are available to it. Colors need
+not be distinct on all of $V(G)$, and not all four need be used. The
+problem \GFC{} asks whether a given graph has a
+graceful $4$-coloring. Graceful colorings were introduced by Bi, Byers,
+English, Laforge and Zhang~\cite{Bi}. The definition above is the informal
+definition of Antony, Laavanya and Devi Yamini: a proper coloring whose edge
+differences form a proper edge coloring \cite[Section~1]{ALD}. Their formal
+definition can be stronger on graphs with triangles, but the two agree on the
+triangle-free graphs used here, so Theorem~\ref{thm:main} holds for both
+(Remark~\ref{rem:ald}).
+
+A \emph{perfect matching cut} of a graph $H$ is a perfect matching $M$ of $H$
+for which there is a set $A\subseteq V(H)$ such that $M$ is exactly the set
+of edges with one endpoint in $A$ and one outside $A$. Bonnet, Chakraborty
+and Duron call this ``a perfect matching that is also a cutset''
+\cite[Section~2]{BCD}. The \emph{double subdivision} $S_2(H)$ replaces each
+edge $uv$ of $H$ by a path $u\,x\,y\,v$ through two new vertices.
+
+\subsection{Main results}
+
+\begin{theorem}\label{thm:main}
+\GFC{} is NP-complete on planar graphs. It remains
+NP-complete on planar graphs of maximum degree at most three.
+\end{theorem}
+
+We use the construction of Bonnet, Chakraborty and Duron~\cite{BCD} without
+their splitting step, which is a Turing reduction. This keeps our reduction
+many-one, but the graphs it produces may be disconnected. This matches the
+problem as posed, whose input is an arbitrary graph; the connected case is not
+treated. The proof rests on the following exact equivalence, which holds for
+all cubic graphs, planar or not.
+
+\begin{theorem}\label{thm:equiv}
+Let $H$ be a finite cubic graph. Then $S_2(H)$
+has a graceful $4$-coloring if and only if $H$ has a perfect matching cut.
+\end{theorem}
+
+For example, $K_4$ has no perfect matching cut (every edge cut of $K_4$ has
+zero, three or four edges, while a perfect matching has two), so $S_2(K_4)$
+has no graceful $4$-coloring. The triangular prism (two triangles joined by
+three edges) has one, those three joining edges, so its double subdivision has
+a graceful $4$-coloring.
+
+\subsection{Where the question comes from}
+
+Antony, Laavanya and Devi Yamini proved that ``Graceful 5-colorablity [sic] is
+NP-complete for 3-regular 3-connected planar bipartite graphs'' and that
+``For $k\ge 6$, Graceful $k$-colorablity is NP-complete for planar bipartite
+graphs of maximum degree $k-2$'' \cite[Theorems~4 and~5]{ALD}. For four
+colors they proved that ``Graceful 4-colorablity is NP-complete for the class
+of 2-degenerate graphs of maximum degree 3'' \cite[Theorem~6]{ALD}, by a
+reduction from Positive Not-All-Equal 3-Sat E4~\cite{DD}; the graphs this
+reduction produces need not be planar. Their
+abstract ends: ``The complexity of checking whether a planar graph is graceful
+4-colorable remains open.'' The same sentence closes the abstract of the
+published conference version by Cyriac Antony, Jacob Antony, Laavanya D.\ and
+Devi Yamini S.~\cite{AALD}. Theorem~\ref{thm:main} answers this question.
+
+Pantoja, Dantas and Luiz also proved hardness results for graceful colorings
+of subcubic graphs; neither concerns planar graphs with four colors. Pantoja's
+thesis, which presents their three papers \cite{PDL371,PDL374,PDL381} among
+its main contributions \cite{Pantoja}, attributes to \cite{PDL374} the
+statement ``The G5CP is NP-complete even when restricted to 3-connected
+bipartite cubic planar graphs'' \cite[Theorem~10]{Pantoja}, where G5CP is the
+graceful 5-coloring problem, and to \cite{PDL381} the statement ``The
+\textup{\textsc{Graceful 4-Coloring}} problem is NP-complete, even for graphs
+with maximum degree 3'' \cite[Theorem~34]{Pantoja}, together with a
+polynomial-time algorithm for trees of maximum degree three
+\cite[Theorem~33]{Pantoja}. Other recent work on graceful colorings concerns
+trees \cite{BNS,Popa}, corona graphs \cite{LDcorona} and a class of bipartite
+graphs built by an operation called unfolding \cite{LDN}.
+
+\subsection{What is new}
+
+The input we build on is the Bonnet--Chakraborty--Duron theorem
+\cite[Theorem~1]{BCD}: ``Perfect Matching Cut is NP-hard in 3-connected cubic
+bipartite planar graphs.'' Their reduction supplies all of the hardness. Our contribution
+is Theorem~\ref{thm:equiv}, the exact correspondence between graceful
+$4$-colorings of $S_2(H)$ and perfect matching cuts of $H$. Double subdivision
+keeps planarity and keeps the maximum degree at three, so the hardness transfers. The step that needs care is the forward direction: a graceful
+$4$-coloring of $S_2(H)$ must be shown to produce a perfect matching that is
+an entire cut and not merely contained in one. This is a counting argument on
+the differences at the original vertices (Section~\ref{sec:equiv}).
+
+We use their construction without the extra hypothesis they make for
+$3$-connectivity, which we do not need (Section~\ref{sec:hard}).
+
+\section{Proof of Theorem~\ref{thm:equiv}}\label{sec:equiv}
+
+Let $H$ be cubic and let $f$ be a graceful $4$-coloring of $S_2(H)$. Call the
+vertices of $H$ \emph{original}. For an original vertex $u$ and an edge $uv$
+of $H$, the \emph{port} of $u$ toward $v$ is the edge from $u$ to the first new
+vertex on the path replacing $uv$, and its difference is the port difference.
+
+\begin{lemma}\label{lem:star}
+In a graceful $4$-coloring, a vertex with three neighbors has color $1$ or
+$4$, its three incident edges have differences $1,2,3$, and its neighbors
+receive the three other colors.
+\end{lemma}
+
+\begin{proof}
+A vertex of color $c$ has at most $|\{|c-d|: d\neq c,\ 1\le d\le 4\}|$ distinct
+positive differences available. This is $3$ for $c\in\{1,4\}$ and $2$ for
+$c\in\{2,3\}$. Three neighbors need three distinct differences, so
+$c\in\{1,4\}$, and then the differences $1,2,3$ are realized by the three
+other colors.
+\end{proof}
+
+The first claim of Lemma~\ref{lem:star} is the case $\Delta=3$ of
+\cite[Lemma~6]{Pantoja}, attributed there to \cite{PDL381}; the same counting
+appears in \cite[proof of Construction~1]{ALD}.
+
+\begin{lemma}\label{lem:path}
+Let $u\,x\,y\,v$ be a path whose interior vertices have degree two, colored
+by a graceful $4$-coloring with $f(u),f(v)\in\{1,4\}$. Up to the symmetry
+$c\mapsto 5-c$ and reversing the path, the possibilities are exactly those in
+Table~\ref{tab:path}.
+\end{lemma}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccccc}
+\toprule
+type & $f(u),f(v)$ & $f(x),f(y)$ & differences along the path & port differences \\
+\midrule
+I & $1,1$ & $2,4$ & $1,2,3$ & $1$ and $3$ \\
+II & $1,1$ & $3,4$ & $2,1,3$ & $2$ and $3$ \\
+III & $1,4$ & $3,2$ & $2,1,2$ & $2$ and $2$ \\
+\bottomrule
+\end{tabular}
+\caption{Graceful colorings of a twice subdivided edge with extreme endpoint colors.}
+\label{tab:path}
+\end{table}
+
+\begin{proof}
+At $x$ the two differences $|f(u)-f(x)|$ and $|f(x)-f(y)|$ must differ, and
+similarly at $y$, and consecutive colors must differ. If $f(u)=f(v)=1$, then
+$f(x),f(y)\in\{2,3,4\}$ are distinct; $(2,3)$ fails at $x$ (differences
+$1,1$) and $(3,2)$ fails at $y$, leaving $(2,4)$, $(3,4)$ and their reversals.
+If $f(u)=1$ and $f(v)=4$, then $f(x)=4$ would give $y$ two neighbors of color
+$4$, and $f(y)=1$ is excluded in the same way, so $f(x),f(y)\in\{2,3\}$ are
+distinct; $(2,3)$ gives differences $1,1,1$, and $(3,2)$ remains.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:equiv}, forward direction]
+By Lemma~\ref{lem:star} every original vertex has color $1$ or $4$ and exactly
+one port of each difference $1,2,3$. By Lemma~\ref{lem:path}, a port of
+difference $1$ lies on a path of type I in Table~\ref{tab:path}, whose
+other port has difference $3$. This pairs each of the $|V(H)|$ ports of
+difference $1$ with a distinct port of difference $3$. There are also exactly
+$|V(H)|$ ports of difference $3$, so all of them are used by paths of type I,
+and no path of type II occurs. Hence every port of difference $2$ lies on a
+path of type III. Let $M$ be the set of edges of $H$ whose paths are of
+type III. Each original vertex has exactly one port of
+difference $2$, so $M$ is a perfect matching. Let $A$ be the set of original
+vertices of color $1$. Paths of types I and II join endpoints of equal color
+and paths of type III join endpoints of different colors, so $M$
+is exactly the set of edges leaving $A$.
+\end{proof}
+
+\begin{proof}[Converse direction]
+Let $M$ be a perfect matching of $H$ equal to the set of edges leaving $A$.
+Removing $M$ leaves a graph in which every vertex has degree two, a disjoint
+union of cycles, and each cycle lies inside $A$ or inside its complement.
+Orient each cycle cyclically. Give the vertices of $A$ color $1$ and the others
+color $4$. Color the path replacing a cycle edge $u\to v$ by $1,4,2,1$ inside
+$A$ and $4,1,3,4$ outside $A$; color the path replacing a matching edge from
+$u\in A$ to $v\notin A$ by $1,3,2,4$. Along these paths the differences are
+$3,2,1$ and $2,1,2$, so each new vertex sees two distinct differences, and
+consecutive colors differ. At an original vertex the outgoing cycle port has
+difference $3$, the incoming cycle port $1$ and the matching port $2$. This is
+a graceful $4$-coloring of $S_2(H)$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:hard}
+
+\paragraph{Membership in NP.} A certificate is a color in $\{1,2,3,4\}$ for
+each vertex. Checking that adjacent vertices have distinct colors and that
+edges at each vertex have distinct differences takes time polynomial in the
+size of the graph.
+
+\paragraph{Double subdivision.}
+
+\begin{lemma}\label{lem:s2}
+Let $H$ be a graph with $n$ vertices and $m$ edges.
+\begin{enumerate}
+\item[(a)] If $H$ is planar, then $S_2(H)$ is planar.
+\item[(b)] $S_2(H)$ has $n+2m$ vertices and $3m$ edges, every new vertex has
+degree two, and every original vertex keeps its degree. From adjacency lists,
+$S_2(H)$ is computed in linear time.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (a), draw $H$ in the plane, choose two interior points on each edge arc
+and declare them the new vertices. Part (b) is immediate from the
+construction.
+\end{proof}
+
+\paragraph{The cited hardness theorem.} We use \cite[Theorem~1]{BCD}
+through its proof, which is a reduction from Monotone Not-All-Equal 3SAT-E4.
+An instance is a set of clauses, each consisting of three distinct variables,
+with each variable in exactly four clauses; it is \emph{positive} if some
+truth assignment gives every clause at least one true and at least one false
+variable. Bonnet, Chakraborty and Duron cite its NP-completeness from Darmann
+and Döcker~\cite{DD} \cite[Section~3.2]{BCD}. For an instance $I$ they
+construct ``in polynomial time'' a graph $G(I)$ \cite[Section~3.2]{BCD}. The
+proof of \cite[Lemma~13]{BCD} shows that $G(I)$ is cubic, planar and
+bipartite, and \cite[Lemmas~26 and~28]{BCD} show that $G(I)$ has a perfect
+matching cut if and only if $I$ is positive. These two lemmas rest on the
+preceding results of \cite[Section~3]{BCD}; of these, \cite[Lemma~7]{BCD} is
+stated for cubic bipartite graphs and \cite[Lemma~3]{BCD} for plane graphs, so
+the equivalence uses the planarity and bipartiteness of $G(I)$ from the proof
+of \cite[Lemma~13]{BCD}.
+Bonnet, Chakraborty and Duron also assume that no variable is a cut vertex of
+the variable--clause incidence graph of $I$, justified by a splitting step
+that they call ``a polynomial-time Turing reduction'' \cite[Section~3.2]{BCD}.
+That hypothesis is used only in the proof of \cite[Lemma~12]{BCD}, that
+$G(I)$ is $3$-connected, which the proof of their Lemma~13 quotes for
+$3$-connectivity alone. The cubicity, planarity and bipartiteness arguments do
+not cite their Lemma~12, and no other lemma of theirs uses the hypothesis. The bipartiteness argument shows that
+every bounded face has even length, counting along exposed paths of the
+gadgets. The proof of their Lemma~12 records two facts that do not depend on the
+hypothesis: every gadget is $2$-connected, and adjacent gadgets are joined by
+two disjoint connector edges. Removing one vertex therefore leaves every gadget
+connected and keeps a connector edge between any two adjacent gadgets, so each
+component of $G(I)$ is $2$-connected, the faces of its drawing are bounded by
+cycles, and that count shows that each component, and so $G(I)$, is bipartite.
+(Numbers of lemmas in \cite{BCD} refer to arXiv:2302.11667v1.)
+
+\begin{proposition}[from the proof of {\cite[Theorem~1]{BCD}}]\label{prop:bcd}
+For every instance $J$ of Monotone Not-All-Equal 3SAT-E4, the graph $G(J)$ is
+cubic and planar, it is computed from $J$ in polynomial time, and it has a
+perfect matching cut if and only if $J$ is positive.
+\end{proposition}
+
+\begin{proof}
+The construction and its running time are in \cite[Section~3.2]{BCD},
+cubicity and planarity are shown in the proof of \cite[Lemma~13]{BCD}, and
+the equivalence is \cite[Lemmas~26 and~28]{BCD}, which use the bipartiteness
+shown in the same proof.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Given $J$, compute $G(J)$ by Proposition~\ref{prop:bcd} and output
+$S_2(G(J))$. Since $G(J)$ is cubic, Proposition~\ref{prop:bcd} and
+Theorem~\ref{thm:equiv} give
+\begin{align*}
+ J\text{ is positive}
+ &\iff G(J)\text{ has a perfect matching cut}\\
+ &\iff S_2(G(J))\text{ has a graceful 4-coloring}.
+\end{align*}
+By Lemma~\ref{lem:s2}, $S_2(G(J))$ is planar, has maximum degree three and is
+computed in polynomial time. Together with membership in NP, this proves both
+statements of Theorem~\ref{thm:main}.
+\end{proof}
+
+\begin{remark}\label{rem:ald}
+Antony, Laavanya and Devi Yamini also give a formal version of the definition:
+the coloring is injective on each closed neighborhood $N[v]$, and the
+difference labeling is injective on all edges of $G[N[v]]$
+\cite[Section~1]{ALD}. On graphs with triangles it can be stronger than the
+definition used here, since it also separates two edges inside $N[v]$ that
+share no endpoint. On triangle-free graphs the two agree: the edges of
+$G[N[v]]$ are then the edges at $v$, and distinct differences at $v$ force
+distinct colors on its neighbors. Every double subdivision is triangle-free,
+so the reduction above proves NP-hardness for both versions. Membership in NP
+holds for both, because each condition is checked on the closed neighborhoods
+in polynomial time. Hence Theorem~\ref{thm:main} holds under either of their
+formulations.
+\end{remark}
+
+\section{Formal verification}\label{sec:formal}
+
+The Lean project accompanying this paper uses Lean~4 \cite{Lean} and Mathlib
+\cite{Mathlib}. Its main theorem is
+\begin{verbatim}
+theorem Antony24.graceful4_s2_iff_pmc {V : Type*} [Finite V]
+    (G : SimpleGraph V) (hG : Cubic G) :
+    Graceful4 (S2 G) <-> PMC G
+\end{verbatim}
+Here \texttt{SimpleGraph V} is Mathlib's simple graph on the vertex type
+\texttt{V}; the only assumption on \texttt{V} is finiteness, so empty and
+disconnected graphs are included. \texttt{Cubic G} says each vertex has exactly
+three distinct neighbors. \texttt{Graceful4 G} says some map to a four-element
+palette is proper on edges and gives distinct differences to two distinct
+neighbors of each vertex; a proved lemma shows this is the same as labels
+$1,\dots,4$. \texttt{S2 G} has vertex type \texttt{V} plus the ordered pairs
+$(u,v)$ of adjacent vertices, with the edge $uv$ becoming the path
+$u\,(u,v)\,(v,u)\,v$. \texttt{PMC G} says some two-sided split of the vertices
+gives each vertex exactly one neighbor on the other side; a proved lemma shows
+this is a Mathlib perfect matching equal to the whole cut of a vertex set. So
+the theorem is Theorem~\ref{thm:equiv}, and the project also states it with
+these unfolded forms on both sides.
+
+The project also proves the counts and degrees of Lemma~\ref{lem:s2}(b) and
+that every double subdivision is triangle-free, as used in
+Remark~\ref{rem:ald}; the theorem names are listed in the project's README.
+The build checks that the main theorems depend only on the axioms
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}, and
+checks the two examples of Section~1 by kernel evaluation.
+
+Outside Lean are \cite[Theorem~1]{BCD} and its proof, including its use of
+\cite{DD}; Proposition~\ref{prop:bcd}; the planarity and running-time parts of
+Lemma~\ref{lem:s2}; membership in NP; and the notion of NP-completeness
+itself.
+
+To reproduce the check, install Lean through elan and run
+\texttt{lake exe cache get} and \texttt{lake build} in the \texttt{lean}
+directory. With the downloaded Mathlib cache the build takes under a minute and
+about 5\,GB of memory.
+
+\begin{thebibliography}{99}
+\bibitem{AALD} Cyriac Antony, Jacob Antony, Laavanya D.\ and Devi Yamini S.,
+Graceful coloring is computationally hard, in: Algorithms and Discrete Applied
+Mathematics (CALDAM 2025), Lecture Notes in Computer Science 15536, Springer, 2025, 13--24,
+\href{https://doi.org/10.1007/978-3-031-83438-7_2}{doi:10.1007/978-3-031-83438-7\_2}.
+\bibitem{ALD} Cyriac Antony, Laavanya D.\ and Devi Yamini S., Graceful coloring
+is computationally hard, \href{https://arxiv.org/abs/2407.02179v2}{arXiv:2407.02179v2}, 2024.
+\bibitem{BNS} Vitaly A. Baransky, Ilia A. Nasyrov and Tatiana A. Senchonok,
+Locks and forbidden configurations in 4-graceful trees, Ural Math.\ J.\ 12
+(2026), no.~1, 26--44,
+\href{https://doi.org/10.15826/umj.2026.1.003}{doi:10.15826/umj.2026.1.003}.
+\bibitem{Bi} Z. Bi, A. Byers, S. English, E. Laforge and P. Zhang, Graceful colorings of graphs, J. Combin. Math. Combin. Comput.\
+101 (2017), 101--119.
+\bibitem{BCD} \'Edouard Bonnet, Dibyayan Chakraborty and Julien Duron, Cutting
+Barnette graphs perfectly is hard, Theoret.\ Comput.\ Sci.\ 1010 (2024), 114701,
+\href{https://doi.org/10.1016/j.tcs.2024.114701}{doi:10.1016/j.tcs.2024.114701};
+\href{https://arxiv.org/abs/2302.11667v1}{arXiv:2302.11667v1}.
+\bibitem{DD} Andreas Darmann and Janosch Döcker, On a simple hard variant of
+Not-All-Equal 3-Sat, Theoret.\ Comput.\ Sci.\ 815 (2020), 147--152,
+\href{https://doi.org/10.1016/j.tcs.2020.02.010}{doi:10.1016/j.tcs.2020.02.010}.
+\bibitem{LDcorona} Laavanya D.\ and Devi Yamini S., Graceful coloring of some
+corona graphs: an algorithmic approach, Commun.\ Comb.\ Optim.\ 11 (2026),
+no.~2, 315--334,
+\href{https://doi.org/10.22049/cco.2024.29155.1866}{doi:10.22049/cco.2024.29155.1866}.
+\bibitem{LDN} Laavanya D., Devi Yamini S.\ and Muhammad Faisal Nadeem, Graceful
+colorings of a subclass of bipartite graphs, in: Nonlinear Complex Systems,
+Computational Intelligence and Their Applications, Springer Proceedings in
+Mathematics \& Statistics, Springer, 2026, 237--247,
+\href{https://doi.org/10.1007/978-981-95-5891-9_18}{doi:10.1007/978-981-95-5891-9\_18}.
+\bibitem{Mathlib} The mathlib Community, The Lean mathematical library, in:
+Proceedings of the 9th ACM SIGPLAN International Conference on Certified
+Programs and Proofs (CPP 2020), 367--381.
+\bibitem{Lean} Leonardo de Moura and Sebastian Ullrich, The Lean~4 theorem
+prover and programming language, in: Automated Deduction (CADE 28), Lecture
+Notes in Computer Science 12699, Springer, 2021, 625--635.
+\bibitem{PDL371} Paola T. Pantoja, Simone Dantas and Atílio G. Luiz, Bounds on
+graceful $k$-colorings of graphs, Discrete Appl.\ Math.\ 371 (2025), 218--231,
+\href{https://doi.org/10.1016/j.dam.2025.04.032}{doi:10.1016/j.dam.2025.04.032}.
+\bibitem{PDL374} Paola T. Pantoja, Simone Dantas and Atílio G. Luiz, Graceful
+colorings of graphs with maximum degree three, Discrete Appl.\ Math.\ 374
+(2025), 75--96,
+\href{https://doi.org/10.1016/j.dam.2025.05.013}{doi:10.1016/j.dam.2025.05.013}.
+\bibitem{PDL381} Paola T. Pantoja, Simone Dantas and Atílio G. Luiz, On graceful
+colorings in subcubic trees, Discrete Appl.\ Math.\ 381 (2026), 98--111,
+\href{https://doi.org/10.1016/j.dam.2025.11.027}{doi:10.1016/j.dam.2025.11.027}.
+\bibitem{Pantoja} Paola Tatiana Pantoja Huaynoca, Graceful colorings of graphs:
+structure, bounds, and complexity, doctoral thesis, Universidade Federal
+Fluminense, Niterói, 2026,
+\href{https://sipos.app/pgmat/administracao/defesas/documentos/2026.03.23-14.56.04Tese\%20Paola\%20Tatiana\%20Pantoja\%20H.pdf}{open copy at sipos.app}.
+\bibitem{Popa} Alexandru Popa and Andrei Popa, A polynomial time algorithm for
+computing the graceful coloring number on trees, SSRN preprint 7181532, 2026,
+\href{https://doi.org/10.2139/ssrn.7181532}{doi:10.2139/ssrn.7181532}.
+\end{thebibliography}
+\end{document}

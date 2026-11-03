@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: geneson-continuous-gluing-${{ github.ref }}
+  group: geneson-continuous-gluing-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

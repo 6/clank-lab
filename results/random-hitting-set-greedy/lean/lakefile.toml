@@ -1,0 +1,45 @@
+name = "GreedyLPHittingSet"
+version = "1.0.0"
+defaultTargets = ["GreedyLPHittingSet"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "c44e0c8ee63ca166450922a373c7409c5d26b00b"
+
+[[lean_lib]]
+name = "GreedyLPHittingSet"
+roots = [
+  "Endpoint",
+  "Probability",
+  "Greedy",
+  "LP",
+  "PathDefinitions",
+  "GreedyPaths",
+  "DeterministicExchange",
+  "DeterministicGap",
+  "PathProbability",
+  "QuantitativeProbability",
+  "ExpectationTail",
+  "BadMiddleBound",
+  "PathCounting",
+  "ExpectationConstruction",
+  "SourceEndpoint",
+  "SourceTransport",
+  "SourceConsequence",
+  "FullConstruction",
+  "UniformEndpoint",
+  "ConflictCoupling",
+  "UniformKernel",
+  "UniformPhase",
+  "UniformInvariance",
+  "PermutationScan",
+  "OrderedPhase",
+  "UniformTransport",
+  "UniformGoodLaw",
+  "UniformConstruction",
+  "UniformCount",
+  "Statement",
+  "Examples",
+  "Axioms",
+]

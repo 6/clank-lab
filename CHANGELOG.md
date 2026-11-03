@@ -30,6 +30,7 @@ Zenodo records.
 
 - Proves Geneson's continuous gluing conjecture (Conjecture 6.3): the maximum avoiding area for two arbitrary planar patterns joined at opposite corners is at most the sum of their separate maxima, for every positive square side length.
 - Includes the proof, a standalone Lean formalization, and checks of the statement and boundary conventions.
+- Zenodo: [10.5281/zenodo.23914513](https://doi.org/10.5281/zenodo.23914513)
 
 ## cd13-universal-dynamics v1 (November 3, 2026)
 

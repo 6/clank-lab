@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: cd13-universal-dynamics-${{ github.ref }}
+  group: cd13-universal-dynamics-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

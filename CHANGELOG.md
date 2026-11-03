@@ -35,6 +35,7 @@ Zenodo records.
 
 - Proves Collina and D'Andrea's conjecture: for every finite directed acyclic graph, finite local updates faithfully represent its Hecke–Kiselman monoid and characterize its universal dynamics.
 - Includes the proof in Lean and a standalone project with pinned dependencies.
+- Zenodo: [10.5281/zenodo.23914494](https://doi.org/10.5281/zenodo.23914494)
 
 ## zero-forcing-unimodality v1 (November 1, 2026)
 

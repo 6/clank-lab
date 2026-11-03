@@ -24,6 +24,7 @@ Zenodo records.
 
 - Disprove the monophonic sum inequality of Conjecture 9.3 of Chandran, Di Stefano, Haritha, Thomas and Tuite: a subdivided six-clique has lower bounds 8 and 15, whose sum exceeds its order plus one.
 - Include the paper, standalone checks with two certificate checkers and corruption controls, and checking notes naming the unread sources with reasons for each access gap.
+- Zenodo: [10.5281/zenodo.23915321](https://doi.org/10.5281/zenodo.23915321)
 
 ## geneson-continuous-gluing v1 (November 3, 2026)
 

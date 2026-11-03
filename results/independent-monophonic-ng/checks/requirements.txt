@@ -1,0 +1,6 @@
+# Linux x86_64 or aarch64; Python >=3.10 (standard library), GCC, HTTPS access.
+# Each dependency: local name, immutable upstream URL, SHA-256.
+drat-trim.c https://raw.githubusercontent.com/marijnheule/drat-trim/2e3b2dc0ecf938addbd779d42877b6ed69d9a985/drat-trim.c d834b649f437e091597f5347f259b9f681087f89ca0844d0cee250a1a1a0c2ee
+basis_ffi.c https://raw.githubusercontent.com/tanyongkiam/cake_lpr/a36874a8b750b43fe4b385b8ddbf5b033e46a3fa/basis_ffi.c 8e30d84fdcb2177aa5571d7fa6661a2fae5ecfd56baa0ce49c65f9233a9f87cb
+cake_lpr.S https://raw.githubusercontent.com/tanyongkiam/cake_lpr/a36874a8b750b43fe4b385b8ddbf5b033e46a3fa/cake_lpr.S 2f3af32d55083839b3fa0e693afd817679c0b8944bef41def05a8b0ec72b7d4a
+cake_lpr_arm8.S https://raw.githubusercontent.com/tanyongkiam/cake_lpr/a36874a8b750b43fe4b385b8ddbf5b033e46a3fa/cake_lpr_arm8.S 95b64883edc0cb09feedbcb1ebec233e2490f5b458fdda9dc29c212ed916f00c

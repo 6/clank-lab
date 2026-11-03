@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## independent-monophonic-ng v1 (November 3, 2026)
+
+- Disprove the monophonic sum inequality of Conjecture 9.3 of Chandran, Di Stefano, Haritha, Thomas and Tuite: a subdivided six-clique has lower bounds 8 and 15, whose sum exceeds its order plus one.
+- Include the paper, standalone checks with two certificate checkers and corruption controls, and checking notes naming the unread sources with reasons for each access gap.
+
 ## geneson-continuous-gluing v1 (November 3, 2026)
 
 - Proves Geneson's continuous gluing conjecture (Conjecture 6.3): the maximum avoiding area for two arbitrary planar patterns joined at opposite corners is at most the sum of their separate maxima, for every positive square side length.

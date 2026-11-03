@@ -1,0 +1,32 @@
+name: Independent monophonic sum checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/independent-monophonic-ng/**'
+      - '.github/workflows/independent-monophonic-ng.yml'
+  pull_request:
+    paths:
+      - 'results/independent-monophonic-ng/**'
+      - '.github/workflows/independent-monophonic-ng.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check independent-monophonic-ng
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: results/independent-monophonic-ng
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check certificates and rejection controls
+        run: python3 checks/check.py

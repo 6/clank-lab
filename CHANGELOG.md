@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## cd13-universal-dynamics v1 (November 3, 2026)
+
+- Proves Collina and D'Andrea's conjecture: for every finite directed acyclic graph, finite local updates faithfully represent its Hecke–Kiselman monoid and characterize its universal dynamics.
+- Includes the proof in Lean and a standalone project with pinned dependencies.
+
 ## zero-forcing-unimodality v1 (November 1, 2026)
 
 - A 73-vertex graph has a nonunimodal zero-forcing polynomial, answering the question of Boyer and coauthors with Wang's compression method.

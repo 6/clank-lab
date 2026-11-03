@@ -1,0 +1,75 @@
+name: Iterated plethysm checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/iterated-plethysm/**'
+      - '.github/workflows/iterated-plethysm.yml'
+  pull_request:
+    paths:
+      - 'results/iterated-plethysm/**'
+      - '.github/workflows/iterated-plethysm.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: iterated-plethysm-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/iterated-plethysm/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean through elan
+        run: |
+          arch=$(uname -m)
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          case "$arch" in
+            x86_64) elan_sha=42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 ;;
+            aarch64) elan_sha=05febd124d84ebf994b2e7479922a5650b1e950c17ae3bd1ddd776b65bb72bf9 ;;
+            *) exit 1 ;;
+          esac
+          echo "$elan_sha  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check --strict
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore proof build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/iterated-plethysm/lean/.lake/build
+          key: iterated-plethysm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/iterated-plethysm/lean/lean-toolchain', 'results/iterated-plethysm/lean/lake-manifest.json', 'results/iterated-plethysm/lean/lakefile.toml', 'results/iterated-plethysm/lean/**/*.lean', '!results/iterated-plethysm/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof, statement checks, and axiom guards
+        run: lake build
+
+  check:
+    name: Check iterated-plethysm
+    needs: [lean]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful proof build
+        env:
+          LEAN_RESULT: ${{ needs.lean.result }}
+        run: test "$LEAN_RESULT" = success

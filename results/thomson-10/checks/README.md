@@ -36,6 +36,7 @@ orthogonal alignment and pair remainder inequality.
 ## Further credits
 
 - Aravind Karthigeyan, [thomson-n9-lean](https://github.com/aravindkarthigeyan/thomson-n9-lean) — most of the MIT-licensed Lean code and the proof design.
+- Katherine Xie, [Optimality and uniqueness for the Thomson problems with n=9 and n=10](https://doi.org/10.5281/zenodo.23899873), November 2, 2026, with [ten-point verification code and certificates](https://doi.org/10.5281/zenodo.23845065) — independent proof of the nine- and ten-point cases.
 - Jingxing Huang, [Thomson n=9 proof and manuscript](https://doi.org/10.5281/zenodo.23573472) — related nine-point candidate.
 - Jingxing Huang, [ten-point stationarity continuation](https://github.com/Stickerbug/thomson-n9-proof/blob/fce398ce69c369a8de5b10d194af137cf33edd54/proof_work/publication_validation/formal/ThomsonCertificate/N10StationarityRightTerm3Final.lean) — related endpoint-sign theorem `d4dStationarity_right_endpoint_positive`.
 - L. Föppl, [Stabile Anordnungen von Elektronen im Atom](https://doi.org/10.1515/crll.1912.141.251) — candidate history.

@@ -7,6 +7,7 @@ Zenodo records.
 ## thomson-10 v10 (November 4, 2026)
 
 - Correction: credit added for Katherine Xie's independent proof of the nine- and ten-point cases, posted November 2, 2026. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23954051](https://doi.org/10.5281/zenodo.23954051)
 
 ## planar-graceful-coloring v1 (November 3, 2026)
 

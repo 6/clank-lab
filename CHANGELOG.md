@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## hamiltonian-degree-sequences v1 (November 4, 2026)
+
+- Refutes the conjecture of Kühn, Osthus and Treglown that conditions on the separately sorted out- and in-degree sequences force a Hamilton cycle in a digraph: it fails for every $n\ge7$ and holds for every $n\le6$. Nash-Williams' conjecture therefore fails for every $n\ge7$, beyond Guninski's 6-vertex counterexamples, and holds for $n\le5$.
+- Includes the paper, a Lean proof of the counterexamples, and two independent programs that check them and search all digraphs on at most six vertices.
+
 ## path-ramsey v9 (November 4, 2026)
 
 - Correction: credit added for Shao, Zhu, Xu and Kosari's independent proof of the same theorem, posted November 2, 2026. The theorem and its checks are unchanged.

@@ -1,0 +1,8 @@
+# n=6 counterexample to Nash-Williams' Chvatal-type conjecture (KO survey Conj. 6 / KOT Conj. 1).
+# One line per vertex: "v: out-neighbours". Vertices 0..5. No loops; 2-cycles allowed.
+0: 1 2 3 4 5
+1: 4 5
+2: 1 5
+3: 1 4
+4: 0 1 3 5
+5: 0 1 2 4

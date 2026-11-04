@@ -13,9 +13,10 @@
 \newcommand{\PAF}{\operatorname{PAF}}
 \newcommand{\Z}{\mathbb Z}
 \setlength{\emergencystretch}{2em}
+\pdfinterwordspaceon
 \title{Nonexistence of Williamson matrices of order 65}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 28, 2026}
+\date{November 4, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={Nonexistence of Williamson matrices of order 65}}
 \begin{document}
 \maketitle
@@ -33,6 +34,11 @@ neither repeats the decisive
 full-row lift search. Full-pipeline controls reproduce known smaller-order counts.
 The search is computational under stated arithmetic assumptions and is
 not formally verified.
+
+This work has not yet been reviewed by experts.
+The proofs, the search code, the enumeration checkers, the witness checkers
+and the text were produced by AI models (from OpenAI and Anthropic),
+working under the author's direction.
 \end{abstract}
 
 \section{Introduction}
@@ -118,10 +124,7 @@ and states that exhaustive search or a SAT+CAS nonexistence proof would be
 required for mathematical certainty~\cite[\S7.5]{Zhang}.
 The exhaustive computation here confirms that prediction;
 no code or reductions from Zhang's account are used.
-
-The proofs, the search code, the enumeration checkers, the witness checkers
-and the text were produced by AI models (from OpenAI and Anthropic),
-working under the author's direction. This work has not yet been reviewed by experts.
+Kishan independently agrees~\cite[\S101]{Kishan}.
 
 \section{Rows, autocorrelations, and spectra}\label{sec:rows}
 The row sum and power spectral density give the necessary conditions for
@@ -719,6 +722,12 @@ arXiv:2601.22337v1, first posted January 29, 2026.
 S. Y. Zhang, Programmable Emergence via Cognitive Engine: Longitudinal
 Evidence of AI Research Maturation, Zenodo record 19392279, version posted April 2, 2026.
 \url{https://doi.org/10.5281/zenodo.19392279}.
+\bibitem{Kishan}
+Kishan, New Hadamard matrices, GitHub repository, file
+\texttt{search/NOTES.md}, Section~101, ``Williamson and good matrices of
+order 65'', committed October 25, 2026; reports by an exhaustive search
+of all compressed instances that no Williamson matrices of order $65$ exist.
+\url{https://github.com/vatskishan03/Hadamard/blob/809480f37d6baf39b2e0689da5027a66705a36af/search/NOTES.md}.
 \bibitem{FGS}
 R. J. Fletcher, M. Gysin and J. Seberry,
 \emph{Application of the discrete Fourier transform to the search for

@@ -7,6 +7,7 @@ Zenodo records.
 ## williamson-order-65 v5 (November 4, 2026)
 
 - Correction: credit added for Kishan's independent exhaustive search reporting the same nonexistence, posted October 25, 2026. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23956544](https://doi.org/10.5281/zenodo.23956544)
 
 ## thomson-10 v10 (November 4, 2026)
 

@@ -7,6 +7,7 @@ Zenodo records.
 ## path-ramsey v9 (November 4, 2026)
 
 - Correction: credit added for Shao, Zhu, Xu and Kosari's independent proof of the same theorem, posted November 2, 2026. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23956571](https://doi.org/10.5281/zenodo.23956571)
 
 ## williamson-order-65 v5 (November 4, 2026)
 

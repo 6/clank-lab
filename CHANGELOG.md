@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## thomson-10 v10 (November 4, 2026)
+
+- Correction: credit added for Katherine Xie's independent proof of the nine- and ten-point cases, posted November 2, 2026. The theorem and its checks are unchanged.
+
 ## planar-graceful-coloring v1 (November 3, 2026)
 
 - Proves that deciding whether a planar graph has a graceful 4-coloring is NP-complete, even for maximum degree three, answering the question of Antony, Laavanya and Devi Yamini; disconnected graphs are allowed, as in their question.

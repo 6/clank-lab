@@ -53,6 +53,18 @@ code re-checked every piece. The upper bounds for $n \le 9$ that the
 computation uses, $R(P_9, P_9, P_9) \le 17$ among them, are re-derived by the
 same method rather than taken from the literature.
 
+Zehui Shao, Enqiang Zhu, Jin Xu and Saeed Kosari posted
+[reproducibility materials](https://doi.org/10.5281/zenodo.23881576) on Zenodo
+on November 2, 2026, for their independent manuscript "The three-color Ramsey
+number of the ten-vertex path" (revision 7), which proves
+$R(P_{10}, P_{10}, P_{10}) = 18$ according to the package; the manuscript
+itself is not public. The package holds C++ programs, reference results and
+independent checks for three exhaustive finite verifications, which need no
+SAT solver. Its reproduction guide describes the proof: these verifications
+are the manuscript's three computed lemmas (Lemmas 13, 14 and 28), and its
+remaining steps are proved in the manuscript. The package records a
+verification run from September 8, 2026.
+
 Checked in Lean from the definitions, with compiled evaluation; not yet reviewed by experts.
 
 The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.

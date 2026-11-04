@@ -50,7 +50,7 @@
 
 \title{The three-color Ramsey number of the 10-vertex path}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 25, 2026}
+\date{November 4, 2026}
 
 \begin{document}
 \maketitle
@@ -70,12 +70,10 @@ Boolean satisfiability refutations after fixing a monochromatic
 nine-vertex path and imposing simultaneous symmetry constraints. A
 separate refutation proves that the cases considered cover every
 coloring. The reduction and the certificate checks are formalized in Lean.
-\end{abstract}
 
-\begin{quotation}\small\noindent
 This work has not yet been reviewed by experts.
 The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-\end{quotation}
+\end{abstract}
 
 \section{Introduction}
 For graphs $G_1,G_2,G_3$, the Ramsey number $R(G_1,G_2,G_3)$ is the least
@@ -119,6 +117,14 @@ be proved complete. A lexicographic minimum and a separate refutation
 excluding all assignments outside the selected cases discharge these
 obligations. Dybizbański, Dzido and Radziszowski reported that their
 attempts at the ten- and eleven-vertex cases remained incomplete \cite{DDR16}.
+
+Shao, Zhu, Xu and Kosari have independently proved $\R(P_{10})=18$
+by a different route \cite{SZXK26}. Their reproducibility materials,
+posted on November 2, 2026, accompany their manuscript (revision~7),
+which we describe from the package's reproduction guide: the proof is
+structural, and its three finite verifications (its Lemmas~13, 14
+and~28) are exhaustive enumerations by C++ programs that need no SAT
+solver. The package records a verification run from September 8, 2026.
 
 The method combines cube-and-conquer with symmetry breaking and verified
 certificate checking. Heule, Kullmann, Wieringa and Biere's
@@ -704,6 +710,12 @@ cycles}, Electron.\ J.\ Combin.\ \textbf{18} (2011), \#P24.
 S.~P.~Radziszowski, \emph{Small Ramsey numbers}, Electron.\ J.\ Combin.,
 Dynamic Survey DS1, revision \#18, April 24, 2026.
 \href{https://doi.org/10.37236/21}{doi:10.37236/21}.
+
+\bibitem{SZXK26}
+Z.~Shao, E.~Zhu, J.~Xu and S.~Kosari, \emph{Reproducibility materials
+for The three-color Ramsey number of the ten-vertex path}, Zenodo,
+version 1.0.1, November 2, 2026.
+\href{https://doi.org/10.5281/zenodo.23881576}{doi:10.5281/zenodo.23881576}.
 
 \bibitem{SJXW26}
 Z.~Shao, H.~Jiang, X.~Xu and S.~Wang, \emph{Native Windows reproduction

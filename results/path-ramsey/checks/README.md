@@ -161,6 +161,7 @@ independent check of the formula files.
 - Yang Yuansheng and P. Rowlinson, [On the third Ramsey numbers of graphs with five edges](../checks/bibliography-background.tex) — preceding cases.
 - Yang Yuansheng, [On the third Ramsey numbers of graphs with six edges](../checks/bibliography-background.tex) — preceding cases.
 - N. F. Galindez, [An upper bound for the three-colour Ramsey number of the ten-cycle](https://doi.org/10.5281/zenodo.22000000) — related cycle bound.
+- Z. Shao, E. Zhu, J. Xu and S. Kosari, [Reproducibility materials for The three-color Ramsey number of the ten-vertex path](https://doi.org/10.5281/zenodo.23881576), November 2, 2026 — independent proof of the same theorem by a structural argument with finite C++ enumerations.
 - Z. Shao, H. Jiang, X. Xu and S. Wang, [Native Windows reproduction package: R(C4,C6,C8)=12](https://doi.org/10.5281/zenodo.23230189) — related computational work.
 - J. Zhang, [erdos557](https://github.com/zhangjun725/erdos557) — related formalization.
 - M. Kirchweger, P. Manrique and S. Szeider, [Formally verified graph generation with SAT modulo symmetries and Lean](https://doi.org/10.1007/978-3-032-32589-1_8) — related method.

@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: path-ramsey-${{ github.ref }}
+  group: path-ramsey-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
@@ -35,9 +35,17 @@ jobs:
       - name: Install Lean with elan
         run: |
           arch=$(uname -m)
+          case "$arch" in
+            x86_64) elan_sha256=42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 ;;
+            aarch64|arm64)
+              arch=aarch64
+              elan_sha256=05febd124d84ebf994b2e7479922a5650b1e950c17ae3bd1ddd776b65bb72bf9 ;;
+            *) echo "Unsupported architecture for elan: $arch" >&2; exit 1 ;;
+          esac
           curl --fail --location --retry 3 \
             "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
             --output "$RUNNER_TEMP/elan.tar.gz"
+          echo "$elan_sha256  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check
           tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
           "$RUNNER_TEMP/elan-init" -y --default-toolchain none
           export PATH="$HOME/.elan/bin:$PATH"
@@ -76,9 +84,17 @@ jobs:
         working-directory: results/path-ramsey/lean
         run: |
           arch=$(uname -m)
+          case "$arch" in
+            x86_64) elan_sha256=42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 ;;
+            aarch64|arm64)
+              arch=aarch64
+              elan_sha256=05febd124d84ebf994b2e7479922a5650b1e950c17ae3bd1ddd776b65bb72bf9 ;;
+            *) echo "Unsupported architecture for elan: $arch" >&2; exit 1 ;;
+          esac
           curl --fail --location --retry 3 \
             "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
             --output "$RUNNER_TEMP/elan.tar.gz"
+          echo "$elan_sha256  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check
           tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
           "$RUNNER_TEMP/elan-init" -y --default-toolchain none
           export PATH="$HOME/.elan/bin:$PATH"

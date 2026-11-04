@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## path-ramsey v9 (November 4, 2026)
+
+- Correction: credit added for Shao, Zhu, Xu and Kosari's independent proof of the same theorem, posted November 2, 2026. The theorem and its checks are unchanged.
+
 ## williamson-order-65 v5 (November 4, 2026)
 
 - Correction: credit added for Kishan's independent exhaustive search reporting the same nonexistence, posted October 25, 2026. The theorem and its checks are unchanged.

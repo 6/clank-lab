@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## williamson-order-65 v5 (November 4, 2026)
+
+- Correction: credit added for Kishan's independent exhaustive search reporting the same nonexistence, posted October 25, 2026. The theorem and its checks are unchanged.
+
 ## thomson-10 v10 (November 4, 2026)
 
 - Correction: credit added for Katherine Xie's independent proof of the nine- and ten-point cases, posted November 2, 2026. The theorem and its checks are unchanged.

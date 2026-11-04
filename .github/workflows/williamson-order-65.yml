@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: williamson-order-65-${{ github.ref }}
+  group: williamson-order-65-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

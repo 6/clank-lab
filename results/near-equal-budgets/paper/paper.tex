@@ -1,0 +1,492 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={P. Graham},pdftitle={Competitive equilibrium can fail near equal budgets for three additive agents}]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\setlength{\emergencystretch}{3em}
+\title{Competitive equilibrium can fail near equal budgets for three additive agents}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+In a Fisher market with indivisible goods, each agent has a budget of
+artificial money and a competitive equilibrium is an allocation of all the
+goods with prices at which every agent gets a most preferred bundle within
+budget. With exactly equal budgets one good and two agents already have no
+equilibrium. Babaioff, Nisan and Talgam-Cohen proved that two agents with
+additive preferences over any number of goods have a competitive
+equilibrium whenever their budgets are sufficiently close to equal but not
+equal, and asked whether this extends to more than two agents (their Open
+Problem~1). It does not. We give three agents with strict additive
+valuations over five goods such that for every $0<\delta<1/17$ no
+competitive equilibrium exists at the budgets $(1-3\delta,1+2\delta,1+\delta)$,
+nor at any budget vector near them. So every neighborhood of equal budgets
+contains a set of positive measure on which no equilibrium exists. Adding
+goods of small value, as in Segal-Halevi's Lemma~5, extends this to every
+number of goods $m\ge5$. This answers the case of three additive agents and
+$m\ge5$ goods that Segal-Halevi left open: the budgets with no competitive
+equilibrium can have positive measure. The proof gives, for each allocation
+of the goods, an exact Farkas (linear-programming duality) certificate that
+no prices support it; an independent exact linear-programming computation
+confirms it.
+
+This work has not yet been reviewed by experts.
+The proofs, the computer checks and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{Keywords:} competitive equilibrium, indivisible goods,
+Fisher market, generic budgets, unequal entitlements, fair division.
+
+\noindent\textit{MSC 2020:} 91B50, 91B32, 90C05.
+
+\section{Introduction}
+
+\subsection{Main result}
+A set $M$ of $m$ indivisible goods is to be divided among $n$ agents. Agent
+$i$ has an additive valuation $V_i$: a positive value $V_i(g)$ for each good
+$g$, and $V_i(S)=\sum_{g\in S}V_i(g)$ for each bundle $S\subseteq M$. Agent
+$i$ strictly prefers $S$ to $T$ when $V_i(S)>V_i(T)$, and the preferences are
+\emph{strict} when the $2^m$ bundle values of each agent are pairwise
+distinct. Each agent $i$ has a budget $t_i>0$. An \emph{allocation}
+$X=(X_1,\dots,X_n)$ is a partition of $M$ into $n$ bundles, some possibly
+empty; prices $p_g>0$ extend to bundles by $p(S)=\sum_{g\in S}p_g$.
+
+\begin{definition}\label{def:ce}
+A \emph{competitive equilibrium} (CE) at budgets $t=(t_1,\dots,t_n)$ is a
+pair $(X,p)$ of an allocation and prices such that for every agent $i$:
+(1)~$p(X_i)\le t_i$, and (2)~$p(Y)>t_i$ for every bundle $Y$ with
+$V_i(Y)>V_i(X_i)$.
+\end{definition}
+
+This is Segal-Halevi's Definition~1 \cite{SH}, specialized to additive
+preferences; Babaioff, Nisan and Talgam-Cohen \cite[Definition~2.1]{BNT}
+use the same conditions with nonnegative prices. The theorem below holds
+under either convention: the proof rules out even nonnegative prices with
+weak inequalities in (2) (Lemma~\ref{lem:farkas}). Let $e=(1,1,1)$ denote
+equal budgets.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lccccc}
+\toprule
+ & $v$ & $w$ & $x$ & $y$ & $z$\\
+\midrule
+agent 1 & 6 & 12 & 11 & 9 & 13\\
+agent 2 & 14 & 4 & 1 & 8 & 20\\
+agent 3 & 8 & 6 & 9 & 16 & 12\\
+\bottomrule
+\end{tabular}
+\caption{The values $V_i(g)$ of the three agents for the five goods.}
+\label{tab:values}
+\end{table}
+
+\begin{theorem}\label{thm:main}
+Consider three agents with the additive valuations of Table~\ref{tab:values}
+over the goods $M=\{v,w,x,y,z\}$; their preferences are strict. There is an
+open set $U\subset\mathbb{R}^3_{>0}$, closed under multiplication by positive
+scalars, such that no CE exists at any budget vector in $U$, and $U$
+contains
+\[
+  e+\delta(-3,2,1)=(1-3\delta,\;1+2\delta,\;1+\delta)\qquad\text{for every }0<\delta<1/17 .
+\]
+Consequently every neighborhood of $e$, and of each positive multiple of
+$e$, contains a set of budget vectors of positive Lebesgue measure at which
+no CE exists.
+\end{theorem}
+
+For example, no CE exists at the budgets $(97,102,101)$ or $(17,22,21)$,
+the multiples of $e+\delta(-3,2,1)$ for $\delta=1/100$ and $\delta=1/20$.
+The theorem does not say that every budget vector near $e$ lacks a CE:
+near $e$, the set $U$ is exactly the set of budgets with $t_1<t_3<t_2$ and
+$t_1+t_2<2t_3$ (Remark~\ref{rem:cone}).
+
+\begin{corollary}\label{cor:m}
+For every $m\ge5$ there are three agents with strict additive valuations
+over $m$ goods and a nonempty open set of budget vectors, closed under
+positive scaling and with $e$ in its closure, at which no CE exists.
+\end{corollary}
+
+\subsection{The two questions}
+Competitive equilibrium from equal incomes is a classical rule for fair
+and efficient division \cite{Fol,Var}. With indivisible goods it can fail
+even for one good and two agents, since whoever doesn't get the good can
+afford it. Babaioff, Nisan and Talgam-Cohen credit Budish \cite{Bud} with initiating
+``the study of competitive equilibrium with almost-equal budgets'', with
+``existence results for an approximate such equilibrium notion'', and
+``take the idea of almost-equal budgets a step further'', to exact
+equilibria with generic budgets \cite[Section~1]{BNT}.
+Their main result is \cite[Theorem~1.1]{BNT}: ``Consider 2 agents with
+additive preferences over multiple items. If the budgets are sufficiently
+close to being equal, but not precisely so, then a CE exists'' (in full,
+\cite[Theorem~7.1]{BNT}). They then pose \cite[Open Problem~1]{BNT}:
+\begin{quote}
+Consider $n>2$ agents with additive preferences over multiple items. Does
+there exist a CE when budgets are sufficiently close to being equal?
+\end{quote}
+Open Problem~1 appears from the second arXiv version of their paper
+(September 25, 2018). The first (March 23, 2017) had asked more broadly
+\cite[Section~1.4]{BNT1}: ``Does there always exist a CE for any number of players with
+additive preferences and generic budgets?'' Segal-Halevi's Theorem~5 \cite{SH}
+answers that question negatively with four agents, and
+Theorem~\ref{thm:main} does so with three. Babaioff, Nisan and
+Talgam-Cohen note that Segal-Halevi's four-agent result ``does not rule
+out that for more than 2 agents, equilibrium exists for generic budgets
+that are almost equal'' \cite[Section~1]{BNT}, where generic existence
+means existence ``for every vector of budgets except for a zero-measure
+subset'' \cite[Section~2.2.2]{BNT}. They also report a computer search: on
+instances from the Spliddit website with additive preferences and more
+than two agents, ``after perturbing the budgets to make them almost
+equal, a CE was found'' \cite[Section~9.2 and Appendix~B.2]{BNT}. The
+example here is not one of those instances.
+
+Open Problem~1 can be read as asking for a CE at every unequal budget
+vector near $e$, or at almost every one (generic existence).
+Theorem~\ref{thm:main} answers both readings negatively: for the three
+agents of Table~\ref{tab:values} there is no $\varepsilon>0$ such that a CE
+exists at almost all budget vectors within $\varepsilon$ of $e$.
+
+Segal-Halevi's Definition~3 \cite{SH} reads: ``Given integers $n\ge2$ and
+$m\ge1$, a CE exists for almost all incomes if the set of income-vectors
+for which no CE exists has a zero measure'', where by Definition~2 a CE
+exists for an income vector $t$ if one exists ``for all
+preference-profiles'' of the class. For additive preferences Segal-Halevi
+proved that three agents and four goods have a CE for almost all incomes
+\cite[Theorem~4]{SH}, and that with four or more agents and four or more
+goods there are additive preferences and a positive-measure set of
+incomes without a CE \cite[Theorem~5]{SH}. For monotone, non-additive
+preferences, two agents and five goods may have no CE on a
+positive-measure set of incomes \cite[Theorem~3.5]{BNT2},
+\cite[Theorem~6]{SH}. Section~10.1 of \cite{SH} states: ``for $n=2$ or
+$n=3$ agents with additive preferences, when there are $m\ge5$ goods, it is
+open whether CE exists for almost all incomes.'' Wikipedia's list of
+unsolved problems in fair division records as an open conjecture that
+``When there are three agents, even with additive valuations, CE for
+almost all incomes might not exist'' \cite{Wik}. Corollary~\ref{cor:m}
+settles the case $n=3$: the answer is no for every $m\ge5$, as that
+conjecture expects (Corollary~\ref{cor:questions}(b)). With the results of
+\cite{SH} for $m\le4$ \cite[table in Section~1, Theorem~4]{SH}, this
+completes the case of three additive agents, and $m=5$ is the least number
+of goods for which a CE can fail on a positive-measure set of incomes.
+
+What this paper adds is the example and its proof. The definitions, the
+questions and the lifting argument for more goods are those of Babaioff,
+Nisan and Talgam-Cohen and of Segal-Halevi. The difficult step was finding
+an additive example: additivity rules out the preferences used for
+monotone valuations (Segal-Halevi explains why the profile of
+\cite[Theorem~6]{SH} is not additive \cite[Section~10.1]{SH}), and the
+example here was found by computer search. This paper does not address two
+additive agents with $m\ge5$ goods, which Segal-Halevi lists as open, or
+Open Problem~1 for a fixed number of agents $n\ge4$.
+
+\subsection{Proof overview}
+At a fixed budget vector, deciding whether a CE exists is finite: there
+are $3^5=243$ allocations, and for each one the CE conditions are linear
+inequalities in the prices. We drop strictness, allowing $p\ge0$ and
+$p(Y)\ge t_i$, and give for each allocation nonnegative multipliers whose
+combination of these inequalities gives a linear inequality on the budgets
+alone, $\sum_i w_it_i\ge0$ (Lemma~\ref{lem:farkas}). Where the budgets
+violate it, that allocation has no CE prices. Along the ray
+$e+\delta(-3,2,1)$ the inequality $\sum_iw_it_i<0$ is linear in $\delta$,
+and the $243$ certificates together cover exactly $0<\delta<1/17$. Each
+certificate excludes an open half-space of budgets, which gives the open
+set $U$. Two kinds of obstruction appear. In the first, an agent prefers
+part of another agent's bundle to its own, which forces a comparison of
+budgets that fails on the ray (Example~\ref{ex:envy}). In the second, an
+agent's preferred bundles together use the goods of other agents' bundles,
+so their prices, each above that agent's budget, are bounded by the other
+budgets (Example~\ref{ex:bottleneck}); an obstruction of this kind bounds
+$\delta$ by $1/17$.
+
+\section{Certificates}
+
+\begin{lemma}\label{lem:farkas}
+Let $X$ be an allocation and $t$ a budget vector. Let $P$ be the set of
+pairs $(i,Y)$ with $V_i(Y)>V_i(X_i)$. Suppose $\alpha_i\ge0$ for each agent
+and $\lambda_{i,Y}\ge0$ for $(i,Y)\in P$ satisfy, for every good $g$,
+\begin{equation}\label{eq:cover}
+  \sum_{i:\,g\in X_i}\alpha_i\;\ge\;\sum_{(i,Y)\in P:\,g\in Y}\lambda_{i,Y},
+\end{equation}
+and let $w_i=\alpha_i-\sum_{Y:(i,Y)\in P}\lambda_{i,Y}$. If
+$\sum_iw_it_i<0$, then no prices $p\ge0$ satisfy $p(X_i)\le t_i$ for all
+$i$ and $p(Y)\ge t_i$ for all $(i,Y)\in P$. In particular there is no CE
+$(X,p)$ at $t$, nor at any budget vector $t'$ with $\sum_iw_it'_i<0$.
+\end{lemma}
+
+\begin{proof}
+Suppose such $p$ exist. Multiply $t_i-p(X_i)\ge0$ by $\alpha_i$ and
+$p(Y)-t_i\ge0$ by $\lambda_{i,Y}$, and add:
+\[
+  \sum_iw_it_i\;\ge\;\sum_g p_g\Bigl(\sum_{i:\,g\in X_i}\alpha_i-\sum_{(i,Y)\in P:\,g\in Y}\lambda_{i,Y}\Bigr)\;\ge\;0,
+\]
+by \eqref{eq:cover} and $p\ge0$, contradicting $\sum_iw_it_i<0$. A CE
+$(X,p)$ at $t$ would satisfy these relaxed inequalities, since $p>0$ and
+$p(Y)>t_i$ imply $p\ge0$ and $p(Y)\ge t_i$; so none exists, and the same
+holds at any $t'$ with $\sum_iw_it'_i<0$.
+\end{proof}
+
+By Farkas' lemma \cite{Sch}, such multipliers exist whenever the relaxed
+system has no solution, so nothing is lost by asking for them. We call
+$w=(w_1,w_2,w_3)$ the \emph{weight} of the certificate. Two examples show
+how the certificates read.
+
+\begin{example}\label{ex:envy}
+Let $X=(vwx,\,z,\,y)$, writing bundles as words. Agent~3 values $y$ at $16$
+and $vx$ at $17$, so it prefers part of agent~1's bundle to its own. In a
+CE, $p(vx)\le p(vwx)\le t_1$ while $p(vx)>t_3$, so $t_1>t_3$. The
+certificate is $\alpha_1=\lambda_{3,vx}=1/2$, with weight
+$(1/2,0,-1/2)$. Along the ray, $t_1-t_3=-4\delta<0$, so this allocation is
+excluded for every $\delta>0$. Seventeen allocations are excluded by a
+linear inequality between budgets that holds with equality at $e$
+(Appendix~\ref{app:typeB}).
+\end{example}
+
+\begin{example}\label{ex:bottleneck}
+Let $X=(w,\,vz,\,xy)$. Agent~1 values $w$ at $12$ and prefers $vx$ ($17$),
+$vy$ ($15$) and $z$ ($13$). In a CE each of these costs more than $t_1$,
+and since $vx+vy+2z$ uses each of $v,x,y,z$ as often as $2\,vz+xy$ does,
+\[
+  4t_1< p(vx)+p(vy)+2p(z)=2p(vz)+p(xy)\le 2t_2+t_3 .
+\]
+On the ray, $4t_1-2t_2-t_3=1-17\delta$, which is positive for
+$\delta<1/17$. This certificate ($\alpha_2=2/7$, $\alpha_3=1/7$,
+$\lambda_{1,vx}=\lambda_{1,vy}=1/7$, $\lambda_{1,z}=2/7$) is the one that
+limits the theorem to $\delta<1/17$.
+\end{example}
+
+\section{Proof of Theorem~\ref{thm:main}}
+
+Write $d=(-3,2,1)$. For each of the $3^5=243$ allocations $X$, a
+certificate as in Lemma~\ref{lem:farkas}, with weight $w^X$, is listed in
+the certificate file that accompanies this paper
+(Section~\ref{sec:verification} says where); the counts and the bound
+$1/17$ below are checked by the programs described there. Any direction
+$d$ with $d_1<d_3<d_2$ and $d_1+d_2<2d_3$ would serve for small $\delta$
+(Remark~\ref{rem:cone}); the certificates were computed for
+$d=(-3,2,1)$. Each weight is of one of two kinds:
+\begin{itemize}
+\item[(A)] $w^X\!\cdot e<0$ ($226$ allocations). Then
+$w^X\!\cdot(e+\delta d)=w^X\!\cdot e+\delta\,w^X\!\cdot d<0$ for
+$0\le\delta<r_X$, where $r_X=-w^X\!\cdot e/w^X\!\cdot d$ if
+$w^X\!\cdot d>0$ and $r_X=\infty$ otherwise.
+\item[(B)] $w^X\!\cdot e=0$ and $w^X\!\cdot d<0$ ($17$ allocations). Then
+$w^X\!\cdot(e+\delta d)<0$ for every $\delta>0$.
+\end{itemize}
+The least $r_X$ is $1/17$, attained by Example~\ref{ex:bottleneck}.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The preferences are strict and the valuations strictly monotone
+(Section~\ref{sec:verification}). Let
+\[
+  U=\{t\in\mathbb{R}^3_{>0}:\ w^X\!\cdot t<0\ \text{for all }243\text{ allocations }X\}.
+\]
+It is a finite intersection of open half-spaces with $\mathbb{R}^3_{>0}$,
+so it is open, and it is closed under positive scaling. At $t\in U$, every
+allocation $X$ is excluded by Lemma~\ref{lem:farkas} with its certificate,
+so no CE exists. By (A) and (B), $e+\delta d\in U$ for every
+$0<\delta<1/17$. Given a positive multiple $ce$ and $\varepsilon>0$, choose
+$\delta$ with $0<\delta<1/17$ and $c\delta\lVert d\rVert<\varepsilon$; then $c(e+\delta d)\in U$
+is within $\varepsilon$ of $ce$, and since $U$ is open, a small ball around
+it lies in $U$ and in the $\varepsilon$-ball around $ce$. That ball has
+positive measure.
+\end{proof}
+
+\begin{remark}\label{rem:cone}
+Near $e$, the set $U$ is cut out by the kind-(B) inequalities alone. The
+$243$ certificates have $51$ distinct weights up to positive scaling, four
+of kind (B). These four give the inequalities $t_1<t_3$, $t_3<t_2$,
+$t_1<t_2$ and $t_1+t_2<2t_3$ (Appendix~\ref{app:typeB}), and the kind-(A)
+inequalities hold strictly at $e$. So there is a neighborhood $N$ of $e$
+in which $U\cap N$ is the intersection of $N$ with the open polyhedral
+cone defined by $t_1<t_3<t_2$ and $t_1+t_2<2t_3$ (the inequality
+$t_1<t_2$ follows from these).
+\end{remark}
+
+\begin{remark}
+The certificates use only which bundles each agent strictly prefers to
+which. So the theorem holds for every additive profile that ranks the
+bundles as Table~\ref{tab:values} does, an open set of valuation profiles.
+\end{remark}
+
+\section{More goods, and the two questions}
+
+\begin{proof}[Proof of Corollary~\ref{cor:m}]
+We follow Segal-Halevi's proof of \cite[Lemma~5(a)]{SH}, which adds a
+``low-value item'' that changes no comparison between the original
+bundles. Let $k=m-5$ and give each agent value $2^{-j}$ for the new good
+$g_j$, $j=1,\dots,k$. Any set $Z$ of new goods has value less than $1$.
+The original values are integers and the preferences are strict, so
+$V_i(W)>V_i(Y)$ implies $V_i(W)\ge V_i(Y)+1>V_i(Y\cup Z)$ for original
+bundles $W,Y$. Bundles of the larger market with different original parts
+therefore have different values, and bundles with the same original part
+differ by distinct sums of distinct powers of $2$; so the preferences stay
+strict. Let $t\in U$ and suppose $(X,p)$ is a CE of the larger market at
+$t$. Put $X'_i=X_i\cap M$. Then $p(X'_i)\le p(X_i)\le t_i$, and if
+$W\subseteq M$ has $V_i(W)>V_i(X'_i)$ then $V_i(W)>V_i(X_i)$, so
+$p(W)>t_i$. Thus $(X',p|_M)$ is a CE of the five-good market at $t$,
+contradicting Theorem~\ref{thm:main}. So no CE exists at any $t\in U$.
+\end{proof}
+
+\begin{corollary}\label{cor:questions}
+(a) The answer to \cite[Open Problem~1]{BNT} is no: for the three additive
+agents of Table~\ref{tab:values} there is no $\varepsilon>0$ such that a CE
+exists for almost all budget vectors within $\varepsilon$ of equal budgets.
+(b) For three agents with additive preferences and $m\ge5$ goods, a CE
+need not exist for almost all incomes in the sense of
+\cite[Definition~3]{SH}.
+\end{corollary}
+
+\begin{proof}
+Both follow from Theorem~\ref{thm:main} and Corollary~\ref{cor:m}: one
+profile has no CE on a set of positive measure within every
+$\varepsilon$-ball around $e$. Normalizing budgets to sum to $1$, as
+\cite[Section~2.1]{BNT} does, changes nothing: the coordinates of $d$ sum
+to $0$, and $U$ is closed under scaling.
+\end{proof}
+
+\section{Computational verification}\label{sec:verification}
+
+Three short programs in exact rational arithmetic check the theorem from
+the market and the certificate file. The programs, the certificate file
+\texttt{data/certificate.json} and the command \texttt{sh checks/check.sh}
+that runs them are in the release accompanying this paper,
+\url{https://github.com/6/clank-lab/tree/near-equal-budgets-v1/results/near-equal-budgets};
+its README describes the file format and the requirements. The first checks the hypotheses: the values are positive
+integers, each agent's $32$ bundle values are distinct, and the market in
+the certificate file is that of Table~\ref{tab:values}. The second reads
+the certificate for each of the $243$ allocations; checks that every
+$\lambda_{i,Y}$ is attached to a bundle $Y$ that agent $i$ strictly prefers
+to $X_i$, that the multipliers are nonnegative and satisfy
+\eqref{eq:cover}, and that the weight is of kind (A) or (B); and computes
+the least $r_X$, which is $1/17$. It runs in well under a second.
+
+The third program does not read the certificates. For each allocation it
+solves, with its own exact two-phase simplex method, the linear program in
+the prices $p\ge0$ and $\delta\ge0$ with $p(X_i)\le 1+\delta d_i$ and
+$p(Y)\ge1+\delta d_i$ for every bundle $Y$ agent $i$ strictly prefers to
+$X_i$. The feasible values of $\delta$ form a closed interval, and the
+program computes its left end $\delta_X$. It finds $214$ allocations
+infeasible for every $\delta\ge0$, $17$ feasible only at $\delta=0$ (the
+allocations of kind (B)), and $12$ whose feasible interval has left end
+$\delta_X\ge1/17$, the least $\delta_X$ being exactly $1/17$. So the two
+programs agree on the bound $1/17$, and by Farkas' lemma no certificate as
+in Lemma~\ref{lem:farkas} exists at $\delta=1/17$ for at least one
+allocation. Whether a CE exists at some
+$\delta\ge1/17$ is not decided here. The program takes about four
+minutes on one core.
+
+As sanity checks, the second program rejects the certificates with one
+multiplier doubled. With agent~1's value for $v$ changed from $6$ to $1$,
+the second program rejects the original certificates, and the third finds
+an allocation feasible for all $\delta$ in $[0,2/11]$. The example was found by a randomized search with
+floating-point linear programs and reduced to small integers; the search
+is not part of the proof.
+
+\begin{appendices}
+
+\section{The seventeen allocations of kind (B)}\label{app:typeB}
+
+Each allocation below, written $(X_1,X_2,X_3)$, is excluded at budgets $t$
+by the single inequality shown. The middle column names the bundles $Y$
+whose prices the certificate compares with the budgets; each is strictly
+preferred by the named agent to its own bundle. For instance, in the first
+row agent~3 prefers $vx$ ($V_3=17>16$), which lies inside $X_1$. All seventeen are excluded on the
+ray for every $\delta>0$, since $t_1-t_3=-4\delta$, $t_3-t_2=-\delta$,
+$t_1-t_2=-5\delta$ and $t_1+t_2-2t_3=-3\delta$.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+allocation & preferred bundles used & excluded where\\
+\midrule
+$(vwx,z,y)$, $(vx,wz,y)$ & agent 3: $vx$ & $t_1<t_3$\\
+$(wy,z,vx)$ & agent 3: $wy$ & $t_1<t_3$\\
+$(vw,xz,y)$ & agent 2: $wz$; agent 3: $vx$ & $t_1<t_3$\\
+$(wxz,v,y)$, $(wz,vx,y)$, $(wz,v,xy)$, $(xz,vw,y)$ & agent 2: $z$ & $t_1<t_2$\\
+$(z,vw,xy)$, $(xz,v,wy)$, $(z,vx,wy)$, $(wz,y,vx)$ & agent 2: $z$ & $t_1<t_2$\\
+$(wx,v,yz)$ & agent 2: $z$; agent 3: $wxy$ & $t_1<t_2$\\
+$(wx,z,vy)$ & agent 2: $vy$ & $t_3<t_2$\\
+$(vw,z,xy)$, $(vx,z,wy)$ & agent 1: $wx$; agent 2: $vy$ & $t_3<t_2$\\
+$(wx,vz,y)$ & agent 3: $vx$, $wz$ & $t_1+t_2<2t_3$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For example, for $(vw,z,xy)$: agent~1 prefers $wx$ ($23>18$) and agent~2
+prefers $vy$ ($22>20$); together $wx$ and $vy$ use the goods of
+$X_1\cup X_3=vwxy$ once each, so in a CE $t_1+t_2<p(wx)+p(vy)=p(vw)+p(xy)\le
+t_1+t_3$. For $(wx,vz,y)$, agent~3 prefers $vx$ ($17>16$) and $wz$
+($18>16$), which together use the goods of $X_1\cup X_2$ once each, so a
+CE needs $2t_3<p(vx)+p(wz)=p(wx)+p(vz)\le t_1+t_2$.
+
+\end{appendices}
+
+\begin{thebibliography}{9}
+
+\bibitem{BNT}
+M.~Babaioff, N.~Nisan and I.~Talgam-Cohen, \emph{Competitive equilibrium
+with indivisible goods and generic budgets}, Math. Oper. Res. \textbf{46}
+(2021), 382--403;
+\href{https://doi.org/10.1287/moor.2020.1062}{doi:10.1287/moor.2020.1062};
+\href{https://arxiv.org/abs/1703.08150v2}{arXiv:1703.08150v2}, the version
+cited.
+
+\bibitem{BNT1}
+M.~Babaioff, N.~Nisan and I.~Talgam-Cohen, \emph{Competitive equilibria
+with indivisible goods and generic budgets},
+\href{https://arxiv.org/abs/1703.08150v1}{arXiv:1703.08150v1} (March 23,
+2017), the first version of \cite{BNT}.
+
+\bibitem{BNT2}
+M.~Babaioff, N.~Nisan and I.~Talgam-Cohen, \emph{Competitive equilibrium
+with generic budgets: beyond additive},
+\href{https://arxiv.org/abs/1911.09992v1}{arXiv:1911.09992v1} (2019).
+
+\bibitem{Bud}
+E.~Budish, \emph{The combinatorial assignment problem: approximate
+competitive equilibrium from equal incomes}, J. Political Econ.
+\textbf{119} (2011), 1061--1103;
+\href{https://doi.org/10.1086/664613}{doi:10.1086/664613}.
+
+\bibitem{Fol}
+D.~K.~Foley, \emph{Resource allocation and the public sector}, Yale
+Econ. Essays \textbf{7} (1967), 45--98.
+
+\bibitem{Sch}
+A.~Schrijver, \emph{Theory of Linear and Integer Programming}, Wiley,
+Chichester, 1986.
+
+\bibitem{SH}
+E.~Segal-Halevi, \emph{Competitive equilibrium for almost all incomes:
+existence and fairness}, Auton. Agents Multi-Agent Syst. \textbf{34}
+(2020), article 26;
+\href{https://doi.org/10.1007/s10458-020-09444-z}{doi:10.1007/s10458-020-09444-z};
+\href{https://arxiv.org/abs/1705.04212v6}{arXiv:1705.04212v6}, the version
+cited.
+
+\bibitem{Var}
+H.~R.~Varian, \emph{Equity, envy, and efficiency}, J. Econom. Theory
+\textbf{9} (1974), 63--91;
+\href{https://doi.org/10.1016/0022-0531(74)90075-1}{doi:10.1016/0022-0531(74)90075-1}.
+
+\bibitem{Wik}
+Wikipedia, \emph{List of unsolved problems in fair division}, section
+``Competitive equilibrium for almost all incomes'',
+\url{https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_fair_division},
+revision 1360704274, accessed November 5, 2026.
+
+\end{thebibliography}
+\end{document}

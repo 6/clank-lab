@@ -1,0 +1,54 @@
+name: Near-equal budgets checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/near-equal-budgets/**'
+      - '.github/workflows/near-equal-budgets.yml'
+  pull_request:
+    paths:
+      - 'results/near-equal-budgets/**'
+      - '.github/workflows/near-equal-budgets.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: near-equal-budgets-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  certificates:
+    name: Certificates, part ${{ matrix.part }} of 8
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/near-equal-budgets
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Check the certificates
+        run: sh checks/check.sh --part ${{ matrix.part }}/8
+
+  check:
+    name: Check near-equal-budgets
+    needs: [certificates]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every part
+        env:
+          CERTIFICATE_RESULT: ${{ needs.certificates.result }}
+        run: test "$CERTIFICATE_RESULT" = success

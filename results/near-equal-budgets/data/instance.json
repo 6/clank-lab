@@ -1,0 +1,5 @@
+{
+  "description": "3 agents with additive valuations over 5 goods; budgets e + delta*d near equal budgets e = (1,1,1).",
+  "values": [[6, 12, 11, 9, 13], [14, 4, 1, 8, 20], [8, 6, 9, 16, 12]],
+  "direction": [-3, 2, 1]
+}

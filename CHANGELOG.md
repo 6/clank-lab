@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## near-equal-budgets v1 (November 5, 2026)
+
+- Proves that three agents with strict additive valuations over five indivisible goods can have no competitive equilibrium on a set of positive measure arbitrarily close to equal budgets: none at $(1-3\delta,1+2\delta,1+\delta)$ for $0<\delta<1/17$, nor near these. This answers Open Problem 1 of Babaioff, Nisan and Talgam-Cohen, and extends to every number of goods $m\ge5$.
+- Includes the paper, the certificates for all 243 allocations, and two independent exact checkers.
+
 ## interval-hales-jewett v1 (November 5, 2026)
 
 - Proves that for every $Q\ge1$ and every $m\ge2\lceil\sqrt{32Q}\rceil+2$ there is, for every $n$, a 2-coloring of $[m]^n$ with no monochromatic combinatorial line whose wildcard set is a union of at most $Q$ intervals, answering Question 3.1 of Conlon and Kamčev.

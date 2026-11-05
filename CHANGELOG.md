@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that for every $Q\ge1$ and every $m\ge2\lceil\sqrt{32Q}\rceil+2$ there is, for every $n$, a 2-coloring of $[m]^n$ with no monochromatic combinatorial line whose wildcard set is a union of at most $Q$ intervals, answering Question 3.1 of Conlon and Kamčev.
 - Includes the paper and a standalone Lean project checking the theorem from the definitions.
+- Zenodo: [10.5281/zenodo.23972681](https://doi.org/10.5281/zenodo.23972681)
 
 ## hamiltonian-degree-sequences v2 (November 5, 2026)
 

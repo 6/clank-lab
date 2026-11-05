@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## parallelepiped-triangulation v1 (November 5, 2026)
+
+- Proves that the 4-dimensional lattice parallelepiped spanned by $`e_1, e_2, e_3`$ and $(1,2,3,5)$ has no unimodular triangulation, so in every dimension from 4 on not all lattice parallelepipeds or lattice zonotopes have one. This answers negatively the question of Haase, Paffenholz, Piechnik and Santos; dimension 3 remains open.
+- Shows, with checked certificates, that this parallelepiped has a unimodular cover and that, up to lattice equivalence, it is the unique 4-dimensional lattice parallelepiped of determinant at most 5 without a unimodular triangulation.
+- Includes the paper, with a hand proof of the main theorem, the certificates and their checkers.
+
 ## hayashi-conjecture v1 (November 5, 2026)
 
 - Gives connected quandles of orders 1890 and 5670 whose profiles contain cycles of lengths 60, 84, 140 and 210. Since 60, 84 and 140 do not divide 210, this refutes Hayashi's 2013 conjecture, and also Filipi's Conjecture 4.1 on conjugacy classes.

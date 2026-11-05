@@ -1,0 +1,56 @@
+name: Parallelepiped triangulation checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/parallelepiped-triangulation/**'
+      - '.github/workflows/parallelepiped-triangulation.yml'
+  pull_request:
+    paths:
+      - 'results/parallelepiped-triangulation/**'
+      - '.github/workflows/parallelepiped-triangulation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: parallelepiped-triangulation-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: Checks ${{ matrix.part }}/8
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        working-directory: results/parallelepiped-triangulation
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Install Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.14"
+      - name: Install checker dependencies
+        run: python3 -m pip install --require-hashes -r checks/requirements.txt
+      - name: Check
+        run: python3 -I checks/check.py --part ${{ matrix.part }}/8
+
+  check:
+    name: Check parallelepiped-triangulation
+    needs: [checks]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CHECKS: ${{ needs.checks.result }}
+    steps:
+      - name: Require every part
+        run: test "$CHECKS" = success

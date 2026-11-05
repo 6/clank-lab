@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## hamiltonian-degree-sequences v2 (November 5, 2026)
+
+- Correction: exposition of Chvátal's theorem. The README said that it tells exactly which degree sequences force a Hamilton cycle. It gives a sufficient condition, best possible among monotone conditions but not necessary: the 5-cycle violates it and is Hamiltonian. The theorem and its checks are unchanged.
+- The README and paper now say this, and describe the conjecture of Kühn, Osthus and Treglown as a digraph analogue of Chvátal's theorem in the same sense, not as an exact characterization.
+
 ## harborth-constant v1 (November 4, 2026)
 
 - Proves that the Harborth constant of $C_p\oplus C_p$ is $2p-1$ for every prime $p\ge11$: every $2p-1$ distinct elements include $p$ whose sum is zero. This answers Problem F.100 of Bajnok's problem book, the primes $11\le p\le43$.

@@ -1,0 +1,69 @@
+name: Interval Hales–Jewett checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/interval-hales-jewett/**'
+      - '.github/workflows/interval-hales-jewett.yml'
+  pull_request:
+    paths:
+      - 'results/interval-hales-jewett/**'
+      - '.github/workflows/interval-hales-jewett.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: interval-hales-jewett-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/interval-hales-jewett/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean through elan
+        run: |
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-x86_64-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          echo "42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore proof build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/interval-hales-jewett/lean/.lake/build
+          key: interval-hales-jewett-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/interval-hales-jewett/lean/lean-toolchain', 'results/interval-hales-jewett/lean/lake-manifest.json', 'results/interval-hales-jewett/lean/lakefile.toml', 'results/interval-hales-jewett/lean/**/*.lean', '!results/interval-hales-jewett/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof, statement checks, and axiom guards
+        run: lake build
+
+  check:
+    name: Check interval-hales-jewett
+    needs: [lean]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful proof build
+        env:
+          LEAN_RESULT: ${{ needs.lean.result }}
+        run: test "$LEAN_RESULT" = success

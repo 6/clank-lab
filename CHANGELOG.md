@@ -9,6 +9,7 @@ Zenodo records.
 - Proves that the 4-dimensional lattice parallelepiped spanned by $`e_1, e_2, e_3`$ and $(1,2,3,5)$ has no unimodular triangulation, so in every dimension from 4 on not all lattice parallelepipeds or lattice zonotopes have one. This answers negatively the question of Haase, Paffenholz, Piechnik and Santos; dimension 3 remains open.
 - Shows, with checked certificates, that this parallelepiped has a unimodular cover and that, up to lattice equivalence, it is the unique 4-dimensional lattice parallelepiped of determinant at most 5 without a unimodular triangulation.
 - Includes the paper, with a hand proof of the main theorem, the certificates and their checkers.
+- Zenodo: [10.5281/zenodo.23990077](https://doi.org/10.5281/zenodo.23990077)
 
 ## hayashi-conjecture v1 (November 5, 2026)
 

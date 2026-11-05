@@ -10,6 +10,8 @@ The proofs, the Lean formalization, the computer checks and the text were produc
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23966463](https://doi.org/10.5281/zenodo.23966463)
+
 ## Check it
 
 The finite identities are checked by two independent exact programs, which rebuild each root system, its noncrossing partitions and the fixed-point polynomials from scratch, compare them with the certificates in `data/`, and evaluate the tabulated q-Kreweras numbers at roots of unity. With Python 3.12 or later, from this folder:
@@ -46,6 +48,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author = {Graham, P.},
   title = {{Cyclic sieving for q-Kreweras numbers in the exceptional types}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/kreweras-cyclic-sieving-v1/results/kreweras-cyclic-sieving}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/kreweras-cyclic-sieving-v1/results/kreweras-cyclic-sieving}},
+  doi          = {10.5281/zenodo.23966463}
 }
 ```

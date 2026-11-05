@@ -12,7 +12,7 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23966080](https://doi.org/10.5281/zenodo.23966080)
+Archived on Zenodo: [doi:10.5281/zenodo.23969956](https://doi.org/10.5281/zenodo.23969956)
 
 ## Check it
 
@@ -51,6 +51,6 @@ Apache-2.0 (see the repository's LICENSE).
   title = {{Counterexamples to the conjectured characterization of Hamiltonian degree sequences in digraphs}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/hamiltonian-degree-sequences-v1/results/hamiltonian-degree-sequences}},
-  doi          = {10.5281/zenodo.23966080}
+  doi          = {10.5281/zenodo.23969956}
 }
 ```

@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: exposition of Chvátal's theorem. The README said that it tells exactly which degree sequences force a Hamilton cycle. It gives a sufficient condition, best possible among monotone conditions but not necessary: the 5-cycle violates it and is Hamiltonian. The theorem and its checks are unchanged.
 - The README and paper now say this, and describe the conjecture of Kühn, Osthus and Treglown as a digraph analogue of Chvátal's theorem in the same sense, not as an exact characterization.
+- Zenodo: [10.5281/zenodo.23969956](https://doi.org/10.5281/zenodo.23969956)
 
 ## harborth-constant v1 (November 4, 2026)
 

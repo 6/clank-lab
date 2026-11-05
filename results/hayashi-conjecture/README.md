@@ -12,6 +12,8 @@ The proofs, the checking programs and the text were produced by AI models (from 
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23990073](https://doi.org/10.5281/zenodo.23990073)
+
 ## Check it
 
 The checks need Python 3.12 or newer, numpy and a C compiler. From this directory, run:
@@ -38,6 +40,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{Connected quandles that refute Hayashi's conjecture}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/hayashi-conjecture-v1/results/hayashi-conjecture}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/hayashi-conjecture-v1/results/hayashi-conjecture}},
+  doi          = {10.5281/zenodo.23990073}
 }
 ```

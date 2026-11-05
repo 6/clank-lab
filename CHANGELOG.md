@@ -15,6 +15,7 @@ Zenodo records.
 - Gives connected quandles of orders 1890 and 5670 whose profiles contain cycles of lengths 60, 84, 140 and 210. Since 60, 84 and 140 do not divide 210, this refutes Hayashi's 2013 conjecture, and also Filipi's Conjecture 4.1 on conjugacy classes.
 - The same construction gives an infinite family of counterexamples, including latin ones, and no counterexample from it is smaller than 1890.
 - Includes the paper, the data of both quandles, and independent checkers of their full operation tables and of Filipi's condition.
+- Zenodo: [10.5281/zenodo.23990073](https://doi.org/10.5281/zenodo.23990073)
 
 ## near-equal-budgets v1 (November 5, 2026)
 

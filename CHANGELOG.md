@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves Reiner and Sommers' Conjecture 1.4 in types $G_2$, $F_4$, $E_6$, $E_7$ and $E_8$: at a primitive $d$-th root of unity, the q-Kreweras number of an orbit of flats counts the noncrossing-partition chains fixed by an element of order $d$ whose bottom element has its fixed space in that orbit. With types A–D, it holds for every irreducible Weyl group.
 - Includes the paper, the certificates with two independent exact checkers, and a Lean project checking the reduction of the conjecture to finitely many identities.
+- Zenodo: [10.5281/zenodo.23966463](https://doi.org/10.5281/zenodo.23966463)
 
 ## hamiltonian-degree-sequences v1 (November 4, 2026)
 

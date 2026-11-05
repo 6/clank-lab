@@ -12,6 +12,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23972681](https://doi.org/10.5281/zenodo.23972681)
+
 ## Check it
 
 Install Lean using [elan](https://github.com/leanprover/elan). A network connection is needed to download Mathlib and its compiled cache, about 5 GB. Allow a few minutes for the download and under a minute for the build, with about 2 GB of memory.
@@ -39,6 +41,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{A quadratic lower bound for intervals in the Hales--Jewett theorem}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/interval-hales-jewett-v1/results/interval-hales-jewett}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/interval-hales-jewett-v1/results/interval-hales-jewett}},
+  doi          = {10.5281/zenodo.23972681}
 }
 ```

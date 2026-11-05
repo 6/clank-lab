@@ -1,0 +1,288 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[title]{appendix}
+\usepackage{newunicodechar}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+  pdftitle={The Harborth constant of Cp ⊕ Cp for every prime p ≥ 11},pdfauthor={P. Graham}}
+\newunicodechar{ℕ}{\ensuremath{\mathbb{N}}}
+\newunicodechar{∀}{\ensuremath{\forall}}
+\newunicodechar{∃}{\ensuremath{\exists}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{⊆}{\ensuremath{\subseteq}}
+\newunicodechar{∑}{\ensuremath{\sum}}
+\newunicodechar{∈}{\ensuremath{\in}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{¬}{\ensuremath{\neg}}
+\newunicodechar{∧}{\ensuremath{\wedge}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}[lemma]{Proposition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\title{The Harborth constant of $C_p\oplus C_p$ for every prime $p\ge 11$}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 4, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The Harborth constant $\mathsf g(G)$ of a finite abelian group $G$ is the least $k$ such that every $k$-element subset of $G$ contains $\exp(G)$ distinct elements whose sum is zero; the exponent $\exp(G)$ is the largest order of an element of $G$. Gao and Thangadurai conjectured that $\mathsf g(C_n\oplus C_n)=2n-1$ for odd $n$, and proved it for primes $p\ge 67$; Gao, Geroldinger and Schmid extended this to $p\ge47$, and Kemnitz had settled $p\in\{3,5,7\}$. Bajnok's \emph{Menu of research problems} asks for the primes $11\le p\le 43$ (Problem F.100). We prove that $\mathsf g(C_p\oplus C_p)=2p-1$ for every prime $p\ge11$, which answers that problem and, with Kemnitz's values, gives the conjecture for every odd prime. As in the work of Gao and Thangadurai and of Gao, Geroldinger and Schmid, we project the set along a line through $0$, which sorts its points into $p$ parallel lines (fibers), choose a projection in which many pairs of points share a fiber, and use the lifting criterion of Gao and Thangadurai. What is new is a sufficient condition, proved with the theorem of Dias da Silva and Hamidoune, that depends only on how many points each fiber holds and not on where the fibers lie. The analysis of fiber sizes is by hand for $p\ge17$ and a finite check for $p=11$ and $13$. The proof for $p\ge11$ and the lower bound for every odd prime are formalized in Lean.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{2020 Mathematics Subject Classification.} 11B30, 11P70, 20K01.\\
+\textit{Keywords.} Zero-sum problems, Harborth constant, restricted sumsets, Dias da Silva--Hamidoune theorem.
+
+\section{Introduction}
+
+\subsection{Main result}
+
+For a finite abelian group $G$, the exponent $\exp(G)$ is the largest order of an element of $G$, so $\exp(C_p\oplus C_p)=p$. The Harborth constant $\mathsf g(G)$ is the least integer $k$ such that every subset of $G$ with $k$ elements has $\exp(G)$ distinct elements whose sum is $0$. We identify $C_p\oplus C_p$ with the plane $\mathbb F_p^2=\Z_p^2$, so that we can speak of lines through $0$ (directions) and projections.
+
+\begin{theorem}\label{thm:main}
+Let $p\ge 11$ be prime. Every subset of $C_p\oplus C_p$ with $2p-1$ elements contains $p$ distinct elements whose sum is $0$. Hence $\mathsf g(C_p\oplus C_p)=2p-1$.
+\end{theorem}
+
+The lower bound $\mathsf g(C_p\oplus C_p)\ge 2p-1$ holds for every odd prime $p$ and is due to Kemnitz~\cite{Kemnitz} (see~\cite[Proposition~F.97]{Bajnok}). In the words of the \emph{Menu}~\cite[p.~301]{Bajnok}, ``As Kemnitz observed in [127], the set $A=\{0,1\}^{r-1}\times\{0,1,\dots,k-2\}$ [\dots] is zero-$k$-sum-free''. We use its translate by $(0,1)$ for $r=2$: the $2p-2$ points $(a,b)$ with $a\in\{0,1\}$ and $b\ne0$. If $p$ of them sum to $0$, the first coordinate of the sum is the number $m$ of chosen points with $a=1$, so $p$ divides $m$. Since $m\le p-1$, $m=0$, but only $p-1$ points have $a=0$. Theorem~\ref{thm:main} and this lower bound are proved in Lean with Mathlib, from the definitions (Section~\ref{sec:lean}).
+
+\subsection{Background and prior work}
+
+The constant goes back to Harborth's problem on lattice points with integral centroid~\cite{Harborth}. Gao and Thangadurai~\cite{GT} introduced the conjecture in its present form; in the words of Gao, Geroldinger and Schmid~\cite[Section~5]{GGS}, with our citation labels, ``In~\cite{GT} it is conjectured that $\mathsf g(C_n\oplus C_n)$ is equal to $2n-1$ for every odd $n\ge3$ and equal to $2n+1$ for every even $n\ge3$, and it is observed that these values are lower bounds. Moreover, it is proved (see~\cite[Theorem~1]{GT}) that $\mathsf g(C_p\oplus C_p)=2p-1$ for all primes $p\ge67$.'' Gao, Geroldinger and Schmid~\cite[Theorem~5.1]{GGS} described all sets of size $2p-2$ with no zero-sum subset of size $p$ for primes $p\ge47$, and so proved $\mathsf g(C_p\oplus C_p)=2p-1$ for those primes.
+
+Bajnok's \emph{Menu}~\cite{Bajnok} states the conjecture as Conjecture~F.98, in his notation and as the equivalent statement that for odd $k$ the largest subset of $\Z_k^2$ with no $k$ distinct elements summing to $0$ has $2k-2$ elements; his $k$ is the $n$ of the quotation above. It records that ``Kemnitz in [127] proved that Conjecture F.98 holds for $k\in\{2,3,5,7\}$'' (see~\cite{Kemnitz}), states the result for $p\ge47$ as Theorem~F.99, and poses
+
+\begin{quote}
+Problem F.100. Prove that Conjecture F.98 holds for prime numbers $11\le p\le43$.
+\end{quote}
+
+Guillot, Marchan, Ordaz, Schmid and Zerdoum~\cite{GMOSZ} recorded the same state of knowledge in 2019: ``It is known that $\mathsf g(C_p\oplus C_p)=2p-1$ for prime $p\ge47$ and for $p\in\{3,5,7\}$''~\cite[p.~614]{GMOSZ}. Theorem~\ref{thm:main} settles Problem F.100, and with Kemnitz's values it gives $\mathsf g(C_p\oplus C_p)=2p-1$ for every odd prime~$p$. The composite case of the conjecture is untouched.
+
+We build directly on three earlier ingredients. The \emph{lifting criterion} (Lemma~\ref{lem:lift}) is Lemma~2.5 of Gao and Thangadurai~\cite{GT}. Gao, Hou, Schmid and Thangadurai extend it to $C_p^r$ as Lemma~5.2 of~\cite{GHST}, which ``was proved in [19] in the special case $r=2$'', with [19] their label for~\cite{GT}, and Gao, Geroldinger and Schmid quote it as Lemma~5.3(1) of~\cite{GGS}. The \emph{averaging over directions} (Lemma~\ref{lem:avg}) is in Gao and Thangadurai~\cite[pp.~83--84]{GT} and is Lemma~5.13 of~\cite{GGS}. Closest to our criterion are Lemmas~5.7 and~5.9 of~\cite{GGS}, stated with the projected sequence written as $R'R^3U^2V$~\cite[p.~267]{GGS}. Lemma~5.9 applies the theorem of Dias da Silva and Hamidoune (their Theorem~2.3(1)) to the support $RUV$ and the Cauchy--Davenport theorem to squarefree pairs $Q_i$ from $R'$, and Lemma~5.7 bounds the lifting sum below by $2(v_g(\varphi(S))-2)$ for each $g$ in the support of the repeated part of the zero-sum sequence. Lemma~5.9 assumes $p\ge47$ and Lemma~5.10 $p\ge41$; Lemmas~5.7, 5.8, 5.11 and 5.12 assume $p\ge5$, $5$, $17$ and $23$. Gao, Geroldinger and Schmid write~\cite[p.~272]{GGS} that ``with more involved proofs some of the results could be obtained for (slightly) smaller primes. Our aim is to obtain results (at least) for primes $p$ with $p\ge47$, which is the bound given by Lemma~5.9.'' The tools are the theorem of Dias da Silva and Hamidoune~\cite{DSH}, in the form of~\cite[Theorem~2.3(1)]{GGS}, and the Cauchy--Davenport theorem~\cite{Cauchy,Davenport}.
+
+What this paper adds is the symmetric layer criterion of Section~\ref{sec:slc}. It applies Dias da Silva--Hamidoune to every layer of a depth chosen inside the fibers (both defined in Section~\ref{sec:slc}), and its hypotheses, a single quadratic inequality and a bound on the layer sizes, depend only on the fiber sizes, not on their positions. The analysis of these sizes in Sections~\ref{sec:shape}--\ref{sec:small} brings the threshold down to $p=11$. The hard step was to find a sufficient condition that does not depend on where the fibers sit; once the quadratic form was found, the case analysis became short.
+
+\subsection{Proof overview}
+
+Let $S\subseteq\mathbb F_p^2$ with $|S|=2p-1$. Fix a direction, that is, a line $K$ through $0$, and project $S$ along $K$ onto a complementary line $H\cong\Z_p$. Each $g\in H$ carries a fiber $S\cap(g+K)$ of $v_g$ points, and the vector $v$ of fiber sizes is the \emph{profile}. By the lifting criterion, $S$ has the required $p$ points as soon as there are integers $0\le t_g\le v_g$ with $\sum t_g=p$, $\sum t_g g=0$ and enough freedom $\sum t_g(v_g-t_g)\ge p-1$ inside the fibers.
+
+Two points of $S$ share a fiber for exactly one of the $p+1$ directions, so averaging gives a direction in which at least $2p-4$ pairs of points of $S$ share a fiber. Section~\ref{sec:reduction} reduces Theorem~\ref{thm:main} in this way to Proposition~\ref{prop:cpl} about such profiles.
+
+To prove the proposition we fix a depth $r$ and choose $t$ in the box $\{t:|2t_g-v_g|\le r_g\}$ around $v/2$. The layers $\{g:r_g\ge i\}$ of the box are sets of distinct residues, so Dias da Silva--Hamidoune bounds the sums of half of each layer, and Cauchy--Davenport bounds the sumset of these sets (Section~\ref{sec:slc}). The conditions on $r$ then involve only the multiset $\{v_g\}$, the \emph{shape} of $v$. For $p\ge17$ two explicit rules give $r$ for all shapes but four (Section~\ref{sec:shape}). For one of the four, $(p-2,p-2,3)$, a rule still gives a witness, checked directly; the other three are handled through the positions of their fibers (Section~\ref{sec:exceptional}). For $p=11$ and $13$ all $526$ and $1435$ concentrated shapes, respectively, are checked (Section~\ref{sec:small}).
+
+\section{Reduction to a lemma on profiles}\label{sec:reduction}
+
+Let $p$ be an odd prime and $S\subseteq\mathbb F_p^2$ with $|S|=2p-1$. Fix a line $K$ through $0$ and a complementary line $H$, and let $\varphi$ be the projection onto $H$ along $K$. For $g\in H$ the fiber $S\cap(g+K)$ has $v_g$ elements, and $\sum_g v_g=2p-1$. We call $g$ a \emph{class} and $v_g$ its \emph{size}.
+
+\begin{lemma}[Lifting criterion~\cite{GT,GHST}]\label{lem:lift}
+Suppose that $t\colon H\to\Z_{\ge0}$ satisfies $t_g\le v_g$, $\sum_g t_g=p$, $\sum_g t_g\,g=0$ in $H$, and
+\[
+W(t):=\sum_{g\in H}t_g(v_g-t_g)\ \ge\ p-1 .
+\]
+Then $S$ contains $p$ distinct elements whose sum is $0$.
+\end{lemma}
+
+\begin{proof}
+Write the fiber over $g$ as $g+A_g$ with $A_g\subseteq K\cong\Z_p$ and $|A_g|=v_g$. Choosing $t_g$ distinct points in each fiber gives $p$ distinct points with sum $\sum_g t_g g+\sum_g a_g=\sum_g a_g$, where $a_g$ runs over the set $t_g^\wedge A_g$ of sums of $t_g$ distinct elements of $A_g$. By Dias da Silva--Hamidoune, $|t_g^\wedge A_g|\ge\min(p,t_g(v_g-t_g)+1)$; this is trivial when $t_g\in\{0,v_g\}$. By Cauchy--Davenport the sumset $\sum_g t_g^\wedge A_g$ has at least $\min(p,W(t)+1)=p$ elements, so it contains $0$.
+\end{proof}
+
+If some fiber is a whole line $g+K$, its $p$ points sum to $pg+\sum_{k\in K}k=0$ because $p$ is odd. So we may assume $v_g\le p-1$ for all $g$.
+
+\begin{lemma}[Averaging~\cite{GT,GGS}]\label{lem:avg}
+Some direction $K$ has $\sum_g\binom{v_g}{2}\ge 2p-4$.
+\end{lemma}
+
+\begin{proof}
+Two points of $S$ lie in a common fiber for exactly one of the $p+1$ directions, so the sums $\sum_g\binom{v_g}2$ over all directions add up to $\binom{2p-1}2$. Some direction has at least $(2p-1)(p-1)/(p+1)=2p-5+6/(p+1)>2p-5$.
+\end{proof}
+
+Since an affine map $g\mapsto\alpha g+\beta$ ($\alpha\ne0$) of $H$ preserves the conditions of Lemma~\ref{lem:lift} (it multiplies $\sum t_g g$ by $\alpha$ and adds $p\beta=0$), we may identify $H$ with $\Z_p$. Theorem~\ref{thm:main} now follows from Lemmas~\ref{lem:lift} and~\ref{lem:avg} and the following proposition.
+
+\begin{proposition}[Concentrated profiles]\label{prop:cpl}
+Let $p\ge11$ be prime and $v\colon\Z_p\to\{0,\dots,p-1\}$ with $\sum_g v_g=2p-1$ and $\sum_g\binom{v_g}2\ge 2p-4$. Then some $t$ satisfies the hypotheses of Lemma~\ref{lem:lift}.
+\end{proposition}
+
+We call such a $v$ \emph{concentrated}. Write $n_j$ for the number of classes $g$ with $v_g=j$. Then $\sum_j n_j=p$ and $\sum_j(j-1)n_j=p-1$. Since $\binom j2=(j-1)+\binom{j-1}2$ for $j\ge1$ and $\binom02=0=(0-1)+1$, we get $\sum_j\binom j2n_j=(p-1)+n_0+\sum_{j\ge3}\binom{j-1}2n_j$, so the concentration hypothesis reads
+\begin{equation}\label{eq:conc}
+n_0+\sum_{j\ge3}\tbinom{j-1}{2}n_j\ \ge\ p-3 .
+\end{equation}
+
+\section{The symmetric layer criterion}\label{sec:slc}
+
+The \emph{shape} of a profile $v$ is the multiset $\{v_g\}$ of its sizes. For a profile $v$ and a \emph{depth} $r\colon\Z_p\to\Z_{\ge0}$, let $x_i=|\{g:r_g\ge i\}|$ for $i\ge1$, the sizes of the layers of $r$.
+
+\begin{lemma}\label{lem:slc}
+Let $v$ be as in Proposition~\ref{prop:cpl}, and suppose that $r$ satisfies
+\begin{enumerate}
+\item[(D)] $r_g\le v_g$ and $r_g\equiv v_g\pmod 2$ for all $g$;
+\item[(W)] $\sum_g r_g^2\le\sum_g(v_g-2)^2$;
+\item[(S)] $\sum_{i\ge1}\lfloor x_i^2/4\rfloor\ge p-1$.
+\end{enumerate}
+Then some $t$ satisfies the hypotheses of Lemma~\ref{lem:lift}.
+\end{lemma}
+
+\begin{proof}
+Put $a_g=(v_g-r_g)/2$, an integer by (D), and consider $t$ with $a_g\le t_g\le a_g+r_g$. Then $u_g=2t_g-v_g$ satisfies $|u_g|\le r_g$, and $t_g(v_g-t_g)=(v_g^2-u_g^2)/4\ge(v_g^2-r_g^2)/4$. Since $\sum_g(v_g-2)^2=\sum_g v_g^2-4(2p-1)+4p$, condition (W) gives $\sum_g(v_g^2-r_g^2)\ge4(p-1)$, so $W(t)\ge p-1$ for every such $t$.
+
+The layers $L_i=\{g:r_g\ge i\}$ are sets of distinct residues. For subsets $X_i\subseteq L_i$ of sizes $h_i$, the vector $t_g=a_g+|\{i:g\in X_i\}|$ lies in the box, with $\sum_g t_g=\sum_g a_g+\sum_i h_i$ and $\sum_g t_g g=\sum_g a_g g+\sum_i\sum_{x\in X_i}x$. Let $R=\sum_g r_g=\sum_i x_i$. By (D), $R\equiv\sum_g v_g$ is odd, and $\sum_g t_g=p$ means $\sum_i h_i=(R+1)/2$. Since $\sum_i\lfloor x_i/2\rfloor\le(R-1)/2$ and $\sum_i\lceil x_i/2\rceil\ge(R+1)/2$, we can choose $h_i\in\{\lfloor x_i/2\rfloor,\lceil x_i/2\rceil\}$ with this sum; then $h_i(x_i-h_i)=\lfloor x_i^2/4\rfloor$. By Dias da Silva--Hamidoune each $h_i^\wedge L_i$ has at least $\min(p,\lfloor x_i^2/4\rfloor+1)$ elements, and by Cauchy--Davenport and (S) their sumset is all of $\Z_p$. So some choice of the $X_i$ gives $\sum_g t_g g=0$.
+\end{proof}
+
+Conditions (D), (W) and (S) are unchanged when $v$ and $r$ are permuted together, so they depend only on the shape of $v$. A depth $r$ meeting them, listed in the order of the shape, is a \emph{witness} for the shape, and then every profile $v'$ with that shape has some $t$ satisfying the hypotheses of Lemma~\ref{lem:lift} for $v'$. For example, take $p=11$ and the shape $(6,3,3,3,3,3)$, padded with five zeros. The depth $r=(2,3,1,1,1,1)$, in the order of the shape and $0$ on the five empty classes, is a witness: (D) holds, $\sum r_g^2=17\le 16+5\cdot1+5\cdot4=41$, and the layers have sizes $6,2,1$, so $9+1+0=10=p-1$.
+
+\section{The Shape Lemma for \texorpdfstring{$p\ge17$}{p >= 17}}\label{sec:shape}
+
+Let $N(i)=|\{g:v_g\ge i\}|$, so that $N(1)=p-n_0$ is the number of nonempty classes and $\sum_i N(i)=2p-1$, and let $v_{(1)}\ge v_{(2)}\ge\cdots$ be the sizes in decreasing order. For $\rho\ge1$ put $\operatorname{sp}(\rho)=\sum_{i=1}^{\rho}\lfloor N(i)^2/4\rfloor$. Since $\lfloor N^2/4\rfloor=\sum_{j=2}^{N}\lfloor j/2\rfloor$,
+\begin{equation}\label{eq:spread}
+\operatorname{sp}(\rho)=\sum_{j\ge2}\lfloor j/2\rfloor\min(v_{(j)},\rho).
+\end{equation}
+
+\emph{Rule B} (basic: every $r_g\le2$). For $j\ge3$ let $e(j)=(j-1)(j-3)/4$ if $j$ is odd and $e(j)=j(j-4)/4$ if $j$ is even; this is $((j-2)^2-r^2)/4$, the slack in (W) of a class of size $j$ with the depth $r\in\{1,2\}$ given below. Put $E=\sum_{j\ge3}e(j)n_j$ and $k=\min(n_2,n_0+E)$. The depth is
+\begin{itemize}
+\item $r_g=0$ if $v_g=0$;
+\item $r_g=1$ if $v_g$ is odd;
+\item $r_g=2$ if $v_g\ge4$ is even;
+\item $r_g=2$ on $k$ of the $n_2$ classes of size $2$, and $r_g=0$ on the others.
+\end{itemize}
+Comparing class by class, $\sum_g(v_g-2)^2-\sum_g r_g^2=4(n_0+E-k)\ge0$, so (W) holds. The layers have sizes $x_1=N(1)-n_2+k$, $x_2=|\{g:v_g\ge4\text{ even}\}|+k$ and $x_i=0$ for $i\ge3$.
+
+\emph{Rule H($\rho$)} (high: depths up to $\rho+1$), for $\rho\ge2$. Put $r_g=v_g$ if $v_g\le\rho+1$, and otherwise $r_g\in\{\rho,\rho+1\}$ with $r_g\equiv v_g$. Then $x_i=N(i)$ for $i\le\rho$, so (S) holds when $\operatorname{sp}(\rho)\ge p-1$. Since $\sum_g(v_g-2)^2-\sum_g r_g^2=\sum_g(v_g^2-r_g^2)-4(p-1)$, (W) holds when
+\[
+\Delta(\rho):=\sum_{v_g\ge\rho+2}\bigl(v_g^2-(\rho+1)^2\bigr)\ \ge\ 4(p-1).
+\]
+
+\begin{proposition}[Shape Lemma]\label{prop:shape}
+Let $p\ge17$ be prime and $v$ concentrated, of none of the shapes $(p-1,p-1,1)$, $(p-1,p-2,2)$, $(p-1,p-3,3)$, $(p-2,p-2,3)$. Then rule B or rule H$(\rho^*)$ gives a witness, where $\rho^*$ is the least $\rho$ with $\operatorname{sp}(\rho)\ge p-1$.
+\end{proposition}
+
+\begin{proof}
+\emph{Case 1: $n_2>n_0+E$}, so $k=n_0+E$. Let $A=\sum_{j\ge3}(j-1)n_j$; the identity $\sum_j(j-1)n_j=p-1$ gives $n_2=p-1+n_0-A$, and hence $x_1=1-n_0+A+E$. Since $n_2\le p-n_0-N(3)$, we have $2n_0\le A+1-N(3)$. This gives $x_1\ge\frac12+\sum_{j\ge3}f(j)n_j$ with $f(j)=j/2+e(j)$, and, with~\eqref{eq:conc}, $\sum_{j\ge3}q(j)n_j\ge p-\frac72$ with $q(j)=j(j-2)/2$. One checks that $f(j)=q(j)/2$ for even $j$ and $f(j)=(j^2-2j+3)/4\ge q(j)/2$ for odd $j$. Hence $x_1\ge p/2-5/4$, and as $x_1$ is an integer and $p$ is odd, $x_1\ge(p-1)/2$. Then $\lfloor x_1^2/4\rfloor\ge\lfloor(p-1)^2/16\rfloor\ge p-1$ because $p\ge17$, so (S) holds for rule B.
+
+\emph{Case 2: $n_2\le n_0+E$ and $\lfloor N(1)^2/4\rfloor\ge p-1$.} Rule B has $k=n_2$ and $x_1=N(1)$, so (S) holds.
+
+\emph{Case 3: $\lfloor N(1)^2/4\rfloor\le p-2$.} This case does not use~\eqref{eq:conc}. Now $\operatorname{sp}(1)=\lfloor N(1)^2/4\rfloor<p-1$, so $\rho=\rho^*\ge2$, and by~\eqref{eq:spread} $\operatorname{sp}(v_{(2)})\ge\sum_{j\ge2}v_{(j)}=2p-1-v_{(1)}\ge p$, so $\rho\le v_{(2)}$. It remains to show $\Delta(\rho)\ge4(p-1)$, using $\operatorname{sp}(\rho-1)\le p-2$.
+
+\emph{(3a) $\rho\le(p-1)/2$.} Put $y=\rho-1\in[1,(p-3)/2]$. From $\lfloor N^2/4\rfloor\ge(N^2-1)/4$ we get $\sum_{i\le y}N(i)^2\le X:=4p-8+y$, so by Cauchy--Schwarz and the monotonicity of $N$, $L:=\sum_{i\le\rho+1}N(i)\le\sqrt{yX}+2\sqrt{X/y}$. Each class with $v_g\ge\rho+2$ contributes $v_g^2-(\rho+1)^2\ge(2\rho+3)(v_g-\rho-1)$ to $\Delta(\rho)$, and $\sum_g\max(v_g-\rho-1,0)=\sum_{i\ge\rho+2}N(i)=2p-1-L$. Therefore $\Delta(\rho)\ge(2y+5)(2p-1-L)$, and the inequality
+\[
+F(p,y):=(2y+5)\bigl(2p-1-\sqrt{yX}-2\sqrt{X/y}\bigr)-4(p-1)\ \ge\ 0
+\]
+for $p\ge17$ and $1\le y\le(p-3)/2$ is verified in Appendix~\ref{app:ineq}.
+
+\emph{(3b) $\rho\ge(p+1)/2$.} By~\eqref{eq:spread}, $\operatorname{sp}(\rho-1)=(\rho-1)+\sum_{j\ge3}\lfloor j/2\rfloor\min(v_{(j)},\rho-1)\le p-2$, so $v_{(j)}\le\rho-2$ for all $j\ge3$ (otherwise $\operatorname{sp}(\rho-1)\ge2\rho-2\ge p-1$). With $\sigma=\sum_{j\ge3}\lfloor j/2\rfloor v_{(j)}$ this gives $\operatorname{sp}(\rho-1)=\rho-1+\sigma$ and $\operatorname{sp}(\rho)=\rho+\sigma$, so $\rho=p-1-\sigma$ and $\sigma\le(p-3)/2$. Only the two largest classes exceed $\rho-2$, and Appendix~\ref{app:ineq} shows $\Delta(\rho)\ge(\sigma-1)(p+3)$, which is at least $4(p-1)$ when $\sigma\ge5$. For $\sigma\le4$ the shapes are listed there: $\Delta(\rho)\ge4(p-1)$ except for the four shapes excluded in the statement.
+\end{proof}
+
+\section{The exceptional shapes}\label{sec:exceptional}
+
+\begin{lemma}\label{lem:exc}
+Proposition~\ref{prop:cpl} holds for the shapes $(p-2,p-2,3)$, $(p-1,p-1,1)$, $(p-1,p-2,2)$ and $(p-1,p-3,3)$, for every prime $p\ge7$.
+\end{lemma}
+
+\begin{proof}
+For $(p-2,p-2,3)$ the depth $r=(p-4,p-4,3)$ of rule H$(p-4)$, with $r_g=0$ on the $p-3$ empty classes, is a witness: $2(p-4)^2+9\le2(p-4)^2+1+4(p-3)$, and the layers have sizes $3,3,3$ and then $2$ (for $4\le i\le p-4$), so $3\cdot2+(p-7)=p-1$. Only the sufficient test $\Delta(\rho)\ge4(p-1)$ of Section~\ref{sec:shape} misses this shape.
+
+The other three shapes are $(p-1,b,c)$ with $b+c=p$ and $c\in\{1,2,3\}$; here the classes' positions matter. By an affine map, put the class $A$ of size $p-1$ at $0$, the class $B$ of size $b$ at $1$, and the class $C$ of size $c$ at some $z\notin\{0,1\}$. Let $\beta\in\{1,\dots,p-2\}$ be the residue of $-z$, and take $t_C=1$, $t_B=\beta$, $t_A=p-1-\beta$. Then $\sum t=p$, $\sum t_g g=\beta+z=0$, and
+\[
+W(t)=\beta(p-1-\beta)+\beta(b-\beta)+(c-1),
+\]
+with $\beta(p-1-\beta)\ge p-2$. For $b=p-1$, $W\ge2(p-2)\ge p-1$; for $b=p-2$, $W\ge(p-2)+0+1=p-1$; for $b=p-3$ and $\beta\le p-3$, $W\ge(p-2)+0+2>p-1$. If $b=p-3$ and $\beta=p-2$, that is $z=2$, take instead $t_C=2$, $t_B=p-4$, $t_A=2$: then $\sum t_g g=p-4+4=0$ and $W=2(p-3)+(p-4)+2=3p-8\ge p-1$.
+\end{proof}
+
+Proposition~\ref{prop:shape} and Lemmas~\ref{lem:slc} and~\ref{lem:exc} prove Proposition~\ref{prop:cpl} for every prime $p\ge17$.
+
+\section{The primes 11 and 13}\label{sec:small}
+
+For $p=11$ and $p=13$ the shapes are finite in number: there are $526$ and $1435$ concentrated shapes with all sizes at most $p-1$. For each, one checks that it is one of the three shapes $(p-1,b,c)$ of Lemma~\ref{lem:exc}, or that rule B, some rule H$(\rho)$ with $2\le\rho\le p-1$, or a depth from Table~\ref{tab:p11} is a witness. At $p=13$ rules B and H suffice. At $p=11$ three shapes need the depths of Table~\ref{tab:p11}, which can be checked by hand as in the example of Section~\ref{sec:slc}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lll}
+shape & witness $r$ & layer sizes\\\hline
+$(6,3,3,3,3,3)$ & $(2,3,1,1,1,1)$ & $6,2,1$\\
+$(5,5,3,3,3,2)$ & $(3,3,3,1,1,0)$ & $5,3,3$\\
+$(5,4,3,3,3,3)$ & $(3,2,1,1,1,1)$ & $6,2,1$
+\end{tabular}
+\caption{The concentrated shapes at $p=11$ that rules B and H miss, with a witness (zeros omitted). In each, (W) reads $17\le41$, $29\le41$ and $17\le37$.}\label{tab:p11}
+\end{table}
+
+With Lemma~\ref{lem:slc} this proves Proposition~\ref{prop:cpl}, and hence Theorem~\ref{thm:main}, for $p=11$ and $13$. In Lean the check runs as a kernel computation over all sorted profiles (Section~\ref{sec:lean}). A separate program, written from the statement of the criterion and sharing no code with the formal proof, confirms the counts and the coverage; it searches all depths when the rules fail and finds no uncovered shape. The criterion alone does not reach $p=7$: there the shapes $(5,4,4)$, $(4,3,3,3)$ and $(4,2,2,2,2,1)$ have no witness.
+
+\section{Formal verification}\label{sec:lean}
+
+Theorem~\ref{thm:main} and the lower bound are proved in Lean~4 with Mathlib. In the namespace \texttt{Harborth}, the theorems are \texttt{upper}, \texttt{lower} and \texttt{harborth\_constant}:
+{\small
+\begin{verbatim}
+def HasZeroSumPSubset (p : ℕ) (S : Finset (ZMod p × ZMod p)) : Prop :=
+  ∃ T ⊆ S, T.card = p ∧ ∑ x ∈ T, x = 0
+
+theorem upper (p : ℕ) [Fact p.Prime] (hp : 11 ≤ p)
+    (S : Finset (ZMod p × ZMod p)) (hS : S.card = 2 * p - 1) :
+    HasZeroSumPSubset p S
+
+theorem lower (p : ℕ) [Fact p.Prime] (hp : 3 ≤ p) :
+    ∃ S : Finset (ZMod p × ZMod p), S.card = 2 * p - 2 ∧ ¬ HasZeroSumPSubset p S
+
+theorem harborth_constant (p : ℕ) [Fact p.Prime] (hp : 11 ≤ p) :
+    sInf {k : ℕ | ∀ S : Finset (ZMod p × ZMod p), S.card = k → HasZeroSumPSubset p S}
+      = 2 * p - 1
+\end{verbatim}
+}
+They match the theorem as follows. \texttt{ZMod p × ZMod p} is $C_p\oplus C_p$, and a \texttt{Finset} has distinct elements, so \texttt{HasZeroSumPSubset p S} says that $S$ has $p=\exp(C_p\oplus C_p)$ distinct elements summing to $0$. \texttt{upper} is the first sentence of Theorem~\ref{thm:main} and \texttt{lower} is the lower bound. The set in \texttt{harborth\_constant} contains $2p-1$ by \texttt{upper} and no smaller $k$ by \texttt{lower} and passing to subsets, so its least element, \texttt{sInf}, is $\mathsf g(C_p\oplus C_p)$. Lean's natural-number subtraction truncates at $0$; here \mbox{\texttt{2 * p - 1}} and \mbox{\texttt{2 * p - 2}} have their usual values because $p\ge3$.
+
+The formalization follows Sections~\ref{sec:reduction}--\ref{sec:small}. It proves the theorem of Dias da Silva and Hamidoune by the polynomial method of Alon, Nathanson and Ruzsa~\cite{ANR}, from Mathlib's Combinatorial Nullstellensatz, and takes Cauchy--Davenport from Mathlib. Case 3 of Proposition~\ref{prop:shape} is proved with integer inequalities in place of the square roots of Appendix~\ref{app:ineq}. The checks of Section~\ref{sec:small} run by \texttt{decide +kernel}, evaluation in Lean's kernel, which adds no axiom. The build restates the three theorems with the definition unfolded, checks small examples of the definition (a full line of $C_3\oplus C_3$, and the lower-bound set at $p=3$), and checks that each theorem depends only on \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. Kemnitz's cases $p\in\{3,5,7\}$ are not part of the formal proof. The Lean files accompany this paper; Appendix~\ref{app:repro} says how to check them.
+
+\begin{appendices}
+\section{The inequalities of Case 3}\label{app:ineq}
+
+\emph{Case (3a).} We show $F(p,y)\ge0$ for primes $p\ge17$ and $1\le y\le(p-3)/2$. Note that $X/y=(4p-8)/y+1$ decreases in $y$, and that in each range below the factor $2p-1-\sqrt{yX}-2\sqrt{X/y}$ is positive, so $2y+5$ may be replaced by a lower bound.
+\begin{itemize}
+\item $y=1$: $X=4p-7$ and $F=10p-3-21\sqrt{4p-7}$, which is nonnegative if and only if $100p^2-1824p+3096\ge0$, true for $p\ge17$.
+\item $p\ge23$, $2\le y\le p/8$: $\sqrt{yX}\le(\sqrt{33}/8)p$ and $2\sqrt{X/y}\le2\sqrt{2p-3}$, so with $2y+5\ge9$ it suffices that $7.53p-5\ge18\sqrt{2p-3}$, true for $p\ge12$.
+\item $p\ge23$, $p/8\le y\le p/4$: $2y+5\ge p/4+5$, $\sqrt{yX}\le(\sqrt{17}/4)p$ and $2\sqrt{X/y}\le2\sqrt{33}$; the resulting quadratic in $p$ has positive leading coefficient and largest root below $21$.
+\item $p\ge23$, $p/4\le y\le(p-3)/2$: $2y+5\ge p/2+5$, $\sqrt{yX}\le3(p-2)/2$ and $2\sqrt{X/y}\le2\sqrt{17-32/p}$, so it suffices that $(p/2+5)(p/2+2-2\sqrt{17-32/p})\ge4(p-1)$. With $\sqrt{17}$ in place of $\sqrt{17-32/p}$ this holds for $p\ge24$; at $p=23$ the left side is $92.3\ldots\ge88$.
+\item $p=17$ and $p=19$: direct evaluation gives $F(17,y)=3.0,\ 32.6,\ 47.0,\ 53.0,\ 52.4,\ 45.9,\ 34.0$ for $y=1,\dots,7$ and $F(19,y)=12.6,\ 48.0,\ 67.4,\ 78.1,\ 81.8,\ 79.4,\ 71.3,\ 57.7$ for $y=1,\dots,8$ (to one decimal).
+\end{itemize}
+
+\emph{Case (3b).} Let $s=\sum_{j\ge3}v_{(j)}\le\sigma$. As $v_{(1)},v_{(2)}\le p-1$, $s\ge1$. Write $v_{(1)}=p-1-d$ and $v_{(2)}=p-s+d$ with $0\le2d\le s-1$. Since $\rho+1=p-\sigma$ and $s\le\sigma$, both sizes are at least $\rho+1$, the smaller sizes are at most $\rho-2$, and
+\[
+\Delta(\rho)=(\sigma-1-d)(2p-1-d-\sigma)+(\sigma-s+d)(2p-s+d-\sigma).
+\]
+Both first factors are nonnegative, with sum $2\sigma-1-s$, and both second factors are at least $2p-2\sigma\ge p+3$, so $\Delta(\rho)\ge(2\sigma-1-s)(p+3)\ge(\sigma-1)(p+3)$. If $\sigma\le4$, the tail $(v_{(3)},v_{(4)},\dots)$ is one of $(1)$, $(2)$, $(3)$, $(4)$, $(1,1)$, $(2,1)$, and the formula gives:
+\begin{center}
+\begin{tabular}{llll}
+tail & $d$ & shape & $\Delta(\rho)$\\\hline
+$(1)$ & $0$ & $(p-1,p-1,1)$ & $0$\\
+$(2)$ & $0$ & $(p-1,p-2,2)$ & $2p-3$\\
+$(3)$ & $0$ & $(p-1,p-3,3)$ & $4p-8$\\
+$(3)$ & $1$ & $(p-2,p-2,3)$ & $4p-10$\\
+$(1,1)$ & $0$ & $(p-1,p-2,1,1)$ & $6p-13$\\
+$(2,1)$ & $0,1$ & $(p-1,p-3,2,1)$, $(p-2,p-2,2,1)$ & $8p-22$, $8p-24$\\
+$(4)$ & $0,1$ & $(p-1,p-4,4)$, $(p-2,p-3,4)$ & $6p-15$, $6p-19$
+\end{tabular}
+\end{center}
+Apart from the first four rows, all values are at least $4(p-1)$ for $p\ge17$.
+
+\section{Reproducing the checks}\label{app:repro}
+
+The Lean project pins Lean~4 v4.34.0 and a fixed Mathlib revision. With the Lean toolchain manager \texttt{elan} installed, running \texttt{lake exe cache get} and then \texttt{lake build} in the project's \texttt{lean} folder downloads Mathlib's compiled library and checks the proof, the restated theorems, the examples and the axioms. The build takes a few minutes and about 9~GB of memory, most of it in the kernel checks of Section~\ref{sec:small}. The independent program of Section~\ref{sec:small} needs only Python~3 and runs in under a second.
+\end{appendices}
+
+\section*{Acknowledgments}
+The problem was posed in this form by Weidong Gao and Ravindranathan Thangadurai, whose lifting lemma and averaging argument the proof uses, and recorded as Problem F.100 by Béla Bajnok. The layer approach and the result for $p\ge47$ are due to Weidong Gao, Alfred Geroldinger and Wolfgang Schmid, and the extension of the lifting criterion to $C_p^r$ to Weidong Gao, Qing-Hu Hou, Wolfgang Schmid and Ravindranathan Thangadurai. Arnfried Kemnitz proved the lower bound and settled $p=3$, $5$ and $7$.
+
+\begin{thebibliography}{99}
+\bibitem{ANR} N.~Alon, M.~B.~Nathanson and I.~Ruzsa, \emph{The polynomial method and restricted sums of congruence classes}, J. Number Theory 56 (1996), 404--417, \href{https://doi.org/10.1006/jnth.1996.0029}{doi:10.1006/jnth.1996.0029}.
+\bibitem{Bajnok} B.~Bajnok, \emph{Additive Combinatorics: A Menu of Research Problems}, \href{https://arxiv.org/abs/1705.07444v2}{arXiv:1705.07444v2} (2017); CRC Press (2018). Proposition F.97, Conjecture F.98, Theorem F.99, Problem F.100 and the passages quoted here are from arXiv version~2.
+\bibitem{Cauchy} A.-L.~Cauchy, \emph{Recherches sur les nombres}, J. École Polytech.\ 9 (1813), 99--116.
+\bibitem{Davenport} H.~Davenport, \emph{On the addition of residue classes}, J. London Math. Soc.\ 10 (1935), 30--32, \href{https://doi.org/10.1112/jlms/s1-10.37.30}{doi:10.1112/jlms/s1-10.37.30}.
+\bibitem{DSH} J.~A.~Dias da Silva and Y.~O.~Hamidoune, \emph{Cyclic spaces for Grassmann derivatives and additive theory}, Bull. London Math. Soc.\ 26 (1994), 140--146, \href{https://doi.org/10.1112/blms/26.2.140}{doi:10.1112/blms/26.2.140}.
+\bibitem{GGS} W.~Gao, A.~Geroldinger and W.~A.~Schmid, \emph{Inverse zero-sum problems}, Acta Arith.\ 128 (2007), 245--279, \href{https://doi.org/10.4064/aa128-3-5}{doi:10.4064/aa128-3-5}.
+\bibitem{GHST} W.~D.~Gao, Q.~H.~Hou, W.~A.~Schmid and R.~Thangadurai, \emph{On short zero-sum subsequences II}, Integers 7 (2007), \#A21, \href{https://math.colgate.edu/~integers/h21/h21.pdf}{math.colgate.edu/\textasciitilde integers/h21/h21.pdf}.
+\bibitem{GT} W.~Gao and R.~Thangadurai, \emph{A variant of Kemnitz conjecture}, J. Combin. Theory Ser.~A 107 (2004), 69--86, \href{https://doi.org/10.1016/j.jcta.2004.03.009}{doi:10.1016/j.jcta.2004.03.009}.
+\bibitem{GMOSZ} P.~Guillot, L.~E.~Marchan, O.~Ordaz, W.~A.~Schmid and H.~Zerdoum, \emph{On the Harborth constant of $C_3\oplus C_{3p}$}, J. Théor. Nombres Bordeaux 31 (2019), 613--633, \href{https://doi.org/10.5802/jtnb.1097}{doi:10.5802/jtnb.1097}.
+\bibitem{Harborth} H.~Harborth, \emph{Ein Extremalproblem für Gitterpunkte}, J. Reine Angew. Math.\ 262/263 (1973), 356--360.
+\bibitem{Kemnitz} A.~Kemnitz, \emph{On a lattice point problem}, Ars Combin.\ 16B (1983), 151--160.
+\end{thebibliography}
+\end{document}

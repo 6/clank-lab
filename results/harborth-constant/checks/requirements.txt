@@ -1,0 +1,2 @@
+# Python 3.8 or later, standard library only (no pip packages).
+# This optional check is not part of the proof; the Lean project in ../lean is.

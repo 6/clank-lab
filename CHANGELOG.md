@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## harborth-constant v1 (November 4, 2026)
+
+- Proves that the Harborth constant of $C_p\oplus C_p$ is $2p-1$ for every prime $p\ge11$: every $2p-1$ distinct elements include $p$ whose sum is zero. This answers Problem F.100 of Bajnok's problem book, the primes $11\le p\le43$.
+- Includes the paper, a standalone Lean project checking the theorem from the definitions, and an independent program checking the finite step for $p=11$ and $13$.
+
 ## kreweras-cyclic-sieving v1 (November 4, 2026)
 
 - Proves Reiner and Sommers' Conjecture 1.4 in types $G_2$, $F_4$, $E_6$, $E_7$ and $E_8$: at a primitive $d$-th root of unity, the q-Kreweras number of an orbit of flats counts the noncrossing-partition chains fixed by an element of order $d$ whose bottom element has its fixed space in that orbit. With types A–D, it holds for every irreducible Weyl group.

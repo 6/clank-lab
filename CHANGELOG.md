@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that three agents with strict additive valuations over five indivisible goods can have no competitive equilibrium on a set of positive measure arbitrarily close to equal budgets: none at $(1-3\delta,1+2\delta,1+\delta)$ for $0<\delta<1/17$, nor near these. This answers Open Problem 1 of Babaioff, Nisan and Talgam-Cohen, and extends to every number of goods $m\ge5$.
 - Includes the paper, the certificates for all 243 allocations, and two independent exact checkers.
+- Zenodo: [10.5281/zenodo.23972983](https://doi.org/10.5281/zenodo.23972983)
 
 ## interval-hales-jewett v1 (November 5, 2026)
 

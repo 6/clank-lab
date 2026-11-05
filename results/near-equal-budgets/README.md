@@ -10,6 +10,8 @@ The proofs, the computer checks and the text were produced by AI models (from Op
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.23972983](https://doi.org/10.5281/zenodo.23972983)
+
 ## Check it
 
 For each of the 243 ways to allocate the five goods, the file `data/certificate.json` gives nonnegative multipliers that combine the equilibrium conditions into an inequality on the budgets alone, which the budgets of the theorem violate. One program checks these certificates in exact rational arithmetic; a second, which does not read them, solves the 243 linear programs exactly along the line of budgets and finds the same bound $1/17$. With Python 3.12 or later and no other packages, from this folder:
@@ -35,6 +37,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{Competitive equilibrium can fail near equal budgets for three additive agents}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/near-equal-budgets-v1/results/near-equal-budgets}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/near-equal-budgets-v1/results/near-equal-budgets}},
+  doi          = {10.5281/zenodo.23972983}
 }
 ```

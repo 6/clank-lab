@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that the Harborth constant of $C_p\oplus C_p$ is $2p-1$ for every prime $p\ge11$: every $2p-1$ distinct elements include $p$ whose sum is zero. This answers Problem F.100 of Bajnok's problem book, the primes $11\le p\le43$.
 - Includes the paper, a standalone Lean project checking the theorem from the definitions, and an independent program checking the finite step for $p=11$ and $13$.
+- Zenodo: [10.5281/zenodo.23968472](https://doi.org/10.5281/zenodo.23968472)
 
 ## kreweras-cyclic-sieving v1 (November 4, 2026)
 

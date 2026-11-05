@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## hayashi-conjecture v1 (November 5, 2026)
+
+- Gives connected quandles of orders 1890 and 5670 whose profiles contain cycles of lengths 60, 84, 140 and 210. Since 60, 84 and 140 do not divide 210, this refutes Hayashi's 2013 conjecture, and also Filipi's Conjecture 4.1 on conjugacy classes.
+- The same construction gives an infinite family of counterexamples, including latin ones, and no counterexample from it is smaller than 1890.
+- Includes the paper, the data of both quandles, and independent checkers of their full operation tables and of Filipi's condition.
+
 ## near-equal-budgets v1 (November 5, 2026)
 
 - Proves that three agents with strict additive valuations over five indivisible goods can have no competitive equilibrium on a set of positive measure arbitrarily close to equal budgets: none at $(1-3\delta,1+2\delta,1+\delta)$ for $0<\delta<1/17$, nor near these. This answers Open Problem 1 of Babaioff, Nisan and Talgam-Cohen, and extends to every number of goods $m\ge5$.

@@ -1,0 +1,10 @@
+{
+  "description": "As q5670.json (the order-5670 quandle), except the F_3 block: a1 = I, a2 = J + 1 (J = [[1,1],[0,1]]), P = diag(2,1,1), g0 = (0,1,0). The third F_3 coordinate is inert (A and P fix it, g0 is 0 there); it keeps the block sizes of the checkers. The quandle is the orbit of c0 under conjugation by G, with x * y = y x y^-1.",
+  "primes": [2, 3, 5, 7],
+  "dims": [2, 3, 2, 2],
+  "a1": [[[0, 1], [1, 1]], [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [[0, 4], [1, 4]], [[2, 0], [0, 4]]],
+  "a2": [[[1, 0], [0, 1]], [[1, 1, 0], [0, 1, 0], [0, 0, 1]], [[0, 4], [1, 4]], [[4, 0], [0, 2]]],
+  "P": [[[1, 1], [0, 1]], [[2, 0, 0], [0, 1, 0], [0, 0, 1]], [[1, 4], [0, 4]], [[0, 1], [1, 0]]],
+  "g0": [[0, 1], [0, 1, 0], [1, 0], [1, 0]],
+  "claim": {"order": 1890, "profile": {"1": 2, "2": 104, "60": 7, "84": 5, "140": 3, "210": 2}}
+}

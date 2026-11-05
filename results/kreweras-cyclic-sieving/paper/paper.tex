@@ -1,0 +1,648 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={P. Graham},pdftitle={Cyclic sieving for q-Kreweras numbers in the exceptional types}]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newcommand{\NC}{\mathrm{NC}}
+\newcommand{\Krew}{\mathrm{Krew}}
+\newcommand{\Fix}{\mathrm{Fix}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Oc}{\mathcal{O}}
+\setlength{\emergencystretch}{3em}
+\title{Cyclic sieving for $q$-Kreweras numbers in the exceptional types}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 4, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $W$ be a finite Weyl group with Coxeter number $h$ and simple Lie
+algebra $\mathfrak g$. For each $s\ge1$ the cyclic group $\Z/sh\Z$ acts on
+the multichains $w_1\le\dots\le w_s$ of noncrossing partitions of $W$.
+Reiner and Sommers defined, for each nilpotent orbit $\Oc$ of $\mathfrak g$
+and each positive integer $m$, a $q$-Kreweras number, a polynomial in $q$,
+and tabulated it in the exceptional types. Each $W$-orbit of flats $X$
+determines a nilpotent orbit $\Oc_X$, principal in the Levi subalgebra of
+$X$. Their Conjecture~1.4 says that the $q$-Kreweras number of $\Oc_X$ with
+$m=sh+1$, at a primitive $d$-th root of unity, counts the multichains fixed
+by an element of order $d$ whose bottom element has fixed space in the
+orbit of $X$. Reiner and Sommers proved it in types $A$, $B$, $C$ and $D$.
+We prove it in types $G_2$, $F_4$, $E_6$, $E_7$ and $E_8$, so it holds for
+every irreducible Weyl group. At $q=1$ the statement is a count proved by
+Douvropoulos and Josuat-Vergès; what is new is every $d>1$. Krattenthaler
+and Müller proved the unrefined cyclic sieving, Armstrong's conjecture, in
+the exceptional types by reducing it to finitely many cases. Using their
+parametrization of $s$ and of the acting element by three integers, and
+their description of the fixed points, we show that with two of the
+integers fixed the fixed-point count is a polynomial of degree at most the
+rank in the third. A finite-difference argument shows the same for the
+tabulated $q$-Kreweras number at the root of unity, once it holds for rank
+plus one consecutive values of the third integer. Only finitely many choices of the fixed pair need a
+direct check. The resulting finitely many identities are verified by two
+independent exact programs, and the reduction is checked in Lean.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization, the computer checks and the text were
+produced by AI models (from OpenAI and Anthropic), working under the
+author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{Keywords:} cyclic sieving, noncrossing partitions,
+Kreweras numbers, Weyl groups, nilpotent orbits, Fuss--Catalan
+combinatorics.
+
+\noindent\textit{MSC 2020:} 05E10, 05A15, 20F55, 17B08.
+
+\section{Introduction}
+
+\subsection{Main result}\label{sec:intro-main}
+Let $\Phi$ be an irreducible crystallographic root system of rank $n$ in a
+real vector space $V$, with Weyl group $W$ and Coxeter number $h$. The \emph{absolute length} $\ell(w)$ of $w\in W$ is the
+least number of reflections whose product is $w$; it equals
+$n-\dim V^w$, where $V^w$ is the space of vectors fixed by $w$
+\cite[Lemma~2]{Car}. The \emph{absolute order} is $u\le w$ if
+$\ell(u)+\ell(u^{-1}w)=\ell(w)$. Fix a Coxeter element $c$, a product of
+the simple reflections in some order. The noncrossing partitions are
+$\NC(W)=\{w\in W: w\le c\}$ \cite{Bes} (all Coxeter elements are conjugate,
+and conjugation is an automorphism of the absolute order, so the choice of
+$c$ does not matter), and $\NC^{(s)}(W)$ is the set of multichains
+$w_1\le w_2\le\dots\le w_s$ in $\NC(W)$ \cite{Arm}. Such a multichain is the same as a \emph{delta
+sequence} $(\delta_0;\delta_1,\dots,\delta_s)$ with
+$\delta_0\delta_1\cdots\delta_s=c$ and
+$\ell(\delta_0)+\dots+\ell(\delta_s)=n$, through $\delta_0=w_1$ and
+$\delta_i=w_i^{-1}w_{i+1}$ ($w_{s+1}=c$). The cyclic group $\Z/sh\Z$
+acts on delta sequences through the generator of Armstrong's action, in
+the form of Bessis and Reiner \cite[(6.4)]{BR}:
+\begin{equation}\label{eq:phi}
+\varphi(\delta_0;\delta_1,\dots,\delta_s)
+=(v;\,c\delta_sc^{-1},\delta_1,\dots,\delta_{s-1}),\qquad
+v=(c\delta_sc^{-1})\,\delta_0\,(c\delta_sc^{-1})^{-1}.
+\end{equation}
+The new bottom element $v$ is conjugate to $\delta_0$, so the $W$-orbit of
+the fixed space of the bottom element $w_1=\delta_0$ is constant on
+$\Z/sh\Z$-orbits.
+
+A \emph{flat} is an intersection of reflecting hyperplanes; each $V^w$ is
+one, and $[X]=W\cdot X$ denotes the $W$-orbit of a flat $X$. Let
+$\mathfrak g$ be the complex simple Lie algebra of $\Phi$ with Cartan
+subalgebra $\mathfrak h$. The centralizer of $X\subset\mathfrak h$ is a
+Levi subalgebra $\mathfrak l_X$, and $\Oc_X$ is the nilpotent orbit
+containing the principal nilpotent elements of $\mathfrak l_X$
+\cite[\S1.3]{RS}. For a nilpotent orbit $\Oc$ and a positive integer $m$,
+Reiner and Sommers define the $q$-Kreweras number
+$\Krew(\Phi,\Oc,m;q)=f_{e,1}(m;q)$, a polynomial in $q$ that they attach to
+an element $e\in\Oc$ \cite[\S1.3]{RS}; the conjecture uses $m=sh+1$. They
+list these polynomials in the exceptional types in the tables of
+\cite[\S3.6]{RS}, and throughout $\Krew(\Phi,\Oc_X,m;q)$ denotes the formula
+tabulated there. Write $[x]_q=(1-q^x)/(1-q)$.
+
+\begin{theorem}\label{thm:main}
+Let $W$ be of type $G_2$, $F_4$, $E_6$, $E_7$ or $E_8$. Let $s\ge1$, let
+$d$ divide $sh$, let $\omega$ be a primitive $d$-th root of unity, and let
+$[X]$ be a $W$-orbit of flats. Then $\Krew(\Phi,\Oc_X,sh+1;q=\omega)$ is the
+number of multichains $w_1\le\dots\le w_s$ in $\NC^{(s)}(W)$ with
+$V^{w_1}\in[X]$ that are fixed by an element of order $d$ of $\Z/sh\Z$.
+\end{theorem}
+
+In the language of Reiner, Stanton and White \cite{RSW}, the theorem says
+that for each $[X]$ the multichains in $\NC^{(s)}(W)$ with
+$V^{w_1}\in[X]$, the polynomial $\Krew(\Phi,\Oc_X,sh+1;q)$ and the cyclic
+group $\Z/sh\Z$ exhibit the cyclic sieving phenomenon: the polynomial's
+value at a primitive $d$-th root of unity counts the points fixed by an
+element of order $d$.
+
+\begin{corollary}\label{cor:all}
+Conjecture~1.4 of Reiner and Sommers \cite{RS} holds for every irreducible
+Weyl group.
+\end{corollary}
+
+\begin{proof}
+Reiner and Sommers prove it in types $A$, $B$, $C$, $D$ \cite[Theorem~1.7]{RS}.
+In the other types they compute $f_{e,1}$ in the tables of \cite[\S3.6]{RS},
+which give the function $\Krew$ of Theorem~\ref{thm:main}, so
+Theorem~\ref{thm:main} proves the conjecture there.
+\end{proof}
+
+\begin{example}\label{ex:g2}
+Take $W$ of type $G_2$ ($n=2$, $h=6$) and $s=1$, so $m=7$. Then the
+generator of $\Z/6\Z$ acts on $\NC(W)$ by conjugation by $c$, an element of
+order $6$; since $c^3=-1$ is central, $c^3$ acts trivially. $\NC(W)$
+consists of the identity (the flat $V$), three reflections of each root
+length and $c$ (the flat $\{0\}$). The four orbits of flats are labeled by
+the Bala--Carter labels $0$, $A_1$, $\tilde A_1$ and $G_2$ of $\Oc_X$, and
+the tables of \cite[\S3.6]{RS} give
+\[
+\tfrac{[m-1]_q[m-5]_q}{[2]_q[6]_q},\quad
+q^{m-5}\tfrac{[m-1]_q}{[2]_q},\quad
+q^{m-3}\tfrac{[m-1]_q}{[2]_q},\quad
+q^{2m-2},
+\]
+which at $m=7$ are $1$, $q^2(1+q^2+q^4)$, $q^4(1+q^2+q^4)$ and $q^{12}$.
+Their values at a primitive $d$-th root of unity are:
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+Label $\backslash$ $d$ (element) & $1$ ($1$) & $2$ ($c^3$) & $3$ ($c^2$) & $6$ ($c$)\\
+\midrule
+$0$ (the identity) & 1 & 1 & 1 & 1\\
+$A_1$ (long reflections) & 3 & 3 & 0 & 0\\
+$\tilde A_1$ (short reflections) & 3 & 3 & 0 & 0\\
+$G_2$ ($c$) & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+\end{center}
+Each entry is both the polynomial's value and the number of elements of
+$\NC(W)$ with that label fixed by conjugation by the element in the column.
+\end{example}
+
+The Kreweras numbers refine the Fuss--Catalan number $|\NC^{(s)}(W)|$
+according to the $W$-orbit of the fixed space of the bottom element
+\cite[\S1.1]{RS}. Reiner and Sommers' $q$-analogues are attached to
+nilpotent orbits of $\mathfrak g$ \cite[\S1.3]{RS}, so the conjecture links
+the nilpotent orbits of the Lie algebra with the cyclic action on the
+noncrossing partitions of its Weyl group. With Theorem~\ref{thm:main} it
+holds uniformly for every Weyl group.
+
+\subsection{Prior work}
+
+Reiner and Sommers stated the conjecture in 2016 \cite{RS}, answering in
+conjectural form a question that Bessis and Reiner posed for $s=1$
+\cite[\S6.1, Question~6.3]{BR}. Their Conjecture~1.4 reads: ``For $m=sh+1$, and for each $W$-orbit $[X]$,
+$\Krew(\Phi,\Oc_X,m;q=\omega_d)$ counts those $w_1\le\dots\le w_s\in
+\NC^{(s)}(W)$ which are fixed under the action an element of order $d$ in
+the $\Z/sh\Z$-action and have $V^{w_1}\in[X]$.'' Their Theorem~1.7 proves it
+in types $A$, $B$, $C$ and $D$. They describe the $q=1$ count as follows:
+``In classical ($A,B,C,D$) and dihedral ($I$) types, work of Rhoades showed
+more generally that $\Krew(W,[X],sh+1)$ counts the elements
+$w_1\le\dots\le w_s$ in $\NC^{(s)}(W)$ with $V^{w_1}$ in $[X]$; this remains
+open in the exceptional types $E,F,H$'' \cite[\S1.1]{RS}. Douvropoulos and
+Josuat-Vergès proved this count for every irreducible $W$
+\cite[Theorem~3.10]{DJV}, a theorem they attribute to Rhoades \cite{Rho}
+except for $E_7$ and $E_8$; for the remaining exceptional groups they write
+that ``this can be done by computer''. When $e\in\Oc_X$,
+$f_{e,1}(m;1)$ is this Kreweras number \cite[\S1.3]{RS}, so the
+case $d=1$ of Theorem~\ref{thm:main} is their theorem, and what is new here
+is every $d>1$. The case $s=1$ of the count is a theorem of Athanasiadis
+and Reiner \cite[Theorem~6.3]{AR}, as Reiner and Sommers recall
+\cite[\S1.1]{RS}.
+
+Without the condition on $V^{w_1}$, the analogous statement for the
+$q$-Fuss--Catalan number (a product of ratios of $q$-integers over the
+degrees of $W$) is Armstrong's Conjecture~5.4.7 \cite{Arm}. Reiner and
+Sommers record it as their Theorem~1.3, citing Bessis and Reiner
+\cite{BR} \cite[\S1.2]{RS}. Krattenthaler
+and Müller prove that the generalized noncrossing partitions of the
+well-generated complex reflection groups of exceptional type ``obey two different cyclic sieving
+phenomena, as conjectured by Armstrong, and by Bessis and Reiner''
+\cite{KM}. To do so they ``reduce the conjectures for
+each of the 26 exceptional types to a finite problem'' \cite[\S1]{KM}. Our
+proof follows that reduction: it uses their formula \cite[(5.1)]{KM} for
+powers of $\varphi$, the parametrization and the block equations
+\cite[(5.8)]{KM} from the proof of their Lemma~30, and their Lemma~31 for
+large $\nu$.
+
+Three works treat related refinements that Theorem~\ref{thm:main} does
+not address. Krattenthaler and Stump pose as an open problem a cyclic
+sieving phenomenon for positive $m$-divisible noncrossing partitions with
+prescribed block structure in exceptional types
+\cite[\S7.2, Question~7.5 and Open Problem~7.6]{KS}. Pouillart provides ``a
+uniform refinement of these cyclic sieving phenomena using a $q$-analogue''
+of the face formula of Douvropoulos and Josuat-Vergès, for faces of the
+generalized cluster complex under the Fomin--Reading rotation \cite{Pou}.
+Kim defines, ``for a coincidental Coxeter group, i.e.\ of type $A_{n-1},
+BC_n, H_3$, or $I_2(m)$'', $q$-Kreweras numbers attached to limit symbols
+\cite{Kim}. Our result concerns neither the positive objects, nor faces, nor
+these other $q$-analogues.
+
+\subsection{Method}
+The conjecture is a statement for infinitely many $s$. Following
+Krattenthaler and Müller, we write $s=m_1\nu$ and the power of $\varphi$
+as $\varphi^{m_1h_1}$ with $h_1\mid h$ and $\gcd(h_1,\nu)=1$. For fixed
+$(h_1,\nu)$ the fixed points with a given $[X]$ are counted by a polynomial
+in $m_1$ of degree at most $n$, built from chains in the centralizer of
+$c^{h_1}$, as in the proof of \cite[Lemma~30]{KM}
+(Proposition~\ref{prop:fix}). The new step for the refinement is the
+$q$-Kreweras side: the tabulated $q$-Kreweras numbers are quotients of
+products and sums of $q$-integers, with no product formula of the kind used
+for the $q$-Fuss--Catalan numbers. We show directly from the shape of each
+formula that if its value at $\omega$ is regular and agrees with a
+polynomial in $m_1$ of degree at most $n$ for $n+1$ consecutive values of
+$m_1$, then it does so for every $m_1$ (Proposition~\ref{prop:rhs}). For
+$\nu>n$ both sides are given in closed form outside finitely many pairs
+$(h_1,\nu)$. The remaining identities, $104$ pairs $(h_1,\nu)$ with $\nu\le
+n$ and $21$ with $\nu>n$ over the five types, are checked by computer
+(Section~\ref{sec:comp}), and the reduction is formalized in Lean
+(Section~\ref{sec:lean}).
+
+\section{The reduction to finitely many identities}\label{sec:red}
+
+Write $\Fix_X(s,p)$ for the number of delta sequences of length $s$ fixed by
+$\varphi^p$ whose bottom element $\delta_0$ has $V^{\delta_0}\in[X]$, and
+$R_X(m;q)=\Krew(\Phi,\Oc_X,m;q)$.
+
+\paragraph{Step 1: the parameters.}
+An element of order $d$ in $\Z/sh\Z$ generates the same subgroup as
+$\varphi^p$ with $p=sh/d$, so it has the same fixed points.
+
+\begin{lemma}\label{lem:param}
+The pairs $(s,p)$ with $s\ge1$ and $p\mid sh$ correspond one to one to
+the triples $(h_1,\nu,m_1)$ of positive integers with $h_1\mid h$ and
+$\gcd(h_1,\nu)=1$, through $s=m_1\nu$ and $p=m_1h_1$. Then $d=sh/p=\nu h/h_1$.
+\end{lemma}
+
+\begin{proof}
+Given $(s,p)$, put $m_1=\gcd(p,s)$, $\nu=s/m_1$ and $h_1=p/m_1$. Then
+$\gcd(h_1,\nu)=1$, and $p\mid sh$ gives $h_1\mid \nu h$, hence $h_1\mid h$.
+Conversely $s=m_1\nu$ and $p=m_1h_1$ satisfy $p\mid sh$ and
+$\gcd(p,s)=m_1$.
+\end{proof}
+
+\paragraph{Step 2: the fixed points.}
+Fix $h_1\mid h$ and $\nu\ge1$ with $\gcd(h_1,\nu)=1$, and write
+$h_1=t\nu+r$ with $0\le r<\nu$, as in the proof of \cite[Lemma~30]{KM}.
+Since $\gcd(r,\nu)=1$, the map sending $k$ to $k+r$, or to $k+r-\nu$ when
+$k+r>\nu$, is one cycle on $\{1,\dots,\nu\}$. Starting from $e_1=0$, follow
+this cycle for $\nu-1$ steps, setting $e_{k+r}=e_k+t$ for a step with
+$k+r\le\nu$ and $e_{k+r-\nu}=e_k+t+1$ for a step with $k+r>\nu$. This
+defines $e_1,\dots,e_\nu$. Going once round the cycle would add
+$\nu t+r=h_1$, so the step that closes it defines nothing; in the proof
+below it becomes the condition of commuting with $c^{h_1}$. Equivalently,
+$e_k$ is the unique integer in $[0,h_1)$ with $h_1\mid \nu e_k+(k-1)$, and
+for elements commuting with $c^{h_1}$ any exponents with this divisibility
+give the same conjugates below (this is the form used in
+Appendix~\ref{app:lean}). Let $C$ be the centralizer of $c^{h_1}$ in
+$W$. For $u\in\NC(W)\cap C$ put $u_k=c^{e_k}uc^{-e_k}$ and
+$\delta_0(u)=c\,(u_1u_2\cdots u_{\nu})^{-1}$, and let
+\[
+U_X=\{u\in\NC(W)\cap C:\ \ell(\delta_0(u))+\nu\,\ell(u)=n,\ V^{\delta_0(u)}\in[X]\}.
+\]
+For $u\in\NC(W)$ let $N_k(u)$ be the number of chains
+$1=z_0<z_1<\dots<z_k=u$ in the absolute order with every $z_i\in C$.
+
+\begin{proposition}\label{prop:fix}
+For every $m_1\ge1$,
+\[
+\Fix_X(m_1\nu,\,m_1h_1)=L_X(m_1):=\sum_{u\in U_X}\ \sum_{k=0}^{n}\binom{m_1}{k}N_k(u).
+\]
+In particular $L_X$ is a polynomial in $m_1$ of degree at most $n$.
+\end{proposition}
+
+\begin{proof}
+Put $s=m_1\nu$ and $p=m_1h_1=ts+m_1r$. On the last $s$ entries,
+$\varphi$ acts by $\rho(\delta_1,\dots,\delta_s)=(c\delta_sc^{-1},\delta_1,
+\dots,\delta_{s-1})$, and $\delta_0=c(\delta_1\cdots\delta_s)^{-1}$ is
+determined by them, so the fixed points of $\varphi^p$ are those of
+$\rho^p$. Since $\rho^s$ is conjugation by $c$ in each entry,
+$\rho^p(\delta)_i=c^{t+1}\delta_{i-m_1r+s}c^{-t-1}$ for $i\le m_1r$ and
+$\rho^p(\delta)_i=c^t\delta_{i-m_1r}c^{-t}$ for $i>m_1r$
+\cite[(5.1), (5.8)]{KM}. Cut $(\delta_1,\dots,\delta_s)$ into $\nu$ blocks
+$B_1,\dots,B_{\nu}$ of $m_1$ consecutive entries. As the shift $m_1r$ is a
+multiple of $m_1$, the equation $\rho^p\delta=\delta$ says that
+$B_{k+r}=c^tB_kc^{-t}$ when $k+r\le \nu$ and $B_{k+r-\nu}=c^{t+1}B_kc^{-t-1}$
+otherwise, entry by entry. Following the cycle from $B_1$, as in the proof
+of \cite[Lemma~30]{KM}, these equations hold exactly when every entry of $B_1$ commutes with $c^{h_1}$ and
+$B_k=c^{e_k}B_1c^{-e_k}$ for all $k$.
+
+Let $u$ be the product of the entries of $B_1$. The product of the entries
+of $B_k$ is then $u_k$, so $\delta_0=\delta_0(u)$, and by subadditivity and
+conjugation invariance of $\ell$,
+\[
+n=\ell(\delta_0)+\nu\sum_{x\in B_1}\ell(x)\ \ge\ \ell(\delta_0)+\nu\,\ell(u)
+=\ell(\delta_0)+\sum_k\ell(u_k)\ \ge\ \ell(c)=n.
+\]
+Both inequalities are equalities: $B_1$ is a length-additive factorization
+of $u$ into $m_1$ elements of $C$, and
+$\ell(\delta_0(u))+\nu\ell(u)=n$. The second condition makes
+$c=\delta_0u_1\cdots u_{\nu}$ length-additive, so $u=u_1\le c$ and $u\in
+\NC(W)\cap C$. Conversely, each $u\in\NC(W)\cap C$ with
+$\ell(\delta_0(u))+\nu\ell(u)=n$ and each length-additive factorization of
+$u$ into $m_1$ elements of $C$ gives a fixed point. Length-additive
+factorizations $u=x_1\cdots x_{m_1}$ correspond to multichains
+$1=y_0\le y_1\le\dots\le y_{m_1}=u$ through $y_j=x_1\cdots x_j$, and all
+$x_j$ lie in $C$ exactly when all $y_j$ do. A multichain with exactly $k$
+strict steps is a strict chain of length $k$ together with a choice of the
+$k$ strict positions among $m_1$, which gives $\binom{m_1}{k}N_k(u)$.
+\end{proof}
+
+\begin{lemma}[{\cite[Lemma~31]{KM}}]\label{lem:large}
+If $\nu>n$, then $L_X(m_1)=1$ when $X=\{0\}$ and $L_X(m_1)=0$ otherwise.
+\end{lemma}
+
+\begin{proof}
+If $u\ne1$ then $\ell(\delta_0(u))+\nu\ell(u)\ge \nu>n$, so $U_X\subseteq\{1\}$.
+For $u=1$, $\delta_0=c$, whose fixed space is $\{0\}$, and $N_k(1)$ is $1$
+for $k=0$ and $0$ for $k>0$.
+\end{proof}
+
+\paragraph{Step 3: the right side.}
+Every formula $R_X(m;q)$ in the tables of \cite[\S3.6]{RS} that we use is a
+product of factors of four kinds: $q^{\alpha m+\beta}$ with integers
+$\alpha,\beta$; numerator brackets $[m-a]_q$; sums
+$\sum_j\pm q^{\gamma_j}[m-a_j]_q$ of such brackets; and denominator brackets
+$1/[b]_q$ with $b\ge1$. In each tabulated formula (a row of the tables)
+there are at most $n$ factors of the second and third kinds together,
+and at most $n$ of the fourth kind; the programs check this for every row.
+
+\begin{proposition}\label{prop:rhs}
+Let $R(m;q)$ be a product of factors of the four kinds, with at most $n$
+of the second and third kinds together and at most $n$ of the fourth kind.
+Let $E\ge1$, and let $\omega$ be a root of unity with
+$\omega^E=1$. Suppose that for $m_1=1,\dots,n+1$ the rational function
+$R(Em_1+1;q)$ is regular at $q=\omega$ with value $P(m_1)$, where $P$ is a
+polynomial of degree at most $n$. Then the same holds for every $m_1\ge1$.
+\end{proposition}
+
+\begin{proof}
+Put $Z=q^{Em_1}$, so that $q^m=qZ$ for $m=Em_1+1$. Then
+$q^{\alpha m+\beta}=q^{\alpha+\beta}Z^\alpha$ and
+$[m-a]_q=(1-q^{1-a}Z)/(1-q)$. Multiplying out,
+$R(Em_1+1;q)=\sum_i\psi_i(q)Z^{\alpha_i}$ with finitely many integers
+$\alpha_i$ and rational functions $\psi_i$ that do not depend on $m_1$.
+Each $\psi_i$ has a pole of order at most $n$ at $\omega$: if $\omega=1$
+the poles come only from the factors $1/(1-q)$, one for each factor of the
+second or third kind, and if $\omega\ne1$ only from the denominator brackets,
+each of which has at most a simple zero at $\omega$. Let $\Delta$ be the
+forward difference in $m_1$. Since $\Delta Z^\alpha=Z^\alpha(q^{E\alpha}-1)$,
+\[
+\Delta^{n+1}R(Em_1+1;q)=\sum_i\psi_i(q)\,Z^{\alpha_i}\,(q^{E\alpha_i}-1)^{n+1}.
+\]
+As $\omega^E=1$, each factor $(q^{E\alpha_i}-1)^{n+1}$ vanishes to order at
+least $n+1$ at $\omega$, so every term is regular at $\omega$ with value $0$.
+Now $R(E(m_1+n+1)+1;q)$ equals $\Delta^{n+1}R(Em_1+1;q)$ minus a fixed
+integer combination of $R(E(m_1+j)+1;q)$ for $0\le j\le n$, and $P$ satisfies
+the same relation with $\Delta^{n+1}P=0$. Induction on $m_1$ completes the
+proof.
+\end{proof}
+
+\paragraph{Step 4: proof of Theorem~\ref{thm:main}.}
+Let $s$, $d$ and $[X]$ be given, and let $(h_1,\nu,m_1)$ correspond to
+$(s,sh/d)$ by Lemma~\ref{lem:param}. Put $E=\nu h$, so $sh+1=Em_1+1$ and
+$\omega^E=1$ because $d=\nu h/h_1$ divides $E$. By
+Proposition~\ref{prop:fix} the left side is $L_X(m_1)$, a polynomial of
+degree at most $n$.
+
+If $\nu\le n$, there are finitely many pairs $(h_1,\nu)$, and for each of
+them and each $[X]$ the computation of Section~\ref{sec:comp} verifies that
+$R_X(Em_1+1;q)$ is regular at $\omega$ with value $L_X(m_1)$ for
+$m_1=1,\dots,n+2$. Proposition~\ref{prop:rhs} gives every $m_1$.
+
+If $\nu>n$, then by Lemma~\ref{lem:large} $L_X$ is $1$ for $X=\{0\}$ and $0$
+otherwise. Let $b_{\max}$ be
+the largest $b$ of a denominator bracket in the type's table ($6$, $12$, $12$,
+$18$ and $30$ for $G_2$, $F_4$, $E_6$, $E_7$, $E_8$). If $d>b_{\max}$, no
+denominator bracket vanishes at $\omega$. Every row except that of
+$X=\{0\}$ has a factor $[m-1]_q$, which vanishes at $\omega\ne1$ because
+$\omega^{m-1}=\omega^{Em_1}=1$, and the row of $X=\{0\}$ is $q^{n(m-1)}$,
+which is $1$ at $\omega$; the programs check both facts. If $d\le b_{\max}$,
+only finitely many pairs $(h_1,\nu)$ occur, and the computation verifies
+that $R_X(Em_1+1;\omega)$ is $1$ for $X=\{0\}$ and $0$ otherwise, for
+$m_1=1,\dots,n+2$; again
+Proposition~\ref{prop:rhs} gives every $m_1$. This covers every $s$, every
+$d\mid sh$ and every $[X]$. \qed
+
+\section{Computational verification}\label{sec:comp}
+
+For each type the programs build $\Phi$, the reflections as integer
+matrices and $c=s_1\cdots s_n$ in Bourbaki's numbering, with
+$\ell(w)=\operatorname{rank}(w-1)$ \cite[Lemma~2]{Car}. They compute
+$\NC(W)$ and check that its size is the Catalan number of $W$ ($8$, $105$,
+$833$, $4160$, $25080$), and the absolute order on it, whose number of
+comparable pairs $u\le w$ is checked against the Fuss--Catalan number
+$\mathrm{Cat}^{(2)}(W)$.
+
+The programs then match each $W$-orbit of flats with its row in the tables
+of \cite[\S3.6]{RS} and check that the match is a bijection onto the $4$,
+$12$, $17$, $32$ and $41$ rows of orbits principal in a Levi subalgebra
+(Bala--Carter labels without parentheses), taken with the trivial
+representation of the component group. Two invariants decide the match.
+The type of the parabolic subgroup fixing the flat must be the Levi type of
+the label. The number of hyperplanes of the arrangement restricted to the
+flat must be the sum of its Orlik--Solomon exponents; these are the
+representation exponents listed in the second column of all the rows of
+the orbit \cite[\S2 after (2.2), and \S3.6]{RS}, and for ten orbits one of
+them is listed in a row with a nontrivial representation. The second
+invariant separates three pairs of orbits in $E_7$ with the same Levi type.
+These $106$ rows were transcribed by a program from the arXiv source of
+\cite{RS} and compared with the journal pages.
+
+For each $h_1\mid h$ and $1\le \nu\le n$ with $\gcd(h_1,\nu)=1$, and for the
+pairs with $\nu>n$ and $d\le b_{\max}$ (Appendix~\ref{app:cases}), a
+certificate lists the coefficients of $L_X$ in the basis $\binom{m_1}{k}$ for
+every $[X]$. Two checkers, written separately and sharing no code,
+recompute everything from the root system and compare with the
+certificate:
+\begin{itemize}
+\item Checker A builds $\NC(W)$ bottom-up with exact ranks, finds a standard
+parabolic subgroup conjugate to the one fixing each flat, and evaluates
+each tabulated formula as an exact polynomial in $\Z[q]$ (the division in
+each formula is checked exact), reduced modulo the cyclotomic polynomial of
+order $d$; the residue must be the integer $L_X(m_1)$.
+\item Checker B lets $W$ act by permutations of the roots, builds
+$\NC(W)$ top-down from $c$, identifies orbits of flats by the type of the
+roots vanishing on $V^w$ and the number of restricted hyperplanes, derives
+the exponents $e_k$ by iterating $\rho$ symbolically, and evaluates each
+tabulated formula from the leading term of each factor's expansion around
+$q=\omega$, in $\mathbb Q(e^{2\pi i/d})$.
+\end{itemize}
+Both check every identity for $m_1=1,\dots,n+2$ and the row shapes used in
+Step~3. Checker B also recounts fixed points by brute force, by the literal
+action \eqref{eq:phi} and by $\rho$, for the small $s$ given in
+Appendix~\ref{app:cases}. The identities with $d=1$ are the counts of
+\cite[Theorem~3.10]{DJV}, and they agree for all $s$. Deliberately
+corrupted certificates and tables are rejected by both checkers. The README
+gives the commands.
+
+\section{Formal verification}\label{sec:lean}
+
+Steps 1--4 are proved in Lean~4 \cite{Lean} with Mathlib \cite{Mathlib}.
+The theorem \texttt{RS16.Main.conjecture\_1\_4} has the following form.
+
+\emph{Data:} a finite group $G$; a function $\ell:G\to\mathbb N$; an element
+$c\in G$ and integers $h$ and $n$; a map $\mathrm{cls}$ from $G$ to a set of
+labels; for each label $X$ a formula $\mathrm{rows}(X)$ of the shape of
+Step~3; and block exponents $e$.
+
+\emph{Hypotheses} (each matched to its check in Appendix~\ref{app:lean}):
+\begin{itemize}
+\item $\ell$ is subadditive, invariant under conjugation and zero only at $1$;
+\item $c^h=1$ and $\ell(c)=n>0$;
+\item the exponent condition of Step~2;
+\item the row shapes and the bound $b_{\max}$;
+\item the row of the label of $c$ is $q^{n(m-1)}$, and every other row has a
+factor $[m-1]_q$;
+\item the identities at $m_1=1,\dots,n+1$ for $\nu\le n$, and those for
+$\nu>n$ and $d\le b_{\max}$.
+\end{itemize}
+
+\emph{Conclusion:} for every $s\ge1$, every $k\in\Z/sh\Z$ of additive order
+$d$, every label $X$ and every primitive $d$-th root of unity $\omega$ in a
+field of characteristic $0$, the formula $\mathrm{rows}(X)$ at $m=sh+1$ is
+regular at $\omega$, and its value there is the number of delta sequences
+fixed by $\varphi^k$ whose bottom element has label $X$.
+
+Instantiated with $G=W$, $\ell(w)=\operatorname{rank}(w-1)$ and
+$\mathrm{cls}(w)$ the label of $W\cdot V^w$, this is
+Theorem~\ref{thm:main}. Lean also proves that $\operatorname{rank}(w-1)$ on
+a group of invertible matrices satisfies the three conditions on $\ell$.
+The eleven theorems of the formal statement depend only on the axioms
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+
+Outside Lean remain: the finite computations themselves; that the checkers'
+rational-function arithmetic computes the formal evaluation of a row, and
+that their $\NC(W)$, order and length are the objects defined above, and
+that their fixed-point polynomial is the $L_X$ of Step~2 (with $U_X$, the
+chain counts and the block exponents as defined there), which a reader
+confirms from the code; the identification of reflection length with
+$\operatorname{rank}(w-1)$ \cite[Lemma~2]{Car}; the formulas of
+\cite[\S3.6]{RS} as stated there, and that each row the checkers read is
+the formula of the table; and the labeling of orbits of flats.
+Appendix~\ref{app:lean} matches each hypothesis to its check.
+
+\begin{appendices}
+\section{The cases checked}\label{app:cases}
+
+For each type the table gives the rank $n$, the Coxeter number $h$, the size
+of $\NC(W)$, the number of orbits of flats, the number of pairs
+$(h_1,\nu)$ with $h_1\mid h$, $1\le \nu\le n$ and $\gcd(h_1,\nu)=1$, the
+number of pairs with $\nu>n$ and $\nu h/h_1\le b_{\max}$, $b_{\max}$, and the
+largest $s$ for which checker B recounts fixed points by brute force, with
+the literal action \eqref{eq:phi} and with $\rho$.
+
+\begin{center}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+Type & $n$ & $h$ & $|\NC(W)|$ & orbits & pairs, $\nu\le n$ & pairs, $\nu>n$ & $b_{\max}$ & $s$, \eqref{eq:phi} & $s$, $\rho$\\
+\midrule
+$G_2$ & 2 & 6 & 8 & 4 & 6 & 1 & 6 & 4 & 4\\
+$F_4$ & 4 & 12 & 105 & 12 & 13 & 4 & 12 & 3 & 4\\
+$E_6$ & 6 & 12 & 833 & 17 & 20 & 2 & 12 & 2 & 3\\
+$E_7$ & 7 & 18 & 4160 & 32 & 27 & 4 & 18 & 1 & 2\\
+$E_8$ & 8 & 30 & 25080 & 41 & 38 & 10 & 30 & 1 & 2\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{The formal statement and the checks}\label{app:lean}
+
+The hypotheses of \texttt{RS16.Main.conjecture\_1\_4} and what establishes
+each:
+\begin{itemize}
+\item subadditivity, conjugation invariance and $\ell(w)=0\iff w=1$ for
+$\ell(w)=\operatorname{rank}(w-1)$: proved in Lean
+(\texttt{reflection\_length});
+\item $c^h=1$ and $\ell(c)=n$: a separate program computes the order of $c$
+and the rank of $c-1$ in each type;
+\item the exponent condition $h_1\mid \nu e_{j+1}+j$ for $0\le j<\nu$ (the
+form of Step~2) for the block exponents:
+proved in Lean for the recursion that checker A uses
+(\texttt{checker\_exponents}), and such exponents exist for every coprime
+pair (\texttt{exists\_exponents});
+\item at most $n$ numerator and $n$ denominator brackets per row, the row
+$q^{n(m-1)}$, the factor $[m-1]_q$ and the bound $b_{\max}$: checked on
+every row by both checkers;
+\item the identities for $\nu\le n$ and for $\nu>n$ with $d\le b_{\max}$:
+checked by both checkers; a constant residue modulo the cyclotomic
+polynomial gives the value at every primitive $d$-th root
+(\texttt{checker\_value}).
+\end{itemize}
+Lean proves Step~2 (\texttt{step2\_fixed\_points},
+\texttt{step2\_large\_m2}), Step~3 (\texttt{step3\_rows}), the vanishing of
+rows with a factor $[m-1]_q$ (\texttt{rows\_with\_m1\_factor}) and Step~1
+inside \texttt{conjecture\_1\_4}. Step~3 is proved by the finite differences
+above, so it uses neither the positivity of $f_{e,1}$
+\cite[Theorem~1.6(iv)]{RS} nor the check at $m_1=n+2$. In the Lean statement
+a multichain is represented by its delta sequence
+$(\delta_0;\delta_1,\dots,\delta_s)$, with $\delta_0=w_1$ as in
+Section~\ref{sec:intro-main}.
+\end{appendices}
+
+\begin{thebibliography}{99}
+
+\bibitem{AR}
+C.~A.~Athanasiadis and V.~Reiner, \emph{Noncrossing partitions for the
+group $D_n$}, SIAM J. Discrete Math. \textbf{18} (2004), 397--417;
+\href{https://doi.org/10.1137/S0895480103432192}{doi:10.1137/S0895480103432192}.
+
+\bibitem{Arm}
+D.~Armstrong, \emph{Generalized noncrossing partitions and combinatorics of
+Coxeter groups}, Mem. Amer. Math. Soc. \textbf{202} (2009), no.~949.
+
+\bibitem{Bes}
+D.~Bessis, \emph{The dual braid monoid}, Ann. Sci. École Norm. Sup. (4)
+\textbf{36} (2003), 647--683;
+\href{https://arxiv.org/abs/math/0101158}{arXiv:math/0101158}.
+
+\bibitem{BR}
+D.~Bessis and V.~Reiner, \emph{Cyclic sieving of noncrossing partitions for
+complex reflection groups}, Ann. Comb. \textbf{15} (2011), 197--222;
+\href{https://arxiv.org/abs/math/0701792}{arXiv:math/0701792}.
+
+\bibitem{Car}
+R.~W.~Carter, \emph{Conjugacy classes in the Weyl group}, Compositio Math.
+\textbf{25} (1972), 1--59.
+
+\bibitem{DJV}
+T.~Douvropoulos and M.~Josuat-Vergès, \emph{The generalized cluster complex:
+refined enumeration of faces and related parking spaces}, SIGMA \textbf{19}
+(2023), 069; \href{https://doi.org/10.3842/SIGMA.2023.069}{doi:10.3842/SIGMA.2023.069}.
+
+\bibitem{Kim}
+D.~Kim, \emph{$q$-Kreweras numbers for coincidental Coxeter groups attached
+to limit symbols}, \href{https://arxiv.org/abs/2012.08076}{arXiv:2012.08076}.
+
+\bibitem{KM}
+C.~Krattenthaler and T.~W.~Müller, \emph{Cyclic sieving for generalised
+non-crossing partitions associated with complex reflection groups of
+exceptional type}, in: I.~S.~Kotsireas and E.~V.~Zima (eds.), Advances in
+Combinatorics: Waterloo Workshop in Computer Algebra, W80, Springer, Berlin,
+2013, 209--247;
+\href{https://doi.org/10.1007/978-3-642-30979-3_12}{doi:10.1007/978-3-642-30979-3\_12};
+\href{https://arxiv.org/abs/1001.0028}{arXiv:1001.0028}; computational
+details in \href{https://arxiv.org/abs/1001.0030}{arXiv:1001.0030}.
+
+\bibitem{KS}
+C.~Krattenthaler and C.~Stump, \emph{Positive $m$-divisible non-crossing
+partitions and their Kreweras maps},
+\href{https://arxiv.org/abs/2506.14996v1}{arXiv:2506.14996v1}.
+
+\bibitem{Lean}
+L.~de~Moura and S.~Ullrich, \emph{The Lean 4 theorem prover and programming
+language}, in: Automated Deduction -- CADE 28, Lecture Notes in Comput. Sci.
+\textbf{12699}, Springer, 2021, 625--635.
+
+\bibitem{Mathlib}
+The mathlib Community, \emph{The Lean mathematical library}, in: Proceedings
+of the 9th ACM SIGPLAN International Conference on Certified Programs and
+Proofs (CPP 2020), 367--381.
+
+\bibitem{Pou}
+L.~Pouillart, \emph{Cyclic sieving phenomena on parabolic classes of faces of
+the cluster complex},
+\href{https://arxiv.org/abs/2603.28242v1}{arXiv:2603.28242v1}.
+
+\bibitem{RS}
+V.~Reiner and E.~Sommers, \emph{Weyl group $q$-Kreweras numbers and cyclic
+sieving}, Ann. Comb. \textbf{22} (2018), 819--874;
+\href{https://arxiv.org/abs/1605.09172v2}{arXiv:1605.09172v2}.
+
+\bibitem{Rho}
+B.~Rhoades, \emph{Parking structures: Fuss analogs}, J. Algebraic Combin.
+\textbf{40} (2014), 417--473;
+\href{https://arxiv.org/abs/1205.4293}{arXiv:1205.4293}.
+
+\bibitem{RSW}
+V.~Reiner, D.~Stanton and D.~White, \emph{The cyclic sieving phenomenon},
+J. Combin. Theory Ser. A \textbf{108} (2004), 17--50;
+\href{https://doi.org/10.1016/j.jcta.2004.04.009}{doi:10.1016/j.jcta.2004.04.009}.
+
+\end{thebibliography}
+\end{document}

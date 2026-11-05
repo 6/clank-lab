@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## kreweras-cyclic-sieving v1 (November 4, 2026)
+
+- Proves Reiner and Sommers' Conjecture 1.4 in types $G_2$, $F_4$, $E_6$, $E_7$ and $E_8$: at a primitive $d$-th root of unity, the q-Kreweras number of an orbit of flats counts the noncrossing-partition chains fixed by an element of order $d$ whose bottom element has its fixed space in that orbit. With types A–D, it holds for every irreducible Weyl group.
+- Includes the paper, the certificates with two independent exact checkers, and a Lean project checking the reduction of the conjecture to finitely many identities.
+
 ## hamiltonian-degree-sequences v1 (November 4, 2026)
 
 - Refutes the conjecture of Kühn, Osthus and Treglown that conditions on the separately sorted out- and in-degree sequences force a Hamilton cycle in a digraph: it fails for every $n\ge7$ and holds for every $n\le6$. Nash-Williams' conjecture therefore fails for every $n\ge7$, beyond Guninski's 6-vertex counterexamples, and holds for $n\le5$.

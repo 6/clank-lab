@@ -1,0 +1,95 @@
+name: Kreweras cyclic sieving checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/kreweras-cyclic-sieving/**'
+      - '.github/workflows/kreweras-cyclic-sieving.yml'
+  pull_request:
+    paths:
+      - 'results/kreweras-cyclic-sieving/**'
+      - '.github/workflows/kreweras-cyclic-sieving.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kreweras-cyclic-sieving-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  certificates:
+    name: Certificates, part ${{ matrix.part }} of 8
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8]
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/kreweras-cyclic-sieving
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install the pinned requirements
+        run: python3 -m pip install -r checks/requirements.txt
+      - name: Check the certificates
+        run: sh checks/check.sh --part ${{ matrix.part }}/8
+
+  lean:
+    name: Lean reduction and axiom guards
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/kreweras-cyclic-sieving/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Install Lean with elan
+        run: |
+          arch=$(uname -m)
+          case "$arch" in
+            x86_64) elan_sha256=42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 ;;
+            aarch64|arm64)
+              arch=aarch64
+              elan_sha256=05febd124d84ebf994b2e7479922a5650b1e950c17ae3bd1ddd776b65bb72bf9 ;;
+            *) echo "Unsupported architecture for elan: $arch" >&2; exit 1 ;;
+          esac
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          echo "$elan_sha256  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+      - name: Fetch the Mathlib cache
+        run: lake exe cache get
+      - name: Build the reduction and the axiom guards
+        run: lake build
+
+  check:
+    name: Check kreweras-cyclic-sieving
+    needs: [certificates, lean]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require both checks
+        env:
+          CERTIFICATE_RESULT: ${{ needs.certificates.result }}
+          LEAN_RESULT: ${{ needs.lean.result }}
+        run: |
+          test "$CERTIFICATE_RESULT" = success
+          test "$LEAN_RESULT" = success

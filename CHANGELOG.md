@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## interval-hales-jewett v1 (November 5, 2026)
+
+- Proves that for every $Q\ge1$ and every $m\ge2\lceil\sqrt{32Q}\rceil+2$ there is, for every $n$, a 2-coloring of $[m]^n$ with no monochromatic combinatorial line whose wildcard set is a union of at most $Q$ intervals, answering Question 3.1 of Conlon and Kamčev.
+- Includes the paper and a standalone Lean project checking the theorem from the definitions.
+
 ## hamiltonian-degree-sequences v2 (November 5, 2026)
 
 - Correction: exposition of Chvátal's theorem. The README said that it tells exactly which degree sequences force a Hamilton cycle. It gives a sufficient condition, best possible among monotone conditions but not necessary: the 5-cycle violates it and is Hamiltonian. The theorem and its checks are unchanged.

@@ -12,7 +12,7 @@ The proofs, the checking programs and the text were produced by AI models (from 
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23990077](https://doi.org/10.5281/zenodo.23990077)
+Archived on Zenodo: [doi:10.5281/zenodo.24027714](https://doi.org/10.5281/zenodo.24027714)
 
 ## Check it
 
@@ -41,6 +41,6 @@ Apache-2.0 (see the repository's LICENSE).
   title = {{A lattice parallelepiped with no unimodular triangulation}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/parallelepiped-triangulation-v1/results/parallelepiped-triangulation}},
-  doi          = {10.5281/zenodo.23990077}
+  doi          = {10.5281/zenodo.24027714}
 }
 ```

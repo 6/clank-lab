@@ -14,7 +14,7 @@ The proofs, the checking programs and the text were produced by AI models (from 
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23990073](https://doi.org/10.5281/zenodo.23990073)
+Archived on Zenodo: [doi:10.5281/zenodo.24027691](https://doi.org/10.5281/zenodo.24027691)
 
 ## Check it
 
@@ -43,6 +43,6 @@ Apache-2.0 (see the repository's LICENSE).
   title = {{Connected quandles that refute Hayashi's conjecture}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/hayashi-conjecture-v1/results/hayashi-conjecture}},
-  doi          = {10.5281/zenodo.23990073}
+  doi          = {10.5281/zenodo.24027691}
 }
 ```

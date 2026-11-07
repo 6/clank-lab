@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## parallelepiped-triangulation v2 (November 6, 2026)
+
+- Correction: wording in the proof of the higher-dimensional corollary. It called $`P\times\{0\}`$ a facet of $P\times[0,1]^{d-4}$; it is a 4-dimensional face, and a facet only when $d=5$. The basis argument now refers to the maximal 4-dimensional simplices of the restricted triangulation. The theorem and its checks are unchanged.
+- The README now says plainly that the main theorem and its corollary have written proofs and which further results are computer-assisted.
+
 ## hayashi-conjecture v2 (November 6, 2026)
 
 - Correction: wording of the abstract. It said that each cycle length is twice the product of three of the primes 2, 3, 5 and 7; that holds for the four long cycle lengths 60, 84, 140 and 210, and the profiles also have cycles of lengths 1 and 2. The theorem and its checks are unchanged.

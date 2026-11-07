@@ -21,7 +21,7 @@
 \newcommand{\relint}{\operatorname{relint}}
 \title{A lattice parallelepiped with no unimodular triangulation}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{November 5, 2026}
+\date{November 7, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -360,12 +360,12 @@ cover need not satisfy this, and $P$ has one (Theorem~\ref{thm:cover}).
 The polytope $Q=P\times[0,1]^{d-4}$ is the lattice parallelepiped spanned
 by the vectors $e_1,e_2,e_3,(1,2,3,5)$, padded with zeros, and by
 $e_5,\dots,e_d$. Suppose $T$ is a unimodular
-triangulation of $Q$. Its faces contained in the facet $P\times\{0\}$ of $Q$
-form a triangulation of that facet (the faces of $T$ in a face of $Q$
-triangulate it). Each of them is a face of a unimodular simplex, hence a
-unimodular simplex for the lattice $\Z^4\times\{0\}$: its edge vectors at
-a vertex are part of a basis of $\Z^d$ and lie in $\Z^4\times\{0\}$, so
-they form a basis of it. This is a unimodular triangulation of $P$, contradicting
+triangulation of $Q$. Its faces contained in the $4$-dimensional face
+$P\times\{0\}$ of $Q$ (a facet only when $d=5$) triangulate that face, so
+its maximal simplices are $4$-dimensional. Each of these is a face of a
+unimodular simplex of $T$, so its four edge vectors at a vertex are part of
+a basis of $\Z^d$; they lie in $\Z^4\times\{0\}$, so they form a basis of
+it. So $T$ restricts to a unimodular triangulation of $P$, contradicting
 Theorem~\ref{thm:main}. Parallelepipeds are zonotopes, Minkowski sums of
 segments.
 \end{proof}
@@ -703,6 +703,16 @@ chapter~\cite{Bl} we read its title and its zbMATH summary (Zbl
 3-parameter family of lattice parallelepipeds. I will study the behavior of
 the lattice with respect to the parameters and prove that three 2-parameter
 subfamilies have unimodular covers.''
+\section{Correction}\label{app:correction}
+
+\emph{November 7, 2026.} The first version's proof of
+Corollary~\ref{cor:all} called $P\times\{0\}$ a facet of
+$P\times[0,1]^{d-4}$. It is a $4$-dimensional face, and a facet only when
+$d=5$. The proof now says so, and its basis argument now refers to the
+maximal $4$-dimensional simplices of the restricted triangulation: a
+unimodular triangulation of the product restricts to one of $P$. The
+argument, the theorems and the checks are unchanged.
+
 \end{appendices}
 
 \begin{thebibliography}{99}

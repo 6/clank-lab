@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: wording of the abstract. It said that each cycle length is twice the product of three of the primes 2, 3, 5 and 7; that holds for the four long cycle lengths 60, 84, 140 and 210, and the profiles also have cycles of lengths 1 and 2. The theorem and its checks are unchanged.
 - The README now says which statements are proved in writing and which are also checked by computer, and that 1890 is the least order within the construction, not among all connected quandles.
+- Zenodo: [10.5281/zenodo.24027691](https://doi.org/10.5281/zenodo.24027691)
 
 ## parallelepiped-triangulation v1 (November 5, 2026)
 

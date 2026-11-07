@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: wording in the proof of the higher-dimensional corollary. It called $`P\times\{0\}`$ a facet of $P\times[0,1]^{d-4}$; it is a 4-dimensional face, and a facet only when $d=5$. The basis argument now refers to the maximal 4-dimensional simplices of the restricted triangulation. The theorem and its checks are unchanged.
 - The README now says plainly that the main theorem and its corollary have written proofs and which further results are computer-assisted.
+- Zenodo: [10.5281/zenodo.24027714](https://doi.org/10.5281/zenodo.24027714)
 
 ## hayashi-conjecture v2 (November 6, 2026)
 

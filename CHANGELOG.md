@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## hayashi-conjecture v2 (November 6, 2026)
+
+- Correction: wording of the abstract. It said that each cycle length is twice the product of three of the primes 2, 3, 5 and 7; that holds for the four long cycle lengths 60, 84, 140 and 210, and the profiles also have cycles of lengths 1 and 2. The theorem and its checks are unchanged.
+- The README now says which statements are proved in writing and which are also checked by computer, and that 1890 is the least order within the construction, not among all connected quandles.
+
 ## parallelepiped-triangulation v1 (November 5, 2026)
 
 - Proves that the 4-dimensional lattice parallelepiped spanned by $`e_1, e_2, e_3`$ and $(1,2,3,5)$ has no unimodular triangulation, so in every dimension from 4 on not all lattice parallelepipeds or lattice zonotopes have one. This answers negatively the question of Haase, Paffenholz, Piechnik and Santos; dimension 3 remains open.

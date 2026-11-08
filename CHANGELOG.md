@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that the simplex with vertices $(0,0,0,0)$, $(1,0,0,0)$, $(1/2,1/2,0,0)$, $(2/3,1/3,1/3,0)$, $(3/4,1/4,1/4,1/4)$, the affine $F_4$ alcove, is tiled by four congruent copies of itself scaled by $1/\sqrt{2}$. This answers Kynčl and Patáková's question, with $k=4$ pieces, and disproves Matoušek and Safernová's conjecture in dimension four. The subdivision is Felikson and Tumarkin's.
 - Includes the paper, with a written proof, the certificate and three exact checkers.
+- Zenodo: [10.5281/zenodo.24061700](https://doi.org/10.5281/zenodo.24061700)
 
 ## parallelepiped-triangulation v2 (November 6, 2026)
 

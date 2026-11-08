@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## reptile-simplex v1 (November 8, 2026)
+
+- Proves that the simplex with vertices $(0,0,0,0)$, $(1,0,0,0)$, $(1/2,1/2,0,0)$, $(2/3,1/3,1/3,0)$, $(3/4,1/4,1/4,1/4)$, the affine $F_4$ alcove, is tiled by four congruent copies of itself scaled by $1/\sqrt{2}$. This answers Kynčl and Patáková's question, with $k=4$ pieces, and disproves Matoušek and Safernová's conjecture in dimension four. The subdivision is Felikson and Tumarkin's.
+- Includes the paper, with a written proof, the certificate and three exact checkers.
+
 ## parallelepiped-triangulation v2 (November 6, 2026)
 
 - Correction: wording in the proof of the higher-dimensional corollary. It called $`P\times\{0\}`$ a facet of $P\times[0,1]^{d-4}$; it is a 4-dimensional face, and a facet only when $d=5$. The basis argument now refers to the maximal 4-dimensional simplices of the restricted triangulation. The theorem and its checks are unchanged.

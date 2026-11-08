@@ -1,0 +1,389 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={P. Graham},pdftitle={A four-dimensional 4-reptile simplex}]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\setlength{\emergencystretch}{3em}
+\title{A four-dimensional 4-reptile simplex}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 8, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A $d$-dimensional simplex is a $k$-reptile if it can be tiled by $k$
+mutually congruent simplices similar to it. Matoušek and Safernová
+conjectured that for $d\ge3$ a $k$-reptile $d$-simplex exists only when
+$k=m^d$ for an integer $m$, and proved this for $d=3$. Kynčl and Patáková
+proved that in dimension four $k$ must be a square, noted that every
+$k$-reptile simplex known in dimension $d\ge3$ has $k=m^d$, and asked
+whether a four-dimensional $k$-reptile simplex exists with $k$ a square
+but not a fourth power. We show that the simplex with vertices $(0,0,0,0)$, $(1,0,0,0)$,
+$(\tfrac12,\tfrac12,0,0)$, $(\tfrac23,\tfrac13,\tfrac13,0)$ and
+$(\tfrac34,\tfrac14,\tfrac14,\tfrac14)$, the fundamental alcove of the
+affine Weyl group of type $F_4$, is a $4$-reptile: it is tiled by four
+congruent copies of itself scaled by $1/\sqrt2$, two of them mirror
+images. This answers the question of Kynčl and Patáková with $k=4$ and
+disproves the conjecture of Matoušek and Safernová in dimension four. The
+subdivision itself is due to Felikson and Tumarkin, who found in 2004 that
+the affine reflection group of type $F_4$ has a reflection subgroup of
+index $4$ whose fundamental simplex is similar to the alcove. What we add
+is the observation that this settles the reptile question, a short direct
+proof of the tiling, and exact computer checks of it.
+
+This work has not yet been reviewed by experts.
+The proofs, the computer checks and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{Keywords:} reptile simplex, self-similar tiling,
+alcove, affine Weyl group, $F_4$.
+
+\noindent\textit{MSC 2020:} 52C22, 05B45, 20F55.
+
+\section{Introduction}
+
+\subsection{Main result}
+A tiling of a closed set $X\subset\mathbb{R}^d$ is a decomposition of $X$
+into finitely many closed sets with nonempty, pairwise disjoint
+interiors. Following Kynčl and Patáková \cite{KP}, a $d$-dimensional
+simplex $S$ is a \emph{$k$-reptile} if it can be tiled by $k$ simplices
+that are all mutually congruent and similar to $S$; as they emphasize,
+``congruence includes mirror symmetries'' \cite[p.~1]{KP}. Throughout, let
+\begin{gather*}
+S=\operatorname{conv}\{v_0,v_1,v_2,v_3,v_4\},\qquad\text{where}\\
+v_0=(0,0,0,0),\quad v_1=(1,0,0,0),\quad v_2=(\tfrac12,\tfrac12,0,0),\quad
+v_3=(\tfrac23,\tfrac13,\tfrac13,0),\quad v_4=(\tfrac34,\tfrac14,\tfrac14,\tfrac14).
+\end{gather*}
+
+\begin{theorem}\label{thm:main}
+The simplex $S\subset\mathbb{R}^4$ is a $4$-reptile. More precisely, $S$
+is the union of four simplices $S_0,\dots,S_3$ with pairwise disjoint
+interiors, each the image of $S$ under a similarity of ratio $1/\sqrt2$.
+Two of the four similarities preserve orientation and two reverse it.
+\end{theorem}
+
+Since $4=2^2$ and $4$ is not a fourth power, Theorem~\ref{thm:main}
+answers the question of Kynčl and Patáková stated below, with $k=4$, and
+gives a counterexample, in dimension $d=4$, to the conjecture of Matoušek
+and Safernová.
+
+The simplex $S$ is the fundamental alcove of the affine Weyl group of type
+$F_4$ (Section~\ref{sec:origin}). A linear map $\varphi$ that is $\sqrt2$
+times an isometry carries the hyperplane arrangement of this group into
+itself, so $\varphi(S)$ is a union of alcoves, $4$ of them by volume.
+Section~\ref{sec:proof} proves Theorem~\ref{thm:main} directly, by
+writing $\varphi(S)$ and its four pieces as solution sets of linear
+inequalities; the proof needs no Lie theory and no computer.
+Section~\ref{sec:verification} describes exact computer checks of the
+same tiling.
+
+\subsection{The question}
+Matoušek and Safernová \cite[Conjecture~1.2]{MS} conjectured: ``If $d\ge3$
+and a $d$-dimensional $k$-reptile simplex exists, then $k=m^d$ for some
+natural number $m\ge2$.'' They proved it for $d=3$; Kynčl and Patáková
+gave a simpler proof \cite[Theorem~1.2]{KP} and proved that a
+four-dimensional $k$-reptile simplex can exist only when $k$ is the square
+of a positive integer \cite[Theorem~1.3]{KP}. In
+their abstract they note that ``the only $k$-reptile simplices that are
+known for $d\geqslant3$, have $k=m^d$''. They then ask \cite[Problem~1.4;
+Problem~2 in the arXiv version]{KP} whether there is a four-dimensional
+$k$-reptile simplex with $k$ the square of a non-square integer, that is,
+with $k$ a square but not a fourth power. Theorem~\ref{thm:main} answers
+this with $k=4$, the square of $2$. It is consistent with \cite[Theorem~1.3]{KP}, since
+$k=4$ is a square, and it leaves the case $d=3$ untouched.
+
+\subsection{Credit}
+The tiling is not new as geometry. Felikson and Tumarkin
+\cite[Lemma~10]{FT} consider Coxeter simplices $F\ne P$ in $\mathbb{E}^n$
+with the same Coxeter diagram, $\Sigma(F)=\Sigma(P)$, and with $G_P\subset
+G_F$ for the groups generated by the reflections in their facets. They
+prove that $1<[G_F:G_P]<2^n$ holds exactly in three cases, the last being
+``$\Sigma(F)=\Sigma(P)=\widetilde F_4$, $[G_F:G_P]=4$''. Equal Coxeter
+diagrams make $P$ similar to $F$. A fundamental simplex of an index-$4$
+reflection subgroup of $G_F$ is a union of $4$ fundamental simplices of
+$G_F$, which are congruent. So their $\widetilde F_4$ case is a simplex
+similar to the $F_4$ alcove and tiled by four alcoves: in substance,
+Theorem~\ref{thm:main}. Their paper does not discuss reptiles, and we
+found no reference connecting it to the reptile question. Our
+contribution is that connection, the explicit tiling with a direct
+proof, and its checks. The other two cases of their lemma, of types
+$\widetilde C_2$ and $\widetilde G_2$, give the classical $2$-reptile
+isosceles right triangle and $3$-reptile $30$-$60$-$90$ triangle.
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+We describe $S$ by inequalities. For $x=(x_1,x_2,x_3,x_4)$ let
+\[
+\ell_0(x)=1-x_1-x_2,\quad \ell_1(x)=x_2-x_3,\quad \ell_2(x)=x_3-x_4,\quad
+\ell_3(x)=x_4,\quad \ell_4(x)=x_1-x_2-x_3-x_4 .
+\]
+
+\begin{lemma}\label{lem:facets}
+$S=\{x\in\mathbb{R}^4:\ \ell_i(x)\ge0 \text{ for } i=0,\dots,4\}$, that is,
+$S=\{x:\ x_2\ge x_3\ge x_4\ge0,\ x_1\ge x_2+x_3+x_4,\ x_1+x_2\le1\}$.
+\end{lemma}
+
+\begin{proof}
+Each vertex of $S$ makes exactly one of the five functions nonzero, and
+that one positive: $\ell_0(v_0)=1$, $\ell_4(v_1)=1$, $\ell_1(v_2)=\tfrac12$,
+$\ell_2(v_3)=\tfrac13$ and $\ell_3(v_4)=\tfrac14$, and every other value
+$\ell_i(v_j)$ is $0$. The points $v_j$ are affinely independent, since
+$v_1,\dots,v_4$ are linearly independent. Let $\lambda_0,\dots,\lambda_4$
+be the barycentric coordinates with respect to $v_0,\dots,v_4$. For each
+vertex there is one function, say $\ell_{\sigma(j)}$ for $v_j$, that is
+nonzero on it; the affine functions $\ell_{\sigma(j)}/\ell_{\sigma(j)}(v_j)$
+and $\lambda_j$ agree on all five vertices, hence everywhere. So
+$S=\{\lambda_j\ge0\ \forall j\}=\{\ell_i\ge0\ \forall i\}$.
+\end{proof}
+
+Let $\varphi(x)=(x_1+x_2,\ x_1-x_2,\ x_3+x_4,\ x_3-x_4)$. Its matrix
+$\Phi$ satisfies $\Phi^{\mathsf T}\Phi=2I$, so $\varphi/\sqrt2$ is an
+orthogonal map and $T=\varphi(S)$ is similar to $S$ with ratio $\sqrt2$;
+also $\det\Phi=4$. Substituting $x_1=\frac{y_1+y_2}2$,
+$x_2=\frac{y_1-y_2}2$, $x_3=\frac{y_3+y_4}2$, $x_4=\frac{y_3-y_4}2$ into
+Lemma~\ref{lem:facets} gives
+\begin{equation}\label{eq:T}
+T=\{y\in\mathbb{R}^4:\ y_1\le1,\ y_1\ge y_2+y_3+y_4,\ y_2\ge y_3\ge y_4\ge0\}.
+\end{equation}
+Its vertices are $\varphi(v_0)=(0,0,0,0)$, $\varphi(v_1)=(1,1,0,0)$,
+$\varphi(v_2)=(1,0,0,0)$, $\varphi(v_3)=(1,\tfrac13,\tfrac13,\tfrac13)$
+and $\varphi(v_4)=(1,\tfrac12,\tfrac12,0)$. Note that $S\subset T$ by
+Lemma~\ref{lem:facets} and~\eqref{eq:T}.
+
+Define four isometries of $\mathbb{R}^4$:
+\begin{align*}
+g_0(x)&=x, & g_1(x)&=(1-x_2,\,1-x_1,\,x_3,\,x_4),\\
+g_2(x)&=(1-x_3,\,1-x_1,\,x_2,\,x_4), & g_3(x)&=(1-x_4,\,1-x_1,\,x_2,\,x_3).
+\end{align*}
+Each is a signed permutation of coordinates followed by a translation.
+The linear parts of $g_0,g_1,g_2,g_3$ have determinants $1,-1,1,-1$.
+
+\begin{lemma}\label{lem:pieces}
+Let $P_i=g_i(S)$. Then
+\begin{align*}
+P_0&=T\cap\{y:\ y_1+y_2\le1\}, &
+P_1&=T\cap\{y:\ y_1+y_3\le1\le y_1+y_2\},\\
+P_2&=T\cap\{y:\ y_1+y_4\le1\le y_1+y_3\}, &
+P_3&=T\cap\{y:\ 1\le y_1+y_4\}.
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+Since $g_i$ is a bijection, $y\in P_i$ exactly when $x=g_i^{-1}(y)$
+satisfies the five inequalities of Lemma~\ref{lem:facets}. We write them
+out in $y$ for each $i$.
+
+For $i=0$: $y_2\ge y_3\ge y_4\ge0$, $y_1\ge y_2+y_3+y_4$ and
+$y_1+y_2\le1$. The remaining inequality $y_1\le1$ of~\eqref{eq:T}
+follows from $y_1\le1-y_2\le1$.
+
+For $i=1$, put $x=(1-y_2,\,1-y_1,\,y_3,\,y_4)$. The five inequalities
+become $y_1+y_3\le1$, $y_3\ge y_4$, $y_4\ge0$, $y_1\ge y_2+y_3+y_4$ and
+$y_1+y_2\ge1$. The inequalities $y_1\le1$ and $y_2\ge y_3$ of~\eqref{eq:T}
+follow: $y_1\le1-y_3\le1$, and $y_1+y_2\ge1\ge y_1+y_3$.
+
+For $i=2$, put $x=(1-y_2,\,y_3,\,1-y_1,\,y_4)$. The inequalities become
+$y_1+y_3\ge1$, $y_1+y_4\le1$, $y_4\ge0$, $y_1\ge y_2+y_3+y_4$ and
+$y_2\ge y_3$. The inequalities $y_3\ge y_4$ and $y_1\le1$ follow from
+$y_1+y_3\ge1\ge y_1+y_4$ and $y_1\le1-y_4\le1$.
+
+For $i=3$, put $x=(1-y_2,\,y_3,\,y_4,\,1-y_1)$. The inequalities become
+$y_3\ge y_4$, $y_1+y_4\ge1$, $y_1\le1$, $y_1\ge y_2+y_3+y_4$ and
+$y_2\ge y_3$. The inequality $y_4\ge0$ follows from $y_4\ge1-y_1\ge0$.
+
+In each case the inequalities obtained, together with the ones shown to
+follow, are exactly those of~\eqref{eq:T} and of the stated region.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+On $T$ we have $y_2\ge y_3\ge y_4$, so $y_1+y_2\ge y_1+y_3\ge y_1+y_4$.
+For $y\in T$, the number $1$ lies above $y_1+y_2$, between two consecutive
+terms of this chain, or below $y_1+y_4$, so $y$ lies in at least one of
+the four regions of Lemma~\ref{lem:pieces}. Hence
+$T=P_0\cup P_1\cup P_2\cup P_3$. Within $T$, two different regions intersect only
+inside one of the hyperplanes $y_1+y_j=1$ ($j=2,3,4$), so the $P_i$ have
+pairwise disjoint interiors. Each $P_i=g_i(S)$ is congruent to $S$.
+
+Apply $\varphi^{-1}$. The sets $S_i=\varphi^{-1}(P_i)$ tile
+$\varphi^{-1}(T)=S$, and $S_i$ is the image of $S$ under the similarity
+$\varphi^{-1}\circ g_i$ of ratio $1/\sqrt2$. These four similarities
+differ from one another by isometries, so the $S_i$ are mutually
+congruent. Since $\det\Phi>0$, the similarity $\varphi^{-1}\circ g_i$
+preserves orientation exactly when $g_i$ does, that is, for $i=0,2$.
+\end{proof}
+
+The tiling is a chain: consecutive pieces share a facet. The vertices
+of the pieces are listed in Appendix~\ref{app:vertices}.
+
+\begin{remark}\label{rem:chiral}
+The mirror images cannot be avoided by relabeling: $S$ has no
+nontrivial symmetry, since its ten edge lengths admit no nonidentity
+permutation of the vertices preserving them. Whether some other tiling
+of $S$ by four copies uses only directly congruent ones is not settled
+here.
+\end{remark}
+
+\section{Where the tiling comes from}\label{sec:origin}
+
+Take the root system of type $F_4$ in Bourbaki's coordinates
+\cite[Plate~VIII]{Bou}: its $48$ roots are $\pm e_i$, $\pm e_i\pm e_j$
+($i<j$) and $\frac12(\pm e_1\pm e_2\pm e_3\pm e_4)$, with simple roots
+$e_2-e_3$, $e_3-e_4$, $e_4$, $\frac12(e_1-e_2-e_3-e_4)$ and highest root
+$e_1+e_2$. The fundamental alcove $\{x:\ \langle\alpha,x\rangle\ge0
+\text{ for the simple roots},\ \langle e_1+e_2,x\rangle\le1\}$ is exactly
+the description of $S$ in Lemma~\ref{lem:facets}. The affine Weyl group
+is generated by the reflections in the hyperplanes $\langle\alpha,x\rangle
+=n$ ($\alpha$ a root, $n\in\mathbb{Z}$), and its alcoves, the closures of
+the regions of this arrangement, are congruent copies of $S$ tiling
+$\mathbb{R}^4$. The matrix $\Phi$ is symmetric with $\Phi^2=2I$, so
+$\varphi^{-1}(y)=\Phi y/2$ and $\varphi$ maps the hyperplane
+$\langle\alpha,x\rangle=n$ onto $\langle\Phi\alpha,y\rangle=2n$. A direct
+check of the $48$ roots shows that $\Phi$ maps each short root
+($\pm e_i$ and $\frac12(\pm e_1\pm e_2\pm e_3\pm e_4)$) to a long root and
+each long root to twice a short root. So the image hyperplane is
+$\langle\beta,y\rangle=2n$ or $\langle\beta,y\rangle=n$ for a root $\beta$,
+again a hyperplane of the arrangement. Hence $T=\varphi(S)$, the image of
+a region of the arrangement, is a union of alcoves, $\det\Phi=4$ of them
+by volume. These are the pieces $P_i$, and the third program in
+Section~\ref{sec:verification} confirms that each is an alcove. This is
+the $\widetilde F_4$ case of \cite[Lemma~10]{FT}, written in coordinates.
+
+\begin{corollary}\label{cor:powers}
+For all integers $a\ge0$ and $m\ge1$, $S$ is a $4^am^4$-reptile.
+\end{corollary}
+
+\begin{proof}
+Iterating Theorem~\ref{thm:main} $a$ times tiles $S$ by $4^a$ congruent
+copies scaled by $2^{-a/2}$. The dilate $mS$ is the set
+$\{x:\ \langle\alpha,x\rangle\ge0 \text{ for the simple roots},\
+\langle e_1+e_2,x\rangle\le m\}$, whose facets lie in hyperplanes of the
+arrangement, so it is a union of alcoves, $m^4$ of them by volume. Scaling
+by $1/m$ tiles $S$ by $m^4$ copies of $S/m$; apply this inside each of the
+$4^a$ pieces.
+\end{proof}
+
+For $a$ odd, $4^am^4$ is a square but not a fourth power. Whether $k=9$,
+$25$, $36,\dots$ ($m=3,5,6,\dots$ in the question of Kynčl and Patáková)
+occur in dimension four, and whether any $k$-reptile simplex with
+$k\ne m^d$ exists for $d\ge5$, remain open.
+
+\section{Computational verification}\label{sec:verification}
+
+The proof above is complete without a computer. The same tiling is also
+checked in exact rational arithmetic by three programs, which read a
+certificate file listing $S$, $\Phi$ and, for each piece, an orthogonal
+matrix $M_i$, a translation $t_i$ (so that $P_i=M_iS+t_i$) and the five
+vertices, together with one separating hyperplane for each pair of
+pieces.
+\begin{enumerate}
+\item The first program checks that $S$ is nondegenerate,
+  $\Phi^{\mathsf T}\Phi=2I$, each $M_i$ is orthogonal and the listed vertices
+  are $M_iS+t_i$, every piece vertex has nonnegative barycentric
+  coordinates in $T$, each pair of pieces lies on opposite closed sides
+  of its listed hyperplane, and the four volumes add up to
+  $\operatorname{vol}T=\frac1{144}=4\operatorname{vol}S$.
+\item The second, written separately from the first, compares $S$ and
+  $\Phi$ with the statement above, ignores the listed hyperplanes, checks
+  congruence by the ten squared edge lengths as well as by $M_i$, checks
+  containment by the facet inequalities of $T$, and shows that each
+  pairwise intersection has dimension at most $3$ by enumerating its
+  vertices exactly; then it checks the volume sum.
+\item The third evaluates all $48$ roots of $F_4$ on the vertices and
+  checks that $S$ and each piece lie in a closed alcove, that the pieces
+  are distinct, have the volume of $S$ and lie in $T$, and that
+  $\operatorname{vol}T=4\operatorname{vol}S$. As $S$ is an alcove, the
+  pieces are then four distinct alcoves in $T$.
+\end{enumerate}
+Closed convex pieces inside $T$ with disjoint interiors and total volume
+$\operatorname{vol}T$ cover $T$, so each of the first two programs alone
+verifies the tiling of $T$ and hence Theorem~\ref{thm:main}. Six
+corrupted certificates (a moved vertex, a map that is not a similarity,
+a duplicated piece, a dropped piece, a shifted separating hyperplane, and
+a non-orthogonal $M_i$) are each rejected by every program that reads the
+corrupted field. The whole check takes under a second. The written proof
+of Section~\ref{sec:proof} does not depend on these programs; they check
+the same four pieces. The certificate, the programs and the command that runs them are
+in the folder accompanying this paper, whose README describes them.
+
+\begin{appendices}
+\section{The vertices of the pieces}\label{app:vertices}
+
+With $v_2,v_3,v_4$ as in the introduction and $w_1=(1,1,0,0)$,
+$w_2=(1,\tfrac12,\tfrac12,0)$, $w_3=(1,\tfrac13,\tfrac13,\tfrac13)$, the
+pieces $P_i=g_i(S)$ of $T$ are
+\begin{align*}
+P_0&=\operatorname{conv}\{0,\,v_1,\,v_2,\,v_3,\,v_4\}=S, &
+P_1&=\operatorname{conv}\{w_1,\,v_1,\,v_2,\,v_3,\,v_4\},\\
+P_2&=\operatorname{conv}\{w_1,\,v_1,\,w_2,\,v_3,\,v_4\}, &
+P_3&=\operatorname{conv}\{w_1,\,v_1,\,w_2,\,w_3,\,v_4\}.
+\end{align*}
+Each piece arises from the previous one by replacing one vertex, and
+$T=\operatorname{conv}\{0,v_1,w_1,w_2,w_3\}$. The points $v_2,v_3,v_4$
+lie on the edges of $T$ from $0$: $v_2=\frac12w_1$, $v_3=\frac23w_2$,
+$v_4=\frac34w_3$. The tiling of $S$ in Theorem~\ref{thm:main} is the
+image of this one under $\varphi^{-1}$.
+
+\section{Sources not read in full}\label{app:unread}
+
+The following could not be read in full; each is listed with why it does
+not contain Theorem~\ref{thm:main}, or what it could change.
+\begin{itemize}
+\item H.~Maehara, Some replicating simplices other than Hill-simplices,
+  \emph{Beitr. Algebra Geom.} \textbf{55} (2014), 429--432. Kynčl and
+  Patáková, writing later, describe its construction as giving $k=2^d$
+  \cite[p.~4]{KP} and state that all known $k$-reptile simplices for
+  $d\ge3$ have $k=m^d$.
+\item E.~Hertel, A class of self-similar $d$-polytopes, \emph{Rev. Roumaine
+  Math. Pures Appl.} \textbf{50} (2005), 647--655. Its zbMATH review
+  (Zbl 1108.52011) describes a class of simplotopes that are
+  $m^d$-replicating for all $m\ge2$.
+\item H.~Maehara and H.~Martini, \emph{Circles, Spheres and Spherical
+  Geometry}, Birkhäuser, 2024, Chapter~11, ``Higher Dimensions''
+  (pp.~213--238); only its abstract and its reference list were read. The
+  reference list (135 entries) includes Hadwiger's note on Hill
+  simplices, Hertel's paper above and Maehara's papers on replicating
+  and Hill simplices (2014, 2015), and none of \cite{FT}, \cite{KP},
+  \cite{MS} or any work on reflection groups or alcoves.
+\item Texts on affine Weyl groups and the special isogeny of $F_4$ from
+  before 2004. These could contain the subdivision of
+  Section~\ref{sec:origin} earlier than \cite{FT}, which would change the
+  credit for the geometry, not the connection to the reptile question.
+\end{itemize}
+\end{appendices}
+
+\begin{thebibliography}{9}
+
+\bibitem{Bou}
+N.~Bourbaki, \emph{Lie Groups and Lie Algebras, Chapters 4--6},
+Springer, 2002, Plate VIII (system of type $F_4$).
+
+\bibitem{FT}
+A.~A. Felikson and P.~V. Tumarkin, Reflection subgroups of Euclidean
+reflection groups, \emph{Sb. Math.} \textbf{196} (2005), 1349--1369;
+\href{https://arxiv.org/abs/math/0402403}{arXiv:math/0402403} (February
+25, 2004), Lemma~10.
+
+\bibitem{KP}
+J.~Kynčl and Z.~Patáková, On the nonexistence of $k$-reptile simplices
+in $\mathbb{R}^3$ and $\mathbb{R}^4$, \emph{Electron. J. Combin.}
+\textbf{24}(3) (2017), \#P3.1,
+\href{https://doi.org/10.37236/6113}{doi:10.37236/6113};
+\href{https://arxiv.org/abs/1602.04668}{arXiv:1602.04668}.
+
+\bibitem{MS}
+J.~Matoušek and Z.~Safernová, On the nonexistence of $k$-reptile
+tetrahedra, \emph{Discrete Comput. Geom.} \textbf{46} (2011), 599--609,
+\href{https://doi.org/10.1007/s00454-011-9334-z}{doi:10.1007/s00454-011-9334-z};
+\href{https://arxiv.org/abs/1006.1807}{arXiv:1006.1807}.
+
+\end{thebibliography}
+\end{document}

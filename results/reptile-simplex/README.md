@@ -10,6 +10,8 @@ The proofs, the computer checks and the text were produced by AI models (from Op
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24061700](https://doi.org/10.5281/zenodo.24061700)
+
 ## Check it
 
 The paper's proof is written out by hand in its Section 2. The file `data/certificate.json` lists the simplex, the scaling map and the four pieces, each with the orthogonal matrix and translation that carry the simplex onto it. Three programs check in exact rational arithmetic that the pieces are congruent copies of the simplex, lie inside its $\sqrt{2}$-scaled copy, have disjoint interiors and fill it by volume; the third also checks that each piece is an alcove of the $F_4$ arrangement. With Python 3.8 or later and no other packages, from this folder:
@@ -35,6 +37,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{A four-dimensional 4-reptile simplex}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/reptile-simplex-v1/results/reptile-simplex}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/reptile-simplex-v1/results/reptile-simplex}},
+  doi          = {10.5281/zenodo.24061700}
 }
 ```

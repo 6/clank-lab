@@ -1,0 +1,11 @@
+# Control for check_arb.py: the integrable flow x' = cos y, y' = sin x, z' = 13/10,
+# whose return map has the exact fixed point (0, pi/2), trace 2 cos(20 pi/13)
+# and first Birkhoff coefficient -tau0/4, tau0 = 2 pi/1.3 (action normalisation).
+flow control
+centre_num_x 0
+centre_num_y 1727108826179
+radius_log2 -20
+time_lo 4.8332
+time_hi 4.8333
+trace_lo 0.24
+trace_hi 0.242

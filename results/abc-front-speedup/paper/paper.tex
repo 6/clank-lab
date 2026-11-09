@@ -1,0 +1,591 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={KPP fronts in the 1-1-1 ABC flow speed up linearly in every direction},pdfauthor={P. Graham}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Leb}{\operatorname{Leb}}
+\title{KPP fronts in the 1-1-1 ABC flow speed up linearly in every direction}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 8, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $V(x,y,z)=(\sin z+\cos y,\ \sin x+\cos z,\ \sin y+\cos x)$ be the
+Arnold--Beltrami--Childress (ABC) flow with $A=B=C=1$, and let $c^*_e(K)$ be
+the minimal speed of pulsating fronts of $T_t+K\,V\cdot\nabla T=\Delta T+f(T)$
+in the direction $e$, for a reaction $f$ of KPP type. We prove that
+$\lim_{K\to\infty}c^*_e(K)/K$ exists and is positive for every unit vector
+$e$. Zlatoš proved that this limit exists and equals a supremum over first
+integrals of the flow, and Xin, Yu and Zlatoš, who constructed periodic orbits
+of this flow, pointed out that a positive-measure tube of orbits moving
+roughly linearly would make the limit positive, but that a rigorous proof of
+such tubes was not known. We prove that such a tube exists. Two independent
+interval-arithmetic computations certify an elliptic periodic orbit with
+nonzero twist; Pöschel's KAM theorem with frequencies as parameters then gives
+invariant curves of the return map with a Lipschitz label, which yield a
+Lipschitz first integral supported on the tube. The deduction from the
+certified facts is checked in Lean, with Zlatoš's and Pöschel's theorems as
+cited inputs.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{2020 Mathematics Subject Classification.} 35K57, 37J40, 76F25, 65G30.
+\textit{Keywords.} ABC flow, KPP fronts, front speed-up, KAM theory, computer-assisted proof.
+
+\section{Introduction}
+
+\subsection{Main result}
+Let $V\colon\R^3\to\R^3$ be the ABC flow with $A=B=C=1$,
+\[
+V(x,y,z)=(\sin z+\cos y,\ \sin x+\cos z,\ \sin y+\cos x).
+\]
+It is $2\pi$-periodic in each variable, divergence-free and of mean zero. Let
+$f\colon[0,1]\to\R$ satisfy, for some $\varepsilon_0>0$,
+\begin{equation}\label{eq:kpp}
+\begin{gathered}
+f\in C^{1,\varepsilon_0}([0,1]),\qquad f(0)=f(1)=0,\\
+f \text{ non-increasing on } (1-\varepsilon_0,1),\qquad 0<f(s)\le f'(0)s \text{ for } s\in(0,1).
+\end{gathered}
+\end{equation}
+For $K>0$ consider
+\begin{equation}\label{eq:rd}
+T_t+K\,V\cdot\nabla T=\Delta T+f(T)\qquad\text{on }\R\times\R^3.
+\end{equation}
+A \emph{pulsating front} in the direction of a unit vector $e$ with speed $c$
+is a classical solution with values in $[0,1]$ of the form
+$T(t,\xi)=U(\xi\cdot e-ct,\xi)$, where $U(s,\cdot)$ is $2\pi$-periodic for
+every $s$, and $U(s,\xi)\to1$ as $s\to-\infty$ and $U(s,\xi)\to0$ as
+$s\to+\infty$, uniformly in $\xi$. The minimal front speed $c^*_e(K)$ is the
+infimum of the speeds of pulsating fronts; in this KPP setting fronts exist
+exactly for $c\ge c^*_e(K)$ \cite{BH}.
+
+\begin{theorem}\label{thm:main}
+For every unit vector $e\in\R^3$ and every $f$ satisfying \eqref{eq:kpp}, the
+limit $\lim_{K\to\infty}c^*_e(K)/K$ exists and is positive.
+\end{theorem}
+
+The proof uses a computer-assisted theorem about the streamlines of $V$
+(Theorem~\ref{thm:orbit}), two published theorems, of Zlatoš
+(Theorem~\ref{thm:zlatos}) and Pöschel (Theorem~\ref{thm:poschel}), quoted
+exactly in Appendix~\ref{app:cited}, and a deduction that is checked in Lean
+(Section~\ref{sec:lean}).
+
+\subsection{The question and prior work}
+Zlatoš \cite[Theorem~1.1]{Z} proved, for $1$-periodic flows $u$ and $f$ as in
+\eqref{eq:kpp}, that $\lim_{A\to\infty}c^*_e(A)/A$ exists and equals a
+supremum over the real first integrals $w\in H^1$ of $u$ (Theorem~\ref{thm:zlatos});
+by \cite[Remark~3]{Z} it is positive ``precisely when there exists $w\in I$
+such that $\int_{\T^n}(u\cdot e)w\,dx\ne0$''. El Smaily and Kirsch
+\cite[Theorem~B and Remark~2]{ESK} extended the formula to periodic domains in
+three or more dimensions and stated the same criterion. For the 1-1-1 ABC
+flow, Xin, Yu and Zlatoš \cite{XYZ} proved that $V$ has periodic orbits with
+rotation vectors parallel to the coordinate axes, which gives linear
+speed-up for the G-equation model. In their introduction they wrote:
+``numerical simulations suggest that there are `vortex tubes' composed of
+orbits which travel roughly linearly in the $\pm x$, $\pm y$, and $\pm z$
+directions [6], suggesting that $c^*(p,K)$ should also grow linearly in $K$
+for each $p$. One could expect to find such vortex tubes, if they indeed
+exist, in the vicinity of the `periodic' orbits constructed in this paper, but
+a rigorous proof of their existence is currently not known.'' Here [6] is
+Dombre, Frisch, Greene, Hénon, Mehr and Soward \cite{DFGHMS}. McMillen, Xin,
+Yu and Zlatoš \cite[Section~1]{MXYZ}, working near the integrable regime
+$0<A\ll1$, $B=C=1$, wrote: ``We are not able to prove the existence of such
+tubes \dots\ even in the KAM region since KAM type theorems do not provide any
+regularity of the set of quasi-periodic orbits.'' Shen, Xin and Zhou
+\cite{SXZ} computed KPP front speeds numerically and found that ``in ABC
+flows however, the enhancement is $O(\delta)$ which can be attributed to the
+presence of principal vortex tubes''. Huang, Zhao and Dai \cite{HZD} study
+invariant tori and chaotic streamlines in a near-integrable ABC regime,
+using volume-preserving KAM and Melnikov methods.
+
+\subsection{What is new}
+We prove that a vortex tube exists, and we obtain the regularity that
+\cite{MXYZ} asks for from a Lipschitz family of invariant curves rather than
+from the set of quasi-periodic orbits itself. The proof has three new
+ingredients. One is a computer-assisted proof that $V$ has an elliptic periodic orbit with nonzero
+twist (Theorem~\ref{thm:orbit}). Breden and Lessard \cite{BL} gave
+computer-assisted proofs for ABC flows: ``for ABC flows, we prove existence of
+ballistic spiral orbits''. Kapela and Simó \cite{KS} proved rigorous KAM
+results around periodic orbits, and Wilczak and Barrio \cite{WB} proved
+stable elliptic periodic orbits with surrounding invariant tori, both by
+computer. Another is the
+passage from Pöschel's Theorem~A \cite{P}, a KAM theorem whose estimates are
+explicit in all its parameters, to a positive-measure family of invariant
+curves of the return map whose label is Lipschitz on their union
+(Proposition~\ref{prop:kam}). This was the hardest step: theorems for a fixed
+nondegenerate twist map do not survive the rescaling near an elliptic point,
+and Pöschel's theorem applies only after a Floquet reduction, a time-periodic
+Birkhoff normal form, and a choice of parameters that keeps the
+perturbation below Pöschel's threshold. The last is a graph-form construction of
+the first integral (Lemma~\ref{lem:w}). Recently Szumiński and Llibre
+\cite{SzL} studied the ABC flow ``in perturbative regimes near its three
+elementary integrable coordinate axes'' and proved the existence of elliptic
+and hyperbolic periodic solutions there; their work concerns other parameter
+values and other questions.
+
+\section{Proof overview}
+By Zlatoš's theorem, after rescaling to period $1$, the limit exists, and it
+is positive as soon as $V$ has a Lipschitz, $2\pi$-periodic first integral $W$
+with $\int (V\cdot e)W\ne0$. By the cyclic symmetry $(x,y,z)\mapsto(y,z,x)$ of
+$V$ it suffices to find one $W\ge0$, supported where $V_z>0$, with
+$\int V_xW=\int V_yW=0$ and $\int V_zW>0$. Such a $W$ comes from a tube of
+orbits that move monotonically in $z$ and stay in a bounded region in $x$ and
+$y$. We find the tube around an elliptic periodic orbit: its first-crossing
+map $P$ from $\{z=0\}$ to $\{z=2\pi\}$ has an elliptic fixed point $p$
+with nonzero twist (certified by computer), so KAM theory gives a
+positive-measure family of $P$-invariant closed curves around $p$. The
+measure of the set of labels of curves surrounding a point gives a
+$P$-invariant Lipschitz function $w$ on the plane, and carrying $w$ along the
+flow gives $W$. The one delicate point is regularity: $w$ is Lipschitz only
+because the label of the curves is Lipschitz on their union, and that is what
+Pöschel's estimates provide.
+
+\section{The certified periodic orbit}\label{sec:orbit}
+For $a\in\R^2$ let $P(a)\in\R^2$ be the point where the streamline of $V$
+from $(a,0)$ first reaches the plane $z=2\pi$ (no reduction modulo $2\pi$).
+Let $\mathcal X$ be the closed square with half-width $2^{-20}$ and center
+\[
+(6533234620664,\ 1727108826179)\cdot2^{-40}\approx(5.941942,\ 1.570796).
+\]
+
+\begin{theorem}[computer-assisted]\label{thm:orbit}
+There is $p\in\mathcal X$ such that:
+\begin{enumerate}
+\item the streamline $\gamma$ of $V$ with $\gamma(0)=(p,0)$ satisfies
+$\gamma(T)=(p,2\pi)$ for some $T\in[3.2352,3.2354]$, and
+$\sin y+\cos x\ge1.92$ along $\gamma$ on $[0,T]$; in particular $P(p)=p$;
+\item $P$ is differentiable at $p$ and $\operatorname{tr}DP(p)\in[-1.9650,-1.9640]$;
+\item the first Birkhoff coefficient of $P$ at $p$ is nonzero.
+\end{enumerate}
+\end{theorem}
+
+Since $P$ preserves the area form of Lemma~\ref{lem:ham} below and fixes $p$,
+$\det DP(p)=1$; as the trace lies in
+$(-2,-1)$, the eigenvalues of $DP(p)$ are $e^{\pm2\pi i\nu}$ with
+$\nu\in(1/3,1/2)$, so $\lambda^q\ne1$ for $q=1,\dots,4$. The first Birkhoff
+coefficient is defined in Appendix~\ref{app:twist} from the $3$-jet of $P$
+at $p$; it is the coefficient of $w^2\bar w$ after the quadratic terms have
+been removed in a complex eigencoordinate $w$, and its vanishing does not
+depend on the coordinates.
+
+Two programs prove Theorem~\ref{thm:orbit} independently. The first uses the
+CAPD library \cite{CAPD}: it computes the $C^3$ jet of $P$ over all of $\mathcal X$,
+proves a unique fixed point in $\mathcal X$ by the interval Newton method, encloses the
+trace in $[-1.96455,-1.96451]$ and the return time in
+$[3.2352771,3.2352775]$, and computes the Birkhoff normal form with CAPD's
+routine, whose twist coefficient has real part in $[-0.5787,-0.5685]$. The
+second, written independently, uses ball arithmetic from Arb \cite{Arb} with
+its own Taylor integrator. It proves by the Krawczyk method a unique fixed
+point in a square of half-width $2^{-100}$ inside $\mathcal X$, encloses the trace in
+$-1.96453154969901637\pm4\cdot10^{-18}$ and $\det DP(p)$ in $1\pm3\cdot10^{-20}$,
+and computes the twist coefficient of $\Phi\circ P\circ\Phi^{-1}$ for the
+area-preserving coordinates $\Phi$ of Lemma~\ref{lem:ham}, with real part
+$0.29530841922827626555718$, with error below $3\cdot10^{-24}$. Both check
+$\sin y+\cos x>0$ on every integration step of the whole orbit segment, with
+lower bounds $1.9215$ and $1.9378$. As a test, each program reproduces the
+exact values for an integrable flow and rejects three altered certificates
+(Appendix~\ref{app:checks}).
+Appendix~\ref{app:checks} gives details.
+
+\section{Invariant curves with a Lipschitz label}\label{sec:kam}
+\begin{lemma}\label{lem:ham}
+Let $X=x\sin y+\sin x$, $Y=y$, and
+$H(x,y,z)=y\sin z+\sin y+\cos x-x\cos z$. Where $\sin y+\cos x\ne0$, the
+streamlines of $V$, parametrized by $z$, satisfy
+$dX/dz=\partial_YH$, $dY/dz=-\partial_XH$, with $H$ written in the
+variables $(X,Y)$.
+\end{lemma}
+
+\begin{proof}
+With $X$ fixed, $\partial x/\partial Y=-x\cos y/(\sin y+\cos x)$ and
+$\partial x/\partial X=1/(\sin y+\cos x)$. Hence
+$\partial_YH=V_x+x\cos y\,V_y/V_z=dX/dz$ and
+$-\partial_XH=V_y/V_z=dY/dz$.
+\end{proof}
+
+So near the certified orbit the streamlines form a $2\pi$-periodic
+Hamiltonian system with one degree of freedom, and $P$ is its period map,
+area-preserving in $(X,Y)$.
+
+\begin{proposition}\label{prop:kam}
+Let $p$ be as in Theorem~\ref{thm:orbit} and $\delta>0$. There are numbers
+$\rho,L>0$, a homeomorphism $h$ from a neighborhood of the closed disk
+$\bar B(0,\rho)$ onto an open subset of $\R^2$ with $h(0)=p$,
+$h(\bar B(0,\rho))\subset B(p,\delta)$ and $h$ bi-Lipschitz with constant
+$L$ on $\bar B(0,\rho)$, a compact set $\mathcal K\subset\R$ of positive
+measure, and continuous $2\pi$-periodic functions $g_s$, $s\in\mathcal K$,
+with $0<g_s<\rho$, such that the closed curves
+$C_s=h(\{g_s(\psi)(\cos\psi,\sin\psi):\psi\in\R\})$ satisfy
+$P(C_s)=C_s$ and
+\[
+|s-s'|\le L\,\bigl|g_s(\psi)(\cos\psi,\sin\psi)-g_{s'}(\psi')(\cos\psi',\sin\psi')\bigr|
+\quad\text{for all } s,s'\in\mathcal K,\ \psi,\psi'\in\R.
+\]
+\end{proposition}
+
+\begin{proof}[Outline of proof]
+The steps, each proved in Lean, are given in Appendix~\ref{app:kam}. Translate
+to the periodic solution and pass to a real Floquet frame, in which the linear
+part is the rotation with frequency $\nu$. Since $\lambda^q\ne1$ for $q\le4$, two
+time-periodic symplectic changes of variables bring the Hamiltonian to
+$\nu\,p+b\,p^2+R$ with $p=|w|^2/2$ and $R=O(|w|^5)$, analytic on a polydisc
+times a strip $|\operatorname{Im}t|<s$. The twist coefficient is a
+conjugacy invariant up to a positive factor, so Theorem~\ref{thm:orbit}(3)
+gives $b\ne0$. For small $\varepsilon>0$ write
+$p=p_0(\omega)+I$ with $p_0(\omega)=(\omega_1/\omega_2-\nu)/(2b)$ and treat
+the frequencies $\omega=(\omega_1,\omega_2)$ as parameters, following
+\cite[\S2a]{P}: the time-$t$ Hamiltonian becomes
+$e(\omega)+\omega_1I+\omega_2J+P_\omega$ in action--angle variables
+$(I,\theta_1,J,\theta_2=t)$, with $\omega$ in
+$\Omega=\{|\omega_2-1|<\tfrac12,\ \omega_1/\omega_2\in\nu+2b(\varepsilon/2,\varepsilon)\}$.
+Apply Theorem~\ref{thm:poschel} with $n=\tau=2$, $r=\varepsilon^{5/4}$,
+$\alpha=\varepsilon^{9/8}$ and $h=\alpha s^3$: the perturbation is
+$O(\varepsilon^{5/2})$, below Pöschel's threshold
+$\gamma\alpha rs^3\sim\varepsilon^{19/8}$ for small $\varepsilon$. The time
+row of the invariance equation forces $\omega_2=1$ to be preserved, so for
+each $\sigma$ with $(\sigma,1)\in\Omega_\alpha$ the torus meets $\{t=0\}$ in
+a $P$-invariant curve with rotation number $\sigma$. The labels $\sigma$ form
+a compact set of measure at least
+$|b|\varepsilon(1-8\alpha)-16\alpha(2+|\nu|)>0$. Pöschel's Lipschitz estimates
+make each curve a radial graph over the angle and bound its displacement in
+$\sigma$ below by $|\sigma-\sigma'|/(4|b|)$, minus terms of relative size
+$O(\varepsilon^{1/8})$; this gives the Lipschitz label.
+\end{proof}
+
+\section{The invariant function and the tube}\label{sec:tube}
+\begin{lemma}\label{lem:w}
+In the setting of Proposition~\ref{prop:kam}, with $\delta$ small, let
+$D_s=h(\{r(\cos\psi,\sin\psi):0\le r<g_s(\psi)\})$ and
+$w(a)=\Leb\{s\in\mathcal K:a\in D_s\}$. Then $w\ge0$ is Lipschitz on $\R^2$,
+$w(p)>0$, $w$ vanishes outside $h(B(0,\rho))$, and $w(P(a))=w(a)$ for $a$ in
+$h(\bar B(0,\rho))$.
+\end{lemma}
+
+\begin{proof}
+$w(p)=\Leb\mathcal K>0$, since $p=h(0)$ lies in every $D_s$. Let $a,b\in\R^2$.
+If $a\in D_s$ and $b\notin D_s$ for some $s$, the segment between their
+chart preimages meets the radial graph of $g_s$. So, for $a,b$ in
+$h(\bar B(0,\rho))$, the labels $s$ counted in exactly one of $w(a)$, $w(b)$
+are labels of points of one segment of length at most $L|a-b|$, and by the
+Lipschitz label they form a set of diameter at most $L^2|a-b|$. Hence
+$|w(a)-w(b)|\le L^2|a-b|$ there; since $w$ vanishes outside
+$h(B(0,\rho))$, the bound extends to all of $\R^2$ with a larger constant. For invariance: near $p$, $P$ is a
+homeomorphism onto its image (its inverse is the first-crossing map in
+negative time), $P(C_s)=C_s$ and $P(p)=p$. So $P(D_s)$ is connected, misses
+$C_s$ and contains $p$; as $h(\bar B(0,\rho))$ is a closed disk on which $h$
+is a homeomorphism and $C_s$ is the boundary of $D_s$, this forces
+$P(D_s)\subseteq D_s$, and the same argument for $P^{-1}$ gives equality.
+\end{proof}
+
+Radial graphs in a chart make the interior $D_s$ explicit, so no Jordan curve
+theorem is needed.
+
+\begin{proposition}\label{prop:tube}
+There is a function $W\colon\R^3\to[0,\infty)$, not identically zero, that is
+Lipschitz and $2\pi$-periodic in each variable, satisfies $V\cdot\nabla W=0$
+almost everywhere, satisfies $V_z\ge c_0>0$ wherever $W\ne0$, and whose
+support has $x$- and $y$-projections contained, modulo $2\pi$, in closed
+intervals of length less than $2\pi$.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:orbit}(1) and Gronwall's inequality, $V_z\ge1.9$ along
+every streamline from $(a,0)$ with $a$ near $p$ for $|t|\le4$, so each such
+streamline crosses the planes $z=0$ and $z=\pm2\pi$ exactly once in that time
+window, transversally. Choose $\delta$ in Proposition~\ref{prop:kam} small
+enough that $w$ from Lemma~\ref{lem:w} is supported in this neighborhood.
+For $\xi$ on the streamline through $(a,0)+\ell$, with $a$ in the support of
+$w$ and $\ell\in2\pi\Z^3$, set $W(\xi)=w(a)$, and set $W=0$ elsewhere. This is
+well defined, because the crossings of the streamline with the planes
+$z\in2\pi\Z$ are the points $P^k(a)$ and $w\circ P=w$ there; it is constant
+on streamlines; and it is Lipschitz, because the crossing point depends in a
+Lipschitz way on $\xi$ (the flow is smooth and the crossings are
+transversal). A Lipschitz function constant along streamlines satisfies
+$V\cdot\nabla W=0$ wherever it is differentiable, hence almost everywhere.
+On the support of $W$ we have $V_z=\sin y+\cos x\ge1.9$, which forces
+$\cos x\ge0.9$ and $\sin y\ge0.9$; so, modulo $2\pi$, the $x$-projection of
+the support lies in $[-\pi+1,\pi-1]$ and the $y$-projection in
+$[-\pi/2+1,3\pi/2-1]$.
+\end{proof}
+
+\begin{lemma}\label{lem:avg}
+For $W$ as in Proposition~\ref{prop:tube} and $Q=[0,2\pi)^3$,
+$\int_QV_xW=\int_QV_yW=0$ and $\int_QV_zW>0$.
+\end{lemma}
+
+\begin{proof}
+$\int_QV_zW\ge c_0\int_QW>0$. For $V_x$, let $\chi$ be a $2\pi$-periodic
+Lipschitz function of $x$ alone that equals $x$ on the $x$-projection of the
+support of $W$ (a sawtooth). Then $V_xW=(V\cdot\nabla\chi)W$, and, integrating
+by parts over the torus with $\operatorname{div}V=0$,
+$\int_Q(V\cdot\nabla\chi)W=-\int_Q\chi\,V\cdot\nabla W=0$. The same argument
+applies to $V_y$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+Let $u(\xi)=V(2\pi\xi)$ and $\hat f=(2\pi)^2f$. If $T$ is a front of
+\eqref{eq:rd} with speed $c$, then $\hat T(t,\xi)=T((2\pi)^2t,2\pi\xi)$ is a
+$1$-periodic front of $\hat T_t+2\pi K\,u\cdot\nabla\hat T=\Delta\hat T+\hat f(\hat T)$
+with speed $2\pi c$, and conversely. Hence
+$c^*_e(K)/K=\hat c^*_e(2\pi K)/(2\pi K)$, where $\hat c^*$ refers to $u$ and
+$\hat f$. The flow $u$ satisfies Zlatoš's hypothesis (1.3) and $\hat f$ Zlatoš's
+(1.2), so by Theorem~\ref{thm:zlatos} the limit exists and equals
+$\ell(e)=\sup_w\int(u\cdot e)w^2/\|w\|_2^2$ over Zlatoš's set.
+
+For positivity, let $\sigma$ be the cyclic permutation
+$(x,y,z)\mapsto(y,z,x)$, which satisfies $V\circ\sigma=\sigma\circ V$, and let
+$W$ be as in Proposition~\ref{prop:tube}. The functions $W$, $W\circ\sigma$
+and $W\circ\sigma^{-1}$ are again Lipschitz periodic first integrals, and by
+Lemma~\ref{lem:avg} and a change of variables,
+$\int_Q(V\cdot e)W=e_z\int_QV_zW$,
+$\int_Q(V\cdot e)\,W\circ\sigma=e_x\int_QV_zW$ and
+$\int_Q(V\cdot e)\,W\circ\sigma^{-1}=e_y\int_QV_zW$. Choose the one whose
+coefficient is a nonzero component of $e$, and let $\hat W(\xi)$ be it at
+$2\pi\xi$. Then $\hat W$ lies in Zlatoš's set $I$ of real $H^1$ first
+integrals of $u$, and $\beta=\int_{[0,1)^3}(u\cdot e)\hat W\ne0$. For small
+$\eta>0$ the function $w_\eta=1+\eta\operatorname{sgn}(\beta)\hat W$ is in $I$,
+satisfies $\|\nabla w_\eta\|_2^2=\eta^2\|\nabla\hat W\|_2^2\le\hat f'(0)\|w_\eta\|_2^2$,
+and, since $\int u\cdot e=0$,
+$\int(u\cdot e)w_\eta^2=2\eta|\beta|+\eta^2\int(u\cdot e)\hat W^2>0$. Hence
+$\ell(e)>0$.\qed
+
+\section{Formal verification and reproducibility}\label{sec:lean}
+The deduction of Theorem~\ref{thm:main} from Theorem~\ref{thm:orbit} and the
+two cited theorems is proved in Lean~4 \cite{Lean} with Mathlib
+\cite{Mathlib}. The formal theorem is
+\begin{quote}\raggedright
+\texttt{theorem ABC.abc\_kpp\_linear\_speedup (f :} $\R\to\R$\texttt{) (hf : ZlatosKPP f) (e : E 3) (he :} $\|e\|=1$\texttt{) :}
+$\exists\,\ell:\R,\ 0<\ell\ \wedge$ \texttt{Tendsto (fun K => cstar (2 * Real.pi) abcField f e K / K) atTop (}$\mathcal N\,\ell$\texttt{)}
+\end{quote}
+Here \texttt{abcField} is $V$; \texttt{ZlatosKPP f} is \eqref{eq:kpp} (an
+exponent $\varepsilon\in(0,1]$, $f$ of class $C^1$ on $[0,1]$ with
+$\varepsilon$-Hölder derivative, $f'(0)$ one-sided); and
+\texttt{cstar (2 * Real.pi) abcField f e K} is the infimum of the speeds of
+pulsating fronts as defined in Section~1, for classical solutions with $T$,
+$T_t$, $\nabla T$ and $D^2T$ jointly continuous. The proof depends on
+Lean's three standard axioms and on three further axioms:
+\texttt{ABC.Cert.fixed\_point}, which states Theorem~\ref{thm:orbit} with its
+numbers as exact rationals (the uniqueness of the fixed point, which both
+programs also prove, is not used); \texttt{ABC.Zlatos2010.theorem\_1\_1}; and
+\texttt{ABC.Poschel2001.theorem\_A}. The last two state
+Theorems~\ref{thm:zlatos} and~\ref{thm:poschel} with all their hypotheses, and
+the Lean files list how each phrase of the quoted statements is read (for
+instance, in Pöschel's theorem, the sup-norms, ``real analytic'' as holomorphic and real
+on real points, and the inclusions $\varphi(\Omega_\alpha)\subset O_h$, which
+hold after decreasing its constant $\gamma$). Every hypothesis of the two
+cited theorems is proved in Lean for this flow; nothing else is assumed. The
+build checks the axiom list. A separate program checks that the rationals in the
+certificate axiom are those the two programs certify.
+
+What lies outside Lean is the correctness of the two interval computations,
+including CAPD's normal-form routine and the Arb library, and the exact
+transcription of the cited theorems, quoted in Appendix~\ref{app:cited} from
+their arXiv versions (Zlatoš v2 and Pöschel's version 1.3, which notes small
+corrections relative to the printed text). The commands to rebuild the Lean
+proof and rerun both programs, with running times, are in the README of the
+accompanying files.
+
+\begin{appendices}
+\section{The cited theorems}\label{app:cited}
+\begin{theorem}[Zlatoš {\cite[Theorem~1.1]{Z}}]\label{thm:zlatos}
+With (1.1) ``$T_t+Au\cdot\nabla T=\Delta T+f(T)$ on $\R^n$'', (1.2)
+``$f\in C^{1,\varepsilon}([0,1])$, $f(0)=f(1)=0$ and $f$ is non-increasing on
+$(1-\varepsilon,1)$ for some $\varepsilon>0$, $0<f(s)\le sf'(0)$ for
+$s\in(0,1)$'', (1.3) ``The $1$-periodic flow $u\colon\T^n\to\R^n$ satisfies
+$u\in C^{1,\varepsilon}(\T^n)$, $\nabla\cdot u\equiv0$, $\int_{\T^n}u\,dx=0$'',
+and (1.5) ``$I\equiv\{w\in H^1(\T^n)\mid \operatorname{Im}w=0$ and
+$u\cdot\nabla w=0\}$'': ``If $u$ and $f$ satisfy (1.2) and (1.3) and
+$|e|=1$, then
+\[
+\lim_{A\to\infty}\frac{c^*_e(A)}{A}=\sup_{w\in I,\ \|\nabla w\|_2^2\le f'(0)\|w\|_2^2}
+\frac{\int_{\T^n}(u\cdot e)w^2\,dx}{\|w\|_2^2}.
+\]
+In particular, the limit exists.''
+\end{theorem}
+Pulsating fronts are defined there as ``a solution of (1.1) of the form
+$T(t,x)=U(x\cdot e-ct,x)$, with $c$ the front speed, and $U$ $1$-periodic in
+$x$ and such that $\lim_{s\to-\infty}U(s,x)=1$,
+$\lim_{s\to+\infty}U(s,x)=0$, uniformly in $x$''. In the formalization,
+$u\cdot\nabla w=0$ holds almost everywhere, as in the proof of Zlatoš's
+Theorem~1.2.
+
+\begin{theorem}[Pöschel {\cite[Theorem~A]{P}}]\label{thm:poschel}
+``Let $H=N+P$. Suppose $P$ is real analytic on $D_{r,s}\times O_h$ with
+$|P|_{r,s,h}\le\gamma\alpha rs^\nu$, $\alpha s^\nu\le h$, where $\nu=\tau+1$
+and $\gamma$ is a small constant depending only on $n$ and $\tau$. Suppose
+also that $r,s,h\le1$. Then there exists a Lipschitz continuous map
+$\varphi\colon\Omega_\alpha\to\Omega$ close to the identity and a Lipschitz
+continuous family of real analytic torus embeddings
+$\Phi\colon\T^n\times\Omega_\alpha\to B\times\T^n$ close to $\Phi_0$, such
+that for each $\omega\in\Omega_\alpha$ the embedded tori are Lagrangian and
+$X_H|_{\varphi(\omega)}\circ\Phi=D\Phi\cdot X_N$. Moreover, $\Phi$ is real
+analytic on $T_*=\{\theta:|\operatorname{Im}\theta|<s/2\}$ for each $\omega$,
+and
+\[
+|W(\Phi-\Phi_0)|,\ \alpha s^\nu|W(\Phi-\Phi_0)|_{\mathfrak L}\le\frac{c}{\alpha rs^\nu}|P|_{r,s,h},\qquad
+|\varphi-\mathrm{id}|,\ \alpha s^\nu|\varphi-\mathrm{id}|_{\mathfrak L}\le\frac{c}{r}|P|_{r,s,h},
+\]
+uniformly on $T_*\times\Omega_\alpha$ and $\Omega_\alpha$, respectively, where
+$c$ is a constant depending only on $n$ and $\tau$, and
+$W=\operatorname{diag}(r^{-1}\mathrm{Id},s^{-1}\mathrm{Id})$.''
+\end{theorem}
+Here, in Pöschel's notation, $N=e(\omega)+\langle\omega,I\rangle$;
+$\Omega_\alpha$ is the set of $\omega\in\Omega$ with
+$|\langle k,\omega\rangle|\ge\alpha/|k|^\tau$ for all $0\ne k\in\Z^n$ and at
+distance at least $\alpha$ from the boundary of $\Omega$, with $\tau>n-1$
+fixed; $D_{r,s}=\{|I|<r\}\times\{|\operatorname{Im}\theta|<s\}$ and
+$O_h=\{\omega:|\omega-\Omega_\alpha|<h\}$, with sup-norms; and
+$\Phi_0(\theta,\omega)=(0,\theta)$. The Lean statement takes $n\ge2$, Pöschel's
+standing assumption.
+
+\section{The twist coefficient}\label{app:twist}
+Let $F$ be a $C^3$ map of the plane with $F(p)=p$ and $\det DF(p)=1$, and let $v\in\C^2$ be an
+eigenvector of $DF(p)$ for an eigenvalue $\lambda\notin\R$ with
+$\lambda^2\ne\lambda$ and $\lambda^2\ne\bar\lambda$; then $|\lambda|=1$. In the coordinate $w$
+given by $x=p+vw+\bar v\bar w$, write
+$F=\sum_{j+k\le3}a_{jk}w^j\bar w^k+o(|w|^3)$, so $a_{10}=\lambda$,
+$a_{01}=0$. The first Birkhoff coefficient is nonzero when
+\[
+\beta=a_{21}+\frac{2a_{20}a_{11}}{|\lambda|^2-\lambda}+\frac{a_{11}a_{20}}{\lambda^2-\lambda}
++\frac{|a_{11}|^2}{|\lambda|^2-\bar\lambda}+\frac{2|a_{02}|^2}{\lambda^2-\bar\lambda}\ne0,
+\]
+the coefficient of $w^2\bar w$ after the change $w\mapsto w+q(w)$ with
+$q_{jk}=a_{jk}/(\lambda^j\bar\lambda^k-\lambda)$ that removes the quadratic
+terms. The twist coefficient of both programs is $-i\beta/\lambda$ up to a
+positive factor and complex conjugation; CAPD's routine uses only
+$\bar\lambda=1/\lambda$, which holds at $p$ since $\det DP(p)=1$. Lean proves
+that, under this determinant-one hypothesis, $\beta\ne0$ is invariant under
+$C^3$ conjugacy fixing $p$, so the second
+program's computation in the coordinates $\Phi$ of Lemma~\ref{lem:ham} gives
+the same conclusion for $P$.
+
+\section{The steps of Proposition~\ref{prop:kam}}\label{app:kam}
+The Lean proof follows these steps; constants not given here are explicit in
+the Lean files.
+\begin{description}
+\item[R1.] In the coordinates of Lemma~\ref{lem:ham}, translated by the
+periodic solution, the streamlines solve $\dot u=J\nabla_uH_1(u,z)$ with
+$H_1$ analytic on a polydisc times a strip, real, $2\pi$-periodic in $z$ and
+$O(|u|^2)$. The period map $P_1$ is conjugate to $P$ by an analytic chart.
+Analyticity of the flow in complex time and of $P_1$ is proved from
+uniform limits of Euler polygons.
+\item[R2.] With $X(t)$ the fundamental matrix of the linear part, the matrix
+$Q(t)=X(t)SR(-\nu t)$, for $S\in SL(2,\R)$ bringing $DP_1(0)$ to the rotation
+$R(2\pi\nu)$, is real, $2\pi$-periodic and symplectic, and $u=Q(t)w$ turns
+$H_1$ into $\tfrac\nu2|w|^2+O(|w|^3)$. Here $\nu$ is not a multiple of $1/q$
+for $q\le4$, by the certified trace.
+\item[R3.] Two finite compositions of time-periodic polynomial shears, solving the homological
+equations with divisors $m+\nu l$ bounded below for $|l|\le4$, give
+$K=\tfrac\nu2|w|^2+\tfrac b4|w|^4+R$ with $|R|\le C|w|^5$ on a polydisc times
+a strip, and conjugate the period maps.
+\item[R4.] The period map of $K$ has twist coefficient a nonzero multiple of
+$b$, and the conjugacy invariance of Appendix~\ref{app:twist} gives $b\ne0$.
+\item[R5.] With $p=|w|^2/2=p_0(\omega)+I$ and polar angle $\theta_1$, the time
+$\theta_2=t$ and its conjugate $J$, the Hamiltonian $\omega_2(K+J)$ equals
+$e(\omega)+\omega_1I+\omega_2J+P_\omega$ exactly, with
+$P_\omega=\omega_2\bigl(bI^2+R\bigr)$.
+\item[R6.] For $\varepsilon\le\varepsilon_0$, with $r=\varepsilon^{5/4}$,
+$\alpha=\varepsilon^{9/8}$ and $h=\alpha s^3$, $P_\omega$ is real analytic on
+$D_{r,s}\times O_h$ with $|P_\omega|\le C_1\varepsilon^{5/2}$, and every
+hypothesis of Theorem~\ref{thm:poschel} holds.
+\item[R7.] The time row of $X_H\circ\Phi=D\Phi\cdot X_N$, averaged over the
+torus, shows $\varphi_2(\omega)=\omega_2$ and that the $\theta_2$-component
+of $\Phi-\Phi_0$ is constant, so for $(\sigma,1)\in\Omega_\alpha$ the section
+$t=0$ of the torus is a $P$-invariant curve. The set
+$\{\sigma:(\sigma,1)\in\Omega_\alpha\}$ has measure at least
+$|b|\varepsilon(1-8\alpha)-16\alpha(2+|\nu|)$.
+\item[Assembly.] With $\varepsilon=\kappa^8$ and $\kappa$ small, the angle
+part of $\Phi$ minus the identity is $\tfrac12$-Lipschitz, so each curve is
+the radial graph of $g_\sigma=\sqrt{2(p_0+\Phi^I)}$ over the angle, in the
+chart given by R1--R3; the bounds on $\varphi-\mathrm{id}$ and
+$\Phi-\Phi_0$ and on their Lipschitz constants give the Lipschitz label.
+\end{description}
+
+\section{The two programs}\label{app:checks}
+The certificate lists the center and half-width of $\mathcal X$ and the claimed ranges
+of the return time and the trace. The first program (CAPD 6.1.0, at a pinned
+commit, with machine intervals) integrates the variational equations to
+order $3$ over $\mathcal X$ by the $C^r$-Lohner algorithm \cite{WZ}, finds the crossing with $z=2\pi$, and checks every claim;
+the second (Arb through python-flint 0.9.0, 256-bit precision, order-36
+Taylor steps of size $1/32$ with a priori enclosures) does the same
+independently, refining the fixed point in high precision first. As a test,
+both treat the integrable flow $x'=\cos y$, $y'=\sin x$, $z'=13/10$ at $(0,\pi/2)$,
+whose return map is the time-$2\pi/1.3$ map of $\cos x+\sin y$ with exact
+twist $-(20\pi/13)/4$; both reproduce it (the second to within
+$8\cdot10^{-29}$). Both reject three altered certificates: the center moved
+by $2^{-19}$, the upper trace bound set to $-1.9646$, and the upper return
+time set to $3.2352$.
+\end{appendices}
+
+\begin{thebibliography}{99}
+\bibitem{BH} Henri Berestycki and François Hamel, Front propagation in
+periodic excitable media, Comm. Pure Appl. Math. 55 (2002), 949--1032.
+\bibitem{BL} Maxime Breden and Jean-Philippe Lessard, Polynomial interpolation
+and a priori bootstrap for computer-assisted proofs in nonlinear ODEs,
+Discrete Contin. Dyn. Syst. Ser. B 23 (2018), 2825--2858; arXiv:1704.03128.
+\bibitem{CAPD} Tomasz Kapela, Marian Mrozek, Daniel Wilczak and Piotr
+Zgliczyński, CAPD::DynSys: a flexible C++ toolbox for rigorous numerical
+analysis of dynamical systems, Commun. Nonlinear Sci. Numer. Simul. 101
+(2021), 105578.
+\bibitem{DFGHMS} Thierry Dombre, Uriel Frisch, John M. Greene, Michel Hénon,
+A. Mehr and Andrew M. Soward, Chaotic streamlines in the ABC flows, J. Fluid
+Mech. 167 (1986), 353--391.
+\bibitem{ESK} Mohammad El Smaily and Stéphane Kirsch, Front speed enhancement
+by incompressible flows in three or higher dimensions, Arch. Ration. Mech.
+Anal. 213 (2014), 327--354; arXiv:1307.4106v2.
+\bibitem{HZD} De-Bin Huang, Xiao-Hua Zhao and Hui-Hui Dai, Invariant tori and
+chaotic streamlines in the ABC flow, Phys. Lett. A 237 (1998), 136--140.
+\bibitem{Arb} Fredrik Johansson, Arb: efficient arbitrary-precision
+midpoint-radius interval arithmetic, IEEE Trans. Comput. 66 (2017),
+1281--1292.
+\bibitem{KS} Tomasz Kapela and Carles Simó, Rigorous KAM results around
+arbitrary periodic orbits for Hamiltonian systems, Nonlinearity 30 (2017),
+965--986.
+\bibitem{Mathlib} The mathlib Community, The Lean mathematical library, in:
+Proceedings of the 9th ACM SIGPLAN International Conference on Certified
+Programs and Proofs (CPP 2020), 367--381.
+\bibitem{MXYZ} Tyler McMillen, Jack Xin, Yifeng Yu and Andrej Zlatoš,
+Ballistic orbits and front speed enhancement for ABC flows, SIAM J. Appl.
+Dyn. Syst. 15 (2016), 1753--1782; arXiv:1606.01461.
+\bibitem{Lean} Leonardo de Moura and Sebastian Ullrich, The Lean~4 theorem
+prover and programming language, in: Automated Deduction (CADE 28), Lecture
+Notes in Computer Science 12699, Springer, 2021, 625--635.
+\bibitem{P} Jürgen Pöschel, A lecture on the classical KAM theorem, in:
+Smooth Ergodic Theory and Its Applications, Proc. Sympos. Pure Math. 69
+(2001), 707--732; arXiv:0908.2234v1 (version 1.3, 2009).
+\bibitem{SXZ} Lyonell Shen, Jack Xin and Aimin Zhou, Finite element
+computation of KPP front speeds in 3D cellular and ABC flows, Math. Model.
+Nat. Phenom. 8 (2013), no.~3, 182--197.
+\bibitem{SzL} Wojciech Szumiński and Jaume Llibre, Dynamics, periodic orbits
+and $C^1$ non-integrability of the ABC flow, arXiv:2609.17449 (2026).
+\bibitem{WB} Daniel Wilczak and Roberto Barrio, Systematic computer-assisted
+proof of branches of stable elliptic periodic orbits and surrounding invariant
+tori, SIAM J. Appl. Dyn. Syst. 16 (2017), 1618--1649.
+\bibitem{WZ} Daniel Wilczak and Piotr Zgliczyński, $C^r$-Lohner algorithm,
+arXiv:0704.0720 (2007).
+\bibitem{XYZ} Jack Xin, Yifeng Yu and Andrej Zlatoš, Periodic orbits of the
+ABC flow with $A=B=C=1$, SIAM J. Math. Anal. 48 (2016), 4087--4093;
+arXiv:1601.02724.
+\bibitem{Z} Andrej Zlatoš, Sharp asymptotics for KPP pulsating front speed-up
+and diffusion enhancement by flows, Arch. Ration. Mech. Anal. 195 (2010),
+441--453; arXiv:0704.1163v2.
+\end{thebibliography}
+\end{document}

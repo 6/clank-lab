@@ -1,0 +1,79 @@
+name: ABC front speed-up checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/abc-front-speedup/**'
+      - '.github/workflows/abc-front-speedup.yml'
+  pull_request:
+    paths:
+      - 'results/abc-front-speedup/**'
+      - '.github/workflows/abc-front-speedup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: abc-front-speedup-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  orbit:
+    name: Certified orbit
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/abc-front-speedup
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install Python requirements
+        run: python3 -m pip install -r checks/requirements.txt
+      - name: Run both checkers, the corruptions and the certificate import
+        run: sh checks/run.sh
+
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/abc-front-speedup/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Install Lean with elan
+        run: |
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-x86_64-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          echo "42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+      - name: Build proof, statement checks and axiom checks
+        run: lake build
+
+  check:
+    name: Check abc-front-speedup
+    needs: [orbit, lean]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      ORBIT_RESULT: ${{ needs.orbit.result }}
+      LEAN_RESULT: ${{ needs.lean.result }}
+    steps:
+      - name: Require all checks
+        run: test "$ORBIT_RESULT" = success && test "$LEAN_RESULT" = success

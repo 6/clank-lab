@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## abc-front-speedup v1 (November 9, 2026)
+
+- Proves that for the ABC flow with $A=B=C=1$ and every KPP reaction, the minimal speed $`c^*_e(K)`$ of pulsating fronts of $`T_t+K\,V\cdot\nabla T=\Delta T+f(T)`$ satisfies: $`c^*_e(K)/K`$ has a positive limit as $K\to\infty$, for every unit vector $e$. This answers the KPP case of the question Xin, Yu and Zlatoš raised in 2016.
+- Includes the paper, the Lean proof of the deduction (with Zlatoš's and Pöschel's theorems as cited inputs) and two independent interval-arithmetic programs that certify an elliptic periodic orbit.
+
 ## reptile-simplex v1 (November 8, 2026)
 
 - Proves that the simplex with vertices $(0,0,0,0)$, $(1,0,0,0)$, $(1/2,1/2,0,0)$, $(2/3,1/3,1/3,0)$, $(3/4,1/4,1/4,1/4)$, the affine $F_4$ alcove, is tiled by four congruent copies of itself scaled by $1/\sqrt{2}$. This answers Kynčl and Patáková's question, with $k=4$ pieces, and disproves Matoušek and Safernová's conjecture in dimension four. The subdivision is Felikson and Tumarkin's.

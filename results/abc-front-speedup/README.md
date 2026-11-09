@@ -14,6 +14,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 Archived on Zenodo: [doi:10.5281/zenodo.24072734](https://doi.org/10.5281/zenodo.24072734)
 
+This DOI identifies version 1; version 2 corrects the build checks.
+
 ## Check it
 
 The deduction of the theorem from the certified orbit and from the theorems of Zlatoš and Pöschel is proved in Lean 4 with Mathlib. The two cited theorems enter as axioms, stated with all their hypotheses, and the certified facts about the orbit as a third axiom; the [Lean documentation](lean/README.md) lists them and explains how the formal statement matches the paper's theorem. With [elan](https://github.com/leanprover/elan) installed, from this folder:
@@ -50,7 +52,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{KPP fronts in the 1-1-1 ABC flow speed up linearly in every direction}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/abc-front-speedup-v1/results/abc-front-speedup}},
-  doi          = {10.5281/zenodo.24072734}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/abc-front-speedup-v2/results/abc-front-speedup}},
+  doi = {10.5281/zenodo.24072734}
 }
 ```

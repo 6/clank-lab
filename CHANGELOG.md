@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## abc-front-speedup v2 (November 9, 2026)
+
+- Correction: the public orbit check could not build when Python setup supplied a pkg-config search path. The build now separates the CAPD search directories correctly and stops if configuration fails. Regression checks cover inherited paths and configuration failures. The theorem, paper, certificates and Lean proof are unchanged.
+
 ## abc-front-speedup v1 (November 9, 2026)
 
 - Proves that for the ABC flow with $A=B=C=1$ and every KPP reaction, the minimal speed $`c^*_e(K)`$ of pulsating fronts of $`T_t+K\,V\cdot\nabla T=\Delta T+f(T)`$ satisfies: $`c^*_e(K)/K`$ has a positive limit as $K\to\infty$, for every unit vector $e$. This answers the KPP case of the question Xin, Yu and Zlatoš raised in 2016.

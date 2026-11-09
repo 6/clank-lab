@@ -10,5 +10,11 @@ mkdir -p "$OUT/include/capd/normalForms"
 sed 's/typename capd::TypeTraits<ScalarType>::Real fac = mp.factorial();/double fac = (double)mp.factorial();/' \
   "$CAPD/include/capd/normalForms/normalForms.h" > "$OUT/include/capd/normalForms/normalForms.h"
 cp "$CAPD/include/capd/normalForms/planarMaps.hpp" "$CAPD/include/capd/normalForms/linearSubstitution.hpp" "$OUT/include/capd/normalForms/"
-g++ -I"$OUT/include" $("$CAPD/bin/capd-config" --cflags) -o "$OUT/bnf" "$(dirname "$0")/bnf.cpp" $("$CAPD/bin/capd-config" --libs)
+# The pinned capd-config wrapper joins its pkg-config directory to the
+# inherited path using PATH_SEPARATOR, which it does not define itself.
+# Separate assignments make a failed lookup stop this script before g++.
+cflags=$(PATH_SEPARATOR=: "$CAPD/bin/capd-config" --cflags)
+libs=$(PATH_SEPARATOR=: "$CAPD/bin/capd-config" --libs)
+# Deliberate word splitting: pkg-config returns lists of compiler/linker flags.
+g++ -I"$OUT/include" $cflags -o "$OUT/bnf" "$(dirname "$0")/bnf.cpp" $libs
 echo "built $OUT/bnf"

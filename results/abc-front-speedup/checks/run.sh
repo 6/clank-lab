@@ -14,6 +14,7 @@ PY=${PYTHON:-python3}
 PATH="$($PY -I -c 'import os, sys; print(os.path.dirname(sys.executable))'):$PATH"
 T=$(mktemp -d)
 trap 'rm -rf "$T"' EXIT
+$PY checks/test_build.py
 $PY checks/check_remainder.py
 CAPD="$T/capd" SRC="$T/capd-src" sh checks/get-capd.sh > "$T/capd.log"
 CAPD="$T/capd" OUT="$T/bnf" sh checks/build.sh > /dev/null

@@ -1,0 +1,17 @@
+# Certificate: an elliptic fixed point with nonzero twist of the return map of
+# the 1-1-1 ABC flow  x' = sin z + cos y,  y' = sin x + cos z,  z' = sin y + cos x.
+# P maps (x, y) on {z = 0} to (x', y') on {z = 2 pi}, at the first crossing of
+# z = 2 pi with z increasing. Claims, for the unique zero p of P(u) - u in X:
+#   X = centre + [-2^radius_log2, 2^radius_log2]^2, centre = (num_x, num_y) / 2^40;
+#   P(p) = p exactly in R^2, so the streamline through (p, 0) satisfies
+#     gamma(t + T) = gamma(t) + (0, 0, 2 pi), T in [time_lo, time_hi];
+#   trace DP(p) in [trace_lo, trace_hi] (inside (-2, -1): elliptic, and
+#     lambda^q != 1 for q = 1, 2, 3, 4);
+#   the first Birkhoff coefficient of P at p is nonzero.
+centre_num_x 6533234620664
+centre_num_y 1727108826179
+radius_log2 -20
+time_lo 3.2352
+time_hi 3.2354
+trace_lo -1.9650
+trace_hi -1.9640

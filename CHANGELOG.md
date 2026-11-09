@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that for the ABC flow with $A=B=C=1$ and every KPP reaction, the minimal speed $`c^*_e(K)`$ of pulsating fronts of $`T_t+K\,V\cdot\nabla T=\Delta T+f(T)`$ satisfies: $`c^*_e(K)/K`$ has a positive limit as $K\to\infty$, for every unit vector $e$. This answers the KPP case of the question Xin, Yu and Zlatoš raised in 2016.
 - Includes the paper, the Lean proof of the deduction (with Zlatoš's and Pöschel's theorems as cited inputs) and two independent interval-arithmetic programs that certify an elliptic periodic orbit.
+- Zenodo: [10.5281/zenodo.24072734](https://doi.org/10.5281/zenodo.24072734)
 
 ## reptile-simplex v1 (November 8, 2026)
 

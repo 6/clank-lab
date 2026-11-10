@@ -1,0 +1,77 @@
+name: Post-Lie structures on perfect and nilpotent pairs checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/postlie-perfect-nilpotent/**'
+      - '.github/workflows/postlie-perfect-nilpotent.yml'
+  pull_request:
+    paths:
+      - 'results/postlie-perfect-nilpotent/**'
+      - '.github/workflows/postlie-perfect-nilpotent.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: postlie-perfect-nilpotent-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lean:
+    name: Lean proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/postlie-perfect-nilpotent/lean
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Lean through elan
+        run: |
+          arch=$(uname -m)
+          case "$arch" in
+            x86_64) elan_sha256=42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 ;;
+            aarch64|arm64)
+              arch=aarch64
+              elan_sha256=05febd124d84ebf994b2e7479922a5650b1e950c17ae3bd1ddd776b65bb72bf9 ;;
+            *) echo "Unsupported architecture for elan: $arch" >&2; exit 1 ;;
+          esac
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${arch}-unknown-linux-gnu.tar.gz" \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          echo "$elan_sha256  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat lean-toolchain)"
+          lean --version
+
+      - name: Restore proof build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: results/postlie-perfect-nilpotent/lean/.lake/build
+          key: postlie-perfect-nilpotent-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('results/postlie-perfect-nilpotent/lean/lean-toolchain', 'results/postlie-perfect-nilpotent/lean/lake-manifest.json', 'results/postlie-perfect-nilpotent/lean/lakefile.toml', 'results/postlie-perfect-nilpotent/lean/**/*.lean', '!results/postlie-perfect-nilpotent/lean/.lake/**') }}
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build proof, statement checks, and axiom guards
+        run: lake build
+
+  check:
+    name: Check postlie-perfect-nilpotent
+    needs: [lean]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful proof build
+        env:
+          LEAN_RESULT: ${{ needs.lean.result }}
+        run: test "$LEAN_RESULT" = success

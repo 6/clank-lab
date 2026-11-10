@@ -13,6 +13,7 @@ Zenodo records.
 
 - Proves that every even number other than 2, 12, 14 and 18 is the combinatorial period of a periodic billiard trajectory in the regular pentagon without five-fold rotational symmetry, the existence statement of Davis and Lelièvre's 2018 conjecture. Whether the four exceptions occur is not treated.
 - Includes the paper, with a written proof; the Lean proof of the covering argument and of the deduction, with Kontorovich and Zhang's statement of the Davis–Fuchs–Tabachnikov period theorem as its cited input; and two exact checkers for six explicit trajectories.
+- Zenodo: [10.5281/zenodo.24119275](https://doi.org/10.5281/zenodo.24119275)
 
 ## abc-front-speedup v2 (November 9, 2026)
 

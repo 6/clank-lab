@@ -1,0 +1,580 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\to}}
+\DeclareUnicodeCharacter{2243}{\ensuremath{\simeq}}
+\DeclareUnicodeCharacter{2097}{\ensuremath{_{l}}}
+\DeclareUnicodeCharacter{2045}{\ensuremath{[\![}}
+\DeclareUnicodeCharacter{2046}{\ensuremath{]\!]}}
+\DeclareUnicodeCharacter{22A4}{\ensuremath{\top}}
+\DeclareUnicodeCharacter{03C1}{\ensuremath{\rho}}
+\DeclareUnicodeCharacter{00AC}{\ensuremath{\neg}}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={P. Graham},pdftitle={No post-Lie algebra structures on pairs of perfect and nilpotent Lie algebras}]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\setlength{\emergencystretch}{3em}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\n}{\mathfrak{n}}
+\newcommand{\s}{\mathfrak{s}}
+\newcommand{\h}{\mathfrak{h}}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\adj}{adj}
+\title{No post-Lie algebra structures on pairs of perfect and nilpotent Lie algebras}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 10, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $\g$ and $\n$ be finite-dimensional Lie algebras on the same vector
+space over a field of characteristic zero, with $\n$ nilpotent. We prove
+that if the pair $(\g,\n)$ carries a post-Lie algebra structure all of
+whose right multiplications have trace zero, then $\g$ is solvable. Hence
+no nonzero perfect Lie algebra $\g$ admits a post-Lie algebra structure on
+$(\g,\n)$ with $\n$ nilpotent. This answers a question of Burde and Dekimpe
+in the negative and proves the nilpotent case of a conjecture of Burde,
+Dekimpe and Monadjem. Nonexistence was known for abelian $\n$, by a theorem of
+Helmstetter on left-symmetric algebras; for two-step nilpotent $\n$, by
+Burde and Dekimpe; and for the complex perfect
+non-semisimple $\g$ of dimensions five and six, by Burde and Dekimpe and by
+Burde, Dekimpe and Monadjem. The proof extends Helmstetter's argument. A
+post-Lie algebra structure embeds $\g$ into the holomorph of $\n$.
+Conjugations chosen by Whitehead's first lemma along the lower central
+series of $\n$ make the translation part of this embedding vanish on a
+Levi factor of $\g$, while its determinant stays equal to one, as in
+Kriebel's treatment of semisimple $\n$. The proof is
+formalized in Lean with Mathlib, assuming Levi's theorem and Whitehead's
+first lemma as stated in Weibel's textbook.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{Keywords:} post-Lie algebra, perfect Lie algebra,
+nilpotent Lie algebra, left-symmetric algebra, NIL-affine action.
+
+\noindent\textit{MSC 2020:} 17B30, 17B60, 17D25.
+
+\section{Introduction}
+
+\subsection{Main results}
+Throughout, $k$ is a field of characteristic zero and all Lie algebras
+are finite-dimensional over $k$. Following Burde and Dekimpe
+\cite[Definition 2.1]{BD}, let $\g=(V,[\,,])$ and $\n=(V,\{\,,\})$ be two
+Lie brackets on one vector space $V$. A \emph{post-Lie algebra structure}
+on the pair $(\g,\n)$ is a bilinear product $x\cdot y$ on $V$ such that,
+for all $x,y,z\in V$,
+\begin{align}
+x\cdot y-y\cdot x&=[x,y]-\{x,y\},\label{eq:pl1}\\
+[x,y]\cdot z&=x\cdot(y\cdot z)-y\cdot(x\cdot z),\label{eq:pl2}\\
+x\cdot\{y,z\}&=\{x\cdot y,z\}+\{y,x\cdot z\}.\label{eq:pl3}
+\end{align}
+We write $L(x)y=x\cdot y$ and $R(x)y=y\cdot x$. By \eqref{eq:pl3} each
+$L(x)$ is a derivation of $\n$, and by \eqref{eq:pl2} the map
+$L\colon\g\to\Der(\n)$ is a representation of $\g$ \cite[\S2]{BD}. When
+$\n$ is abelian, \eqref{eq:pl1} and \eqref{eq:pl2} say that $(V,\cdot)$ is
+a left-symmetric algebra (an algebra whose associator
+$(x,y,z)=(x\cdot y)\cdot z-x\cdot(y\cdot z)$ is symmetric in $x$ and $y$)
+whose commutator is the bracket of $\g$.
+
+\begin{theorem}\label{thm:main}
+Let $x\cdot y$ be a post-Lie algebra structure on a pair $(\g,\n)$ with
+$\n$ nilpotent. If $\tr R(x)=0$ for every $x\in V$, then $\g$ is
+solvable.
+\end{theorem}
+
+\begin{corollary}\label{cor:perfect}
+Let $\g\neq0$ be perfect, that is, $[\g,\g]=\g$, and let $\n$ be
+nilpotent. Then there is no post-Lie algebra structure on $(\g,\n)$.
+\end{corollary}
+
+For $\g=0$ the zero product is a post-Lie algebra structure, so the
+hypothesis $\g\ne0$ is needed. The trace hypothesis in
+Theorem~\ref{thm:main} cannot be dropped: the product of matrices
+$x\cdot y=xy$ on $V=\mathfrak{gl}_m(k)$ is a post-Lie algebra structure on
+$(\mathfrak{gl}_m(k),\n)$ with $\n$ abelian, since associativity gives
+\eqref{eq:pl2}, and $\mathfrak{gl}_m(k)$ is not solvable for $m\ge2$; here
+$\tr R(x)=m\tr x$.
+
+\subsection{The question and prior work}
+Post-Lie algebras were introduced by Vallette \cite{Va}. As Burde and
+Dekimpe recall \cite[\S1]{BD}, post-Lie algebra structures on pairs of Lie
+algebras were introduced independently by Burde, Dekimpe and Vercammen
+\cite{BDV}, in the study of NIL-affine actions of Lie groups, that is,
+affine actions on a nilpotent Lie group $N$ by elements of
+$N\rtimes\mathrm{Aut}(N)$.
+
+Burde and Dekimpe \cite{BD} studied their existence in terms of the
+structure of $\g$ and $\n$. For perfect $\g$ they proved: ``Proposition
+3.3. Let $(\g,\n)$ be a pair of Lie algebras over a field of
+characteristic zero, where $\g$ is perfect and $\n$ is abelian or 2-step
+nilpotent. Then there is no post-Lie algebra structure on $(\g,\n)$.'' In
+its proof the abelian case is taken from Segal \cite[Theorem 1 and
+Proposition 1]{Se} and, over $\mathbb{C}$, from Helmstetter
+\cite[Proposition 20]{He}, and the two-step case is reduced to it by
+\cite[Proposition 4.2]{BDV}. They also recall that $\n$ cannot be solvable
+and not nilpotent \cite[Proposition 4.4]{BDV} (their Proposition 3.4), and
+that $\g$ cannot be semisimple when $\n$ is solvable \cite[Theorem
+4.2]{BD13} (their Theorem 3.2). This led them to ask:
+
+\begin{question}[{\cite[Question 3.5]{BD}}]
+Let $(\g,\n)$ be a pair of Lie algebras, where $\g$ is perfect and $\n$ is
+nilpotent. Does there exist a post-Lie algebra structure on $(\g,\n)$?
+\end{question}
+
+They showed that no structure exists for
+$\g=\mathfrak{sl}_2(\mathbb{C})\ltimes V(2)$, the semidirect product with
+the two-dimensional irreducible module \cite[Proposition 3.6]{BD}. In a
+report of joint work with Dekimpe, Burde then stated two conjectures
+\cite[p.~2689]{OWR}: ``Conjecture. Let $(\g,\n)$ be a pair of Lie
+algebras, where $\g=\mathfrak{sl}_n(\mathbb{C})\ltimes V(n)$ and $\n$ is
+nilpotent. Then there is no post-Lie algebra structure on $(\g,\n)$,''
+where $n$ is an integer and $V(n)$ the natural representation of
+$\mathfrak{sl}_n(\mathbb{C})$, and, as ``a more general conjecture'':
+``Conjecture. Let $(\g,\n)$ be a pair of Lie algebras, where $\g$ is
+perfect non-semisimple, and $\n$ is nilpotent. Then there is no post-Lie
+algebra structure on $(\g,\n)$.''
+
+Burde, Dekimpe and Monadjem \cite{BDM} studied the pairs with $\g$ perfect
+and not semisimple, in seven cases for $\n$, of which case (b) is ``$\n$
+is nilpotent non-abelian'' \cite[\S3]{BDM}. In their introduction they
+write that for the cases ``where $\g$ is perfect non-semisimple, and $\n$
+is either nilpotent, simple, or semisimple, we are not able [to] solve the
+existence question in general. We conjecture that there do not exist
+post-Lie algebra structures in these cases.'' In case (b) they proved
+nonexistence for the two six-dimensional complex perfect Lie algebras that
+are not semisimple, $\mathfrak{sl}_2(\mathbb{C})\ltimes V(3)$ and
+$\mathfrak{sl}_2(\mathbb{C})\ltimes\mathfrak{n}_3(\mathbb{C})$, where
+$\mathfrak{n}_3(\mathbb{C})$ is the three-dimensional Heisenberg algebra
+\cite[Proposition 3.2]{BDM}.
+
+Corollary~\ref{cor:perfect} answers Question 3.5 of \cite{BD} in the
+negative, and proves case (b) of the conjecture of \cite{BDM} and both
+conjectures of \cite[p.~2689]{OWR}, over every field of characteristic
+zero.
+
+The case $\n$ abelian of Theorem~\ref{thm:main} is due to Helmstetter. A
+left-symmetric algebra is \emph{complete} if every $I+R(x)$ is bijective
+\cite[Definition 3.30]{Bu}, and in characteristic zero this holds if and
+only if every $R(x)$ is nilpotent, and if and only if $\tr R(x)=0$ for
+all $x$ \cite[Theorem 3.31]{Bu}, a theorem of Segal \cite{Se}. Helmstetter
+calls a left-symmetric algebra nilpotent when every right multiplication
+is nilpotent \cite[Definition 17]{He}, and proved: ``Si $A$ est une
+alg\`ebre sym\'etrique \`a gauche nilpotente, l'alg\`ebre de Lie $A$ est
+r\'esoluble'' (if $A$ is a nilpotent left-symmetric algebra, its Lie
+algebra is solvable) \cite[Proposition 20]{He}. The proof of
+Helmstetter's Corollary 21, that for a finite-dimensional left-symmetric algebra ``il
+est impossible que l'alg\`ebre de Lie $A$ soit \'egale \`a l'alg\`ebre de
+Lie d\'eriv\'ee $[A,A]$'' (the Lie algebra $A$ cannot equal its derived
+algebra), deduces nilpotency from $\tr R_a=0$ for every $a$. Fox restates
+these results, as due to Helmstetter, in \cite[Lemma 5.3]{Fo}: ``(1) The
+underlying Lie algebra of a complete finite-dimensional LSA over $k$ is
+solvable.'' Burde recalls the geometric origin: if a Lie group $G$ acts
+simply transitively by affine transformations of $\mathbb{R}^n$, then
+``Auslander proved that in this case $G$ is solvable'' \cite{Au},
+\cite[Remark 2.28]{Bu}.
+
+Several analogues concern groups. A Lie skew brace is a Lie group with a
+second Lie group structure on the same manifold, linked by the skew-brace
+identity, and its tangent object is a post-Lie algebra \cite[\S1]{DL}.
+Damele and Loi proved, in their Theorem 1.1(S2): ``Let $(G,\cdot,\circ)$
+be a connected LSB [Lie skew brace]. \dots\ If $(G,\cdot)$ is solvable,
+then $(G,\circ)$ is solvable'' \cite{DL}. Of the existence question for
+nilpotent $\n$ and perfect $\g$, which they attribute to \cite{BDM}, they
+write: ``While we are currently not able to answer this question
+definitively, we can nevertheless state that any such PLA [post-Lie
+algebra], if it exists, would not be integrable into an LSB due to
+condition (S2) in Theorem 1.1'' \cite[\S1]{DL}. Theorem~\ref{thm:main}
+needs no Lie group and no integration. For finite groups, Byott proved
+``if $G$ is nilpotent then $\Gamma$ is soluble'' for a Hopf--Galois
+structure of type $G$ on a Galois extension with group $\Gamma$
+\cite[Theorem 1]{By}; for skew braces this reads ``Let $A$ be a finite
+skew brace whose additive group $(A,\cdot)$ is nilpotent. Then $(A,\circ)$
+is solvable'' \cite[Corollary 1.23]{SV}, and Damele has extended it to
+finite skew braces whose additive derived subgroup is nilpotent \cite{Da}.
+On simply connected nilpotent Lie groups, Der\'e and Origlia recall that
+``if a group acts simply transitively on a 1-connected nilpotent Lie group,
+it must be solvable'' \cite[\S1]{DO}.
+
+For semisimple $\n$, Kriebel's preprint gives a proof of nonexistence for
+perfect non-semisimple complex $\g$ \cite[Theorem 1 and Corollary 3]{Kr}.
+There ``the integrated left-right action has a holomorphic infinitesimal
+determinant. Unimodularity makes this determinant invariant''
+\cite[abstract]{Kr}, and Kriebel credits Baues's determinant relative
+invariant of an \'etale affine representation as its predecessor
+\cite[Theorem 5.19 and Corollary 5.20]{Ba}.
+
+\subsection{Proof overview and what is new}
+Helmstetter's proof, in the form given by Fox \cite[proof of Lemma
+5.3]{Fo}, runs as follows. If $\g$ is not solvable it contains a nonzero
+semisimple subalgebra $\s$; the identity map $\s\to V$ is a $1$-cocycle for
+the representation $L$, so by Whitehead's first lemma there is $a\in V$
+with $x=L(x)a=R(a)x$ for $x\in\s$. Hence $I-R(a)$ is singular, which
+contradicts completeness (take $x=-a$).
+
+For nilpotent $\n$ both steps need a replacement. By a theorem of Burde,
+Dekimpe and Vercammen \cite[Proposition 2.13]{BDV}, a post-Lie algebra
+structure is the same as an embedding $x\mapsto(x,L(x))$ of $\g$ into the
+holomorph $\n\rtimes\Der(\n)$. Its first component, the translation part,
+is the identity map $P=\mathrm{id}_V$, which is a cocycle for $L$ with
+respect to the bracket of $\n$ (Section~\ref{sec:setup}). Conjugating the
+embedding by the exponential of $-\ad(z,0)$ for $z\in\n$ changes $P$ to a
+new cocycle $P^z$. We show two things.
+\begin{itemize}
+\item When $\tr L=\tr\ad_\g$, which is equivalent to $\tr R=0$, every
+conjugation preserves $\det P$ (Lemma~\ref{lem:det}). This step follows
+the determinant method Kriebel used for semisimple $\n$ \cite{Kr}, after
+Baues \cite{Ba} and Helmstetter's characteristic polynomial: there the
+unimodularity of $\g$ makes a determinant invariant, and here the trace
+hypothesis does. What is new is that for nilpotent $\n$ the invariance is
+an identity of polynomials, with no integration. The proof puts $tz$ in
+place of $z$, so that the translation part becomes a matrix $P_t$ with
+entries in $k[t]$, and shows that $\det P_t$ has derivative zero by
+Jacobi's formula and a trace identity extracted from the cocycle equation.
+For $\n$ abelian, $P_t=I+tR(z)$, and the lemma says that Helmstetter's
+characteristic polynomial $\det(I+R(x))$ \cite[\S3]{Fo} equals one.
+\item Let $\n=\n^1\supseteq\n^2\supseteq\dots\supseteq\n^{r+1}=0$ be the
+lower central series and $\s$ a Levi factor of $\g$. Whitehead's first
+lemma, applied to the successive quotients $\n^i/\n^{i+1}$, gives elements
+$z_1,\dots,z_r$ whose conjugations move $P(\s)$ into
+$\n^2,\dots,\n^{r+1}=0$ (Lemma~\ref{lem:whitehead}). In the abelian case
+one application suffices. When $\n$ is not abelian the cocycle equation is
+nonlinear and becomes linear only modulo the next term of the series, so
+the lemma is applied $r$ times; this step has no abelian analogue.
+\end{itemize}
+After the $r$ conjugations the determinant is still one, but the cocycle
+vanishes on $\s\ne0$, a contradiction.
+
+The proof uses Levi's theorem and Whitehead's first lemma, quoted in
+Section~\ref{sec:lean}. Everything else is proved in a Lean formalization
+\cite{Lean,Mathlib}, described there; the two theorems enter it as named
+axioms.
+
+\section{Cocycles and conjugation}\label{sec:setup}
+Let $\n=(V,\{\,,\})$ be a Lie algebra and $\h=\n\rtimes\Der(\n)$ its
+holomorph, the vector space $V\oplus\Der(\n)$ with bracket
+\[
+[(a,D),(b,E)]=(\{a,b\}+Db-Ea,\;DE-ED).
+\]
+Let $\g=(V,[\,,])$ be a Lie algebra on the same space and
+$L\colon\g\to\Der(\n)$ a representation. Call a linear map
+$P\colon V\to V$ a \emph{cocycle} (for $L$) if
+\begin{equation}\label{eq:cocycle}
+P[a,b]=\{Pa,Pb\}+L(a)Pb-L(b)Pa\qquad(a,b\in V),
+\end{equation}
+that is, if $x\mapsto(Px,L(x))$ is a Lie algebra homomorphism
+$\g\to\h$. For a post-Lie algebra structure, \eqref{eq:pl1} says exactly
+that $P=\mathrm{id}_V$ is a cocycle for $L$; together with \eqref{eq:pl2}
+and \eqref{eq:pl3} this is \cite[Proposition 2.13]{BDV}.
+
+Two trace identities will be used. First, \eqref{eq:pl1} gives
+$R(x)=L(x)-\ad_\g(x)+\ad_\n(x)$. If $\n$ is nilpotent, each $\ad_\n(x)$
+is nilpotent and has trace zero, so
+\begin{equation}\label{eq:trace}
+\tr R(x)=0\text{ for all }x\quad\Longleftrightarrow\quad
+\tr L(x)=\tr\ad_\g(x)\text{ for all }x.
+\end{equation}
+Second, if $\g$ is perfect, every element of $\g$ is a sum of brackets,
+and $L$ and $\ad_\g$ are representations, so $\tr L(x)=\tr\ad_\g(x)=0$
+for all $x$.
+
+Now let $\n$ be nilpotent and $z\in V$. The derivation $A=\ad_\h(z,0)$
+of $\h$ is $A(a,D)=(\{z,a\}-Dz,0)$. It maps $\h$ into $V\oplus0$ and acts
+there as $\ad_\n(z)$, so it is nilpotent, and $\exp(-A)$ is an
+automorphism of $\h$ (a finite sum since $A$ is nilpotent, with
+coefficients $1/j!$ since $k$ has characteristic zero).
+Because $A$ has no $\Der(\n)$-component, for a cocycle $P$ the
+homomorphism $\exp(-A)\circ(P,L)$ again has the form $x\mapsto(P^zx,L(x))$,
+and $P^z$ is a cocycle. We call $P^z$ the \emph{conjugate} of $P$ by $z$.
+For $\n$ abelian, $A^2=0$ and $P^z=P+\rho(z)$, where $\rho(z)x=L(x)z$;
+in particular $\mathrm{id}^z=I+R(z)$.
+
+\section{The determinant is invariant}
+
+\begin{lemma}\label{lem:det}
+Let $\n$ be nilpotent, let $\tr L(x)=\tr\ad_\g(x)$ for all $x\in V$, and
+let $P$ be a cocycle with $\det P\ne0$. Then $\det P^z=\det P$ for every
+$z\in V$.
+\end{lemma}
+
+\begin{proof}
+Extend all maps $k[t]$-linearly to $V[t]=V\otimes k[t]$. The derivation
+$tA$ of $\h[t]$ is nilpotent, and $\psi_t=\exp(-tA)\circ(P,L)$ is a
+homomorphism $\g[t]\to\h[t]$ of the form $\psi_t(x)=(P_tx,L(x))$, with
+$P_t$ a matrix over $k[t]$, $P_0=P$ and $P_1=P^z$. Differentiating in $t$
+gives $\psi_t'=-A\psi_t$, whose first component is
+\begin{equation}\label{eq:flow}
+P_t'=-\ad_\n(z)\,P_t+\rho(z),\qquad \rho(w)\colon x\mapsto L(x)w.
+\end{equation}
+Let $F=\det P_t\in k[t]$ and $Q=\adj(P_t)$, so $QP_t=P_tQ=F\,I$. Since
+$\psi_t$ is a homomorphism, $P_t$ satisfies \eqref{eq:cocycle} over
+$k[t]$. Read as an identity of maps in $b$, this says
+\[
+P_t\ad_\g(a)=\bigl(\ad_\n(P_ta)+L(a)\bigr)P_t-\rho(P_ta)\qquad(a\in V[t]).
+\]
+Multiply on the right by $Q$ and take traces. Since
+$\tr(P_t\ad_\g(a)Q)=\tr(\ad_\g(a)QP_t)=F\tr\ad_\g(a)$ and
+$\tr\ad_\n(P_ta)=0$,
+\[
+\tr\bigl(\rho(P_ta)Q\bigr)=F\bigl(\tr L(a)-\tr\ad_\g(a)\bigr)=0
+\qquad(a\in V[t]).
+\]
+For $w\in V[t]$ take $a=Qw$; then $P_ta=Fw$, so $F\tr(\rho(w)Q)=0$. As
+$F(0)=\det P\ne0$, $F$ is a nonzero element of the domain $k[t]$, hence
+$\tr(\rho(w)Q)=0$ for all $w$. Jacobi's formula $F'=\tr(QP_t')$ and
+\eqref{eq:flow} now give
+\[
+F'=-\tr\bigl(Q\ad_\n(z)P_t\bigr)+\tr\bigl(Q\rho(z)\bigr)
+=-F\tr\ad_\n(z)+0=0.
+\]
+In characteristic zero $F$ is constant, so
+$\det P^z=F(1)=F(0)=\det P$.
+\end{proof}
+
+\section{Pushing a Levi factor down the lower central series}
+
+Let $\n=\n^1\supseteq\n^2\supseteq\dots\supseteq\n^{r+1}=0$ be the lower
+central series, $\n^{i+1}=\{\n,\n^i\}$, and recall that
+$\{\n^i,\n^j\}\subseteq\n^{i+j}$ and that derivations preserve each
+$\n^i$.
+
+\begin{lemma}\label{lem:whitehead}
+Let $\n$ be nilpotent, $\s\subseteq\g$ a semisimple subalgebra, and $P$ a
+cocycle with $P(\s)\subseteq\n^i$ for some $i\ge1$. Then there is
+$z\in\n^i$ with $P^z(\s)\subseteq\n^{i+1}$.
+\end{lemma}
+
+\begin{proof}
+The space $M=\n^i/\n^{i+1}$ is an $\s$-module through $L$. For
+$x,y\in\s$ we have $\{Px,Py\}\in\n^{2i}\subseteq\n^{i+1}$, so
+\eqref{eq:cocycle} shows that $c\colon\s\to M$, $c(x)=Px+\n^{i+1}$,
+satisfies $c([x,y])=L(x)c(y)-L(y)c(x)$. By Whitehead's first lemma there is
+$w\in\n^i$ with $Px\equiv L(x)w\pmod{\n^{i+1}}$ for all $x\in\s$. Put
+$z=-w$ and $A=\ad_\h(z,0)$. For $x\in\s$,
+$A(Px,L(x))=(\{z,Px\}-L(x)z,0)$ has first component in $\n^i$, and each
+further application of $A$ brackets with $z\in\n^i$, so $A^j(Px,L(x))$
+has first component in $\n^{2i}\subseteq\n^{i+1}$ for $j\ge2$. Since
+$\{z,Px\}\in\n^{i+1}$ too,
+\[
+P^zx\equiv Px+L(x)z=Px-L(x)w\equiv0\pmod{\n^{i+1}}.\qedhere
+\]
+\end{proof}
+
+\section{Proofs of the main results}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Suppose $\g$ is not solvable. By Levi's theorem $\g$ has a nonzero
+semisimple subalgebra $\s$. By \eqref{eq:trace},
+$\tr L(x)=\tr\ad_\g(x)$ for all $x$. Start from the cocycle
+$P^{(0)}=\mathrm{id}_V$, with $P^{(0)}(\s)\subseteq\n^1$. Applying
+Lemma~\ref{lem:whitehead} $r$ times gives $z_1,\dots,z_r$ and cocycles
+$P^{(i)}=(P^{(i-1)})^{z_i}$ with $P^{(i)}(\s)\subseteq\n^{i+1}$. By
+Lemma~\ref{lem:det} and induction, $\det P^{(i)}=\det P^{(0)}=1$ for
+every $i$. But $P^{(r)}(\s)\subseteq\n^{r+1}=0$ and $\s\ne0$, so
+$P^{(r)}$ is singular, a contradiction.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:perfect}]
+Suppose $(\g,\n)$ has a post-Lie algebra structure. As $\g$ is perfect,
+$\tr L=\tr\ad_\g=0$ (Section~\ref{sec:setup}), so $\tr R=0$ by
+\eqref{eq:trace}, and $\g$ is solvable by Theorem~\ref{thm:main}. A
+solvable perfect Lie algebra is zero, since its derived series is
+constant.
+\end{proof}
+
+\section{Formal verification}\label{sec:lean}
+The theorem and corollary are proved in Lean~4 \cite{Lean} with Mathlib
+\cite{Mathlib}. The definition of a post-Lie algebra structure, in
+\texttt{PostLie/Definitions.lean}, takes two Lie algebras \texttt{g} and
+\texttt{n} over a field \texttt{k} with \texttt{[CharZero k]}, both
+finite-dimensional, and a linear equivalence \texttt{e : g ≃ₗ[k] n},
+which plays the role of the common space $V$:
+\begin{verbatim}
+structure Product (e : g ≃ₗ[k] n) where
+  mul : g →ₗ[k] g →ₗ[k] g
+  skew : ∀ x y, mul x y - mul y x = ⁅x, y⁆ - e.symm ⁅e x, e y⁆
+  left_lie : ∀ x y z, mul ⁅x, y⁆ z = mul x (mul y z) - mul y (mul x z)
+  derivation : ∀ x y z, mul x (e.symm ⁅e y, e z⁆) =
+    e.symm ⁅e (mul x y), e z⁆ + e.symm ⁅e y, e (mul x z)⁆
+\end{verbatim}
+Here \texttt{mul x y} is $x\cdot y$ and \texttt{e.symm ⁅e y, e z⁆} is
+$\{y,z\}$, so the three fields are \eqref{eq:pl1}--\eqref{eq:pl3}. With
+\texttt{right p x}, the map $y\mapsto y\cdot x$, the two results in
+\texttt{PostLie/Statement.lean} are
+\begin{verbatim}
+theorem solvable_of_trace_right_eq_zero (e : g ≃ₗ[k] n) (p : Product e)
+    [LieRing.IsNilpotent n]
+    (htrace : ∀ x, LinearMap.trace k g (right p x) = 0) :
+    LieAlgebra.IsSolvable g
+
+theorem no_product_of_perfect (e : g ≃ₗ[k] n)
+    [LieRing.IsNilpotent n] [Nontrivial g]
+    (hperfect : ⁅(⊤ : LieIdeal k g), (⊤ : LieIdeal k g)⁆ = ⊤) :
+    ¬ Nonempty (Product e)
+\end{verbatim}
+They are Theorem~\ref{thm:main} and Corollary~\ref{cor:perfect}:
+\texttt{Nontrivial g} says $\g\ne0$, and \texttt{hperfect} says
+$[\g,\g]=\g$. A build check prints the axioms each theorem depends on and
+fails unless they are exactly Lean's \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound} and the following two.
+\begin{itemize}
+\item \texttt{PostLie.levi\_nonzero\_semisimple}: if \texttt{g} is not
+solvable, it has a nontrivial subalgebra \texttt{s} with
+\texttt{LieAlgebra.IsSemisimple k s}. This follows from Levi's theorem
+\cite[Theorem 7.8.13]{We}: ``If $\g$ is a finite-dimensional Lie algebra
+over a field of characteristic zero, then there is a semisimple Lie
+subalgebra $\s$ of $\g$ (called a Levi factor of $\g$) such that $\g$ is
+isomorphic to the semidirect product $\g=(\mathrm{rad}\,\g)\rtimes\s$.'' If
+$\g$ is not solvable, then $\mathrm{rad}\,\g\ne\g$ and $\s\ne0$.
+\item \texttt{PostLie.whitehead\_first}: for a finite-dimensional
+semisimple \texttt{s}, a representation \texttt{ρ} of \texttt{s} on a
+finite-dimensional \texttt{M} and a linear \texttt{c : s →ₗ[k] M} with
+\texttt{c ⁅x, y⁆ = ρ x (c y) - ρ y (c x)}, there is \texttt{m} with
+\texttt{c x = ρ x m} for all \texttt{x}. This is Whitehead's first lemma
+\cite[Corollary 7.8.10]{We}: ``Let $\g$ be a semisimple Lie algebra over a
+field of characteristic 0. If $M$ is any finite-dimensional $\g$-module,
+then $H^1(\g,M)=0$. That is, every derivation from $\g$ into $M$ is an
+inner derivation.''
+\end{itemize}
+Weibel calls a Lie algebra semisimple when its radical is zero, and these
+are the finite products of simple Lie algebras \cite[Theorem 7.8.5]{We}.
+Such a product satisfies Mathlib's definition, which asks that the ideal
+lattice be generated by independent non-abelian atoms: the atoms are the
+simple factors. Conversely, Mathlib proves that its semisimple Lie
+algebras have zero radical
+(\texttt{LieAlgebra.IsSemisimple.instHasTrivialRadical}). So each axiom is
+an instance of the statement it quotes.
+Everything else is proved, including Jacobi's formula over $k[t]$, the
+exponential of the nilpotent derivation $A$ and the two lemmas. In the
+formal proof a cocycle is a linear map from \texttt{g} to \texttt{n}, the
+conjugation by $tz$ is the exponential series of $tA$ truncated to a
+polynomial in $t$, whose value at $t=1$ is Mathlib's exponential of $A$,
+and Lemma~\ref{lem:det} is the theorem \texttt{det\_translated}. To
+reproduce the check, run \texttt{lake exe cache get} and \texttt{lake
+build} in the \texttt{lean} folder of the accompanying files; with the
+Mathlib cache the build takes about two minutes and under 3~GB of
+memory.
+
+\begin{thebibliography}{99}
+\bibitem{Au} L. Auslander, Simply transitive groups of affine motions,
+\emph{Amer. J. Math.} 99 (1977), 809--826.
+
+\bibitem{Ba} O. Baues, Prehomogeneous affine representations and flat
+pseudo-Riemannian manifolds, in \emph{Handbook of pseudo-Riemannian
+geometry and supersymmetry}, IRMA Lect. Math. Theor. Phys. 16, European
+Mathematical Society, 2010, 731--817,
+\href{https://doi.org/10.4171/079-1/22}{doi:10.4171/079-1/22};
+numbering of \href{https://arxiv.org/abs/0809.0824v1}{arXiv:0809.0824v1}.
+
+\bibitem{Bu} D. Burde, Left-symmetric algebras, or pre-Lie algebras in
+geometry and physics, \emph{Cent. Eur. J. Math.} 4 (2006), no.~3,
+323--357,
+\href{https://doi.org/10.2478/s11533-006-0014-9}{doi:10.2478/s11533-006-0014-9};
+numbering and quotation from
+\href{https://arxiv.org/abs/math-ph/0509016v2}{arXiv:math-ph/0509016v2}.
+
+\bibitem{BD} D. Burde and K. Dekimpe, Post-Lie algebra structures on
+pairs of Lie algebras, \emph{J. Algebra} 464 (2016), 226--245,
+\href{https://doi.org/10.1016/j.jalgebra.2016.05.026}{doi:10.1016/j.jalgebra.2016.05.026};
+numbering and quotations from
+\href{https://arxiv.org/abs/1505.00955v1}{arXiv:1505.00955v1}.
+
+\bibitem{BD13} D. Burde and K. Dekimpe, Post-Lie algebra structures and
+generalized derivations of semisimple Lie algebras, \emph{Mosc. Math. J.}
+13 (2013), no.~1, 1--18,
+\href{https://doi.org/10.17323/1609-4514-2013-13-1-1-18}{doi:10.17323/1609-4514-2013-13-1-1-18};
+numbering of \href{https://arxiv.org/abs/1108.5950v1}{arXiv:1108.5950v1}.
+
+\bibitem{BDM} D. Burde, K. Dekimpe and M. Monadjem, Post-Lie algebra
+structures for perfect Lie algebras, \emph{Comm. Algebra} 52 (2024),
+no.~10, 4255--4267,
+\href{https://doi.org/10.1080/00927872.2024.2344638}{doi:10.1080/00927872.2024.2344638};
+numbering and quotations from
+\href{https://arxiv.org/abs/2311.08985v1}{arXiv:2311.08985v1}.
+
+\bibitem{BDV} D. Burde, K. Dekimpe and K. Vercammen, Affine actions on Lie
+groups and post-Lie algebra structures, \emph{Linear Algebra Appl.} 437
+(2012), no.~5, 1250--1263,
+\href{https://doi.org/10.1016/j.laa.2012.04.007}{doi:10.1016/j.laa.2012.04.007};
+numbering of \href{https://arxiv.org/abs/1109.0251v1}{arXiv:1109.0251v1}.
+
+\bibitem{By} N. P. Byott, Solubility criteria for Hopf--Galois
+structures, \emph{New York J. Math.} 21 (2015), 883--903.
+
+\bibitem{Da} M. Damele, Determinant characters and multiplicative
+solubility of finite skew braces, preprint, October 20, 2026,
+\href{https://arxiv.org/abs/2610.28420v1}{arXiv:2610.28420v1}.
+
+\bibitem{DL} M. Damele and A. Loi, Structural and rigidity properties of
+Lie skew braces, \emph{J. Algebra} 695 (2026), 356--383,
+\href{https://doi.org/10.1016/j.jalgebra.2026.01.048}{doi:10.1016/j.jalgebra.2026.01.048};
+numbering and quotations from
+\href{https://arxiv.org/abs/2507.06214v3}{arXiv:2507.06214v3}.
+
+\bibitem{DO} J. Der\'e and M. Origlia, On post-Lie algebra structures
+coming from simply transitive NIL-affine actions, \emph{Transform. Groups}
+31 (2026), no.~2, 1391--1415,
+\href{https://doi.org/10.1007/s00031-025-09906-2}{doi:10.1007/s00031-025-09906-2};
+quotation from \href{https://arxiv.org/abs/2401.02503v1}{arXiv:2401.02503v1}.
+
+\bibitem{Fo} D. J. F. Fox, Left-symmetric algebras and homogeneous
+improper affine spheres, \emph{Ann. Global Anal. Geom.} 53 (2018), no.~3,
+405--443,
+\href{https://doi.org/10.1007/s10455-017-9582-0}{doi:10.1007/s10455-017-9582-0};
+numbering and quotation from
+\href{https://arxiv.org/abs/1707.08896v2}{arXiv:1707.08896v2}.
+
+\bibitem{He} J. Helmstetter, Radical d'une alg\`ebre sym\'etrique \`a
+gauche, \emph{Ann. Inst. Fourier} 29 (1979), no.~4, 17--35,
+\href{https://doi.org/10.5802/aif.764}{doi:10.5802/aif.764}.
+
+\bibitem{Kr} A. Kriebel, Post-Lie nonexistence with a semisimple target,
+preprint, October 16, 2026,
+\href{https://doi.org/10.5281/zenodo.23414025}{doi:10.5281/zenodo.23414025}.
+
+\bibitem{Lean} L. de Moura and S. Ullrich, The Lean 4 theorem prover and
+programming language, in \emph{Automated Deduction -- CADE 28}, Lecture
+Notes in Comput. Sci. 12699, Springer, 2021, 625--635.
+
+\bibitem{Mathlib} The mathlib Community, The Lean mathematical library, in
+\emph{Proceedings of the 9th ACM SIGPLAN International Conference on
+Certified Programs and Proofs}, 2020, 367--381.
+
+\bibitem{OWR} D. Burde, Pre-Lie and post-Lie algebra structures (joint
+work with K. Dekimpe), in \emph{Mini-Workshop: Poisson and Poisson-type
+algebras}, \emph{Oberwolfach Rep.} 20 (2023), no.~4, 2688--2690,
+\href{https://doi.org/10.4171/OWR/2023/46}{doi:10.4171/OWR/2023/46}.
+
+\bibitem{Se} D. Segal, The structure of complete left-symmetric algebras,
+\emph{Math. Ann.} 293 (1992), 569--578.
+
+\bibitem{SV} A. Smoktunowicz and L. Vendramin, On skew braces (with an
+appendix by N. Byott and L. Vendramin), \emph{J. Comb. Algebra} 2 (2018),
+no.~1, 47--86,
+\href{https://doi.org/10.4171/JCA/2-1-3}{doi:10.4171/JCA/2-1-3};
+numbering and quotation from
+\href{https://arxiv.org/abs/1705.06958v3}{arXiv:1705.06958v3}.
+
+\bibitem{Va} B. Vallette, Homology of generalized partition posets,
+\emph{J. Pure Appl. Algebra} 208 (2007), no.~2, 699--725,
+\href{https://doi.org/10.1016/j.jpaa.2006.03.012}{doi:10.1016/j.jpaa.2006.03.012}.
+
+\bibitem{We} C. A. Weibel, \emph{An Introduction to Homological Algebra},
+Cambridge Stud. Adv. Math. 38, Cambridge University Press, 1994.
+\end{thebibliography}
+\end{document}

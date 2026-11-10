@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## postlie-perfect-nilpotent v1 (November 10, 2026)
+
+- Proves that over any field of characteristic zero, no nonzero perfect Lie algebra admits a post-Lie algebra structure over a nilpotent Lie algebra on the same space, answering Burde and Dekimpe's 2015 Question 3.5 in the negative. More generally, a nilpotent second bracket and right multiplications of trace zero force the first Lie algebra to be solvable.
+- Includes the paper, with a written proof, and the Lean proof of both results, with Levi's theorem and Whitehead's first lemma as its two cited inputs.
+
 ## pentagon-billiard-periods v1 (November 10, 2026)
 
 - Proves that every even number other than 2, 12, 14 and 18 is the combinatorial period of a periodic billiard trajectory in the regular pentagon without five-fold rotational symmetry, the existence statement of Davis and Lelièvre's 2018 conjecture. Whether the four exceptions occur is not treated.

@@ -12,6 +12,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24119284](https://doi.org/10.5281/zenodo.24119284)
+
 ## Check it
 
 Install [elan](https://github.com/leanprover/elan) and Git. From `lean/`, run:
@@ -38,6 +40,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{No post-Lie algebra structures on pairs of perfect and nilpotent Lie algebras}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/postlie-perfect-nilpotent-v1/results/postlie-perfect-nilpotent}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/postlie-perfect-nilpotent-v1/results/postlie-perfect-nilpotent}},
+  doi          = {10.5281/zenodo.24119284}
 }
 ```

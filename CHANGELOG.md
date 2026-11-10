@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## pentagon-billiard-periods v1 (November 10, 2026)
+
+- Proves that every even number other than 2, 12, 14 and 18 is the combinatorial period of a periodic billiard trajectory in the regular pentagon without five-fold rotational symmetry, the existence statement of Davis and Lelièvre's 2018 conjecture. Whether the four exceptions occur is not treated.
+- Includes the paper, with a written proof; the Lean proof of the covering argument and of the deduction, with Kontorovich and Zhang's statement of the Davis–Fuchs–Tabachnikov period theorem as its cited input; and two exact checkers for six explicit trajectories.
+
 ## abc-front-speedup v2 (November 9, 2026)
 
 - Correction: the public orbit check could not build when Python setup supplied a pkg-config search path. The build now separates the CAPD search directories correctly and stops if configuration fails. Regression checks cover inherited paths and configuration failures. The theorem, paper, certificates and Lean proof are unchanged.

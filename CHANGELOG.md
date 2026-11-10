@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that over any field of characteristic zero, no nonzero perfect Lie algebra admits a post-Lie algebra structure over a nilpotent Lie algebra on the same space, answering Burde and Dekimpe's 2015 Question 3.5 in the negative. More generally, a nilpotent second bracket and right multiplications of trace zero force the first Lie algebra to be solvable.
 - Includes the paper, with a written proof, and the Lean proof of both results, with Levi's theorem and Whitehead's first lemma as its two cited inputs.
+- Zenodo: [10.5281/zenodo.24119284](https://doi.org/10.5281/zenodo.24119284)
 
 ## pentagon-billiard-periods v1 (November 10, 2026)
 

@@ -1,0 +1,8 @@
+name = "pentagon"
+defaultTargets = ["Pentagon", "PublicChecks"]
+
+[[lean_lib]]
+name = "Pentagon"
+
+[[lean_lib]]
+name = "PublicChecks"

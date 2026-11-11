@@ -12,6 +12,8 @@ The proofs, the computer checks and the text were produced by AI models (from Op
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24146253](https://doi.org/10.5281/zenodo.24146253)
+
 ## Check it
 
 With Python 3.12 or later and GNU `time` and `timeout`, run from this folder:
@@ -40,6 +42,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{The Heawood family is not the complete list of excluded minors for 4-flat graphs}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/heawood-family-four-flat-v1/results/heawood-family-four-flat}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/heawood-family-four-flat-v1/results/heawood-family-four-flat}},
+  doi          = {10.5281/zenodo.24146253}
 }
 ```

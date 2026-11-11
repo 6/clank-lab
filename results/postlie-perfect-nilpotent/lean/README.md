@@ -4,7 +4,7 @@ Run `lake exe cache get` and then `lake build` in this directory. `lean-toolchai
 
 ## Statements and correspondence
 
-The definitions are in `PostLie/Definitions.lean`. The paper's two brackets on one space $V$ are two Lie algebras `g` and `n` over a field `k` with `[CharZero k]`, both finite-dimensional, together with a linear equivalence `e : g ≃ₗ[k] n`. The bracket of `n` read on `g` is `e.symm ⁅e y, e z⁆`.
+The definitions are in `PostLie/Definitions.lean`. The paper's two brackets on one space $V$ are two Lie algebras `g` and `n` over a field `k` with `[CharZero k]`, together with a linear equivalence `e : g ≃ₗ[k] n`. The bracket of `n` read on `g` is `e.symm ⁅e y, e z⁆`.
 
 ```lean
 structure Product (e : g ≃ₗ[k] n) where
@@ -32,7 +32,7 @@ theorem no_product_of_perfect (e : g ≃ₗ[k] n)
     ¬ Nonempty (Product e)
 ```
 
-These are the paper's Theorem 1.1 and Corollary 1.2. `Nontrivial g` says that the algebra is nonzero, and `hperfect` that it equals its derived algebra.
+These are the paper's Theorem 1.1 and Corollary 1.2. Both assume `[FiniteDimensional k g]` and `[FiniteDimensional k n]`, as the paper does throughout; without them the corollary fails. `Nontrivial g` says that the algebra is nonzero, and `hperfect` that it equals its derived algebra.
 
 ## Axioms
 

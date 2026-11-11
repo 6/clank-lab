@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: credits. The paper and README now credit Eike Hertel's Conjecture 2 (2005, p. 652), which asserted earlier that for $d > 2$ a reptile simplex needs $m^d$ pieces and must be one of his H-simplices; the four-piece simplex refutes it too. The theorem and its checks are unchanged.
 - Hertel's 2005 paper, earlier described only through its review, is now cited normally, and the paper's list of sources not read in full is removed.
+- Zenodo: [10.5281/zenodo.24128596](https://doi.org/10.5281/zenodo.24128596)
 
 ## postlie-perfect-nilpotent v1 (November 10, 2026)
 

@@ -1,0 +1,41 @@
+name: Heawood family 4-flatness checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/heawood-family-four-flat/**'
+      - '.github/workflows/heawood-family-four-flat.yml'
+  pull_request:
+    paths:
+      - 'results/heawood-family-four-flat/**'
+      - '.github/workflows/heawood-family-four-flat.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: heawood-family-four-flat-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Check heawood-family-four-flat
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/heawood-family-four-flat
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14'
+      - name: Install checker dependencies
+        run: python3 -m pip install --require-hashes -r checks/requirements.txt
+      - name: Check the certificates and the minor exclusion
+        run: sh checks/check.sh

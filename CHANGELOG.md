@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## heawood-family-four-flat v1 (November 11, 2026)
+
+- Proves that a known graph with 11 vertices and 22 edges is not 4-flat and has no Heawood-family minor, disproving the completeness clause of Georgakopoulos–Winter Conjecture 1.1, implicit in two conjectures of van der Holst. Earlier structural work and the 2-apex implication show that this graph itself is an excluded minor.
+- Includes a paper, explicit finite certificates, two independently written obstruction checkers and replay of the published minor checks from [heawood-family-mu5 v1](https://doi.org/10.5281/zenodo.24128771).
+
 ## heawood-family-mu5 v1 (November 11, 2026)
 
 - Proves that two graphs with 23 edges from Mattman and Pavelescu's list of obstructions to knotless embedding have Colin de Verdière invariant $\mu = 6$ and no Heawood-family minor. So the Heawood family is not the complete list of excluded minors for $\mu \le 5$, against van der Holst's proposal (Mattman and Pavelescu's Conjecture 4).

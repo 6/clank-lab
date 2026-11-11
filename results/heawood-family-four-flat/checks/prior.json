@@ -1,0 +1,12 @@
+{
+  "version": "heawood-family-mu5-v1",
+  "doi": "10.5281/zenodo.24128771",
+  "base_url": "https://raw.githubusercontent.com/6/clank-lab/heawood-family-mu5-v1/results/heawood-family-mu5/",
+  "sha256": {
+    "checks/family.py": "163dcf9880fa69b0edaa8e12b7648a9cbf248b82c2a5930e52a7f04f44820792",
+    "checks/minor_exclusion.py": "450b4108b19b7fb72aad406c6c11616975f8493958d6aee6cff7f33d0093b4c4",
+    "checks/checker_b.py": "d20af5af3f5f3bf410c213656191572c558e82ca0dbcd37c45dc5f4e6abb57be",
+    "data/graphs.g6": "a1a9d6ab72ca797fb254b3298de1c00f3eab08c04e76d4a3d474055026b28f0d",
+    "data/minor-controls.g6": "7b0d68b736dd459c985670af37ff36c2f66e927c32e0b12e54ea31a25d817029"
+  }
+}

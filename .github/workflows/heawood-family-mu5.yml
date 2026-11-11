@@ -1,0 +1,41 @@
+name: Heawood family mu <= 5 checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/heawood-family-mu5/**'
+      - '.github/workflows/heawood-family-mu5.yml'
+  pull_request:
+    paths:
+      - 'results/heawood-family-mu5/**'
+      - '.github/workflows/heawood-family-mu5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: heawood-family-mu5-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Check heawood-family-mu5
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/heawood-family-mu5
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14'
+      - name: Install checker dependencies
+        run: python3 -m pip install --require-hashes -r checks/requirements.txt
+      - name: Check the certificates and the minor exclusion
+        run: sh checks/check.sh

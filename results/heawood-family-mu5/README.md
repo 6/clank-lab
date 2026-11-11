@@ -12,6 +12,8 @@ The proofs, the computer checks and the text were produced by AI models (from Op
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24128771](https://doi.org/10.5281/zenodo.24128771)
+
 ## Check it
 
 The two graphs are in `data/graphs.g6`, and `data/G1-cert.json` and `data/G2-cert.json` each give a matrix that proves $\mu \ge 6$. With Python 3.12 or later, from this folder:
@@ -38,6 +40,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{The Heawood family is not the complete list of excluded minors for Colin de Verdière invariant at most 5}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/heawood-family-mu5-v1/results/heawood-family-mu5}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/heawood-family-mu5-v1/results/heawood-family-mu5}},
+  doi          = {10.5281/zenodo.24128771}
 }
 ```

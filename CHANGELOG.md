@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that a known graph with 11 vertices and 22 edges is not 4-flat and has no Heawood-family minor, disproving the completeness clause of Georgakopoulos–Winter Conjecture 1.1, implicit in two conjectures of van der Holst. Earlier structural work and the 2-apex implication show that this graph itself is an excluded minor.
 - Includes a paper, explicit finite certificates, two independently written obstruction checkers and replay of the published minor checks from [heawood-family-mu5 v1](https://doi.org/10.5281/zenodo.24128771).
+- Zenodo: [10.5281/zenodo.24146253](https://doi.org/10.5281/zenodo.24146253)
 
 ## heawood-family-mu5 v1 (November 11, 2026)
 

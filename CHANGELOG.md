@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that two graphs with 23 edges from Mattman and Pavelescu's list of obstructions to knotless embedding have Colin de Verdière invariant $\mu = 6$ and no Heawood-family minor. So the Heawood family is not the complete list of excluded minors for $\mu \le 5$, against van der Holst's proposal (Mattman and Pavelescu's Conjecture 4).
 - Includes the paper, the two matrix certificates and two separately written sets of checkers.
+- Zenodo: [10.5281/zenodo.24128771](https://doi.org/10.5281/zenodo.24128771)
 
 ## reptile-simplex v2 (November 11, 2026)
 

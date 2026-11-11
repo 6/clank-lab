@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## heawood-family-mu5 v1 (November 11, 2026)
+
+- Proves that two graphs with 23 edges from Mattman and Pavelescu's list of obstructions to knotless embedding have Colin de Verdière invariant $\mu = 6$ and no Heawood-family minor. So the Heawood family is not the complete list of excluded minors for $\mu \le 5$, against van der Holst's proposal (Mattman and Pavelescu's Conjecture 4).
+- Includes the paper, the two matrix certificates and two separately written sets of checkers.
+
 ## reptile-simplex v2 (November 11, 2026)
 
 - Correction: credits. The paper and README now credit Eike Hertel's Conjecture 2 (2005, p. 652), which asserted earlier that for $d > 2$ a reptile simplex needs $m^d$ pieces and must be one of his H-simplices; the four-piece simplex refutes it too. The theorem and its checks are unchanged.

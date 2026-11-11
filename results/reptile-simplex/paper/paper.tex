@@ -15,7 +15,7 @@
 \setlength{\emergencystretch}{3em}
 \title{A four-dimensional 4-reptile simplex}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{November 8, 2026}
+\date{November 11, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -87,6 +87,14 @@ Section~\ref{sec:verification} describes exact computer checks of the
 same tiling.
 
 \subsection{The question}
+Hertel \cite[pp.~650--652]{He} proved that the simplices he calls
+H-simplices, and more generally his H-simplotopes, are $m^d$-replicating
+(tiled by $m^d$ congruent copies of themselves scaled down) for every
+integer $m\ge2$. His Conjecture~2 \cite[p.~652]{He} asserts that, for
+$d>2$, an $f$-replicating $d$-simplex must have $f=m^d$ for an integer
+$m\ge2$ and must be an H-simplex. Theorem~\ref{thm:main} also refutes this
+conjecture in dimension four, since $4$ is not a fourth power.
+
 Matoušek and Safernová \cite[Conjecture~1.2]{MS} conjectured: ``If $d\ge3$
 and a $d$-dimensional $k$-reptile simplex exists, then $k=m^d$ for some
 natural number $m\ge2$.'' They proved it for $d=3$; Kynčl and Patáková
@@ -332,32 +340,6 @@ lie on the edges of $T$ from $0$: $v_2=\frac12w_1$, $v_3=\frac23w_2$,
 $v_4=\frac34w_3$. The tiling of $S$ in Theorem~\ref{thm:main} is the
 image of this one under $\varphi^{-1}$.
 
-\section{Sources not read in full}\label{app:unread}
-
-The following could not be read in full; each is listed with why it does
-not contain Theorem~\ref{thm:main}, or what it could change.
-\begin{itemize}
-\item H.~Maehara, Some replicating simplices other than Hill-simplices,
-  \emph{Beitr. Algebra Geom.} \textbf{55} (2014), 429--432. Kynčl and
-  Patáková, writing later, describe its construction as giving $k=2^d$
-  \cite[p.~4]{KP} and state that all known $k$-reptile simplices for
-  $d\ge3$ have $k=m^d$.
-\item E.~Hertel, A class of self-similar $d$-polytopes, \emph{Rev. Roumaine
-  Math. Pures Appl.} \textbf{50} (2005), 647--655. Its zbMATH review
-  (Zbl 1108.52011) describes a class of simplotopes that are
-  $m^d$-replicating for all $m\ge2$.
-\item H.~Maehara and H.~Martini, \emph{Circles, Spheres and Spherical
-  Geometry}, Birkhäuser, 2024, Chapter~11, ``Higher Dimensions''
-  (pp.~213--238); only its abstract and its reference list were read. The
-  reference list (135 entries) includes Hadwiger's note on Hill
-  simplices, Hertel's paper above and Maehara's papers on replicating
-  and Hill simplices (2014, 2015), and none of \cite{FT}, \cite{KP},
-  \cite{MS} or any work on reflection groups or alcoves.
-\item Texts on affine Weyl groups and the special isogeny of $F_4$ from
-  before 2004. These could contain the subdivision of
-  Section~\ref{sec:origin} earlier than \cite{FT}, which would change the
-  credit for the geometry, not the connection to the reptile question.
-\end{itemize}
 \end{appendices}
 
 \begin{thebibliography}{9}
@@ -371,6 +353,10 @@ A.~A. Felikson and P.~V. Tumarkin, Reflection subgroups of Euclidean
 reflection groups, \emph{Sb. Math.} \textbf{196} (2005), 1349--1369;
 \href{https://arxiv.org/abs/math/0402403}{arXiv:math/0402403} (February
 25, 2004), Lemma~10.
+
+\bibitem{He}
+E.~Hertel, A class of self-similar $d$-polytopes, \emph{Rev. Roumaine
+Math. Pures Appl.} \textbf{50} (2005), 647--655.
 
 \bibitem{KP}
 J.~Kynčl and Z.~Patáková, On the nonexistence of $k$-reptile simplices

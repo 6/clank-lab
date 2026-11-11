@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## reptile-simplex v2 (November 11, 2026)
+
+- Correction: credits. The paper and README now credit Eike Hertel's Conjecture 2 (2005, p. 652), which asserted earlier that for $d > 2$ a reptile simplex needs $m^d$ pieces and must be one of his H-simplices; the four-piece simplex refutes it too. The theorem and its checks are unchanged.
+- Hertel's 2005 paper, earlier described only through its review, is now cited normally, and the paper's list of sources not read in full is removed.
+
 ## postlie-perfect-nilpotent v1 (November 10, 2026)
 
 - Proves that over any field of characteristic zero, no nonzero perfect Lie algebra admits a post-Lie algebra structure over a nilpotent Lie algebra on the same space, answering Burde and Dekimpe's 2015 Question 3.5 in the negative. More generally, a nilpotent second bracket and right multiplications of trace zero force the first Lie algebra to be solvable.

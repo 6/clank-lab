@@ -10,8 +10,6 @@ The candidate's height is specified by an exact equation. Lean proves that the h
 
 The new inputs are the ten-point energy, interval-classification and Hessian certificates. The hardest step is the three-point energy certificate, whose error must be small enough to force geometric localization. The [paper](paper/paper.pdf) contains the proof and its key lemmas in the main text; its appendices give routine verifications, finite case checks and formal-proof details.
 
-Katherine Xie's preprint [Optimality and uniqueness for the Thomson problems with n=9 and n=10](https://doi.org/10.5281/zenodo.23899873), posted on Zenodo on November 2, 2026, independently proves that the tricapped trigonal prism and the bicapped square antiprism are the unique minimizers for nine and ten charges, up to rotations, reflections and relabeling (its Theorem 1.1). Xie's proof uses polynomial and three-point energy bounds, a classification of how the pairwise distances fit together, and a second-derivative bound near the candidate, with exact arithmetic, exhaustive enumeration and rigorous interval bounds; its [ten-point verification code and certificates](https://doi.org/10.5281/zenodo.23845065) were posted on October 31, 2026.
-
 Checked in Lean from the definitions; not yet reviewed by experts.
 
 The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.

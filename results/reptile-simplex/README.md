@@ -10,7 +10,7 @@ The proofs, the computer checks and the text were produced by AI models (from Op
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.24061700](https://doi.org/10.5281/zenodo.24061700)
+Archived on Zenodo: [doi:10.5281/zenodo.24128596](https://doi.org/10.5281/zenodo.24128596)
 
 ## Check it
 
@@ -38,6 +38,6 @@ Apache-2.0 (see the repository's LICENSE).
   title = {{A four-dimensional 4-reptile simplex}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/reptile-simplex-v1/results/reptile-simplex}},
-  doi          = {10.5281/zenodo.24061700}
+  doi          = {10.5281/zenodo.24128596}
 }
 ```

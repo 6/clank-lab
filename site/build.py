@@ -17,6 +17,8 @@ from urllib.error import HTTPError
 from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, urlopen
 
+from maths import render_html
+
 API = "https://zenodo.org/api/records"
 ORCID = "0009-0007-8493-1505"
 BASE_URL = "https://clanklab.org/"
@@ -30,6 +32,7 @@ h1,p,li,code,a{overflow-wrap:anywhere}a{color:var(--link);text-underline-offset:
 a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 .papers{list-style:none;margin:1.5rem 0;padding:0}.papers li{border-top:1px solid var(--line);padding:1.3rem 0}
 .paper-title{display:flex;align-items:center;min-height:44px;font-size:1.1rem;line-height:1.45;font-weight:600;text-decoration:none}
+math[display="block"]{display:block;overflow-x:auto;padding:.25em 0}
 time,.authors{color:var(--muted)}time{font-size:.9rem}
 .links{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem 1rem;margin:.15rem 0 0}
 .links a{display:inline-flex;align-items:center;min-height:44px;max-width:100%;font-size:.9rem}
@@ -211,8 +214,9 @@ def document(title, body, tags=()):
                      for name, value in tags)
     return (f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8">\n'
             f'<meta name="viewport" content="width=device-width,initial-scale=1">\n'
-            f'<title>{html.escape(title)}</title>\n{meta}\n<style>{STYLE}</style>\n'
-            f'</head><body><main>{body}</main></body></html>\n')
+            f'<title>{html.escape(title)}</title>\n{meta}\n'
+            f'<style>{STYLE}</style>\n'
+            f'</head><body><main>{render_html(body)}</main></body></html>\n')
 
 
 def download(paper, url, destination, source=None):
@@ -303,7 +307,7 @@ def build(checkout, output, base_url, manifest):
                 f'<p class="links"><a href="{doi_url}">{paper["concept_doi"]}</a>'
                 f'<a href="{slug}.pdf">PDF</a></p>')
         (folder / "index.html").write_text(document(title, body, tags), encoding="utf-8")
-        listing.append(f'<li><a class="paper-title" href="papers/{slug}/">{html.escape(title)}</a>'
+        listing.append(f'<li><a class="paper-title" href="papers/{slug}/"><span>{html.escape(title)}</span></a>'
                        f'<div class="links"><time datetime="{paper["first_version_date"]}">{paper["first_version_date"]}</time>'
                        f'<a href="{doi_url}">DOI</a><a href="papers/{slug}/{slug}.pdf">PDF</a></div></li>')
         locations.append(page_url)

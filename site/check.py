@@ -18,7 +18,7 @@ from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
 
 MAX_PDF = 5_000_000
-BASE_URL = "https://6.github.io/clank-lab/"
+BASE_URL = "https://clanklab.org/"
 FORBIDDEN = {
     "run identifier": r"\b(?=[0-9a-f]{12}\b)(?=[0-9a-f]*[a-f])[0-9a-f]{12}\b|\b[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\b|\brun[_ -]?id\s*[:=]\s*\S+",
     "private path": r"(?:/(?:home|Users|root|tmp|private|var|mnt|opt|workspace|workspaces)/|[a-z]:[\\/](?:Users|Windows)[\\/]|file://|~/)",
@@ -225,7 +225,8 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
     urls = [node.text for node in tree.findall("{*}url/{*}loc")]
     require(len(urls) == len(expected_urls) and set(urls) == expected_urls, "Sitemap differs from paper inventory")
     robots = (output / "robots.txt").read_text(encoding="utf-8")
-    require(robots == "User-agent: *\nAllow: /\n", "robots.txt must allow all crawling without a host URL")
+    require(robots == f"User-agent: *\nAllow: /\nSitemap: {base_url}sitemap.xml\n",
+            "robots.txt must allow all crawling and advertise the sitemap")
     if screenshots is not None:
         require(output.resolve() != screenshots.resolve() and output.resolve() not in screenshots.resolve().parents,
                 "Save screenshots outside the generated site")

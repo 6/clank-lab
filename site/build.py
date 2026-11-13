@@ -19,7 +19,7 @@ from urllib.request import Request, urlopen
 
 API = "https://zenodo.org/api/records"
 ORCID = "0009-0007-8493-1505"
-BASE_URL = "https://6.github.io/clank-lab/"
+BASE_URL = "https://clanklab.org/"
 MAX_PDF = 5_000_000  # Decimal MB, conservatively below 5 MiB.
 STYLE = """:root{color-scheme:light dark;--bg:#fff;--text:#18202b;--muted:#596270;--link:#245e91;--line:#dce1e7}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
@@ -310,7 +310,7 @@ def build(checkout, output, base_url, manifest):
         if paper["pdf_size"] > MAX_PDF:
             warnings.append(f"PDF exceeds 5 MB: {slug} ({paper['pdf_size']} bytes)")
     (output / "index.html").write_text(document("Papers", '<h1>Papers</h1><ul class="papers">' + "\n".join(listing) + "</ul>"), encoding="utf-8")
-    (output / "robots.txt").write_text("User-agent: *\nAllow: /\n", encoding="utf-8")
+    (output / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {base_url}sitemap.xml\n", encoding="utf-8")
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += "".join("<url><loc>" + html.escape(url) + "</loc></url>\n" for url in locations) + "</urlset>\n"
     (output / "sitemap.xml").write_text(sitemap, encoding="utf-8")

@@ -17,6 +17,8 @@ import unicodedata
 from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
 
+from maths import has_math
+
 MAX_PDF = 5_000_000
 BASE_URL = "https://clanklab.org/"
 FORBIDDEN = {
@@ -46,12 +48,33 @@ class Page(HTMLParser):
         self.text = []
         self.attributes = []
         self.styles = 0
+        self.visible = []
+        self.stack = []
+        self.in_math = False
+        self.in_annotation = False
+        self.literal_dollar = False
+        self.hidden = False
+        self.math_count = 0
+        self.annotations = 0
         self.unsafe = False
         self.feed(source)
         self.close()
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
+        classes = attributes.get("class", "").split()
+        self.stack.append((tag, self.in_math, self.in_annotation, self.literal_dollar, self.hidden))
+        if tag == "math":
+            self.in_math = True
+            self.math_count += 1
+            self.visible.append("\n")
+        if tag == "annotation" and self.in_math and attributes.get("encoding") == "application/x-tex":
+            self.in_annotation = True
+            self.annotations += 1
+        if "tex-dollar" in classes:
+            self.literal_dollar = True
+            self.visible.append("\n")
+        self.hidden |= tag in {"script", "style", "template"} or "hidden" in attributes
         self.attributes.extend(value for _, value in attrs if value)
         if tag == "head":
             self.in_head = True
@@ -67,11 +90,19 @@ class Page(HTMLParser):
         if tag == "time":
             self.dates.append(attributes.get("datetime", ""))
         self.styles += tag == "style"
-        if (tag in {"script", "iframe", "object", "embed", "img", "link", "form", "video", "audio", "source"}
+        if (tag in {"link", "script", "iframe", "object", "embed", "img", "form", "video", "audio", "source"}
+                or "katex-error" in classes
                 or any(name.startswith("on") or name in {"src", "srcset"} for name in attributes)):
             self.unsafe = True
+        if tag in {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}:
+            self.stack.pop()
 
     def handle_endtag(self, tag):
+        for index in range(len(self.stack) - 1, -1, -1):
+            if self.stack[index][0] == tag:
+                _, self.in_math, self.in_annotation, self.literal_dollar, self.hidden = self.stack[index]
+                del self.stack[index:]
+                break
         if tag == "head":
             self.in_head = False
         if tag == "body":
@@ -81,10 +112,27 @@ class Page(HTMLParser):
 
     def handle_data(self, text):
         self.text.append(text)
-        if self.in_body:
-            self.body.append(text)
-        if self.in_heading:
-            self.headings[-1] += text
+        # Recover source text from MathML annotations for completeness checks.
+        # MathML tokens repeat that content and are excluded here.
+        if not self.in_math or self.in_annotation:
+            semantic = r"\$" if self.literal_dollar else text
+            if self.in_body:
+                self.body.append(semantic)
+            if self.in_heading:
+                self.headings[-1] += semantic
+        if self.in_body and not (self.in_math or self.literal_dollar or self.hidden):
+            self.visible.append(text)
+
+
+def check_page(page, label):
+    require(not page.unsafe and page.styles == 1, "Unexpected assets, script, or stylesheet in " + label)
+    require(page.meta["viewport"] == ["width=device-width,initial-scale=1"], "Missing mobile viewport in " + label)
+    require(not has_math("".join(page.visible)), "Unrendered math in visible text in " + label)
+    require(page.math_count == page.annotations, "Missing math accessibility/source annotation in " + label)
+    for name, values in page.meta.items():
+        if name.startswith("citation_"):
+            require(all(not re.search(r"</?[A-Za-z][^>]*>", value) for value in values),
+                    "HTML in " + name + " in " + label)
 
 
 def normal(text):
@@ -162,8 +210,7 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
         if path.suffix == ".html":
             page = Page(source)
             scan(" ".join(page.text + page.attributes), label, deny)
-            require(not page.unsafe and page.styles == 1, "Unexpected assets, script, or stylesheet in " + label)
-            require(page.meta["viewport"] == ["width=device-width,initial-scale=1"], "Missing mobile viewport in " + label)
+            check_page(page, label)
             require(not re.search(r"@import|url\s*\(", source, re.IGNORECASE), "External stylesheet asset in " + label)
             pages[label] = page
     index = pages["index.html"]
@@ -190,7 +237,7 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
         require(bool(paper["authors"]), "No authors for " + label)
         for name, values in wanted.items():
             require(page.meta[name] == values, f"Incorrect {name} in {label}")
-        require(page.headings == [title], "Incorrect visible title in " + label)
+        require(len(page.headings) == 1 and normal(page.headings[0]) == normal(title), "Incorrect visible title in " + label)
         require(page.dates == [day], "Incorrect visible date in " + label)
         visible = normal(" ".join(page.body))
         require(all(normal(author) in visible for author in paper["authors"]), "Missing visible author in " + label)

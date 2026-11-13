@@ -23,6 +23,10 @@ jobs:
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
+      - name: Set up Node for static math rendering
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
       - name: Get this repository's Pages URL
         id: pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
@@ -34,6 +38,8 @@ jobs:
         env:
           BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: |
+          npm ci --prefix site --ignore-scripts --no-audit --no-fund
+          python -m unittest discover -s site -p 'test_*.py'
           python site/build.py . _site --base-url "$BASE_URL"
           python site/check.py _site --base-url "$BASE_URL"
       - name: Upload checked site only

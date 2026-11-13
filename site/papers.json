@@ -1,0 +1,800 @@
+[
+  {
+    "title": "The Heawood family is not the complete list of excluded minors for Colin de Verdière invariant at most 5",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-11",
+    "concept_doi": "10.5281/zenodo.24128770",
+    "latest_record_id": 24128771,
+    "pdf_filename": "heawood-family-mu5-v1.pdf",
+    "pdf_md5": "1cadf09be77633a06449c8e7bfbf70a6",
+    "pdf_size": 361805,
+    "abstract": "<p>We show that two intrinsically knotted graphs $G_1$ and $G_2$ with 23 edges, on 11 and 12 vertices, have Colin de Verdière invariant $\\mu=6$ and no minor in the Heawood family, the 78 graphs obtained from $K_7$ and $K_{3,3,1,1}$ by $\\Delta Y$- and $Y\\Delta$-transformations. So the Heawood family is not the complete list of excluded minors for $\\mu\\le5$, as van der Holst proposed; Mattman and Pavelescu stated this proposal as a conjecture and derived from it that $G_1$ and $G_2$ have $\\mu=5$. More precisely, either the common minor $H$ of $G_1$ and $G_2$, a 4-regular graph with 11 vertices and 22 edges, is an excluded minor for $\\mu\\le5$, or $G_1$ and $G_2$ both are. It follows that the following two conjectures of van der Holst cannot both hold: (a) a graph is 4-flat if and only if $\\mu\\le5$; (b) the Heawood family is the complete list of excluded minors for 4-flat graphs. The lower bound $\\mu\\ge6$ is proved by explicit matrices certified in interval and exact rational arithmetic, and the minor exclusion by exhaustive enumeration. This work has not yet been reviewed by experts. The proofs, the computer checks and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "heawood-family-mu5"
+  },
+  {
+    "title": "The Heawood family is not the complete list of excluded minors for 4-flat graphs",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-11",
+    "concept_doi": "10.5281/zenodo.24146252",
+    "latest_record_id": 24146253,
+    "pdf_filename": "heawood-family-four-flat-v1.pdf",
+    "pdf_md5": "de91410b2d073fe9b03b8fc0598e8e5a",
+    "pdf_size": 329504,
+    "abstract": "<p>A graph is 4-flat if the complex obtained by filling every simple cycle with a separate disk embeds piecewise linearly in four-dimensional space. The Heawood family consists of 78 graphs obtained from $K_7$ and $K_{3,3,1,1}$ by triangle–star and star–triangle transformations. Van der Holst proved that these graphs are not 4-flat; Georgakopoulos and Winter completed the proof that all 78 are excluded minors and conjectured that there are no other excluded minors for 4-flatness. We show that the known eleven-vertex, twenty-two-edge graph $H$ is not 4-flat and has no Heawood-family minor, resolving the completeness question negatively. Mattman and Pierce found by computer search that every proper minor of $H$ is 2-apex; this implies that $H$ itself is a further excluded minor. Mattman and Pierce found $H$, subsequently studied by Kim and Mattman. An earlier paper by the author proved that its one-edge extension $G_1$ has Colin de Verdière invariant 6 and no Heawood-family minor. This made 4-flatness completeness incompatible with van der Holst's proposed equivalence between 4-flatness and invariant at most 5. The new step is an explicit mod-two deleted-product cycle with invariant one. Van der Holst and Pendavingh's obstruction theorem therefore excludes an even map, and hence an embedding, of a cycle subcomplex of $H$ into four-dimensional space. Two separately written exact implementations evaluate the certificate, using moment-curve intersections and the recursive cellular invariant, respectively. This work has not yet been reviewed by experts. The proofs, the computer checks and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "heawood-family-four-flat"
+  },
+  {
+    "title": "No post-Lie algebra structures on pairs of perfect and nilpotent Lie algebras",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-10",
+    "concept_doi": "10.5281/zenodo.24119283",
+    "latest_record_id": 24119284,
+    "pdf_filename": "postlie-perfect-nilpotent-v1.pdf",
+    "pdf_md5": "afd67e61b60c0935811e6e6976ef3e3c",
+    "pdf_size": 299317,
+    "abstract": "<p>Let $\\mathfrak{g}$ and $\\mathfrak{n}$ be finite-dimensional Lie algebras on the same vector space over a field of characteristic zero, with $\\mathfrak{n}$ nilpotent. We prove that if the pair $(\\mathfrak{g},\\mathfrak{n})$ carries a post-Lie algebra structure all of whose right multiplications have trace zero, then $\\mathfrak{g}$ is solvable. Hence no nonzero perfect Lie algebra $\\mathfrak{g}$ admits a post-Lie algebra structure on $(\\mathfrak{g},\\mathfrak{n})$ with $\\mathfrak{n}$ nilpotent. This answers a question of Burde and Dekimpe in the negative and proves the nilpotent case of a conjecture of Burde, Dekimpe and Monadjem. Nonexistence was known for abelian $\\mathfrak{n}$, by a theorem of Helmstetter on left-symmetric algebras; for two-step nilpotent $\\mathfrak{n}$, by Burde and Dekimpe; and for the complex perfect non-semisimple $\\mathfrak{g}$ of dimensions five and six, by Burde and Dekimpe and by Burde, Dekimpe and Monadjem. The proof extends Helmstetter's argument. A post-Lie algebra structure embeds $\\mathfrak{g}$ into the holomorph of $\\mathfrak{n}$. Conjugations chosen by Whitehead's first lemma along the lower central series of $\\mathfrak{n}$ make the translation part of this embedding vanish on a Levi factor of $\\mathfrak{g}$, while its determinant stays equal to one, as in Kriebel's treatment of semisimple $\\mathfrak{n}$. The proof is formalized in Lean with Mathlib, assuming Levi's theorem and Whitehead's first lemma as stated in Weibel's textbook. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Written proof, with Lean and computer checks; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "postlie-perfect-nilpotent"
+  },
+  {
+    "title": "Combinatorial periods of asymmetric billiard trajectories in the regular pentagon",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-10",
+    "concept_doi": "10.5281/zenodo.24119274",
+    "latest_record_id": 24119275,
+    "pdf_filename": "pentagon-billiard-periods-v1.pdf",
+    "pdf_md5": "ca41bfbd8bcfbdf01ffa9f7164f8c3e0",
+    "pdf_size": 308102,
+    "abstract": "<p>We prove that every even integer other than $2$, $12$, $14$ and $18$ is the combinatorial period, the number of bounces before repeating, of a periodic billiard trajectory in the regular pentagon that does not have five-fold rotational symmetry. Davis and Lelièvre conjectured this in 2018 and checked it up to period $4000$, and Kontorovich and Zhang proved it for almost every even number. As they explain, a theorem of Davis, Fuchs and Tabachnikov turns the question into one about vectors. Each vector $(a+b\\varphi,c+d\\varphi)$ obtained from $(0,1)$ by products of four explicit $2\\times2$ matrices, where $\\varphi$ is the golden ratio and $a,b,c,d$ are integers, has the half-period $\\ell=a+b+c+d$, and when a congruence modulo $5$ holds it gives such a trajectory of period $n=2\\ell$. Varying the power of one of the two triangular matrices in such a product gives half-periods in an arithmetic progression. We give $379$ of these progressions, which together contain every half-period $\\ell\\ge2$ except nine values. Six of the nine come from explicit trajectories checked in exact arithmetic; the other three are halves of excluded periods. The covering argument is checked in Lean, assuming the cited theorem. Whether the four excluded periods occur is not treated. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Written proof, with Lean and computer checks; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "pentagon-billiard-periods"
+  },
+  {
+    "title": "KPP fronts in the 1-1-1 ABC flow speed up linearly in every direction",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-09",
+    "concept_doi": "10.5281/zenodo.24072733",
+    "latest_record_id": 24081425,
+    "pdf_filename": "abc-front-speedup-v2.pdf",
+    "pdf_md5": "06c9c906055471aa5f0c0352358b090c",
+    "pdf_size": 371221,
+    "abstract": "<p>Let $V(x,y,z)=(\\sin z+\\cos y,\\ \\sin x+\\cos z,\\ \\sin y+\\cos x)$ be the Arnold–Beltrami–Childress (ABC) flow with $A=B=C=1$, and let $c^*_e(K)$ be the minimal speed of pulsating fronts of $T_t+K\\,V\\cdot\\nabla T=\\Delta T+f(T)$ in the direction $e$, for a reaction $f$ of KPP type. We prove that $\\lim_{K\\to\\infty}c^*_e(K)/K$ exists and is positive for every unit vector $e$. Zlatoš proved that this limit exists and equals a supremum over first integrals of the flow, and Xin, Yu and Zlatoš, who constructed periodic orbits of this flow, pointed out that a positive-measure tube of orbits moving roughly linearly would make the limit positive, but that a rigorous proof of such tubes was not known. We prove that such a tube exists. Two independent interval-arithmetic computations certify an elliptic periodic orbit with nonzero twist; Pöschel's KAM theorem with frequencies as parameters then gives invariant curves of the return map with a Lipschitz label, which yield a Lipschitz first integral supported on the tube. The deduction from the certified facts is checked in Lean, with Zlatoš's and Pöschel's theorems as cited inputs. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Written proof, with Lean and computer checks; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "abc-front-speedup"
+  },
+  {
+    "title": "A four-dimensional 4-reptile simplex",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-08",
+    "concept_doi": "10.5281/zenodo.24061699",
+    "latest_record_id": 24128596,
+    "pdf_filename": "reptile-simplex-v2.pdf",
+    "pdf_md5": "91d6f5a9c81017fb9534c59f5d905c8d",
+    "pdf_size": 331165,
+    "abstract": "<p>A $d$-dimensional simplex is a $k$-reptile if it can be tiled by $k$ mutually congruent simplices similar to it. Matoušek and Safernová conjectured that for $d\\ge3$ a $k$-reptile $d$-simplex exists only when $k=m^d$ for an integer $m$, and proved this for $d=3$. Kynčl and Patáková proved that in dimension four $k$ must be a square, noted that every $k$-reptile simplex known in dimension $d\\ge3$ has $k=m^d$, and asked whether a four-dimensional $k$-reptile simplex exists with $k$ a square but not a fourth power. We show that the simplex with vertices $(0,0,0,0)$, $(1,0,0,0)$, $(\\tfrac12,\\tfrac12,0,0)$, $(\\tfrac23,\\tfrac13,\\tfrac13,0)$ and $(\\tfrac34,\\tfrac14,\\tfrac14,\\tfrac14)$, the fundamental alcove of the affine Weyl group of type $F_4$, is a $4$-reptile: it is tiled by four congruent copies of itself scaled by $1/\\sqrt2$, two of them mirror images. This answers the question of Kynčl and Patáková with $k=4$ and disproves the conjecture of Matoušek and Safernová in dimension four. The subdivision itself is due to Felikson and Tumarkin, who found in 2004 that the affine reflection group of type $F_4$ has a reflection subgroup of index $4$ whose fundamental simplex is similar to the alcove. What we add is the observation that this settles the reptile question, a short direct proof of the tiling, and exact computer checks of it. This work has not yet been reviewed by experts. The proofs, the computer checks and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "reptile-simplex"
+  },
+  {
+    "title": "A lattice parallelepiped with no unimodular triangulation",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-05",
+    "concept_doi": "10.5281/zenodo.23990076",
+    "latest_record_id": 24027714,
+    "pdf_filename": "parallelepiped-triangulation-v2.pdf",
+    "pdf_md5": "81f17dc848917c43adbf14e6a79d7469",
+    "pdf_size": 389541,
+    "abstract": "<p>A lattice polytope has a unimodular triangulation if it can be cut into lattice simplices of the smallest possible volume. Haase, Paffenholz, Piechnik and Santos asked in their 2017 survey whether every lattice parallelepiped, and more generally every lattice zonotope, has one. Such polytopes have the integer decomposition property, and Codenotti and Santos proved that every 3-dimensional lattice parallelepiped can be covered by unimodular simplices. We show that the answer is no in every dimension $d\\ge 4$. The 4-dimensional parallelepiped $P$ spanned by $e_1,e_2,e_3$ and $(1,2,3,5)$ has no unimodular triangulation, and its products with unit cubes give examples in higher dimensions. Its edges at the origin span a cone that Firla and Ziegler showed cannot be triangulated into unimodular cones generated by its Hilbert basis (its minimal generators). Yet the cone of $P$ at each vertex can be so triangulated with lattice points of $P$: the obstruction is not seen at any vertex. The proof is by hand: points of $P$ with coordinates in $\\frac12\\mathbb{Z}$ and $\\frac14\\mathbb{Z}$ force faces into any unimodular triangulation, until one such point lies in none. Checked certificates show that $P$ has a unimodular cover and is, up to lattice equivalence, the unique 4-dimensional example of determinant at most 5. The question in dimension 3 remains open. This work has not yet been reviewed by experts. The proofs, the checking programs and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "parallelepiped-triangulation"
+  },
+  {
+    "title": "Competitive equilibrium can fail near equal budgets for three additive agents",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-05",
+    "concept_doi": "10.5281/zenodo.23972982",
+    "latest_record_id": 23972983,
+    "pdf_filename": "near-equal-budgets-v1.pdf",
+    "pdf_md5": "79f9f7bbe341bef63d039bbff972f050",
+    "pdf_size": 288494,
+    "abstract": "<p>In a Fisher market with indivisible goods, each agent has a budget of artificial money and a competitive equilibrium is an allocation of all the goods with prices at which every agent gets a most preferred bundle within budget. With exactly equal budgets one good and two agents already have no equilibrium. Babaioff, Nisan and Talgam-Cohen proved that two agents with additive preferences over any number of goods have a competitive equilibrium whenever their budgets are sufficiently close to equal but not equal, and asked whether this extends to more than two agents (their Open Problem 1). It does not. We give three agents with strict additive valuations over five goods such that for every $0&lt;\\delta&lt;1/17$ no competitive equilibrium exists at the budgets $(1-3\\delta,1+2\\delta,1+\\delta)$, nor at any budget vector near them. So every neighborhood of equal budgets contains a set of positive measure on which no equilibrium exists. Adding goods of small value, as in Segal-Halevi's Lemma 5, extends this to every number of goods $m\\ge5$. This answers the case of three additive agents and $m\\ge5$ goods that Segal-Halevi left open: the budgets with no competitive equilibrium can have positive measure. The proof gives, for each allocation of the goods, an exact Farkas (linear-programming duality) certificate that no prices support it; an independent exact linear-programming computation confirms it. This work has not yet been reviewed by experts. The proofs, the computer checks and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "near-equal-budgets"
+  },
+  {
+    "title": "A quadratic lower bound for intervals in the Hales–Jewett theorem",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-05",
+    "concept_doi": "10.5281/zenodo.23972680",
+    "latest_record_id": 23972681,
+    "pdf_filename": "interval-hales-jewett-v1.pdf",
+    "pdf_md5": "519ac3bc4c6f06e4ab41ae4e00ae2a98",
+    "pdf_size": 297965,
+    "abstract": "<p>A combinatorial line in $[m]^n$ is $q$-fold if its wildcard set, the set of coordinates that vary along the line, is a union of at most $q$ intervals of consecutive coordinates. Let $I(m,r)$ be the least $q$ such that, for $n$ large, every $r$-coloring of $[m]^n$ has a monochromatic $q$-fold line. We show that $I(m,2)&gt;(m-3)^2/128$ for every $m\\ge3$, so $I(m,r)\\ge I(m,2)$ grows at least quadratically in $m$ for every $r\\ge2$. This answers Question 3.1 of Conlon and Kamčev, who asked whether some $m\\ge4$, $r\\ge2$ and $c&gt;1$ admit $r$-colorings of $[m]^n$ with no monochromatic line whose wildcard set is a union of at most $cr$ intervals: $m=18$, $r=2$ and any $1&lt;c&lt;3/2$ do, for every $n$. For $m=3$ the value is known, $r$ or $r-1$, by work of Conlon and Kamčev, Leader and Räty, and Kamčev and Spiegel; Kamčev and Spiegel noted that $r-1$ is the best explicit lower bound the known methods give, and Shelah's proof of the Hales–Jewett theorem gives the upper bound $\\mathrm{HJ}(m-1,r)$. To rule out lines with at most $Q$ intervals, we color $x$ by the parity of $\\lfloor S(x)/(32Q)\\rfloor$, where $S(x)$ is the sum of the squared differences of consecutive letters of the word $0x$. Along such a line, $S$ is a quadratic in the free letter whose values rise through a whole interval of length $32Q$ in smaller steps, so the line meets both colors. This coloring theorem is proved in Lean from the definitions; the step to $I(m,r)$ is a short argument on paper. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "interval-hales-jewett"
+  },
+  {
+    "title": "Connected quandles that refute Hayashi's conjecture",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-05",
+    "concept_doi": "10.5281/zenodo.23990072",
+    "latest_record_id": 24027691,
+    "pdf_filename": "hayashi-conjecture-v2.pdf",
+    "pdf_md5": "304242dada5c23f7bfe0529baff96993",
+    "pdf_size": 334134,
+    "abstract": "<p>We construct connected quandles of orders 1890 and 5670 whose right translations $x\\mapsto x*y$ have cycles of lengths 60, 84, 140 and 210. Since 60, 84 and 140 do not divide 210, this disproves the conjecture of Hayashi (2013) that in a finite connected quandle the longest cycle length of a right translation is a multiple of all the others. A quandle is a set with a self-distributive operation modeled on conjugation in a group, and quandles give invariants of knots. The conjecture was known for profiles with at most five cycles (Lages and Lopes), for orders up to 47 (Watanabe) and for affine quandles (Kajiwara and Nakayama). Filipi showed that for conjugation quandles it is equivalent to a group-theoretic conjecture, that a power of an element of a finite generating conjugacy class $C$ is central as soon as it commutes with a suitable element of $C$. Our quandles are conjugacy classes of affine maps, so they refute that conjecture too. The four long cycle lengths are each twice the product of three of the primes 2, 3, 5 and 7, while each right translation has order 420. The construction gives an infinite family, including latin counterexamples (every left translation is also a bijection), and no counterexample from it has order below 1890. The proofs are by hand. Independent programs recompute both quandles, and one checks every quandle axiom on the full operation table. This work has not yet been reviewed by experts. The proofs, the checking programs and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "hayashi-conjecture"
+  },
+  {
+    "title": "Cyclic sieving for q-Kreweras numbers in the exceptional types",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-04",
+    "concept_doi": "10.5281/zenodo.23966462",
+    "latest_record_id": 23966463,
+    "pdf_filename": "kreweras-cyclic-sieving-v1.pdf",
+    "pdf_md5": "d7f5f19bec4441b3c1af5ee96a763d4a",
+    "pdf_size": 368340,
+    "abstract": "<p>Let $W$ be a finite Weyl group with Coxeter number $h$ and simple Lie algebra $\\mathfrak g$. For each $s\\ge1$ the cyclic group $\\mathbb{Z}/sh\\mathbb{Z}$ acts on the multichains $w_1\\le\\dots\\le w_s$ of noncrossing partitions of $W$. Reiner and Sommers defined, for each nilpotent orbit $\\mathcal{O}$ of $\\mathfrak g$ and each positive integer $m$, a $q$-Kreweras number, a polynomial in $q$, and tabulated it in the exceptional types. Each $W$-orbit of flats $X$ determines a nilpotent orbit $\\mathcal{O}_X$, principal in the Levi subalgebra of $X$. Their Conjecture 1.4 says that the $q$-Kreweras number of $\\mathcal{O}_X$ with $m=sh+1$, at a primitive $d$-th root of unity, counts the multichains fixed by an element of order $d$ whose bottom element has fixed space in the orbit of $X$. Reiner and Sommers proved it in types $A$, $B$, $C$ and $D$. We prove it in types $G_2$, $F_4$, $E_6$, $E_7$ and $E_8$, so it holds for every irreducible Weyl group. At $q=1$ the statement is a count proved by Douvropoulos and Josuat-Vergès; what is new is every $d&gt;1$. Krattenthaler and Müller proved the unrefined cyclic sieving, Armstrong's conjecture, in the exceptional types by reducing it to finitely many cases. Using their parametrization of $s$ and of the acting element by three integers, and their description of the fixed points, we show that with two of the integers fixed the fixed-point count is a polynomial of degree at most the rank in the third. A finite-difference argument shows the same for the tabulated $q$-Kreweras number at the root of unity, once it holds for rank plus one consecutive values of the third integer. Only finitely many choices of the fixed pair need a direct check. The resulting finitely many identities are verified by two independent exact programs, and the reduction is checked in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization, the computer checks and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "kreweras-cyclic-sieving"
+  },
+  {
+    "title": "The Harborth constant of Cp ⊕ Cp for every prime p ≥ 11",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-04",
+    "concept_doi": "10.5281/zenodo.23968471",
+    "latest_record_id": 23968472,
+    "pdf_filename": "harborth-constant-v1.pdf",
+    "pdf_md5": "f3da2210268c534326680ed6edf0480a",
+    "pdf_size": 340324,
+    "abstract": "<p>The Harborth constant $\\mathsf g(G)$ of a finite abelian group $G$ is the least $k$ such that every $k$-element subset of $G$ contains $\\exp(G)$ distinct elements whose sum is zero; the exponent $\\exp(G)$ is the largest order of an element of $G$. Gao and Thangadurai conjectured that $\\mathsf g(C_n\\oplus C_n)=2n-1$ for odd $n$, and proved it for primes $p\\ge 67$; Gao, Geroldinger and Schmid extended this to $p\\ge47$, and Kemnitz had settled $p\\in\\{3,5,7\\}$. Bajnok's <em>Menu of research problems</em> asks for the primes $11\\le p\\le 43$ (Problem F.100). We prove that $\\mathsf g(C_p\\oplus C_p)=2p-1$ for every prime $p\\ge11$, which answers that problem and, with Kemnitz's values, gives the conjecture for every odd prime. As in the work of Gao and Thangadurai and of Gao, Geroldinger and Schmid, we project the set along a line through $0$, which sorts its points into $p$ parallel lines (fibers), choose a projection in which many pairs of points share a fiber, and use the lifting criterion of Gao and Thangadurai. What is new is a sufficient condition, proved with the theorem of Dias da Silva and Hamidoune, that depends only on how many points each fiber holds and not on where the fibers lie. The analysis of fiber sizes is by hand for $p\\ge17$ and a finite check for $p=11$ and $13$. The proof for $p\\ge11$ and the lower bound for every odd prime are formalized in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "harborth-constant"
+  },
+  {
+    "title": "Counterexamples to the conjectured characterization of Hamiltonian degree sequences in digraphs",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-04",
+    "concept_doi": "10.5281/zenodo.23966079",
+    "latest_record_id": 23969956,
+    "pdf_filename": "hamiltonian-degree-sequences-v2.pdf",
+    "pdf_md5": "dc655c0b5534120c93ab045cf93d2085",
+    "pdf_size": 340612,
+    "abstract": "<p>We show that the conjecture of Kühn, Osthus and Treglown (2008), proposed as a digraph analogue of Chvátal's theorem, fails for every order $n\\ge7$ and holds for $3\\le n\\le6$. It states that every digraph whose separately sorted out- and in-degree sequences satisfy two Chvátal-type conditions, and a third condition when the order is even, has a Hamilton cycle. It strengthens Nash-Williams' conjecture of 1975, which assumes strong connectivity instead of the third condition. Guninski found 6-vertex counterexamples to Nash-Williams' conjecture on MathOverflow in 2013 and 2020; the 2013 example was confirmed there by Royle and Thomas and the 2020 ones by DeBiasio. All of them violate the third condition. Our counterexamples are an explicit 7-vertex digraph and an explicit family, and the small orders are settled by exhaustive search. Hence Nash-Williams' conjecture fails for every $n\\ge7$, in addition to Guninski's case $n=6$, and the same search shows that it holds for $3\\le n\\le5$. The family also shows that for every $n\\ge8$ the conditions of either conjecture do not even force a cycle through every pair of vertices, answering a question recorded by Kühn and Osthus after Bermond and Thomassen. The counterexamples are checked in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "hamiltonian-degree-sequences"
+  },
+  {
+    "title": "A counterexample to the very sparse greedy conjecture for random hitting sets",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-03",
+    "concept_doi": "10.5281/zenodo.23915337",
+    "latest_record_id": 23915338,
+    "pdf_filename": "random-hitting-set-greedy-v1.pdf",
+    "pdf_md5": "c1a69c28eace6442de543f7c12877698",
+    "pdf_size": 364038,
+    "abstract": "<p>Let $A$ be a random $m\\times n$ zero-one matrix with independent Bernoulli$(p)$ entries, whose rows are to be hit by a set of columns. Arpino, Dmitriev and Grometto proved that with high probability the linear programming (LP) relaxation, the fractional hitting set, is within a constant factor of the optimum when $mp\\lesssim\\log n$, and the greedy algorithm is within a constant factor of the optimum when $p\\ge n^{-\\delta}$ with $\\delta&lt;1/2$. They conjectured that in the very sparse regime $mp\\to0$ the ratio of the greedy value to the LP value tends to one. We show that this fails. For $m=k$, $n=k^{10}$ and $p=1/(10k^4)$, with the explicit constant $c=1/(196608\\cdot10^9)$, the greedy algorithm that breaks ties by the leftmost column, as in their analysis, uses at least $(1+c/8)$ times the LP value with probability at least $c/4$ for every $k\\ge10^{20}$; these parameters satisfy their Assumption 2. The same holds with probability at least $c/8$ when ties are broken uniformly at random. So the ratio does not converge to one in probability. The obstruction is a path of three triples whose middle triple greedy takes first; exchanging it for its two ends saves half a column per path. The proofs are elementary counting arguments, checked in Lean from the definitions. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "random-hitting-set-greedy"
+  },
+  {
+    "title": "Graceful 4-coloring of planar graphs is NP-complete",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-03",
+    "concept_doi": "10.5281/zenodo.23915537",
+    "latest_record_id": 23915538,
+    "pdf_filename": "planar-graceful-coloring-v1.pdf",
+    "pdf_md5": "01aab8d2e671c76f53bd7e086e410f9c",
+    "pdf_size": 288235,
+    "abstract": "<p>A graceful $k$-coloring of a graph is a proper vertex coloring with colors $1,\\dots,k$ such that, at every vertex, the incident edges receive distinct differences of their endpoint colors. Cyriac Antony, Laavanya D. and Devi Yamini S. proved that deciding graceful $k$-colorability is NP-complete for planar graphs when $k\\ge 5$, and for $k=4$ on graphs of maximum degree three, and they left open the complexity of graceful 4-colorability of planar graphs. We prove that this problem is NP-complete, even for planar graphs of maximum degree three (inputs, as in their formulation, may be disconnected). The hardness comes from the reduction of Édouard Bonnet, Dibyayan Chakraborty and Julien Duron, who proved that deciding whether a cubic planar graph has a perfect matching cut (a perfect matching that is exactly the set of edges leaving some vertex set) is NP-hard; we apply their construction to every instance. What we add is an exact correspondence: for every finite cubic graph $H$, the graph obtained by subdividing each edge of $H$ twice has a graceful 4-coloring if and only if $H$ has a perfect matching cut. This equivalence is proved in Lean from the definitions. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Written proof, with Lean and computer checks; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "planar-graceful-coloring"
+  },
+  {
+    "title": "Symmetry of hook+column coefficients in iterated plethysms",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-03",
+    "concept_doi": "10.5281/zenodo.23915347",
+    "latest_record_id": 23915348,
+    "pdf_filename": "iterated-plethysm-v1.pdf",
+    "pdf_md5": "a050d09e4b8dfc6b291e3e95b4fbe78b",
+    "pdf_size": 345361,
+    "abstract": "<p>A hook+column partition $(\\alpha,2^\\beta,1^\\gamma)$ has a first part $\\alpha$, followed by $\\beta$ parts equal to two and $\\gamma$ parts equal to one. Let $g$ be a homogeneous rational symmetric function of degree $d\\geq1$, let $a\\geq2$, and put $f=g[h_a]$. We prove that, for each fixed $\\gamma$, the Schur coefficients of $f$ at these partitions, listed by $\\beta$ from $0$ to $d-1-\\gamma$, read the same forwards and backwards, zero entries included, and that they vanish for larger $\\beta$. Consequently, every iterated plethysm of complete homogeneous functions has symmetric hook+column sequences, answering Question 1 of Gutiérrez and Rosas. They gave explicit formulas for two three-factor families and proved that the second symmetric and exterior plethysms $s_{(2)}[f]$ and $s_{(1,1)}[f]$ of a Schur-positive $f$ preserve flip-symmetry, a stronger form of this symmetry; Langley and Remmel gave the underlying two-factor formula. We extend the symmetry to every number of factors and every positive index, and retain the zero entries. The argument uses Gutiérrez and Rosas's specialization at the signed alphabet $1-x-y$. After division by $(1-x)(1-y)$, replacing $x$ and $y$ by their reciprocals gives the coefficient identity. A Lean formalization proves the result from power-sum, Newton, and Jacobi–Trudi definitions, including the existence and uniqueness of Schur expansions. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "iterated-plethysm"
+  },
+  {
+    "title": "A subdivided 6-clique breaks a conjectured sum bound for independent monophonic-position colorings",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-03",
+    "concept_doi": "10.5281/zenodo.23915320",
+    "latest_record_id": 23915321,
+    "pdf_filename": "independent-monophonic-ng-v1.pdf",
+    "pdf_md5": "443754bc5e83c0e9cfd80a75baeff623",
+    "pdf_size": 321710,
+    "abstract": "<p>A set of vertices of a graph is in monophonic position if no induced path contains three of its vertices. Ullas Chandran S. V., Gabriele Di Stefano, S. Haritha, Elias John Thomas and James Tuite introduced colorings whose color classes are such sets, and the variant whose classes are also independent. They showed that the monophonic-position chromatic numbers of an $n$-vertex graph and of its complement sum to at most $n+1$, and conjectured the same Nordhaus–Gaddum bound for the independent variant; they report a computer search by Grahame Erskine confirming their conjecture for all graphs with at most ten vertices. We show that the independent monophonic sum bound fails. Subdividing every edge of the complete graph $K_6$ once gives a graph $H$ on 21 vertices that needs at least eight independent monophonic-position color classes, while its complement needs at least fifteen, so the sum is at least 23. The proof classifies the independent monophonic-position sets of $H$ and shows by counting that seven color classes cannot cover $H$. The lower bounds are also confirmed by SAT-solver proofs checked with a formally verified checker. This work has not yet been reviewed by experts. The proofs, the code and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "independent-monophonic-ng"
+  },
+  {
+    "title": "A proof of Geneson's continuous gluing conjecture",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-03",
+    "concept_doi": "10.5281/zenodo.23914512",
+    "latest_record_id": 23914513,
+    "pdf_filename": "geneson-continuous-gluing-v1.pdf",
+    "pdf_md5": "bfdd03768f005d659f7fc062da2b959a",
+    "pdf_size": 206677,
+    "abstract": "<p>Geneson introduced continuous Turán numbers: for a set $R\\subseteq\\mathbb R^2$ and $n&gt;0$, $\\operatorname{opx}(n,R)$ is the supremum of the areas of open subsets of the square $[0,n]^2$ that contain no copy of $R$, where a copy may move the horizontal coordinates of $R$ apart and its vertical coordinates apart, keeping their order, but never closer together. We prove Conjecture 6.3 of Geneson's <em>Continuous Turán numbers</em>: if $P$ and $Q$ share a point $(c,d)$, with $P$ weakly south-west of it and $Q$ weakly north-east of it, then $\\operatorname{opx}(n,P\\cup Q)\\le\\operatorname{opx}(n,P)+\\operatorname{opx}(n,Q)$ for every $n&gt;0$. The sets $P$ and $Q$ are arbitrary: no finiteness, boundedness or measurability is assumed. Keszegh proved the corresponding inequality for forbidden zero–one matrices joined at opposite corner entries, by partitioning a host matrix according to the possible gluing corners. We carry this partition over to the continuous setting. What we add is compactness of the space of copies in a compact host, which makes the partition measurable, and the inner regularity of Lebesgue measure, which passes from measurable pieces to open sets. The theorem and its proof are formalized in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "geneson-continuous-gluing"
+  },
+  {
+    "title": "Faithful local dynamics on every finite acyclic graph",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-03",
+    "concept_doi": "10.5281/zenodo.23914493",
+    "latest_record_id": 23914494,
+    "pdf_filename": "cd13-universal-dynamics-v1.pdf",
+    "pdf_md5": "7eada429bd331d48ec44988513893ffa",
+    "pdf_size": 289550,
+    "abstract": "<p>Give each vertex of a finite directed acyclic graph a finite set of states, and let updating a vertex overwrite its state with a function of the states at its outgoing neighbors. Collina and D'Andrea showed that such updates always satisfy the relations of the graph's Hecke–Kiselman monoid, introduced by Ganyushkin and Mazorchuk, and conjectured that some choice of states and functions satisfies no other relations. They proved this for complete acyclic graphs, and Forsberg's effective representations settle further special classes. We prove the conjecture for every finite directed acyclic graph: some such system represents the monoid faithfully, so two words act equally in every system exactly when they are equal in the monoid. Each update is recorded as a formal expression built from the expressions it reads. Aragona and D'Andrea's cancellation rules reduce every word to one of their normal forms. In a normal form, the expressions produced at each vertex grow strictly and all survive in the final state, so the final state determines the word up to swaps of adjacent commuting letters. Lean checks the full theorem. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "cd13-universal-dynamics"
+  },
+  {
+    "title": "A graph whose zero-forcing polynomial is not unimodal",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-01",
+    "concept_doi": "10.5281/zenodo.23875152",
+    "latest_record_id": 23875153,
+    "pdf_filename": "zero-forcing-unimodality-v1.pdf",
+    "pdf_md5": "b0913b33ef00d03a19e3bf1106669f82",
+    "pdf_size": 199190,
+    "abstract": "<p>The zero-forcing polynomial of a graph counts its zero-forcing sets by cardinality. We give a graph on 73 vertices with $2096$, $1592$ and $1600$ zero-forcing sets of sizes 69, 70 and 71, respectively. This answers in the negative the question of Boyer and coauthors whether the zero-forcing polynomial of every graph is unimodal. The graph joins two disjoint complete graphs, of orders 32 and 33, to four disjoint edges. The proof is a short count: vertices in each clique have the same neighbors outside it, and a zero-forcing set can leave at most one vertex of each clique uncolored. Wang's Lemma 3.5 and Corollary 3.6 establish this principle more generally and count the choices within each group by its size. We apply that principle to this explicit graph and classify the remaining possibilities by the numbers of uncolored vertices on each side of the join. Two independent exact programs confirm the resulting polynomial. This work has not yet been reviewed by experts. The proofs, the certificate checkers, the figure and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "zero-forcing-unimodality"
+  },
+  {
+    "title": "The queueing polynomial is convex",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-01",
+    "concept_doi": "10.5281/zenodo.23862339",
+    "latest_record_id": 23862340,
+    "pdf_filename": "queueing-polynomial-convexity-v1.pdf",
+    "pdf_md5": "259435632202072f30db23fa202b5cd8",
+    "pdf_size": 288784,
+    "abstract": "<p>We prove that the hypergraph polynomial arising in redundancy scheduling is convex on the nonnegative orthant for every number of vertices, every positive edge size, and every nonnegative degree. This proves Conjecture 1 of Brosch, Laurent and Steenkamp, posed in their work on job occupancy, which asks for convexity on the standard simplex for all parameters at least two. They proved convexity for edge size two and degree three; Polak's Theorem 1.1 extends the edge-size-two case through degree nine. Marshall and Olkin's classical exponential construction gives a moment representation that yields convexity directly. We apply this construction to the conjecture and give a finite proof checked in Lean. A vertex-deletion recurrence expresses the original ordered-tuple polynomial as an average of complete homogeneous symmetric polynomials at nonnegative linear forms. Their convexity follows from McLeod's classical inequality; we give a coefficientwise Hessian proof suited to formal verification. The representation and the full simplex statement are checked in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "queueing-polynomial-convexity"
+  },
+  {
+    "title": "No holeless tetrad of four congruent pentagons",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-01",
+    "concept_doi": "10.5281/zenodo.23861936",
+    "latest_record_id": 23861937,
+    "pdf_filename": "pentagon-tetrads-v1.pdf",
+    "pdf_md5": "2879eec06176d9b6a12c1972b434abd8",
+    "pdf_size": 296198,
+    "abstract": "<p>A tetrad is a set of four plane regions with disjoint interiors, every two of which share a boundary segment of positive length; it is holeless if the complement of their union is connected. Holeless tetrads of four congruent hexagons appear in Martin Gardner's account of the puzzle, one of them found by Scott Kim, and Juris Čerņenoks and Andrejs Cibulis list the least number of sides of such a polygon as an open problem. Four congruent pentagons can form a tetrad around a hole. Walter Trump asked in 2020 whether they can form one without a hole, judging it extremely unlikely, and showed that convex tiles cannot form a tetrad at all. We prove that no four congruent simple pentagons, convex or not and mirror images allowed, form a holeless tetrad, and that triangles and quadrilaterals cannot either; so six is the least number of sides. The proof reduces every such tetrad to one of three plane maps and finitely many corner placements, decides the linear conditions on angles and side lengths in exact arithmetic, and excludes each of the 116 remaining two-parameter families by an exact certificate that the prototile cannot close up as a simple pentagon. A separately written verifier checks the certificates. This work has not yet been reviewed by experts. The proofs, the checking programs and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "pentagon-tetrads"
+  },
+  {
+    "title": "Counts of maximal matchings in a graph need not be log-concave",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-01",
+    "concept_doi": "10.5281/zenodo.23861938",
+    "latest_record_id": 23861939,
+    "pdf_filename": "maximal-matching-logconcavity-v1.pdf",
+    "pdf_md5": "fbca93dad590ed40d3a99b9dfa6f2db0",
+    "pdf_size": 280296,
+    "abstract": "<p>The numbers of inclusion-maximal matchings of each size in a graph need not form a log-concave sequence. We give an explicit counterexample on 76 vertices: the join of six disjoint edges with two disjoint cliques of order 32. Its maximal matchings have sizes 35 through 38, and the square of the coefficient at size 36 is smaller than the product of its two neighbors. This answers the general log-concavity question posed by Došlić and Short and by Došlić and Zubac. The proof uses the independent uncovered-set viewpoint discussed by Došlić and Short, retaining the number of perfect matchings for each uncovered set. For the stated graph, this reduces the coefficient calculation to a short recurrence on residual graphs. A second computation evaluates an explicit factorial sum, and both use exact integer arithmetic. The result concerns log-concavity for arbitrary graphs; the displayed coefficient sequence is unimodal. This work has not yet been reviewed by experts. The proofs, the code and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "maximal-matching-logconcavity"
+  },
+  {
+    "title": "A conjecture of Hopkins on golden Rado numbers",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-01",
+    "concept_doi": "10.5281/zenodo.23862329",
+    "latest_record_id": 23862330,
+    "pdf_filename": "golden-rado-v1.pdf",
+    "pdf_md5": "bb7689448456b269b0316db08dca31e0",
+    "pdf_size": 84458,
+    "abstract": "<p>A 2-coloring of $\\{1,\\dots,N\\}$ satisfies the golden mean shift if no two consecutive integers both receive color 1. For $1\\le a\\le b$, Hopkins defined the golden Rado number $R_0^{\\varphi}(a,b)$ as the least $N$ such that every such coloring with $1$ colored $0$ contains a monochromatic solution of $ax+by=z$, and conjectured that $R_0^{\\varphi}(a,\\ell a)=a^2(\\ell+1)^2$ for all positive integers $a$ and $\\ell$. Hopkins proved the case $\\ell=1$, and determined $R_0^{\\varphi}(1,b)$ for every $b$; that evaluation shows the formula fails when $a=1$ and $\\ell\\ge2$. We prove the formula for every $a\\ge2$ and $\\ell\\ge1$, which settles all the remaining cases of the conjecture. The lower bound is the coloring that gives color 1 exactly to the multiples of $a$ that are at least $a(\\ell+1)$. The upper bound is a forcing argument: a descent in steps of $\\ell$ shows that a residue $r\\le\\min(a,\\ell)$ has color 1, and two families of solutions then make color 1 invariant under shifts by $\\ell$ on an initial interval, which leads to a contradiction. The proof is elementary, and the theorem, both bounds included, is checked in the Lean proof assistant from the definitions. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "golden-rado"
+  },
+  {
+    "title": "A counterexample on two kinds of positive dependence",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-01",
+    "concept_doi": "10.5281/zenodo.23862335",
+    "latest_record_id": 23862336,
+    "pdf_filename": "ft23-pqd-pmi-v1.pdf",
+    "pdf_md5": "9c14ae2373daccf1500a8759e9e4230e",
+    "pdf_size": 359453,
+    "abstract": "<p>We construct a strict bivariate Archimedean copula that is positively quadrant dependent but is not positive measure inducing. This disproves the forward implication in the equivalence conjectured by Sebastian Fuchs and Marco Tschimpke. Their work introduced the positive measure inducing property through a reflected copula sum and established the equivalence for the Frank family. Our example separates the two properties in the full Archimedean class. Its inverse generator is the maximum of two exponential functions. Convexity gives copula validity, and a piecewise linear inequality in logarithmic coordinates gives positive quadrant dependence throughout the unit square. A rectangle strictly inside the open square $(0,1/2)^2$ has a negative increment for the reflected sum, excluding the positive measure required by the definition. All corner estimates use rational arithmetic and squaring, without a density assumption. The complete argument, including generator admissibility, boundary values and the measure-theoretic contradiction, is formalized in Lean. The converse implication and the separate negative-dependence equivalence are not resolved by this example. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "ft23-pqd-pmi"
+  },
+  {
+    "title": "A base-r simplex that is not Ehrhart positive",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-01",
+    "concept_doi": "10.5281/zenodo.23875144",
+    "latest_record_id": 23875145,
+    "pdf_filename": "base-r-ehrhart-v1.pdf",
+    "pdf_md5": "34ad915d11c8fa29c7cb0a1d4e0e77af",
+    "pdf_size": 319716,
+    "abstract": "<p>For integers $r\\ge2$ and $d\\ge1$, Solus's base-$r$ $d$-simplex is the convex hull of the standard basis vectors of $\\mathbb{R}^d$ and the point $-(r-1)(1,r,\\dots,r^{d-1})$. Solus introduced these simplices through numeral systems, proved that their $h^*$-polynomials are real-rooted, and observed that computations suggest they are also Ehrhart positive. Fu Liu recorded this as Solus's conjecture that every base-$r$ $d$-simplex is Ehrhart positive, and Liu and Solus restated it for all $r\\ge2$ and $d\\ge1$. We show that the conjecture fails: the base-$14$ $5$-simplex has Ehrhart polynomial \\[ 1-\\tfrac{268}{15}t+\\tfrac{3955}{12}t^2+\\tfrac{5833}{2}t^3+\\tfrac{10343}{12}t^4+\\tfrac{67228}{15}t^5, \\] whose linear coefficient is negative. The proof is an explicit bijection between the lattice points of each dilate and pairs consisting of a residue modulo $14^5$ and a vector of nonnegative integers, which reduces the count to the distribution of one integer-valued height function over the $537{,}824$ residues. Lean checks the whole statement from the definition of the convex hull, including the finite height distribution, by kernel evaluation. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "base-r-ehrhart"
+  },
+  {
+    "title": "A counterexample to two questions on acyclic polynomial roots",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-11-01",
+    "concept_doi": "10.5281/zenodo.23862350",
+    "latest_record_id": 23862351,
+    "pdf_filename": "acyclic-root-extrema-v1.pdf",
+    "pdf_md5": "bc8e828a96b33be38d3cbce847c1655b",
+    "pdf_size": 256697,
+    "abstract": "<p>The acyclic polynomial of a graph counts its vertex subsets that induce forests, by their cardinality. We give a twelve-vertex graph whose acyclic polynomial has a real root smaller than every real root of the acyclic polynomial of the proposed extremal graph of Barton, Brown and Pike, and whose modulus exceeds that of every complex root of that polynomial. This answers both parts of their question on extremal acyclic roots negatively. Their work supplies the proposed graph, the complement of a four-cycle and a star, and a formula for its quartic polynomial. We replace that star by two three-leaf stars. The resulting polynomial differs only in its cubic coefficient. Exact sign evaluations and the triangle inequality separate the two root sets at radius eighty-six, without numerical root approximations. A Lean formalization proves the coefficient identities from induced-graph acyclicity and derives both failures of the universal assertions. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "acyclic-root-extrema"
+  },
+  {
+    "title": "A Steiner triple system with a broken chromatic spectrum",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-31",
+    "concept_doi": "10.5281/zenodo.23838455",
+    "latest_record_id": 23838456,
+    "pdf_filename": "sts-broken-spectrum-v1.pdf",
+    "pdf_md5": "ce285db0b10462b9c60921119777cdfa",
+    "pdf_size": 267141,
+    "abstract": "<p>A bicoloring of a Steiner triple system colors its points so that every block receives exactly two colors, and the feasible set of the system is the set of integers $k$ for which some bicoloring uses exactly $k$ colors. Mario Gionfriddo conjectured in 2003 that the feasible set of every bicolorable Steiner triple system has no gaps; Tuza and Voloshin listed the question as open in 2008, and Gionfriddo restated the conjecture in 2025. In 2014 Gionfriddo, Guardo, Milazzo and Voloshin left open whether a system of order 39 has feasible set $\\{3,5\\}$. We give a Steiner triple system of order 39 that has bicolorings with exactly three and exactly five colors but none with exactly four, so the conjecture is false. With their theorem that bicolorings of systems of order 39 use three, four or five colors, its feasible set is $\\{3,5\\}$. The class sizes of the two bicolorings come from the tables of Colbourn, Dinitz and Rosa. The absence of a four-color bicoloring is proved by computer: a SAT solver's clausal refutation of a direct encoding, checked by DRAT-trim and by a separate unit-propagation checker. This work has not yet been reviewed by experts. The proofs, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "sts-broken-spectrum"
+  },
+  {
+    "title": "A classification of solvable spinning-switches puzzles",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-31",
+    "concept_doi": "10.5281/zenodo.23853843",
+    "latest_record_id": 23853844,
+    "pdf_filename": "spinning-switches-v1.pdf",
+    "pdf_md5": "c6414e16f07fc5a9de89bad81745aa71",
+    "pdf_size": 326387,
+    "abstract": "<p>Spinning-switches puzzles ask for a predetermined sequence of moves that works despite hidden permutations of the switches. Kagey formulated the problem using a finite group of switch states and a permutation group of positions, proved solvability when both groups are $p$-groups for one prime $p$, and classified the case of abelian switch groups. We prove the converse without an abelian hypothesis: for nontrivial finite groups $G$ and $H$, with $H$ acting faithfully on a finite set $\\Omega$, a surjective strategy for $G\\wr_\\Omega H$ exists exactly when $G$ and $H$ are $p$-groups for the same prime. This answers Kagey's Open Question 31. The necessity proof restricts the adversary to a prime-order element and tracks excluded configurations by cosets of prime-power subgroups. We also give a central-series proof of the known sufficient condition. The classification and its consequences for $S_3\\wr C_2$ and $A_4\\wr C_3$ are formalized in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "spinning-switches"
+  },
+  {
+    "title": "A counterexample to the cocircuit diameter conjecture",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-29",
+    "concept_doi": "10.5281/zenodo.23765669",
+    "latest_record_id": 23765670,
+    "pdf_filename": "cocircuit-diameter-counterexample-v1.pdf",
+    "pdf_md5": "dc3b1a8fd5208c529ffde64e354fb2e2",
+    "pdf_size": 466362,
+    "abstract": "<p>A rationally realizable uniform rank-41 oriented matroid on 80 elements has cocircuit-graph diameter at least $42&gt;41=n-r+2$, refuting the general cocircuit diameter conjecture. We build on the rank-21 example of Adler, De Loera, Klee and Zhang, the non-Hirsch polytope of Matschke, Santos and Weibel, Santos's product construction, and the source certification of Allamigeon, Canu and Strub. A count of negative coordinates confines every potentially shorter walk to two affine sections; projection to the product factors then gives the lower bound. Two rational perturbations make the resulting oriented matroid uniform. Lean 4 separately verifies the matrix existence and walk lower bound for a different realizing matrix; the printed perturbations are proved here, not checked in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "cocircuit-diameter-counterexample"
+  },
+  {
+    "title": "The Turán density of the tight five-cycle",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-28",
+    "concept_doi": "10.5281/zenodo.23743819",
+    "latest_record_id": 23757663,
+    "pdf_filename": "tight-cycle-c5-turan-v2.pdf",
+    "pdf_md5": "6ff7b31b58bf284586d2d8151f520ab0",
+    "pdf_size": 379190,
+    "abstract": "<p>The tight five-cycle is the three-uniform hypergraph whose edges are the five cyclically consecutive triples on five distinct vertices. We prove that its Turán density is $2\\sqrt3-3$. This answers the conjecture usually attributed to Mubayi and Rödl, explicitly stated by Mubayi, Pikhurko and Sudakov. Mubayi and Rödl's recursive construction gives the lower bound. The upper bound follows the reduction of Bodnár, León, Liu and Pikhurko, whose theorem concerns forbidding both the tight four-cycle and the tight five-cycle, or a tight cycle of length at least seven not divisible by three. We establish the two estimates needed for the five-cycle alone by exact rational certificates, using weighted link inequalities to include configurations containing a complete four-vertex hypergraph. We give the finite counting argument that turns the certificates into these estimates and then into the density bound. The whole proof, including this counting argument, is checked in Lean; its finite computations run as compiled code, so the check trusts Lean's compiler as well as its kernel. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Proved in Lean, with compiler-trusted finite checks; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "tight-cycle-c5-turan"
+  },
+  {
+    "title": "A counterexample to the E-derivation part of the LNED conjecture",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-28",
+    "concept_doi": "10.5281/zenodo.23735732",
+    "latest_record_id": 23753957,
+    "pdf_filename": "lned-counterexample-v2.pdf",
+    "pdf_md5": "d34354c53bc93e1df7d1e02f5be1cdb2",
+    "pdf_size": 330153,
+    "abstract": "<p>For a field $K$ of characteristic zero and $c\\in K\\setminus\\{0\\}$, let $\\delta_c f(x)=f(x)-f(x+c)$ and $J_c=(x(x-c/2))\\subset K[x]$. We prove that $\\delta_c$ is a locally nilpotent $K$-$\\mathcal{E}$-derivation such that the image of $J_c$ under $\\delta_c$ contains $x^{2m}$ and excludes $x^{2m+1}$ for every $m\\ge1$, refuting the $\\mathcal{E}$-derivation part of Zhao's locally nilpotent derivation and $\\mathcal{E}$-derivation (LNED) conjecture already in one variable. The proof specializes Zhao's Bernoulli-polynomial membership criterion for images of quadratic ideals at $x=c/2$. For any $v$ in an index set $T$, the shift $x_v\\mapsto x_v+1$ in $K[x_i:i\\in T]$, fixing the other variables, gives the same failure of the Mathieu–Zhao condition for the corresponding quadratic ideal.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "lned-counterexample"
+  },
+  {
+    "title": "Relations among cycle invariants of a three-armed quiver",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-27",
+    "concept_doi": "10.5281/zenodo.23705763",
+    "latest_record_id": 23705764,
+    "pdf_filename": "makonzi-invariants-v1.pdf",
+    "pdf_md5": "613645be4a89c01bd57e929a6991641d",
+    "pdf_size": 81763,
+    "abstract": "<p>Join two vertices by three paths, each with at least two edges, and give each edge an arrow in each direction, with variables $d_{ij},u_{ij}$. Put $D_i=\\prod_jd_{ij}$ and $U_i=\\prod_ju_{ij}$, and impose $D_1-D_2+D_3=0$. Put $v_{ij}=d_{ij}u_{ij}$ and $A=\\prod_jv_{1j}$, $B=\\prod_jv_{2j}$, $C=\\prod_jv_{3j}$. Under independent rescalings at the vertices, the ring of invariant polynomial functions over $\\mathbb C$ has presentation \\[ \\mathbb C[v_{ij},w_1,w_2,w_3]\\big/I_2\\!\\begin{pmatrix} w_2&amp;w_3&amp;B\\\\ A&amp;w_3+C&amp;w_1 \\end{pmatrix}. \\] Here $(w_1,w_2,w_3)=(D_1U_2,D_2U_1,-D_2U_3)$, and $I_2$ denotes the ideal of $2\\times2$ minors. Makonzi proved that these elements generate the invariant ring. We prove that the minors generate all their relations, with the corrected all-edge indexing in the paper, establishing the kernel formulation of Makonzi's conjecture. The key step is a specialization to a rational function field that proves independence of normal forms. Lean checks the kernel equality over $\\mathbb C$ for every triple of path lengths at least two.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "makonzi-invariants"
+  },
+  {
+    "title": "Arbitrarily long avoidance of 3 in Euclid–Mullin sequences",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-26",
+    "concept_doi": "10.5281/zenodo.23666670",
+    "latest_record_id": 23666671,
+    "pdf_filename": "cameron-donkin-v1.pdf",
+    "pdf_md5": "ceca0c63b997d82d95a8455d79ab8851",
+    "pdf_size": 320608,
+    "abstract": "<p>For a prime seed $p_1$, define $p_{k+1}$ to be the least prime divisor of $1+p_1\\cdots p_k$. For every positive integer $n$, there is a prime seed for which none of the first $n$ terms is $3$. This answers the first of Donkin's two questions in Cameron's problem list. The proof chooses a finite increasing sequence of auxiliary primes and forces the sequence to begin with the seed, $2$, and those primes. Booker and Irvine used the Chinese remainder theorem to prescribe prime-divisor paths, including constructions from prime starting values. Here congruences also exclude every smaller prime factor, making the prescribed divisors the least factors. Dirichlet's theorem then supplies a prime seed. The argument, including the congruence construction and its translation into the sequence, is formalized in Lean. The separate question of a single prime seed whose sequence avoids $3$ forever remains open.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "cameron-donkin"
+  },
+  {
+    "title": "The weak parking-space conjecture",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-23",
+    "concept_doi": "10.5281/zenodo.23605083",
+    "latest_record_id": 23605084,
+    "pdf_filename": "weak-parking-v1.pdf",
+    "pdf_md5": "169c7a584375ef979451c87195505fc7",
+    "pdf_size": 390660,
+    "abstract": "<p>Armstrong, Reiner and Rhoades conjectured in 2012 that the noncrossing and algebraic parking spaces of an irreducible finite real reflection group have the same character under the reflection group and Coxeter rotation. We prove their weak conjecture in types $E_7$ and $E_8$, its last two open real types, completing the conjecture. The proof expresses fixed parking functions as intersections of conjugacy classes with cosets of pointwise parabolic subgroups. Complete finite certificates verify these intersections and the noncrossing interval, using exact arithmetic. Together with the previously established types, the result gives the conjectured complex representation isomorphism for every irreducible finite real reflection group. The assertion concerns the original parking spaces, with Fuss parameter $1$.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "weak-parking"
+  },
+  {
+    "title": "Symmetric chains in noncrossing partition lattices",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-23",
+    "concept_doi": "10.5281/zenodo.23605554",
+    "latest_record_id": 23639462,
+    "pdf_filename": "noncrossing-symmetric-chains-v2.pdf",
+    "pdf_md5": "3fe681587871604d8da51f4179052ec6",
+    "pdf_size": 350755,
+    "abstract": "<p>Every noncrossing partition lattice of a finite well-generated complex reflection group admits a symmetric chain decomposition. We give a computer-assisted proof for the exceptional types $H_4$, $G_{33}$, $G_{34}$, $E_6$, $E_7$, and $E_8$, completing the saturated-chain assertion asked by Henri Mühle. Simion and Ullman, Reiner, Bessis and Corran, and Mühle established the other irreducible cases. Explicit chain certificates are checked against exact reflection-group models; exhaustive rank descent certifies that their graphs are the full absolute-order intervals. Reflection-preserving automorphisms and a constructive product decomposition give every Coxeter element and every reducible group. Lean verifies the general interval-closure, product, and transfer lemmas. The finite group calculations and the published classification and decomposition results remain external inputs.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "noncrossing-symmetric-chains"
+  },
+  {
+    "title": "A counterexample to a lit-only sigma-game conjecture",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-23",
+    "concept_doi": "10.5281/zenodo.23602479",
+    "latest_record_id": 23709807,
+    "pdf_filename": "lit-only-sigma-v4.pdf",
+    "pdf_md5": "de398026053a5c2b80d573f8f721756d",
+    "pdf_size": 268598,
+    "abstract": "<p>A move in the sigma-game toggles the neighbors of a vertex; the lit-only game permits such a move only at a lit vertex. The gap for a graph is the largest difference, over starting configurations, between the minimum numbers of lights attainable in these two games. Goldwasser, Wang and Wu conjectured that a connected graph on $n$ vertices with gap greater than $n/2$ must be complete $m$-partite for $m\\equiv3\\pmod4$. We refute their Conjecture 5, published in 2011. The complement of the disjoint union of a six-cycle and an isolated vertex has a starting configuration reducible to zero lights by regular moves but to no fewer than four by lit-only moves. Its lit-only orbit has three configuration types. Replacing every vertex by $m$ independent copies gives connected graphs on $7m$ vertices that are not complete multipartite, with a uniform starting configuration having minimum light numbers $0$ and $4m$. The counterexample and this family are proved in Lean from the definitions.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "lit-only-sigma"
+  },
+  {
+    "title": "Greedy play can require more colors in the coloring game",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-23",
+    "concept_doi": "10.5281/zenodo.23604985",
+    "latest_record_id": 23758053,
+    "pdf_filename": "game-grundy-gap-v4.pdf",
+    "pdf_md5": "d8a42ecc776dd5cf5629d9b96b249c0d",
+    "pdf_size": 248469,
+    "abstract": "<p>In the coloring game, Alice and Bob alternately color vertices properly from a fixed palette, with Alice trying to color the whole graph. The game chromatic number is the least palette size for which she can win. In the greedy game the players choose vertices, each receiving the least available positive integer; Alice minimizes and Bob maximizes the number of colors used. Havet and Zhu asked in June 2011 whether the resulting game Grundy number is always at most the game chromatic number. We give an explicit finite simple graph $G$ for which $\\chi_g(G)=5$ and $\\Gamma_g(G)=6$, answering the first part of their question negatively. The proof consists of finite strategy certificates checked by two separately written certificate checkers for the two unrestricted Alice-first games, together with a clique obstruction and a short greedy strategy. It does not establish arbitrarily large separation between the parameters. This work has not yet been reviewed by experts. The proofs, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "game-grundy-gap"
+  },
+  {
+    "title": "Strongly cospectral sets in seven-dimensional cubelike graphs",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-23",
+    "concept_doi": "10.5281/zenodo.23603017",
+    "latest_record_id": 23636896,
+    "pdf_filename": "cubelike-cospectrality-v2.pdf",
+    "pdf_md5": "7925491a086a1a35a5f7a16b077c3b24",
+    "pdf_size": 349996,
+    "abstract": "<p>Every set of pairwise strongly cospectral vertices in a cubelike graph on $128$ vertices has at most four elements, and a connected graph attains four. Vertices are strongly cospectral if their orthogonal projections onto each adjacency eigenspace agree up to sign. This gives a negative answer to Árnadóttir and Godsil's question whether their upper bound is tight in every dimension: in dimension seven their bound gives eight. They proved the general bound, attained it in dimensions three through six, and supplied the connected construction attaining four used here. Our upper bound combines their abelian character criterion, building on Sin and Sorci's normal-Cayley criterion, with congruences, a second-moment bound and an exact finite inequality certified by linear programming duality. The universal upper bound, including the certificate checks, is formalized in Lean; exact computations also verify the attaining graph. Sin's construction gives arbitrarily large strongly cospectral classes as the dimension grows.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "cubelike-cospectrality"
+  },
+  {
+    "title": "The strong Lefschetz property for complex reflection coinvariants",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-23",
+    "concept_doi": "10.5281/zenodo.23605133",
+    "latest_record_id": 23754213,
+    "pdf_filename": "coinvariant-lefschetz-v3.pdf",
+    "pdf_md5": "00464419f050bf6ac43e8aef57ccfe92",
+    "pdf_size": 150211,
+    "abstract": "<p>The ordinary coinvariant algebra over $\\mathbb C$ of every finite complex reflection group has the strong Lefschetz property: one linear element has maximal-rank multiplication by every power in every degree. We give a computer-assisted proof for $G_{34}$, the exceptional type excluded by Wachi's earlier results; the other types follow from the work of Harima–Watanabe, Harima–Migliore–Nagel–Watanabe, McDaniel, and Wachi. The question is recorded in Wachi's 2013 conjecture on complex reflection coinvariants. The proof uses the Conway–Sloane orbit invariants in the coordinates developed by Oura–Sekiguchi. Exact finite-field polynomial certificates, specialization, and a Hilbert-function comparison establish the strong Lefschetz property for a relative coinvariant algebra. The free-extension theorem then transfers it to the ordinary coinvariant algebra, using Wachi's result for $G_{33}$.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "coinvariant-lefschetz"
+  },
+  {
+    "title": "Nonexistence of Williamson matrices of order 65",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23584886",
+    "latest_record_id": 23956544,
+    "pdf_filename": "williamson-order-65-v5.pdf",
+    "pdf_md5": "2a566fdbfd25206e80c61c8dde2f275b",
+    "pdf_size": 326029,
+    "abstract": "<p>We prove by exhaustive computation that Williamson matrices of order $65$ do not exist: no four symmetric circulant sign matrices of that order have squares summing to $260$ times the identity. Compression to length $13$, common multipliers, conservative power spectral density bounds and Williamson's product identity reduce the search to matching pairs of full sequences. The CPU computation took about $271$ CPU-hours. Two checkers verify the compressed enumeration: one reuses the search's row generator, and one regenerates rows with separately written code. They share the compression model and per-representative enumeration records; neither repeats the decisive full-row lift search. Full-pipeline controls reproduce known smaller-order counts. The search is computational under stated arithmetic assumptions and is not formally verified. This work has not yet been reviewed by experts. The proofs, the search code, the enumeration checkers, the witness checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "williamson-order-65"
+  },
+  {
+    "title": "The Thomson problem for N = 10",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23552641",
+    "latest_record_id": 23954051,
+    "pdf_filename": "thomson-10-v10.pdf",
+    "pdf_md5": "4152ad1ae5dba7fc28acce82bc1f4ce5",
+    "pdf_size": 378304,
+    "abstract": "<p>For ten distinct points on the unit sphere, we prove that the bicapped square antiprism uniquely minimizes Coulomb energy, up to orthogonal transformations and relabeling. We build on the Lean proof directed by Aravind Karthigeyan of the tricapped trigonal prism's nine-point optimality and uniqueness. We use the three-point positivity method of Bachoc and Vallentin and of Cohn and Woo. A three-point semidefinite bound confines every competitor of no greater energy to short intervals around the candidate's inner products. Gram-determinant tests determine their assignment to pairs; orthogonal alignment and a quantitative local energy inequality then force congruence. The candidate's height is the unique critical point in a rational interval. We formalize the argument in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Proved in Lean; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "thomson-10"
+  },
+  {
+    "title": "A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23571932",
+    "latest_record_id": 23757770,
+    "pdf_filename": "scattering-coefficients-v5.pdf",
+    "pdf_md5": "8a98f0860c964211b46eb9fadcf26fcc",
+    "pdf_size": 473272,
+    "abstract": "<p>For the rank-two cluster scattering diagram with initial walls $1+x$ and $1+y^5$, we prove $\\tau^{1,5}(2j,j)=\\frac1j\\sum_{\\ell}\\binom{\\ell}{j-\\ell+1}\\binom{j+\\ell-1}{\\ell}$ for every $j\\geq1$, in the convention of Burcroff and coauthors and of Elgin, Reading and Stella's table and code. This proves Elgin, Reading and Stella's Conjecture 13. Elgin, Reading and Stella provided extensive computations and stated eighteen conjectures on rank-two cluster scattering coefficients. Burcroff, Lee, Mou, Musiker and Reineke proved Conjectures 1–3, 5–10 and 14–18, leaving Conjecture 13 unresolved and \"mysterious from both the quiver moduli and tight grading points of view.\" Kontsevich and Soibelman provided ordered factorization, and Gross, Hacking, Keel and Kontsevich provided the change of lattice used here. The binomial sum was already recorded by Vladimir Kruchinin, with functional equations by Paul D. Hanna; Burcroff and coauthors identified its algebraicity and growth rate conditionally on the conjecture. We identify these numbers with the scattering coefficients. We observe that OpenAI's closely related quantum scattering framework admits the same five-and-one incoming multiplicities; whether it implies the coefficient formula or cubic remains unresolved. After a change of lattice and a monomial substitution, the fifth power of the wall function becomes the diagonal factor of an explicit Poisson automorphism. A grading separates that factor from the other walls and yields a differential equation with a unique algebraic solution. The coefficient identity is formalized in Lean from the definitions. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "scattering-coefficients"
+  },
+  {
+    "title": "A generalized pseudostandard prefix with no string attractor of size four",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23562187",
+    "latest_record_id": 23751684,
+    "pdf_filename": "pseudostandard-attractors-v3.pdf",
+    "pdf_md5": "903d2a0b5792724938f335cff3707a9d",
+    "pdf_size": 342724,
+    "abstract": "<p>A string attractor of a finite word is a set of positions such that every nonempty factor has an occurrence containing one of them. Binary generalized pseudostandard sequences are built by iterating palindromic and antipalindromic closures along a directive bi-sequence $(\\Delta,\\Theta)$, where $\\Delta$ lists the letters appended and $\\Theta$ the closures taken, $R$ for palindromic and $E$ for antipalindromic. Dvořáková and Hendrychová (2023) determined the minimal string attractors of the pseudopalindromic prefixes of standard complementary-symmetric Rote sequences, gave attractors of at most three positions for the antipalindromic prefixes of pseudostandard sequences, and conjectured that the pseudopalindromic prefixes of every binary generalized pseudostandard sequence have a minimal string attractor of size at most four. We show that this bound fails at length 36: for $\\Delta$ beginning $00101$ and $\\Theta$ beginning $EEEER$, the fifth word of the recurrence, the palindromic prefix $010110010101100101101001101010011010$, has smallest attractor size five. The lower bound is an elementary argument with seven factors; the upper bound is an explicit five-position attractor. Both bounds are also confirmed by computer. A second example has length 43.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "pseudostandard-attractors"
+  },
+  {
+    "title": "Fathi's consecutive-integers bound does not extend to multitwists",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23582025",
+    "latest_record_id": 23639372,
+    "pdf_filename": "multitwist-exceptions-v3.pdf",
+    "pdf_md5": "75bc89697f4a1e356b6a9b7191d94f2a",
+    "pdf_size": 352453,
+    "abstract": "<p>On the sphere with five boundary components, a fixed positive multitwist can have exceptional exponents arbitrarily far apart, even when the base map is pseudo-Anosov. More precisely, we give curves $a,c,d$ such that, for every $k\\ge1$, the multitwist $t=T_aT_c$ and $g_k=T_a^{-1}T_c^{-(k+1)}T_d$ satisfy Ivanov's filling hypothesis (the component orbits together fill the surface), while $tg_k$ and $t^{k+1}g_k$ fix essential curves. Their exceptional exponents are $k$ apart. Thus Fathi's consecutive-integers bound for a single Dehn twist does not extend to the multitwists in Ivanov's question. Long and Morton proved finiteness of the exceptions for a single twist about an essential curve with a pseudo-Anosov base on a closed orientable surface; on closed surfaces, Fathi confined the exceptional exponents to seven consecutive integers whenever the twisting curve's orbit fills the surface, for any base mapping class. We answer Ivanov's consecutive-integers question for this surface; examples with reducible bases are also given. Penner's construction supplies the pseudo-Anosov bases, and a pants decomposition proves filling. The algebra is verified in Lean and the finite curve and topology calculations by independent exact programs. The weaker question about the number of exceptions remains open.</p><p>Written proof, with Lean and computer checks; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "multitwist-exceptions"
+  },
+  {
+    "title": "A monotone counterexample to a question on distributional complexity",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23578347",
+    "latest_record_id": 23706655,
+    "pdf_filename": "monotone-query-gap-v3.pdf",
+    "pdf_md5": "43f3f542ec13e3492950f2940ec6df4e",
+    "pdf_size": 315882,
+    "abstract": "<p>For a Boolean function under a product measure, distributional algorithmic complexity is the minimum expected number of adaptive queries needed to determine its value. Distributional subcube partition complexity is the minimum expected number of fixed coordinates in a monochromatic subcube partition. Köhler-Schindler and Steif asked in 2024 whether these quantities are equal for every monotone Boolean function. We answer their Question 2.1 in the negative with the explicit function $f(x_0,\\ldots,x_4)=x_1x_2x_3\\lor x_0x_4(x_1\\lor x_2\\lor x_3)$. For independent fair input bits its algorithmic complexity is $13/4$, while its subcube partition complexity is $51/16$. A finite recurrence proves the algorithmic lower bound, and an explicit partition gives the strict inequality. An exact linear-programming dual certificate proves the partition value is optimal. The strict inequality is formalized in Lean; independent exact checkers verify the additional dual certificate.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "monotone-query-gap"
+  },
+  {
+    "title": "Locked tromino tilings of rectangles",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23562183",
+    "latest_record_id": 23752747,
+    "pdf_filename": "locked-trominoes-v4.pdf",
+    "pdf_md5": "a426d1f2831e5d92b6f4317c33f6cd38",
+    "pdf_size": 337457,
+    "abstract": "<p>An $m\\times n$ rectangle has a locked tromino tiling if and only if $3\\mid mn$ and $\\min(m,n)\\ge4$. A tromino consists of three grid cells connected through shared sides; a tiling is locked if no pair of tiles can be recombined into a different pair and the rectangle has another tiling. We prove the existence direction of Tucker-Foltz's conjecture. Tucker-Foltz showed that rectangles with a side of length at most three have none, constructed locked tilings when one side is divisible by three and at least six and the other is at least one hundred, and conjectured that four suffices. Following Tucker-Foltz's construction by compatible rectangular blocks, we supply the remaining cases and glue them along full rows and columns. Aanjaneya and Pal earlier proved existence on the same rectangles for the different condition of fault-free L-tromino tilings. Lean formalizes the existence theorem for $3\\mid m$, $m\\ge6$, $n\\ge4$, including the gluing argument, arithmetic and finite blocks, using only propext, Classical.choice and Quot.sound. Two separately written programs, sharing no code, check the blocks and seams. The classification uses Tucker-Foltz's preprint theorem for narrow rectangles, whose proof leaves the $m=3$ frontier check to the reader there; we neither repeat nor formalize that check.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "locked-trominoes"
+  },
+  {
+    "title": "Existence of locally toroidal regular 4-polytopes",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23562181",
+    "latest_record_id": 23753810,
+    "pdf_filename": "locally-toroidal-polytopes-v4.pdf",
+    "pdf_md5": "1dbde43b54af859fb6823d0f39417d12",
+    "pdf_size": 398394,
+    "abstract": "<p>We prove the existence half of Schulte–Weiss Problem 16 (2006) and McMullen–Schulte Conjecture 10C7 (2002): the universal regular 4-polytope $\\{\\{4,4\\}_{(s,0)},\\{4,4\\}_{(u,0)}\\}$ exists for every pair of distinct odd integers $s,u\\geq3$, with no coprimality assumption. Here $\\{4,4\\}_{(s,0)}$ is the quotient of the square tessellation by $s\\mathbb Z^2$. Finiteness and group classification remain open. The proof constructs four matrices over a finite field of characteristic two whose local subgroups are isomorphic to the prescribed toroidal groups. A commutator obstruction shows that these subgroups meet exactly in the subgroup on their two shared generators; this equality lifts to the universal presentation. The group theorem, the geometric identification of the toroidal maps, and the construction and universality of the resulting abstract polytope are formalized in Lean.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "locally-toroidal-polytopes"
+  },
+  {
+    "title": "Sharp linear bounds for the EKG sequence",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-22",
+    "concept_doi": "10.5281/zenodo.23562176",
+    "latest_record_id": 23753659,
+    "pdf_filename": "ekg-bounds-v5.pdf",
+    "pdf_md5": "349396adab70286d7a49cc3b83b80691",
+    "pdf_size": 358162,
+    "abstract": "<p>We prove that the EKG sequence satisfies $13n/28\\le a(n)\\le12n/7$ for every $n\\ge1$, with equality only at $n=28$ and $n=7$, respectively. Discovered by Jonathan Ayres, the sequence starts with $1,2$ and repeatedly takes the least unused positive integer sharing a factor greater than $1$ with its predecessor. This proves the sharp linear bounds conjectured by Lagarias, Rains and Sloane, who established coarse bounds at every index. Hofman and Pilipczuk proved the limits $1/2$, $3/2$ and $1$ of $a(n)/n$ on primes, their triples and the other terms, and Haver made these estimates explicit and formalized them in Lean. Our earlier second-order asymptotic also builds on Haver's work. We sharpen Haver's self-improving early-even bound with a shorter prime window and effective large-sieve constants, and control odd terms so that the analytic range meets a finite computation. Lean checks the deduction from the definition, conditional on computed premises; independent programs check those premises, and their correspondence with the formal statements was checked by reading the code.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "ekg-bounds"
+  },
+  {
+    "title": "A counterexample to Stanley's conjecture on Smith forms of Jucys–Murphy elements",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-21",
+    "concept_doi": "10.5281/zenodo.23541469",
+    "latest_record_id": 23635828,
+    "pdf_filename": "stanley-smith-forms-v3.pdf",
+    "pdf_md5": "77e08f9fee8a21d45f912bc0d7faa444",
+    "pdf_size": 338528,
+    "abstract": "<p>We disprove Stanley's conjectured Smith-form formula for Jucys–Murphy elements on integral Specht modules: for shape $(3,1,1)$ and $k=3$, the Smith form is $(1,1,1,1,2,2)$ instead of $(1,1,1,1,1,4)$. A second example, of shape $(5,2)$, disproves his conjectural remark that every invariant factor is a product of some of the eigenvalues. For $n\\ge3$, we prove in writing that the formula holds at $k=3$ precisely for partitions with at most two rows or at most two columns. The classification holds on every full-rank lattice in the rational Specht module stable under the permutations of $\\{1,2,3\\}$. Stanley's formula was based on Darij Grinberg's computations. Grinberg also clarified the integral lattice, and Alexander Chervov asked about the conjecture's status. The elements first appeared in Alfred Young's work and were rediscovered by Jucys and Murphy; Vershik and Okounkov give their common eigenbasis and tableau-content eigenvalues. The proof combines those eigenvalues with an integral group-ring identity and explicit integer matrices. Lean verifies the finite matrix calculations and supporting algebraic identities; independent programs identify the matrices with the Specht-module actions outside Lean.</p><p>Written proof, with Lean and computer checks; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "stanley-smith-forms"
+  },
+  {
+    "title": "Smith normal form of the n-cycle class sum",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-21",
+    "concept_doi": "10.5281/zenodo.23552056",
+    "latest_record_id": 23638220,
+    "pdf_filename": "stanley-class-sum-snf-v4.pdf",
+    "pdf_md5": "cecfdc76bdbd104c5e0a5b830d64e1fb",
+    "pdf_size": 369180,
+    "abstract": "<p>We determine the Smith normal form of multiplication by the sum of all $n$-cycles on the center of $\\mathbb{Z} S_n$. For every $n\\geq1$, it has $p(n)-n$ zero entries, where $p(n)$ counts partitions of $n$, and nonzero factors $d_0=1$ and $d_r=a_r r!/\\gcd(n,r)$ for $1\\le r&lt;n$, with $a_r=2$ when $r\\equiv n\\pmod2$ and $a_r=1$ otherwise. This confirms Stanley's conjectures for odd primes and twice odd primes and gives the $n$-cycle formula for every positive $n$. Goupil and Schaeffer gave a formula for long-cycle connection coefficients, and Biane gave an algebraic proof. We determine the two integral coefficient lattices needed to extract its Smith factors, then prove rowwise divisibility. Grinberg's exposition supplies class-sum and representation-theory background used here. Lean proves the image-lattice statement and divisor chain directly from group-ring definitions, including the character formula. The diagonal form and prime cases follow by written arguments.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "stanley-class-sum-snf"
+  },
+  {
+    "title": "The three-color Ramsey number of the 10-vertex path",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-21",
+    "concept_doi": "10.5281/zenodo.23548858",
+    "latest_record_id": 23956571,
+    "pdf_filename": "path-ramsey-v9.pdf",
+    "pdf_md5": "720b567b66192db30908aa4e8f83cbc6",
+    "pdf_size": 358959,
+    "abstract": "<p>We prove $R(P_{10},P_{10},P_{10})=18$: every three-coloring of the edges of $K_{18}$ contains a monochromatic path on ten vertices, and some three-coloring of $K_{17}$ contains none. Faudree and Schelp suggested a formula for three-color path Ramsey numbers. Gyárfás, Ruszinkó, Sárközy and Szemerédi proved that the three-color Ramsey number of the path on $n$ vertices is $2n-2+(n\\bmod2)$ for all sufficiently large $n$. Dybizbański, Dzido and Radziszowski established the eight- and nine-vertex cases, completing the cases through nine vertices recorded by Radziszowski's survey. The lower-bound coloring is the even-case $K_4$ blow-up given by Gyárfás, Ruszinkó, Sárközy and Szemerédi and by Dybizbański, Dzido and Radziszowski. The new upper bound follows from Boolean satisfiability refutations after fixing a monochromatic nine-vertex path and imposing simultaneous symmetry constraints. A separate refutation proves that the cases considered cover every coloring. The reduction and the certificate checks are formalized in Lean. This work has not yet been reviewed by experts. The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.</p><p>Proved in Lean, with compiled checking; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "path-ramsey"
+  },
+  {
+    "title": "Nonexistence of (243,121,60) difference sets in C3 × C9 × C9",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-21",
+    "concept_doi": "10.5281/zenodo.23534852",
+    "latest_record_id": 23647301,
+    "pdf_filename": "difference-set-243-v4.pdf",
+    "pdf_md5": "966f78c621653a93c4f1bf679c1ad8fe",
+    "pdf_size": 387579,
+    "abstract": "<p>We prove, by exhaustive computation, that no $(243,121,60)$ difference set exists in $C_3\\times C_9\\times C_9$. Keita Baba settled this case first on October 4, 2026, by a SAT computation with a certificate accepted by a formally verified checker. We give an independent proof by a different method: a lifting search with the reduction checked in Lean. A difference set with these parameters is a 121-element subset whose ordered differences represent every nonzero group element exactly 60 times. Vera López and García Sánchez recorded this group-specific case as unresolved, and Gordon singled it out in his presentation on the La Jolla Difference Set Repository. The reduction builds on the classical multiplier and character methods of Hall, Menon and Turyn and the multiplier searches of Vera López and García Sánchez. A multiplier-fixed translate has thirteen points in the subgroup of elements annihilated by three. Moment identities, singleton congruences and affine normalizations reduce the problem to eight quotient multiplicity arrays. Complete ternary lifting searches exclude all eight. Lean proves the algebraic reduction, normalization, lifting coverage and pruning lemmas; the final formal nonexistence theorem assumes the search assertions established by the external integer computations.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "difference-set-243"
+  },
+  {
+    "title": "The convex uniform 5-polytopes: a computer-assisted classification",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-20",
+    "concept_doi": "10.5281/zenodo.23491266",
+    "latest_record_id": 23751484,
+    "pdf_filename": "uniform-5-polytopes-v5.pdf",
+    "pdf_md5": "cae317c7cda4d4ad7ac9b57160786ae4",
+    "pdf_size": 206353,
+    "abstract": "<p>We prove completeness of the convex uniform 5-polytope list, conditional on the cited lower-dimensional classifications, the written reductions and the certificate checkers. Its members are Wythoff's constructions of types $A_5$, $B_5$, $D_5$, prisms over uniform 4-polytopes, and products of regular polygons with uniform polyhedra. Conway and Guy announced the four-dimensional classification; Möller gave a complete computer-assisted proof. We extend these neighborhood and radius methods to dimension five. Coxeter's and Johnson's constructions supply the known families. Unbounded polygon sizes require products, forced by neighbor distances and prism cells. Lean checks a conditional implication from explicit premises.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "uniform-5-polytopes"
+  },
+  {
+    "title": "A planar graph without four- or nine-cycles that is not three-colorable",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-20",
+    "concept_doi": "10.5281/zenodo.23491270",
+    "latest_record_id": 23644204,
+    "pdf_filename": "steinberg-c4-c9-v7.pdf",
+    "pdf_md5": "0fef6aef56f717f9795a274244800bd9",
+    "pdf_size": 407228,
+    "abstract": "<p>Lu, Wang, Wang, Bu, Montassier and Raspaud asked which cycle lengths, together with length four, force proper three-colorability of planar graphs, as recorded by Kang, Jin and Wang. Cohen-Addad, Hebdige, Král', Li and Salgado disproved Steinberg's conjecture for lengths four and five. Kostochka and Yancey proved a sharp general lower bound on the number of edges of a four-critical graph. We give an 82-vertex planar graph without cycles of length four or nine that is four-critical and attains that bound, answering the length-nine case of that question. The graph is obtained by Dirac–Hajós–Gallai–Ore compositions of complete four-vertex graphs. Its non-three-colorability follows by induction on this construction; a rotation system, cycle enumeration and three-colorings after edge deletion establish the remaining properties. Lean verifies the rotation certificate, the exclusion of four- and nine-cycles, and non-three-colorability of the same graph.</p><p>Checked in Lean from the definitions; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "steinberg-c4-c9"
+  },
+  {
+    "title": "The second-order asymptotic of the EKG sequence",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-20",
+    "concept_doi": "10.5281/zenodo.23491264",
+    "latest_record_id": 23754333,
+    "pdf_filename": "ekg-sequence-v8.pdf",
+    "pdf_md5": "0773835f1fb8dce77a3c35b96cfa036a",
+    "pdf_size": 340556,
+    "abstract": "<p>The EKG sequence $a(n)$ starts $1,2$ and thereafter chooses the least unused positive integer not coprime to the preceding term. Jonathan Ayres discovered it, and Lagarias, Rains and Sloane conjectured its additive second-order asymptotic at almost all indices. Haver reduced the asymptotic for the least unused even integer to counting used odd values above it, excluding three times odd primes, and proved the sharp upper bound. Hofman and Pilipczuk proved the weaker ratio limits and prime pattern. Combining these estimates with an elementary sieve and the prime number theorem, we prove the lower bound and transfer to the smoothed sequence. Smoothing $p,3p$ to $2p$ for odd primes gives $b(n)=n+n/(3\\log n)+o(n/\\log n)$ $(n\\to\\infty)$, hence the conjectured formula at almost all original indices. We prove Ordowski's nonprime inequality and density-one conjectures, and Jasinski's finiteness conjectures for the three critical lines; we also obtain the below-diagonal asymptotic and finiteness of cycles of each bounded length. Lean formalizes the main theorem.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "ekg-sequence"
+  },
+  {
+    "title": "The seventh ternary density Hales–Jewett number",
+    "authors": [
+      "Graham, P."
+    ],
+    "first_version_date": "2026-10-20",
+    "concept_doi": "10.5281/zenodo.23491268",
+    "latest_record_id": 23752609,
+    "pdf_filename": "density-seven-v5.pdf",
+    "pdf_md5": "b005c1e84b0e08e694c87329e5bedfd8",
+    "pdf_size": 236297,
+    "abstract": "<p>Let $c_{n,3}$ be the largest size of a subset of $\\{0,1,2\\}^n$ containing no combinatorial line, a triple obtained by varying a nonempty set of coordinates through the same letter while fixing the rest. We give a computer-assisted proof that $c_{7,3}=1302$, confirming Polymath1's tentative conjecture and closing its bounds $1302\\leq c_{7,3}\\leq1348$, recorded by Tao in 2009 and O'Bryant in 2015. The witness realizes Polymath1's known lower bound. Three auxiliary SAT bounds, slicing and global alphabet symmetry give sixteen main slice obligations. Refutations of all nineteen formulas were accepted by FRAT-rs, and in a separate earlier production campaign by drat-trim's lrat-check. Formal verification applies to certificate checking: cake_lpr, verified in HOL4 and compiled with CakeML, accepted refutations of all nineteen formulas across two regeneration campaigns. The SAT encodings, cap induction, symmetry reduction, case cover and counting interpretation are justified by the written proof and separate executable checks; they are outside that formal verification.</p><p>Computer-assisted; not yet reviewed by experts. Produced by AI models under the author's direction.</p>",
+    "slug": "density-seven"
+  }
+]

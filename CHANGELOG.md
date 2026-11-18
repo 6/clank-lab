@@ -138,7 +138,7 @@ Zenodo records.
 
 ## iterated-plethysm v1 (November 3, 2026)
 
-- Answers Gutiérrez and Rosas's Question 1: every iterated plethysm of complete homogeneous functions has symmetric hook+column coefficient sequences.
+- [Gutiérrez's 2021 thesis](https://idus.us.es/handle/11441/133706) posed Conjecture 1 and proved symmetry preservation under outer $s_2$ (Theorem 4.28). [Gutiérrez and Rosas (2022)](https://arxiv.org/abs/2201.00240v2) asked Question 1. We prove that every iterated plethysm of complete homogeneous functions has symmetric hook+column coefficient sequences.
 - Proves the stronger coefficient reflection for every homogeneous rational outer function and every inner complete homogeneous function of degree at least two, including the vanishing statements.
 - Includes the paper and a standalone Lean proof with pinned dependencies.
 - Zenodo: [10.5281/zenodo.23915348](https://doi.org/10.5281/zenodo.23915348)

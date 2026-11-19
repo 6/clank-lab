@@ -8,6 +8,7 @@ Zenodo records.
 
 - Proves that every class of graphs closed under taking subgraphs with bounded game chromatic number has bounded arboricity, answering Zhu's Question 3 (1999) in the affirmative: every graph of large enough average degree has a subgraph on which Bob wins the coloring game with any number of colors up to a given bound.
 - Includes the paper, with a written proof, and the Lean proof of both results, with the theorem of Kühn and Osthus on 4-cycle-free subgraphs as its one cited input.
+- Zenodo: [10.5281/zenodo.24376624](https://doi.org/10.5281/zenodo.24376624)
 
 ## heawood-family-four-flat v1 (November 11, 2026)
 

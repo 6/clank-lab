@@ -12,6 +12,8 @@ The proofs, the Lean formalization and the text were produced by AI models (from
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24376624](https://doi.org/10.5281/zenodo.24376624)
+
 ## Check it
 
 Install [elan](https://github.com/leanprover/elan) and Git. From `lean/`, run:
@@ -38,6 +40,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, P.},
   title = {{Monotone classes of bounded game chromatic number have bounded arboricity}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/game-chromatic-arboricity-v1/results/game-chromatic-arboricity}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/game-chromatic-arboricity-v1/results/game-chromatic-arboricity}},
+  doi          = {10.5281/zenodo.24376624}
 }
 ```

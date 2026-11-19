@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-sequence v9 (November 19, 2026)
+
+- Correction: cite Tomer Haver's Yellowstone papers (posted October 22–23, 2026) as later work, posted after this result's first release on October 20, 2026 ([Zenodo version 1](https://doi.org/10.5281/zenodo.23491265)). The theorem and its checks are unchanged.
+- Correction: layout: the review-status and AI-assistance sentences move from a paragraph under the abstract into the abstract. The theorem and its checks are unchanged.
+
 ## pluto-prediscovery v1 (November 19, 2026)
 
 - Reports faint images at Pluto's predicted position on three public plate scans, Harvard plate MA 731 (December 21, 1908) and the simultaneous Heidelberg plates B2247a and B2248b (February 20, 1909), older than the accepted prediscovery images of January 1914. The identification is offered as a hypothesis for experts to test on the original glass.

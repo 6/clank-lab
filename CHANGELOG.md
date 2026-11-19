@@ -7,6 +7,7 @@ Zenodo records.
 ## path-ramsey v10 (November 19, 2026)
 
 - Correction: cite Shao, Zhu, Xu and Kosari's proof (posted November 2, 2026) as work posted after this result's first release on October 21, 2026 ([Zenodo version 1](https://doi.org/10.5281/zenodo.23548859)); their package records a verification run of September 8, 2026. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24382551](https://doi.org/10.5281/zenodo.24382551)
 
 ## ekg-sequence v9 (November 19, 2026)
 

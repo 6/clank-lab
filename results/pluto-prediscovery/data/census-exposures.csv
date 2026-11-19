@@ -1,0 +1,1907 @@
+plate,date_utc,series,solnum,coverage,limit_B,pluto_B,margin,verdict
+B 971,1886-12-28T02:02,b,-1,inside,,16.710,,not tested (no limit)
+B 1740,1887-10-15T08:25,b,-1,inside,,16.714,,not tested (no limit)
+B 1782,1887-10-31T05:46,b,-1,inside,,16.697,,not tested (no limit)
+B 1821,1887-11-05T06:34,b,-1,inside,,16.692,,not tested (no limit)
+B 2091,1887-12-23T03:34,b,-1,inside,,16.696,,not tested (no limit)
+C 2326,1889-12-24T04:29,c,-1,inside,,16.679,,not tested (no limit)
+I 454,1890-01-10T00:44,i,0,inside,,16.697,,not tested (no limit)
+I 456,1890-01-10T02:07,i,-1,inside,,16.697,,not tested (no limit)
+I 516,1890-01-19T02:09,i,-1,inside,,16.707,,not tested (no limit)
+I 518,1890-01-21T01:52,i,0,inside,,16.709,,not tested (no limit)
+I 1956,1890-10-10T07:21,i,-1,inside,,16.697,,not tested (no limit)
+I 1984,1890-10-14T07:03,i,-1,inside,,16.693,,not tested (no limit)
+I 1985,1890-10-15T08:14,i,-1,inside,,16.692,,not tested (no limit)
+I 2001,1890-10-16T09:15,i,-1,inside,,16.691,,not tested (no limit)
+I 2019,1890-10-21T08:10,i,-1,inside,,16.685,,not tested (no limit)
+I 2110,1890-10-31T08:16,i,-1,inside,,16.674,,not tested (no limit)
+I 2169,1890-11-04T08:45,i,-1,inside,,16.670,,not tested (no limit)
+I 2206,1890-11-06T07:31,i,-1,inside,,16.668,,not tested (no limit)
+I 2261,1890-11-15T04:56,i,-1,inside,,16.659,,not tested (no limit)
+I 2282,1890-11-19T03:47,i,-1,inside,,16.656,,not tested (no limit)
+I 2363,1890-11-28T03:28,i,-1,inside,,16.652,,not tested (no limit)
+I 2576,1890-12-24T04:20,i,-1,inside,,16.668,,not tested (no limit)
+I 2585,1890-12-24T06:14,i,-1,inside,,16.668,,not tested (no limit)
+I 2586,1890-12-24T06:27,i,-1,inside,,16.668,,not tested (no limit)
+I 2831,1891-01-16T02:16,i,0,inside,,16.693,,not tested (no limit)
+I 2950,1891-02-02T00:53,i,0,inside,,16.711,,not tested (no limit)
+I 4117,1891-08-29T08:30,i,-1,inside,,16.731,,not tested (no limit)
+I 4218,1891-09-12T09:08,i,-1,inside,,16.719,,not tested (no limit)
+I 4401,1891-10-01T05:37,i,0,inside,,16.700,,not tested (no limit)
+I 4404,1891-10-01T08:23,i,-1,inside,,16.700,,not tested (no limit)
+I 4546,1891-10-17T06:16,i,0,inside,,16.682,,not tested (no limit)
+I 4634,1891-10-29T04:37,i,0,inside,,16.668,,not tested (no limit)
+I 4635,1891-10-29T04:49,i,0,inside,,16.668,,not tested (no limit)
+I 4641,1891-10-29T07:46,i,0,inside,13.420,16.668,-3.248,short
+I 4642,1891-10-29T07:58,i,0,inside,,16.668,,not tested (no limit)
+I 5035,1891-12-11T04:50,i,0,inside,13.821,16.647,-2.826,short
+I 5036,1891-12-11T05:01,i,0,inside,,16.647,,not tested (no limit)
+I 5088,1891-12-12T04:54,i,0,inside,,16.647,,not tested (no limit)
+I 5089,1891-12-12T05:05,i,0,edge,,16.647,,not tested (edge unresolved)
+I 5293,1891-12-31T02:59,i,-1,inside,,16.665,,not tested (no limit)
+I 5333,1892-01-06T02:32,i,0,inside,15.119,16.672,-1.553,short
+I 5405,1892-01-17T02:00,i,0,inside,14.867,16.684,-1.817,short
+I 7684,1892-12-17T03:48,i,0,inside,14.044,16.641,-2.597,short
+I 7764,1892-12-19T03:56,i,-1,inside,,16.643,,not tested (no limit)
+I 7700,1892-12-21T03:48,i,0,inside,,16.645,,not tested (no limit)
+I 7741,1892-12-25T03:20,i,0,inside,14.252,16.649,-2.397,short
+I 9543,1893-09-21T09:36,i,-1,inside,,16.693,,not tested (no limit)
+AB 126,1893-09-23T08:19,ab,-1,inside,,16.691,,not tested (no limit)
+I 9575,1893-10-03T09:24,i,0,inside,13.603,16.680,-3.077,short
+I 9645,1893-10-11T08:56,i,-1,inside,,16.671,,not tested (no limit)
+BO 79,1893-10-15T03:00,bo,-1,inside,,16.666,,not tested (no limit)
+BO 83,1893-10-18T06:08,bo,-1,inside,,16.663,,not tested (no limit)
+BO 84,1893-10-18T07:10,bo,-1,inside,,16.663,,not tested (no limit)
+BO 89,1893-10-19T04:16,bo,-1,inside,,16.662,,not tested (no limit)
+BO 91,1893-10-19T06:20,bo,-1,inside,,16.662,,not tested (no limit)
+I 9856,1893-11-01T06:39,i,-1,inside,,16.647,,not tested (no limit)
+BO 108,1893-11-02T04:19,bo,-1,inside,,16.646,,not tested (no limit)
+BO 112,1893-11-03T03:45,bo,-1,inside,,16.645,,not tested (no limit)
+AB 151,1893-11-04T04:41,ab,-1,edge,,16.644,,not tested (edge unresolved)
+BO 116,1893-11-04T05:11,bo,-1,inside,,16.644,,not tested (no limit)
+BO 117,1893-11-04T06:23,bo,-1,inside,,16.643,,not tested (no limit)
+I 9919,1893-11-16T03:23,i,-1,inside,,16.631,,not tested (no limit)
+AB 167,1893-11-16T09:46,ab,-1,inside,,16.631,,not tested (no limit)
+AB 168,1893-11-16T10:40,ab,-1,inside,,16.631,,not tested (no limit)
+AB 169,1893-11-16T11:16,ab,-1,inside,,16.631,,not tested (no limit)
+AB 169,1893-11-16T11:21,ab,-1,inside,,16.631,,not tested (no limit)
+I 9930,1893-11-17T05:38,i,-1,inside,,16.630,,not tested (no limit)
+B 10653,1893-11-18T04:08,b,-1,inside,,16.630,,not tested (no limit)
+I 10075,1893-11-27T02:26,i,0,inside,13.618,16.624,-3.006,short
+I 10089,1893-11-27T05:41,i,0,inside,,16.624,,not tested (no limit)
+BO 129,1893-11-29T02:34,bo,-1,inside,,16.623,,not tested (no limit)
+BO 134,1893-12-06T03:55,bo,-1,inside,,16.623,,not tested (no limit)
+AB 173,1893-12-08T01:54,ab,-1,inside,,16.624,,not tested (no limit)
+AB 175,1893-12-08T04:23,ab,-1,inside,,16.624,,not tested (no limit)
+I 10258,1893-12-24T02:14,i,-1,inside,,16.637,,not tested (no limit)
+AB 180,1893-12-24T06:22,ab,-1,inside,,16.637,,not tested (no limit)
+AB 180,1893-12-24T06:28,ab,-1,inside,,16.637,,not tested (no limit)
+AB 181,1893-12-24T07:10,ab,-1,inside,,16.637,,not tested (no limit)
+AB 181,1893-12-24T07:33,ab,-1,inside,,16.637,,not tested (no limit)
+AB 182,1893-12-24T08:12,ab,-1,inside,,16.637,,not tested (no limit)
+AB 185,1893-12-25T07:01,ab,-1,inside,,16.638,,not tested (no limit)
+AB 185,1893-12-25T07:07,ab,-1,inside,,16.638,,not tested (no limit)
+AB 185,1893-12-25T07:12,ab,-1,inside,,16.638,,not tested (no limit)
+AB 191,1894-01-20T04:49,ab,-1,inside,,16.666,,not tested (no limit)
+AB 191,1894-01-20T04:55,ab,-1,inside,,16.666,,not tested (no limit)
+AB 191,1894-01-20T05:28,ab,-1,inside,,16.666,,not tested (no limit)
+AB 192,1894-01-20T06:01,ab,-1,inside,,16.666,,not tested (no limit)
+AB 192,1894-01-20T06:15,ab,-1,inside,,16.666,,not tested (no limit)
+AB 192,1894-01-20T06:21,ab,-1,inside,,16.666,,not tested (no limit)
+AB 192,1894-01-20T06:34,ab,-1,inside,,16.666,,not tested (no limit)
+AB 193,1894-01-20T06:56,ab,-1,inside,,16.666,,not tested (no limit)
+AB 193,1894-01-20T07:08,ab,-1,inside,,16.666,,not tested (no limit)
+I 10523,1894-01-23T00:09,i,0,inside,,16.669,,not tested (no limit)
+I 10532,1894-01-23T01:42,i,0,inside,,16.669,,not tested (no limit)
+I 10617,1894-02-01T03:14,i,-1,inside,,16.679,,not tested (no limit)
+I 10637,1894-02-06T02:01,i,-1,inside,,16.684,,not tested (no limit)
+AB 212,1894-03-04T00:29,ab,-1,inside,,16.707,,not tested (no limit)
+B 11886,1894-08-14T09:58,b,0,inside,13.251,16.712,-3.461,short
+B 12027,1894-08-29T09:50,b,0,inside,,16.704,,not tested (no limit)
+BO 287,1894-09-06T08:24,bo,-1,inside,,16.697,,not tested (no limit)
+I 11470,1894-09-21T09:05,i,0,inside,,16.684,,not tested (no limit)
+I 11493,1894-09-24T09:20,i,-1,inside,,16.681,,not tested (no limit)
+BO 323,1894-09-28T05:35,bo,-1,inside,,16.676,,not tested (no limit)
+BO 324,1894-09-28T06:35,bo,-1,inside,,16.676,,not tested (no limit)
+BO 325,1894-09-28T07:14,bo,-1,inside,,16.676,,not tested (no limit)
+I 11581,1894-10-11T08:34,i,-1,inside,,16.662,,not tested (no limit)
+I 11739,1894-10-19T07:43,i,0,inside,,16.653,,not tested (no limit)
+B 12410,1894-10-31T06:58,b,-1,edge,,16.639,,not tested (edge unresolved)
+I 11790,1894-11-01T06:51,i,-1,inside,,16.638,,not tested (no limit)
+I 11815,1894-11-07T06:30,i,-1,inside,,16.631,,not tested (no limit)
+I 11861,1894-11-12T06:14,i,-1,inside,,16.626,,not tested (no limit)
+AB 412,1894-11-20T04:26,ab,-1,inside,,16.618,,not tested (no limit)
+AB 414,1894-11-20T06:37,ab,-1,inside,,16.618,,not tested (no limit)
+I 11954,1894-11-20T06:44,i,-1,inside,,16.618,,not tested (no limit)
+AB 420,1894-11-23T10:42,ab,-1,inside,,16.616,,not tested (no limit)
+AB 420,1894-11-23T10:47,ab,-1,inside,,16.616,,not tested (no limit)
+I 11978,1894-11-26T06:46,i,-1,inside,,16.614,,not tested (no limit)
+AB 428,1894-11-29T04:00,ab,-1,inside,,16.612,,not tested (no limit)
+I 11992,1894-11-29T04:58,i,-1,inside,,16.612,,not tested (no limit)
+AB 429,1894-11-29T06:13,ab,-1,inside,,16.612,,not tested (no limit)
+AB 442,1894-12-04T05:22,ab,-1,inside,,16.612,,not tested (no limit)
+I 12024,1894-12-06T04:23,i,0,inside,,16.612,,not tested (no limit)
+AB 445,1894-12-16T00:56,ab,-1,inside,,16.618,,not tested (no limit)
+I 12077,1894-12-16T01:12,i,0,inside,13.429,16.618,-3.189,short
+I 12119,1894-12-20T04:42,i,0,inside,13.388,16.621,-3.233,short
+AB 465,1894-12-23T03:51,ab,-1,inside,,16.624,,not tested (no limit)
+I 12149,1894-12-24T03:32,i,-1,inside,,16.625,,not tested (no limit)
+AB 472,1894-12-24T05:28,ab,-1,inside,,16.625,,not tested (no limit)
+AB 487,1894-12-30T01:31,ab,-1,inside,,16.631,,not tested (no limit)
+AB 492,1895-01-02T01:38,ab,-1,inside,,16.634,,not tested (no limit)
+AB 498,1895-01-02T23:21,ab,-1,inside,,16.635,,not tested (no limit)
+AB 502,1895-01-03T03:48,ab,-1,inside,,16.635,,not tested (no limit)
+AB 505,1895-01-05T04:38,ab,-1,inside,,16.637,,not tested (no limit)
+AB 514,1895-01-18T00:46,ab,-1,inside,,16.652,,not tested (no limit)
+I 12243,1895-01-24T03:16,i,-1,inside,,16.659,,not tested (no limit)
+I 12258,1895-01-26T01:25,i,-1,inside,,16.661,,not tested (no limit)
+I 12260,1895-01-28T01:20,i,-1,inside,,16.663,,not tested (no limit)
+AB 547,1895-01-30T01:18,ab,-1,inside,,16.665,,not tested (no limit)
+I 12361,1895-02-15T00:54,i,-1,inside,,16.681,,not tested (no limit)
+I 12397,1895-02-21T01:06,i,0,inside,,16.687,,not tested (no limit)
+I 12434,1895-02-24T02:00,i,0,inside,,16.689,,not tested (no limit)
+I 13721,1895-10-22T09:55,i,-1,inside,,16.639,,not tested (no limit)
+I 13725,1895-10-24T07:03,i,-1,inside,,16.637,,not tested (no limit)
+B 14922,1895-10-24T07:11,b,0,inside,13.353,16.637,-3.284,short
+I 13727,1895-10-24T09:42,i,-1,inside,,16.637,,not tested (no limit)
+I 13734,1895-10-25T08:47,i,-1,inside,,16.636,,not tested (no limit)
+I 13739,1895-10-26T07:04,i,-1,inside,,16.635,,not tested (no limit)
+I 13740,1895-10-26T08:18,i,-1,inside,,16.635,,not tested (no limit)
+BO 402,1895-11-12T06:15,bo,-1,inside,,16.616,,not tested (no limit)
+BO 406,1895-11-13T04:20,bo,-1,inside,,16.615,,not tested (no limit)
+B 15159,1895-11-15T08:43,b,-1,inside,,16.613,,not tested (no limit)
+BO 424,1895-11-15T08:44,bo,-1,inside,,16.613,,not tested (no limit)
+BO 425,1895-11-16T02:10,bo,-1,inside,,16.612,,not tested (no limit)
+BO 431,1895-11-17T05:58,bo,-1,inside,,16.611,,not tested (no limit)
+I 13878,1895-11-28T07:55,i,0,inside,,16.602,,not tested (no limit)
+I 13959,1895-12-01T07:44,i,-1,inside,,16.601,,not tested (no limit)
+I 13960,1895-12-01T07:58,i,-1,edge,,16.601,,not tested (edge unresolved)
+I 14070,1895-12-17T05:27,i,-1,inside,,16.606,,not tested (no limit)
+I 14092,1895-12-19T04:53,i,-1,inside,,16.608,,not tested (no limit)
+I 14196,1896-01-02T05:47,i,0,inside,,16.622,,not tested (no limit)
+I 14525,1896-02-26T01:10,i,0,inside,,16.679,,not tested (no limit)
+I 14675,1896-03-22T00:58,i,-1,inside,,16.694,,not tested (no limit)
+AB 724,1896-04-04T00:53,ab,-1,inside,,16.698,,not tested (no limit)
+AB 733,1896-04-10T00:32,ab,-1,inside,,16.699,,not tested (no limit)
+AB 739,1896-04-10T23:10,ab,-1,inside,,16.699,,not tested (no limit)
+BO 671,1896-10-07T07:14,bo,-1,inside,,16.646,,not tested (no limit)
+I 16241,1896-10-23T06:10,i,-1,inside,,16.627,,not tested (no limit)
+I 16242,1896-10-23T06:23,i,0,inside,,16.627,,not tested (no limit)
+I 16367,1896-10-28T07:18,i,0,inside,,16.621,,not tested (no limit)
+I 16368,1896-10-28T07:32,i,0,inside,,16.621,,not tested (no limit)
+I 16375,1896-10-28T09:35,i,-1,inside,,16.621,,not tested (no limit)
+I 16376,1896-10-28T09:46,i,-1,inside,,16.621,,not tested (no limit)
+I 16390,1896-10-31T06:11,i,0,inside,,16.618,,not tested (no limit)
+I 16435,1896-11-03T08:48,i,-1,inside,,16.614,,not tested (no limit)
+BO 679,1896-11-07T07:49,bo,-1,inside,,16.610,,not tested (no limit)
+BO 682,1896-11-08T05:10,bo,-1,inside,,16.609,,not tested (no limit)
+I 16503,1896-11-13T06:57,i,0,inside,,16.604,,not tested (no limit)
+I 16504,1896-11-13T07:16,i,0,inside,,16.604,,not tested (no limit)
+I 16579,1896-11-23T03:14,i,0,inside,,16.594,,not tested (no limit)
+BO 698,1896-11-28T04:54,bo,-1,inside,,16.591,,not tested (no limit)
+BO 702,1896-11-29T04:39,bo,-1,inside,,16.590,,not tested (no limit)
+BO 707,1896-12-01T07:00,bo,-1,inside,,16.589,,not tested (no limit)
+I 16609,1896-12-01T07:26,i,-1,inside,,16.589,,not tested (no limit)
+AB 793,1896-12-02T13:26,ab,-1,inside,,16.589,,not tested (no limit)
+AB 796,1896-12-29T08:51,ab,-1,inside,,16.606,,not tested (no limit)
+I 16921,1896-12-30T06:03,i,-1,inside,,16.607,,not tested (no limit)
+I 16988,1897-01-07T03:42,i,0,inside,15.322,16.615,-1.293,short
+I 17011,1897-01-08T05:20,i,-1,inside,,16.617,,not tested (no limit)
+I 17083,1897-01-17T03:39,i,-1,inside,,16.627,,not tested (no limit)
+I 17084,1897-01-17T03:45,i,-1,inside,,16.627,,not tested (no limit)
+BO 721,1897-01-27T02:43,bo,-1,inside,,16.638,,not tested (no limit)
+BO 722,1897-01-28T02:17,bo,-1,inside,,16.639,,not tested (no limit)
+BO 726,1897-01-30T02:33,bo,-1,inside,,16.641,,not tested (no limit)
+I 17259,1897-02-05T02:05,i,0,inside,14.448,16.647,-2.199,short
+I 17307,1897-02-11T23:43,i,-1,inside,,16.655,,not tested (no limit)
+I 17308,1897-02-11T23:58,i,-1,inside,,16.655,,not tested (no limit)
+AB 798,1897-02-24T01:24,ab,-1,inside,,16.666,,not tested (no limit)
+AB 800,1897-02-25T01:31,ab,-1,inside,,16.666,,not tested (no limit)
+AB 802,1897-02-27T22:18,ab,-1,inside,,16.669,,not tested (no limit)
+AB 803,1897-02-28T00:11,ab,-1,inside,,16.669,,not tested (no limit)
+BO 747,1897-04-24T01:31,bo,-1,inside,,16.687,,not tested (no limit)
+I 19064,1897-09-29T09:27,i,0,inside,,16.644,,not tested (no limit)
+I 19364,1897-10-26T08:46,i,-1,inside,,16.613,,not tested (no limit)
+I 19366,1897-10-26T09:36,i,-1,inside,,16.613,,not tested (no limit)
+I 19367,1897-10-26T09:47,i,-1,inside,,16.613,,not tested (no limit)
+BO 920,1897-10-28T04:30,bo,-1,inside,,16.611,,not tested (no limit)
+BO 921,1897-10-28T05:42,bo,-1,inside,,16.611,,not tested (no limit)
+BO 921,1897-10-28T05:48,bo,-1,inside,,16.611,,not tested (no limit)
+BO 922,1897-10-28T07:04,bo,-1,inside,,16.611,,not tested (no limit)
+BO 922,1897-10-28T07:10,bo,-1,inside,,16.611,,not tested (no limit)
+BO 923,1897-10-28T07:51,bo,-1,inside,,16.611,,not tested (no limit)
+BO 923,1897-10-28T07:57,bo,-1,inside,,16.611,,not tested (no limit)
+BO 924,1897-10-28T08:27,bo,-1,inside,,16.611,,not tested (no limit)
+BO 926,1897-10-30T06:26,bo,-1,inside,,16.609,,not tested (no limit)
+I 19430,1897-11-04T07:25,i,-1,inside,,16.603,,not tested (no limit)
+I 19594,1897-11-18T06:49,i,0,inside,,16.588,,not tested (no limit)
+I 19595,1897-11-18T07:05,i,0,edge,,16.588,,not tested (edge unresolved)
+I 19621,1897-11-24T02:36,i,-1,inside,,16.582,,not tested (no limit)
+I 19626,1897-11-24T06:50,i,-1,inside,,16.582,,not tested (no limit)
+BO 929,1897-11-25T04:31,bo,-1,inside,,16.581,,not tested (no limit)
+I 19653,1897-11-30T06:23,i,-1,inside,,16.578,,not tested (no limit)
+I 19654,1897-11-30T07:24,i,-1,inside,,16.578,,not tested (no limit)
+I 19802,1897-12-20T03:59,i,-1,inside,,16.584,,not tested (no limit)
+I 19885,1898-01-02T02:23,i,0,inside,14.231,16.597,-2.366,short
+I 19919,1898-01-04T02:52,i,-1,inside,,16.599,,not tested (no limit)
+I 19963,1898-01-06T03:42,i,-1,inside,,16.601,,not tested (no limit)
+I 19964,1898-01-06T04:00,i,-1,inside,,16.601,,not tested (no limit)
+I 20221,1898-02-14T00:42,i,-1,inside,,16.644,,not tested (no limit)
+I 20488,1898-03-15T01:28,i,0,inside,13.924,16.667,-2.743,short
+C 11101,1898-03-18T01:07,c,-1,inside,,16.668,,not tested (no limit)
+I 20569,1898-04-02T00:12,i,0,inside,13.041,16.674,-3.633,short
+I 21329,1898-10-06T09:33,i,0,inside,,16.626,,not tested (no limit)
+I 21351,1898-10-07T04:58,i,0,inside,,16.625,,not tested (no limit)
+AC 55,1898-10-10T07:02,ac,0,inside,11.424,16.621,-5.197,short
+I 21375,1898-10-10T09:24,i,0,inside,,16.621,,not tested (no limit)
+AC 62,1898-10-17T07:24,ac,0,inside,12.167,16.613,-4.446,short
+AC 63,1898-10-17T08:35,ac,0,inside,,16.613,,not tested (no limit)
+I 21451,1898-10-18T06:20,i,0,inside,,16.612,,not tested (no limit)
+I 21452,1898-10-18T06:32,i,-1,inside,,16.612,,not tested (no limit)
+I 21466,1898-10-24T05:34,i,-1,inside,,16.605,,not tested (no limit)
+I 21467,1898-10-24T06:18,i,0,inside,,16.605,,not tested (no limit)
+AC 73,1898-10-25T07:37,ac,0,inside,10.408,16.604,-6.196,short
+AC 81,1898-10-28T04:21,ac,0,inside,,16.600,,not tested (no limit)
+AC 82,1898-10-28T05:33,ac,0,inside,,16.600,,not tested (no limit)
+I 21587,1898-11-01T07:46,i,-1,inside,,16.595,,not tested (no limit)
+AC 96,1898-11-03T05:37,ac,-1,inside,,16.593,,not tested (no limit)
+I 21622,1898-11-03T07:59,i,0,edge,,16.593,,not tested (edge unresolved)
+I 21677,1898-11-09T07:18,i,-1,inside,,16.586,,not tested (no limit)
+I 21719,1898-11-21T07:08,i,0,inside,,16.574,,not tested (no limit)
+I 21856,1898-12-02T02:03,i,0,inside,,16.565,,not tested (no limit)
+I 21866,1898-12-02T04:45,i,0,inside,,16.565,,not tested (no limit)
+I 21867,1898-12-02T04:56,i,0,inside,,16.565,,not tested (no limit)
+AC 108,1898-12-08T06:52,ac,-1,inside,,16.564,,not tested (no limit)
+AC 110,1898-12-09T04:48,ac,-1,inside,,16.564,,not tested (no limit)
+AC 117,1898-12-12T06:30,ac,0,inside,,16.565,,not tested (no limit)
+AC 119,1898-12-15T04:24,ac,-1,inside,,16.567,,not tested (no limit)
+AC 121,1898-12-16T03:55,ac,0,edge,,16.567,,not tested (edge unresolved)
+AC 126,1898-12-17T03:20,ac,0,inside,,16.568,,not tested (no limit)
+AC 138,1898-12-24T02:00,ac,-1,inside,,16.574,,not tested (no limit)
+AC 148,1899-01-11T01:18,ac,-1,inside,,16.593,,not tested (no limit)
+AC 150,1899-01-12T01:23,ac,0,inside,12.560,16.594,-4.034,short
+AC 158,1899-01-18T01:01,ac,0,inside,11.738,16.601,-4.863,short
+AC 164,1899-01-19T02:21,ac,0,inside,13.523,16.602,-3.079,short
+AC 165,1899-01-19T03:23,ac,-1,inside,,16.602,,not tested (no limit)
+AC 178,1899-01-27T00:19,ac,0,inside,,16.611,,not tested (no limit)
+I 22233,1899-01-27T00:56,i,0,inside,14.101,16.611,-2.510,short
+AC 179,1899-01-27T01:24,ac,0,inside,,16.611,,not tested (no limit)
+AC 221,1899-02-25T01:02,ac,0,inside,,16.640,,not tested (no limit)
+AC 256,1899-03-25T00:38,ac,0,inside,,16.659,,not tested (no limit)
+AM 134,1899-09-02T08:29,am,0,inside,,16.647,,not tested (no limit)
+AM 147,1899-09-09T08:53,am,0,inside,11.528,16.642,-5.114,short
+AC 424,1899-09-13T08:59,ac,-1,inside,,16.638,,not tested (no limit)
+AC 431,1899-09-14T08:55,ac,0,inside,,16.637,,not tested (no limit)
+AC 443,1899-09-16T07:26,ac,0,inside,10.485,16.635,-6.150,short
+AC 447,1899-09-17T07:44,ac,0,inside,,16.635,,not tested (no limit)
+I 23627,1899-09-22T09:40,i,-1,inside,,16.630,,not tested (no limit)
+AC 458,1899-09-27T09:02,ac,-1,inside,,16.625,,not tested (no limit)
+AM 170,1899-09-28T08:53,am,0,inside,,16.624,,not tested (no limit)
+AM 178,1899-09-30T07:59,am,0,inside,11.405,16.622,-5.217,short
+AM 179,1899-09-30T09:15,am,0,inside,11.778,16.622,-4.844,short
+AM 187,1899-10-01T09:12,am,0,inside,,16.620,,not tested (no limit)
+AM 192,1899-10-03T08:31,am,0,inside,11.537,16.618,-5.081,short
+I 23716,1899-10-03T09:21,i,-1,inside,,16.618,,not tested (no limit)
+AC 477,1899-10-13T09:14,ac,0,inside,10.510,16.607,-6.097,short
+AM 222,1899-10-14T05:14,am,0,inside,12.920,16.606,-3.686,short
+I 23823,1899-10-17T05:41,i,0,inside,,16.602,,not tested (no limit)
+I 23824,1899-10-17T05:53,i,0,inside,,16.602,,not tested (no limit)
+I 23872,1899-10-21T07:22,i,0,inside,,16.597,,not tested (no limit)
+AM 252,1899-10-27T06:53,am,0,inside,13.081,16.590,-3.509,short
+AM 261,1899-10-29T06:48,am,0,inside,12.596,16.588,-3.992,short
+AC 499,1899-11-06T06:55,ac,0,inside,11.784,16.579,-4.795,short
+AC 507,1899-11-08T08:25,ac,0,inside,,16.576,,not tested (no limit)
+AM 265,1899-11-10T04:14,am,-1,inside,,16.574,,not tested (no limit)
+AM 269,1899-11-10T08:13,am,-1,inside,,16.574,,not tested (no limit)
+AM 277,1899-11-14T03:48,am,0,inside,11.588,16.570,-4.982,short
+AC 541,1899-11-18T05:33,ac,0,inside,,16.565,,not tested (no limit)
+AC 542,1899-11-18T05:43,ac,0,inside,,16.565,,not tested (no limit)
+AC 546,1899-11-21T02:00,ac,0,inside,,16.562,,not tested (no limit)
+AC 547,1899-11-21T03:08,ac,0,inside,11.807,16.562,-4.755,short
+AM 303,1899-11-22T06:28,am,0,inside,12.281,16.561,-4.280,short
+AM 310,1899-11-23T05:33,am,0,inside,12.063,16.560,-4.497,short
+AM 315,1899-11-24T06:58,am,0,inside,,16.559,,not tested (no limit)
+AC 552,1899-11-25T07:38,ac,0,inside,12.043,16.558,-4.515,short
+AC 557,1899-11-26T06:10,ac,-1,inside,,16.558,,not tested (no limit)
+AM 324,1899-11-29T06:54,am,-1,inside,,16.555,,not tested (no limit)
+AC 561,1899-12-03T04:06,ac,-1,inside,,16.553,,not tested (no limit)
+AM 337,1899-12-03T04:34,am,0,inside,11.943,16.553,-4.610,short
+AC 566,1899-12-05T05:20,ac,0,inside,13.837,16.552,-2.715,short
+AC 569,1899-12-06T01:36,ac,0,inside,,16.551,,not tested (no limit)
+AM 348,1899-12-06T06:05,am,0,edge,,16.551,,not tested (edge unresolved)
+AC 602,1899-12-17T00:29,ac,0,inside,,16.555,,not tested (no limit)
+AC 603,1899-12-17T00:36,ac,0,inside,,16.555,,not tested (no limit)
+AC 604,1899-12-17T00:55,ac,0,inside,,16.555,,not tested (no limit)
+AC 613,1899-12-21T06:25,ac,0,inside,,16.558,,not tested (no limit)
+AC 617,1899-12-22T01:27,ac,0,inside,,16.559,,not tested (no limit)
+AC 622,1899-12-27T03:55,ac,0,inside,,16.563,,not tested (no limit)
+AC 624,1899-12-28T00:04,ac,0,inside,,16.564,,not tested (no limit)
+AC 627,1899-12-29T03:34,ac,-1,inside,,16.565,,not tested (no limit)
+I 24358,1899-12-31T04:06,i,0,inside,14.508,16.567,-2.059,short
+AC 643,1900-01-03T03:37,ac,-1,inside,,16.570,,not tested (no limit)
+I 24367,1900-01-03T04:04,i,0,inside,14.860,16.570,-1.710,short
+AC 644,1900-01-03T05:26,ac,0,inside,,16.570,,not tested (no limit)
+AC 650,1900-01-04T01:42,ac,0,inside,13.392,16.571,-3.179,short
+AC 652,1900-01-04T04:38,ac,0,inside,,16.571,,not tested (no limit)
+AC 663,1900-01-07T00:45,ac,0,inside,11.822,16.575,-4.753,short
+AC 669,1900-01-09T00:54,ac,0,inside,11.266,16.577,-5.311,short
+I 24445,1900-01-17T03:54,i,0,inside,14.045,16.586,-2.541,short
+AC 688,1900-01-24T00:49,ac,0,inside,,16.594,,not tested (no limit)
+AC 719,1900-02-19T02:53,ac,0,inside,11.767,16.621,-4.854,short
+AC 720,1900-02-19T04:16,ac,0,inside,10.875,16.621,-5.746,short
+I 24740,1900-03-11T01:55,i,0,inside,,16.638,,not tested (no limit)
+AC 761,1900-03-15T03:44,ac,0,inside,,16.641,,not tested (no limit)
+AC 763,1900-03-17T01:45,ac,0,inside,10.333,16.642,-6.309,short
+AC 769,1900-03-18T02:51,ac,-1,inside,,16.642,,not tested (no limit)
+I 24904,1900-03-22T01:52,i,0,inside,14.219,16.645,-2.426,short
+AB 832,1900-03-28T01:41,ab,-1,inside,,16.647,,not tested (no limit)
+AB 835,1900-03-29T01:05,ab,-1,inside,,16.648,,not tested (no limit)
+AM 674,1900-09-20T09:01,am,0,inside,12.233,16.620,-4.387,short
+AC 1008,1900-09-20T09:08,ac,0,inside,,16.620,,not tested (no limit)
+AM 698,1900-10-17T09:01,am,0,inside,13.531,16.591,-3.060,short
+AM 708,1900-11-02T08:39,am,0,inside,11.853,16.572,-4.719,short
+I 26015,1900-11-03T07:30,i,-1,inside,,16.571,,not tested (no limit)
+AM 717,1900-11-14T05:44,am,0,inside,12.108,16.558,-4.450,short
+AM 726,1900-11-24T05:33,am,0,inside,11.291,16.548,-5.257,short
+B 26738,1900-11-28T04:55,b,0,inside,,16.544,,not tested (no limit)
+AI 31,1900-12-09T05:28,ai,0,inside,,16.538,,not tested (no limit)
+AI 33,1900-12-10T03:47,ai,-1,inside,,16.538,,not tested (no limit)
+AC 1047,1900-12-12T06:46,ac,0,inside,,16.538,,not tested (no limit)
+AC 1066,1900-12-18T04:07,ac,0,inside,12.064,16.541,-4.477,short
+I 26255,1900-12-18T04:44,i,0,inside,,16.541,,not tested (no limit)
+I 26262,1900-12-19T04:29,i,-1,inside,,16.542,,not tested (no limit)
+AC 1074,1900-12-19T06:26,ac,-1,inside,,16.542,,not tested (no limit)
+AC 1082,1900-12-23T03:00,ac,0,inside,11.741,16.545,-4.804,short
+AB 875,1900-12-23T04:51,ab,-1,inside,,16.545,,not tested (no limit)
+AC 1088,1900-12-25T04:55,ac,0,inside,,16.547,,not tested (no limit)
+AI 39,1900-12-27T00:00,ai,0,inside,10.928,16.549,-5.621,short
+AC 1101,1900-12-29T03:46,ac,0,inside,12.376,16.551,-4.175,short
+AI 46,1900-12-29T03:46,ai,0,inside,11.107,16.551,-5.444,short
+AB 890,1900-12-29T03:48,ab,-1,inside,,16.551,,not tested (no limit)
+AC 1110,1900-12-30T05:32,ac,0,inside,11.761,16.552,-4.791,short
+AC 1117,1901-01-02T04:02,ac,-1,inside,,16.555,,not tested (no limit)
+AC 1127,1901-01-05T02:51,ac,-1,inside,,16.558,,not tested (no limit)
+AI 72,1901-01-05T02:51,ai,-1,inside,,16.558,,not tested (no limit)
+AI 73,1901-01-05T23:25,ai,0,inside,10.879,16.559,-5.680,short
+AI 75,1901-01-06T01:50,ai,-1,inside,,16.559,,not tested (no limit)
+AC 1132,1901-01-06T04:37,ac,0,inside,,16.559,,not tested (no limit)
+AI 77,1901-01-06T04:37,ai,0,inside,,16.559,,not tested (no limit)
+AC 1135,1901-01-08T02:54,ac,-1,inside,,16.561,,not tested (no limit)
+AI 80,1901-01-08T02:54,ai,0,inside,,16.561,,not tested (no limit)
+AC 1136,1901-01-08T04:48,ac,-1,inside,,16.561,,not tested (no limit)
+AI 81,1901-01-08T04:48,ai,-1,inside,,16.561,,not tested (no limit)
+AC 1142,1901-01-09T01:40,ac,0,inside,,16.563,,not tested (no limit)
+AI 89,1901-01-14T02:11,ai,0,inside,11.060,16.568,-5.508,short
+AI 95,1901-01-27T01:21,ai,0,inside,10.975,16.583,-5.608,short
+AC 1178,1901-01-27T02:45,ac,0,inside,12.410,16.583,-4.173,short
+AI 96,1901-01-27T02:45,ai,0,inside,11.003,16.583,-5.580,short
+AC 1190,1901-02-02T03:05,ac,-1,inside,,16.590,,not tested (no limit)
+AI 98,1901-02-03T01:29,ai,0,inside,,16.591,,not tested (no limit)
+AI 100,1901-02-03T04:11,ai,-1,inside,,16.591,,not tested (no limit)
+AC 1208,1901-02-07T02:02,ac,-1,inside,,16.595,,not tested (no limit)
+AI 107,1901-02-07T02:02,ai,0,inside,11.209,16.595,-5.386,short
+AI 108,1901-02-07T03:18,ai,-1,inside,,16.595,,not tested (no limit)
+AC 1216,1901-02-08T02:10,ac,0,inside,12.155,16.596,-4.441,short
+AI 115,1901-02-08T02:10,ai,0,inside,,16.596,,not tested (no limit)
+AC 1244,1901-02-12T04:09,ac,-1,inside,,16.600,,not tested (no limit)
+AC 1245,1901-02-14T01:37,ac,0,inside,,16.603,,not tested (no limit)
+I 26654,1901-02-19T03:00,i,0,inside,15.593,16.608,-1.015,short
+AI 122,1901-02-19T03:25,ai,0,inside,,16.608,,not tested (no limit)
+AC 1261,1901-02-20T00:56,ac,0,inside,13.766,16.609,-2.843,short
+AC 1270,1901-02-21T23:58,ac,0,inside,12.065,16.610,-4.545,short
+AC 1272,1901-02-22T02:34,ac,0,inside,12.131,16.610,-4.479,short
+AI 125,1901-02-22T02:34,ai,0,inside,,16.610,,not tested (no limit)
+I 26685,1901-02-24T23:59,i,0,inside,13.784,16.613,-2.829,short
+I 26696,1901-02-25T23:36,i,-1,inside,,16.614,,not tested (no limit)
+AI 133,1901-02-28T08:57,ai,0,inside,,16.616,,not tested (no limit)
+AC 1308,1901-02-28T23:58,ac,0,inside,,16.617,,not tested (no limit)
+AI 135,1901-02-28T23:58,ai,0,inside,10.438,16.617,-6.179,short
+AI 136,1901-03-01T00:35,ai,0,inside,,16.617,,not tested (no limit)
+AI 140,1901-03-06T23:35,ai,0,inside,,16.622,,not tested (no limit)
+AI 141,1901-03-07T01:28,ai,0,inside,,16.622,,not tested (no limit)
+AC 1319,1901-03-07T02:38,ac,0,inside,,16.622,,not tested (no limit)
+AI 142,1901-03-07T03:45,ai,0,inside,,16.622,,not tested (no limit)
+AI 149,1901-03-08T01:09,ai,0,inside,,16.622,,not tested (no limit)
+AC 1328,1901-03-08T01:48,ac,0,inside,11.529,16.622,-5.093,short
+AI 150,1901-03-08T01:48,ai,0,inside,,16.622,,not tested (no limit)
+AC 1329,1901-03-08T02:57,ac,0,inside,,16.622,,not tested (no limit)
+AI 151,1901-03-08T02:57,ai,0,inside,10.504,16.622,-6.118,short
+I 26778,1901-03-13T00:19,i,0,inside,14.623,16.626,-2.003,short
+AC 1331,1901-03-13T00:35,ac,0,inside,,16.626,,not tested (no limit)
+AI 153,1901-03-13T00:35,ai,0,inside,10.261,16.626,-6.365,short
+AI 159,1901-03-13T03:34,ai,0,inside,,16.626,,not tested (no limit)
+AI 168,1901-03-18T02:28,ai,-1,inside,,16.629,,not tested (no limit)
+AC 1364,1901-03-23T00:09,ac,-1,inside,,16.632,,not tested (no limit)
+AI 173,1901-03-24T01:34,ai,0,inside,,16.632,,not tested (no limit)
+AC 1369,1901-03-24T01:36,ac,0,inside,,16.632,,not tested (no limit)
+AC 1385,1901-03-31T01:05,ac,0,inside,12.588,16.635,-4.047,short
+I 27463,1901-09-09T07:33,i,-1,inside,,16.618,,not tested (no limit)
+AC 1738,1901-09-12T08:42,ac,0,inside,11.753,16.616,-4.863,short
+AC 1742,1901-09-14T08:58,ac,0,inside,,16.614,,not tested (no limit)
+AC 1752,1901-09-17T08:31,ac,-1,inside,,16.611,,not tested (no limit)
+AC 1779,1901-09-25T09:15,ac,0,inside,,16.604,,not tested (no limit)
+AC 1786,1901-09-26T07:57,ac,0,inside,11.824,16.603,-4.779,short
+AC 1793,1901-09-27T08:02,ac,0,inside,,16.602,,not tested (no limit)
+AC 1819,1901-10-04T09:21,ac,0,inside,,16.594,,not tested (no limit)
+AC 1838,1901-10-07T07:44,ac,0,inside,12.198,16.591,-4.393,short
+AC 1845,1901-10-08T06:36,ac,0,inside,12.738,16.590,-3.852,short
+AC 1854,1901-10-09T08:58,ac,0,inside,11.799,16.589,-4.790,short
+AC 1894,1901-10-22T06:51,ac,0,inside,,16.573,,not tested (no limit)
+AC 1897,1901-10-24T07:21,ac,0,inside,12.028,16.571,-4.543,short
+AC 1952,1901-11-04T06:45,ac,0,inside,13.778,16.558,-2.780,short
+AM 1108,1901-11-05T08:32,am,0,inside,11.849,16.557,-4.708,short
+I 27940,1901-11-09T08:45,i,-1,inside,,16.552,,not tested (no limit)
+AC 1970,1901-11-09T09:46,ac,-1,inside,,16.552,,not tested (no limit)
+AC 1997,1901-11-22T06:56,ac,0,inside,12.189,16.538,-4.349,short
+AC 2033,1901-12-02T03:40,ac,0,inside,13.529,16.528,-2.999,short
+AM 1131,1901-12-06T03:58,am,0,inside,12.037,16.526,-4.489,short
+AC 2057,1901-12-06T06:00,ac,0,inside,12.754,16.526,-3.772,short
+I 28063,1901-12-10T00:00,i,-1,inside,,16.525,,not tested (no limit)
+AC 2070,1901-12-11T05:33,ac,-1,inside,,16.525,,not tested (no limit)
+AB 1032,1901-12-14T05:22,ab,-1,inside,,16.525,,not tested (no limit)
+AB 1036,1901-12-15T04:28,ab,-1,inside,,16.526,,not tested (no limit)
+AC 2091,1901-12-21T03:51,ac,0,inside,10.369,16.529,-6.160,short
+I 28144,1901-12-28T00:05,i,0,inside,,16.536,,not tested (no limit)
+AC 2113,1901-12-28T04:12,ac,0,inside,11.059,16.536,-5.477,short
+AC 2124,1902-01-01T01:06,ac,0,inside,12.246,16.540,-4.294,short
+I 28204,1902-01-05T03:55,i,0,inside,,16.544,,not tested (no limit)
+AC 2156,1902-01-05T05:21,ac,0,inside,12.912,16.544,-3.632,short
+AC 2157,1902-01-05T06:43,ac,0,inside,12.601,16.544,-3.943,short
+AC 2174,1902-01-10T04:29,ac,0,inside,,16.549,,not tested (no limit)
+AC 2176,1902-01-11T02:27,ac,0,inside,,16.550,,not tested (no limit)
+I 28242,1902-01-14T03:13,i,0,inside,14.531,16.554,-2.023,short
+AC 2226,1902-01-24T02:07,ac,-1,inside,,16.565,,not tested (no limit)
+AC 2227,1902-01-24T03:20,ac,-1,inside,,16.565,,not tested (no limit)
+AC 2228,1902-01-24T04:49,ac,0,inside,10.373,16.565,-6.192,short
+AC 2246,1902-01-27T06:25,ac,0,inside,,16.569,,not tested (no limit)
+AC 2250,1902-01-28T00:55,ac,0,inside,,16.570,,not tested (no limit)
+I 28378,1902-01-29T03:28,i,-1,inside,,16.571,,not tested (no limit)
+AC 2258,1902-01-31T04:02,ac,0,inside,,16.573,,not tested (no limit)
+AC 2262,1902-02-04T03:02,ac,0,inside,13.727,16.577,-2.850,short
+AC 2283,1902-02-07T03:24,ac,0,inside,12.663,16.581,-3.918,short
+I 28440,1902-02-08T04:33,i,-1,inside,,16.582,,not tested (no limit)
+AC 2308,1902-02-11T02:06,ac,0,inside,14.098,16.585,-2.487,short
+AC 2309,1902-02-11T03:15,ac,0,inside,12.799,16.585,-3.786,short
+I 28468,1902-02-12T01:22,i,-1,inside,,16.586,,not tested (no limit)
+I 28491,1902-02-14T23:56,i,0,inside,,16.589,,not tested (no limit)
+AC 2328,1902-02-15T01:12,ac,0,inside,12.250,16.589,-4.339,short
+AC 2351,1902-02-21T00:31,ac,-1,inside,,16.595,,not tested (no limit)
+AC 2352,1902-02-21T03:05,ac,-1,inside,,16.595,,not tested (no limit)
+AC 2361,1902-02-24T02:25,ac,0,inside,10.988,16.598,-5.610,short
+AC 2372,1902-03-02T02:09,ac,0,inside,13.049,16.604,-3.555,short
+AC 2375,1902-03-03T02:53,ac,0,inside,12.032,16.604,-4.572,short
+AC 2390,1902-03-07T02:02,ac,0,inside,12.550,16.608,-4.058,short
+AC 2398,1902-03-11T02:08,ac,0,inside,10.992,16.611,-5.619,short
+AC 2399,1902-03-11T03:14,ac,0,inside,11.893,16.611,-4.718,short
+AC 2404,1902-03-13T01:36,ac,0,inside,,16.612,,not tested (no limit)
+AC 2433,1902-03-27T00:38,ac,0,inside,10.986,16.620,-5.634,short
+AC 2493,1902-04-20T00:39,ac,-1,inside,,16.626,,not tested (no limit)
+AI 235,1902-08-10T08:20,ai,-1,inside,,16.622,,not tested (no limit)
+AM 1520,1902-08-24T08:30,am,0,inside,12.667,16.616,-3.949,short
+AI 277,1902-08-27T07:09,ai,0,inside,,16.615,,not tested (no limit)
+AC 2782,1902-08-27T08:30,ac,-1,inside,,16.615,,not tested (no limit)
+AI 290,1902-08-31T08:50,ai,0,inside,,16.612,,not tested (no limit)
+AI 314,1902-09-09T06:27,ai,0,inside,,16.606,,not tested (no limit)
+AC 2841,1902-09-15T08:54,ac,-1,inside,,16.601,,not tested (no limit)
+AM 1559,1902-09-23T08:17,am,0,inside,,16.594,,not tested (no limit)
+AM 1580,1902-09-27T08:01,am,0,inside,11.618,16.590,-4.972,short
+AI 350,1902-10-07T08:13,ai,0,inside,,16.579,,not tested (no limit)
+AC 2862,1902-10-07T08:14,ac,0,inside,13.153,16.579,-3.426,short
+AM 1610,1902-10-07T08:42,am,0,inside,13.072,16.579,-3.507,short
+AM 1616,1902-10-08T06:18,am,0,inside,12.701,16.578,-3.877,short
+AI 356,1902-10-08T06:49,ai,0,inside,,16.578,,not tested (no limit)
+AI 357,1902-10-08T08:33,ai,0,inside,,16.578,,not tested (no limit)
+AI 364,1902-10-09T06:59,ai,0,inside,,16.577,,not tested (no limit)
+AC 2885,1902-10-10T08:15,ac,0,inside,13.237,16.576,-3.339,short
+AI 373,1902-10-10T08:17,ai,0,inside,,16.576,,not tested (no limit)
+AM 1636,1902-10-11T05:56,am,0,inside,13.169,16.575,-3.406,short
+AI 380,1902-10-11T06:51,ai,-1,inside,,16.575,,not tested (no limit)
+AI 381,1902-10-11T08:02,ai,-1,inside,,16.575,,not tested (no limit)
+AM 1646,1902-10-12T07:16,am,0,inside,12.776,16.573,-3.797,short
+AI 388,1902-10-15T06:31,ai,0,inside,,16.570,,not tested (no limit)
+AC 2930,1902-10-24T07:12,ac,0,inside,11.578,16.559,-4.981,short
+AI 415,1902-10-24T07:20,ai,0,inside,,16.559,,not tested (no limit)
+AC 2931,1902-10-25T07:52,ac,0,inside,11.964,16.558,-4.594,short
+AI 424,1902-10-26T09:03,ai,0,inside,,16.557,,not tested (no limit)
+AC 2943,1902-10-29T05:54,ac,0,inside,12.639,16.553,-3.914,short
+AI 434,1902-10-30T05:14,ai,0,inside,10.330,16.552,-6.222,short
+AI 435,1902-10-30T06:41,ai,0,inside,,16.552,,not tested (no limit)
+AI 437,1902-10-31T05:21,ai,0,inside,,16.551,,not tested (no limit)
+AC 2953,1902-10-31T06:47,ac,0,inside,,16.551,,not tested (no limit)
+AI 443,1902-11-01T05:15,ai,0,inside,,16.550,,not tested (no limit)
+AI 444,1902-11-01T06:35,ai,0,inside,,16.550,,not tested (no limit)
+AC 2960,1902-11-01T08:20,ac,0,inside,12.782,16.550,-3.768,short
+I 29495,1902-11-02T08:46,i,-1,inside,,16.548,,not tested (no limit)
+AI 452,1902-11-02T08:47,ai,0,inside,,16.548,,not tested (no limit)
+AI 457,1902-11-03T06:26,ai,0,inside,,16.547,,not tested (no limit)
+I 29502,1902-11-03T08:10,i,0,inside,,16.547,,not tested (no limit)
+AC 2981,1902-11-08T05:53,ac,0,inside,12.179,16.541,-4.362,short
+AC 2982,1902-11-08T07:12,ac,0,inside,,16.541,,not tested (no limit)
+AM 1683,1902-11-08T07:45,am,0,inside,11.480,16.541,-5.061,short
+AI 465,1902-11-11T03:48,ai,0,inside,11.039,16.538,-5.499,short
+AI 473,1902-11-20T09:30,ai,0,inside,,16.527,,not tested (no limit)
+AI 480,1902-11-23T07:55,ai,0,inside,11.086,16.524,-5.438,short
+AI 482,1902-11-23T10:13,ai,0,inside,10.048,16.524,-6.476,short
+AI 487,1902-11-24T05:48,ai,0,inside,,16.523,,not tested (no limit)
+AM 1705,1902-11-25T04:45,am,0,inside,11.218,16.522,-5.304,short
+AM 1723,1902-11-27T07:07,am,0,inside,,16.520,,not tested (no limit)
+AC 3021,1902-11-29T02:40,ac,-1,inside,,16.518,,not tested (no limit)
+AC 3021,1902-11-29T02:55,ac,-1,inside,,16.518,,not tested (no limit)
+AC 3021,1902-11-29T03:07,ac,-1,inside,,16.518,,not tested (no limit)
+AI 492,1902-11-29T04:18,ai,0,inside,,16.518,,not tested (no limit)
+AI 493,1902-11-29T05:39,ai,0,inside,,16.518,,not tested (no limit)
+AI 502,1902-12-02T04:31,ai,0,inside,,16.516,,not tested (no limit)
+AI 505,1902-12-04T05:16,ai,0,inside,,16.514,,not tested (no limit)
+AI 523,1902-12-09T04:15,ai,0,inside,10.779,16.511,-5.732,short
+AI 524,1902-12-09T05:57,ai,0,inside,10.698,16.511,-5.813,short
+AI 534,1902-12-10T07:17,ai,0,inside,,16.511,,not tested (no limit)
+AI 543,1902-12-19T06:39,ai,0,inside,10.096,16.513,-6.417,short
+AI 547,1902-12-20T03:17,ai,0,inside,9.910,16.514,-6.604,short
+AI 548,1902-12-21T02:58,ai,0,inside,10.482,16.515,-6.033,short
+AC 3089,1902-12-21T03:36,ac,0,inside,12.517,16.515,-3.998,short
+AI 554,1902-12-24T03:26,ai,0,inside,,16.517,,not tested (no limit)
+AI 555,1902-12-24T04:33,ai,0,inside,,16.517,,not tested (no limit)
+AI 567,1902-12-28T02:27,ai,0,inside,10.932,16.521,-5.589,short
+AI 571,1902-12-29T03:18,ai,0,inside,,16.522,,not tested (no limit)
+AI 572,1902-12-29T04:34,ai,0,inside,,16.522,,not tested (no limit)
+AI 579,1902-12-31T03:02,ai,0,inside,9.926,16.524,-6.598,short
+AC 3129,1903-01-01T04:00,ac,0,inside,12.385,16.525,-4.140,short
+AI 599,1903-01-02T05:09,ai,0,inside,,16.526,,not tested (no limit)
+AI 624,1903-01-14T01:20,ai,0,inside,,16.539,,not tested (no limit)
+AI 626,1903-01-14T03:53,ai,-1,inside,,16.539,,not tested (no limit)
+AI 635,1903-01-18T01:39,ai,0,inside,,16.543,,not tested (no limit)
+AI 636,1903-01-18T02:32,ai,0,inside,9.925,16.543,-6.618,short
+AI 638,1903-01-19T01:29,ai,0,inside,10.447,16.545,-6.098,short
+AI 639,1903-01-19T02:44,ai,0,inside,,16.545,,not tested (no limit)
+AI 649,1903-01-20T03:59,ai,0,inside,10.956,16.546,-5.590,short
+AI 655,1903-01-21T01:00,ai,-1,inside,,16.547,,not tested (no limit)
+AM 1810,1903-01-21T01:14,am,0,inside,11.482,16.547,-5.065,short
+AI 659,1903-01-22T00:23,ai,0,inside,10.541,16.548,-6.007,short
+AI 658,1903-01-22T02:05,ai,0,inside,9.963,16.548,-6.585,short
+AI 660,1903-01-22T04:40,ai,0,inside,,16.548,,not tested (no limit)
+AI 668,1903-01-24T01:05,ai,0,inside,10.281,16.550,-6.269,short
+AC 3212,1903-01-24T04:28,ac,0,inside,13.903,16.550,-2.647,short
+AI 670,1903-01-24T04:29,ai,0,inside,,16.550,,not tested (no limit)
+AI 674,1903-01-27T00:45,ai,0,inside,,16.554,,not tested (no limit)
+AC 3219,1903-01-27T03:18,ac,0,inside,11.205,16.554,-5.349,short
+AI 676,1903-01-27T03:21,ai,0,inside,,16.554,,not tested (no limit)
+AI 681,1903-01-31T01:59,ai,0,inside,,16.558,,not tested (no limit)
+AC 3225,1903-01-31T03:14,ac,0,inside,11.449,16.558,-5.109,short
+AI 682,1903-01-31T03:14,ai,-1,inside,,16.558,,not tested (no limit)
+AI 683,1903-01-31T04:37,ai,0,inside,,16.558,,not tested (no limit)
+AI 685,1903-02-01T00:19,ai,0,inside,,16.559,,not tested (no limit)
+AI 687,1903-02-01T02:33,ai,0,inside,,16.559,,not tested (no limit)
+AC 3230,1903-02-01T02:36,ac,0,inside,,16.559,,not tested (no limit)
+AI 688,1903-02-01T03:55,ai,0,inside,,16.559,,not tested (no limit)
+AI 697,1903-02-04T00:36,ai,0,inside,,16.563,,not tested (no limit)
+AI 698,1903-02-04T02:00,ai,0,inside,,16.563,,not tested (no limit)
+AI 699,1903-02-04T03:42,ai,0,inside,,16.563,,not tested (no limit)
+AI 708,1903-02-07T01:58,ai,0,inside,,16.566,,not tested (no limit)
+AI 712,1903-02-08T01:21,ai,0,inside,,16.567,,not tested (no limit)
+AI 722,1903-02-10T00:51,ai,0,inside,,16.569,,not tested (no limit)
+AC 3266,1903-02-10T03:05,ac,0,inside,10.114,16.569,-6.455,short
+AI 724,1903-02-10T03:08,ai,0,inside,,16.569,,not tested (no limit)
+AI 733,1903-02-11T00:47,ai,-1,inside,,16.570,,not tested (no limit)
+AC 3283,1903-02-13T00:43,ac,0,inside,9.329,16.573,-7.244,short
+AI 738,1903-02-13T00:47,ai,0,inside,,16.573,,not tested (no limit)
+AC 3284,1903-02-13T01:54,ac,0,inside,,16.573,,not tested (no limit)
+AI 741,1903-02-13T04:08,ai,0,inside,,16.573,,not tested (no limit)
+AI 744,1903-02-14T02:40,ai,0,inside,,16.574,,not tested (no limit)
+AI 745,1903-02-14T03:54,ai,0,inside,9.439,16.574,-7.135,short
+AC 3292,1903-02-14T05:01,ac,0,inside,,16.574,,not tested (no limit)
+AI 747,1903-02-14T06:11,ai,0,inside,,16.574,,not tested (no limit)
+AI 752,1903-02-15T00:46,ai,0,inside,,16.575,,not tested (no limit)
+AI 753,1903-02-15T01:49,ai,0,inside,,16.575,,not tested (no limit)
+AC 3300,1903-02-15T02:57,ac,0,inside,13.205,16.575,-3.370,short
+AI 755,1903-02-15T04:15,ai,0,inside,,16.575,,not tested (no limit)
+AI 759,1903-02-18T02:38,ai,-1,inside,,16.578,,not tested (no limit)
+AC 3305,1903-02-18T03:49,ac,0,inside,,16.578,,not tested (no limit)
+AI 760,1903-02-18T03:49,ai,-1,inside,,16.578,,not tested (no limit)
+AI 768,1903-02-19T04:14,ai,0,inside,,16.579,,not tested (no limit)
+AC 3320,1903-02-20T02:05,ac,0,inside,11.779,16.580,-4.801,short
+AI 775,1903-02-20T02:09,ai,0,inside,11.421,16.580,-5.159,short
+AI 776,1903-02-20T03:13,ai,0,inside,,16.580,,not tested (no limit)
+AI 777,1903-02-20T04:17,ai,0,inside,,16.580,,not tested (no limit)
+AI 779,1903-02-20T06:32,ai,0,inside,,16.580,,not tested (no limit)
+AC 3327,1903-02-21T02:12,ac,0,inside,12.075,16.581,-4.506,short
+AI 787,1903-02-21T05:09,ai,0,inside,,16.581,,not tested (no limit)
+AI 794,1903-02-23T00:57,ai,0,inside,,16.583,,not tested (no limit)
+AC 3337,1903-02-23T01:59,ac,0,inside,13.867,16.583,-2.716,short
+I 30056,1903-02-23T02:57,i,-1,inside,,16.583,,not tested (no limit)
+AI 803,1903-02-24T01:05,ai,0,inside,,16.584,,not tested (no limit)
+AI 804,1903-02-24T02:11,ai,0,inside,10.582,16.584,-6.002,short
+AC 3347,1903-02-24T03:16,ac,0,inside,12.816,16.584,-3.768,short
+AI 805,1903-02-24T03:19,ai,0,inside,,16.584,,not tested (no limit)
+AI 812,1903-02-25T03:55,ai,0,inside,,16.585,,not tested (no limit)
+AI 827,1903-02-26T23:38,ai,0,inside,,16.587,,not tested (no limit)
+AI 835,1903-03-01T01:35,ai,0,inside,,16.588,,not tested (no limit)
+AC 3370,1903-03-01T02:49,ac,0,inside,,16.588,,not tested (no limit)
+AI 842,1903-03-02T00:54,ai,0,inside,9.815,16.589,-6.774,short
+I 30134,1903-03-02T02:17,i,0,inside,14.783,16.589,-1.806,short
+I 30134,1903-03-02T02:27,i,-1,inside,,16.589,,not tested (no limit)
+AC 3378,1903-03-02T03:03,ac,-1,inside,,16.589,,not tested (no limit)
+AI 845,1903-03-02T04:12,ai,0,inside,,16.589,,not tested (no limit)
+AI 851,1903-03-03T00:07,ai,0,inside,,16.590,,not tested (no limit)
+AC 3387,1903-03-03T02:16,ac,0,inside,10.612,16.590,-5.978,short
+AI 853,1903-03-03T02:30,ai,0,inside,10.628,16.590,-5.962,short
+AI 855,1903-03-03T05:00,ai,0,inside,,16.590,,not tested (no limit)
+AI 866,1903-03-07T01:21,ai,0,inside,,16.593,,not tested (no limit)
+AI 874,1903-03-12T01:10,ai,0,inside,,16.597,,not tested (no limit)
+AI 876,1903-03-12T03:13,ai,0,inside,,16.597,,not tested (no limit)
+AC 3411,1903-03-13T00:09,ac,-1,inside,,16.598,,not tested (no limit)
+AI 879,1903-03-13T00:11,ai,0,inside,,16.598,,not tested (no limit)
+AC 3412,1903-03-13T01:12,ac,-1,inside,,16.598,,not tested (no limit)
+AI 880,1903-03-13T01:14,ai,-1,inside,,16.598,,not tested (no limit)
+AI 881,1903-03-13T02:24,ai,0,inside,8.626,16.598,-7.972,short
+AI 887,1903-03-14T00:04,ai,0,inside,,16.599,,not tested (no limit)
+AI 889,1903-03-14T02:52,ai,0,inside,,16.599,,not tested (no limit)
+AI 893,1903-03-15T00:07,ai,0,inside,,16.599,,not tested (no limit)
+AI 898,1903-03-16T01:44,ai,0,inside,10.694,16.600,-5.906,short
+AI 902,1903-03-18T00:56,ai,-1,inside,,16.601,,not tested (no limit)
+AI 903,1903-03-18T01:58,ai,0,inside,,16.601,,not tested (no limit)
+AC 3439,1903-03-20T00:28,ac,-1,inside,,16.603,,not tested (no limit)
+AI 906,1903-03-20T00:31,ai,-1,inside,,16.603,,not tested (no limit)
+AI 907,1903-03-20T01:36,ai,0,inside,,16.603,,not tested (no limit)
+AC 3446,1903-03-21T00:50,ac,0,inside,,16.603,,not tested (no limit)
+AC 3447,1903-03-21T01:59,ac,0,inside,,16.603,,not tested (no limit)
+AI 914,1903-03-21T02:09,ai,0,inside,,16.603,,not tested (no limit)
+AC 3449,1903-03-26T00:18,ac,0,inside,,16.606,,not tested (no limit)
+AC 3450,1903-03-26T01:25,ac,0,inside,10.976,16.606,-5.630,short
+AI 917,1903-03-26T02:43,ai,0,inside,,16.606,,not tested (no limit)
+AI 921,1903-03-27T01:19,ai,0,inside,,16.607,,not tested (no limit)
+AC 3462,1903-04-01T00:28,ac,0,inside,11.104,16.609,-5.505,short
+AI 933,1903-04-01T00:37,ai,-1,inside,,16.609,,not tested (no limit)
+AI 934,1903-04-01T01:53,ai,-1,inside,,16.609,,not tested (no limit)
+AC 3469,1903-04-02T00:47,ac,0,inside,11.263,16.609,-5.346,short
+AI 941,1903-04-02T00:49,ai,0,inside,,16.609,,not tested (no limit)
+AC 3478,1903-04-06T01:15,ac,0,inside,,16.610,,not tested (no limit)
+AC 3485,1903-04-11T00:56,ac,0,inside,,16.612,,not tested (no limit)
+AC 3489,1903-04-12T00:33,ac,-1,inside,,16.612,,not tested (no limit)
+AI 959,1903-04-12T00:39,ai,0,inside,,16.612,,not tested (no limit)
+AC 3496,1903-04-13T00:48,ac,0,inside,,16.612,,not tested (no limit)
+AC 3505,1903-04-18T01:26,ac,0,inside,,16.613,,not tested (no limit)
+AC 3512,1903-04-19T01:09,ac,0,inside,,16.613,,not tested (no limit)
+AC 3520,1903-04-20T00:59,ac,0,inside,,16.613,,not tested (no limit)
+AI 999,1903-04-22T01:08,ai,0,inside,,16.613,,not tested (no limit)
+AC 3541,1903-04-25T01:05,ac,0,inside,,16.613,,not tested (no limit)
+AI 1008,1903-04-26T01:24,ai,0,inside,,16.613,,not tested (no limit)
+AI 1031,1903-04-30T01:17,ai,0,inside,,16.612,,not tested (no limit)
+AI 1051,1903-05-03T01:10,ai,0,inside,,16.612,,not tested (no limit)
+AI 1079,1903-05-12T01:24,ai,0,inside,,16.609,,not tested (no limit)
+AI 1324,1903-08-25T07:58,ai,-1,inside,,16.603,,not tested (no limit)
+AI 1331,1903-09-01T08:22,ai,-1,inside,,16.599,,not tested (no limit)
+AC 3871,1903-09-01T08:23,ac,-1,inside,,16.599,,not tested (no limit)
+I 30791,1903-09-01T08:30,i,0,inside,12.630,16.599,-3.969,short
+AM 2241,1903-09-01T09:15,am,0,inside,13.107,16.599,-3.492,short
+AI 1350,1903-09-05T08:48,ai,-1,inside,,16.597,,not tested (no limit)
+AI 1354,1903-09-07T06:25,ai,-1,inside,,16.595,,not tested (no limit)
+AI 1355,1903-09-07T07:59,ai,-1,inside,,16.595,,not tested (no limit)
+AC 3905,1903-09-08T08:52,ac,0,inside,,16.594,,not tested (no limit)
+AI 1362,1903-09-08T08:54,ai,-1,inside,,16.594,,not tested (no limit)
+AI 1369,1903-09-09T08:41,ai,-1,inside,,16.594,,not tested (no limit)
+AI 1390,1903-09-14T09:03,ai,-1,inside,,16.590,,not tested (no limit)
+AI 1403,1903-09-17T08:54,ai,0,inside,,16.587,,not tested (no limit)
+AI 1406,1903-09-19T07:28,ai,-1,inside,,16.585,,not tested (no limit)
+AI 1411,1903-09-20T07:30,ai,-1,inside,,16.584,,not tested (no limit)
+AC 3955,1903-09-20T08:52,ac,0,edge,,16.584,,not tested (edge unresolved)
+AI 1419,1903-09-22T07:51,ai,-1,inside,,16.583,,not tested (no limit)
+AI 1420,1903-09-22T09:02,ai,-1,inside,,16.583,,not tested (no limit)
+AI 1427,1903-09-23T08:08,ai,-1,inside,,16.582,,not tested (no limit)
+AI 1432,1903-09-24T05:31,ai,-1,inside,,16.581,,not tested (no limit)
+AI 1434,1903-09-24T08:56,ai,-1,inside,,16.581,,not tested (no limit)
+AI 1442,1903-09-25T08:45,ai,0,inside,,16.580,,not tested (no limit)
+AC 3984,1903-09-25T08:47,ac,0,inside,12.313,16.580,-4.267,short
+AI 1449,1903-09-26T07:38,ai,0,inside,,16.579,,not tested (no limit)
+AI 1451,1903-09-26T09:16,ai,-1,inside,,16.579,,not tested (no limit)
+AI 1457,1903-09-27T07:52,ai,-1,inside,,16.578,,not tested (no limit)
+AI 1463,1903-09-29T08:02,ai,0,inside,,16.576,,not tested (no limit)
+AI 1464,1903-09-29T09:11,ai,0,inside,,16.576,,not tested (no limit)
+AI 1470,1903-09-30T07:51,ai,0,inside,,16.575,,not tested (no limit)
+AM 2295,1903-09-30T08:24,am,0,inside,12.725,16.575,-3.850,short
+AI 1481,1903-10-03T06:51,ai,0,inside,,16.571,,not tested (no limit)
+AI 1482,1903-10-03T08:29,ai,0,inside,,16.571,,not tested (no limit)
+AC 4025,1903-10-03T08:30,ac,0,inside,12.575,16.571,-3.996,short
+AI 1487,1903-10-04T06:59,ai,-1,inside,,16.570,,not tested (no limit)
+AC 4030,1903-10-04T07:00,ac,-1,inside,,16.570,,not tested (no limit)
+AI 1493,1903-10-14T07:47,ai,-1,inside,,16.559,,not tested (no limit)
+AM 2333,1903-10-15T07:27,am,0,inside,13.216,16.558,-3.342,short
+AI 1500,1903-10-15T07:48,ai,0,inside,,16.558,,not tested (no limit)
+AI 1501,1903-10-15T09:27,ai,-1,inside,,16.558,,not tested (no limit)
+AI 1510,1903-10-19T05:40,ai,-1,inside,,16.553,,not tested (no limit)
+AC 4053,1903-10-19T05:42,ac,0,inside,11.586,16.553,-4.967,short
+AI 1512,1903-10-19T08:17,ai,0,inside,,16.553,,not tested (no limit)
+AI 1520,1903-10-20T08:00,ai,0,inside,,16.552,,not tested (no limit)
+AI 1529,1903-10-21T08:22,ai,0,inside,,16.551,,not tested (no limit)
+AI 1537,1903-10-22T07:38,ai,0,inside,,16.550,,not tested (no limit)
+AC 4088,1903-10-23T08:23,ac,-1,inside,,16.548,,not tested (no limit)
+AI 1548,1903-10-25T06:35,ai,0,inside,,16.546,,not tested (no limit)
+AC 4094,1903-10-25T09:28,ac,0,inside,12.237,16.546,-4.309,short
+AI 1554,1903-10-26T06:23,ai,-1,inside,,16.545,,not tested (no limit)
+AI 1555,1903-10-26T09:34,ai,0,inside,,16.545,,not tested (no limit)
+AM 2348,1903-10-27T04:59,am,0,inside,12.848,16.544,-3.696,short
+AI 1561,1903-10-27T06:39,ai,0,inside,10.204,16.544,-6.340,short
+AI 1574,1903-10-29T04:59,ai,0,inside,,16.541,,not tested (no limit)
+AI 1575,1903-10-29T06:11,ai,0,inside,10.378,16.541,-6.163,short
+AI 1585,1903-10-30T06:18,ai,0,inside,,16.540,,not tested (no limit)
+AC 4130,1903-10-30T06:21,ac,0,inside,12.751,16.540,-3.789,short
+AI 1586,1903-10-30T07:24,ai,0,inside,,16.540,,not tested (no limit)
+AI 1595,1903-10-31T06:44,ai,0,inside,,16.539,,not tested (no limit)
+AI 1596,1903-10-31T08:12,ai,0,inside,,16.539,,not tested (no limit)
+AC 4141,1903-10-31T08:13,ac,0,inside,11.796,16.539,-4.743,short
+AI 1604,1903-11-01T08:31,ai,0,inside,,16.537,,not tested (no limit)
+AI 1610,1903-11-02T06:58,ai,0,inside,,16.536,,not tested (no limit)
+AI 1611,1903-11-02T08:15,ai,0,inside,,16.536,,not tested (no limit)
+AI 1618,1903-11-04T06:11,ai,0,inside,,16.534,,not tested (no limit)
+AI 1619,1903-11-04T07:38,ai,0,inside,,16.534,,not tested (no limit)
+AI 1645,1903-11-10T06:07,ai,0,inside,,16.527,,not tested (no limit)
+AC 4190,1903-11-10T07:22,ac,0,inside,,16.527,,not tested (no limit)
+AI 1646,1903-11-10T07:23,ai,0,inside,,16.527,,not tested (no limit)
+AI 1651,1903-11-11T04:59,ai,0,inside,,16.526,,not tested (no limit)
+AI 1652,1903-11-11T06:22,ai,0,inside,9.900,16.525,-6.625,short
+AI 1661,1903-11-13T06:16,ai,0,inside,,16.523,,not tested (no limit)
+AI 1668,1903-11-15T05:34,ai,0,inside,10.584,16.521,-5.937,short
+AM 2366,1903-11-15T06:11,am,0,inside,,16.521,,not tested (no limit)
+AI 1674,1903-11-16T05:17,ai,0,inside,,16.520,,not tested (no limit)
+AI 1676,1903-11-19T05:12,ai,0,inside,10.098,16.516,-6.418,short
+AC 4224,1903-11-19T05:14,ac,0,inside,,16.516,,not tested (no limit)
+AI 1684,1903-11-20T05:24,ai,0,inside,10.522,16.515,-5.993,short
+AM 2386,1903-11-20T06:12,am,0,inside,11.249,16.515,-5.266,short
+AI 1686,1903-11-20T07:43,ai,0,inside,,16.515,,not tested (no limit)
+AI 1693,1903-11-21T05:31,ai,0,inside,,16.514,,not tested (no limit)
+AI 1694,1903-11-21T06:49,ai,0,inside,,16.514,,not tested (no limit)
+AI 1702,1903-11-22T06:34,ai,0,inside,,16.513,,not tested (no limit)
+AI 1703,1903-11-22T08:39,ai,0,inside,,16.513,,not tested (no limit)
+AI 1705,1903-11-23T07:05,ai,0,inside,,16.512,,not tested (no limit)
+AI 1712,1903-11-25T05:03,ai,0,inside,10.718,16.510,-5.792,short
+AC 4251,1903-11-25T05:05,ac,0,inside,,16.510,,not tested (no limit)
+AI 1724,1903-11-26T06:33,ai,0,inside,,16.509,,not tested (no limit)
+AC 4263,1903-11-26T06:35,ac,0,inside,,16.509,,not tested (no limit)
+AI 1732,1903-11-27T06:01,ai,0,inside,10.033,16.508,-6.475,short
+AC 4270,1903-11-27T06:04,ac,0,inside,12.964,16.508,-3.544,short
+I 31215,1903-11-29T05:02,i,0,inside,,16.506,,not tested (no limit)
+AI 1741,1903-11-29T06:17,ai,0,inside,11.071,16.506,-5.435,short
+AI 1749,1903-12-01T04:02,ai,0,inside,9.644,16.504,-6.860,short
+AI 1751,1903-12-01T06:37,ai,0,inside,,16.504,,not tested (no limit)
+AI 1762,1903-12-05T00:42,ai,-1,inside,,16.500,,not tested (no limit)
+AI 1778,1903-12-07T03:44,ai,-1,inside,,16.499,,not tested (no limit)
+AI 1779,1903-12-07T04:53,ai,0,inside,,16.499,,not tested (no limit)
+AI 1800,1903-12-11T07:51,ai,0,inside,10.470,16.497,-6.027,short
+AC 4348,1903-12-12T05:47,ac,0,inside,13.210,16.497,-3.287,short
+AI 1809,1903-12-12T05:48,ai,0,inside,,16.497,,not tested (no limit)
+I 31255,1903-12-12T07:10,i,0,inside,14.587,16.497,-1.910,short
+I 31266,1903-12-14T04:04,i,0,inside,15.738,16.497,-0.759,short
+AI 1819,1903-12-14T05:03,ai,0,inside,,16.497,,not tested (no limit)
+AC 4358,1903-12-14T05:05,ac,0,inside,11.943,16.497,-4.554,short
+AI 1821,1903-12-14T08:04,ai,0,inside,,16.497,,not tested (no limit)
+I 31273,1903-12-15T01:53,i,-1,inside,,16.497,,not tested (no limit)
+AI 1838,1903-12-16T05:23,ai,0,inside,,16.497,,not tested (no limit)
+AI 1853,1903-12-18T05:35,ai,0,inside,,16.498,,not tested (no limit)
+AI 1863,1903-12-19T06:56,ai,0,inside,8.885,16.499,-7.614,short
+AI 1871,1903-12-20T05:27,ai,0,inside,,16.499,,not tested (no limit)
+AI 1872,1903-12-20T06:34,ai,0,inside,,16.499,,not tested (no limit)
+AI 1875,1903-12-23T00:35,ai,0,inside,10.743,16.501,-5.758,short
+AI 1877,1903-12-23T02:56,ai,0,inside,,16.501,,not tested (no limit)
+AI 1878,1903-12-23T04:00,ai,0,inside,10.772,16.501,-5.729,short
+AI 1879,1903-12-23T05:20,ai,0,inside,,16.501,,not tested (no limit)
+AI 1888,1903-12-24T02:57,ai,0,edge,,16.502,,not tested (edge unresolved)
+AI 1890,1903-12-24T05:15,ai,0,inside,9.913,16.502,-6.589,short
+AC 4434,1903-12-25T04:59,ac,0,inside,11.727,16.503,-4.776,short
+AI 1897,1903-12-25T06:04,ai,-1,inside,,16.503,,not tested (no limit)
+AI 1899,1903-12-26T04:47,ai,0,inside,,16.504,,not tested (no limit)
+AC 4442,1903-12-27T04:29,ac,0,inside,12.249,16.505,-4.256,short
+AI 1905,1903-12-27T05:37,ai,0,inside,10.636,16.505,-5.869,short
+AI 1910,1903-12-28T04:55,ai,0,inside,,16.506,,not tested (no limit)
+AI 1911,1903-12-28T06:19,ai,0,inside,10.838,16.506,-5.668,short
+AI 1918,1903-12-29T03:11,ai,0,inside,,16.507,,not tested (no limit)
+AI 1919,1903-12-29T04:17,ai,0,inside,10.959,16.507,-5.548,short
+AI 1920,1903-12-29T05:47,ai,0,inside,10.215,16.507,-6.292,short
+AI 1938,1904-01-04T03:00,ai,0,inside,,16.513,,not tested (no limit)
+AI 1945,1904-01-05T00:44,ai,0,inside,8.997,16.514,-7.517,short
+AI 1948,1904-01-05T04:21,ai,0,inside,10.087,16.514,-6.427,short
+AC 4488,1904-01-05T05:41,ac,0,inside,,16.514,,not tested (no limit)
+AI 1957,1904-01-06T02:47,ai,0,inside,,16.515,,not tested (no limit)
+AI 1959,1904-01-06T05:10,ai,0,inside,,16.515,,not tested (no limit)
+AI 1961,1904-01-06T08:02,ai,0,inside,,16.515,,not tested (no limit)
+AC 4506,1904-01-08T03:54,ac,0,inside,12.253,16.517,-4.264,short
+AI 1969,1904-01-08T06:20,ai,0,inside,,16.517,,not tested (no limit)
+AI 1974,1904-01-11T04:16,ai,0,inside,,16.520,,not tested (no limit)
+AM 2444,1904-01-13T03:32,am,-1,inside,,16.523,,not tested (no limit)
+AI 1980,1904-01-15T04:54,ai,0,inside,11.341,16.525,-5.184,short
+AC 4519,1904-01-15T05:02,ac,0,inside,11.977,16.525,-4.548,short
+AI 1988,1904-01-16T03:28,ai,0,inside,,16.526,,not tested (no limit)
+AI 1989,1904-01-16T04:51,ai,0,inside,10.653,16.526,-5.873,short
+AI 1998,1904-01-18T03:15,ai,0,inside,11.491,16.528,-5.037,short
+AI 1999,1904-01-18T04:21,ai,0,inside,,16.528,,not tested (no limit)
+AI 2007,1904-01-19T04:22,ai,0,inside,11.455,16.529,-5.074,short
+AI 2008,1904-01-19T05:36,ai,0,inside,10.976,16.529,-5.553,short
+AI 2014,1904-01-20T00:46,ai,0,inside,10.458,16.530,-6.072,short
+AI 2015,1904-01-20T02:02,ai,0,inside,10.564,16.530,-5.966,short
+AC 4552,1904-01-20T03:05,ac,0,inside,,16.530,,not tested (no limit)
+AI 2017,1904-01-20T04:27,ai,0,inside,10.352,16.530,-6.178,short
+AI 2019,1904-01-25T03:21,ai,0,inside,,16.536,,not tested (no limit)
+AI 2020,1904-01-25T04:36,ai,0,inside,11.090,16.536,-5.446,short
+AI 2027,1904-01-26T02:06,ai,0,inside,,16.537,,not tested (no limit)
+AC 4564,1904-01-26T03:20,ac,0,inside,13.162,16.537,-3.375,short
+AC 4565,1904-01-26T04:26,ac,0,inside,,16.537,,not tested (no limit)
+AI 2038,1904-01-28T03:17,ai,0,inside,,16.540,,not tested (no limit)
+AI 2039,1904-01-28T04:52,ai,-1,inside,,16.540,,not tested (no limit)
+AI 2047,1904-01-31T04:04,ai,-1,inside,,16.543,,not tested (no limit)
+AI 2051,1904-02-02T02:38,ai,-1,inside,,16.545,,not tested (no limit)
+AC 4587,1904-02-02T02:45,ac,0,inside,,16.545,,not tested (no limit)
+AI 2061,1904-02-04T01:00,ai,0,inside,,16.548,,not tested (no limit)
+AC 4598,1904-02-04T02:39,ac,0,inside,12.372,16.548,-4.176,short
+AI 2068,1904-02-05T02:18,ai,0,inside,,16.549,,not tested (no limit)
+AI 2069,1904-02-05T03:56,ai,0,inside,,16.549,,not tested (no limit)
+AI 2075,1904-02-06T00:41,ai,0,inside,,16.550,,not tested (no limit)
+AI 2077,1904-02-06T02:53,ai,0,inside,,16.550,,not tested (no limit)
+AI 2078,1904-02-06T04:14,ai,0,inside,,16.550,,not tested (no limit)
+AI 2082,1904-02-08T02:36,ai,-1,inside,,16.552,,not tested (no limit)
+AI 2083,1904-02-08T04:21,ai,0,inside,,16.552,,not tested (no limit)
+AI 2087,1904-02-09T00:51,ai,0,inside,,16.553,,not tested (no limit)
+AC 4620,1904-02-09T01:57,ac,0,inside,13.599,16.553,-2.954,short
+AC 4622,1904-02-09T04:07,ac,0,inside,11.371,16.553,-5.182,short
+AC 4629,1904-02-10T00:51,ac,-1,inside,,16.554,,not tested (no limit)
+AI 2098,1904-02-10T02:33,ai,0,inside,11.277,16.554,-5.277,short
+AC 4631,1904-02-11T00:46,ac,0,inside,,16.555,,not tested (no limit)
+AI 2106,1904-02-11T00:46,ai,0,inside,11.191,16.555,-5.364,short
+AI 2107,1904-02-11T01:52,ai,0,inside,10.593,16.555,-5.962,short
+AI 2115,1904-02-12T00:40,ai,0,inside,11.133,16.557,-5.424,short
+AI 2113,1904-02-12T00:49,ai,0,inside,,16.557,,not tested (no limit)
+AI 2129,1904-02-18T02:48,ai,0,inside,11.334,16.563,-5.229,short
+AI 2140,1904-02-21T00:30,ai,0,inside,,16.566,,not tested (no limit)
+AI 2141,1904-02-21T02:20,ai,0,inside,10.629,16.566,-5.937,short
+AI 2142,1904-02-21T03:43,ai,0,inside,10.132,16.566,-6.434,short
+AI 2149,1904-02-23T02:17,ai,0,inside,,16.568,,not tested (no limit)
+AI 2159,1904-02-26T01:40,ai,0,inside,,16.571,,not tested (no limit)
+AI 2176,1904-03-04T23:57,ai,0,inside,10.461,16.578,-6.117,short
+AI 2177,1904-03-05T01:55,ai,0,inside,11.037,16.578,-5.541,short
+AI 2185,1904-03-06T01:55,ai,0,inside,,16.579,,not tested (no limit)
+AI 2186,1904-03-06T03:31,ai,0,inside,,16.579,,not tested (no limit)
+AI 2191,1904-03-09T01:15,ai,0,inside,10.517,16.581,-6.064,short
+AI 2192,1904-03-09T02:25,ai,0,inside,,16.581,,not tested (no limit)
+AC 4720,1904-03-10T00:02,ac,0,inside,11.162,16.582,-5.420,short
+AI 2199,1904-03-10T00:07,ai,-1,inside,,16.582,,not tested (no limit)
+AC 4721,1904-03-10T02:41,ac,0,inside,11.808,16.582,-4.774,short
+AC 4731,1904-03-13T00:16,ac,0,inside,11.393,16.584,-5.191,short
+AC 4732,1904-03-13T01:00,ac,0,inside,11.638,16.584,-4.946,short
+AI 2211,1904-03-13T02:10,ai,0,inside,,16.584,,not tested (no limit)
+AI 2219,1904-03-14T02:37,ai,0,inside,10.086,16.585,-6.499,short
+AI 2229,1904-03-17T02:07,ai,0,inside,,16.587,,not tested (no limit)
+AI 2236,1904-03-18T00:39,ai,0,inside,,16.588,,not tested (no limit)
+AI 2238,1904-03-19T02:27,ai,0,inside,,16.588,,not tested (no limit)
+AI 2264,1904-03-27T00:39,ai,0,inside,9.374,16.593,-7.219,short
+AI 2266,1904-03-30T00:39,ai,0,inside,,16.594,,not tested (no limit)
+AI 2267,1904-03-30T01:38,ai,0,inside,,16.594,,not tested (no limit)
+AI 2270,1904-03-31T00:44,ai,0,inside,9.103,16.595,-7.492,short
+AI 2277,1904-04-03T00:48,ai,0,inside,8.548,16.596,-8.048,short
+AC 4785,1904-04-03T00:50,ac,0,inside,,16.596,,not tested (no limit)
+AI 2291,1904-04-05T02:00,ai,0,inside,,16.596,,not tested (no limit)
+AI 2298,1904-04-06T00:37,ai,0,inside,,16.597,,not tested (no limit)
+AI 2299,1904-04-06T01:45,ai,0,inside,,16.597,,not tested (no limit)
+AI 2308,1904-04-12T00:55,ai,0,inside,,16.598,,not tested (no limit)
+AI 2309,1904-04-12T04:50,ai,0,inside,,16.598,,not tested (no limit)
+AC 4820,1904-04-13T00:56,ac,0,inside,11.094,16.598,-5.504,short
+AI 2332,1904-04-17T01:04,ai,0,inside,,16.599,,not tested (no limit)
+AC 4855,1904-04-22T00:39,ac,-1,inside,,16.599,,not tested (no limit)
+AC 4856,1904-04-22T00:43,ac,-1,inside,,16.599,,not tested (no limit)
+AI 2362,1904-05-01T01:17,ai,0,inside,,16.598,,not tested (no limit)
+AI 2581,1904-07-20T07:57,ai,-1,inside,,16.595,,not tested (no limit)
+AI 2593,1904-07-22T07:58,ai,-1,inside,,16.596,,not tested (no limit)
+AI 2618,1904-08-05T07:59,ai,-1,inside,,16.596,,not tested (no limit)
+AI 2643,1904-08-16T08:13,ai,-1,inside,,16.593,,not tested (no limit)
+B 34675,1904-08-18T08:28,b,-1,inside,,16.593,,not tested (no limit)
+AI 2651,1904-08-19T08:44,ai,0,inside,,16.592,,not tested (no limit)
+AM 2965,1904-08-19T09:03,am,0,inside,12.651,16.592,-3.941,short
+AC 5160,1904-08-22T08:23,ac,0,inside,11.398,16.591,-5.193,short
+AI 2655,1904-08-22T08:26,ai,0,inside,,16.591,,not tested (no limit)
+AI 2670,1904-08-25T08:39,ai,0,inside,,16.589,,not tested (no limit)
+AI 2680,1904-08-27T08:29,ai,0,inside,,16.588,,not tested (no limit)
+AI 2690,1904-08-29T07:00,ai,0,inside,9.240,16.587,-7.347,short
+AC 5197,1904-08-29T07:59,ac,0,inside,9.073,16.587,-7.514,short
+AI 2692,1904-08-29T08:59,ai,-1,inside,,16.587,,not tested (no limit)
+AI 2699,1904-08-30T08:52,ai,-1,inside,,16.587,,not tested (no limit)
+AI 2711,1904-09-01T08:04,ai,-1,inside,,16.586,,not tested (no limit)
+AI 2732,1904-09-08T08:12,ai,0,inside,8.393,16.581,-8.188,short
+AI 2733,1904-09-08T09:08,ai,-1,inside,,16.581,,not tested (no limit)
+AM 3036,1904-09-15T08:51,am,0,inside,,16.575,,not tested (no limit)
+AC 5250,1904-09-16T08:52,ac,0,inside,11.587,16.574,-4.987,short
+AI 2754,1904-09-18T06:42,ai,-1,inside,,16.573,,not tested (no limit)
+AI 2756,1904-09-18T08:49,ai,-1,inside,,16.573,,not tested (no limit)
+AC 5263,1904-09-18T09:17,ac,0,inside,10.515,16.573,-6.058,short
+AM 3054,1904-09-20T06:57,am,0,inside,13.309,16.571,-3.262,short
+AM 3055,1904-09-20T08:00,am,0,inside,12.260,16.571,-4.311,short
+AC 5269,1904-09-21T09:32,ac,0,inside,10.695,16.570,-5.875,short
+AI 2762,1904-09-21T09:34,ai,0,inside,,16.570,,not tested (no limit)
+AI 2766,1904-09-22T07:34,ai,0,inside,10.454,16.569,-6.115,short
+AI 2767,1904-09-22T08:41,ai,0,inside,,16.569,,not tested (no limit)
+AI 2779,1904-09-27T06:12,ai,0,inside,,16.564,,not tested (no limit)
+AI 2780,1904-09-27T07:44,ai,-1,inside,,16.564,,not tested (no limit)
+AC 5298,1904-09-29T07:43,ac,0,inside,,16.562,,not tested (no limit)
+AI 2800,1904-10-01T07:37,ai,0,inside,,16.560,,not tested (no limit)
+AC 5316,1904-10-02T07:44,ac,0,inside,,16.559,,not tested (no limit)
+AI 2812,1904-10-03T08:46,ai,0,inside,,16.558,,not tested (no limit)
+AI 2813,1904-10-03T09:35,ai,-1,inside,,16.558,,not tested (no limit)
+AC 5324,1904-10-04T07:03,ac,0,inside,12.877,16.557,-3.680,short
+AI 2816,1904-10-04T07:08,ai,0,inside,,16.557,,not tested (no limit)
+AI 2817,1904-10-04T08:07,ai,0,inside,8.971,16.557,-7.586,short
+AC 5340,1904-10-07T07:03,ac,0,inside,12.036,16.553,-4.517,short
+AI 2831,1904-10-07T07:06,ai,0,inside,,16.553,,not tested (no limit)
+AI 2840,1904-10-08T06:24,ai,0,inside,9.905,16.552,-6.647,short
+AI 2843,1904-10-08T09:36,ai,0,inside,,16.552,,not tested (no limit)
+AC 5358,1904-10-14T07:46,ac,0,inside,,16.545,,not tested (no limit)
+AI 2849,1904-10-14T08:11,ai,0,inside,,16.545,,not tested (no limit)
+AI 2850,1904-10-14T09:28,ai,0,inside,,16.545,,not tested (no limit)
+AM 3144,1904-10-15T06:29,am,0,inside,12.854,16.544,-3.690,short
+AI 2861,1904-10-16T07:34,ai,0,inside,,16.543,,not tested (no limit)
+AC 5371,1904-10-16T08:38,ac,0,inside,11.796,16.543,-4.747,short
+AI 2868,1904-10-17T05:57,ai,0,inside,,16.542,,not tested (no limit)
+AI 2869,1904-10-17T07:00,ai,0,inside,10.682,16.542,-5.860,short
+AI 2879,1904-10-18T06:45,ai,0,inside,,16.541,,not tested (no limit)
+AI 2880,1904-10-18T07:46,ai,0,inside,9.558,16.541,-6.983,short
+AM 3148,1904-10-21T06:32,am,0,inside,12.989,16.537,-3.548,short
+AI 2902,1904-10-23T05:25,ai,0,inside,9.884,16.535,-6.651,short
+AC 5412,1904-10-23T06:28,ac,0,inside,,16.535,,not tested (no limit)
+AC 5413,1904-10-23T07:26,ac,0,inside,12.537,16.535,-3.998,short
+AI 2904,1904-10-23T07:29,ai,0,inside,,16.535,,not tested (no limit)
+AC 5423,1904-10-25T05:43,ac,-1,inside,,16.532,,not tested (no limit)
+AI 2915,1904-10-25T07:14,ai,0,inside,,16.532,,not tested (no limit)
+AI 2943,1904-10-30T06:24,ai,0,inside,,16.526,,not tested (no limit)
+AI 2949,1904-10-31T06:21,ai,0,inside,,16.525,,not tested (no limit)
+AI 2950,1904-10-31T07:13,ai,-1,inside,,16.525,,not tested (no limit)
+AM 3167,1904-11-01T05:53,am,0,inside,12.558,16.524,-3.966,short
+AI 2959,1904-11-02T05:07,ai,0,inside,10.423,16.523,-6.100,short
+AI 2960,1904-11-02T06:07,ai,0,inside,,16.522,,not tested (no limit)
+AC 5470,1904-11-02T07:14,ac,0,inside,13.157,16.522,-3.365,short
+AI 2971,1904-11-04T04:50,ai,-1,inside,,16.520,,not tested (no limit)
+AC 5481,1904-11-04T06:45,ac,0,inside,11.904,16.520,-4.616,short
+AI 2972,1904-11-04T06:47,ai,0,inside,,16.520,,not tested (no limit)
+AM 3192,1904-11-05T06:46,am,0,inside,12.088,16.519,-4.431,short
+AI 2985,1904-11-08T06:45,ai,0,inside,,16.515,,not tested (no limit)
+AC 5493,1904-11-08T07:43,ac,0,inside,,16.515,,not tested (no limit)
+AI 2991,1904-11-09T05:10,ai,0,inside,10.699,16.514,-5.815,short
+AC 5499,1904-11-09T06:18,ac,0,inside,11.783,16.514,-4.731,short
+AC 5500,1904-11-09T07:42,ac,0,inside,12.477,16.514,-4.037,short
+AM 3209,1904-11-10T06:08,am,0,inside,12.024,16.513,-4.489,short
+AI 2999,1904-11-10T06:15,ai,0,inside,,16.513,,not tested (no limit)
+AM 3220,1904-11-12T05:49,am,0,inside,12.765,16.511,-3.746,short
+AC 5527,1904-11-15T04:57,ac,0,inside,13.799,16.507,-2.708,short
+AI 3012,1904-11-15T04:59,ai,0,inside,,16.507,,not tested (no limit)
+AI 3021,1904-11-16T05:12,ai,0,inside,,16.506,,not tested (no limit)
+AM 3235,1904-11-17T04:29,am,0,inside,13.094,16.505,-3.411,short
+AC 5540,1904-11-17T06:35,ac,0,inside,12.635,16.504,-3.869,short
+AI 3027,1904-11-17T07:43,ai,0,inside,,16.504,,not tested (no limit)
+A 7087,1904-11-18T04:37,a,0,inside,15.431,16.503,-1.072,short
+AI 3034,1904-11-18T05:01,ai,0,inside,10.230,16.503,-6.273,short
+AI 3035,1904-11-18T06:48,ai,0,inside,,16.503,,not tested (no limit)
+AI 3040,1904-11-19T04:09,ai,0,inside,,16.502,,not tested (no limit)
+AI 3042,1904-11-19T05:09,ai,-1,inside,,16.502,,not tested (no limit)
+AI 3043,1904-11-19T07:27,ai,0,inside,,16.502,,not tested (no limit)
+AI 3041,1904-11-19T13:01,ai,0,inside,11.069,16.501,-5.432,short
+AI 3051,1904-11-20T04:23,ai,0,inside,,16.501,,not tested (no limit)
+AI 3053,1904-11-20T06:35,ai,0,inside,10.534,16.501,-5.967,short
+AC 5573,1904-11-22T03:52,ac,0,inside,,16.499,,not tested (no limit)
+AI 3058,1904-11-22T05:12,ai,0,inside,,16.499,,not tested (no limit)
+AI 3059,1904-11-22T06:18,ai,0,inside,,16.499,,not tested (no limit)
+AI 3067,1904-11-23T08:40,ai,-1,inside,,16.498,,not tested (no limit)
+AI 3072,1904-11-25T05:31,ai,-1,inside,,16.496,,not tested (no limit)
+AI 3074,1904-11-25T07:59,ai,-1,inside,,16.496,,not tested (no limit)
+AC 5598,1904-11-26T05:12,ac,0,inside,11.812,16.495,-4.683,short
+AI 3082,1904-11-26T05:14,ai,0,inside,,16.495,,not tested (no limit)
+AC 5599,1904-11-26T06:17,ac,0,inside,,16.495,,not tested (no limit)
+AI 3094,1904-11-27T05:14,ai,0,inside,,16.494,,not tested (no limit)
+AI 3095,1904-11-27T06:19,ai,0,inside,10.811,16.494,-5.683,short
+AC 5617,1904-11-28T05:18,ac,0,inside,12.372,16.493,-4.121,short
+AI 3100,1904-11-28T05:19,ai,0,inside,9.961,16.493,-6.532,short
+AI 3101,1904-11-28T06:48,ai,0,inside,,16.493,,not tested (no limit)
+AM 3251,1904-11-29T04:36,am,0,inside,,16.492,,not tested (no limit)
+AI 3110,1904-11-29T06:50,ai,0,inside,11.318,16.492,-5.174,short
+AI 3116,1904-12-01T05:24,ai,0,inside,,16.490,,not tested (no limit)
+AC 5643,1904-12-02T05:32,ac,0,inside,12.612,16.489,-3.877,short
+AI 3128,1904-12-02T06:39,ai,0,inside,9.736,16.489,-6.753,short
+AI 3136,1904-12-03T04:54,ai,0,inside,10.388,16.488,-6.100,short
+AC 5665,1904-12-05T05:28,ac,0,inside,13.269,16.486,-3.217,short
+AI 3147,1904-12-05T05:30,ai,0,inside,9.934,16.486,-6.552,short
+AI 3148,1904-12-05T06:31,ai,0,inside,,16.486,,not tested (no limit)
+AM 3262,1904-12-06T05:42,am,0,inside,12.573,16.485,-3.912,short
+AC 5678,1904-12-07T08:32,ac,0,inside,10.621,16.485,-5.864,short
+AI 3166,1904-12-08T06:26,ai,0,inside,10.943,16.484,-5.541,short
+AI 3170,1904-12-09T04:13,ai,0,inside,,16.484,,not tested (no limit)
+AC 5688,1904-12-09T05:18,ac,0,inside,13.023,16.484,-3.461,short
+AC 5695,1904-12-10T04:24,ac,-1,edge,,16.483,,not tested (edge unresolved)
+AI 3179,1904-12-10T05:41,ai,0,inside,10.564,16.483,-5.919,short
+AI 3185,1904-12-11T07:53,ai,-1,inside,,16.483,,not tested (no limit)
+AI 3190,1904-12-12T03:19,ai,0,inside,10.492,16.483,-5.991,short
+AC 5708,1904-12-12T04:27,ac,0,inside,13.521,16.483,-2.962,short
+AI 3192,1904-12-12T05:32,ai,0,inside,,16.483,,not tested (no limit)
+AI 3193,1904-12-12T06:28,ai,0,inside,9.712,16.483,-6.771,short
+AM 3292,1904-12-13T03:39,am,0,inside,,16.482,,not tested (no limit)
+AI 3197,1904-12-14T04:55,ai,0,inside,11.442,16.482,-5.040,short
+AC 5715,1904-12-14T06:04,ac,0,inside,,16.482,,not tested (no limit)
+AC 5724,1904-12-15T04:06,ac,0,inside,13.495,16.483,-2.988,short
+AC 5725,1904-12-15T04:50,ac,0,inside,11.757,16.483,-4.726,short
+AI 3208,1904-12-15T05:26,ai,0,inside,,16.483,,not tested (no limit)
+AI 3219,1904-12-17T04:08,ai,0,inside,,16.483,,not tested (no limit)
+AI 3221,1904-12-17T06:29,ai,0,inside,,16.483,,not tested (no limit)
+AC 5747,1904-12-19T04:03,ac,0,inside,11.899,16.484,-4.585,short
+AC 5751,1904-12-20T03:51,ac,0,inside,,16.485,,not tested (no limit)
+AI 3234,1904-12-21T07:48,ai,0,inside,,16.485,,not tested (no limit)
+AI 3239,1904-12-22T02:47,ai,-1,inside,,16.486,,not tested (no limit)
+AC 5765,1904-12-22T04:26,ac,-1,inside,,16.486,,not tested (no limit)
+AI 3243,1904-12-22T06:28,ai,-1,inside,,16.486,,not tested (no limit)
+AC 5771,1904-12-25T05:04,ac,0,inside,10.928,16.489,-5.561,short
+AI 3247,1904-12-25T05:07,ai,0,inside,,16.489,,not tested (no limit)
+AC 5776,1904-12-29T06:15,ac,0,inside,11.781,16.492,-4.711,short
+AI 3259,1904-12-30T04:12,ai,0,inside,,16.493,,not tested (no limit)
+AI 3260,1904-12-30T05:38,ai,-1,inside,,16.493,,not tested (no limit)
+AC 5797,1905-01-05T04:25,ac,0,inside,12.580,16.499,-3.919,short
+AI 3273,1905-01-05T04:43,ai,0,inside,11.292,16.499,-5.207,short
+AI 3274,1905-01-05T05:29,ai,0,inside,10.526,16.499,-5.973,short
+AI 3280,1905-01-06T04:38,ai,0,inside,10.737,16.500,-5.763,short
+AI 3290,1905-01-09T04:18,ai,0,inside,10.715,16.504,-5.789,short
+AI 3297,1905-01-11T02:09,ai,-1,inside,,16.506,,not tested (no limit)
+AM 3310,1905-01-11T04:45,am,0,inside,12.048,16.506,-4.458,short
+A 7137,1905-01-13T01:39,a,0,inside,15.292,16.508,-1.216,short
+AI 3305,1905-01-15T01:06,ai,0,inside,11.366,16.510,-5.144,short
+AC 5833,1905-01-15T03:46,ac,0,inside,11.979,16.510,-4.531,short
+AI 3307,1905-01-15T03:50,ai,0,inside,,16.510,,not tested (no limit)
+AI 3315,1905-01-16T04:57,ai,0,inside,10.509,16.511,-6.002,short
+AC 5854,1905-01-19T04:01,ac,-1,inside,,16.515,,not tested (no limit)
+AC 5855,1905-01-20T01:03,ac,-1,inside,,16.516,,not tested (no limit)
+AI 3336,1905-01-21T02:17,ai,0,inside,,16.517,,not tested (no limit)
+AC 5864,1905-01-21T03:42,ac,0,inside,10.961,16.517,-5.556,short
+AI 3345,1905-01-23T02:53,ai,0,inside,,16.520,,not tested (no limit)
+AC 5873,1905-01-23T03:50,ac,0,inside,12.213,16.520,-4.307,short
+AC 5883,1905-01-24T03:09,ac,0,inside,11.379,16.521,-5.142,short
+AI 3355,1905-01-24T03:20,ai,-1,inside,,16.521,,not tested (no limit)
+AI 3356,1905-01-24T04:23,ai,0,inside,10.975,16.521,-5.546,short
+AI 3357,1905-01-24T05:25,ai,0,inside,,16.521,,not tested (no limit)
+AC 5893,1905-01-27T02:48,ac,0,inside,,16.524,,not tested (no limit)
+AI 3365,1905-01-27T02:50,ai,0,inside,11.667,16.524,-4.857,short
+AI 3374,1905-01-28T02:27,ai,0,inside,9.734,16.525,-6.791,short
+AI 3376,1905-01-29T01:02,ai,0,inside,,16.526,,not tested (no limit)
+AC 5907,1905-01-29T03:18,ac,0,inside,12.536,16.526,-3.990,short
+AI 3379,1905-01-29T04:27,ai,0,inside,10.998,16.526,-5.528,short
+AI 3386,1905-01-30T01:49,ai,0,inside,,16.528,,not tested (no limit)
+AI 3387,1905-01-30T02:45,ai,0,inside,,16.528,,not tested (no limit)
+AC 5918,1905-01-31T04:16,ac,0,inside,,16.529,,not tested (no limit)
+AI 3389,1905-01-31T04:20,ai,0,inside,10.279,16.529,-6.250,short
+AI 3396,1905-02-01T01:46,ai,0,inside,11.451,16.530,-5.079,short
+AI 3398,1905-02-01T04:22,ai,0,inside,,16.530,,not tested (no limit)
+AI 3407,1905-02-03T09:25,ai,0,inside,,16.532,,not tested (no limit)
+AI 3414,1905-02-04T00:50,ai,0,inside,,16.533,,not tested (no limit)
+AC 5936,1905-02-04T03:11,ac,0,inside,,16.533,,not tested (no limit)
+AI 3416,1905-02-04T03:11,ai,0,inside,10.236,16.533,-6.297,short
+AC 5946,1905-02-05T02:17,ac,0,inside,12.575,16.534,-3.959,short
+AI 3426,1905-02-05T02:18,ai,0,inside,,16.534,,not tested (no limit)
+AI 3427,1905-02-05T03:24,ai,0,inside,11.610,16.534,-4.924,short
+AI 3436,1905-02-08T00:48,ai,0,inside,10.698,16.538,-5.840,short
+AI 3438,1905-02-08T03:17,ai,0,inside,10.883,16.538,-5.655,short
+AI 3449,1905-02-11T01:59,ai,0,inside,10.867,16.541,-5.674,short
+AI 3458,1905-02-12T01:10,ai,0,inside,10.639,16.542,-5.903,short
+AI 3460,1905-02-12T03:18,ai,0,inside,,16.542,,not tested (no limit)
+AC 5982,1905-02-12T03:20,ac,0,inside,12.217,16.542,-4.325,short
+AI 3469,1905-02-14T02:38,ai,0,inside,,16.544,,not tested (no limit)
+AI 3477,1905-02-14T23:39,ai,0,inside,,16.545,,not tested (no limit)
+AI 3478,1905-02-15T00:46,ai,0,inside,,16.545,,not tested (no limit)
+AI 3490,1905-02-17T01:11,ai,-1,inside,,16.548,,not tested (no limit)
+AC 6013,1905-02-17T02:17,ac,0,inside,,16.548,,not tested (no limit)
+AI 3491,1905-02-17T02:19,ai,-1,inside,,16.548,,not tested (no limit)
+AI 3492,1905-02-18T01:41,ai,-1,inside,,16.549,,not tested (no limit)
+AI 3502,1905-02-19T00:55,ai,0,inside,,16.550,,not tested (no limit)
+AC 6025,1905-02-19T02:02,ac,-1,inside,,16.550,,not tested (no limit)
+AI 3503,1905-02-19T02:03,ai,-1,inside,,16.550,,not tested (no limit)
+AC 6027,1905-02-19T04:12,ac,-1,inside,,16.550,,not tested (no limit)
+AC 6034,1905-02-20T01:08,ac,-1,inside,,16.551,,not tested (no limit)
+AI 3511,1905-02-20T01:11,ai,0,inside,,16.551,,not tested (no limit)
+AI 3512,1905-02-20T02:11,ai,0,inside,,16.551,,not tested (no limit)
+AI 3525,1905-02-22T00:59,ai,0,inside,11.087,16.553,-5.466,short
+AI 3527,1905-02-22T04:27,ai,0,inside,,16.553,,not tested (no limit)
+AI 3531,1905-02-24T01:04,ai,0,inside,,16.555,,not tested (no limit)
+AI 3532,1905-02-24T03:23,ai,0,inside,,16.555,,not tested (no limit)
+AI 3542,1905-02-26T01:14,ai,0,inside,,16.557,,not tested (no limit)
+AC 6065,1905-02-26T02:27,ac,0,inside,12.029,16.557,-4.528,short
+AI 3553,1905-02-28T00:24,ai,0,inside,10.901,16.558,-5.657,short
+AI 3554,1905-02-28T01:39,ai,0,inside,,16.558,,not tested (no limit)
+AI 3559,1905-03-01T00:45,ai,0,inside,,16.559,,not tested (no limit)
+AI 3560,1905-03-01T01:37,ai,-1,inside,,16.559,,not tested (no limit)
+AI 3564,1905-03-01T08:28,ai,0,inside,,16.559,,not tested (no limit)
+AI 3569,1905-03-02T02:22,ai,-1,inside,,16.560,,not tested (no limit)
+AI 3570,1905-03-02T03:25,ai,0,inside,10.022,16.560,-6.538,short
+AI 3580,1905-03-03T02:15,ai,0,inside,11.129,16.561,-5.432,short
+AC 6110,1905-03-03T23:54,ac,-1,inside,,16.562,,not tested (no limit)
+AI 3589,1905-03-04T01:02,ai,0,inside,,16.562,,not tested (no limit)
+AI 3590,1905-03-04T02:12,ai,0,inside,10.806,16.562,-5.756,short
+AI 3592,1905-03-05T00:20,ai,0,inside,9.806,16.563,-6.757,short
+AC 6115,1905-03-05T01:20,ac,0,inside,13.003,16.563,-3.560,short
+AI 3594,1905-03-05T02:22,ai,0,inside,,16.563,,not tested (no limit)
+AM 3366,1905-03-07T01:47,am,0,inside,,16.565,,not tested (no limit)
+AI 3611,1905-03-07T03:09,ai,0,inside,10.068,16.565,-6.497,short
+AC 6143,1905-03-11T01:54,ac,0,inside,11.545,16.568,-5.023,short
+AC 6152,1905-03-12T01:43,ac,0,inside,12.488,16.569,-4.081,short
+AI 3641,1905-03-14T01:42,ai,0,inside,,16.570,,not tested (no limit)
+AI 3642,1905-03-14T02:52,ai,0,inside,,16.570,,not tested (no limit)
+AI 3651,1905-03-16T00:43,ai,0,inside,9.932,16.572,-6.640,short
+AC 6174,1905-03-16T01:21,ac,0,inside,10.518,16.572,-6.054,short
+AM 3385,1905-03-18T01:00,am,0,inside,,16.573,,not tested (no limit)
+AI 3668,1905-03-18T01:30,ai,0,inside,9.623,16.573,-6.950,short
+AI 3678,1905-03-23T00:30,ai,0,inside,,16.576,,not tested (no limit)
+AI 3679,1905-03-23T01:34,ai,0,inside,10.512,16.576,-6.064,short
+AC 6212,1905-03-24T01:36,ac,0,inside,,16.577,,not tested (no limit)
+AI 3688,1905-03-24T01:37,ai,0,inside,,16.577,,not tested (no limit)
+AI 3695,1905-03-28T00:48,ai,0,inside,,16.579,,not tested (no limit)
+AI 3696,1905-03-28T01:55,ai,0,inside,,16.579,,not tested (no limit)
+AI 3705,1905-03-30T01:46,ai,0,inside,,16.580,,not tested (no limit)
+AI 3714,1905-04-01T00:45,ai,0,inside,,16.581,,not tested (no limit)
+AI 3719,1905-04-02T03:02,ai,0,inside,,16.581,,not tested (no limit)
+AI 3726,1905-04-03T01:10,ai,0,inside,,16.581,,not tested (no limit)
+AI 3727,1905-04-03T02:19,ai,0,inside,,16.581,,not tested (no limit)
+AI 3734,1905-04-04T00:50,ai,0,inside,,16.582,,not tested (no limit)
+AC 6263,1905-04-07T01:05,ac,0,inside,11.169,16.583,-5.414,short
+AI 3749,1905-04-08T01:00,ai,0,inside,10.565,16.583,-6.018,short
+AC 6283,1905-04-10T01:41,ac,0,inside,,16.584,,not tested (no limit)
+AI 3778,1905-04-20T01:19,ai,0,inside,,16.585,,not tested (no limit)
+AC 6305,1905-04-23T00:58,ac,0,inside,,16.585,,not tested (no limit)
+AI 3785,1905-04-24T01:35,ai,0,inside,,16.585,,not tested (no limit)
+AI 3791,1905-04-25T00:53,ai,-1,inside,,16.585,,not tested (no limit)
+AI 3957,1905-07-05T07:49,ai,-1,inside,,16.577,,not tested (no limit)
+AI 4023,1905-07-27T08:12,ai,-1,inside,,16.582,,not tested (no limit)
+AI 4077,1905-08-19T07:41,ai,-1,inside,,16.578,,not tested (no limit)
+AI 4086,1905-08-22T07:08,ai,-1,inside,,16.577,,not tested (no limit)
+AI 4087,1905-08-22T08:42,ai,-1,inside,,16.577,,not tested (no limit)
+AI 4105,1905-08-28T07:06,ai,-1,inside,,16.574,,not tested (no limit)
+AI 4106,1905-08-28T08:28,ai,-1,inside,,16.574,,not tested (no limit)
+AC 6647,1905-09-01T08:33,ac,0,inside,10.434,16.572,-6.138,short
+AI 4128,1905-09-07T09:16,ai,-1,inside,,16.568,,not tested (no limit)
+AC 6671,1905-09-09T08:21,ac,0,inside,12.724,16.567,-3.843,short
+AI 4136,1905-09-09T09:17,ai,0,inside,,16.567,,not tested (no limit)
+AI 4141,1905-09-10T06:43,ai,-1,inside,,16.566,,not tested (no limit)
+AI 4142,1905-09-10T08:17,ai,0,inside,,16.566,,not tested (no limit)
+AM 3880,1905-09-10T09:00,am,0,inside,12.208,16.566,-4.358,short
+AC 6679,1905-09-10T09:11,ac,0,inside,,16.566,,not tested (no limit)
+AI 4143,1905-09-10T09:13,ai,-1,inside,,16.566,,not tested (no limit)
+AI 4147,1905-09-11T08:56,ai,-1,inside,,16.565,,not tested (no limit)
+AI 4151,1905-09-14T07:29,ai,0,inside,,16.563,,not tested (no limit)
+AC 6689,1905-09-14T08:29,ac,0,inside,11.039,16.563,-5.524,short
+AI 4153,1905-09-14T09:22,ai,0,inside,,16.563,,not tested (no limit)
+AI 4158,1905-09-15T05:21,ai,-1,inside,,16.562,,not tested (no limit)
+AI 4160,1905-09-15T07:28,ai,0,inside,,16.562,,not tested (no limit)
+AI 4168,1905-09-21T19:44,ai,-1,inside,,16.556,,not tested (no limit)
+AI 4167,1905-09-22T06:33,ai,-1,inside,,16.556,,not tested (no limit)
+AI 4176,1905-09-23T07:22,ai,0,inside,,16.555,,not tested (no limit)
+AI 4182,1905-09-24T06:09,ai,0,inside,,16.554,,not tested (no limit)
+AC 6720,1905-09-24T08:14,ac,0,inside,12.321,16.554,-4.233,short
+AI 4184,1905-09-24T08:21,ai,0,inside,,16.554,,not tested (no limit)
+AI 4185,1905-09-24T09:18,ai,-1,inside,,16.554,,not tested (no limit)
+AI 4187,1905-09-25T07:37,ai,0,inside,,16.553,,not tested (no limit)
+AI 4189,1905-09-25T09:24,ai,0,inside,,16.553,,not tested (no limit)
+AI 4195,1905-09-26T05:41,ai,0,inside,,16.552,,not tested (no limit)
+AI 4196,1905-09-26T06:53,ai,-1,inside,,16.552,,not tested (no limit)
+AI 4198,1905-09-26T09:11,ai,0,inside,,16.552,,not tested (no limit)
+AI 4204,1905-09-27T07:44,ai,0,inside,,16.551,,not tested (no limit)
+AI 4205,1905-09-27T08:46,ai,0,inside,,16.551,,not tested (no limit)
+AI 4209,1905-09-28T06:48,ai,0,inside,10.155,16.550,-6.395,short
+AC 6748,1905-09-28T08:51,ac,0,inside,,16.550,,not tested (no limit)
+AI 4211,1905-09-28T08:55,ai,0,inside,,16.550,,not tested (no limit)
+AI 4217,1905-09-29T06:06,ai,0,inside,,16.549,,not tested (no limit)
+AM 3917,1905-09-29T08:22,am,0,inside,13.389,16.549,-3.160,short
+AI 4219,1905-09-29T08:56,ai,0,inside,,16.549,,not tested (no limit)
+AI 4224,1905-10-02T06:31,ai,0,inside,,16.546,,not tested (no limit)
+AI 4229,1905-10-04T05:29,ai,-1,inside,,16.544,,not tested (no limit)
+AI 4231,1905-10-04T07:44,ai,-1,inside,,16.544,,not tested (no limit)
+AI 4232,1905-10-04T08:52,ai,0,inside,,16.544,,not tested (no limit)
+AI 4233,1905-10-04T09:33,ai,-1,inside,,16.544,,not tested (no limit)
+AC 6775,1905-10-05T06:12,ac,0,inside,12.445,16.543,-4.098,short
+AI 4238,1905-10-05T06:18,ai,0,inside,,16.543,,not tested (no limit)
+AC 6776,1905-10-05T07:17,ac,0,inside,11.591,16.543,-4.952,short
+AI 4239,1905-10-05T07:22,ai,0,inside,10.212,16.543,-6.331,short
+AI 4241,1905-10-05T09:23,ai,0,inside,,16.543,,not tested (no limit)
+AI 4248,1905-10-06T06:28,ai,0,inside,,16.542,,not tested (no limit)
+AI 4249,1905-10-06T07:31,ai,0,inside,9.095,16.542,-7.447,short
+AI 4251,1905-10-06T09:33,ai,0,inside,,16.542,,not tested (no limit)
+AI 4258,1905-10-07T06:53,ai,0,inside,,16.541,,not tested (no limit)
+AI 4259,1905-10-07T07:55,ai,0,inside,,16.541,,not tested (no limit)
+AC 6794,1905-10-07T09:22,ac,0,inside,,16.541,,not tested (no limit)
+AI 4266,1905-10-08T05:56,ai,0,inside,,16.540,,not tested (no limit)
+AI 4267,1905-10-08T07:13,ai,0,inside,,16.539,,not tested (no limit)
+AI 4268,1905-10-08T08:15,ai,0,inside,,16.539,,not tested (no limit)
+AI 4269,1905-10-08T09:28,ai,0,inside,,16.539,,not tested (no limit)
+AI 4275,1905-10-09T05:52,ai,0,inside,10.098,16.538,-6.440,short
+AC 6810,1905-10-09T06:53,ac,0,inside,11.788,16.538,-4.750,short
+AI 4276,1905-10-09T06:56,ai,0,inside,,16.538,,not tested (no limit)
+AI 4277,1905-10-09T07:59,ai,0,inside,,16.538,,not tested (no limit)
+AI 4284,1905-10-10T05:51,ai,0,inside,,16.537,,not tested (no limit)
+AM 3950,1905-10-10T07:20,am,0,inside,13.654,16.537,-2.883,short
+AI 4286,1905-10-10T09:02,ai,0,inside,,16.537,,not tested (no limit)
+AI 4291,1905-10-11T05:57,ai,0,inside,,16.536,,not tested (no limit)
+AI 4298,1905-10-13T06:15,ai,0,inside,9.114,16.534,-7.420,short
+AC 6832,1905-10-13T07:13,ac,0,inside,10.724,16.534,-5.810,short
+AI 4300,1905-10-13T08:19,ai,0,inside,9.218,16.534,-7.316,short
+AI 4301,1905-10-13T09:21,ai,0,inside,,16.534,,not tested (no limit)
+AI 4304,1905-10-14T08:37,ai,0,inside,,16.533,,not tested (no limit)
+AC 6843,1905-10-15T05:54,ac,0,inside,11.229,16.532,-5.303,short
+AI 4309,1905-10-15T05:57,ai,0,inside,9.373,16.532,-7.159,short
+AI 4310,1905-10-15T06:59,ai,-1,inside,,16.531,,not tested (no limit)
+AI 4326,1905-10-18T07:17,ai,-1,inside,,16.528,,not tested (no limit)
+AC 6861,1905-10-18T08:28,ac,-1,inside,,16.528,,not tested (no limit)
+AI 4327,1905-10-18T08:28,ai,-1,inside,,16.528,,not tested (no limit)
+AI 4335,1905-10-22T08:29,ai,0,inside,10.065,16.523,-6.458,short
+AC 6871,1905-10-22T09:25,ac,0,inside,12.168,16.523,-4.355,short
+AI 4336,1905-10-22T10:13,ai,-1,inside,,16.523,,not tested (no limit)
+AI 4341,1905-10-23T10:11,ai,-1,inside,,16.522,,not tested (no limit)
+AI 4354,1905-10-26T08:18,ai,0,inside,,16.518,,not tested (no limit)
+AI 4355,1905-10-26T09:33,ai,0,inside,,16.518,,not tested (no limit)
+AI 4360,1905-10-27T06:08,ai,0,inside,,16.517,,not tested (no limit)
+AI 4361,1905-10-27T07:31,ai,0,inside,,16.517,,not tested (no limit)
+AI 4366,1905-10-27T19:53,ai,-1,inside,,16.516,,not tested (no limit)
+AI 4367,1905-10-28T08:06,ai,0,inside,,16.516,,not tested (no limit)
+AC 6901,1905-10-28T09:17,ac,0,inside,11.572,16.516,-4.944,short
+AI 4377,1905-10-30T08:04,ai,0,inside,,16.513,,not tested (no limit)
+AC 6911,1905-10-30T09:04,ac,0,inside,12.047,16.513,-4.466,short
+AI 4384,1905-10-31T07:06,ai,-1,inside,,16.512,,not tested (no limit)
+AI 4385,1905-10-31T08:23,ai,-1,inside,,16.512,,not tested (no limit)
+AI 4393,1905-11-02T07:51,ai,0,inside,,16.509,,not tested (no limit)
+AC 6927,1905-11-02T08:57,ac,0,inside,13.183,16.509,-3.326,short
+AC 6936,1905-11-03T08:39,ac,0,inside,,16.508,,not tested (no limit)
+AI 4411,1905-11-05T07:30,ai,0,inside,9.988,16.506,-6.518,short
+AI 4416,1905-11-07T07:02,ai,-1,inside,,16.503,,not tested (no limit)
+AI 4422,1905-11-09T06:48,ai,0,inside,,16.501,,not tested (no limit)
+AI 4423,1905-11-09T08:03,ai,0,inside,,16.501,,not tested (no limit)
+AI 4431,1905-11-10T06:54,ai,0,inside,,16.500,,not tested (no limit)
+AC 6965,1905-11-10T08:13,ac,0,inside,12.664,16.500,-3.836,short
+AC 6973,1905-11-11T05:33,ac,0,inside,10.683,16.499,-5.816,short
+AI 4441,1905-11-11T06:49,ai,0,inside,,16.498,,not tested (no limit)
+AC 6975,1905-11-11T08:07,ac,0,inside,10.696,16.498,-5.802,short
+AI 4443,1905-11-11T09:21,ai,0,inside,,16.498,,not tested (no limit)
+AI 4450,1905-11-12T06:03,ai,-1,inside,,16.497,,not tested (no limit)
+AC 6983,1905-11-12T07:08,ac,-1,inside,,16.497,,not tested (no limit)
+AI 4451,1905-11-12T07:10,ai,0,inside,,16.497,,not tested (no limit)
+A 7524,1905-11-18T05:47,a,0,inside,15.544,16.490,-0.946,short
+AI 4494,1905-11-21T06:46,ai,-1,inside,,16.487,,not tested (no limit)
+AI 4512,1905-11-24T09:32,ai,0,inside,9.423,16.483,-7.060,short
+AI 4518,1905-11-25T03:21,ai,-1,inside,,16.482,,not tested (no limit)
+AI 4524,1905-11-26T04:12,ai,0,inside,10.986,16.481,-5.495,short
+AI 4535,1905-11-28T08:55,ai,-1,inside,,16.479,,not tested (no limit)
+AC 7065,1905-11-28T08:59,ac,0,inside,11.785,16.479,-4.694,short
+MB 19,1905-12-01T00:00,mb,-1,inside,,16.476,,not tested (no limit)
+MB 20,1905-12-06T00:00,mb,-1,inside,,16.472,,not tested (no limit)
+AI 4554,1905-12-06T09:30,ai,0,inside,,16.472,,not tested (no limit)
+AI 4559,1905-12-08T04:18,ai,-1,inside,,16.470,,not tested (no limit)
+AI 4560,1905-12-08T05:46,ai,-1,inside,,16.470,,not tested (no limit)
+AC 7091,1905-12-08T06:46,ac,0,inside,,16.470,,not tested (no limit)
+AI 4561,1905-12-08T08:30,ai,0,inside,,16.470,,not tested (no limit)
+AC 7098,1905-12-09T04:51,ac,-1,inside,,16.469,,not tested (no limit)
+AI 4569,1905-12-11T05:29,ai,0,inside,,16.468,,not tested (no limit)
+AC 7101,1905-12-11T06:58,ac,-1,inside,,16.468,,not tested (no limit)
+AI 4579,1905-12-15T05:18,ai,-1,inside,,16.468,,not tested (no limit)
+AC 7111,1905-12-15T05:24,ac,0,inside,10.407,16.468,-6.061,short
+AI 4584,1905-12-16T03:28,ai,0,inside,,16.468,,not tested (no limit)
+AC 7118,1905-12-19T06:26,ac,0,inside,11.345,16.469,-5.124,short
+AI 4589,1905-12-23T07:13,ai,-1,inside,,16.471,,not tested (no limit)
+AI 4590,1905-12-23T08:18,ai,0,inside,,16.471,,not tested (no limit)
+AI 4596,1905-12-27T07:06,ai,-1,inside,,16.474,,not tested (no limit)
+AI 4597,1905-12-27T08:11,ai,0,inside,,16.474,,not tested (no limit)
+AI 4602,1905-12-28T02:36,ai,0,inside,9.849,16.475,-6.626,short
+AI 4603,1905-12-28T03:45,ai,0,inside,,16.475,,not tested (no limit)
+AI 4606,1905-12-28T08:08,ai,0,inside,,16.475,,not tested (no limit)
+AI 4612,1905-12-29T02:27,ai,0,inside,,16.476,,not tested (no limit)
+A 7555,1905-12-29T02:36,a,0,inside,15.170,16.476,-1.306,short
+AI 4613,1905-12-29T03:41,ai,-1,inside,,16.476,,not tested (no limit)
+AM 4035,1905-12-29T03:50,am,0,inside,12.582,16.476,-3.894,short
+AI 4614,1905-12-31T00:58,ai,0,inside,10.159,16.478,-6.319,short
+AI 4615,1906-01-02T01:17,ai,0,inside,,16.480,,not tested (no limit)
+AM 4038,1906-01-02T05:34,am,0,inside,,16.480,,not tested (no limit)
+AI 4617,1906-01-05T04:44,ai,0,inside,,16.483,,not tested (no limit)
+AI 4619,1906-01-06T02:34,ai,-1,inside,,16.484,,not tested (no limit)
+AI 4620,1906-01-07T01:44,ai,0,inside,,16.485,,not tested (no limit)
+AC 7148,1906-01-07T03:51,ac,-1,inside,,16.485,,not tested (no limit)
+AI 4628,1906-01-10T01:25,ai,-1,inside,,16.489,,not tested (no limit)
+AC 7157,1906-01-10T03:42,ac,-1,inside,,16.489,,not tested (no limit)
+AI 4630,1906-01-10T03:46,ai,-1,inside,,16.489,,not tested (no limit)
+AI 4636,1906-01-11T02:47,ai,0,inside,8.206,16.490,-8.284,short
+AI 4637,1906-01-11T04:10,ai,0,inside,,16.490,,not tested (no limit)
+AI 4643,1906-01-12T23:21,ai,0,inside,,16.492,,not tested (no limit)
+AI 4645,1906-01-13T02:07,ai,-1,inside,,16.492,,not tested (no limit)
+AI 4653,1906-01-19T01:02,ai,-1,inside,,16.499,,not tested (no limit)
+AI 4658,1906-01-20T01:14,ai,0,inside,,16.500,,not tested (no limit)
+AI 4659,1906-01-20T02:06,ai,-1,inside,,16.500,,not tested (no limit)
+AI 4663,1906-01-22T03:30,ai,0,inside,,16.502,,not tested (no limit)
+AI 4667,1906-01-23T01:40,ai,-1,inside,,16.503,,not tested (no limit)
+AI 4670,1906-01-25T02:01,ai,0,inside,,16.506,,not tested (no limit)
+AI 4671,1906-01-25T03:00,ai,0,inside,10.348,16.506,-6.158,short
+AI 4680,1906-01-26T05:57,ai,0,inside,,16.507,,not tested (no limit)
+AC 7214,1906-01-27T03:50,ac,0,inside,13.328,16.508,-3.180,short
+AC 7220,1906-01-28T01:47,ac,0,inside,13.636,16.509,-2.873,short
+AM 4057,1906-01-28T01:50,am,0,inside,12.945,16.509,-3.564,short
+AC 7221,1906-01-28T03:14,ac,0,inside,12.534,16.509,-3.975,short
+AI 4701,1906-01-30T02:18,ai,0,inside,,16.512,,not tested (no limit)
+AC 7230,1906-01-30T04:17,ac,0,inside,12.519,16.512,-3.993,short
+AC 7238,1906-01-31T02:40,ac,0,inside,,16.513,,not tested (no limit)
+AI 4710,1906-01-31T02:40,ai,0,inside,,16.513,,not tested (no limit)
+AI 4711,1906-01-31T03:50,ai,0,inside,,16.513,,not tested (no limit)
+AI 4715,1906-02-03T00:50,ai,-1,inside,,16.516,,not tested (no limit)
+AI 4716,1906-02-03T01:59,ai,0,inside,,16.516,,not tested (no limit)
+AC 7246,1906-02-03T04:02,ac,0,inside,11.512,16.516,-5.004,short
+AI 4718,1906-02-03T04:04,ai,0,inside,,16.516,,not tested (no limit)
+AI 4726,1906-02-04T02:56,ai,0,inside,,16.517,,not tested (no limit)
+AC 7256,1906-02-04T03:47,ac,0,inside,,16.517,,not tested (no limit)
+AI 4730,1906-02-06T02:18,ai,-1,inside,,16.520,,not tested (no limit)
+AI 4732,1906-02-06T04:14,ai,-1,inside,,16.520,,not tested (no limit)
+AC 7263,1906-02-07T01:13,ac,-1,inside,,16.521,,not tested (no limit)
+AC 7264,1906-02-07T02:23,ac,-1,inside,,16.521,,not tested (no limit)
+AI 4735,1906-02-07T02:25,ai,0,inside,8.338,16.521,-8.183,short
+AI 4739,1906-02-11T03:03,ai,0,inside,,16.525,,not tested (no limit)
+AC 7270,1906-02-11T04:05,ac,0,inside,11.687,16.525,-4.838,short
+AI 4747,1906-02-12T03:08,ai,0,inside,,16.526,,not tested (no limit)
+AM 4109,1906-02-16T01:34,am,0,inside,12.600,16.531,-3.931,short
+AI 4750,1906-02-16T03:08,ai,0,inside,,16.531,,not tested (no limit)
+AI 4756,1906-02-17T01:01,ai,0,inside,,16.532,,not tested (no limit)
+AC 7287,1906-02-17T02:08,ac,0,inside,13.500,16.532,-3.032,short
+AI 4764,1906-02-18T01:04,ai,0,inside,11.428,16.533,-5.105,short
+AC 7292,1906-02-18T02:08,ac,0,inside,,16.533,,not tested (no limit)
+AI 4766,1906-02-18T03:19,ai,0,inside,,16.533,,not tested (no limit)
+AI 4772,1906-02-19T02:13,ai,-1,inside,,16.534,,not tested (no limit)
+AI 4774,1906-02-19T23:02,ai,0,inside,,16.535,,not tested (no limit)
+AC 7301,1906-02-20T02:07,ac,0,inside,,16.535,,not tested (no limit)
+AI 4779,1906-02-20T22:17,ai,0,inside,,16.536,,not tested (no limit)
+AI 4784,1906-02-23T02:06,ai,0,inside,11.310,16.538,-5.228,short
+AI 4785,1906-02-23T03:13,ai,0,inside,,16.538,,not tested (no limit)
+AI 4792,1906-02-24T01:53,ai,0,inside,11.217,16.539,-5.322,short
+AI 4798,1906-02-25T00:35,ai,0,inside,,16.540,,not tested (no limit)
+AC 7329,1906-03-01T01:14,ac,0,inside,,16.544,,not tested (no limit)
+AC 7330,1906-03-01T02:18,ac,0,inside,12.657,16.544,-3.887,short
+AI 4807,1906-03-01T02:21,ai,0,inside,10.612,16.544,-5.932,short
+AI 4812,1906-03-02T00:48,ai,0,inside,10.683,16.545,-5.862,short
+AI 4821,1906-03-05T02:07,ai,0,inside,,16.547,,not tested (no limit)
+AC 7349,1906-03-06T02:05,ac,0,inside,,16.548,,not tested (no limit)
+AC 7356,1906-03-07T01:39,ac,0,inside,11.404,16.549,-5.145,short
+AI 4841,1906-03-11T01:13,ai,0,inside,,16.552,,not tested (no limit)
+AC 7371,1906-03-13T00:41,ac,0,inside,,16.554,,not tested (no limit)
+AC 7374,1906-03-15T01:15,ac,0,inside,13.052,16.555,-3.503,short
+AI 4851,1906-03-15T01:17,ai,0,inside,,16.555,,not tested (no limit)
+AC 7379,1906-03-18T00:49,ac,0,inside,12.636,16.558,-3.922,short
+AI 4857,1906-03-18T02:27,ai,0,inside,10.928,16.558,-5.630,short
+AI 4860,1906-03-19T00:47,ai,0,inside,,16.558,,not tested (no limit)
+AI 4862,1906-03-19T02:53,ai,0,inside,9.962,16.558,-6.596,short
+AI 4866,1906-03-21T02:35,ai,0,inside,10.582,16.560,-5.978,short
+AI 4867,1906-03-21T03:49,ai,0,inside,,16.560,,not tested (no limit)
+AI 4871,1906-03-22T01:36,ai,-1,inside,,16.560,,not tested (no limit)
+AC 7405,1906-03-24T00:42,ac,0,inside,,16.561,,not tested (no limit)
+AI 4887,1906-03-25T02:06,ai,0,inside,,16.562,,not tested (no limit)
+AC 7416,1906-03-26T00:52,ac,0,inside,11.756,16.563,-4.807,short
+AI 4891,1906-03-26T01:59,ai,0,inside,9.828,16.563,-6.735,short
+AM 4152,1906-03-29T01:38,am,0,inside,,16.564,,not tested (no limit)
+AC 7430,1906-04-02T00:52,ac,0,inside,12.560,16.566,-4.006,short
+AI 4908,1906-04-03T00:37,ai,0,inside,9.648,16.566,-6.918,short
+AI 4915,1906-04-04T00:38,ai,0,inside,,16.567,,not tested (no limit)
+AI 4916,1906-04-04T01:56,ai,-1,inside,,16.567,,not tested (no limit)
+AI 4931,1906-04-08T00:49,ai,0,inside,,16.568,,not tested (no limit)
+AC 7460,1906-04-09T00:53,ac,0,inside,,16.569,,not tested (no limit)
+AC 7465,1906-04-14T00:44,ac,0,inside,,16.570,,not tested (no limit)
+AI 4942,1906-04-17T01:20,ai,0,inside,,16.570,,not tested (no limit)
+AI 4948,1906-04-18T00:48,ai,0,inside,,16.570,,not tested (no limit)
+AI 4957,1906-04-19T02:52,ai,0,inside,,16.571,,not tested (no limit)
+AI 5176,1906-08-17T08:30,ai,-1,inside,,16.565,,not tested (no limit)
+AI 5183,1906-08-18T08:22,ai,0,inside,,16.565,,not tested (no limit)
+AI 5193,1906-08-19T18:16,ai,-1,inside,,16.564,,not tested (no limit)
+AM 4512,1906-08-22T09:12,am,0,inside,12.134,16.563,-4.429,short
+AI 5203,1906-08-25T07:46,ai,-1,inside,,16.562,,not tested (no limit)
+AI 5204,1906-08-25T09:03,ai,-1,inside,,16.562,,not tested (no limit)
+AI 5219,1906-09-01T06:29,ai,0,inside,,16.558,,not tested (no limit)
+AI 5228,1906-09-02T08:50,ai,0,inside,,16.558,,not tested (no limit)
+AI 5248,1906-09-06T08:41,ai,0,inside,,16.555,,not tested (no limit)
+AI 5266,1906-09-15T08:37,ai,0,inside,,16.548,,not tested (no limit)
+AI 5270,1906-09-16T07:58,ai,0,inside,9.777,16.548,-6.771,short
+AM 4582,1906-09-18T08:34,am,0,inside,,16.546,,not tested (no limit)
+AM 4586,1906-09-20T08:29,am,0,inside,,16.544,,not tested (no limit)
+AI 5298,1906-09-28T06:12,ai,0,inside,,16.537,,not tested (no limit)
+AC 7861,1906-09-29T07:50,ac,0,inside,13.270,16.536,-3.266,short
+AI 5305,1906-09-29T07:53,ai,0,inside,,16.536,,not tested (no limit)
+AI 5308,1906-10-01T08:40,ai,0,inside,,16.534,,not tested (no limit)
+AI 5309,1906-10-01T09:30,ai,0,inside,,16.534,,not tested (no limit)
+AI 5320,1906-10-07T09:23,ai,0,inside,9.348,16.527,-7.179,short
+AI 5323,1906-10-08T07:40,ai,0,inside,,16.526,,not tested (no limit)
+AC 7880,1906-10-08T08:51,ac,0,inside,,16.526,,not tested (no limit)
+AI 5336,1906-10-11T08:08,ai,-1,inside,,16.523,,not tested (no limit)
+AI 5343,1906-10-12T05:14,ai,0,inside,10.939,16.522,-5.583,short
+AI 5344,1906-10-12T06:22,ai,0,inside,,16.521,,not tested (no limit)
+AC 7904,1906-10-12T09:38,ac,-1,inside,,16.521,,not tested (no limit)
+AI 5347,1906-10-12T09:39,ai,0,inside,,16.521,,not tested (no limit)
+AI 5354,1906-10-13T06:33,ai,0,inside,,16.520,,not tested (no limit)
+AM 4630,1906-10-13T06:57,am,0,inside,12.986,16.520,-3.534,short
+AI 5355,1906-10-13T07:45,ai,-1,inside,,16.520,,not tested (no limit)
+AC 7913,1906-10-13T08:43,ac,0,inside,13.061,16.520,-3.459,short
+AI 5363,1906-10-14T06:47,ai,0,inside,,16.519,,not tested (no limit)
+AI 5368,1906-10-15T05:05,ai,0,inside,9.773,16.518,-6.745,short
+AC 7925,1906-10-15T08:16,ac,0,inside,11.143,16.518,-5.375,short
+AM 4650,1906-10-18T07:25,am,0,inside,13.511,16.514,-3.003,short
+AI 5378,1906-10-24T08:08,ai,0,inside,9.645,16.507,-6.862,short
+AI 5385,1906-10-26T07:37,ai,0,inside,,16.505,,not tested (no limit)
+AI 5392,1906-10-28T05:33,ai,-1,inside,,16.502,,not tested (no limit)
+AI 5393,1906-10-28T08:57,ai,0,inside,,16.502,,not tested (no limit)
+AC 7948,1906-10-29T08:49,ac,0,inside,,16.501,,not tested (no limit)
+AC 7952,1906-11-03T08:58,ac,0,inside,10.162,16.495,-6.333,short
+AI 5399,1906-11-03T08:58,ai,0,inside,,16.495,,not tested (no limit)
+AI 5400,1906-11-03T10:00,ai,-1,inside,,16.495,,not tested (no limit)
+AI 5406,1906-11-04T06:30,ai,0,inside,,16.494,,not tested (no limit)
+AI 5407,1906-11-04T07:38,ai,0,inside,,16.494,,not tested (no limit)
+AI 5413,1906-11-05T06:04,ai,0,inside,,16.492,,not tested (no limit)
+AC 7975,1906-11-07T05:11,ac,0,inside,13.080,16.490,-3.410,short
+AI 5422,1906-11-07T07:44,ai,0,inside,11.303,16.490,-5.187,short
+AI 5423,1906-11-07T08:52,ai,0,inside,10.767,16.490,-5.723,short
+AI 5430,1906-11-08T06:11,ai,0,inside,,16.489,,not tested (no limit)
+AI 5431,1906-11-08T08:22,ai,0,inside,,16.489,,not tested (no limit)
+AM 4668,1906-11-09T05:35,am,0,inside,,16.488,,not tested (no limit)
+AC 7998,1906-11-09T07:33,ac,0,inside,12.734,16.487,-3.753,short
+AI 5441,1906-11-09T07:33,ai,0,inside,,16.487,,not tested (no limit)
+AC 8010,1906-11-14T06:29,ac,0,inside,,16.481,,not tested (no limit)
+AI 5453,1906-11-14T06:29,ai,0,inside,,16.481,,not tested (no limit)
+AI 5460,1906-11-15T05:52,ai,0,inside,,16.480,,not tested (no limit)
+AI 5461,1906-11-15T06:54,ai,0,inside,,16.480,,not tested (no limit)
+AC 8018,1906-11-15T07:55,ac,0,inside,11.448,16.480,-5.032,short
+AI 5463,1906-11-17T02:42,ai,0,inside,10.858,16.478,-5.620,short
+AI 5474,1906-11-20T03:26,ai,0,inside,,16.474,,not tested (no limit)
+AI 5475,1906-11-20T04:37,ai,0,inside,,16.474,,not tested (no limit)
+AC 8033,1906-11-20T05:28,ac,0,inside,11.738,16.474,-4.736,short
+AI 5486,1906-11-24T02:52,ai,0,inside,10.674,16.470,-5.796,short
+AC 8058,1906-11-27T05:56,ac,0,inside,11.633,16.466,-4.833,short
+AI 5500,1906-11-27T05:58,ai,0,inside,,16.466,,not tested (no limit)
+AI 5508,1906-11-30T04:19,ai,0,inside,,16.463,,not tested (no limit)
+AI 5509,1906-11-30T05:21,ai,0,inside,,16.463,,not tested (no limit)
+AI 5516,1906-12-02T05:54,ai,0,inside,,16.461,,not tested (no limit)
+AI 5532,1906-12-07T05:01,ai,0,inside,9.639,16.456,-6.817,short
+MB 200,1906-12-08T00:00,mb,-1,inside,,16.456,,not tested (no limit)
+AC 8095,1906-12-08T05:58,ac,0,inside,13.614,16.456,-2.842,short
+AI 5539,1906-12-08T07:04,ai,0,inside,10.559,16.456,-5.897,short
+AI 5538,1906-12-08T14:56,ai,0,inside,11.457,16.455,-4.998,short
+AM 4721,1906-12-14T03:33,am,0,inside,12.398,16.452,-4.054,short
+AC 8103,1906-12-17T05:30,ac,0,inside,,16.452,,not tested (no limit)
+AI 5546,1906-12-17T05:30,ai,0,inside,,16.452,,not tested (no limit)
+AI 5547,1906-12-18T06:01,ai,0,inside,,16.452,,not tested (no limit)
+AC 8105,1906-12-18T07:07,ac,0,inside,12.033,16.452,-4.419,short
+AI 5548,1906-12-18T07:08,ai,-1,inside,,16.452,,not tested (no limit)
+MB 204,1906-12-19T00:00,mb,-1,inside,,16.453,,not tested (no limit)
+MB 205,1906-12-19T00:00,mb,-1,inside,,16.453,,not tested (no limit)
+MB 206,1906-12-19T00:00,mb,-1,inside,,16.453,,not tested (no limit)
+AI 5551,1906-12-19T03:27,ai,0,inside,,16.453,,not tested (no limit)
+AI 5552,1906-12-19T05:03,ai,0,inside,11.270,16.453,-5.183,short
+AI 5553,1906-12-19T06:13,ai,0,inside,,16.453,,not tested (no limit)
+AC 8110,1906-12-19T06:13,ac,0,inside,13.318,16.453,-3.135,short
+MB 207,1906-12-20T00:00,mb,-1,inside,,16.453,,not tested (no limit)
+AI 5559,1906-12-20T01:49,ai,0,inside,,16.453,,not tested (no limit)
+AI 5561,1906-12-20T04:02,ai,0,inside,10.974,16.453,-5.479,short
+AI 5562,1906-12-20T05:09,ai,0,inside,,16.453,,not tested (no limit)
+AI 5564,1906-12-27T05:01,ai,0,inside,,16.458,,not tested (no limit)
+AI 5566,1907-01-02T05:38,ai,-1,inside,,16.464,,not tested (no limit)
+AI 5571,1907-01-05T14:59,ai,0,inside,10.561,16.468,-5.907,short
+MB 211,1907-01-06T00:00,mb,-1,inside,,16.468,,not tested (no limit)
+AI 5573,1907-01-06T01:57,ai,0,inside,10.906,16.468,-5.562,short
+AI 5575,1907-01-06T04:26,ai,0,inside,,16.468,,not tested (no limit)
+AI 5584,1907-01-10T02:06,ai,0,inside,,16.472,,not tested (no limit)
+AC 8144,1907-01-10T04:09,ac,0,inside,13.520,16.472,-2.952,short
+AI 5586,1907-01-10T04:11,ai,0,inside,,16.472,,not tested (no limit)
+AC 8152,1907-01-12T03:06,ac,0,inside,,16.474,,not tested (no limit)
+AC 8153,1907-01-12T05:18,ac,0,inside,11.570,16.474,-4.904,short
+AI 5610,1907-01-22T02:01,ai,0,inside,11.339,16.486,-5.147,short
+AI 5617,1907-01-23T03:01,ai,0,inside,,16.487,,not tested (no limit)
+AC 8175,1907-01-23T03:49,ac,0,inside,12.059,16.487,-4.428,short
+AI 5619,1907-01-23T05:17,ai,-1,inside,,16.487,,not tested (no limit)
+AI 5627,1907-01-24T02:30,ai,0,inside,10.193,16.488,-6.295,short
+AI 5628,1907-01-24T03:49,ai,0,inside,,16.488,,not tested (no limit)
+AI 5637,1907-01-29T03:07,ai,-1,inside,,16.494,,not tested (no limit)
+AI 5644,1907-01-31T02:27,ai,0,inside,,16.496,,not tested (no limit)
+AI 5645,1907-01-31T05:16,ai,0,inside,,16.496,,not tested (no limit)
+AI 5652,1907-02-04T04:33,ai,-1,inside,,16.501,,not tested (no limit)
+AI 5653,1907-02-07T01:22,ai,0,inside,,16.504,,not tested (no limit)
+AI 5663,1907-02-08T01:36,ai,-1,inside,,16.505,,not tested (no limit)
+AC 8223,1907-02-09T03:02,ac,0,inside,11.959,16.506,-4.547,short
+AI 5665,1907-02-09T03:05,ai,-1,inside,,16.506,,not tested (no limit)
+AI 5671,1907-02-10T00:19,ai,-1,inside,,16.508,,not tested (no limit)
+AC 8231,1907-02-10T02:32,ac,0,inside,12.859,16.508,-3.649,short
+AI 5675,1907-02-11T04:35,ai,-1,inside,,16.509,,not tested (no limit)
+AC 8237,1907-02-12T02:17,ac,0,inside,12.011,16.510,-4.499,short
+AC 8245,1907-02-13T01:54,ac,0,inside,13.454,16.511,-3.057,short
+AI 5679,1907-02-14T02:12,ai,0,inside,,16.512,,not tested (no limit)
+AI 5682,1907-02-16T02:02,ai,0,inside,,16.514,,not tested (no limit)
+AI 5683,1907-02-16T03:12,ai,0,inside,,16.514,,not tested (no limit)
+AI 5686,1907-02-19T02:05,ai,0,inside,,16.517,,not tested (no limit)
+AI 5696,1907-02-22T01:13,ai,0,inside,,16.521,,not tested (no limit)
+AI 5697,1907-02-22T02:20,ai,0,inside,,16.521,,not tested (no limit)
+AI 5704,1907-02-23T01:46,ai,-1,inside,,16.522,,not tested (no limit)
+AI 5714,1907-02-24T01:07,ai,0,inside,,16.523,,not tested (no limit)
+AC 8290,1907-02-24T02:12,ac,0,inside,,16.523,,not tested (no limit)
+AI 5716,1907-02-24T03:13,ai,-1,inside,,16.523,,not tested (no limit)
+AI 5723,1907-02-26T01:01,ai,0,inside,,16.525,,not tested (no limit)
+AC 8299,1907-02-26T02:03,ac,0,inside,10.367,16.525,-6.158,short
+AI 5725,1907-02-26T03:07,ai,-1,inside,,16.525,,not tested (no limit)
+AI 5732,1907-02-27T01:16,ai,0,inside,,16.526,,not tested (no limit)
+AC 8309,1907-02-28T01:27,ac,0,inside,,16.527,,not tested (no limit)
+AC 8310,1907-02-28T02:48,ac,-1,inside,,16.527,,not tested (no limit)
+AI 5735,1907-02-28T02:54,ai,-1,inside,,16.527,,not tested (no limit)
+AC 8327,1907-03-08T01:20,ac,0,inside,12.069,16.534,-4.465,short
+AI 5750,1907-03-08T01:22,ai,0,inside,,16.534,,not tested (no limit)
+AI 5757,1907-03-10T01:11,ai,-1,inside,,16.536,,not tested (no limit)
+AI 5758,1907-03-10T02:14,ai,0,inside,10.531,16.536,-6.005,short
+AC 8342,1907-03-12T01:36,ac,0,inside,11.908,16.537,-4.629,short
+AC 8354,1907-03-19T01:07,ac,0,inside,,16.542,,not tested (no limit)
+AI 5802,1907-03-31T01:22,ai,0,inside,,16.550,,not tested (no limit)
+AC 8386,1907-04-03T00:40,ac,0,inside,11.357,16.551,-5.194,short
+AI 5806,1907-04-03T00:45,ai,0,inside,,16.551,,not tested (no limit)
+AC 8403,1907-04-07T01:13,ac,0,inside,,16.553,,not tested (no limit)
+AI 5814,1907-04-12T00:34,ai,0,inside,,16.554,,not tested (no limit)
+AI 5858,1907-04-22T01:14,ai,0,inside,,16.556,,not tested (no limit)
+AI 5896,1907-05-14T01:11,ai,-1,inside,,16.553,,not tested (no limit)
+AM 5045,1907-08-05T09:58,am,0,inside,12.786,16.552,-3.766,short
+AM 5050,1907-08-06T09:33,am,0,inside,,16.552,,not tested (no limit)
+B 37933,1907-08-07T09:23,b,0,inside,,16.552,,not tested (no limit)
+A 8416,1907-08-08T09:17,a,0,inside,,16.552,,not tested (no limit)
+B 37941,1907-08-08T09:19,b,0,inside,,16.552,,not tested (no limit)
+AI 6066,1907-08-21T08:03,ai,-1,inside,,16.549,,not tested (no limit)
+AC 8712,1907-08-21T08:54,ac,-1,inside,,16.549,,not tested (no limit)
+AI 6092,1907-08-30T08:53,ai,0,inside,,16.545,,not tested (no limit)
+AI 6107,1907-09-13T08:41,ai,0,inside,,16.536,,not tested (no limit)
+AI 6119,1907-09-15T06:33,ai,-1,inside,,16.534,,not tested (no limit)
+AI 6120,1907-09-15T08:40,ai,0,inside,,16.534,,not tested (no limit)
+AI 6123,1907-09-16T07:05,ai,-1,inside,,16.533,,not tested (no limit)
+AI 6133,1907-09-18T08:42,ai,-1,inside,,16.532,,not tested (no limit)
+AI 6146,1907-10-03T06:08,ai,0,inside,,16.517,,not tested (no limit)
+AI 6147,1907-10-03T07:09,ai,-1,inside,,16.517,,not tested (no limit)
+AI 6166,1907-10-09T07:15,ai,-1,inside,,16.511,,not tested (no limit)
+AC 8845,1907-10-09T09:32,ac,-1,inside,,16.511,,not tested (no limit)
+AI 6187,1907-10-13T05:16,ai,-1,inside,,16.507,,not tested (no limit)
+AI 6189,1907-10-14T07:24,ai,0,inside,,16.505,,not tested (no limit)
+AI 6195,1907-10-16T05:15,ai,0,inside,,16.503,,not tested (no limit)
+AI 6196,1907-10-16T07:19,ai,0,inside,,16.503,,not tested (no limit)
+AM 5206,1907-10-16T07:24,am,0,inside,13.124,16.503,-3.379,short
+AC 8882,1907-10-17T08:05,ac,0,inside,,16.502,,not tested (no limit)
+AC 8883,1907-10-17T09:12,ac,0,inside,,16.502,,not tested (no limit)
+AC 8902,1907-10-22T06:52,ac,0,inside,,16.496,,not tested (no limit)
+AI 6218,1907-10-22T06:55,ai,-1,inside,,16.496,,not tested (no limit)
+AI 6219,1907-10-22T07:49,ai,-1,inside,,16.496,,not tested (no limit)
+AI 6227,1907-10-22T22:13,ai,-1,inside,,16.495,,not tested (no limit)
+AC 8909,1907-10-23T04:23,ac,0,inside,,16.495,,not tested (no limit)
+AC 8913,1907-10-23T08:42,ac,-1,inside,,16.494,,not tested (no limit)
+AI 6228,1907-10-23T08:43,ai,0,inside,,16.494,,not tested (no limit)
+AI 6240,1907-10-26T06:08,ai,0,inside,,16.491,,not tested (no limit)
+AI 6241,1907-10-26T07:20,ai,-1,inside,,16.491,,not tested (no limit)
+AM 5231,1907-10-29T08:22,am,0,inside,13.208,16.487,-3.279,short
+AI 6257,1907-10-30T20:34,ai,0,inside,,16.485,,not tested (no limit)
+AI 6256,1907-10-31T09:05,ai,0,inside,,16.485,,not tested (no limit)
+AI 6263,1907-11-01T04:52,ai,0,inside,,16.484,,not tested (no limit)
+AI 6264,1907-11-01T05:52,ai,0,inside,,16.484,,not tested (no limit)
+AM 5243,1907-11-03T08:06,am,0,inside,13.134,16.481,-3.347,short
+AI 6273,1907-11-04T05:50,ai,0,inside,,16.480,,not tested (no limit)
+AI 6274,1907-11-04T06:52,ai,0,inside,,16.480,,not tested (no limit)
+AC 8962,1907-11-04T07:51,ac,0,inside,12.081,16.480,-4.399,short
+AI 6282,1907-11-05T05:48,ai,0,inside,9.184,16.479,-7.295,short
+MB 390,1907-11-06T00:00,mb,-1,inside,,16.477,,not tested (no limit)
+AM 5248,1907-11-08T08:28,am,-1,inside,,16.475,,not tested (no limit)
+AI 6302,1907-11-12T06:03,ai,-1,inside,,16.470,,not tested (no limit)
+AI 6309,1907-11-14T05:22,ai,-1,inside,,16.467,,not tested (no limit)
+AI 6310,1907-11-14T06:25,ai,0,inside,,16.467,,not tested (no limit)
+AC 8994,1907-11-14T08:27,ac,-1,inside,,16.467,,not tested (no limit)
+AI 6316,1907-11-15T04:23,ai,-1,inside,,16.466,,not tested (no limit)
+AI 6317,1907-11-15T05:29,ai,0,inside,10.723,16.466,-5.743,short
+AI 6323,1907-11-17T04:06,ai,-1,inside,,16.464,,not tested (no limit)
+AC 9025,1907-11-29T04:38,ac,0,inside,,16.450,,not tested (no limit)
+AI 6341,1907-11-29T04:39,ai,0,inside,,16.450,,not tested (no limit)
+AI 6342,1907-11-29T05:40,ai,0,inside,,16.450,,not tested (no limit)
+AI 6343,1907-11-29T06:43,ai,0,inside,,16.450,,not tested (no limit)
+AI 6349,1907-11-30T06:32,ai,0,inside,10.552,16.449,-5.897,short
+MB 403,1907-12-01T00:00,mb,-1,inside,,16.448,,not tested (no limit)
+MB 405,1907-12-02T00:00,mb,-1,inside,,16.447,,not tested (no limit)
+MB 409,1907-12-06T00:00,mb,-1,inside,,16.443,,not tested (no limit)
+MB 410,1907-12-06T00:00,mb,-1,inside,,16.443,,not tested (no limit)
+AI 6364,1907-12-06T04:39,ai,0,inside,,16.443,,not tested (no limit)
+AI 6365,1907-12-06T06:50,ai,0,inside,,16.443,,not tested (no limit)
+AI 6371,1907-12-08T04:06,ai,0,inside,,16.441,,not tested (no limit)
+AC 9056,1907-12-09T06:37,ac,0,inside,11.764,16.440,-4.676,short
+AI 6379,1907-12-12T04:39,ai,0,inside,10.146,16.438,-6.292,short
+AI 6380,1907-12-12T06:12,ai,-1,inside,,16.438,,not tested (no limit)
+AI 6388,1907-12-13T06:28,ai,0,inside,10.403,16.437,-6.034,short
+AI 6401,1907-12-20T05:20,ai,0,inside,,16.437,,not tested (no limit)
+AI 6410,1907-12-22T03:17,ai,0,inside,,16.438,,not tested (no limit)
+AI 6411,1907-12-22T04:34,ai,0,inside,8.265,16.438,-8.173,short
+AI 6412,1907-12-23T05:23,ai,-1,inside,,16.438,,not tested (no limit)
+AI 6418,1907-12-25T05:38,ai,0,inside,9.390,16.440,-7.050,short
+AI 6424,1907-12-27T03:51,ai,0,inside,,16.441,,not tested (no limit)
+AI 6425,1907-12-27T05:20,ai,0,inside,,16.441,,not tested (no limit)
+AI 6426,1907-12-27T06:37,ai,-1,inside,,16.441,,not tested (no limit)
+AI 6430,1907-12-28T03:32,ai,0,inside,,16.442,,not tested (no limit)
+AC 9113,1907-12-29T05:40,ac,0,inside,,16.443,,not tested (no limit)
+AI 6435,1907-12-30T04:00,ai,0,inside,,16.444,,not tested (no limit)
+AI 6440,1908-01-01T03:46,ai,0,inside,10.379,16.446,-6.067,short
+AI 6441,1908-01-01T04:47,ai,0,inside,,16.446,,not tested (no limit)
+AI 6442,1908-01-01T05:52,ai,0,inside,,16.446,,not tested (no limit)
+AI 6448,1908-01-02T02:17,ai,0,inside,,16.447,,not tested (no limit)
+AI 6450,1908-01-02T04:35,ai,0,inside,,16.447,,not tested (no limit)
+AI 6459,1908-01-04T02:39,ai,0,inside,,16.449,,not tested (no limit)
+AI 6460,1908-01-04T03:46,ai,0,inside,10.219,16.449,-6.230,short
+AC 9139,1908-01-04T04:48,ac,0,inside,,16.449,,not tested (no limit)
+AC 9140,1908-01-04T05:50,ac,0,inside,13.281,16.449,-3.168,short
+AI 6471,1908-01-07T03:36,ai,0,inside,10.303,16.452,-6.149,short
+AI 6472,1908-01-07T04:37,ai,0,inside,,16.452,,not tested (no limit)
+AI 6473,1908-01-07T05:49,ai,0,inside,,16.452,,not tested (no limit)
+AC 9156,1908-01-09T02:29,ac,0,inside,12.653,16.454,-3.801,short
+AI 6479,1908-01-09T02:38,ai,0,inside,,16.454,,not tested (no limit)
+AI 6481,1908-01-09T04:47,ai,0,inside,,16.454,,not tested (no limit)
+AI 6482,1908-01-09T05:51,ai,-1,inside,,16.454,,not tested (no limit)
+AI 6488,1908-01-11T02:23,ai,0,inside,,16.456,,not tested (no limit)
+AC 9166,1908-01-11T03:33,ac,0,inside,11.343,16.456,-5.113,short
+AI 6489,1908-01-11T03:34,ai,0,inside,,16.456,,not tested (no limit)
+AI 6494,1908-01-15T03:47,ai,0,inside,,16.460,,not tested (no limit)
+AC 9181,1908-01-17T03:59,ac,-1,inside,,16.463,,not tested (no limit)
+AI 6502,1908-01-17T04:01,ai,-1,inside,,16.463,,not tested (no limit)
+AI 6503,1908-01-17T05:02,ai,-1,inside,,16.463,,not tested (no limit)
+AI 6505,1908-01-19T01:50,ai,0,inside,,16.465,,not tested (no limit)
+AC 9191,1908-01-21T04:01,ac,0,inside,,16.467,,not tested (no limit)
+AM 5275,1908-01-25T04:06,am,-1,inside,,16.472,,not tested (no limit)
+MB 456,1908-01-28T00:00,mb,-1,inside,,16.476,,not tested (no limit)
+AC 9205,1908-01-28T03:10,ac,0,inside,,16.476,,not tested (no limit)
+AI 6514,1908-01-31T02:10,ai,0,inside,10.391,16.479,-6.088,short
+AC 9215,1908-01-31T03:14,ac,0,inside,13.869,16.479,-2.610,short
+AI 6517,1908-01-31T05:36,ai,0,inside,9.834,16.479,-6.645,short
+AC 9223,1908-02-01T03:13,ac,0,inside,12.987,16.480,-3.493,short
+AM 5296,1908-02-02T02:26,am,-1,inside,,16.481,,not tested (no limit)
+AI 6537,1908-02-05T01:05,ai,0,inside,,16.485,,not tested (no limit)
+AI 6539,1908-02-05T03:31,ai,0,inside,,16.485,,not tested (no limit)
+AM 5302,1908-02-06T02:16,am,0,inside,13.157,16.486,-3.329,short
+AC 9244,1908-02-08T02:10,ac,0,inside,12.124,16.488,-4.364,short
+AI 6547,1908-02-08T02:11,ai,0,inside,10.168,16.488,-6.320,short
+AI 6548,1908-02-08T03:21,ai,0,inside,,16.488,,not tested (no limit)
+AI 6555,1908-02-09T01:04,ai,0,inside,,16.489,,not tested (no limit)
+AC 9253,1908-02-09T02:09,ac,0,inside,11.994,16.489,-4.495,short
+AC 9254,1908-02-09T03:12,ac,0,inside,12.884,16.489,-3.605,short
+AI 6558,1908-02-09T04:35,ai,-1,inside,,16.489,,not tested (no limit)
+AI 6564,1908-02-12T01:15,ai,0,inside,,16.493,,not tested (no limit)
+AI 6575,1908-02-19T02:02,ai,0,inside,,16.501,,not tested (no limit)
+AI 6576,1908-02-19T03:10,ai,0,inside,9.300,16.501,-7.201,short
+AI 6579,1908-02-21T01:58,ai,0,inside,,16.503,,not tested (no limit)
+AC 9282,1908-02-23T01:03,ac,0,inside,13.327,16.505,-3.178,short
+AI 6585,1908-02-23T02:05,ai,0,inside,10.072,16.505,-6.433,short
+AI 6592,1908-02-25T02:13,ai,0,inside,,16.507,,not tested (no limit)
+AC 9294,1908-02-26T00:54,ac,-1,inside,,16.508,,not tested (no limit)
+AI 6597,1908-02-26T00:54,ai,-1,inside,,16.508,,not tested (no limit)
+AI 6600,1908-02-29T01:47,ai,0,inside,,16.511,,not tested (no limit)
+AI 6601,1908-02-29T03:24,ai,0,inside,,16.511,,not tested (no limit)
+AI 6608,1908-03-01T04:18,ai,0,inside,,16.512,,not tested (no limit)
+AC 9307,1908-03-04T01:05,ac,0,inside,,16.515,,not tested (no limit)
+AI 6610,1908-03-04T01:07,ai,0,inside,10.411,16.515,-6.104,short
+AC 9308,1908-03-04T02:15,ac,0,inside,13.225,16.515,-3.290,short
+AI 6616,1908-03-06T01:46,ai,0,inside,,16.516,,not tested (no limit)
+AI 6618,1908-03-06T04:05,ai,0,inside,,16.516,,not tested (no limit)
+AI 6634,1908-03-13T01:36,ai,0,inside,,16.522,,not tested (no limit)
+AI 6641,1908-03-15T01:37,ai,-1,inside,,16.524,,not tested (no limit)
+AI 6644,1908-03-17T00:51,ai,0,inside,,16.525,,not tested (no limit)
+AI 6645,1908-03-17T02:05,ai,0,inside,,16.525,,not tested (no limit)
+AI 6652,1908-03-20T03:19,ai,0,inside,9.428,16.528,-7.100,short
+AI 6656,1908-03-22T00:44,ai,0,inside,,16.529,,not tested (no limit)
+AI 6657,1908-03-22T01:48,ai,0,inside,10.882,16.529,-5.647,short
+AC 9359,1908-03-25T00:54,ac,0,inside,11.838,16.531,-4.693,short
+AI 6662,1908-03-25T00:55,ai,0,inside,10.650,16.531,-5.881,short
+AI 6664,1908-03-25T03:05,ai,0,inside,,16.531,,not tested (no limit)
+AI 6667,1908-03-26T02:39,ai,0,inside,9.987,16.531,-6.544,short
+AC 9372,1908-03-31T00:40,ac,0,inside,11.746,16.534,-4.788,short
+AI 6675,1908-03-31T00:42,ai,0,inside,,16.534,,not tested (no limit)
+AC 9373,1908-04-02T00:44,ac,0,inside,,16.535,,not tested (no limit)
+AI 6676,1908-04-02T00:44,ai,0,inside,10.540,16.535,-5.995,short
+AI 6679,1908-04-03T00:35,ai,0,inside,,16.535,,not tested (no limit)
+AI 6686,1908-04-04T00:46,ai,0,inside,10.096,16.536,-6.440,short
+AI 6693,1908-04-05T00:54,ai,0,inside,,16.536,,not tested (no limit)
+AI 6694,1908-04-05T02:04,ai,0,inside,9.874,16.536,-6.662,short
+AI 6704,1908-04-10T00:50,ai,0,inside,9.434,16.538,-7.104,short
+AI 6711,1908-04-12T02:41,ai,0,inside,,16.539,,not tested (no limit)
+AI 6715,1908-04-13T02:20,ai,0,inside,,16.539,,not tested (no limit)
+AI 6720,1908-04-15T01:05,ai,0,inside,,16.539,,not tested (no limit)
+AC 9418,1908-04-17T00:58,ac,0,inside,10.907,16.540,-5.633,short
+AI 6728,1908-04-18T01:11,ai,0,inside,10.477,16.540,-6.063,short
+AI 6730,1908-04-18T03:22,ai,0,inside,,16.540,,not tested (no limit)
+AI 6740,1908-04-22T01:21,ai,0,inside,,16.540,,not tested (no limit)
+AC 9440,1908-04-23T01:06,ac,-1,inside,,16.540,,not tested (no limit)
+AI 6755,1908-04-30T01:27,ai,0,inside,,16.540,,not tested (no limit)
+AC 9455,1908-05-02T01:16,ac,0,inside,,16.540,,not tested (no limit)
+AI 6951,1908-08-16T08:26,ai,0,inside,8.800,16.535,-7.735,short
+AI 6965,1908-08-21T08:33,ai,0,inside,,16.533,,not tested (no limit)
+AI 6970,1908-08-24T07:54,ai,-1,inside,,16.532,,not tested (no limit)
+AC 9688,1908-08-28T07:25,ac,0,inside,11.714,16.530,-4.816,short
+AI 6990,1908-08-29T21:13,ai,0,inside,,16.529,,not tested (no limit)
+AI 6999,1908-09-01T08:14,ai,0,inside,,16.528,,not tested (no limit)
+AI 7007,1908-09-04T08:04,ai,0,inside,,16.527,,not tested (no limit)
+AI 7013,1908-09-08T07:20,ai,0,inside,,16.524,,not tested (no limit)
+AI 7014,1908-09-08T08:22,ai,0,inside,,16.524,,not tested (no limit)
+AC 9726,1908-09-08T09:03,ac,0,inside,,16.524,,not tested (no limit)
+AI 7027,1908-09-10T09:03,ai,-1,inside,,16.523,,not tested (no limit)
+AI 7046,1908-09-23T07:43,ai,-1,inside,,16.512,,not tested (no limit)
+AI 7047,1908-09-23T09:01,ai,-1,inside,,16.512,,not tested (no limit)
+AM 5853,1908-09-23T09:12,am,0,inside,,16.512,,not tested (no limit)
+AM 5857,1908-09-25T07:36,am,0,inside,13.075,16.510,-3.435,short
+AI 7056,1908-09-30T08:30,ai,0,inside,11.073,16.505,-5.432,short
+AI 7066,1908-10-03T08:20,ai,0,inside,,16.502,,not tested (no limit)
+AI 7067,1908-10-03T09:26,ai,0,inside,,16.502,,not tested (no limit)
+AC 9783,1908-10-04T08:26,ac,0,inside,11.638,16.501,-4.863,short
+AI 7076,1908-10-04T09:04,ai,0,inside,10.960,16.501,-5.541,short
+AI 7098,1908-10-13T08:53,ai,0,inside,9.615,16.491,-6.876,short
+AI 7105,1908-10-14T06:41,ai,0,inside,,16.490,,not tested (no limit)
+AC 9817,1908-10-14T07:55,ac,0,inside,,16.490,,not tested (no limit)
+AI 7106,1908-10-14T07:57,ai,0,inside,,16.490,,not tested (no limit)
+AI 7114,1908-10-15T07:39,ai,0,inside,,16.488,,not tested (no limit)
+AI 7115,1908-10-15T08:40,ai,0,inside,,16.488,,not tested (no limit)
+AI 7128,1908-10-20T07:00,ai,0,inside,10.836,16.482,-5.646,short
+AI 7129,1908-10-20T08:20,ai,0,inside,,16.482,,not tested (no limit)
+AI 7136,1908-10-21T06:21,ai,0,inside,,16.481,,not tested (no limit)
+AI 7138,1908-10-21T08:46,ai,0,inside,10.060,16.481,-6.421,short
+AC 9853,1908-10-28T07:06,ac,0,inside,,16.473,,not tested (no limit)
+AI 7154,1908-10-28T07:09,ai,0,inside,,16.473,,not tested (no limit)
+AI 7155,1908-10-28T08:20,ai,-1,inside,,16.473,,not tested (no limit)
+AC 9861,1908-10-31T06:40,ac,0,inside,12.604,16.469,-3.865,short
+AI 7159,1908-10-31T07:51,ai,0,inside,,16.469,,not tested (no limit)
+AI 7164,1908-11-01T05:25,ai,0,inside,,16.468,,not tested (no limit)
+I 35645,1908-11-02T05:00,i,0,inside,14.261,16.467,-2.206,short
+AM 5884,1908-11-02T07:59,am,0,inside,11.597,16.466,-4.869,short
+AM 5885,1908-11-02T08:51,am,0,inside,,16.466,,not tested (no limit)
+AI 7170,1908-11-02T08:59,ai,0,inside,,16.466,,not tested (no limit)
+AI 7176,1908-11-05T05:26,ai,0,inside,9.928,16.463,-6.535,short
+AC 9881,1908-11-05T06:38,ac,0,inside,12.924,16.463,-3.539,short
+AI 7178,1908-11-05T07:48,ai,0,inside,,16.463,,not tested (no limit)
+AI 7179,1908-11-05T08:54,ai,0,inside,,16.463,,not tested (no limit)
+AC 9888,1908-11-06T07:46,ac,0,inside,,16.461,,not tested (no limit)
+AI 7192,1908-11-13T07:30,ai,0,inside,10.651,16.453,-5.802,short
+AI 7203,1908-11-14T09:00,ai,0,inside,,16.451,,not tested (no limit)
+AI 7207,1908-11-16T08:14,ai,0,inside,9.867,16.449,-6.582,short
+AI 7219,1908-11-19T09:54,ai,0,inside,,16.445,,not tested (no limit)
+AC 9934,1908-11-21T07:26,ac,0,inside,11.478,16.443,-4.965,short
+AI 7231,1908-11-22T03:29,ai,0,inside,,16.442,,not tested (no limit)
+AI 7234,1908-11-22T08:04,ai,0,inside,,16.442,,not tested (no limit)
+AI 7236,1908-11-22T09:41,ai,0,inside,,16.442,,not tested (no limit)
+AM 5911,1908-11-24T03:50,am,0,inside,11.807,16.440,-4.633,short
+AI 7244,1908-11-24T07:26,ai,0,inside,,16.439,,not tested (no limit)
+AI 7245,1908-11-24T08:48,ai,-1,inside,,16.439,,not tested (no limit)
+AI 7256,1908-11-29T03:45,ai,0,inside,,16.434,,not tested (no limit)
+AI 7260,1908-12-02T02:57,ai,0,inside,,16.431,,not tested (no limit)
+AC 9970,1908-12-02T03:30,ac,-1,inside,,16.431,,not tested (no limit)
+AI 7262,1908-12-02T05:23,ai,0,inside,10.694,16.431,-5.737,short
+AI 7264,1908-12-02T07:30,ai,0,inside,,16.431,,not tested (no limit)
+AI 7265,1908-12-02T08:31,ai,0,inside,10.760,16.431,-5.671,short
+AC 9980,1908-12-03T03:00,ac,0,inside,,16.430,,not tested (no limit)
+AI 7274,1908-12-03T06:41,ai,0,inside,,16.430,,not tested (no limit)
+AI 7275,1908-12-03T07:52,ai,0,inside,,16.430,,not tested (no limit)
+AI 7287,1908-12-06T04:13,ai,-1,inside,,16.427,,not tested (no limit)
+AI 7288,1908-12-06T05:18,ai,0,inside,,16.427,,not tested (no limit)
+AI 7289,1908-12-06T06:18,ai,0,inside,,16.427,,not tested (no limit)
+I 35718,1908-12-06T08:57,i,0,inside,13.414,16.427,-3.013,short
+AI 7292,1908-12-06T09:25,ai,0,inside,,16.427,,not tested (no limit)
+AC 10005,1908-12-08T06:46,ac,0,inside,,16.425,,not tested (no limit)
+AI 7297,1908-12-08T06:47,ai,-1,inside,,16.425,,not tested (no limit)
+AI 7298,1908-12-08T07:48,ai,-1,inside,,16.425,,not tested (no limit)
+AI 7306,1908-12-09T05:06,ai,-1,inside,,16.424,,not tested (no limit)
+AI 7311,1908-12-10T05:12,ai,0,inside,,16.423,,not tested (no limit)
+AI 7313,1908-12-10T07:15,ai,0,inside,,16.423,,not tested (no limit)
+AI 7321,1908-12-11T03:54,ai,0,inside,,16.422,,not tested (no limit)
+AI 7323,1908-12-11T05:58,ai,-1,inside,,16.422,,not tested (no limit)
+AI 7330,1908-12-13T04:16,ai,0,inside,,16.421,,not tested (no limit)
+AI 7333,1908-12-13T07:31,ai,0,inside,9.971,16.421,-6.450,short
+I 35727,1908-12-15T01:31,i,0,inside,12.799,16.420,-3.621,short
+I 35732,1908-12-16T01:49,i,0,inside,12.989,16.420,-3.431,short
+I 35733,1908-12-16T02:19,i,0,inside,13.567,16.420,-2.853,short
+AI 7343,1908-12-16T04:33,ai,0,inside,9.787,16.420,-6.633,short
+AC 10059,1908-12-16T06:58,ac,0,inside,,16.420,,not tested (no limit)
+AI 7345,1908-12-16T06:58,ai,0,inside,,16.420,,not tested (no limit)
+I 35734,1908-12-16T07:58,i,0,inside,14.715,16.420,-1.705,short
+AC 10060,1908-12-16T08:02,ac,0,inside,12.237,16.420,-4.183,short
+I 35735,1908-12-16T08:36,i,0,inside,13.976,16.420,-2.444,short
+AI 7348,1908-12-16T10:28,ai,0,inside,,16.420,,not tested (no limit)
+I 35738,1908-12-17T01:53,i,0,inside,14.842,16.420,-1.578,short
+AI 7360,1908-12-18T05:53,ai,0,inside,,16.420,,not tested (no limit)
+AI 7361,1908-12-18T06:54,ai,0,inside,10.031,16.420,-6.389,short
+I 35745,1908-12-20T01:17,i,0,inside,12.985,16.420,-3.435,short
+I 35746,1908-12-20T01:33,i,-1,inside,,16.420,,not tested (no limit)
+I 35746,1908-12-20T01:37,i,-1,inside,,16.420,,not tested (no limit)
+I 35746,1908-12-20T01:42,i,-1,inside,,16.420,,not tested (no limit)
+MA 729,1908-12-20T06:56,ma,0,inside,15.401,16.420,-1.019,short
+MA 731,1908-12-21T06:46,ma,0,inside,16.894,16.420,0.474,passes
+AI 7367,1908-12-22T04:23,ai,0,inside,10.201,16.421,-6.220,short
+AC 10082,1908-12-22T05:29,ac,0,inside,12.311,16.421,-4.110,short
+AI 7369,1908-12-22T06:33,ai,0,inside,,16.421,,not tested (no limit)
+MA 733,1908-12-22T06:49,ma,0,inside,16.245,16.421,-0.176,short
+AC 10084,1908-12-22T07:36,ac,0,inside,12.215,16.421,-4.206,short
+I 35756,1908-12-22T07:48,i,0,inside,13.241,16.421,-3.180,short
+AI 7376,1908-12-24T03:17,ai,0,inside,9.994,16.422,-6.428,short
+AC 10092,1908-12-24T04:16,ac,0,inside,13.795,16.422,-2.627,short
+AI 7377,1908-12-24T04:19,ai,0,inside,10.976,16.422,-5.446,short
+AC 10093,1908-12-24T05:19,ac,0,inside,,16.422,,not tested (no limit)
+AI 7378,1908-12-24T05:22,ai,0,inside,,16.422,,not tested (no limit)
+AI 7381,1908-12-24T08:37,ai,0,inside,,16.422,,not tested (no limit)
+AI 7387,1908-12-27T06:31,ai,0,inside,,16.425,,not tested (no limit)
+AI 7388,1908-12-28T05:57,ai,0,inside,,16.425,,not tested (no limit)
+AI 7390,1908-12-28T08:11,ai,0,inside,9.875,16.425,-6.550,short
+AI 7398,1908-12-30T01:59,ai,0,inside,,16.427,,not tested (no limit)
+AI 7400,1908-12-30T04:17,ai,0,inside,,16.427,,not tested (no limit)
+AC 10116,1908-12-30T05:24,ac,0,inside,11.874,16.427,-4.553,short
+AI 7401,1908-12-30T05:35,ai,0,inside,,16.427,,not tested (no limit)
+AC 10117,1908-12-30T06:33,ac,0,inside,12.637,16.427,-3.790,short
+AI 7404,1908-12-30T08:39,ai,0,inside,,16.427,,not tested (no limit)
+AI 7408,1909-01-01T03:09,ai,0,inside,11.345,16.429,-5.084,short
+AI 7410,1909-01-01T05:28,ai,0,inside,,16.429,,not tested (no limit)
+AC 10134,1909-01-02T04:07,ac,0,inside,11.861,16.430,-4.569,short
+AC 10135,1909-01-02T05:09,ac,0,inside,12.819,16.430,-3.611,short
+AI 7416,1909-01-02T05:10,ai,0,inside,,16.430,,not tested (no limit)
+AI 7417,1909-01-02T06:19,ai,0,inside,,16.430,,not tested (no limit)
+AI 7424,1909-01-03T02:56,ai,0,inside,,16.431,,not tested (no limit)
+AI 7425,1909-01-03T03:57,ai,0,inside,,16.431,,not tested (no limit)
+AC 10144,1909-01-03T05:08,ac,0,inside,,16.431,,not tested (no limit)
+AM 5935,1909-01-03T06:45,am,-1,inside,,16.431,,not tested (no limit)
+AI 7429,1909-01-07T02:26,ai,0,inside,,16.435,,not tested (no limit)
+AI 7430,1909-01-07T03:39,ai,0,inside,,16.435,,not tested (no limit)
+AC 10148,1909-01-07T04:04,ac,-1,inside,,16.435,,not tested (no limit)
+AC 10148,1909-01-07T04:16,ac,0,inside,,16.435,,not tested (no limit)
+AC 10148,1909-01-07T04:29,ac,-1,inside,,16.435,,not tested (no limit)
+AC 10148,1909-01-07T04:41,ac,-1,inside,,16.435,,not tested (no limit)
+AC 10148,1909-01-07T04:54,ac,-1,inside,,16.435,,not tested (no limit)
+AM 5936,1909-01-11T04:15,am,0,inside,,16.439,,not tested (no limit)
+AI 7445,1909-01-19T01:27,ai,0,inside,10.863,16.449,-5.586,short
+AI 7446,1909-01-19T02:33,ai,0,inside,11.694,16.449,-4.755,short
+AI 7447,1909-01-19T03:40,ai,0,inside,,16.449,,not tested (no limit)
+AI 7448,1909-01-19T04:50,ai,0,inside,,16.449,,not tested (no limit)
+AM 5939,1909-01-22T03:56,am,0,inside,,16.452,,not tested (no limit)
+AI 7464,1909-01-27T02:00,ai,0,inside,11.142,16.458,-5.316,short
+AI 7465,1909-01-27T03:03,ai,0,inside,,16.458,,not tested (no limit)
+AI 7466,1909-01-27T04:06,ai,0,inside,,16.458,,not tested (no limit)
+AI 7469,1909-01-27T07:42,ai,0,inside,,16.458,,not tested (no limit)
+AI 7473,1909-01-28T23:37,ai,0,inside,11.432,16.460,-5.028,short
+AI 7476,1909-01-29T03:03,ai,0,inside,,16.460,,not tested (no limit)
+AI 7479,1909-01-29T07:29,ai,0,inside,,16.460,,not tested (no limit)
+AI 7487,1909-02-02T01:41,ai,0,inside,,16.465,,not tested (no limit)
+AC 10196,1909-02-02T02:55,ac,0,inside,11.119,16.465,-5.346,short
+AI 7488,1909-02-02T02:57,ai,0,inside,,16.465,,not tested (no limit)
+AI 7494,1909-02-04T01:08,ai,0,inside,,16.467,,not tested (no limit)
+AI 7496,1909-02-04T03:45,ai,0,inside,9.239,16.467,-7.228,short
+AI 7502,1909-02-07T00:43,ai,0,inside,,16.471,,not tested (no limit)
+AC 10212,1909-02-07T02:44,ac,0,inside,,16.471,,not tested (no limit)
+AC 10214,1909-02-07T04:45,ac,0,inside,12.031,16.471,-4.440,short
+AC 10221,1909-02-09T02:35,ac,0,inside,,16.473,,not tested (no limit)
+AM 5954,1909-02-10T02:43,am,0,inside,,16.474,,not tested (no limit)
+AI 7516,1909-02-11T23:30,ai,0,inside,,16.476,,not tested (no limit)
+AC 10225,1909-02-12T00:55,ac,0,inside,12.711,16.476,-3.765,short
+AI 7517,1909-02-12T01:00,ai,0,inside,,16.476,,not tested (no limit)
+AI 7520,1909-02-13T22:40,ai,-1,inside,,16.479,,not tested (no limit)
+AI 7521,1909-02-13T23:11,ai,0,inside,,16.479,,not tested (no limit)
+AC 10228,1909-02-14T01:05,ac,0,inside,13.219,16.479,-3.260,short
+AM 5955,1909-02-14T01:49,am,0,inside,,16.479,,not tested (no limit)
+AI 7525,1909-02-18T02:48,ai,0,inside,,16.483,,not tested (no limit)
+AI 7535,1909-02-19T03:31,ai,0,inside,9.838,16.484,-6.646,short
+AI 7536,1909-02-21T02:40,ai,0,inside,,16.486,,not tested (no limit)
+AI 7543,1909-02-22T23:23,ai,0,inside,10.680,16.488,-5.808,short
+AC 10253,1909-02-23T03:53,ac,0,inside,12.159,16.488,-4.329,short
+AC 10258,1909-02-26T00:19,ac,0,inside,12.882,16.492,-3.610,short
+AI 7550,1909-02-26T00:22,ai,0,inside,,16.492,,not tested (no limit)
+AI 7551,1909-02-26T01:25,ai,0,inside,,16.492,,not tested (no limit)
+AI 7566,1909-03-02T00:16,ai,0,inside,10.372,16.496,-6.124,short
+AC 10275,1909-03-02T01:08,ac,0,inside,11.899,16.496,-4.597,short
+AI 7567,1909-03-02T01:10,ai,0,inside,9.154,16.496,-7.342,short
+AI 7568,1909-03-06T01:23,ai,0,inside,,16.499,,not tested (no limit)
+AC 10277,1909-03-06T02:28,ac,0,inside,11.236,16.499,-5.263,short
+AI 7577,1909-03-07T01:18,ai,0,inside,,16.500,,not tested (no limit)
+AI 7578,1909-03-07T02:18,ai,0,inside,9.793,16.500,-6.707,short
+AI 7580,1909-03-07T04:21,ai,-1,inside,,16.500,,not tested (no limit)
+AC 10288,1909-03-09T00:17,ac,0,inside,,16.502,,not tested (no limit)
+AI 7582,1909-03-09T02:35,ai,0,inside,10.916,16.502,-5.586,short
+AI 7589,1909-03-12T01:36,ai,0,inside,,16.505,,not tested (no limit)
+AC 10306,1909-03-13T00:45,ac,0,inside,12.039,16.505,-4.466,short
+AC 10311,1909-03-16T01:13,ac,0,inside,12.912,16.508,-3.596,short
+AC 10319,1909-03-18T00:40,ac,0,inside,11.780,16.509,-4.729,short
+AI 7611,1909-03-18T00:46,ai,0,inside,,16.509,,not tested (no limit)
+AC 10325,1909-03-19T00:11,ac,0,inside,,16.510,,not tested (no limit)
+AI 7622,1909-03-19T03:32,ai,0,inside,,16.510,,not tested (no limit)
+AC 10334,1909-03-21T00:34,ac,0,inside,,16.511,,not tested (no limit)
+AI 7629,1909-03-21T01:37,ai,0,inside,,16.511,,not tested (no limit)
+AI 7642,1909-03-23T01:40,ai,0,inside,,16.513,,not tested (no limit)
+AI 7649,1909-03-24T01:03,ai,0,inside,,16.513,,not tested (no limit)
+AI 7657,1909-03-25T00:48,ai,0,inside,,16.514,,not tested (no limit)
+AM 6006,1909-03-30T00:31,am,0,inside,11.684,16.517,-4.833,short
+AC 10386,1909-04-02T00:34,ac,0,inside,,16.518,,not tested (no limit)
+AI 7681,1909-04-02T01:36,ai,0,inside,10.571,16.518,-5.947,short
+AK 246,1909-04-07T18:32,ak,0,inside,,16.521,,not tested (no limit)
+AI 7706,1909-04-10T00:45,ai,0,inside,10.612,16.522,-5.910,short
+AI 7708,1909-04-10T02:46,ai,0,inside,,16.522,,not tested (no limit)
+AC 10416,1909-04-11T01:08,ac,0,inside,11.815,16.522,-4.707,short
+AI 7744,1909-04-24T02:25,ai,0,inside,,16.524,,not tested (no limit)
+AI 7788,1909-05-12T01:33,ai,0,inside,,16.522,,not tested (no limit)

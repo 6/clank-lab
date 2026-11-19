@@ -1,0 +1,140 @@
+{
+  "pluto-prediscovery": {
+    "path": "data/stamps.svg",
+    "sha256": "3890f03dfc1c5b35837379725367b900272280f3a6d437f7cef7cf8907bc10c7",
+    "caption": "Filtered close-ups of the three plates, 2′ square, north up; blue circle: Pluto's predicted position; red cross: the measured image center.",
+    "alt": "Three grayscale panels from plates MA 731 (December 21, 1908), B2247a and B2248b (February 20, 1909), each with a dark spot inside a small blue circle at the center."
+  },
+  "pentagon-billiard-periods": {
+    "path": "data/paths.svg",
+    "sha256": "17c4fd21b384537f0802183a80f33056adfc482ecda659d5646013e4ed8facdd",
+    "caption": "The six periodic billiard paths in the regular pentagon that are not symmetric under a fifth of a turn, of periods 8, 10, 30, 42, 58 and 102.",
+    "alt": "Six regular pentagons, each crossed by one blue periodic billiard path, labeled period 8, 10, 30, 42, 58 and 102; the longer the period, the denser the path."
+  },
+  "path-ramsey": {
+    "path": "data/lower-bound.svg",
+    "sha256": "b2c378e10ebc94a50a727aaa36e3d6e4c0d968ce0906c66ab5f13fd925a0a0fc",
+    "caption": "A 3-coloring of the edges of K17 with no one-colored 10-vertex path, compressed into four parts; edges inside a part have color 0.",
+    "alt": "Four circles labeled A: 5, B: 4, C: 4 and D: 4, joined in pairs by red solid, blue dashed and green dotted lines for colors 0, 1 and 2."
+  },
+  "thomson-10": {
+    "path": "data/antiprism.svg",
+    "sha256": "4335778b3660b09605f37df7547baf240996fd8c0b37749fb72c5f35a50f7c8f",
+    "caption": "The optimal arrangement of ten charges on a sphere, the bicapped square antiprism, from the side and from above (illustration only).",
+    "alt": "Two views of ten numbered points on a sphere: from the side, two stacked squares with one point above and one below; from above, the lower square turned by 45 degrees."
+  },
+  "ekg-bounds": {
+    "path": "data/ratio.svg",
+    "sha256": "6eca49b66ab42602383920ec2d9cf7b7aa83b5d947f38e489dc3db4d0bdb1737",
+    "caption": "Left: a(n)/n for n ≤ 60 between the sharp bounds 12/7 and 13/28. Right: the largest and smallest a(n)/n in each dyadic block up to 10^6.",
+    "alt": "Two plots. Left: dots for a(n)/n up to n = 60 between lines at 12/7 and 13/28, touching them at n = 7 and 28. Right: block extremes settling near 1.5 and 0.5."
+  },
+  "locked-trominoes": {
+    "path": "data/tiling.svg",
+    "sha256": "db1a7e9d21ff398f651fd6a70104754e560c4c2408c775a2f039e87657c24b26",
+    "caption": "A locked tromino tiling of the 15 × 17 rectangle, glued from four blocks of heights 6 and 9 and widths 8 and 9; dashed lines are the seams.",
+    "alt": "A rectangle tiled by L-shaped and straight three-cell tiles in four pastel colors, crossed by one red dashed horizontal and one red dashed vertical line."
+  },
+  "steinberg-c4-c9": {
+    "path": "data/graph.svg",
+    "sha256": "ccabd0195e774d74d1861734c661ebe3830209dc4aec13508d8869efc86d353f",
+    "caption": "The 82-vertex planar graph with no 4-cycles or 9-cycles that is not 3-colorable.",
+    "alt": "A planar graph drawn inside a circle: a few vertices on the boundary joined by long edges, with many small clusters of short edges between them."
+  },
+  "tight-cycle-c5-turan": {
+    "path": "assets/recursive-construction.svg",
+    "sha256": "f4694d1f1da49340f064d4046a5f5e03cb2d8ad1ccd3e5deadcc9de7b9399b9a",
+    "caption": "The recursive construction giving the lower bound: every triple with two vertices in A and one in B, repeated inside B.",
+    "alt": "Two ovals labeled A and B; a blue triangle has two corners in A and one in B, and a smaller oval labeled repeat sits inside B."
+  },
+  "game-grundy-gap": {
+    "path": "data/graph.svg",
+    "sha256": "094aaebdc187435fb4fd209b3f137f0b48dff42a3855b1f40a39ca7d60beec08",
+    "caption": "The 11-vertex graph used to answer Havet and Zhu's question on the greedy coloring game.",
+    "alt": "A graph of eleven circled vertices numbered 0 to 10, joined by straight gray edges, some of which cross."
+  },
+  "lit-only-sigma": {
+    "path": "data/graph.svg",
+    "sha256": "582b52dc9bf40bcfdc1f5d9cdc0e69f0039d6f94dcc3f9f1553acb257c557c37",
+    "caption": "The 7-vertex counterexample to the Goldwasser–Wang–Wu conjecture; blue vertices are lit at the start.",
+    "alt": "Seven numbered vertices, six on a hexagon around vertex 6, joined by many straight and curved edges; vertices 0, 1, 3 and 4 are blue."
+  },
+  "pseudostandard-attractors": {
+    "path": "data/word.svg",
+    "sha256": "8fa4a362e863ecebe89424f794c7d92964303a0e5783d721039a1c6da322624c",
+    "caption": "The 36-letter binary prefix with the attractor positions 3, 7, 15, 21 and 25 shaded, and the three regions of the lower-bound proof below.",
+    "alt": "A row of 36 boxed binary digits with five boxes shaded blue, and three brackets below marked at least 2, at least 1 and at least 2."
+  },
+  "locally-toroidal-polytopes": {
+    "path": "data/local-toroids.svg",
+    "sha256": "5a26ed841c065c134b938009875813a7f2fba82be3d68a6259cf8d26c9cc7a84",
+    "caption": "The facet map {4,4}(3,0) and vertex-figure map {4,4}(9,0) for one instance, as square grids with opposite sides identified.",
+    "alt": "Two square grids, 3 by 3 and 9 by 9, each with arrows on opposite sides showing they are glued into a torus and one corner cell shaded."
+  },
+  "scattering-coefficients": {
+    "path": "data/rays.svg",
+    "sha256": "3b65d6a6c435c564254ab019fb2072c78909427696cf70f55ba1a58b090ec3e9",
+    "caption": "The rays with a nonzero coefficient in total degree at most 12: blue below the diagonal, red above it, and the diagonal in black.",
+    "alt": "Rays fanning out from the origin in the positive quadrant: blue rays below the diagonal, red rays above it, and a thick black diagonal."
+  },
+  "makonzi-invariants": {
+    "path": "data/quiver.svg",
+    "sha256": "b9d2e7d8ed0346d67e98c605bfe32ce66edc95f77aa37c886035a28d847b7fd0",
+    "caption": "The three-armed quiver: two vertices joined by three doubled paths, with arrows D and U in each direction.",
+    "alt": "Two points labeled s and q joined by three pairs of curves, labeled D1 and U1, D2 and U2, U3 and D3."
+  },
+  "noncrossing-symmetric-chains": {
+    "path": "data/scd-example.svg",
+    "sha256": "44d5532f877b76d2223dacba674a9e0277307bded59bcbd130b1539290ac28c2",
+    "caption": "A symmetric chain decomposition of a product of chains of lengths two and three, the kind of partition the paper finds for noncrossing lattices.",
+    "alt": "A 3 by 4 grid of points labeled (i, j), covered by three colored chains: blue for ranks 0 to 5, orange for ranks 1 to 4, green for ranks 2 to 3."
+  },
+  "weak-parking": {
+    "path": "data/a2.svg",
+    "sha256": "5d7821425fd01e10a1f1455ca309e92bbec17f2b9e39041d7b8e9e6d8426029c",
+    "caption": "The parking construction in the smallest case, type A2: three reflection lines, Coxeter rotation, and the fiber sizes over each flat.",
+    "alt": "Three lines through a point with an arrow marking a 120-degree rotation, beside a table of fiber sizes adding up to 16 parking points."
+  },
+  "pentagon-tetrads": {
+    "path": "figures/hexagon-tetrad.svg",
+    "sha256": "ba3d8cd74fb8a9e447a85c66df428f79079e440167fc396f261b1731a495c002",
+    "caption": "A holeless tetrad of four congruent hexagons, of the type found by Scott Kim; the paper shows no such tetrad exists for pentagons.",
+    "alt": "Four congruent hexagons in orange, green, blue and red, packed so each touches the other three along an edge, with no gap between them."
+  },
+  "maximal-matching-logconcavity": {
+    "path": "data/graph.svg",
+    "sha256": "a2479332b4ade6ee70723e51c407ba0e5a6081e2f436ada54a64a25000cd7c25",
+    "caption": "The 76-vertex counterexample: six disjoint edges joined to two disjoint cliques of order 32.",
+    "alt": "A box of six vertical edges above two circles labeled 32-vertex clique, with thick bars from the box to each circle and none between them."
+  },
+  "acyclic-root-extrema": {
+    "path": "data/complement.svg",
+    "sha256": "9f537d98f809e83dbb3a014eed1a906e4dcb76beaec4fbf68b2d771af084b6fa",
+    "caption": "The complement of the 12-vertex counterexample: a four-cycle and two disjoint three-leaf stars.",
+    "alt": "A square of four vertices beside two stars, each a center vertex with three leaves."
+  },
+  "zero-forcing-unimodality": {
+    "path": "data/graph.svg",
+    "sha256": "20550babeddd302b6ef3212a7e748dd8cf8353beecd4cfc389e0223be288bb75",
+    "caption": "The 73-vertex counterexample: cliques of orders 32 and 33, each completely joined to four disjoint edges.",
+    "alt": "Two circles labeled K32 and K33 on the left and four circles labeled K2 on the right, with a line from each left circle to every right circle."
+  },
+  "geneson-continuous-gluing": {
+    "path": "data/corner.svg",
+    "sha256": "f2413ffd1a480e94aff3b60de315b461f1d11ce96cefbf7c97b8397400bac94d",
+    "caption": "The common anchor (c,d) and the two allowed quadrants: a pattern P to the southwest and a pattern Q to the northeast.",
+    "alt": "A point labeled (c,d) at the corner where a blue box of points labeled P to the lower left meets an orange box of points labeled Q to the upper right."
+  },
+  "independent-monophonic-ng": {
+    "path": "data/graph.svg",
+    "sha256": "400a2182967fc00fe8042698df1463581d104a7cef5e363dc91dd1f45a19b194",
+    "caption": "The graph H: the complete graph on six vertices with each of its fifteen edges subdivided once.",
+    "alt": "Six black numbered vertices joined by straight lines, each line carrying one small blue vertex at its middle."
+  },
+  "spinning-switches": {
+    "path": "data/switches.svg",
+    "sha256": "e84412b8b0367281c83d45e872e79efc46602ee71801a91e054f9b63cfebc58c",
+    "caption": "The puzzle: the solver changes hidden switches, then an adversary may swap their positions.",
+    "alt": "Two circles marked with question marks, an arrow, then the same two circles with curved arrows swapping them; a note says states and swaps stay hidden."
+  }
+}

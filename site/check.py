@@ -17,7 +17,9 @@ import unicodedata
 from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
 
+from figures import FIGURES, FIGURE_FILE, verify_figure
 from maths import has_math
+from releases import paper_release_links
 
 MAX_PDF = 5_000_000
 BASE_URL = "https://clanklab.org/"
@@ -48,6 +50,8 @@ class Page(HTMLParser):
         self.text = []
         self.attributes = []
         self.styles = 0
+        self.images = []
+        self.captions = []
         self.visible = []
         self.stack = []
         self.in_math = False
@@ -90,9 +94,16 @@ class Page(HTMLParser):
         if tag == "time":
             self.dates.append(attributes.get("datetime", ""))
         self.styles += tag == "style"
-        if (tag in {"link", "script", "iframe", "object", "embed", "img", "form", "video", "audio", "source"}
+        if tag == "img":
+            self.unsafe |= (not self.in_body or self.hidden or not any(item[0] == "figure" for item in self.stack)
+                            or len(attrs) != 2 or attributes.keys() != {"src", "alt"})
+            self.images.append((attributes.get("src"), attributes.get("alt")))
+        if tag == "figcaption":
+            self.captions.append("")
+        if (tag in {"link", "script", "iframe", "object", "embed", "form", "video", "audio", "source"}
                 or "katex-error" in classes
-                or any(name.startswith("on") or name in {"src", "srcset"} for name in attributes)):
+                or any(name.startswith("on") or (name in {"src", "srcset"} and tag != "img")
+                       for name in attributes)):
             self.unsafe = True
         if tag in {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}:
             self.stack.pop()
@@ -112,6 +123,8 @@ class Page(HTMLParser):
 
     def handle_data(self, text):
         self.text.append(text)
+        if any(item[0] == "figcaption" for item in self.stack):
+            self.captions[-1] += text
         # Recover source text from MathML annotations for completeness checks.
         # MathML tokens repeat that content and are excluded here.
         if not self.in_math or self.in_annotation:
@@ -180,7 +193,9 @@ def pdf_text(tool, path, first_page=False):
     return result.stdout.decode("utf-8")
 
 
-def check(output, base_url, manifest, screenshots=None, deny=()):
+def check(output, base_url, manifest, screenshots=None, deny=(), checkout=None):
+    if checkout is None:
+        checkout = Path(__file__).resolve().parents[1]
     base_url = base_url.rstrip("/") + "/"
     base = urlsplit(base_url)
     require(base.scheme in {"http", "https"} and base.hostname and not base.query
@@ -191,11 +206,12 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
     slugs = [paper["slug"] for paper in papers]
     require(len(set(slugs)) == len(slugs), "Duplicate manifest slug")
     require(len({p["concept_doi"] for p in papers}) == len(papers), "Duplicate concept DOI")
+    release_links = paper_release_links(checkout, slugs)
     expected_pages = {"index.html"} | {f"papers/{slug}/index.html" for slug in slugs}
     expected_pdfs = {f"papers/{slug}/{slug}.pdf" for slug in slugs}
     expected_files = expected_pages | expected_pdfs | {"robots.txt", "sitemap.xml"}
     actual_files = {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()}
-    require(actual_files == expected_files, "Generated file inventory differs from manifest")
+    require(expected_files <= actual_files, "Missing generated site files")
     tool = shutil.which("pdftotext")
     warnings = [] if tool else ["pdftotext unavailable: PDF title and extracted full-text privacy checks skipped"]
     pages = {}
@@ -214,6 +230,7 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
             require(not re.search(r"@import|url\s*\(", source, re.IGNORECASE), "External stylesheet asset in " + label)
             pages[label] = page
     index = pages["index.html"]
+    require(not index.images and not index.captions, "Unexpected figure on index")
     ordered = sorted(papers, key=lambda p: (p["first_version_date"], p["slug"]), reverse=True)
     links = [link for p in ordered for link in (f"papers/{p['slug']}/", "https://doi.org/" + p["concept_doi"],
                                                 f"papers/{p['slug']}/{p['slug']}.pdf")]
@@ -239,13 +256,27 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
             require(page.meta[name] == values, f"Incorrect {name} in {label}")
         require(len(page.headings) == 1 and normal(page.headings[0]) == normal(title), "Incorrect visible title in " + label)
         require(page.dates == [day], "Incorrect visible date in " + label)
+        if page.images or page.captions:
+            entry = FIGURES.get(slug)
+            require(entry is not None, "Unlisted figure in " + label)
+            require(page.images == [(FIGURE_FILE, entry["alt"])] and entry["alt"].strip(),
+                    "Missing or incorrect figure image or alt text in " + label)
+            require(page.captions == [entry["caption"]], "Missing or incorrect figure caption in " + label)
+            relative_figure = f"papers/{slug}/{FIGURE_FILE}"
+            try:
+                verify_figure((output / relative_figure).read_bytes(), entry)
+            except ValueError as error:
+                raise ValueError(f"{relative_figure}: {error}") from error
+            expected_files.add(relative_figure)
         visible = normal(" ".join(page.body))
         require(all(normal(author) in visible for author in paper["authors"]), "Missing visible author in " + label)
         abstract = normal(" ".join(Page(paper["abstract"]).text))
         require(bool(abstract) and abstract in visible, "Incomplete abstract in " + label)
         doi_url = "https://doi.org/" + paper["concept_doi"]
-        require(page.links == ["../../", doi_url, slug + ".pdf"],
-                "Paper index navigation and PDF links must be relative in " + label)
+        expected_links = ["../../", doi_url, slug + ".pdf"]
+        if slug in release_links:
+            expected_links.append(release_links[slug])
+        require(page.links == expected_links, "Incorrect navigation, DOI, PDF, or release link in " + label)
         require(doi_url in page.links and paper["concept_doi"] in " ".join(page.body), "Missing visible DOI in " + label)
         require(slug + ".pdf" in page.links, "Missing visible PDF link in " + label)
         parsed = urlsplit(page.meta["citation_pdf_url"][0])
@@ -267,6 +298,7 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
             require(normal(title) in normal(first), "Title absent from PDF page 1: " + slug)
             scan(pdf_text(tool, pdf), "PDF text: " + slug, deny)
         largest = max(largest, (size, slug))
+    require(actual_files == expected_files, "Generated file inventory differs from manifest")
     expected_urls = {base_url} | {base_url + f"papers/{slug}/" for slug in slugs}
     tree = ET.parse(output / "sitemap.xml")
     urls = [node.text for node in tree.findall("{*}url/{*}loc")]
@@ -298,6 +330,7 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--checkout", type=Path, help="Public Git checkout with release tags (default: this script's repository)")
     parser.add_argument("--base-url", default=BASE_URL)
     parser.add_argument("--manifest", type=Path, default=Path(__file__).with_name("papers.json"))
     parser.add_argument("--deny-file", type=Path, help="Optional extra privacy patterns, one regex per line, kept outside the public copy")
@@ -305,7 +338,7 @@ def main():
     args = parser.parse_args()
     try:
         deny = read_deny(args.deny_file) if args.deny_file else ()
-        check(args.output, args.base_url, args.manifest, args.screenshots, deny)
+        check(args.output, args.base_url, args.manifest, args.screenshots, deny, args.checkout)
     except (OSError, ValueError, KeyError, subprocess.TimeoutExpired, ET.ParseError) as error:
         parser.exit(1, f"Check failed: {error}\n")
 

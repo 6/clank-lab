@@ -50,7 +50,7 @@
 
 \title{The three-color Ramsey number of the 10-vertex path}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{November 4, 2026}
+\date{November 19, 2026}
 
 \begin{document}
 \maketitle
@@ -118,13 +118,15 @@ excluding all assignments outside the selected cases discharge these
 obligations. Dybizbański, Dzido and Radziszowski reported that their
 attempts at the ten- and eleven-vertex cases remained incomplete \cite{DDR16}.
 
-Shao, Zhu, Xu and Kosari have independently proved $\R(P_{10})=18$
-by a different route \cite{SZXK26}. Their reproducibility materials,
-posted on November 2, 2026, accompany their manuscript (revision~7),
+In work posted after our first public release on October 21,
+2026~\cite{v1}, Shao, Zhu, Xu and Kosari independently prove
+$\R(P_{10})=18$ by a different route \cite{SZXK26}. Their reproducibility
+materials, posted on November 2, 2026, accompany their manuscript (revision~7),
 which we describe from the package's reproduction guide: the proof is
 structural, and its three finite verifications (its Lemmas~13, 14
 and~28) are exhaustive enumerations by C++ programs that need no SAT
-solver. The package records a verification run from September 8, 2026.
+solver. The package records a verification run from September 8, 2026,
+before our release; their work is independent of ours.
 
 The method combines cube-and-conquer with symmetry breaking and verified
 certificate checking. Heule, Kullmann, Wieringa and Biere's
@@ -716,6 +718,13 @@ Z.~Shao, E.~Zhu, J.~Xu and S.~Kosari, \emph{Reproducibility materials
 for The three-color Ramsey number of the ten-vertex path}, Zenodo,
 version 1.0.1, November 2, 2026.
 \href{https://doi.org/10.5281/zenodo.23881576}{doi:10.5281/zenodo.23881576}.
+
+\bibitem{v1}
+P. Graham, \emph{The three-color Ramsey number of the 10-vertex path},
+version 1, first public release, October 21, 2026: repository tag
+\href{https://github.com/6/clank-lab/tree/path-ramsey-v1/results/path-ramsey}{\texttt{path-ramsey-v1}}
+(commit \texttt{49eaedf});
+Zenodo version 1, \href{https://doi.org/10.5281/zenodo.23548859}{doi:10.5281/zenodo.23548859}.
 
 \bibitem{SJXW26}
 Z.~Shao, H.~Jiang, X.~Xu and S.~Wang, \emph{Native Windows reproduction

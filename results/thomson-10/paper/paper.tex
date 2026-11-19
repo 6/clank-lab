@@ -15,7 +15,7 @@
 \newcommand{\E}{\mathcal{E}}
 \title{The Thomson problem for N = 10}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{November 4, 2026}
+\date{November 19, 2026}
 \begin{document}
 \maketitle
 \begin{center}Version 8\end{center}
@@ -110,10 +110,9 @@ that energy at most this value forces a pair farther apart than $1.935$.
 
 Jingxing Huang also reports a separate nine-point Lean proof candidate, with
 conditional independent Python checking~\cite[README and manuscript abstract]{huangn9}.
-Xie's preprint, posted on November 2, 2026, independently proves
-optimality and uniqueness for nine and ten charges~\cite[Theorem~1.1]{xie},
-using three-point energy bounds, Gram classification and a Hessian bound
-with exact and interval arithmetic.
+Later work: Xie's preprint of November 2, 2026, posted after our first
+release on October 22, 2026~\cite{v1}, independently proves optimality and
+uniqueness for nine and ten charges~\cite[Theorem~1.1]{xie}.
 
 This work is checked in Lean from the definitions (Section~\ref{sec:verification}).
 
@@ -890,6 +889,15 @@ $n=9$ and $n=10$}, preprint, Zenodo, version 1.0.0, November 2, 2026.
 \href{https://doi.org/10.5281/zenodo.23899873}{doi:10.5281/zenodo.23899873};
 ten-point verification code and certificates,
 \href{https://doi.org/10.5281/zenodo.23845065}{doi:10.5281/zenodo.23845065}.
+The proof uses three-point energy bounds, Gram classification and a Hessian
+bound with exact and interval arithmetic.
+
+\bibitem{v1}
+P. Graham, \emph{The Thomson problem for N = 10}, version 1, first public
+release, October 22, 2026: repository tag
+\href{https://github.com/6/clank-lab/tree/thomson-10-v1/results/thomson-10}{\texttt{thomson-10-v1}}
+(commit \texttt{bc8bd8c});
+Zenodo version 1, \href{https://doi.org/10.5281/zenodo.23552642}{doi:10.5281/zenodo.23552642}.
 
 \bibitem{huangn9}
 Jingxing Huang (\texttt{Stickerbug}),

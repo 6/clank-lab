@@ -18,6 +18,8 @@ The proofs, the measurements, the code and the text were produced by AI models (
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24376801](https://doi.org/10.5281/zenodo.24376801)
+
 ## Check it
 
 Tested with Python 3.14:
@@ -42,6 +44,7 @@ The plates were taken by Harvard College Observatory and by August Kopff at Heid
   author = {Graham, P.},
   title = {{Candidate images of Pluto on archival plates from 1908 and 1909}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/pluto-prediscovery-v1/results/pluto-prediscovery}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/pluto-prediscovery-v1/results/pluto-prediscovery}},
+  doi          = {10.5281/zenodo.24376801}
 }
 ```

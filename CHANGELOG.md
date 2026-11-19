@@ -8,6 +8,7 @@ Zenodo records.
 
 - Reports faint images at Pluto's predicted position on three public plate scans, Harvard plate MA 731 (December 21, 1908) and the simultaneous Heidelberg plates B2247a and B2248b (February 20, 1909), older than the accepted prediscovery images of January 1914. The identification is offered as a hypothesis for experts to test on the original glass.
 - Includes the paper, a script that redates the exposures from asteroid trails and reruns the measurements and controls from the public archives, and a census of the public plates covering Pluto's track from 1880 to June 1909.
+- Zenodo: [10.5281/zenodo.24376801](https://doi.org/10.5281/zenodo.24376801)
 
 ## game-chromatic-arboricity v1 (November 19, 2026)
 

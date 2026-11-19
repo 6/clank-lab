@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## game-chromatic-arboricity v1 (November 19, 2026)
+
+- Proves that every class of graphs closed under taking subgraphs with bounded game chromatic number has bounded arboricity, answering Zhu's Question 3 (1999) in the affirmative: every graph of large enough average degree has a subgraph on which Bob wins the coloring game with any number of colors up to a given bound.
+- Includes the paper, with a written proof, and the Lean proof of both results, with the theorem of Kühn and Osthus on 4-cycle-free subgraphs as its one cited input.
+
 ## heawood-family-four-flat v1 (November 11, 2026)
 
 - Proves that a known graph with 11 vertices and 22 edges is not 4-flat and has no Heawood-family minor, disproving the completeness clause of Georgakopoulos–Winter Conjecture 1.1, implicit in two conjectures of van der Holst. Earlier structural work and the 2-apex implication show that this graph itself is an excluded minor.

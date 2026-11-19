@@ -7,6 +7,7 @@ Zenodo records.
 ## thomson-10 v11 (November 19, 2026)
 
 - Correction: cite Katherine Xie's proof (posted November 2, 2026) and Jingxing Huang's ten-point continuation (first committed October 23, 2026) as later work, posted after this result's first release on October 22, 2026 ([Zenodo version 1](https://doi.org/10.5281/zenodo.23552642)). The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24382573](https://doi.org/10.5281/zenodo.24382573)
 
 ## path-ramsey v10 (November 19, 2026)
 

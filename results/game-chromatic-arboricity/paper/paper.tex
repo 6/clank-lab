@@ -1,0 +1,624 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
+\DeclareUnicodeCharacter{2203}{\ensuremath{\exists}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\to}}
+\DeclareUnicodeCharacter{2264}{\ensuremath{\le}}
+\DeclareUnicodeCharacter{2260}{\ensuremath{\ne}}
+\DeclareUnicodeCharacter{2227}{\ensuremath{\wedge}}
+\DeclareUnicodeCharacter{00AC}{\ensuremath{\neg}}
+\DeclareUnicodeCharacter{2115}{\ensuremath{\mathbb{N}}}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={P. Graham},pdftitle={Monotone classes of bounded game chromatic number have bounded arboricity}]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\setlength{\emergencystretch}{3em}
+\title{Monotone classes of bounded game chromatic number have bounded arboricity}
+\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 19, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+In the coloring game on a finite graph, Alice and Bob alternately color
+uncolored vertices with one of $k$ colors so that adjacent vertices get
+different colors. Alice moves first and wins if every vertex gets colored;
+Bob wins if some uncolored vertex sees all $k$ colors among its neighbors.
+The game chromatic number of a graph is the least $k$ for which Alice can
+force a win. We prove that for every $K$ there is $d$ such that every graph
+of average degree at least $d$ has a subgraph on which Bob wins the
+$k$-color game for every $k\le K$. Consequently, if a class of graphs is
+closed under taking subgraphs and its game chromatic numbers are bounded,
+then the edges of each of its graphs can be partitioned into a bounded
+number of forests, that is, the class has bounded arboricity. This answers
+Zhu's Question~3 (1999) in the affirmative. The proof combines the theorem of Kühn and Osthus
+that every graph of large enough average degree contains a subgraph of
+large average degree with no 4-cycle, with a strategy for Bob that adapts
+the weighting argument behind Beck's criterion for positional games: Bob
+uses weights to keep some uncolored vertex that can still be blocked from
+every color. The rest of the proof is checked in Lean, with the theorem of
+Kühn and Osthus as an explicit hypothesis.
+
+This work has not yet been reviewed by experts.
+The proofs, the Lean formalization and the text were produced by AI models
+(from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{Keywords:} graph coloring game, game chromatic number,
+arboricity, monotone graph class, 4-cycle-free subgraph, Maker--Breaker
+game.
+
+\noindent\textit{MSC 2020:} 05C15, 05C57, 91A43.
+
+\section{Introduction}
+
+\subsection{Main results}
+Graphs are finite and simple. In the \emph{$k$-color game} on a graph $G$,
+Alice and Bob alternately choose an uncolored vertex and give it one of the
+colors $1,\dots,k$ that no neighbor of the vertex has; Alice moves first.
+The game ends when the player to move has no legal move, and Alice wins if
+every vertex is then colored; otherwise Bob wins. We use the rules as
+stated by Zhu \cite[pp.~1--2]{Zhu}; the game goes back to Brams, was
+published by Gardner and was introduced for general graphs by Bodlaender
+\cite[Section~1]{BGKZ}. The \emph{game chromatic number} $\chi_g(G)$ is the
+least $k$ for which Alice has a winning strategy. A class of graphs is
+\emph{monotone} if it is closed under taking subgraphs, that is, any vertex
+subset with any subset of the edges among it. The
+\emph{arboricity} of $G$ is the least number of forests into which its edge
+set can be partitioned. The average degree of a graph with at least one
+vertex is $2|E(G)|/|V(G)|$.
+
+\begin{theorem}\label{thm:main}
+For every integer $K\ge0$ there is an integer $d=d(K)$ such that every
+graph with at least one vertex and average degree at least $d$ has a
+subgraph $H$ on which Bob has a winning strategy in the $k$-color game for
+every integer $k$ with $0\le k\le K$; equivalently, $\chi_g(H)>K$.
+\end{theorem}
+
+Whether a win for Alice with $k$ colors implies one with $k+1$ colors is
+Zhu's Question~1 \cite[p.~11]{Zhu}, still open \cite[Section~8]{BGKZ},
+\cite[Question~1.1]{Ho}; so a win for Bob with $K$ colors alone would leave
+the smaller palettes to check.
+
+\begin{corollary}\label{cor:arboricity}
+For every integer $K\ge0$ there is an integer $d(K)$ with the following
+property. If a class of graphs is closed under taking subgraphs and each of
+its members has game chromatic number at most $K$, then each of its
+members has arboricity at most $d(K)$.
+\end{corollary}
+
+This answers in the affirmative Zhu's Question~3, whose hereditary classes
+are those ``closed under taking (not necessarily induced) subgraphs''
+\cite[p.~12]{Zhu}:
+
+\begin{question}[{Zhu \cite[Question 3]{Zhu}}]
+``Suppose a hereditary class of graphs has bounded game chromatic number.
+Is it true that the arboricity of this class of graphs is also bounded?''
+\end{question}
+
+Both results rest on a theorem of Kühn and Osthus \cite[Theorem~1]{KO}, in
+the form of Theorem~\ref{thm:ko}; given it as a hypothesis, both are proved
+in Lean (Section~\ref{sec:lean}).
+
+\subsection{Proof overview}
+Given a graph of very large average degree, the theorem of Kühn and Osthus
+gives a subgraph $G_0$ of large average degree with no 4-cycle, and inside
+it a nonempty vertex set $S$ each of whose vertices has many neighbors in
+$S$ (Lemma~\ref{lem:mindeg}). Labeling $S$ at random and averaging
+(Lemma~\ref{lem:extract}) gives disjoint sets $U_1,\dots,U_K\subseteq S$
+and a set $A\subseteq S$ outside them, more than $2^K+1$ times as large as
+$U=U_1\cup\dots\cup U_K$, such that every vertex of $A$ has a neighbor in
+every $U_i$. Keeping one such edge from each $a\in A$ to each $U_i$ gives a
+subgraph $H$ in which every $a\in A$ has exactly one neighbor $a_i$ in each
+$U_i$. Two vertices of $A$ share at most one of these neighbors, or there
+would be a 4-cycle.
+
+Fix $k\le K$ and play the $k$-color game on $H$ with $U_1,\dots,U_k$; call
+$i$ the \emph{designated} color of $U_i$. An uncolored $a\in A$ whose
+$a_1,\dots,a_k$ carry colors $1,\dots,k$ can never be colored, since colors
+are never removed, and Bob wins. Alice protects $a$ by making some $a_i$
+\emph{dead}: coloring it with another color, or giving color $i$ to a
+neighbor of it. A move changes the status of at most one vertex of $U$, but
+may cost every target adjacent to it. While some vertex of $U$ is
+\emph{free} (uncolored, with no neighbor of its designated color), Bob
+gives one its designated color; afterwards he plays any legal move. He
+maximizes a potential, the sum of $2^{t(a)}$ over the $a$ with no dead
+$a_i$, where $t(a)$ counts the $a_i$ carrying their designated color,
+placed by either player. As for the Erdős--Selfridge theorem
+\cite[p.~299]{ES} and Beck's criterion \cite{Be}, Bob's greedy move gains
+at least what Alice's next move can lose, up to an error the overlap bound
+controls. The potential stays above a reserve proportional to the number
+of free vertices, so once none is free, some uncolored $a$ sees all $k$
+colors. Finally, if all subgraphs of $G$ have average degree below $d$, removing
+vertices with fewer than $d$ remaining neighbors one at a time orders the
+vertices so that each has fewer than $d$ earlier neighbors; giving these
+edges distinct colors splits the edges into $d$ forests.
+
+\subsection{Prior work and related questions}
+Zhu's questions concern hereditary classes because a subgraph can have
+larger game chromatic number than the graph itself \cite[p.~11]{Zhu}, as
+Tuza and Zhu also note in their survey \cite[Section~1, p.~306]{TZ}.
+
+Zhu's Question~2 asks the same with the game coloring number in place of
+the arboricity. In Bodlaender's marking game, where Alice and Bob
+alternately mark vertices, Alice tries to keep small the largest number of
+previously marked neighbors of any vertex; the least bound she can
+guarantee is the \emph{Go number}, and the game coloring number is one more
+\cite[Section~2]{KT}. A yes answer to Question~2 would imply one to
+Question~3 \cite[p.~12]{Zhu}. In 2001 Kierstead and Trotter gave ``an
+example which shows that the game chromatic number of a class of graphs
+may be bounded even when the Go number is not'' \cite[Section~6]{KT}, and
+with a theorem of Dinski and Zhu
+\cite[Theorem~2]{DZ} their Example~6.1 gives a monotone class with game
+chromatic number at most 12 and unbounded Go number, a negative answer to
+Question~2 (Appendix~\ref{app:related}). Zhu's Question~4 repeats
+Conjecture~1 of Dinski and Zhu \cite{DZ}, that every monotone class of bounded game
+chromatic number has bounded acyclic chromatic number, the fewest colors
+in a proper coloring with no two-colored cycle. It remains open, and would
+imply Corollary~\ref{cor:arboricity}, since bounded acyclic chromatic
+number implies bounded arboricity \cite[p.~12]{Zhu}; Appendix~\ref{app:related}
+discusses Dvořák's reduction of it.
+
+The new step is Theorem~\ref{thm:potential}, which adapts the weighting
+argument behind Beck's criterion for Maker--Breaker games \cite{Be},
+\cite[Theorem~4.3]{Kr}. Unlike Maker, Bob must move legally, and a new
+estimate bounds the weight Alice's next move can destroy, since two
+targets share at most one vertex of $U$.
+
+
+\section{Bob's potential strategy}\label{sec:potential}
+
+\begin{theorem}\label{thm:potential}
+Let $k\ge0$ and $D\ge0$ be integers, and let $G$ be a graph with a set $A$
+of vertices and pairwise disjoint sets $U_1,\dots,U_k$ of vertices,
+disjoint from $A$. Write $U=U_1\cup\dots\cup U_k$ and assume:
+\begin{enumerate}
+\item every neighbor of every vertex of $U$ lies in $A$;
+\item every $a\in A$ has exactly one neighbor in $U_i$, written $a_i$, for
+each $i$;
+\item two distinct vertices of $A$ have at most one common neighbor in $U$;
+\item every vertex of $U$ has at most $D$ neighbors in $A$, and
+$2^k|U|+8D<8|A|$.
+\end{enumerate}
+Then Bob has a winning strategy in the $k$-color game on $G$.
+\end{theorem}
+
+The graph $G$ may have further vertices, in neither $A$ nor $U$, and
+further edges not meeting $U$.
+
+\begin{proof}
+A \emph{position} is a partial proper coloring reached by legal moves.
+In a position $c$, call a vertex $w\in U_i$ \emph{taken} if $c(w)=i$,
+\emph{free} if $w$ is uncolored and no neighbor of $w$ has color $i$, and
+\emph{dead} otherwise. Colors never change, so a taken vertex stays taken
+and a dead vertex stays dead. Call $a\in A$ \emph{alive} if none of
+$a_1,\dots,a_k$ is dead, and let $t(a)$ be the number of taken vertices
+among them. Put
+\[
+\Phi(c)=\sum_{a\text{ alive}}2^{t(a)},\qquad
+\Phi_y(c)=\sum_{a\text{ alive},\ a\sim y}2^{t(a)}\quad(y\in U),
+\]
+and let $F(c)$ be the number of free vertices.
+
+(a) \emph{An alive vertex is uncolored.} If $a\in A$ has color $j$, then
+$a_j$ is not taken (the coloring is proper) and not free (its neighbor $a$
+has color $j$), so $a_j$ is dead.
+
+(b) \emph{One move changes the status of at most one vertex of $U$.} Let a
+move give the vertex $v$ the color $j$. If $v\in U_i$, then by (1) no
+vertex of $U$ is adjacent to $v$, so only $v$ can change status: if it
+was free, it becomes taken if $j=i$ and dead otherwise, and if it was dead,
+it stays dead. If $v\in A$, a free vertex $w\in U_i$ stops being
+free only if $i=j$ and $w\sim v$, that is, by (2), only if $w=v_j$. If $v$
+lies in neither $A$ nor $U$, then by (1) nothing changes.
+
+(c) \emph{The potential.} If a move makes a free vertex $y$ taken, every
+alive $a\sim y$ stays alive with $t(a)$ one larger, so $\Phi$ grows by
+$\Phi_y(c)$. If a move makes a free vertex $y$ dead, exactly the alive
+$a\sim y$ stop being alive, so $\Phi$ falls by $\Phi_y(c)$. Otherwise
+$\Phi$ is unchanged.
+
+(d) \emph{Bob's strategy.} When some vertex is free, Bob takes a free
+vertex $x$ with $\Phi_x(c)$ largest: if $x\in U_i$ he colors it $i$, which
+is legal because $x$ is free. Otherwise he makes any legal move.
+
+(e) \emph{The invariants.} For a position $c$ with Bob to move let
+$I_B(c)$ say $8\Phi(c)>2^kF(c)$; for a position with Alice to move let
+$I_A(c)$ say $8\Phi(c)>2^kF(c)$ and
+$8(\Phi(c)-\Phi_y(c))>2^k(F(c)-1)$ for every free $y$.
+At the start every vertex of $U$ is free, every $a\in A$ is alive with
+$t(a)=0$, $\Phi=|A|$, $F=|U|$ and $\Phi_y\le D$, so $I_A$ holds by (4).
+If $I_A(c)$ holds and Alice moves to $c'$, then by (b) and (c) either a
+free $y$ became dead, with $\Phi(c')=\Phi(c)-\Phi_y(c)$ and
+$F(c')=F(c)-1$, which is the second part of $I_A(c)$; or a free $y$ became
+taken, and $\Phi$ grew while $F$ fell; or nothing changed. So $I_B(c')$
+holds.
+
+Now let $I_B(c)$ hold, let some vertex be free, and let Bob take $x$ as in
+(d), reaching $c'$. Then $\Phi(c')=\Phi(c)+\Phi_x(c)$ and
+$F(c')=F(c)-1$, which gives the first part of $I_A(c')$. Let $y$ be free in
+$c'$; then $y\ne x$, $y$ was free in $c$, and $\Phi_y(c)\le\Phi_x(c)$. The
+alive vertices of $c$ and $c'$ are the same, and $t$ changed only on those
+adjacent to $x$. By (3) at most one alive $a$ is adjacent to both $x$ and
+$y$; if there is one, $x$ and $y$ are two of $a_1,\dots,a_k$, both free in
+$c$, so $t(a)\le k-2$ in $c$ and the term of $a$ in $\Phi_y$ grew by
+$2^{t(a)}\le2^k/4$. Hence $8(\Phi_y(c')-\Phi_y(c))\le2\cdot2^k$ and
+\[
+8(\Phi(c')-\Phi_y(c'))\ge8\Phi(c)-2\cdot2^k>2^kF(c)-2\cdot2^k
+=2^k(F(c')-1).
+\]
+
+(f) \emph{Bob wins.} Let Bob follow (d), and let $p$ be the first position
+of the play with no free vertex; there is one, because the last position
+has none (a free vertex can be colored). By (e) and induction along the
+play, $I_A$ or $I_B$ holds at every position up to $p$, according to who
+moves; the step for Bob is used only at positions with a free vertex. So
+$\Phi(p)>0$ and some $a$ is alive at $p$. As no vertex is free,
+$a_1,\dots,a_k$ are all taken, so $a$ sees all $k$ colors, and by (a) $a$
+is uncolored. It can never be colored, and Bob wins.
+\end{proof}
+
+For $k\ge2$ this adapts the weighting argument behind Beck's criterion
+\cite{Be}, \cite[Theorem~4.3]{Kr}: $U$ plays the role of the board and the
+sets $\{a_1,\dots,a_k\}$ the winning sets of a $k$-uniform family in which
+two sets share at most one element. New are the legality of Bob's moves,
+tracked by the statuses free, taken and dead, and the overlap estimate
+in (e). The term $8D$ pays for Alice's first move.
+
+\begin{corollary}\label{cor:structure}
+Let $K\ge2$ and let $G$ consist of pairwise disjoint vertex sets
+$A,U_1,\dots,U_K$ and edges joining each $a\in A$ to exactly one vertex $a_i$
+of each $U_i$, with no other edges (further isolated vertices are
+allowed). If $G$ has no 4-cycle and $(2^K+8)|U|<8|A|$, where
+$U=U_1\cup\dots\cup U_K$, then $\chi_g(G)>K$.
+\end{corollary}
+
+\begin{proof}
+Fix $k\le K$ and apply Theorem~\ref{thm:potential} with the sets
+$U_1,\dots,U_k$; the vertices of the other sets lie in neither $A$ nor the
+union of the sets used. Conditions (1) and (2) are immediate, and (3)
+holds because two vertices of $A$ with two common neighbors span a
+4-cycle. For (4), let $w\in U_i$ and pick $j\ne i$. Two distinct neighbors
+$a,a'$ of $w$ have $a_j\ne a'_j$, since otherwise $w$ and $a_j$ would be
+two common neighbors. So $w$ has at most $|U_j|\le|U|$ neighbors, and (4)
+holds with $D=|U|$ because $2^k|U_1\cup\dots\cup U_k|+8|U|\le(2^K+8)|U|$.
+\end{proof}
+
+\section{Extraction}\label{sec:extract}
+
+\begin{lemma}\label{lem:mindeg}
+A graph with at least one vertex and average degree at least $t>0$ has a
+nonempty vertex set $S$ in which every vertex has at least $t/2$ neighbors
+in $S$.
+\end{lemma}
+
+\begin{proof}
+Write $e(S)$ for the number of edges inside $S$, and take $S$ nonempty of
+least size with $2e(S)\ge t|S|$; the whole vertex set qualifies. If some
+$v\in S$ had fewer than $t/2$ neighbors in $S$, then $S\setminus\{v\}$
+would be nonempty, since $e(S)>0$, and
+$2e(S\setminus\{v\})>2e(S)-t\ge t|S\setminus\{v\}|$, against the choice
+of $S$.
+\end{proof}
+
+\begin{lemma}\label{lem:extract}
+Let $K,M\ge0$ be integers and let $S$ be a nonempty set of vertices of a
+graph such that each vertex in $S$ has at least $\delta=2(M+1)K(K+1)$
+neighbors in $S$.
+Then there are disjoint sets $U_1,\dots,U_K\subseteq S$ and a set
+$A\subseteq S\setminus(U_1\cup\dots\cup U_K)$ such that every $a\in A$ has
+a neighbor in each $U_i$ and $M|U_1\cup\dots\cup U_K|<|A|$.
+\end{lemma}
+
+\begin{proof}
+For $K=0$ take $A=S$. Let $K\ge1$, $N=2(M+1)K$ and $n=|S|$, and consider
+all $N^n$ labelings $\ell\colon S\to\{0,\dots,N-1\}$. For a labeling, let
+$U_i(\ell)=\ell^{-1}(i-1)$ for $i\le K$, let $U(\ell)$ be their union, and
+let $A(\ell)$ be the set of $x\in S$ with $\ell(x)\ge K$ that have a
+neighbor in every $U_i(\ell)$. Each $x$ lies in $U(\ell)$ for $KN^{n-1}$
+labelings, so $\sum_\ell|U(\ell)|=nKN^{n-1}$. For fixed $x$ and $i$, fix
+$\delta$ neighbors of $x$ in $S$; the labelings in which none of them has
+label $i-1$ number $(N-1)^\delta N^{n-\delta}$, and they include those in
+which no neighbor of $x$ in $S$ has label $i-1$. So $x$ lies in $A(\ell)$ for at least
+$N^n-KN^{n-1}-K(N-1)^\delta N^{n-\delta}$ labelings. Since $N\ge2$ and,
+by the binomial theorem, $(N/(N-1))^N\ge1+N/(N-1)>2$, we have
+$2(N-1)^N\le N^N$; as $\delta=N(K+1)$, this gives
+$2^{K+1}(N-1)^\delta\le N^\delta$, and since $2^{K+1}>2K$ it follows that
+$K(N-1)^\delta N^{n-\delta}<N^n/2$. Also $(M+1)KN^{n-1}=N^n/2$. Therefore
+\[
+\sum_\ell\bigl(|A(\ell)|-M|U(\ell)|\bigr)\ge
+n\bigl(N^n-(M+1)KN^{n-1}-K(N-1)^\delta N^{n-\delta}\bigr)>0,
+\]
+and some labeling has $|A(\ell)|>M|U(\ell)|$.
+\end{proof}
+
+
+\section{The cited theorem}\label{sec:cited}
+
+\begin{theorem}[{Kühn and Osthus \cite[Theorem~1]{KO}}]\label{thm:koorig}
+``For every $k$ there exists $d=d(k)$ such that every graph of average
+degree at least $d$ contains a subgraph of average degree at least $k$
+whose girth is at least six.''
+\end{theorem}
+
+We use it in this form, the hypothesis \texttt{C4FreeSubgraphTheorem} of
+the Lean proof (Section~\ref{sec:lean}).
+
+\begin{theorem}\label{thm:ko}
+For every integer $t\ge0$ there is an integer $d$ such that every graph
+with at least one vertex and average degree at least $d$ has a subgraph
+with at least one vertex, no 4-cycle and average degree at least $t$.
+\end{theorem}
+
+\begin{proof}[Derivation from Theorem~\ref{thm:koorig}]
+For $t=0$ take $d=0$: a single vertex is such a subgraph. For $t\ge1$ take
+$d=\lceil d(t)\rceil$ from Theorem~\ref{thm:koorig} with $k=t$. Since $d\ge d(t)$,
+a graph of average degree at least $d$ has a subgraph of girth at least six
+and average degree at least $t\ge1$. That
+subgraph has an edge, hence a vertex, and its girth excludes 4-cycles.
+\end{proof}
+Appendix~\ref{app:bound} gives an explicit $d$.
+
+\section{Proofs of the main results}\label{sec:proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The conclusion for $K$ contains the conclusion for every smaller $K$, so
+we may assume $K\ge2$. Let $M=2^K+1$, $\delta=2(M+1)K(K+1)$, $t=2\delta$,
+and let $d$ be given by Theorem~\ref{thm:ko} for this $t$. Let $G$ have at
+least one vertex and average degree at least $d$. Theorem~\ref{thm:ko}
+gives a subgraph $G_0$ with no 4-cycle and average degree at least $t$;
+Lemma~\ref{lem:mindeg} gives a set $S$ in which every vertex has at least
+$\delta$ neighbors in $S$; and Lemma~\ref{lem:extract} gives $A$ and
+$U_1,\dots,U_K$ with $M|U|<|A|$. Choose for each $a\in A$ one neighbor
+$a_i\in U_i$ for each $i$, and let $H$ be the subgraph of $G_0$ on the
+vertex set of $G_0$ whose edges are the pairs $aa_i$. Then $H$ has no
+4-cycle, and $(2^K+8)|U|\le8M|U|<8|A|$, also when $U$ is empty, since then
+$A$ is not. By Corollary~\ref{cor:structure}, $\chi_g(H)>K$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:arboricity}]
+Let $d=d(K)$ be as in Theorem~\ref{thm:main}, let $\mathcal C$ be a
+monotone class whose members have game chromatic number at most $K$, and
+let $G\in\mathcal C$. Every subgraph of $G$ lies in $\mathcal C$, so by
+Theorem~\ref{thm:main} every subgraph of $G$ with at least one vertex has
+average degree less than $d$. Hence every nonempty vertex set $S$ contains
+a vertex with fewer than $d$ neighbors in $S$, since otherwise the subgraph
+induced by $S$ would have average degree at least $d$. Removing such
+vertices one at a time orders the vertices as $v_1,\dots,v_n$ so that each
+$v_m$ has fewer than $d$ neighbors among $v_1,\dots,v_{m-1}$. Color the
+edges from each $v_m$ to earlier vertices with distinct colors from
+$1,\dots,d$. In each color class every vertex has at most one edge to an
+earlier vertex, so the class has no cycle, as the latest vertex of a cycle
+would have two. So $G$ has arboricity at most $d$.
+\end{proof}
+
+\section{Formal verification}\label{sec:lean}
+Theorem~\ref{thm:main} and Corollary~\ref{cor:arboricity} are proved in
+Lean~4 \cite{Lean} with the Mathlib library \cite{Mathlib}, from
+definitions of the game given verbatim in Appendix~\ref{app:lean}. A position gives each vertex one of the $k$
+colors, indexed by \texttt{Fin k}, that is $\{0,\dots,k-1\}$, or
+\texttt{none}, meaning uncolored. A move gives one uncolored vertex a color
+that none of its neighbors has. The inductive predicate
+\texttt{AliceWins G k b c} says that Alice can force a win from the
+position \texttt{c}, with Alice to move when \texttt{b} is \texttt{true}:
+every vertex is colored; or it is Alice's turn and some move of hers leads
+to such a position; or it is Bob's turn, he has a move, and all his moves
+lead to such positions. \texttt{AliceWinsGame G k} is this predicate at
+the empty position with Alice to move. On a finite graph,
+\texttt{¬ AliceWinsGame G k} says exactly that Bob has a winning strategy
+in the $k$-color game (Appendix~\ref{app:lean}). The cited theorem is the
+proposition
+\begin{verbatim}
+def C4FreeSubgraphTheorem : Prop :=
+  ∀ t : ℕ, ∃ d : ℕ, ∀ (V : Type) [Finite V] [Nonempty V] (G : SimpleGraph V),
+    d * Nat.card V ≤ 2 * G.edgeSet.ncard →
+    ∃ H : G.Subgraph, H.verts.Nonempty ∧ C4Free H.coe ∧
+      t * H.verts.ncard ≤ 2 * H.coe.edgeSet.ncard
+\end{verbatim}
+where \texttt{C4Free H} says that there are no $a,b,c,d$ with $a\ne c$,
+$b\ne d$ and $a\sim b\sim c\sim d\sim a$; this is Theorem~\ref{thm:ko},
+with ``average degree at least $d$'' written as $d|V|\le2|E|$. The two
+main results, in \texttt{Main.lean}, are
+\begin{verbatim}
+theorem GCG.exists_subgraph_bob_wins (hC4 : C4FreeSubgraphTheorem) (K : ℕ) :
+    ∃ d : ℕ, ∀ (V : Type) [Finite V] [Nonempty V] (G : SimpleGraph V),
+      d * Nat.card V ≤ 2 * G.edgeSet.ncard →
+      ∃ H : G.Subgraph, ∀ k ≤ K, ¬ AliceWinsGame H.coe k
+
+theorem GCG.bounded_arboricity (hC4 : C4FreeSubgraphTheorem) (K : ℕ) :
+    ∃ d : ℕ, ∀ C : (V : Type) → SimpleGraph V → Prop,
+      (∀ V G, C V G → Finite V) →
+      (∀ V G, C V G → ∀ H : G.Subgraph, C H.verts H.coe) →
+      (∀ V G, C V G → ∃ k ≤ K, AliceWinsGame G k) →
+      ∀ V G, C V G → ArboricityLE G d
+\end{verbatim}
+The first is Theorem~\ref{thm:main}, where \texttt{H.coe} is the graph
+formed by a Mathlib subgraph \texttt{H}. In the second, a class is a
+predicate \texttt{C} whose three hypotheses say that its members are
+finite, closed under subgraphs, and of game chromatic number at most $K$; \texttt{ArboricityLE G d} gives arboricity at most $d$
+(Appendix~\ref{app:lean}). The build fails unless the axioms of
+the two main theorems and of Theorem~\ref{thm:potential} are exactly
+Lean's \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+Theorem~\ref{thm:potential} and Lemma~\ref{lem:extract} are formalized as
+written. Lemma~\ref{lem:mindeg} is checked for integer $t$, and
+Corollary~\ref{cor:structure} under the stronger hypothesis
+$(2^K+1)|U|<|A|$; these are the cases Section~\ref{sec:proofs} uses, and
+Appendix~\ref{app:lean} notes the differences in detail and gives the
+commands that reproduce the check.
+
+\begin{appendices}
+\section{The Lean definitions and correspondence}\label{app:lean}
+A position is a function \texttt{c : V → Option (Fin k)}: \texttt{Fin k}
+is the set $\{0,\dots,k-1\}$ indexing the $k$ colors, and the value
+\texttt{none} means uncolored. The game is defined in
+\texttt{GCG/Game.lean}:
+\begin{verbatim}
+def Move (G : SimpleGraph V) {k : ℕ} (c c' : V → Option (Fin k)) : Prop :=
+  ∃ v i, c v = none ∧ (∀ w, G.Adj v w → c w ≠ some i) ∧ c' v = some i ∧
+    ∀ u, u ≠ v → c' u = c u
+
+inductive AliceWins (G : SimpleGraph V) (k : ℕ) :
+    Bool → (V → Option (Fin k)) → Prop
+  | full (b : Bool) (c : V → Option (Fin k)) :
+      (∀ v, c v ≠ none) → AliceWins G k b c
+  | alice (c c' : V → Option (Fin k)) :
+      Move G c c' → AliceWins G k false c' → AliceWins G k true c
+  | bob (c : V → Option (Fin k)) :
+      (∃ c', Move G c c') → (∀ c', Move G c c' → AliceWins G k true c') →
+      AliceWins G k false c
+
+def AliceWinsGame (G : SimpleGraph V) (k : ℕ) : Prop :=
+  AliceWins G k true (fun _ => none)
+\end{verbatim}
+
+\paragraph{Why \texttt{¬ AliceWinsGame G k} means that Bob wins.}
+Each move colors a vertex, so on a finite graph every play ends after at
+most $|V|$ moves. If \texttt{AliceWins} holds at a position, the
+constructors used in its derivation give Alice a strategy that wins from
+there: they never let Bob reach a position where it fails, and a play can
+end only at a full coloring. Suppose it fails at a position. If the player
+to move has no legal move, play ends there, and since \texttt{full} does
+not apply, some vertex is uncolored: Bob has won. If it is Alice's turn,
+then by \texttt{alice} it fails after each of her moves. If it is Bob's
+turn and he has a move, then by \texttt{bob} it fails after some move of
+his, and he plays that move. Following this, Bob keeps \texttt{AliceWins}
+false until play ends, so he wins. Zhu \cite[pp.~1--2]{Zhu} awards Bob the
+game as soon as an uncolored vertex has all $k$ colors among its
+neighbors. Such a vertex stays uncolorable, so under the rules of
+Section~1 play ends with it uncolored and Bob wins as well; conversely, a
+play that ends with an uncolored vertex reached such a vertex. The two
+conventions give the same winner.
+
+\paragraph{Arboricity.} \texttt{ArboricityLE G d} says that some map from
+all unordered pairs of vertices to $d$ colors makes every color class of
+edges of $G$ a forest. Restricting the map to the edges partitions them
+into at most $d$ forests, so $G$ has arboricity at most $d$; conversely,
+for $d>0$ a partition into $d$ forests extends to such a map. For $d=0$
+the predicate fails on every graph with a vertex, which does not affect an
+existential upper bound.
+
+\paragraph{Correspondence.}
+Both main theorems take the cited theorem as the hypothesis \texttt{hC4},
+and their proofs establish its hypotheses (finiteness, a vertex and the
+density bound) for each graph to which they apply it.
+\texttt{C4Free} is in \texttt{GCG/Game.lean} and \texttt{ArboricityLE} in
+\texttt{GCG/Forest.lean}. Theorem~\ref{thm:potential} is
+\texttt{GCG.bob\_wins\_of\_structure} in \texttt{GCG/Potential.lean}, in
+which conditions (1)--(4) appear as hypotheses on a set \texttt{A}, a
+family of classes and a map assigning to each $a\in A$ and $i$ its
+neighbor $a_i$. Lemma~\ref{lem:mindeg} is
+\texttt{GCG.exists\_minDegree\_subset} in \texttt{GCG/Extract.lean}, for a
+positive integer threshold $t$, the case used in
+Section~\ref{sec:proofs}; the written proof covers real $t>0$.
+Lemma~\ref{lem:extract} is \texttt{GCG.extract} in the same file.
+\texttt{GCG.bob\_wins\_pickGraph} in \texttt{Main.lean} is
+Corollary~\ref{cor:structure} with the hypothesis $(2^K+8)|U|<8|A|$
+replaced by the stronger $(2^K+1)|U|<|A|$, which is what
+Lemma~\ref{lem:extract} provides in Section~\ref{sec:proofs}; the graph
+whose edges are the pairs $aa_i$ is \texttt{GCG.pickGraph}. The printed
+Corollary~\ref{cor:structure} follows from the checked
+Theorem~\ref{thm:potential} by the written proof. The degeneracy step in
+the proof of Corollary~\ref{cor:arboricity} is
+\texttt{GCG.arboricityLE\_of\_degenerate} in \texttt{GCG/Forest.lean}.
+The axiom checks are in \texttt{Axioms.lean}.
+
+The formal proof of Theorem~\ref{thm:main} applies the cited theorem with
+$t=4(2^{K+2}+2)(K+2)(K+3)$, which is the value of $t$ in
+Section~\ref{sec:proofs} for $K+2$ in place of $K$; this covers $K<2$
+without a separate case. Its subgraph $H$ keeps all the vertices of $G_0$,
+as in the written proof.
+
+To reproduce the check, run \texttt{lake exe cache get} and
+\texttt{lake build} in the \texttt{lean} folder of the accompanying files,
+which pins Lean v4.34.0 and a Mathlib commit; with the Mathlib cache the
+build takes about a minute.
+
+\section{Zhu's Questions 2 and 4}\label{app:related}
+Kierstead and
+Trotter \cite[Example~6.1]{KT} subdivide every edge of $K_{n,n}$ once;
+their proof shows that these graphs $G_n$ have acyclic chromatic number at
+most 3 and game chromatic number at most 4, and that their Go number tends
+to infinity. By a theorem of Dinski and Zhu \cite[Theorem~2]{DZ}, every
+subgraph of a graph with acyclic chromatic number at most $k$ has game
+chromatic number at most $k(k+1)$. So the subgraphs of the graphs $G_n$
+form a monotone class with game chromatic number at most 12 and unbounded
+game coloring number, which answers Question~2 in the negative.
+
+Dvořák \cite[Section~3.1.5]{Dv} showed that the conjecture of Dinski and
+Zhu follows from Conjecture~3.1 of \cite{Dv} (Conjecture~1 of \cite{Dv08}, derived there from
+its Corollary~4): ``There exists a function $f$ such that for each graph
+$G$, if $\chi(G)\ge f(c)$ then the game chromatic number of
+$\mathrm{sd}_1(G)$ is at least $c$'', where $\chi(G)$ is the chromatic
+number, $c$ ranges over the positive integers and $\mathrm{sd}_1(G)$ is
+obtained by subdividing every edge of $G$ once. Dvořák calls it ``wide
+open''. The present argument does not reach these graphs. In a subgraph of
+$\mathrm{sd}_1(G)$, every edge meets a subdivision vertex and these have
+degree at most 2, so there are at most twice as many edges as subdivision
+vertices; a subgraph with an edge also has a vertex of $G$, so its average
+degree is less than 4, and Theorem~\ref{thm:main} says nothing about it.
+\section{An explicit bound}\label{app:bound}
+Montgomery, Pokrovskiy and Sudakov \cite[Theorem~1.1]{MPS} showed that
+there is $c>0$ such that for every integer $t\ge1$, every graph of average
+degree at least $2^{ct^2\log t}$ has a subgraph of average degree at least
+$t$ and girth at least 6; so $d=\lceil2^{ct^2\log t}\rceil$ serves in
+Theorem~\ref{thm:ko} for $t\ge1$. Section~\ref{sec:proofs} applies it with $t$ of order
+$K^22^K$, so $d(K)$ is at most doubly exponential in $K$; we made no
+attempt to optimize it.
+\end{appendices}
+
+\begin{thebibliography}{99}
+\bibitem{Be} J. Beck, Van der Waerden and Ramsey type games,
+\emph{Combinatorica} 1 (1981), 103--116,
+\url{https://doi.org/10.1007/BF02579267}.
+\bibitem{BGKZ} T. Bartnicki, J. Grytczuk, H. A. Kierstead and X. Zhu, The
+map-coloring game, \emph{Amer. Math. Monthly} 114 (2007), 793--803.
+\bibitem{DZ} T. Dinski and X. Zhu, A bound for the game chromatic number
+of graphs, \emph{Discrete Math.} 196 (1999), 109--115. Theorem and
+conjecture numbers as in the authors' preprint of October 1997,
+\url{https://www.math.nsysu.edu.tw/~zhu/papers/game/bound.pdf}.
+\bibitem{Dv} Z. Dvořák, \emph{Asymptotical Structure of Combinatorial
+Objects}, doctoral thesis, Charles University, Prague, 2007,
+\url{https://iuuk.mff.cuni.cz/~rakdver/disert.pdf}.
+\bibitem{Dv08} Z. Dvořák, On forbidden subdivision characterizations of
+graph classes, \emph{European J. Combin.} 29 (2008), 1321--1332,
+\url{https://doi.org/10.1016/j.ejc.2007.05.008}. Numbering
+as in the author's preprint, ITI Series 2006-324.
+\bibitem{ES} P. Erdős and J. L. Selfridge, On a combinatorial game,
+\emph{J. Combin. Theory Ser. A} 14 (1973), 298--301,
+\url{https://doi.org/10.1016/0097-3165(73)90005-8}.
+\bibitem{Ho} L. Hollom, \emph{On monotonicity in Maker--Breaker graph colouring
+games}, \emph{Discrete Appl. Math.} 347 (2024), 131--138,
+\url{https://doi.org/10.1016/j.dam.2024.01.007}.
+\bibitem{KT} H. A. Kierstead and W. T. Trotter, Competitive colorings of
+oriented graphs, \emph{Electron. J. Combin.} 8(2) (2001), \#R12.
+\bibitem{Kr} M. Krivelevich, Positional games, in \emph{Proceedings of the
+International Congress of Mathematicians, Seoul 2014}, vol.~4, Kyung Moon
+Sa, 2014, 355--379. Theorem numbering as in arXiv:1404.2731v1.
+\bibitem{KO} D. Kühn and D. Osthus, Every graph of sufficiently large
+average degree contains a $C_4$-free subgraph of large average degree,
+\emph{Combinatorica} 24 (2004), 155--162.
+\bibitem{Lean} L. de Moura and S. Ullrich, The Lean 4 theorem prover and
+programming language, in \emph{Automated Deduction -- CADE 28}, Lecture
+Notes in Comput. Sci. 12699, Springer, 2021, 625--635.
+\bibitem{Mathlib} The mathlib Community, The Lean mathematical library, in
+\emph{Proceedings of the 9th ACM SIGPLAN International Conference on
+Certified Programs and Proofs}, 2020, 367--381.
+\bibitem{MPS} R. Montgomery, A. Pokrovskiy and B. Sudakov, $C_4$-free
+subgraphs with large average degree, \emph{Israel J. Math.} 246 (2021),
+55--71; arXiv:2004.03564v1.
+\bibitem{TZ} Zs. Tuza and X. Zhu, \emph{Colouring games}, in \emph{Topics in
+Chromatic Graph Theory} (L. W. Beineke and R. J. Wilson, eds.),
+Encyclopedia Math. Appl. 156, Cambridge University Press, 2015, 304--326.
+\bibitem{Zhu} X. Zhu, The game coloring number of planar graphs,
+\emph{J. Combin. Theory Ser. B} 75 (1999), 245--258. Page and question
+numbers as in the author's preprint,
+\url{https://www.math.nsysu.edu.tw/~zhu/papers/game/planar.pdf}.
+\end{thebibliography}
+\end{document}

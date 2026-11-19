@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## pluto-prediscovery v1 (November 19, 2026)
+
+- Reports faint images at Pluto's predicted position on three public plate scans, Harvard plate MA 731 (December 21, 1908) and the simultaneous Heidelberg plates B2247a and B2248b (February 20, 1909), older than the accepted prediscovery images of January 1914. The identification is offered as a hypothesis for experts to test on the original glass.
+- Includes the paper, a script that redates the exposures from asteroid trails and reruns the measurements and controls from the public archives, and a census of the public plates covering Pluto's track from 1880 to June 1909.
+
 ## game-chromatic-arboricity v1 (November 19, 2026)
 
 - Proves that every class of graphs closed under taking subgraphs with bounded game chromatic number has bounded arboricity, answering Zhu's Question 3 (1999) in the affirmative: every graph of large enough average degree has a subgraph on which Bob wins the coloring game with any number of colors up to a given bound.

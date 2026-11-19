@@ -1,0 +1,44 @@
+name: Pluto-prediscovery checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/pluto-prediscovery/**'
+      - '.github/workflows/pluto-prediscovery.yml'
+  pull_request:
+    paths:
+      - 'results/pluto-prediscovery/**'
+      - '.github/workflows/pluto-prediscovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pluto-prediscovery-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: Check pluto-prediscovery
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/pluto-prediscovery
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.8'
+
+      - name: Install Python requirements
+        run: python3 -m pip install -r checks/requirements.txt
+
+      - name: Rerun the measurements and controls from the public archives
+        run: python3 checks/rerun.py "$RUNNER_TEMP/pluto-work"

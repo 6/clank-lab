@@ -1,0 +1,238 @@
+{
+ "note": "Values recorded on November 19, 2026; rerun.py compares a fresh run with these ranges.",
+ "checks": [
+  {
+   "what": "MA 731 clock correction from (179) Klytaemnestra, minutes (recorded -348.2)",
+   "path": "ma731_clock_179/correction_min",
+   "min": -353,
+   "max": -343
+  },
+  {
+   "what": "MA 731 fitted exposure length, minutes (recorded 72.9; storage envelope 60)",
+   "path": "ma731_clock_179/duration_min",
+   "min": 60,
+   "max": 85
+  },
+  {
+   "what": "MA 731 S/N at the free centroid (recorded 6.25)",
+   "path": "ma731/measure/snr_at_centroid",
+   "min": 5.5
+  },
+  {
+   "what": "MA 731 centroid offset from Pluto's prediction, arcsec (recorded 0.65)",
+   "path": "ma731/measure/offset",
+   "max": 1.2
+  },
+  {
+   "what": "MA 731 blue magnitude (recorded 16.19; predicted 16.33-16.42)",
+   "path": "ma731/measure/B_centroid",
+   "min": 15.8,
+   "max": 16.6
+  },
+  {
+   "what": "MA 731 nearest Gaia DR3 star (G < 19.5) to the image, arcsec (recorded 11.4)",
+   "path": "ma731/nearest_gaia/arcsec",
+   "min": 10
+  },
+  {
+   "what": "MA 731 S/N at the archive-time position (recorded -0.2)",
+   "path": "ma731_archive_time_snr",
+   "max": 2
+  },
+  {
+   "what": "Joint random offsets, MA 731 alone: offsets with a replayed match as close and as strong as the image (recorded 29 of 230352)",
+   "path": "joint_null/observed values, ma731/hits",
+   "max": 60
+  },
+  {
+   "what": "Same on B2247a alone (recorded 6)",
+   "path": "joint_null/observed values, b2247a/hits",
+   "max": 20
+  },
+  {
+   "what": "Same on B2248b alone (recorded 223)",
+   "path": "joint_null/observed values, b2248b/hits",
+   "max": 400
+  },
+  {
+   "what": "SkyBoT objects within 0.04 deg of the MA 731 image",
+   "path": "ma731_skybot",
+   "equals": [
+    "Pluto"
+   ]
+  },
+  {
+   "what": "B2247a clock from (417) Suevia minus archive midpoint, minutes (recorded 0.0)",
+   "path": "B2247a_clocks/417/minus_archive_min",
+   "min": -30,
+   "max": 30
+  },
+  {
+   "what": "B2248b clock from (417) Suevia minus archive midpoint, minutes (recorded -6.7)",
+   "path": "B2248b_clocks/417/minus_archive_min",
+   "min": -30,
+   "max": 30
+  },
+  {
+   "what": "B2247a S/N at the free centroid (recorded 4.84)",
+   "path": "B2247a/measure/snr_at_centroid",
+   "min": 4.3
+  },
+  {
+   "what": "B2247a centroid offset, arcsec (recorded 0.31)",
+   "path": "B2247a/measure/offset",
+   "max": 1.2
+  },
+  {
+   "what": "B2247a blue magnitude (recorded 16.60; predicted 16.40-16.49)",
+   "path": "B2247a/measure/B_centroid",
+   "min": 16.1,
+   "max": 16.9
+  },
+  {
+   "what": "B2248b S/N at the free centroid (recorded 5.84)",
+   "path": "B2248b/measure/snr_at_centroid",
+   "min": 5.2
+  },
+  {
+   "what": "B2248b centroid offset, arcsec (recorded 1.90)",
+   "path": "B2248b/measure/offset",
+   "max": 2.0
+  },
+  {
+   "what": "B2248b blue magnitude (recorded 16.35)",
+   "path": "B2248b/measure/B_centroid",
+   "min": 16.0,
+   "max": 16.8
+  },
+  {
+   "what": "B2247a nearest Gaia DR3 star (G < 19.5), arcsec (recorded 25.6)",
+   "path": "B2247a/nearest_gaia/arcsec",
+   "min": 20
+  },
+  {
+   "what": "SkyBoT objects within 0.04 deg of the February position, from Heidelberg",
+   "path": "feb_skybot",
+   "equals": [
+    "Pluto"
+   ]
+  },
+  {
+   "what": "December image carried by Pluto's motion, miss on B2247a, arcsec (recorded 0.84)",
+   "path": "motion_residual_arcsec/B2247a",
+   "max": 2.5
+  },
+  {
+   "what": "December image carried by Pluto's motion, miss on B2248b, arcsec (recorded 1.82)",
+   "path": "motion_residual_arcsec/B2248b",
+   "max": 2.5
+  },
+  {
+   "what": "Joint random offsets: replayed matches on all three plates as close and as strong as observed (recorded 0 of 230352)",
+   "path": "joint_null/observed values, all three plates/hits",
+   "max": 0
+  },
+  {
+   "what": "Joint random offsets: trials inside all three cut-outs (recorded 230352)",
+   "path": "joint_null/observed values, all three plates/trials",
+   "min": 200000
+  },
+  {
+   "what": "Joint random offsets: matches on both February plates (recorded 1)",
+   "path": "joint_null/observed values, b2247a & b2248b/hits",
+   "max": 5
+  },
+  {
+   "what": "Joint random offsets: matches on all three plates with no Gaia star within 3 arcsec (recorded 0)",
+   "path": "joint_null/observed values, uncatalogued, all three plates/hits",
+   "max": 0
+  },
+  {
+   "what": "1914 positive check B3383a: S/N at the free centroid (recorded 6.80)",
+   "path": "B3383a_1914_control/measure/snr_at_centroid",
+   "min": 6.0
+  },
+  {
+   "what": "1914 positive check B3383a: offset, arcsec (recorded 1.55)",
+   "path": "B3383a_1914_control/measure/offset",
+   "max": 2.5
+  },
+  {
+   "what": "1923 plate B4816a at the February position: S/N (recorded -0.70)",
+   "path": "B4816a_1923_fixed_site/measure/snr_at_pred",
+   "max": 2
+  },
+  {
+   "what": "1923 plate B4816a: recovery of injected B 16.4 images at S/N >= 3 (recorded 1.00)",
+   "path": "B4816a_1923_fixed_site/injection/16.4/snr_ge3",
+   "min": 0.9
+  },
+  {
+   "what": "MA 731 clock: the trail fit reads no pixel within 1 degree of Pluto (recorded 5.38 deg)",
+   "path": "ma731_timing/clock_region_distance_from_pluto_deg",
+   "min": 1.0
+  },
+  {
+   "what": "MA 731 clock: 1-sigma error of the fitted midpoint, minutes (recorded 0.66)",
+   "path": "ma731_timing/t_mid_err_min",
+   "max": 2.0
+  },
+  {
+   "what": "MA 731: Pluto's prediction moves this far per 1-sigma clock error, arcsec (recorded 0.03)",
+   "path": "ma731_timing/arcsec_for_1sigma",
+   "max": 0.1
+  },
+  {
+   "what": "Heidelberg clocks read no pixel within 1 degree of Pluto (recorded 2.25 deg)",
+   "path": "B2247a_timing/clock_region_distance_from_pluto_deg",
+   "min": 1.0
+  },
+  {
+   "what": "MA 731: fraction of comparably faint catalog stars whose centroid misses by no more than the image's (recorded 0.20)",
+   "path": "ma731/faint_stars/image_offset_rank",
+   "max": 0.5
+  },
+  {
+   "what": "B2247a: same fraction (recorded 0.06)",
+   "path": "B2247a/faint_stars/image_offset_rank",
+   "max": 0.5
+  },
+  {
+   "what": "B2248b: same fraction (recorded 0.73)",
+   "path": "B2248b/faint_stars/image_offset_rank",
+   "max": 0.95
+  },
+  {
+   "what": "MA 731: robust spread of calibrated minus catalog B for comparably faint stars (recorded 0.21)",
+   "path": "ma731/faint_stars/dB_robust_sd",
+   "max": 0.35
+  },
+  {
+   "what": "Joint random offsets with the search's loose rule (S/N >= 4 at the replayed centroid), all three plates (recorded 8581)",
+   "path": "joint_null/search rule, all three plates/hits",
+   "min": 6000,
+   "max": 11000
+  },
+  {
+   "what": "Same, with no Gaia star within 3 arcsec of the centroid on any plate (recorded 3360)",
+   "path": "joint_null/search rule, uncatalogued, all three plates/hits",
+   "min": 2000,
+   "max": 5000
+  },
+  {
+   "what": "Same, centroid also within 3 arcsec of the shifted prediction, a cut chosen after seeing the data (recorded 0)",
+   "path": "joint_null/after seeing the data: search rule, uncatalogued, centroid within 3 arcsec, all three plates/hits",
+   "max": 0
+  },
+  {
+   "what": "Joint random offsets with crowding matched to Pluto's, all three plates (recorded 0 of 39786)",
+   "path": "joint_null/crowding-matched, observed values, all three plates/hits",
+   "max": 0
+  },
+  {
+   "what": "Crowding-matched trials (recorded 39786)",
+   "path": "joint_null/crowding-matched, observed values, all three plates/trials",
+   "min": 30000
+  }
+ ]
+}

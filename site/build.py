@@ -17,6 +17,7 @@ from urllib.error import HTTPError
 from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, urlopen
 
+from figures import FIGURES, FIGURE_FILE, read_figure
 from maths import render_html
 
 API = "https://zenodo.org/api/records"
@@ -37,6 +38,12 @@ time,.authors{color:var(--muted)}time{font-size:.9rem}
 .links{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem 1rem;margin:.15rem 0 0}
 .links a{display:inline-flex;align-items:center;min-height:44px;max-width:100%;font-size:.9rem}
 @media(prefers-color-scheme:dark){:root{--bg:#111418;--text:#e8edf3;--muted:#aab4c3;--link:#91bfff;--line:#333e4d}}"""
+
+
+FIGURE_STYLE = """
+.paper-figure{margin:1.5rem 0}
+.paper-figure img{display:block;max-width:100%;height:auto;background:white;margin:0 auto}
+.paper-figure figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem}"""
 
 
 def public_url(url):
@@ -209,13 +216,13 @@ def abstract_html(source):
     return "".join(parser.parts)
 
 
-def document(title, body, tags=()):
+def document(title, body, tags=(), extra_style=""):
     meta = "\n".join(f'<meta name="{name}" content="{html.escape(value, quote=True)}">'
                      for name, value in tags)
     return (f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8">\n'
             f'<meta name="viewport" content="width=device-width,initial-scale=1">\n'
             f'<title>{html.escape(title)}</title>\n{meta}\n'
-            f'<style>{STYLE}</style>\n'
+            f'<style>{STYLE}{extra_style}</style>\n'
             f'</head><body><main>{render_html(body)}</main></body></html>\n')
 
 
@@ -240,6 +247,21 @@ def download(paper, url, destination, source=None):
         temporary.replace(destination)
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def paper_figure(checkout, slug, folder):
+    entry = FIGURES.get(slug)
+    if entry is None:
+        return ""
+    try:
+        data = read_figure(checkout, slug, entry)
+    except (OSError, ValueError) as error:
+        print(f"WARNING: Skipping figure for {slug}: {error}", file=sys.stderr)
+        return ""
+    (folder / FIGURE_FILE).write_bytes(data)
+    alt, caption = html.escape(entry["alt"], quote=True), html.escape(entry["caption"])
+    return (f'<figure class="paper-figure"><img src="{FIGURE_FILE}" alt="{alt}">'
+            f'<figcaption>{caption}</figcaption></figure>')
 
 
 def build(checkout, output, base_url, manifest):
@@ -300,13 +322,15 @@ def build(checkout, output, base_url, manifest):
                  ("citation_pdf_url", page_url + slug + ".pdf"),
                  ("citation_doi", paper["concept_doi"]), ("citation_publisher", "Zenodo")]
         doi_url = "https://doi.org/" + paper["concept_doi"]
+        figure = paper_figure(checkout, slug, folder)
         body = ('<nav class="links" aria-label="Site"><a href="../../">All papers</a></nav>'
                 f'<h1>{html.escape(title)}</h1><p class="authors">{html.escape("; ".join(paper["authors"]))}</p>'
                 f'<p><time datetime="{paper["first_version_date"]}">{paper["first_version_date"]}</time></p>'
-                f'<section aria-label="Abstract">{abstract_html(paper["abstract"])}</section>'
+                f'<section aria-label="Abstract">{abstract_html(paper["abstract"])}</section>{figure}'
                 f'<p class="links"><a href="{doi_url}">{paper["concept_doi"]}</a>'
                 f'<a href="{slug}.pdf">PDF</a></p>')
-        (folder / "index.html").write_text(document(title, body, tags), encoding="utf-8")
+        extra_style = FIGURE_STYLE if figure else ""
+        (folder / "index.html").write_text(document(title, body, tags, extra_style), encoding="utf-8")
         listing.append(f'<li><a class="paper-title" href="papers/{slug}/"><span>{html.escape(title)}</span></a>'
                        f'<div class="links"><time datetime="{paper["first_version_date"]}">{paper["first_version_date"]}</time>'
                        f'<a href="{doi_url}">DOI</a><a href="papers/{slug}/{slug}.pdf">PDF</a></div></li>')

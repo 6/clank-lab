@@ -35,10 +35,12 @@ orthogonal alignment and pair remainder inequality.
 
 ## Further credits
 
+This result's first public release is version 1 of October 22, 2026 (tag [`thomson-10-v1`](<https://github.com/6/clank-lab/tree/thomson-10-v1/results/thomson-10>) at commit `bc8bd8c`, and [Zenodo version 1](https://doi.org/10.5281/zenodo.23552642)). Entries marked later work were first posted after it.
+
 - Aravind Karthigeyan, [thomson-n9-lean](https://github.com/aravindkarthigeyan/thomson-n9-lean) — most of the MIT-licensed Lean code and the proof design.
-- Katherine Xie, [Optimality and uniqueness for the Thomson problems with n=9 and n=10](https://doi.org/10.5281/zenodo.23899873), November 2, 2026, with [ten-point verification code and certificates](https://doi.org/10.5281/zenodo.23845065) — independent proof of the nine- and ten-point cases.
+- Katherine Xie, [Optimality and uniqueness for the Thomson problems with n=9 and n=10](https://doi.org/10.5281/zenodo.23899873), November 2, 2026, with [ten-point verification code and certificates](https://doi.org/10.5281/zenodo.23845065), October 31, 2026 — later work: independent proof of the nine- and ten-point cases.
 - Jingxing Huang, [Thomson n=9 proof and manuscript](https://doi.org/10.5281/zenodo.23573472) — related nine-point candidate.
-- Jingxing Huang, [ten-point stationarity continuation](https://github.com/Stickerbug/thomson-n9-proof/blob/fce398ce69c369a8de5b10d194af137cf33edd54/proof_work/publication_validation/formal/ThomsonCertificate/N10StationarityRightTerm3Final.lean) — related endpoint-sign theorem `d4dStationarity_right_endpoint_positive`.
+- Jingxing Huang, [ten-point stationarity continuation](https://github.com/Stickerbug/thomson-n9-proof/blob/fce398ce69c369a8de5b10d194af137cf33edd54/proof_work/publication_validation/formal/ThomsonCertificate/N10StationarityRightTerm3Final.lean), first committed October 23, 2026 — later work: related endpoint-sign theorem `d4dStationarity_right_endpoint_positive`.
 - L. Föppl, [Stabile Anordnungen von Elektronen im Atom](https://doi.org/10.1515/crll.1912.141.251) — candidate history.
 - V. A. Yudin, [Minimum potential energy of a point system of charges](https://doi.org/10.1515/dma.1993.3.1.75) — energy-bound background.
 - R. E. Schwartz, [The Five-Electron Case of Thomson's Problem](https://arxiv.org/abs/1001.3702) — preceding exact case.
@@ -63,7 +65,8 @@ The source scope and development account below is retained from the landing page
 
 Aravind Karthigeyan's pinned October 6, 2026 [README](https://github.com/aravindkarthigeyan/thomson-n9-lean/blob/168ff0c98cab4dfda0460ba55f8d169070ac385e/README.md) states “global optimality and uniqueness for nine distinct points” and calls the project “a research release requesting external review”. That AI-generated proof establishes the D3h tricapped trigonal prism as minimizer, with equality up to orthogonal transformation and permutation. We reuse most of its MIT-licensed Lean code and follow its proof design. [THIRD_PARTY.md](../THIRD_PARTY.md) preserves the file-level attribution, changes and full license notice.
 
-Jingxing Huang's later ten-point continuation includes
+Jingxing Huang's later ten-point continuation, first committed on October 23,
+2026, after this result's first public release on October 22, includes
 [`d4dStationarity_right_endpoint_positive`](https://github.com/Stickerbug/thomson-n9-proof/blob/fce398ce69c369a8de5b10d194af137cf33edd54/proof_work/publication_validation/formal/ThomsonCertificate/N10StationarityRightTerm3Final.lean),
 a Lean theorem giving the positive sign of the stationarity expression at
 a rational right endpoint for the one-parameter D4d candidate family.

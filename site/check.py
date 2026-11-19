@@ -19,6 +19,7 @@ import xml.etree.ElementTree as ET
 
 from figures import FIGURES, FIGURE_FILE, verify_figure
 from maths import has_math
+from releases import paper_release_links
 
 MAX_PDF = 5_000_000
 BASE_URL = "https://clanklab.org/"
@@ -192,7 +193,9 @@ def pdf_text(tool, path, first_page=False):
     return result.stdout.decode("utf-8")
 
 
-def check(output, base_url, manifest, screenshots=None, deny=()):
+def check(output, base_url, manifest, screenshots=None, deny=(), checkout=None):
+    if checkout is None:
+        checkout = Path(__file__).resolve().parents[1]
     base_url = base_url.rstrip("/") + "/"
     base = urlsplit(base_url)
     require(base.scheme in {"http", "https"} and base.hostname and not base.query
@@ -203,6 +206,7 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
     slugs = [paper["slug"] for paper in papers]
     require(len(set(slugs)) == len(slugs), "Duplicate manifest slug")
     require(len({p["concept_doi"] for p in papers}) == len(papers), "Duplicate concept DOI")
+    release_links = paper_release_links(checkout, slugs)
     expected_pages = {"index.html"} | {f"papers/{slug}/index.html" for slug in slugs}
     expected_pdfs = {f"papers/{slug}/{slug}.pdf" for slug in slugs}
     expected_files = expected_pages | expected_pdfs | {"robots.txt", "sitemap.xml"}
@@ -269,8 +273,10 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
         abstract = normal(" ".join(Page(paper["abstract"]).text))
         require(bool(abstract) and abstract in visible, "Incomplete abstract in " + label)
         doi_url = "https://doi.org/" + paper["concept_doi"]
-        require(page.links == ["../../", doi_url, slug + ".pdf"],
-                "Paper index navigation and PDF links must be relative in " + label)
+        expected_links = ["../../", doi_url, slug + ".pdf"]
+        if slug in release_links:
+            expected_links.append(release_links[slug])
+        require(page.links == expected_links, "Incorrect navigation, DOI, PDF, or release link in " + label)
         require(doi_url in page.links and paper["concept_doi"] in " ".join(page.body), "Missing visible DOI in " + label)
         require(slug + ".pdf" in page.links, "Missing visible PDF link in " + label)
         parsed = urlsplit(page.meta["citation_pdf_url"][0])
@@ -324,6 +330,7 @@ def check(output, base_url, manifest, screenshots=None, deny=()):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--checkout", type=Path, help="Public Git checkout with release tags (default: this script's repository)")
     parser.add_argument("--base-url", default=BASE_URL)
     parser.add_argument("--manifest", type=Path, default=Path(__file__).with_name("papers.json"))
     parser.add_argument("--deny-file", type=Path, help="Optional extra privacy patterns, one regex per line, kept outside the public copy")
@@ -331,7 +338,7 @@ def main():
     args = parser.parse_args()
     try:
         deny = read_deny(args.deny_file) if args.deny_file else ()
-        check(args.output, args.base_url, args.manifest, args.screenshots, deny)
+        check(args.output, args.base_url, args.manifest, args.screenshots, deny, args.checkout)
     except (OSError, ValueError, KeyError, subprocess.TimeoutExpired, ET.ParseError) as error:
         parser.exit(1, f"Check failed: {error}\n")
 

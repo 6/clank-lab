@@ -19,6 +19,7 @@ from urllib.request import Request, urlopen
 
 from figures import FIGURES, FIGURE_FILE, read_figure
 from maths import render_html
+from releases import paper_release_links
 
 API = "https://zenodo.org/api/records"
 ORCID = "0009-0007-8493-1505"
@@ -304,6 +305,7 @@ def build(checkout, output, base_url, manifest):
     if not papers:
         raise ValueError("No public papers found; refusing to replace the manifest")
     sources = match_results(checkout, papers, identities, previous)
+    release_links = paper_release_links(checkout, (paper["slug"] for paper in papers))
     papers.sort(key=lambda p: (p["first_version_date"], p["slug"]), reverse=True)
     output.mkdir(parents=True, exist_ok=True)
     listing, locations, warnings = [], [base_url], []
@@ -323,12 +325,14 @@ def build(checkout, output, base_url, manifest):
                  ("citation_doi", paper["concept_doi"]), ("citation_publisher", "Zenodo")]
         doi_url = "https://doi.org/" + paper["concept_doi"]
         figure = paper_figure(checkout, slug, folder)
+        release_url = release_links.get(slug)
+        code_link = f'<a href="{release_url}">Code and proofs</a>' if release_url else ""
         body = ('<nav class="links" aria-label="Site"><a href="../../">All papers</a></nav>'
                 f'<h1>{html.escape(title)}</h1><p class="authors">{html.escape("; ".join(paper["authors"]))}</p>'
                 f'<p><time datetime="{paper["first_version_date"]}">{paper["first_version_date"]}</time></p>'
-                f'<section aria-label="Abstract">{abstract_html(paper["abstract"])}</section>{figure}'
                 f'<p class="links"><a href="{doi_url}">{paper["concept_doi"]}</a>'
-                f'<a href="{slug}.pdf">PDF</a></p>')
+                f'<a href="{slug}.pdf">PDF</a>{code_link}</p>'
+                f'<section aria-label="Abstract">{abstract_html(paper["abstract"])}</section>{figure}')
         extra_style = FIGURE_STYLE if figure else ""
         (folder / "index.html").write_text(document(title, body, tags, extra_style), encoding="utf-8")
         listing.append(f'<li><a class="paper-title" href="papers/{slug}/"><span>{html.escape(title)}</span></a>'

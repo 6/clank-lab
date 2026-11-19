@@ -8,7 +8,10 @@ python3 site/check.py _site --base-url https://clanklab.org/
 ```
 
 The output directory must be empty. The build reads public Zenodo metadata
-and verifies the adjacent PDFs against its checksums.
+and verifies the adjacent PDFs against its checksums. Use a Git checkout with
+the public release tags. Each paper links to its result folder at the highest
+numbered `<slug>-vN` tag when one exists. If you build from a different checkout,
+pass that checkout to `check.py --checkout` as well.
 
 Math is rendered to native MathML at build time using KaTeX 0.19.0,
 pinned by the npm lockfile. Inline `$…$` and `\(…\)`, and display `$$…$$`

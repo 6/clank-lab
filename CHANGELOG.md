@@ -7,6 +7,7 @@ Zenodo records.
 ## williamson-order-65 v6 (November 19, 2026)
 
 - Correction: cite Kishan's exhaustive search (committed October 25, 2026) as later work, posted after this result's first release on October 22, 2026 ([Zenodo version 1](https://doi.org/10.5281/zenodo.23584887)). The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24384103](https://doi.org/10.5281/zenodo.24384103)
 
 ## ekg-bounds v6 (November 19, 2026)
 

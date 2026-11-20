@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## tight-cycle-c5-turan v3 (November 19, 2026)
+
+- Correction: credit for prior work. Lidický and Volec's numerical flag-algebra upper bound of 0.465031 for the same density, posted on arXiv on October 24, 2026, is now cited. Razborov's 0.4683 bound is now cited to its page in the original paper, which has been read. The theorem and its checks are unchanged.
+
 ## williamson-order-65 v6 (November 19, 2026)
 
 - Correction: cite Kishan's exhaustive search (committed October 25, 2026) as later work, posted after this result's first release on October 22, 2026 ([Zenodo version 1](https://doi.org/10.5281/zenodo.23584887)). The theorem and its checks are unchanged.

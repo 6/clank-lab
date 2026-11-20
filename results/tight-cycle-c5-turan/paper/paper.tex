@@ -20,7 +20,7 @@
 \newcommand{\fall}[2]{(#1)_{#2}}
 \title{The Turán density of the tight five-cycle}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 27, 2026}
+\date{November 20, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -74,6 +74,12 @@ for discussions leading to this construction \cite[\S7]{MR}.}; the equality is s
 Mubayi, Pikhurko and Sudakov \cite[\S2.4, Conjecture~7]{MPS}.
 They also record Razborov's earlier upper bound
 $\pi(\Cfive)<0.4683$ \cite[\S2.4]{MPS,RazborovBound}.
+In prior work posted on October 24, 2026, Lidick\'y and Volec
+obtained the numerical flag-algebra upper bound $\pi(\Cfive)\le0.465031$
+(and $0.46507$ by their cutting-plane linear-programming method)
+\cite[\S6]{LV}. It bounds the same density from above; the value
+$2\sqrt3-3\approx0.4641$ proved here lies below it. Their method and
+computations are not used here.
 The usual attribution is recorded in
 Kam\v{c}ev--Letzter--Pokrovskiy \cite[Conjecture~1.1]{KLP};
 their Theorem~1.3 gives the equality for all sufficiently large cycle
@@ -665,6 +671,12 @@ B. Lidick\'y, C. Mattes and F. Pfender,
 arXiv:2409.14257v2 (November 26, 2024; first posted September 21, 2024).
 \url{https://arxiv.org/abs/2409.14257v2}.
 
+\bibitem{LV}
+B. Lidick\'y and J. Volec,
+\emph{Solving Large SDPs from Flag Algebra Problems},
+arXiv:2610.33850v1 (October 24, 2026).
+\url{https://arxiv.org/abs/2610.33850v1}.
+
 \bibitem{Razborov}
 A. A. Razborov,
 \emph{Flag algebras},
@@ -674,8 +686,8 @@ Journal of Symbolic Logic \textbf{72} (2007), no.~4, 1239--1282.
 \bibitem{RazborovBound}
 A. A. Razborov,
 \emph{On 3-Hypergraphs with Forbidden 4-Vertex Configurations},
-2010. \url{https://doi.org/10.1137/090747476}.
-The earlier upper bound is cited through the text of \cite[\S2.4]{MPS};
-the original paper was not read in full.
+SIAM J. Discrete Math. \textbf{24} (2010), no.~3, 946--963;
+the bound $\pi(\Cfive)<0.4683$ is on p.~962.
+\url{https://doi.org/10.1137/090747476}.
 \end{thebibliography}
 \end{document}

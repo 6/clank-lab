@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: tight-cycle-c5-turan-${{ github.ref }}
+  group: tight-cycle-c5-turan-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

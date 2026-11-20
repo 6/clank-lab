@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: cite three of Tomer Haver's Yellowstone papers (posted October 23, 2026) as later work, posted after this result's first release on October 22, 2026 ([Zenodo version 1](https://doi.org/10.5281/zenodo.23562177)), and the two posted earlier that day as concurrent. The theorem and its checks are unchanged.
 - Correction: layout: the review-status and AI-assistance sentences move from a paragraph under the abstract into the abstract. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24383931](https://doi.org/10.5281/zenodo.24383931)
 
 ## thomson-10 v11 (November 19, 2026)
 

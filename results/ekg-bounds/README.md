@@ -128,7 +128,7 @@ the arithmetic residue-avoidance inequality is deduced.
 Lean, mathlib and their contributors supplied the formal infrastructure,
 and the cover checker uses Arb through python-flint.
 
-Haver's subsequent [Yellowstone work](https://doi.org/10.5281/zenodo.23604970) concerns a different greedy permutation; nothing from those papers is used here.
+Haver's later [Yellowstone work](https://doi.org/10.5281/zenodo.23604970), posted on October 23, 2026, after this result's first public release on October 22, 2026 (tag [`ekg-bounds-v1`](<https://github.com/6/clank-lab/tree/ekg-bounds-v1/results/ekg-bounds>) and [Zenodo version 1](https://doi.org/10.5281/zenodo.23562177)), concerns a different greedy permutation; nothing from those papers is used here.
 
 Related October 17–18 work by Haver treats the [lag-two EKG sequence (10.5281/zenodo.23437539)](https://doi.org/10.5281/zenodo.23437539), [general greedy-sieve processes (10.5281/zenodo.23437752)](https://doi.org/10.5281/zenodo.23437752), [a near-linear Yellowstone bound (10.5281/zenodo.23437783)](https://doi.org/10.5281/zenodo.23437783), [eight EKG-type rules (10.5281/zenodo.23437809)](https://doi.org/10.5281/zenodo.23437809), [closed Yellowstone-ladder results (10.5281/zenodo.23437816)](https://doi.org/10.5281/zenodo.23437816), and [Yellowstone II (10.5281/zenodo.23449375)](https://doi.org/10.5281/zenodo.23449375). These treat variants and general frameworks, including an EKG instance of the asymptotic theory in the general greedy-sieve paper; no additional theorem or code from these six papers is used here.
 

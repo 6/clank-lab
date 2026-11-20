@@ -28,7 +28,7 @@
 \newcommand{\lean}[1]{\texttt{#1}}
 \title{Sharp linear bounds for the EKG sequence}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 26, 2026}
+\date{November 19, 2026}
 \begin{document}
 \maketitle
 
@@ -50,14 +50,12 @@ meets a finite computation. Lean checks the deduction from
 the definition, conditional on computed premises; independent programs
 check those premises, and their correspondence with the formal
 statements was checked by reading the code.
-\end{abstract}
 
-\begin{quotation}\small\noindent
 This work has not yet been reviewed by experts.
 The proofs, the Lean formalization, the programs and the text were
 produced by AI models (from OpenAI and Anthropic), working under the
 author's direction.
-\end{quotation}
+\end{abstract}
 
 \bigskip
 \noindent 2020 \emph{Mathematics Subject Classification}:
@@ -567,8 +565,8 @@ dependencies. Reproduction commands and implementation details are in the
 supplementary checking notes.
 
 \paragraph{Related work.}
-Haver's subsequent work on the Yellowstone permutation
-\cite{haverY3,haverYFrontier,haverY6,haverY7,haverY8} concerns a different
+Haver's work on the Yellowstone permutation, concurrent
+\cite{haverY3,haverYFrontier} and later \cite{haverY6,haverY7,haverY8}, concerns a different
 greedy permutation; nothing from those papers is used here.
 Other nearby visiting rules include Applegate, Havermann, Selcoe,
 Shevelev, Sloane and Zumkeller's Yellowstone permutation~\cite{yellowstoneOriginal},
@@ -687,24 +685,36 @@ $b_q$ & $90$
 \begin{thebibliography}{99}
 
 \bibitem{haverY3}
-T. Haver, \emph{The Yellowstone permutation, III: few large terms}, October 22, 2026.
+T. Haver, \emph{The Yellowstone permutation, III: few large terms}, October 22, 2026, earlier on
+the day of this work's first public release~\cite{v1}.
 \href{https://doi.org/10.5281/zenodo.23557280}{doi:10.5281/zenodo.23557280}.
 
 \bibitem{haverYFrontier}
-T. Haver, \emph{The prime frontier of the Yellowstone permutation is linear}, October 22, 2026.
+T. Haver, \emph{The prime frontier of the Yellowstone permutation is linear}, October 22, 2026, earlier on
+the day of this work's first public release~\cite{v1}.
 \href{https://doi.org/10.5281/zenodo.23558450}{doi:10.5281/zenodo.23558450}.
 
 \bibitem{haverY6}
-T. Haver, \emph{The prime frontier of the Yellowstone permutation falls behind time: limsup R(t)/t < 1}, October 23, 2026.
+T. Haver, \emph{The prime frontier of the Yellowstone permutation falls behind time: limsup R(t)/t < 1}, October 23, 2026, after this work's
+first public release on October 22, 2026~\cite{v1} (later work).
 \href{https://doi.org/10.5281/zenodo.23604646}{doi:10.5281/zenodo.23604646}.
 
 \bibitem{haverY7}
-T. Haver, \emph{The Yellowstone permutation: limsup R(t)/t $\leq$ 0.68605, liminf $n_p/p>1.4576$, and Conjecture 7 for large n}, October 23, 2026.
+T. Haver, \emph{The Yellowstone permutation: limsup R(t)/t $\leq$ 0.68605, liminf $n_p/p>1.4576$, and Conjecture 7 for large n}, October 23, 2026, after this work's
+first public release on October 22, 2026~\cite{v1} (later work).
 \href{https://doi.org/10.5281/zenodo.23604811}{doi:10.5281/zenodo.23604811}.
 
 \bibitem{haverY8}
-T. Haver, \emph{The Yellowstone permutation: Conjecture 7 for all n reduced to a riser law on a finite range, the normality and entry times of primes, and a run certificate}, October 23, 2026.
+T. Haver, \emph{The Yellowstone permutation: Conjecture 7 for all n reduced to a riser law on a finite range, the normality and entry times of primes, and a run certificate}, October 23, 2026, after this work's
+first public release on October 22, 2026~\cite{v1} (later work).
 \href{https://doi.org/10.5281/zenodo.23604970}{doi:10.5281/zenodo.23604970}.
+
+\bibitem{v1}
+P. Graham, \emph{Sharp linear bounds for the EKG sequence}, version 1, first
+public release, October 22, 2026 (11:35 UTC): repository tag
+\href{https://github.com/6/clank-lab/tree/ekg-bounds-v1/results/ekg-bounds}{\texttt{ekg-bounds-v1}}
+(commit \texttt{b7da3aa});
+Zenodo version 1, \href{https://doi.org/10.5281/zenodo.23562177}{doi:10.5281/zenodo.23562177}.
 
 
 \bibitem{chebyshev}

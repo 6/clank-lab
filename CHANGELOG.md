@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## ekg-bounds v6 (November 19, 2026)
+
+- Correction: cite three of Tomer Haver's Yellowstone papers (posted October 23, 2026) as later work, posted after this result's first release on October 22, 2026 ([Zenodo version 1](https://doi.org/10.5281/zenodo.23562177)), and the two posted earlier that day as concurrent. The theorem and its checks are unchanged.
+- Correction: layout: the review-status and AI-assistance sentences move from a paragraph under the abstract into the abstract. The theorem and its checks are unchanged.
+
 ## thomson-10 v11 (November 19, 2026)
 
 - Correction: cite Katherine Xie's proof (posted November 2, 2026) and Jingxing Huang's ten-point continuation (first committed October 23, 2026) as later work, posted after this result's first release on October 22, 2026 ([Zenodo version 1](https://doi.org/10.5281/zenodo.23552642)). The theorem and its checks are unchanged.

@@ -1,0 +1,150 @@
+{
+ "note": "Recorded IMCCE SkyBoT cone searches (not rerun by checks/rerun.py), retrieved on 2026-11-19 with astroquery.imcce.Skybot.cone_search; no magnitude cut. Separations are from the stated position, in arcsec. If the service's answers change, compare with these.",
+ "december": {
+  "position_icrs_deg": [
+   85.89371,
+   16.016635
+  ],
+  "position": "MA 731 image (Method B center)",
+  "observer": "geocenter (IAU code 500)",
+  "times_utc": {
+   "open": "1908-12-21 00:21:54",
+   "mid": "1908-12-21 00:58:23",
+   "close": "1908-12-21 01:34:48"
+  },
+  "results": {
+   "open_radius_60arcsec": [
+    {
+     "number": "134340",
+     "name": "Pluto",
+     "type": "KBO>SDO",
+     "V": 16.14,
+     "sep_arcsec": 1.45
+    }
+   ],
+   "mid_radius_60arcsec": [
+    {
+     "number": "134340",
+     "name": "Pluto",
+     "type": "KBO>SDO",
+     "V": 16.14,
+     "sep_arcsec": 0.34
+    }
+   ],
+   "close_radius_60arcsec": [
+    {
+     "number": "134340",
+     "name": "Pluto",
+     "type": "KBO>SDO",
+     "V": 16.14,
+     "sep_arcsec": 2.12
+    }
+   ],
+   "open_radius_60arcsec0": [
+    {
+     "number": "134340",
+     "name": "Pluto",
+     "type": "KBO>SDO",
+     "V": 16.14,
+     "sep_arcsec": 1.45
+    },
+    {
+     "number": "80494",
+     "name": "2000 AM47",
+     "type": "MB>Inner",
+     "V": 18.7,
+     "sep_arcsec": 375.25
+    }
+   ],
+   "mid_radius_60arcsec0": [
+    {
+     "number": "134340",
+     "name": "Pluto",
+     "type": "KBO>SDO",
+     "V": 16.14,
+     "sep_arcsec": 0.34
+    },
+    {
+     "number": "80494",
+     "name": "2000 AM47",
+     "type": "MB>Inner",
+     "V": 18.7,
+     "sep_arcsec": 400.05
+    }
+   ],
+   "close_radius_60arcsec0": [
+    {
+     "number": "134340",
+     "name": "Pluto",
+     "type": "KBO>SDO",
+     "V": 16.14,
+     "sep_arcsec": 2.12
+    },
+    {
+     "number": "80494",
+     "name": "2000 AM47",
+     "type": "MB>Inner",
+     "V": 18.7,
+     "sep_arcsec": 424.86
+    }
+   ]
+  }
+ },
+ "february": {
+  "position_icrs_deg": [
+   84.9614918,
+   16.1337235
+  ],
+  "position": "mean of the B2247a and B2248b Method B centers",
+  "observer": "Heidelberg-Koenigstuhl (IAU code 024)",
+  "times_utc": {
+   "start": "1909-02-20 18:50:10",
+   "mid": "1909-02-20 20:20:11",
+   "end": "1909-02-20 21:50:12"
+  },
+  "results": {
+   "start_radius_60arcsec": [
+    {
+     "name": "Pluto",
+     "V": 16.27,
+     "sep_arcsec": 2.35
+    }
+   ],
+   "mid_radius_60arcsec": [
+    {
+     "name": "Pluto",
+     "V": 16.27,
+     "sep_arcsec": 0.86
+    }
+   ],
+   "end_radius_60arcsec": [
+    {
+     "name": "Pluto",
+     "V": 16.27,
+     "sep_arcsec": 0.7
+    }
+   ],
+   "start_radius_60arcsec0": [
+    {
+     "name": "Pluto",
+     "V": 16.27,
+     "sep_arcsec": 2.35
+    }
+   ],
+   "mid_radius_60arcsec0": [
+    {
+     "name": "Pluto",
+     "V": 16.27,
+     "sep_arcsec": 0.86
+    }
+   ],
+   "end_radius_60arcsec0": [
+    {
+     "name": "Pluto",
+     "V": 16.27,
+     "sep_arcsec": 0.7
+    }
+   ]
+  }
+ }
+}

@@ -29,7 +29,8 @@ def gaia_cone(path, ra, dec, radius, gmax):
             import astropy.units as u
             cols = ['Source', 'RA_ICRS', 'DE_ICRS', 'pmRA', 'pmDE', 'Gmag']
             V = Vizier(columns=cols, column_filters={'Gmag': f'<{gmax}'}, row_limit=-1)
-            t = V.query_region(SkyCoord(ra, dec, unit='deg'), radius=radius*u.deg, catalog='I/355/gaiadr3')[0]
+            from plates import vizier_table  # retries an error or an empty answer, then fails clearly
+            t = vizier_table(V, SkyCoord(ra, dec, unit='deg'), radius*u.deg, 'I/355/gaiadr3')
             t.rename_columns(cols, ['source_id', 'ra', 'dec', 'pmra', 'pmdec', 'phot_g_mean_mag'])
             t.write(path, overwrite=True)
     return Table.read(path)

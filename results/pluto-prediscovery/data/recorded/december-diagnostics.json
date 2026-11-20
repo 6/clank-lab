@@ -1,0 +1,387 @@
+{
+  "pair": {
+    "free_ICRF_deg": [
+      [
+        85.89348112047956,
+        16.016531308517404
+      ],
+      [
+        85.8727140953626,
+        16.016281060003934
+      ]
+    ],
+    "expected_EN_as": [
+      -71.91081569366428,
+      1.7758440000051223
+    ],
+    "measured_EN_as": [
+      -71.85926122513743,
+      -0.9008946484939884
+    ],
+    "vector_residual_as": 2.677235076640438,
+    "delta_B": 0.6577016982651571,
+    "common_withheld_companions": 18,
+    "as_discrepant": 3,
+    "as_faint": 3,
+    "null_score_q50_90_95_99_100_higher": [
+      [
+        -17.61558339169516,
+        135.31044863779016,
+        175.1712852046672,
+        243.31512574118807,
+        282.4369306366069
+      ],
+      [
+        -22.977905808783955,
+        150.0129090004687,
+        210.28657109664246,
+        335.60498310663667,
+        482.6179420973878
+      ]
+    ]
+  },
+  "native": [
+    {
+      "plate": "ma00731",
+      "native_bounds_0based_halfopen": [
+        14747,
+        14841,
+        1504,
+        1599
+      ],
+      "scanner_patch_sha256": "e21a5b118694d1aa60474b411c5223dbf77235674e1ef8d935f2a34fbb2b43fc",
+      "core_valid": 613,
+      "nearest_edge_px": 1550.8242398335399,
+      "rank_correlation": 0.9999992154750565,
+      "finite": 8930,
+      "pixels": 8930
+    },
+    {
+      "plate": "ma00733",
+      "native_bounds_0based_halfopen": [
+        14929,
+        15023,
+        2187,
+        2281
+      ],
+      "scanner_patch_sha256": "2433414ad9f85476fe3d6f36d40bfe3376b9fda73f291ad1ebe871f3feb12462",
+      "core_valid": 1257,
+      "nearest_edge_px": 2233.6480991287,
+      "rank_correlation": 0.9999994718474707,
+      "finite": 8836,
+      "pixels": 8836
+    }
+  ],
+  "external_catalogues": [
+    {
+      "plate": "ma00731",
+      "jpl_UT1": "1908-Dec-21 00:58:29.199",
+      "jpl_ICRF_deg": [
+        "85.893538670",
+        "16.016552122"
+      ],
+      "jpl_uncertainty": [
+        "n.a.",
+        "n.a.",
+        "n.a.",
+        "n.a.",
+        "n.a.",
+        "n.a."
+      ],
+      "ps1_within_10_arcsec": [
+        {
+          "id": "127220858911750401",
+          "radius_as": 8.112777427204955,
+          "g": "-999.0",
+          "r": "21.234100341796875",
+          "n": 9
+        }
+      ],
+      "ps1_sha256": "d4b22b18878f6fa0ddfe73b59802be7db6ad0a3ac7ea1536ed8647db8fe114b1"
+    },
+    {
+      "plate": "ma00733",
+      "jpl_UT1": "1908-Dec-22 01:28:40.495",
+      "jpl_ICRF_deg": [
+        "85.872768271",
+        "16.017045114"
+      ],
+      "jpl_uncertainty": [
+        "n.a.",
+        "n.a.",
+        "n.a.",
+        "n.a.",
+        "n.a.",
+        "n.a."
+      ],
+      "ps1_within_10_arcsec": [
+        {
+          "id": "127210858708349466",
+          "radius_as": 7.649890646179189,
+          "g": "-999.0",
+          "r": "20.197799682617188",
+          "n": 4
+        },
+        {
+          "id": "127220858749310180",
+          "radius_as": 8.081778155368541,
+          "g": "-999.0",
+          "r": "22.25160026550293",
+          "n": 6
+        },
+        {
+          "id": "127220858702490280",
+          "radius_as": 8.92458181425903,
+          "g": "-999.0",
+          "r": "21.225900650024414",
+          "n": 30
+        },
+        {
+          "id": "127210858711688236",
+          "radius_as": 9.796982546737269,
+          "g": "-999.0",
+          "r": "-999.0",
+          "n": 5
+        }
+      ],
+      "ps1_sha256": "0abc5fcfd18faf1c0f3d36f518a2b68ef36571133d3180b317232df1532b1788"
+    }
+  ],
+  "wide_fields": [
+    {
+      "field": [
+        -1,
+        0
+      ],
+      "center_deg": [
+        85.431133,
+        16.017
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 3,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        -1,
+        1
+      ],
+      "center_deg": [
+        85.430155,
+        16.447
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 1,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        -1,
+        2
+      ],
+      "center_deg": [
+        85.429146,
+        16.877
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        -2,
+        0
+      ],
+      "center_deg": [
+        84.983766,
+        16.017
+      ],
+      "excluded_plate": "ma00731",
+      "blank_fraction": 0.8850069920040159,
+      "valid": 0
+    },
+    {
+      "field": [
+        -2,
+        1
+      ],
+      "center_deg": [
+        84.981809,
+        16.447
+      ],
+      "excluded_plate": "ma00731",
+      "blank_fraction": 0.946737423356879,
+      "valid": 0
+    },
+    {
+      "field": [
+        -2,
+        2
+      ],
+      "center_deg": [
+        84.979793,
+        16.877
+      ],
+      "excluded_plate": "ma00731",
+      "blank_fraction": 0.9980924378787336,
+      "valid": 0
+    },
+    {
+      "field": [
+        0,
+        1
+      ],
+      "center_deg": [
+        85.8785,
+        16.447
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        0,
+        2
+      ],
+      "center_deg": [
+        85.8785,
+        16.877
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        1,
+        0
+      ],
+      "center_deg": [
+        86.325867,
+        16.017
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        1,
+        1
+      ],
+      "center_deg": [
+        86.326845,
+        16.447
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        1,
+        2
+      ],
+      "center_deg": [
+        86.327854,
+        16.877
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        2,
+        0
+      ],
+      "center_deg": [
+        86.773234,
+        16.017
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        2,
+        1
+      ],
+      "center_deg": [
+        86.775191,
+        16.447
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    },
+    {
+      "field": [
+        2,
+        2
+      ],
+      "center_deg": [
+        86.777207,
+        16.877
+      ],
+      "valid": 169,
+      "invalid": 0,
+      "both_threshold": 0,
+      "both_photometry_veto": 0,
+      "both_as_bright": 0,
+      "both_as_bright_and_veto": 0
+    }
+  ],
+  "morning_21": {
+    "site": {
+      "name": "Taunton, MA",
+      "lat": 41.8997,
+      "lon": 71.0903,
+      "elevation": 3
+    },
+    "trail": {
+      "east_north_as": [
+        -2.9576878216900173,
+        0.07645320000762013
+      ],
+      "length_as": 2.958675775134012,
+      "pa_deg": 271.4807074711362,
+      "pixels": 2.054636085969961,
+      "time_accuracy_minutes": 10.799999999999999,
+      "timing_shift_as": 0.5325616395241222,
+      "isolated_trailed_to_point_peak": 0.9856526958620344
+    }
+  }
+}

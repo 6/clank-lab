@@ -14,7 +14,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.24376801](https://doi.org/10.5281/zenodo.24376801)
+Archived on Zenodo: [doi:10.5281/zenodo.24387450](https://doi.org/10.5281/zenodo.24387450)
 
 ## Abstract
 
@@ -47,6 +47,6 @@ The plates were taken by Harvard College Observatory and by August Kopff at Heid
   title = {{Candidate images of Pluto on archival plates from 1908 and 1909}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/pluto-prediscovery-v1/results/pluto-prediscovery}},
-  doi          = {10.5281/zenodo.24376801}
+  doi          = {10.5281/zenodo.24387450}
 }
 ```

@@ -4,6 +4,13 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## pluto-prediscovery v2 (November 19, 2026)
+
+- Correction: presentation, answering an outside review. The paper assesses the February 1909 pair, the December 1908 plate and their combination separately: the February pair cannot confirm December. The random-offset counts are per-trial counts of specific events, not significance levels. The centroid rule is stated exactly, and the limits cite a 1914 Harvard image later judged a grain enhancement.
+- Narrowed: earlier plates. Version 1 said none we could assess was deep enough to show Pluto. Version 2 reports each depth test separately: 525 Harvard exposures with a catalog limit fall short, and 16 plates were judged too shallow by inspection, without a numeric threshold. It concludes only that no other qualifying image was found; earlier images are not excluded.
+- New checks: a Pan-STARRS entry near the December image is a probable image artifact; faint stars held out of the plate solution and calibration validate positions and brightnesses; artificial images pass through the whole measurement. The candidate images, their positions and brightnesses are unchanged.
+- Zenodo: [10.5281/zenodo.24376801](https://doi.org/10.5281/zenodo.24376801)
+
 ## tight-cycle-c5-turan v3 (November 19, 2026)
 
 - Correction: credit for prior work. Lidický and Volec's numerical flag-algebra upper bound of 0.465031 for the same density, posted on arXiv on October 24, 2026, is now cited. Razborov's 0.4683 bound is now cited to its page in the original paper, which has been read. The theorem and its checks are unchanged.

@@ -1,0 +1,52 @@
+{
+ "catalog": "II/336/apass9",
+ "radius_deg": 0.75,
+ "columns": [
+  "RAJ2000",
+  "DEJ2000",
+  "Bmag",
+  "e_Bmag",
+  "Vmag",
+  "e_Vmag",
+  "B-V"
+ ],
+ "retrieved": "2026-11-20, VizieR (CfA mirror), by checks/plates.py catalogues()",
+ "blank": "NaN marks a value APASS leaves blank",
+ "cuts": {
+  "ma731": {
+   "file": "ma731.ecsv",
+   "sha256": "df92b8dac064c4982dbc2dc38ac271e092f1eb1534cb97d7d4c9f7510bb3ec4f",
+   "rows": 5264,
+   "ra": 85.893540142,
+   "dec": 16.016552086
+  },
+  "b2247a": {
+   "file": "b2247a-b2248b.ecsv",
+   "sha256": "faf5dd02a6776d72ff30d1e56562fd26deaed02fc8a148b475724f325e0d7e0f",
+   "rows": 4842,
+   "ra": 84.96154176,
+   "dec": 16.133506648
+  },
+  "b2248b": {
+   "file": "b2247a-b2248b.ecsv",
+   "sha256": "faf5dd02a6776d72ff30d1e56562fd26deaed02fc8a148b475724f325e0d7e0f",
+   "rows": 4842,
+   "ra": 84.961540873,
+   "dec": 16.133507077
+  },
+  "b3383a": {
+   "file": "b3383a.ecsv",
+   "sha256": "88c0f8b756da61a3cd4d5ca1e3d2da8b4d1be35e19fc67c9f963da2b1606b64a",
+   "rows": 3362,
+   "ra": 90.73207296,
+   "dec": 17.622068489
+  },
+  "b4816a": {
+   "file": "b4816a.ecsv",
+   "sha256": "abead665ecbf8a93c749d7d6e4cf235c271e6cc224a2988aef31c89ff54c512f",
+   "rows": 4842,
+   "ra": 84.96149186710305,
+   "dec": 16.133723532635006
+  }
+ }
+}

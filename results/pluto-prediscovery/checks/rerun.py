@@ -131,15 +131,24 @@ def run_plate(label, scan, hdu, mid, open_, close_, epoch, bexp, inject=True):
                                          Bs=tuple(round(bexp+d, 2) for d in (-0.5, -0.25, 0, 0.25, 0.5)))
         # astrometric and photometric errors of comparably faint, isolated catalog stars, measured the same way
         out["faint_stars"] = plates.faint_stars(P, mf, M, bexp)
+        # the same stars held out: each measured with an astrometric solution and B calibration fitted without it
+        out["heldout_faint_stars"] = plates.heldout(P, mf, M, bexp)
+        # injections through the measurement itself (before filtering; centroid, position, S/N and B acceptance)
+        out["injection_pipeline"] = plates.inject_pipeline(P, mf, M, trail, Bs=tuple(round(bexp+d, 2) for d in (-0.5, -0.25, 0, 0.25, 0.5)))
     return out, P, M, mf
 
 
-def nearest_gaia(label, ra, dec):
-    from astropy.table import Table
-    g = Table.read(W/f"gaia_{label}.fits")
-    d = np.hypot((np.array(g["ra"], float)-ra)*np.cos(np.radians(dec)), np.array(g["dec"], float)-dec)*3600
+def nearest_gaia(P, ra, dec):
+    """The nearest Gaia DR3 star (G < 19.5) to (ra, dec), with Gaia positions moved to the plate epoch as in the
+    measurement. Also the same distance with the unmoved DR3 (epoch 2016) positions, for comparison."""
+    gra, gde, G = P.gaia
+    d = np.hypot((gra-ra)*np.cos(np.radians(dec)), gde-dec)*3600
     k = int(np.argmin(d))
-    return dict(arcsec=float(d[k]), G=float(g["phot_g_mean_mag"][k]))
+    from astropy.table import Table
+    g = Table.read(W/f"gaia_{P.label}.fits")
+    d0 = np.hypot((np.array(g["ra"], float)-ra)*np.cos(np.radians(dec)), np.array(g["dec"], float)-dec)*3600
+    return dict(arcsec=float(d[k]), G=float(G[k]), arcsec_epoch2016=float(np.min(d0)),
+                same_star_epoch2016=bool(int(np.argmin(d0)) == k))
 
 
 def skybot(ra, dec, time, observer, radius_deg=0.04):
@@ -188,12 +197,25 @@ R["ma731_timing"] = timing(c, pra, pde)
 R["ma731_timing"]["clock_region_distance_from_pluto_deg"] = sep_arcsec(float(np.median(ra)), float(np.median(de)), pra[1], pde[1])/3600
 out, P731, M731, mf731 = run_plate("ma731", MA, 1, (pra[1], pde[1]), (pra[0], pde[0]), (pra[2], pde[2]), 1908.973, 16.33)
 R["ma731"] = out
-R["ma731"]["nearest_gaia"] = nearest_gaia("ma731", M731["free_centroid_ra"], M731["free_centroid_dec"])
+R["ma731"]["nearest_gaia"] = nearest_gaia(P731, M731["free_centroid_ra"], M731["free_centroid_dec"])
 # the archive-time position (a second hypothesis, reported as a control)
 _, ara, ade, _ = horizons("999", None, times=["1908-12-21 " + exp["datetime"][11:19]], site=TAUNTON)
 X, Y = P731.sky2pix(ara[0], ade[0])
 from scipy import ndimage as nd  # noqa: E402
 R["ma731_archive_time_snr"] = float((nd.map_coordinates(mf731, [Y, X], order=1)[0]-M731["base"])/M731["noise"])
+# the same free search as at the trail-time prediction (brightest filtered pixel within 8 pixels, windowed centroid)
+_fx, _fy = plates.free_centroid(P731, mf731, float(np.ravel(X)[0]), float(np.ravel(Y)[0]), M731["sigma_px"])
+_fe, _fn = P731.pix2std(_fx, _fy); _pe, _pn = P731.pix2std(float(np.ravel(X)[0]), float(np.ravel(Y)[0]))
+R["ma731_archive_time_free_search"] = dict(
+    snr_at_centroid=float((nd.map_coordinates(mf731, [[_fy], [_fx]], order=1)[0]-M731["base"])/M731["noise"]),
+    offset_arcsec=float(np.hypot(float(np.ravel(_fe)[0]-np.ravel(_pe)[0]), float(np.ravel(_fn)[0]-np.ravel(_pn)[0]))))
+_cra, _cde = P731.pix2sky(_fx, _fy)
+R["ma731_archive_time_free_search"]["nearest_gaia"] = nearest_gaia(P731, float(np.ravel(_cra)[0]), float(np.ravel(_cde)[0]))
+R["ma731_archive_time_free_search"]["from_image_arcsec"] = float(np.hypot(
+    (float(np.ravel(_cra)[0])-M731["free_centroid_ra"])*np.cos(np.radians(M731["free_centroid_dec"])),
+    float(np.ravel(_cde)[0])-M731["free_centroid_dec"])*3600)
+R["ma731_archive_time_free_search"]["prediction_from_image_arcsec"] = float(np.hypot(
+    (float(ara[0])-M731["free_centroid_ra"])*np.cos(np.radians(M731["free_centroid_dec"])), float(ade[0])-M731["free_centroid_dec"])*3600)
 R["ma731_skybot"] = skybot(M731["free_centroid_ra"], M731["free_centroid_dec"], times[1].replace(" ", "T"), "500")
 
 # ---------------------------------------------------------------- Heidelberg, 20 February 1909
@@ -221,7 +243,7 @@ for plate, (t0, tm, t1) in HD.items():
     R[f"{plate}_timing"]["clock_region_distance_from_pluto_deg"] = sep_arcsec(*ASTEROIDS["417"], pra[1], pde[1])/3600
     cut = gavo_cutout(plate, 84.96154, 16.13351, 0.7)
     out, P, M, mf = run_plate(plate.lower(), cut, 0, (pra[1], pde[1]), (pra[0], pde[0]), (pra[2], pde[2]), 1909.14, 16.40)
-    out["nearest_gaia"] = nearest_gaia(plate.lower(), M["free_centroid_ra"], M["free_centroid_dec"])
+    out["nearest_gaia"] = nearest_gaia(P, M["free_centroid_ra"], M["free_centroid_dec"])
     R[plate] = out
     feb[plate] = (P, M, mf)
 R["feb_skybot"] = skybot(84.96154, 16.13351, "1909-02-20T20:20:00", "024")
@@ -236,23 +258,31 @@ from scipy.spatial import cKDTree  # noqa: E402
 from scipy.stats import chi2  # noqa: E402
 J = dict(ma731=(P731, M731, mf731, 1908.973), b2247a=(*feb["B2247a"], 1909.14), b2248b=(*feb["B2248b"], 1909.14))
 rng = np.random.default_rng(1909); off = rng.uniform(-1500, 1500, (300000, 2)); off = off[np.hypot(off[:, 0], off[:, 1]) > 60]
-inside = np.ones(len(off), bool); obs = {}; srch = {}; R["replay_at_prediction"] = {}
-crowd_ok = np.ones(len(off), bool); R["gaia_within_60as_at_pluto"] = {}
+inside = np.ones(len(off), bool); obs = {}; srch = {}; R["replay_at_prediction"] = {}; dists = {}
+crowd_ok = np.ones(len(off), bool); crowd_lit = np.ones(len(off), bool); R["gaia_within_60as_at_pluto"] = {}
+R["crowding_tolerance"] = {}
 for lab, (P, M, mf, ep) in J.items():
     px, py = P.T.std(M["ra"], M["dec"])
     xi = np.r_[px, px+off[:, 0]]; eta = np.r_[py, py+off[:, 1]]
     X, Y = P.std2pix(xi[1:], eta[1:]); inside &= (X > 60) & (Y > 60) & (X < P.nx-60) & (Y < P.ny-60)
-    snr, dist, cat = plates.replay(P, mf, M, xi, eta, prefilter_snr=4.0)
-    s0, d0 = float(snr[0]), float(dist[0])
-    R["replay_at_prediction"][lab] = dict(snr=s0, offset_arcsec=d0, gaia_within_3as=bool(cat[0]))
+    snr, dist, cat, dpx = plates.replay(P, mf, M, xi, eta, prefilter_snr=4.0)
+    s0, d0 = float(snr[0]), float(dist[0]); dists[lab] = dist[1:]
+    R["replay_at_prediction"][lab] = dict(snr=s0, offset_arcsec=d0, gaia_within_3as=bool(cat[0]), offset_px=float(dpx[0]))
     obs[lab] = (snr[1:] >= s0) & (dist[1:] <= d0); obs[lab+"_u"] = obs[lab] & ~cat[1:]
     srch[lab] = snr[1:] >= 4.0; srch[lab+"_u"] = srch[lab] & ~cat[1:]
     srch[lab+"_u3"] = srch[lab+"_u"] & (dist[1:] <= 3.0)  # cut chosen after seeing the search-rule counts
+    # the outside review's alternative (2026-11-20): the final centroid also within 8 pixels of the prediction,
+    # applied to the real measurement (index 0, which passes it) and to every shifted one alike
+    assert dpx[0] <= 8.0
+    srch[lab+"_8"] = srch[lab] & (dpx[1:] <= 8.0); srch[lab+"_u8"] = srch[lab+"_u"] & (dpx[1:] <= 8.0)
     gra, gde, G = P.gaia; gt = cKDTree(np.c_[P.T.std(gra, gde)])
     n0 = len(gt.query_ball_point([px, py], 60.0)); R["gaia_within_60as_at_pluto"][lab] = n0
     cnt = np.array([len(l) for l in gt.query_ball_point(np.c_[xi[1:], eta[1:]], 60.0)])
-    crowd_ok &= np.abs(cnt-n0) <= max(2, round(0.2*n0))
-crowd_ok &= inside
+    tol = max(2, round(0.2*n0)); R["crowding_tolerance"][lab] = dict(n=n0, admitted=[n0-tol, n0+tol])
+    crowd_ok &= np.abs(cnt-n0) <= tol
+    crowd_lit &= np.abs(cnt-n0) <= 0.2*n0  # 20% taken literally (a non-integer bound)
+    R["crowding_tolerance"][lab]["admitted_literal_20pct"] = [int(np.ceil(0.8*n0)), int(np.floor(1.2*n0))]
+crowd_ok &= inside; crowd_lit &= inside
 
 
 def tally(sel, keys, within):
@@ -276,9 +306,17 @@ R["joint_null"] = {
     "search rule, uncatalogued, all three plates": tally(srch, ["ma731_u", "b2247a_u", "b2248b_u"], inside),
     "after seeing the data: search rule, uncatalogued, centroid within 3 arcsec, all three plates":
         tally(srch, ["ma731_u3", "b2247a_u3", "b2248b_u3"], inside),
+    "search rule with the final centroid within 8 pixels, all three plates": tally(srch, ["ma731_8", "b2247a_8", "b2248b_8"], inside),
+    "search rule with the final centroid within 8 pixels, uncatalogued, all three plates":
+        tally(srch, ["ma731_u8", "b2247a_u8", "b2248b_u8"], inside),
     "crowding-matched, observed values, all three plates": tally(obs, ["ma731", "b2247a", "b2248b"], crowd_ok),
     "crowding-matched, search rule, uncatalogued, all three plates": tally(srch, ["ma731_u", "b2247a_u", "b2248b_u"], crowd_ok),
+    "crowding within 20% literally, observed values, all three plates": tally(obs, ["ma731", "b2247a", "b2248b"], crowd_lit),
 }
+# where the final centroids of the loose-rule, uncatalogued joint matches lie: median distance from the moved prediction
+_h = inside & srch["ma731_u"] & srch["b2247a_u"] & srch["b2248b_u"]
+R["joint_null"]["search rule, uncatalogued, all three plates"]["median_centroid_distance_arcsec"] = {
+    lab: float(np.median(d[_h])) for lab, d in dists.items()}
 
 # Blinded cut-outs: on each plate the image and 11 controls, each control centred so that an uncatalogued peak
 # of similar S/N (within 1 of the image's) sits where the image sits relative to the prediction. The panel order
@@ -322,6 +360,7 @@ fra = np.mean([R[p]["measure"]["free_centroid_ra"] for p in HD]); fde = np.mean(
 cut = gavo_cutout("B4816a", round(float(fra), 5), round(float(fde), 5), 0.7)
 R["B4816a_1923_fixed_site"], *_ = run_plate("b4816a", cut, 0, (fra, fde), (fra, fde), (fra, fde), 1923.99, 16.40)
 
+R["apass_source"] = plates.APASS_SOURCE  # live VizieR or the pinned cut, per plate
 json.dump(R, open(W/"results.json", "w"), indent=1, default=float)
 
 # ---------------------------------------------------------------- compare with the recorded values
@@ -342,5 +381,7 @@ for row in E["checks"]:
           and ("equals" not in row or v == row["equals"]))
     bad += not ok
     print(f"{'ok  ' if ok else 'FAIL'} {row['what']}: {v if not isinstance(v, float) else round(v, 3)}")
+for lab, how in plates.APASS_SOURCE.items():
+    print(f"APASS source for {lab}: {how}")
 print("all checks pass" if not bad else f"{bad} checks failed")
 sys.exit(1 if bad else 0)

@@ -1,0 +1,191 @@
+{
+  "ma00731": {
+    "defect": {
+      "source": {
+        "snr": 6.251023769378662,
+        "fwhm_px": 10.936581931023406,
+        "ell": 0.3684334955444838,
+        "conc": 0.00457624281826376,
+        "amp": 1094.2407514673,
+        "resid_rms": 0.3621889342453123
+      },
+      "n_comparison": 48,
+      "fwhm": {
+        "source": 10.936581931023406,
+        "stars_p16_p50_p84": [
+          9.790043475240788,
+          12.049374956323263,
+          14.631287332729462
+        ],
+        "source_percentile": 39.58333333333333,
+        "n": 48
+      },
+      "ellipticity": {
+        "source": 0.3684334955444838,
+        "stars_p16_p50_p84": [
+          0.1829302796529956,
+          0.34445869544352786,
+          0.44572156601338087
+        ],
+        "source_percentile": 54.166666666666664,
+        "n": 48
+      },
+      "concentration": {
+        "source": 0.00457624281826376,
+        "stars_p16_p50_p84": [
+          0.004575101292676154,
+          0.0066613675713683065,
+          0.00904091828098645
+        ],
+        "source_percentile": 16.666666666666664,
+        "n": 48
+      },
+      "duplicate_exposure_beyond_25px": {
+        "max_rel_peak": 0.06666367501020432,
+        "at_offset_px": [
+          59,
+          -39
+        ],
+        "sigma": 3.821592092514038
+      },
+      "duplicate_exposure": {
+        "n_stars": 33,
+        "max_secondary_rel_peak": 0.070891372859478,
+        "at_offset_px": [
+          -13,
+          -8
+        ],
+        "stack_noise": 0.019575411453843117,
+        "max_secondary_sigma": 4.000941276550293
+      }
+    },
+    "source_shape": {
+      "source": {
+        "fwhm_major": 14.1232,
+        "fwhm_minor": 8.92632,
+        "ell": 0.367968,
+        "pa_deg": 78.8784
+      },
+      "median_star": {
+        "fwhm_major": 13.5103,
+        "fwhm_minor": 10.9209,
+        "ell": 0.191659,
+        "pa_deg": 58.8829
+      },
+      "n_stars": 48,
+      "star_pa_p16_p50_p84": [
+        43.8466,
+        70.419,
+        94.502
+      ],
+      "star_ell_p16_p50_p84": [
+        0.181925,
+        0.343354,
+        0.444675
+      ],
+      "star_fwhm_major_p16_p50_p84": [
+        12.4589,
+        14.886,
+        18.7064
+      ],
+      "trails": [
+        {
+          "L_arcsec": 3.59,
+          "pa_deg": 271.5,
+          "predicted_from_median_star": {
+            "fwhm_major": 13.6698,
+            "fwhm_minor": 10.9948,
+            "ell": 0.195687,
+            "pa_deg": 61.2335
+          },
+          "trailed_stars_fwhm_major_p16_p50_p84": [
+            12.6406,
+            14.967,
+            18.8472
+          ],
+          "share_of_trailed_stars_with_major_le_source": 0.375
+        },
+        {
+          "L_arcsec": 10.0,
+          "pa_deg": 270.0,
+          "predicted_from_median_star": {
+            "fwhm_major": 14.8684,
+            "fwhm_minor": 11.2666,
+            "ell": 0.242245,
+            "pa_deg": 71.7555
+          },
+          "trailed_stars_fwhm_major_p16_p50_p84": [
+            13.9576,
+            15.7876,
+            19.7173
+          ],
+          "share_of_trailed_stars_with_major_le_source": 0.208333
+        },
+        {
+          "L_arcsec": 20.0,
+          "pa_deg": 270.0,
+          "predicted_from_median_star": {
+            "fwhm_major": 18.8166,
+            "fwhm_minor": 11.5138,
+            "ell": 0.388105,
+            "pa_deg": 82.6806
+          },
+          "trailed_stars_fwhm_major_p16_p50_p84": [
+            17.7215,
+            19.4271,
+            22.4335
+          ],
+          "share_of_trailed_stars_with_major_le_source": 0.0
+        },
+        {
+          "L_arcsec": 37.7,
+          "pa_deg": 270.0,
+          "predicted_from_median_star": {
+            "fwhm_major": 28.6973,
+            "fwhm_minor": 11.6199,
+            "ell": 0.595087,
+            "pa_deg": 87.6683
+          },
+          "trailed_stars_fwhm_major_p16_p50_p84": [
+            27.9606,
+            28.7337,
+            30.9284
+          ],
+          "share_of_trailed_stars_with_major_le_source": 0.0
+        },
+        {
+          "L_arcsec": 51.5,
+          "pa_deg": 277.7,
+          "predicted_from_median_star": {
+            "fwhm_major": 37.2024,
+            "fwhm_minor": 11.9731,
+            "ell": 0.678165,
+            "pa_deg": 96.2725
+          },
+          "trailed_stars_fwhm_major_p16_p50_p84": [
+            36.5712,
+            37.2915,
+            38.9018
+          ],
+          "share_of_trailed_stars_with_major_le_source": 0.0
+        },
+        {
+          "L_arcsec": 59.7,
+          "pa_deg": 243.1,
+          "predicted_from_median_star": {
+            "fwhm_major": 42.7683,
+            "fwhm_minor": 10.936,
+            "ell": 0.744296,
+            "pa_deg": 62.9445
+          },
+          "trailed_stars_fwhm_major_p16_p50_p84": [
+            42.3486,
+            42.9428,
+            43.9502
+          ],
+          "share_of_trailed_stars_with_major_le_source": 0.0
+        }
+      ]
+    }
+  }
+}

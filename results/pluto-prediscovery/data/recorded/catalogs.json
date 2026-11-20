@@ -1,0 +1,210 @@
+{
+  "december": {
+    "ps1_mean": [
+      {
+        "sep": 0.9,
+        "nDet": "1",
+        "g": null,
+        "r": null,
+        "i": null,
+        "z": 16.51,
+        "y": null
+      },
+      {
+        "sep": 2.88,
+        "nDet": "1",
+        "g": null,
+        "r": 21.99,
+        "i": null,
+        "z": null,
+        "y": null
+      },
+      {
+        "sep": 5.88,
+        "nDet": "1",
+        "g": null,
+        "r": 21.77,
+        "i": null,
+        "z": null,
+        "y": null
+      },
+      {
+        "sep": 7.76,
+        "nDet": "1",
+        "g": null,
+        "r": null,
+        "i": null,
+        "z": null,
+        "y": 19.51
+      },
+      {
+        "sep": 7.95,
+        "nDet": "1",
+        "g": null,
+        "r": null,
+        "i": null,
+        "z": 20.5,
+        "y": null
+      }
+    ],
+    "ps1_stack": [
+      {
+        "sep": 8.68,
+        "nDet": "9",
+        "g": 23.17,
+        "r": 22.14,
+        "i": 21.84,
+        "z": 21.64,
+        "y": 21.21
+      },
+      {
+        "sep": 11.4,
+        "nDet": "60",
+        "g": 19.69,
+        "r": 18.89,
+        "i": 18.45,
+        "z": 18.28,
+        "y": 18.23
+      },
+      {
+        "sep": 13.65,
+        "nDet": "0",
+        "g": 24.69,
+        "r": 24.39,
+        "i": 22.25,
+        "z": null,
+        "y": 26.31
+      },
+      {
+        "sep": 13.91,
+        "nDet": "54",
+        "g": 22.54,
+        "r": 21.13,
+        "i": 20.27,
+        "z": 19.77,
+        "y": 19.56
+      },
+      {
+        "sep": 14.51,
+        "nDet": "44",
+        "g": 21.4,
+        "r": 20.82,
+        "i": 20.45,
+        "z": 20.17,
+        "y": 20.38
+      }
+    ],
+    "ls_dr10": [],
+    "ls_dr10_sources_in_4x4arcmin_box": "0",
+    "2mass": [
+      {
+        "sep": 11.31,
+        "Jmag": "16.937",
+        "e_Jmag": "0.149",
+        "Hmag": "16.489",
+        "e_Hmag": "0.218",
+        "Kmag": "15.625",
+        "e_Kmag": "--"
+      }
+    ],
+    "vsx": [],
+    "gaia_dr3_all": [
+      {
+        "sep": 11.4,
+        "Gmag": "18.8573",
+        "BPmag": "19.528923",
+        "RPmag": "18.097332",
+        "GRVSmag": "--"
+      },
+      {
+        "sep": 13.9,
+        "Gmag": "20.870993",
+        "BPmag": "21.899837",
+        "RPmag": "20.202108",
+        "GRVSmag": "--"
+      },
+      {
+        "sep": 14.51,
+        "Gmag": "20.745378",
+        "BPmag": "21.150684",
+        "RPmag": "20.108488",
+        "GRVSmag": "--"
+      }
+    ],
+    "ucac4": [],
+    "usnob1": [
+      {
+        "sep": 11.24,
+        "B1mag": "20.3",
+        "R1mag": "18.74",
+        "B2mag": "20.16",
+        "R2mag": "18.83",
+        "Imag": "18.34"
+      }
+    ],
+    "skybot_ps1_epoch": []
+  },
+  "february": {
+    "ps1_mean": [
+      {
+        "sep": 3.35,
+        "nDet": "1",
+        "g": null,
+        "r": null,
+        "i": null,
+        "z": null,
+        "y": 20.26
+      },
+      {
+        "sep": 6.04,
+        "nDet": "1",
+        "g": null,
+        "r": null,
+        "i": null,
+        "z": 20.46,
+        "y": null
+      },
+      {
+        "sep": 6.42,
+        "nDet": "1",
+        "g": null,
+        "r": null,
+        "i": null,
+        "z": null,
+        "y": 19.8
+      },
+      {
+        "sep": 7.07,
+        "nDet": "1",
+        "g": null,
+        "r": null,
+        "i": null,
+        "z": 20.51,
+        "y": null
+      }
+    ],
+    "ps1_stack": [
+      {
+        "sep": 14.31,
+        "nDet": "0",
+        "g": null,
+        "r": 23.35,
+        "i": null,
+        "z": null,
+        "y": 23.24
+      }
+    ],
+    "ls_dr10": [],
+    "ls_dr10_sources_in_4x4arcmin_box": "0",
+    "2mass": [],
+    "vsx": [],
+    "gaia_dr3_all": [],
+    "ucac4": [],
+    "usnob1": [],
+    "skybot_ps1_epoch": [],
+    "gaia_epoch_propagated_nearest": {
+      "sep_arcsec": 17.07,
+      "G": 19.84
+    }
+  }
+}

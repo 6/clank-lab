@@ -1,0 +1,7 @@
+-r ../checks/requirements.txt
+jplephem==2.24
+Pillow==12.2.0
+pandas==3.1.1
+matplotlib==3.11.0
+rebound==4.6.0
+assist==1.2.3

@@ -1,0 +1,116 @@
+[
+  {
+    "asteroid": "179",
+    "plate": "ma00731",
+    "header_midpoint": "1908-12-21T06:46:36.5Z",
+    "nominal_duration_min": 60,
+    "measured_midpoint_UT1": "1908-12-21T00:58:29.199",
+    "clock_offset_min": -348.1216831162057,
+    "equivalent_duration_min": 72.7084551303035,
+    "model_trail_as": 33.95455235889985,
+    "observed_trail_as": 41.14638411094352,
+    "midpoint_cross_as": 0.11499335119083604,
+    "trail_angle_residual_deg": 3.8005513971432903,
+    "input_hashes": {
+      "ma-apass.csv": "1bc9dd54dcc53e3ed0138bcee8154d95b13ed7d0d2ef92ac85c19b3d316fa6a3",
+      "ma-gaia.csv": "732db2b2857c7a3f7bfd88eabe8020ea60e85906c69f0f9e48b1fafe7917b153",
+      "ma00731.fits": "d05c253aaa5e51d88874e8ab70910f40f682e3e46672c9bc9ea008c57ff0e6b7",
+      "ma00731.json": "f53bc0b7e707f5e8fb856849c3f7da584be6f0a6c091ec5d2e80e7a731756a42"
+    }
+  },
+  {
+    "asteroid": "1436",
+    "plate": "ma00731",
+    "header_midpoint": "1908-12-21T06:46:36.5Z",
+    "nominal_duration_min": 60,
+    "measured_midpoint_UT1": "1908-12-21T01:01:30.565",
+    "clock_offset_min": -345.0989208607817,
+    "equivalent_duration_min": 50.82333059526731,
+    "model_trail_as": 32.7516086723021,
+    "observed_trail_as": 27.74243058465389,
+    "midpoint_cross_as": 0.0030969283735551075,
+    "trail_angle_residual_deg": 7.579435573989954,
+    "input_hashes": {
+      "ma-apass.csv": "6105d2d6809654b40460320f6b31a17590665eb1adf8b317c7c8be1015c0cdb7",
+      "ma-gaia.csv": "8229b2627cacc87a4506b7d3804abcc8327bbee1484412be1b99286b431fa256",
+      "ma00731.fits": "2af3c7665cc30f4e5da15b9b0a1414f5e745333ad360d77c90f6c06b5dae3cf6",
+      "ma00731.json": "97716eab66df17d437ef619025b0aefa9df218b77997d7cde2fefceea5649543"
+    }
+  },
+  {
+    "asteroid": "2891",
+    "plate": "ma00731",
+    "header_midpoint": "1908-12-21T06:46:36.5Z",
+    "nominal_duration_min": 60,
+    "measured_midpoint_UT1": "1908-12-21T01:04:11.979",
+    "clock_offset_min": -342.4086892371964,
+    "equivalent_duration_min": 64.45365467194229,
+    "model_trail_as": 31.204743812167603,
+    "observed_trail_as": 33.52099636326464,
+    "midpoint_cross_as": 0.7335310491042393,
+    "trail_angle_residual_deg": 10.285537975475012,
+    "input_hashes": {
+      "ma-apass.csv": "1640d67454856fb7d8f37d55ff75cb9566a60b96ce62fb2537fc35ed49f96de4",
+      "ma-gaia.csv": "893d96c84c04273b26d306b10ca15a54670a97a5468e5ccf5abcdfd007196573",
+      "ma00731.fits": "6ff93150d90e350a205731f76857303689fbc6df3e563f2b331147f86122aa56",
+      "ma00731.json": "1dedf46f99093643dc52d7adbb56bfee20a7dd558b2e9df2db5553721bcb8ecd"
+    }
+  },
+  {
+    "asteroid": "179",
+    "plate": "ma00733",
+    "header_midpoint": "1908-12-22T06:49:09.5Z",
+    "nominal_duration_min": 181,
+    "measured_midpoint_UT1": "1908-12-22T01:28:40.495",
+    "clock_offset_min": -320.48341711820126,
+    "equivalent_duration_min": 162.22850934338396,
+    "model_trail_as": 102.50774495874651,
+    "observed_trail_as": 91.87667768402889,
+    "midpoint_cross_as": 0.4691593654681188,
+    "trail_angle_residual_deg": 1.857391141878583,
+    "input_hashes": {
+      "ma-apass.csv": "ee6459016872ca155add94f4b049fb56e1167ecf53478eaeb454242beb6c2caa",
+      "ma-gaia.csv": "e46d0aa4885890385838dc8dba11081480bbc1ef8a62a16e4f53e762edb9cb52",
+      "ma00733.fits": "d6847427bcc38f234468ed183b2eb6a4fb9c79fbda082ff493551c259e542a36",
+      "ma00733.json": "9abbbc958150c24f48aeb76f4bb4207fabaf6047660ee58dd19e1088241f635a"
+    }
+  },
+  {
+    "asteroid": "1436",
+    "plate": "ma00733",
+    "header_midpoint": "1908-12-22T06:49:09.5Z",
+    "nominal_duration_min": 181,
+    "measured_midpoint_UT1": "1908-12-22T00:41:11.073",
+    "clock_offset_min": -367.9737801652151,
+    "equivalent_duration_min": 211.41377871178165,
+    "model_trail_as": 98.35596370973711,
+    "observed_trail_as": 114.88290578295242,
+    "midpoint_cross_as": 0.11094959530717864,
+    "trail_angle_residual_deg": -4.230076480820726,
+    "input_hashes": {
+      "ma-apass.csv": "fd9ffabbcb9c5637cf172e1c22575f5a38beabbf1d0006fa285f279da3df1eb3",
+      "ma-gaia.csv": "916c1fdec6034549f17573946a5dc5ab2d365f056fa45b7de93f80c31368a07e",
+      "ma00733.fits": "b136f3df6a3ab1407fddd319309a480ece051fcd20dd26f6cb4b5761cb54cbe5",
+      "ma00733.json": "c1fb45cf044b4af8c810c486d01d021d6c08ddd390fc5e0008dfefade01faa55"
+    }
+  },
+  {
+    "asteroid": "2891",
+    "plate": "ma00733",
+    "header_midpoint": "1908-12-22T06:49:09.5Z",
+    "nominal_duration_min": 181,
+    "measured_midpoint_UT1": "1908-12-22T01:19:10.688",
+    "clock_offset_min": -329.98019308334534,
+    "equivalent_duration_min": 131.87343166575798,
+    "model_trail_as": 93.80247783068117,
+    "observed_trail_as": 68.3428433717299,
+    "midpoint_cross_as": 3.82270283551823,
+    "trail_angle_residual_deg": -14.645801859845712,
+    "input_hashes": {
+      "ma-apass.csv": "2826199a9ec67af09498c7069985913a1bf37cc8315aa23baab3b0df02bc94d4",
+      "ma-gaia.csv": "41b64acc76c69b61f45364066777a7236c0b106e3f616415b9210626fd8ff677",
+      "ma00733.fits": "1371273e09d8c9e13da4642374577ed02bdf30d2d19b9d5f4e12e36b9266a25c",
+      "ma00733.json": "92ff719d6635f158dcfb3f5a6807e4f4166743faedb13beebf2d700c37af6106"
+    }
+  }
+]

@@ -1,0 +1,708 @@
+{
+  "ma00731": {
+    "times_utc": {
+      "open": "1908-12-21 00:21:54",
+      "mid": "1908-12-21 00:58:23.1",
+      "close": "1908-12-21 01:34:48"
+    },
+    "source_radec_deg": [
+      85.8937,
+      16.0166
+    ],
+    "skybot": {
+      "open_r60": [
+        {
+          "number": "134340",
+          "name": "Pluto",
+          "type": "KBO>SDO",
+          "V": 16.14,
+          "sep_arcsec": 1.45
+        }
+      ],
+      "mid_r60": [
+        {
+          "number": "134340",
+          "name": "Pluto",
+          "type": "KBO>SDO",
+          "V": 16.14,
+          "sep_arcsec": 0.34
+        }
+      ],
+      "close_r60": [
+        {
+          "number": "134340",
+          "name": "Pluto",
+          "type": "KBO>SDO",
+          "V": 16.14,
+          "sep_arcsec": 2.12
+        }
+      ],
+      "open_r600": [
+        {
+          "number": "134340",
+          "name": "Pluto",
+          "type": "KBO>SDO",
+          "V": 16.14,
+          "sep_arcsec": 1.45
+        },
+        {
+          "number": "80494",
+          "name": "2000 AM47",
+          "type": "MB>Inner",
+          "V": 18.7,
+          "sep_arcsec": 375.25
+        }
+      ],
+      "mid_r600": [
+        {
+          "number": "134340",
+          "name": "Pluto",
+          "type": "KBO>SDO",
+          "V": 16.14,
+          "sep_arcsec": 0.34
+        },
+        {
+          "number": "80494",
+          "name": "2000 AM47",
+          "type": "MB>Inner",
+          "V": 18.7,
+          "sep_arcsec": 400.05
+        }
+      ],
+      "close_r600": [
+        {
+          "number": "134340",
+          "name": "Pluto",
+          "type": "KBO>SDO",
+          "V": 16.14,
+          "sep_arcsec": 2.12
+        },
+        {
+          "number": "80494",
+          "name": "2000 AM47",
+          "type": "MB>Inner",
+          "V": 18.7,
+          "sep_arcsec": 424.86
+        }
+      ]
+    },
+    "nbody_within_1deg": [
+      {
+        "pdes": "80494",
+        "cls": "MBA",
+        "H": "15.88",
+        "sep_deg": 0.1098
+      },
+      {
+        "pdes": "15661",
+        "cls": "MBA",
+        "H": "15.27",
+        "sep_deg": 0.2265
+      },
+      {
+        "pdes": "114188",
+        "cls": "MBA",
+        "H": "16.57",
+        "sep_deg": 0.3062
+      },
+      {
+        "pdes": "59660",
+        "cls": "MBA",
+        "H": "15.13",
+        "sep_deg": 0.3332
+      },
+      {
+        "pdes": "33915",
+        "cls": "MBA",
+        "H": "15.56",
+        "sep_deg": 0.3764
+      },
+      {
+        "pdes": "2017 WB38",
+        "cls": "MBA",
+        "H": "17.17",
+        "sep_deg": 0.4546
+      },
+      {
+        "pdes": "66088",
+        "cls": "MBA",
+        "H": "14.51",
+        "sep_deg": 0.4807
+      },
+      {
+        "pdes": "164253",
+        "cls": "MBA",
+        "H": "16.86",
+        "sep_deg": 0.5362
+      },
+      {
+        "pdes": "279766",
+        "cls": "MBA",
+        "H": "16.61",
+        "sep_deg": 0.5458
+      },
+      {
+        "pdes": "99036",
+        "cls": "MBA",
+        "H": "15.35",
+        "sep_deg": 0.5863
+      },
+      {
+        "pdes": "160553",
+        "cls": "MBA",
+        "H": "15.63",
+        "sep_deg": 0.6559
+      },
+      {
+        "pdes": "2018 RT1",
+        "cls": "AMO",
+        "H": "23.9",
+        "sep_deg": 0.6599
+      },
+      {
+        "pdes": "2891",
+        "cls": "OMB",
+        "H": "11.10",
+        "sep_deg": 0.683
+      },
+      {
+        "pdes": "29194",
+        "cls": "MBA",
+        "H": "14.50",
+        "sep_deg": 0.6843
+      },
+      {
+        "pdes": "175983",
+        "cls": "MBA",
+        "H": "17.24",
+        "sep_deg": 0.6902
+      },
+      {
+        "pdes": "17362",
+        "cls": "MBA",
+        "H": "14.11",
+        "sep_deg": 0.7178
+      },
+      {
+        "pdes": "134340",
+        "cls": "TNO",
+        "H": "-0.55",
+        "sep_deg": 0.7839
+      },
+      {
+        "pdes": "42855",
+        "cls": "MBA",
+        "H": "15.44",
+        "sep_deg": 0.7955
+      },
+      {
+        "pdes": "2298",
+        "cls": "MBA",
+        "H": "12.99",
+        "sep_deg": 0.8001
+      },
+      {
+        "pdes": "120822",
+        "cls": "MBA",
+        "H": "16.43",
+        "sep_deg": 0.8099
+      },
+      {
+        "pdes": "113495",
+        "cls": "MBA",
+        "H": "16.34",
+        "sep_deg": 0.8201
+      },
+      {
+        "pdes": "2013 TE135",
+        "cls": "APO",
+        "H": "19.98",
+        "sep_deg": 0.8258
+      },
+      {
+        "pdes": "67939",
+        "cls": "MBA",
+        "H": "15.37",
+        "sep_deg": 0.8416
+      },
+      {
+        "pdes": "13299",
+        "cls": "MBA",
+        "H": "14.32",
+        "sep_deg": 0.8729
+      },
+      {
+        "pdes": "2020 NH1",
+        "cls": "AMO",
+        "H": "23.06",
+        "sep_deg": 0.8882
+      },
+      {
+        "pdes": "60044",
+        "cls": "MBA",
+        "H": "14.27",
+        "sep_deg": 0.8997
+      },
+      {
+        "pdes": "21680",
+        "cls": "MBA",
+        "H": "14.63",
+        "sep_deg": 0.909
+      },
+      {
+        "pdes": "87056",
+        "cls": "MBA",
+        "H": "15.82",
+        "sep_deg": 0.9239
+      },
+      {
+        "pdes": "36878",
+        "cls": "MBA",
+        "H": "13.91",
+        "sep_deg": 0.924
+      },
+      {
+        "pdes": "2020 KE2",
+        "cls": "AMO",
+        "H": "23.3",
+        "sep_deg": 0.9279
+      },
+      {
+        "pdes": "12652",
+        "cls": "MBA",
+        "H": "14.49",
+        "sep_deg": 0.9346
+      },
+      {
+        "pdes": "31950",
+        "cls": "MBA",
+        "H": "15.15",
+        "sep_deg": 0.936
+      },
+      {
+        "pdes": "43990",
+        "cls": "MBA",
+        "H": "15.14",
+        "sep_deg": 0.9907
+      }
+    ],
+    "horizons_topocentric": {
+      "Pluto": {
+        "sep_open_arcsec": 1.26,
+        "sep_mid_arcsec": 0.66,
+        "sep_close_arcsec": 2.4,
+        "closest_approach_of_trail_arcsec": 0.31,
+        "V_mid": 15.551,
+        "trail_arcsec": 3.59,
+        "trail_PA_deg": 271.5
+      },
+      "113495": {
+        "sep_open_arcsec": 2956.93,
+        "sep_mid_arcsec": 2951.41,
+        "sep_close_arcsec": 2946.03,
+        "closest_approach_of_trail_arcsec": 2946.03,
+        "V_mid": 20.092,
+        "trail_arcsec": 46.43,
+        "trail_PA_deg": 271.8
+      },
+      "134340": {
+        "sep_open_arcsec": 1.26,
+        "sep_mid_arcsec": 0.66,
+        "sep_close_arcsec": 2.4,
+        "closest_approach_of_trail_arcsec": 0.31,
+        "V_mid": 15.551,
+        "trail_arcsec": 3.59,
+        "trail_PA_deg": 271.5
+      },
+      "120822": {
+        "sep_open_arcsec": 2924.96,
+        "sep_mid_arcsec": 2918.2,
+        "sep_close_arcsec": 2911.59,
+        "closest_approach_of_trail_arcsec": 2911.59,
+        "V_mid": 20.818,
+        "trail_arcsec": 43.65,
+        "trail_PA_deg": 269.2
+      },
+      "60044": {
+        "sep_open_arcsec": 3220.78,
+        "sep_mid_arcsec": 3240.6,
+        "sep_close_arcsec": 3260.42,
+        "closest_approach_of_trail_arcsec": 3220.78,
+        "V_mid": 19.125,
+        "trail_arcsec": 40.63,
+        "trail_PA_deg": 283.3
+      },
+      "164253": {
+        "sep_open_arcsec": 1993.55,
+        "sep_mid_arcsec": 1968.01,
+        "sep_close_arcsec": 1942.44,
+        "closest_approach_of_trail_arcsec": 1942.44,
+        "V_mid": 19.597,
+        "trail_arcsec": 52.69,
+        "trail_PA_deg": 262.2
+      },
+      "12652": {
+        "sep_open_arcsec": 3344.81,
+        "sep_mid_arcsec": 3362.24,
+        "sep_close_arcsec": 3379.7,
+        "closest_approach_of_trail_arcsec": 3344.81,
+        "V_mid": 19.391,
+        "trail_arcsec": 38.16,
+        "trail_PA_deg": 262.3
+      },
+      "59660": {
+        "sep_open_arcsec": 1207.23,
+        "sep_mid_arcsec": 1202.06,
+        "sep_close_arcsec": 1197.39,
+        "closest_approach_of_trail_arcsec": 1197.39,
+        "V_mid": 19.113,
+        "trail_arcsec": 48.68,
+        "trail_PA_deg": 285.7
+      },
+      "66088": {
+        "sep_open_arcsec": 1738.5,
+        "sep_mid_arcsec": 1728.56,
+        "sep_close_arcsec": 1718.76,
+        "closest_approach_of_trail_arcsec": 1718.76,
+        "V_mid": 17.824,
+        "trail_arcsec": 40.13,
+        "trail_PA_deg": 277.0
+      },
+      "31950": {
+        "sep_open_arcsec": 3374.12,
+        "sep_mid_arcsec": 3372.84,
+        "sep_close_arcsec": 3371.73,
+        "closest_approach_of_trail_arcsec": 3371.73,
+        "V_mid": 18.961,
+        "trail_arcsec": 45.53,
+        "trail_PA_deg": 276.9
+      },
+      "87056": {
+        "sep_open_arcsec": 3316.7,
+        "sep_mid_arcsec": 3339.96,
+        "sep_close_arcsec": 3363.27,
+        "closest_approach_of_trail_arcsec": 3316.7,
+        "V_mid": 19.051,
+        "trail_arcsec": 49.24,
+        "trail_PA_deg": 261.8
+      },
+      "80494": {
+        "sep_open_arcsec": 375.9,
+        "sep_mid_arcsec": 401.21,
+        "sep_close_arcsec": 426.6,
+        "closest_approach_of_trail_arcsec": 375.9,
+        "V_mid": 18.773,
+        "trail_arcsec": 51.53,
+        "trail_PA_deg": 277.7
+      },
+      "67939": {
+        "sep_open_arcsec": 2979.99,
+        "sep_mid_arcsec": 3002.93,
+        "sep_close_arcsec": 3025.89,
+        "closest_approach_of_trail_arcsec": 2979.99,
+        "V_mid": 19.294,
+        "trail_arcsec": 46.15,
+        "trail_PA_deg": 273.3
+      },
+      "2298": {
+        "sep_open_arcsec": 2859.11,
+        "sep_mid_arcsec": 2876.59,
+        "sep_close_arcsec": 2894.19,
+        "closest_approach_of_trail_arcsec": 2859.11,
+        "V_mid": 16.076,
+        "trail_arcsec": 47.91,
+        "trail_PA_deg": 267.6
+      },
+      "42855": {
+        "sep_open_arcsec": 2899.2,
+        "sep_mid_arcsec": 2875.13,
+        "sep_close_arcsec": 2851.03,
+        "closest_approach_of_trail_arcsec": 2851.03,
+        "V_mid": 17.946,
+        "trail_arcsec": 49.53,
+        "trail_PA_deg": 279.3
+      },
+      "175983": {
+        "sep_open_arcsec": 2506.57,
+        "sep_mid_arcsec": 2489.53,
+        "sep_close_arcsec": 2472.59,
+        "closest_approach_of_trail_arcsec": 2472.59,
+        "V_mid": 19.458,
+        "trail_arcsec": 52.15,
+        "trail_PA_deg": 273.2
+      },
+      "17362": {
+        "sep_open_arcsec": 2572.15,
+        "sep_mid_arcsec": 2583.7,
+        "sep_close_arcsec": 2595.35,
+        "closest_approach_of_trail_arcsec": 2572.15,
+        "V_mid": 19.22,
+        "trail_arcsec": 37.87,
+        "trail_PA_deg": 265.8
+      },
+      "114188": {
+        "sep_open_arcsec": 1144.3,
+        "sep_mid_arcsec": 1119.36,
+        "sep_close_arcsec": 1094.39,
+        "closest_approach_of_trail_arcsec": 1094.39,
+        "V_mid": 19.785,
+        "trail_arcsec": 49.95,
+        "trail_PA_deg": 271.8
+      },
+      "2891": {
+        "sep_open_arcsec": 2465.74,
+        "sep_mid_arcsec": 2460.11,
+        "sep_close_arcsec": 2454.59,
+        "closest_approach_of_trail_arcsec": 2454.59,
+        "V_mid": 15.581,
+        "trail_arcsec": 37.99,
+        "trail_PA_deg": 279.9
+      },
+      "160553": {
+        "sep_open_arcsec": 2352.35,
+        "sep_mid_arcsec": 2366.97,
+        "sep_close_arcsec": 2381.73,
+        "closest_approach_of_trail_arcsec": 2352.35,
+        "V_mid": 19.136,
+        "trail_arcsec": 45.22,
+        "trail_PA_deg": 262.6
+      },
+      "29194": {
+        "sep_open_arcsec": 2411.76,
+        "sep_mid_arcsec": 2431.61,
+        "sep_close_arcsec": 2451.55,
+        "closest_approach_of_trail_arcsec": 2411.76,
+        "V_mid": 17.572,
+        "trail_arcsec": 48.65,
+        "trail_PA_deg": 277.7
+      },
+      "33915": {
+        "sep_open_arcsec": 1386.05,
+        "sep_mid_arcsec": 1361.02,
+        "sep_close_arcsec": 1335.95,
+        "closest_approach_of_trail_arcsec": 1335.95,
+        "V_mid": 18.88,
+        "trail_arcsec": 50.11,
+        "trail_PA_deg": 268.4
+      },
+      "43990": {
+        "sep_open_arcsec": 3560.25,
+        "sep_mid_arcsec": 3568.07,
+        "sep_close_arcsec": 3576.0,
+        "closest_approach_of_trail_arcsec": 3560.25,
+        "V_mid": 18.677,
+        "trail_arcsec": 44.81,
+        "trail_PA_deg": 269.1
+      },
+      "21680": {
+        "sep_open_arcsec": 3282.6,
+        "sep_mid_arcsec": 3277.54,
+        "sep_close_arcsec": 3272.61,
+        "closest_approach_of_trail_arcsec": 3272.61,
+        "V_mid": 18.156,
+        "trail_arcsec": 42.22,
+        "trail_PA_deg": 268.6
+      },
+      "2017 WB38": {
+        "sep_open_arcsec": 1611.59,
+        "sep_mid_arcsec": 1630.32,
+        "sep_close_arcsec": 1649.36,
+        "closest_approach_of_trail_arcsec": 1611.59,
+        "V_mid": 20.715,
+        "trail_arcsec": 59.72,
+        "trail_PA_deg": 243.1
+      },
+      "279766": {
+        "sep_open_arcsec": 1942.07,
+        "sep_mid_arcsec": 1958.5,
+        "sep_close_arcsec": 1975.09,
+        "closest_approach_of_trail_arcsec": 1942.07,
+        "V_mid": 20.155,
+        "trail_arcsec": 47.32,
+        "trail_PA_deg": 270.0
+      },
+      "15661": {
+        "sep_open_arcsec": 782.91,
+        "sep_mid_arcsec": 807.49,
+        "sep_close_arcsec": 832.15,
+        "closest_approach_of_trail_arcsec": 782.91,
+        "V_mid": 18.258,
+        "trail_arcsec": 50.57,
+        "trail_PA_deg": 272.5
+      },
+      "36878": {
+        "sep_open_arcsec": 3346.72,
+        "sep_mid_arcsec": 3328.11,
+        "sep_close_arcsec": 3309.49,
+        "closest_approach_of_trail_arcsec": 3309.49,
+        "V_mid": 18.438,
+        "trail_arcsec": 37.69,
+        "trail_PA_deg": 269.3
+      },
+      "13299": {
+        "sep_open_arcsec": 3149.21,
+        "sep_mid_arcsec": 3139.57,
+        "sep_close_arcsec": 3130.1,
+        "closest_approach_of_trail_arcsec": 3130.1,
+        "V_mid": 17.672,
+        "trail_arcsec": 49.08,
+        "trail_PA_deg": 269.9
+      },
+      "99036": {
+        "sep_open_arcsec": 2136.13,
+        "sep_mid_arcsec": 2113.72,
+        "sep_close_arcsec": 2091.34,
+        "closest_approach_of_trail_arcsec": 2091.34,
+        "V_mid": 18.748,
+        "trail_arcsec": 48.97,
+        "trail_PA_deg": 284.7
+      },
+      "2013 TE135": {
+        "sep_open_arcsec": 2945.88,
+        "sep_mid_arcsec": 2969.49,
+        "sep_close_arcsec": 2993.12,
+        "closest_approach_of_trail_arcsec": 2945.88,
+        "V_mid": 25.12,
+        "trail_arcsec": 50.35,
+        "trail_PA_deg": 269.0
+      },
+      "2020 KE2": {
+        "sep_open_arcsec": 3354.25,
+        "sep_mid_arcsec": 3339.62,
+        "sep_close_arcsec": 3325.03,
+        "closest_approach_of_trail_arcsec": 3325.03,
+        "V_mid": 29.201,
+        "trail_arcsec": 39.2,
+        "trail_PA_deg": 267.6
+      },
+      "2020 NH1": {
+        "sep_open_arcsec": 3183.47,
+        "sep_mid_arcsec": 3195.72,
+        "sep_close_arcsec": 3208.13,
+        "closest_approach_of_trail_arcsec": 3183.47,
+        "V_mid": 27.298,
+        "trail_arcsec": 53.19,
+        "trail_PA_deg": 273.5
+      },
+      "2018 RT1": {
+        "sep_open_arcsec": 74057.3,
+        "sep_mid_arcsec": 74032.3,
+        "sep_close_arcsec": 74007.2,
+        "closest_approach_of_trail_arcsec": 74007.2,
+        "V_mid": 28.32,
+        "trail_arcsec": 50.15,
+        "trail_PA_deg": 273.9
+      }
+    },
+    "nbody_validation_vs_horizons": {
+      "rest": {
+        "AST": {
+          "n": 16,
+          "n_over_60arcsec": 1,
+          "n_over_1deg": 1,
+          "median_arcsec": 0.36979,
+          "p90_arcsec": 3.49645,
+          "max_arcsec": 26543.3
+        },
+        "CEN": {
+          "n": 20,
+          "n_over_60arcsec": 3,
+          "n_over_1deg": 1,
+          "median_arcsec": 0.0435491,
+          "p90_arcsec": 1247.77,
+          "max_arcsec": 77497.0
+        },
+        "HYA": {
+          "n": 2,
+          "n_over_60arcsec": 1,
+          "n_over_1deg": 0,
+          "median_arcsec": 1079.72,
+          "p90_arcsec": 1929.78,
+          "max_arcsec": 2142.3
+        },
+        "IMB": {
+          "n": 20,
+          "n_over_60arcsec": 0,
+          "n_over_1deg": 0,
+          "median_arcsec": 6.72631,
+          "p90_arcsec": 11.6239,
+          "max_arcsec": 25.6563
+        },
+        "MBA": {
+          "n": 20,
+          "n_over_60arcsec": 1,
+          "n_over_1deg": 0,
+          "median_arcsec": 2.42951,
+          "p90_arcsec": 15.0669,
+          "max_arcsec": 105.652
+        },
+        "MCA": {
+          "n": 20,
+          "n_over_60arcsec": 2,
+          "n_over_1deg": 1,
+          "median_arcsec": 2.60567,
+          "p90_arcsec": 42.281,
+          "max_arcsec": 12456.9
+        },
+        "OMB": {
+          "n": 20,
+          "n_over_60arcsec": 0,
+          "n_over_1deg": 0,
+          "median_arcsec": 0.281245,
+          "p90_arcsec": 2.08856,
+          "max_arcsec": 5.24384
+        },
+        "TJN": {
+          "n": 20,
+          "n_over_60arcsec": 0,
+          "n_over_1deg": 0,
+          "median_arcsec": 0.0719834,
+          "p90_arcsec": 0.0932366,
+          "max_arcsec": 0.122481
+        },
+        "TNO": {
+          "n": 20,
+          "n_over_60arcsec": 6,
+          "n_over_1deg": 0,
+          "median_arcsec": 0.0114708,
+          "p90_arcsec": 692.581,
+          "max_arcsec": 2822.75
+        }
+      },
+      "neo": {
+        "AMO": {
+          "n": 20,
+          "n_over_60arcsec": 8,
+          "n_over_1deg": 5,
+          "median_arcsec": 0.0802596,
+          "p90_arcsec": 112418.0,
+          "max_arcsec": 151204.0
+        },
+        "APO": {
+          "n": 20,
+          "n_over_60arcsec": 9,
+          "n_over_1deg": 8,
+          "median_arcsec": 0.175619,
+          "p90_arcsec": 171957.0,
+          "max_arcsec": 602046.0
+        },
+        "ATE": {
+          "n": 20,
+          "n_over_60arcsec": 3,
+          "n_over_1deg": 2,
+          "median_arcsec": 0.141944,
+          "p90_arcsec": 3005.06,
+          "max_arcsec": 82969.6
+        },
+        "IEO": {
+          "n": 3,
+          "n_over_60arcsec": 0,
+          "n_over_1deg": 0,
+          "median_arcsec": 0.130111,
+          "p90_arcsec": 0.151135,
+          "max_arcsec": 0.156391
+        }
+      }
+    }
+  }
+}

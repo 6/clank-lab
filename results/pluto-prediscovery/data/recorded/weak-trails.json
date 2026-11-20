@@ -1,0 +1,58 @@
+{
+  "ma00731": {
+    "179": {
+      "open_UT": "1908-12-21 00:21.9",
+      "close_UT": "01:34.8",
+      "mid_UT": "00:58.4",
+      "dur_min": 72.9,
+      "cross_track_px": 0,
+      "snr": 210.4,
+      "frac_var_explained": 0.969,
+      "local_astrometry_median_arcsec": 0.43,
+      "stars": 287
+    },
+    "forced_windows": [
+      "731   179 Klytaemnestra K-window: excess  3218.8 p=0.000 (z= 86.3, n=313) | archive-window: excess    -6.2 p=0.702 (z= -0.6)",
+      "731  1436 Salonta       K-window: excess   329.6 p=0.000 (z=  5.2, n=229) | archive-window: excess   109.9 p=0.088 (z=  1.4)",
+      "731  2891 McGetchin     K-window: excess   195.8 p=0.003 (z=  3.4, n=288) | archive-window: excess    13.5 p=0.584 (z= -0.2)",
+      "731  4204 Barsig        K-window: excess   144.3 p=0.004 (z=  4.0, n=246) | archive-window: excess    36.9 p=0.297 (z=  0.6)",
+      "731  2175 Andrea Doria  K-window: excess    44.1 p=0.226 (z=  0.6, n=297) | archive-window: excess    14.1 p=0.583 (z= -0.2)",
+      "731  3147 Samantha      K-window: excess   230.6 p=0.000 (z=  4.7, n=280) | archive-window: excess     nan p=nan (z=  nan)",
+      "731  9593 1991 PZ17     K-window: excess    34.0 p=0.344 (z=  0.5, n=273) | archive-window: excess     nan p=nan (z=  nan)",
+      "731 13567 Urabe         K-window: excess    55.5 p=0.160 (z=  0.8, n=287) | archive-window: excess    31.6 p=0.493 (z=  0.0)",
+      "731 25493 1999 XG85     K-window: excess     nan p=nan (z=  nan, n=251) | archive-window: excess     nan p=nan (z=  nan)"
+    ],
+    "faint_asteroid_stack": [
+      "731 faint-asteroid stack peak mid 01:02.5 UT score 7.9 n_ast 8 next-best score away (>60 min)  2.1",
+      "   windows with >half peak score: mid 00:36.5 to 01:36.5"
+    ]
+  },
+  "ma00733": {
+    "179": {
+      "open_UT": "1908-12-22 00:06.4",
+      "close_UT": "02:50.8",
+      "mid_UT": "01:28.6",
+      "dur_min": 164.3,
+      "cross_track_px": 1,
+      "snr": 209.4,
+      "frac_var_explained": 0.977,
+      "local_astrometry_median_arcsec": 0.56,
+      "stars": 324
+    },
+    "forced_windows": [
+      "733   179 Klytaemnestra K-window: excess  2845.6 p=0.000 (z= 74.7, n=229) | archive-window: excess   -28.3 p=0.863 (z= -0.8)",
+      "733  1436 Salonta       K-window: excess   129.0 p=0.060 (z=  1.7, n=248) | archive-window: excess    31.0 p=0.500 (z=  0.0)",
+      "733  2891 McGetchin     K-window: excess   148.4 p=0.000 (z=  5.8, n=252) | archive-window: excess    20.2 p=0.429 (z=  0.1)",
+      "733  4204 Barsig        K-window: excess    84.3 p=0.196 (z=  1.6, n=245) | archive-window: excess   -21.2 p=0.767 (z= -0.8)",
+      "733  2175 Andrea Doria  K-window: excess   114.4 p=0.000 (z=  3.5, n=252) | archive-window: excess   -27.5 p=0.908 (z= -1.1)",
+      "733  3147 Samantha      K-window: excess   190.0 p=0.000 (z=  6.8, n=252) | archive-window: excess   -33.8 p=0.941 (z= -0.8)",
+      "733  9593 1991 PZ17     K-window: excess    32.1 p=0.349 (z=  0.3, n=252) | archive-window: excess    -7.3 p=0.882 (z= -1.3)",
+      "733 13567 Urabe         K-window: excess   168.5 p=0.000 (z=  4.7, n=221) | archive-window: excess    10.8 p=0.659 (z= -0.4)",
+      "733 25493 1999 XG85     K-window: excess    58.0 p=0.171 (z=  1.5, n=234) | archive-window: excess    14.6 p=0.320 (z=  0.4)"
+    ],
+    "faint_asteroid_stack": [
+      "733 faint-asteroid stack peak mid 01:54.2 UT score 6.1 n_ast 8 next-best score away (>60 min)  4.7",
+      "   windows with >half peak score: mid 23:58.2 to 02:50.2"
+    ]
+  }
+}

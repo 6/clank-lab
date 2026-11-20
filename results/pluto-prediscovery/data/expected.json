@@ -1,5 +1,5 @@
 {
- "note": "Values recorded on November 19, 2026; rerun.py compares a fresh run with these ranges.",
+ "note": "Values recorded on November 19, 2026 (checks 1-44) and November 20, 2026 (checks 45-57); rerun.py compares a fresh run with these ranges.",
  "checks": [
   {
    "what": "MA 731 clock correction from (179) Klytaemnestra, minutes (recorded -348.2)",
@@ -30,7 +30,7 @@
    "max": 16.6
   },
   {
-   "what": "MA 731 nearest Gaia DR3 star (G < 19.5) to the image, arcsec (recorded 11.4)",
+   "what": "MA 731 nearest Gaia DR3 star (G < 19.5, moved to the plate epoch) to the image, arcsec (recorded 11.38; 11.41 unmoved)",
    "path": "ma731/nearest_gaia/arcsec",
    "min": 10
   },
@@ -55,7 +55,7 @@
    "max": 400
   },
   {
-   "what": "SkyBoT objects within 0.04 deg of the MA 731 image",
+   "what": "SkyBoT (rerun: one geocentric query at the trail-based midpoint, radius 0.04 deg): objects near the MA 731 image",
    "path": "ma731_skybot",
    "equals": [
     "Pluto"
@@ -106,12 +106,12 @@
    "max": 16.8
   },
   {
-   "what": "B2247a nearest Gaia DR3 star (G < 19.5), arcsec (recorded 25.6)",
+   "what": "B2247a nearest Gaia DR3 star (G < 19.5, moved to the plate epoch), arcsec (recorded 25.63)",
    "path": "B2247a/nearest_gaia/arcsec",
    "min": 20
   },
   {
-   "what": "SkyBoT objects within 0.04 deg of the February position, from Heidelberg",
+   "what": "SkyBoT (rerun: one query from Heidelberg, code 024, at 20:20 UT, radius 0.04 deg): objects near the February position",
    "path": "feb_skybot",
    "equals": [
     "Pluto"
@@ -128,7 +128,7 @@
    "max": 2.5
   },
   {
-   "what": "Joint random offsets: replayed matches on all three plates as close and as strong as observed (recorded 0 of 230352)",
+   "what": "Joint random offsets, observed-values rule (on each plate S/N at least and centroid distance at most the observed): matches on all three plates (recorded 0 of 230352)",
    "path": "joint_null/observed values, all three plates/hits",
    "max": 0
   },
@@ -138,12 +138,12 @@
    "min": 200000
   },
   {
-   "what": "Joint random offsets: matches on both February plates (recorded 1)",
+   "what": "Same observed-values rule on both February plates only (recorded 1)",
    "path": "joint_null/observed values, b2247a & b2248b/hits",
    "max": 5
   },
   {
-   "what": "Joint random offsets: matches on all three plates with no Gaia star within 3 arcsec (recorded 0)",
+   "what": "Observed-values rule on all three plates (row 24), also with no Gaia star (G < 19.5) within 3 arcsec of the centroid, on each plate separately (recorded 0)",
    "path": "joint_null/observed values, uncatalogued, all three plates/hits",
    "max": 0
   },
@@ -163,7 +163,7 @@
    "max": 2
   },
   {
-   "what": "1923 plate B4816a: recovery of injected B 16.4 images at S/N >= 3 (recorded 1.00)",
+   "what": "1923 plate B4816a: injected B 16.4 images, added after filtering, reaching S/N >= 3 within 3 pixels (recorded 1.00)",
    "path": "B4816a_1923_fixed_site/injection/16.4/snr_ge3",
    "min": 0.9
   },
@@ -208,19 +208,19 @@
    "max": 0.35
   },
   {
-   "what": "Joint random offsets with the search's loose rule (S/N >= 4 at the replayed centroid), all three plates (recorded 8581)",
+   "what": "Joint random offsets, loose search rule (S/N >= 4 at the replayed centroid, any distance): matches on all three plates (recorded 8581)",
    "path": "joint_null/search rule, all three plates/hits",
    "min": 6000,
    "max": 11000
   },
   {
-   "what": "Same, with no Gaia star within 3 arcsec of the centroid on any plate (recorded 3360)",
+   "what": "Loose rule (row 40), also with no Gaia star (G < 19.5) within 3 arcsec of the centroid, on each plate separately (recorded 3360)",
    "path": "joint_null/search rule, uncatalogued, all three plates/hits",
    "min": 2000,
    "max": 5000
   },
   {
-   "what": "Same, centroid also within 3 arcsec of the shifted prediction, a cut chosen after seeing the data (recorded 0)",
+   "what": "Loose rule with no Gaia star (row 41), also centroid within 3 arcsec of the shifted prediction, a cut chosen after seeing the data (recorded 0)",
    "path": "joint_null/after seeing the data: search rule, uncatalogued, centroid within 3 arcsec, all three plates/hits",
    "max": 0
   },
@@ -233,6 +233,98 @@
    "what": "Crowding-matched trials (recorded 39786)",
    "path": "joint_null/crowding-matched, observed values, all three plates/trials",
    "min": 30000
+  },
+  {
+   "what": "MA 731 held-out faint stars (their Gaia and APASS entries left out of the plate solution and the B calibration): median radial centroid miss, arcsec (recorded 1.24)",
+   "path": "ma731/heldout_faint_stars/radial_median",
+   "max": 1.6
+  },
+  {
+   "what": "MA 731: fraction of held-out faint stars missing by no more than the image (recorded 0.20)",
+   "path": "ma731/heldout_faint_stars/image_offset_rank",
+   "max": 0.5
+  },
+  {
+   "what": "MA 731 held-out faint stars: median calibrated minus catalog B, mag (recorded +0.035)",
+   "path": "ma731/heldout_faint_stars/dB_median",
+   "min": -0.15,
+   "max": 0.15
+  },
+  {
+   "what": "MA 731 held-out faint stars: robust spread of calibrated minus catalog B, mag (recorded 0.21)",
+   "path": "ma731/heldout_faint_stars/dB_robust_sd",
+   "max": 0.35
+  },
+  {
+   "what": "B2247a: same held-out fraction (recorded 0.055)",
+   "path": "B2247a/heldout_faint_stars/image_offset_rank",
+   "max": 0.5
+  },
+  {
+   "what": "B2248b: same held-out fraction (recorded 0.73)",
+   "path": "B2248b/heldout_faint_stars/image_offset_rank",
+   "max": 0.95
+  },
+  {
+   "what": "MA 731: injections at B 16.33 through the whole measurement, recovered (S/N >= 4, within 6 arcsec, B within 0.45 mag) (recorded 0.725)",
+   "path": "ma731/injection_pipeline/16.33/recovered",
+   "min": 0.6
+  },
+  {
+   "what": "B2247a: same at B 16.40 (recorded 0.79)",
+   "path": "B2247a/injection_pipeline/16.4/recovered",
+   "min": 0.6
+  },
+  {
+   "what": "B2248b: same at B 16.40 (recorded 0.76)",
+   "path": "B2248b/injection_pipeline/16.4/recovered",
+   "min": 0.6
+  },
+  {
+   "what": "1923 plate B4816a: same at B 16.40 (recorded 0.815)",
+   "path": "B4816a_1923_fixed_site/injection_pipeline/16.4/recovered",
+   "min": 0.7
+  },
+  {
+   "what": "MA 731: the same positions without an injection pass S/N >= 4 within 6 arcsec (recorded 0.025)",
+   "path": "ma731/injection_pipeline/bare/passes_rule_at_any_B",
+   "max": 0.06
+  },
+  {
+   "what": "Loose rule (row 40), also final centroid within 8 pixels of the shifted prediction (applied to the real measurement too), all three plates (recorded 201)",
+   "path": "joint_null/search rule with the final centroid within 8 pixels, all three plates/hits",
+   "min": 100,
+   "max": 400
+  },
+  {
+   "what": "Row 56, also with no Gaia star (G < 19.5) within 3 arcsec of the centroid, on each plate separately (recorded 0)",
+   "path": "joint_null/search rule with the final centroid within 8 pixels, uncatalogued, all three plates/hits",
+   "max": 0
+  },
+  {
+   "what": "1923 plate B4816a: injected B 16.4 images read at the injected position with a 1-arcsec rms registration error (a forced measurement), fraction reaching S/N >= 3 (recorded 1.00)",
+   "path": "B4816a_1923_fixed_site/injection_pipeline/16.4/forced_snr_ge3",
+   "min": 0.9
+  },
+  {
+   "what": "1923 plate B4816a: free search at the February position (brightest filtered pixel within 8 pixels, windowed centroid), S/N at the centroid (recorded -0.04)",
+   "path": "B4816a_1923_fixed_site/measure/snr_at_centroid",
+   "max": 2
+  },
+  {
+   "what": "Joint random offsets with crowding within 20% taken literally (a non-integer bound), all three plates (recorded 0 of 31434)",
+   "path": "joint_null/crowding within 20% literally, observed values, all three plates/hits",
+   "max": 0
+  },
+  {
+   "what": "Loose-rule matches with no Gaia star within 3 arcsec (row 41): median distance of the MA 731 centroid from the shifted prediction, arcsec (recorded 11.8)",
+   "path": "joint_null/search rule, uncatalogued, all three plates/median_centroid_distance_arcsec/ma731",
+   "min": 6
+  },
+  {
+   "what": "MA 731 free search at the archive-time prediction: distance of the final centroid from that prediction, arcsec (recorded 11.26; Method A's limit is 6)",
+   "path": "ma731_archive_time_free_search/offset_arcsec",
+   "min": 6
   }
  ]
 }

@@ -10,9 +10,15 @@ The picture shows the missing edges: the counterexample joins exactly those pair
 
 Checked in Lean from the definitions; not yet reviewed by experts.
 
-The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
+
+Archived on Zenodo: [doi:10.5281/zenodo.23862351](https://doi.org/10.5281/zenodo.23862351)
+
+## Abstract
+
+The acyclic polynomial of a graph counts its vertex subsets that induce forests, by their cardinality. We give a twelve-vertex graph whose acyclic polynomial has a real root smaller than every real root of the acyclic polynomial of the proposed extremal graph of Barton, Brown and Pike, and whose modulus exceeds that of every complex root of that polynomial. This answers both parts of their question on extremal acyclic roots negatively. Their work supplies the proposed graph, the complement of a four-cycle and a star, and a formula for its quartic polynomial. We replace that star by two three-leaf stars. The resulting polynomial differs only in its cubic coefficient. Exact sign evaluations and the triangle inequality separate the two root sets at radius eighty-six, without numerical root approximations. A Lean formalization proves the coefficient identities from induced-graph acyclicity and derives both failures of the universal assertions.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 ## Check it
 
@@ -28,7 +34,7 @@ Allow about ten minutes after downloading the dependencies and at least 12 GB of
 
 ## Credits
 
-Caroline Barton, Jason I. Brown and David A. Pike introduced the induced-forest polynomial studied here. Their [paper, *Acyclic polynomials of graphs*](https://ajc.maths.uq.edu.au/pdf/82/ajc_v82_p146.pdf), supplies the definition, the proposed extremal graph and the two questions answered in this note. Question 2.17 is the precise source of the comparison, and Lemma 2.18 gives the polynomial of their proposed extremizer. The counterexample modifies that construction; both the formulation of the problem and the useful quartic form come from their work.
+Caroline Barton, Jason I. Brown and David A. Pike introduced the induced-forest polynomial studied here. Their [paper, *Acyclic polynomials of graphs*](https://ajc.maths.uq.edu.au/pdf/82/ajc_v82_p146.pdf), supplies the definition, the proposed extremal graph and the two questions answered in this note. Question 2.17 is the precise source of the comparison, and Lemma 2.18 gives the polynomial of their proposed extremizer. The counterexample modifies that construction; both the formulation of the problem and the useful quartic form come from their work. Yuran Xiu gave an example of a graph whose acyclic polynomial is nonunimodal and has all its roots strictly in the left half-plane. In a second preprint, Xiu answered Barton, Brown and Pike's Question 3.3 by constructing a 230-vertex bipartite graph with a nonunimodal acyclic polynomial. Both preprints were posted on October 18, 2026, before the first release of this work on November 1, 2026. They are related prior work on other questions about the same polynomial. [Left-half-plane example](https://hexagonmath.org/abs/2610.00325v1) · [Bipartite example](https://hexagonmath.org/abs/2610.00326v1) · [Zenodo v1](https://doi.org/10.5281/zenodo.23862351)
 
 The proof uses elementary counting, the intermediate value theorem and the triangle inequality. Its formalization uses [Lean](https://lean-lang.org/) and [Mathlib](https://github.com/leanprover-community/mathlib4), including their definitions of finite simple graphs, acyclicity, polynomials, real numbers and complex numbers. These libraries provide the foundations and general lemmas connecting the finite graph calculation to the root inequalities. Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -39,6 +45,7 @@ The proof uses elementary counting, the intermediate value theorem and the trian
   author = {Graham, P.},
   title = {{A counterexample to two questions on acyclic polynomial roots}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/acyclic-root-extrema-v1/results/acyclic-root-extrema}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/acyclic-root-extrema-v1/results/acyclic-root-extrema}},
+  doi          = {10.5281/zenodo.23862351}
 }
 ```

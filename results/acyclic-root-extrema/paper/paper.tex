@@ -7,7 +7,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \title{A counterexample to two questions on acyclic polynomial roots}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 31, 2026}
+\date{November 21, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -49,6 +49,8 @@ The construction and its quartic form build directly on Barton, Brown and Pike's
              \binom n2 x^2+nx+1.
 \]
 Splitting the seven-leaf star of $\overline{J_{12}}$ into two three-leaf stars increases the cubic coefficient while keeping the other coefficients fixed. The proof below explains that change by counting missing edges. A complete Lean proof also establishes the two coefficient identities directly from the definition of acyclicity.
+
+Yuran Xiu gave an example of a graph whose acyclic polynomial is nonunimodal and has all its roots strictly in the left half-plane~\cite{XiuStability}. In a second preprint, Xiu answered Barton, Brown and Pike's Question~3.3 by constructing a 230-vertex bipartite graph with a nonunimodal acyclic polynomial~\cite{XiuBipartite}. Both preprints were posted on October 18, 2026, before the first release of this work on November 1, 2026 (\href{https://doi.org/10.5281/zenodo.23862351}{Zenodo v1} and \href{https://github.com/6/clank-lab/tree/acyclic-root-extrema-v1/results/acyclic-root-extrema}{repository v1 tag}). They are related prior work on other questions about the same polynomial.
 
 \section{Proof overview}
 The key finite step is to count induced forests after splitting the star. Both graphs have exactly one induced forest on four vertices and none on more vertices. For three vertices, a forest is precisely a triple containing a missing edge. Counting such triples gives cubic coefficients $90$ and $85$.
@@ -139,6 +141,16 @@ C. Barton, J. I. Brown and D. A. Pike,
 82(2) (2022), 146--181. Question~2.17 and Lemma~2.18.
 \url{https://ajc.maths.uq.edu.au/pdf/82/ajc_v82_p146.pdf}.
 Original preprint: \href{https://arxiv.org/abs/2011.01735v1}{arXiv:2011.01735v1}, Conjecture~1; journal text also at \href{https://arxiv.org/abs/2011.01735v3}{arXiv:2011.01735v3}.
+\bibitem{XiuStability}
+Y. Xiu,
+\emph{A Nonunimodal Acyclic Polynomial with All Roots in the Left Half-Plane},
+Hexagon preprint 2610.00325v1, October 18, 2026.
+\url{https://hexagonmath.org/abs/2610.00325v1}.
+\bibitem{XiuBipartite}
+Y. Xiu,
+\emph{A Bipartite Graph with a Nonunimodal Acyclic Polynomial},
+Hexagon preprint 2610.00326v1, October 18, 2026.
+\url{https://hexagonmath.org/abs/2610.00326v1}.
 \bibitem{Lean}
 L. de Moura and S. Ullrich,
 \emph{The Lean 4 theorem prover and programming language},

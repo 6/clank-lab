@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## acyclic-root-extrema v2 (November 20, 2026)
+
+- Correction: add credit to Yuran Xiu's two earlier preprints on stability and coefficient unimodality of acyclic polynomials. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.23862351](https://doi.org/10.5281/zenodo.23862351)
+
 ## thomson-10 v12 (November 20, 2026)
 
 - Correction: clarify the dates of Katherine Xie's independent proof and Jingxing Huang's ten-point stationarity continuation relative to this work's first release. The theorem and its checks are unchanged.

@@ -37,7 +37,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamParallelepipedTriangulation2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A lattice parallelepiped with no unimodular triangulation}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/parallelepiped-triangulation-v1/results/parallelepiped-triangulation}},

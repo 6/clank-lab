@@ -49,7 +49,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamAbcFrontSpeedup2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{KPP fronts in the 1-1-1 ABC flow speed up linearly in every direction}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/abc-front-speedup-v2/results/abc-front-speedup}},

@@ -37,7 +37,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamHeawoodFamilyMu52026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{The Heawood family is not the complete list of excluded minors for Colin de Verdière invariant at most 5}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/heawood-family-mu5-v1/results/heawood-family-mu5}},

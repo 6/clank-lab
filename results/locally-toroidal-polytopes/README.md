@@ -42,7 +42,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamLocallyToroidalPolytopes2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{Existence of locally toroidal regular 4-polytopes}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/locally-toroidal-polytopes-v3/results/locally-toroidal-polytopes}},

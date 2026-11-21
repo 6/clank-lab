@@ -68,7 +68,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamCocircuitDiameterCounterexample2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{A counterexample to the cocircuit diameter conjecture}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/cocircuit-diameter-counterexample-v1/results/cocircuit-diameter-counterexample}},

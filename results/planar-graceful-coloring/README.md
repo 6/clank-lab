@@ -36,7 +36,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamPlanarGracefulColoring2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Graceful 4-coloring of planar graphs is NP-complete}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/planar-graceful-coloring-v1/results/planar-graceful-coloring}},

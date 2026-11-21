@@ -39,7 +39,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamHeawoodFamilyFourFlat2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{The Heawood family is not the complete list of excluded minors for 4-flat graphs}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/heawood-family-four-flat-v1/results/heawood-family-four-flat}},

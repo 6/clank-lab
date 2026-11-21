@@ -36,7 +36,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamWilliamsonOrder652026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{Nonexistence of Williamson matrices of order 65}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/williamson-order-65-v4/results/williamson-order-65}},

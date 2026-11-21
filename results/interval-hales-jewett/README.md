@@ -38,7 +38,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamIntervalHalesJewett2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A quadratic lower bound for intervals in the Hales--Jewett theorem}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/interval-hales-jewett-v1/results/interval-hales-jewett}},

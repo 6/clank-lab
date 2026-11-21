@@ -38,7 +38,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamRandomHittingSetGreedy2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A counterexample to the very sparse greedy conjecture for random hitting sets}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/random-hitting-set-greedy-v1/results/random-hitting-set-greedy}},

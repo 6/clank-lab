@@ -34,7 +34,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamReptileSimplex2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A four-dimensional 4-reptile simplex}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/reptile-simplex-v1/results/reptile-simplex}},

@@ -74,7 +74,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamScatteringCoefficients2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/scattering-coefficients-v4/results/scattering-coefficients}},

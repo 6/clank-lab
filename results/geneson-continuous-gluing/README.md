@@ -44,7 +44,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamGenesonContinuousGluing2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A proof of Geneson's continuous gluing conjecture}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/geneson-continuous-gluing-v1/results/geneson-continuous-gluing}},

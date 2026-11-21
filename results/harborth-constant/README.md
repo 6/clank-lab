@@ -42,7 +42,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamHarborthConstant2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{The Harborth constant of Cp ⊕ Cp for every prime p ≥ 11}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/harborth-constant-v1/results/harborth-constant}},

@@ -38,7 +38,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamIteratedPlethysm2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Symmetry of hook+column coefficients in iterated plethysms}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/iterated-plethysm-v1/results/iterated-plethysm}},

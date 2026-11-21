@@ -33,7 +33,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamTightCycleC5Turan2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{The Turán density of the tight five-cycle}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/tight-cycle-c5-turan-v1/results/tight-cycle-c5-turan}},

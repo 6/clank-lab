@@ -97,7 +97,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamDifferenceSet2432026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{Nonexistence of (243,121,60) difference sets in C3 × C9 × C9}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v4/results/difference-set-243}},

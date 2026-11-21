@@ -42,7 +42,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamLnedCounterexample2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{A counterexample to the E-derivation part of the LNED conjecture}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/lned-counterexample-v1/results/lned-counterexample}},

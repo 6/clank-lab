@@ -47,7 +47,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamHamiltonianDegreeSequences2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Counterexamples to the conjectured characterization of Hamiltonian degree sequences in digraphs}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/hamiltonian-degree-sequences-v1/results/hamiltonian-degree-sequences}},

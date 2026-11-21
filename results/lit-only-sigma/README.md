@@ -59,7 +59,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamLitOnlySigma2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{A counterexample to a lit-only sigma-game conjecture}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/lit-only-sigma-v4/results/lit-only-sigma}},

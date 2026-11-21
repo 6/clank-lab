@@ -37,7 +37,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamPostliePerfectNilpotent2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{No post-Lie algebra structures on pairs of perfect and nilpotent Lie algebras}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/postlie-perfect-nilpotent-v1/results/postlie-perfect-nilpotent}},

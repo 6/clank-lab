@@ -32,7 +32,7 @@ The calculation uses exact Python integers, a factorial sum, and a separate recu
 
 ```bibtex
 @misc{GrahamMaximalMatchingLogconcavity2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Counts of maximal matchings in a graph need not be log-concave}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/maximal-matching-logconcavity-v1/results/maximal-matching-logconcavity}}

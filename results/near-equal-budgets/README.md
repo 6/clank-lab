@@ -34,7 +34,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamNearEqualBudgets2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Competitive equilibrium can fail near equal budgets for three additive agents}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/near-equal-budgets-v1/results/near-equal-budgets}},

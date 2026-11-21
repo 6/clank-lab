@@ -15,10 +15,10 @@
 \newcommand{\E}{\mathcal{E}}
 \title{The Thomson problem for N = 10}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{November 19, 2026}
+\date{November 20, 2026}
 \begin{document}
 \maketitle
-\begin{center}Version 8\end{center}
+\begin{center}Version 12\end{center}
 \begin{abstract}
 For ten distinct points on the unit sphere, we prove that the bicapped
 square antiprism uniquely minimizes Coulomb energy, up to orthogonal
@@ -71,8 +71,7 @@ $x:\{0,\ldots,9\}\to S^2$,
 Thomson wrote \emph{On the structure of the atom}~\cite[p.~237]{thomson}.
 Our formalization reuses most of the nine-point Lean proof of optimality
 and uniqueness directed by Karthigeyan~\cite{n9}.
-For ten points, the new three-point, classification and Hessian bounds
-establish global optimality and uniqueness of the bicapped square antiprism.
+New three-point, classification and Hessian bounds prove the theorem.
 The main difficulty is making the three-point bound accurate enough to force
 the candidate's seven inner-product intervals.
 
@@ -110,9 +109,11 @@ that energy at most this value forces a pair farther apart than $1.935$.
 
 Jingxing Huang also reports a separate nine-point Lean proof candidate, with
 conditional independent Python checking~\cite[README and manuscript abstract]{huangn9}.
-Later work: Xie's preprint of November 2, 2026, posted after our first
-release on October 22, 2026~\cite{v1}, independently proves optimality and
-uniqueness for nine and ten charges~\cite[Theorem~1.1]{xie}.
+Xie's preprint, posted on November 2, 2026, eleven days after the first
+version of this work (October 22, 2026)~\cite{v1}, independently proves
+optimality and uniqueness for nine and ten charges~\cite[Theorem~1.1]{xie},
+using three-point energy bounds, Gram classification and a Hessian bound
+with exact and interval arithmetic.
 
 This work is checked in Lean from the definitions (Section~\ref{sec:verification}).
 

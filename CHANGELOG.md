@@ -7,6 +7,7 @@ Zenodo records.
 ## acyclic-root-extrema v2 (November 20, 2026)
 
 - Correction: add credit to Yuran Xiu's two earlier preprints on stability and coefficient unimodality of acyclic polynomials. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24412633](https://doi.org/10.5281/zenodo.24412633)
 
 ## thomson-10 v12 (November 20, 2026)
 

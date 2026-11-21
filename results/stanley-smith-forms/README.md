@@ -111,7 +111,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamStanleySmithForms2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{A counterexample to Stanley's conjecture on Smith forms of Jucys--Murphy elements}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-smith-forms-v3/results/stanley-smith-forms}},

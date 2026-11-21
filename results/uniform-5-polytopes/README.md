@@ -62,7 +62,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamUniform5Polytopes2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{The convex uniform 5-polytopes: a computer-assisted classification}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/uniform-5-polytopes-v5/results/uniform-5-polytopes}},

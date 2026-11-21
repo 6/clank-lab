@@ -37,7 +37,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamGameChromaticArboricity2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Monotone classes of bounded game chromatic number have bounded arboricity}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/game-chromatic-arboricity-v1/results/game-chromatic-arboricity}},

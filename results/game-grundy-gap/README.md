@@ -42,7 +42,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamGameGrundyGap2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{Greedy play can require more colors in the coloring game}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/game-grundy-gap-v3/results/game-grundy-gap}},

@@ -83,7 +83,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamMonotoneQueryGap2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{A monotone counterexample to a question on distributional complexity}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/monotone-query-gap-v3/results/monotone-query-gap}},

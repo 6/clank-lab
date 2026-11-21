@@ -34,7 +34,7 @@ The proof classifies the permitted color classes and counts the members of a cov
 
 ```bibtex
 @misc{GrahamIndependentMonophonicNg2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A subdivided 6-clique breaks a conjectured sum bound for independent monophonic-position colorings}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/independent-monophonic-ng-v1/results/independent-monophonic-ng}},

@@ -43,7 +43,7 @@ The plates were taken by Harvard College Observatory and by August Kopff at Heid
 
 ```bibtex
 @misc{GrahamPlutoPrediscovery2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Candidate images of Pluto on archival plates from 1908 and 1909}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/pluto-prediscovery-v1/results/pluto-prediscovery}},

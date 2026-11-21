@@ -42,7 +42,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamZeroForcingUnimodality2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A graph whose zero-forcing polynomial is not unimodal}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/zero-forcing-unimodality-v1/results/zero-forcing-unimodality}}

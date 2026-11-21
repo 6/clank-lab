@@ -34,7 +34,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamFt23PqdPmi2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A counterexample on two kinds of positive dependence}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/ft23-pqd-pmi-v1/results/ft23-pqd-pmi}}

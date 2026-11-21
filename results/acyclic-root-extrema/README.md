@@ -42,7 +42,7 @@ The proof uses elementary counting, the intermediate value theorem and the trian
 
 ```bibtex
 @misc{GrahamAcyclicRootExtrema2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A counterexample to two questions on acyclic polynomial roots}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/acyclic-root-extrema-v1/results/acyclic-root-extrema}},

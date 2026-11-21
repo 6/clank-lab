@@ -94,7 +94,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamWeakParking2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{The weak parking-space conjecture}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/weak-parking-v1/results/weak-parking}},

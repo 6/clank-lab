@@ -41,7 +41,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamCubelikeCospectrality2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{Strongly cospectral sets in seven-dimensional cubelike graphs}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/cubelike-cospectrality-v2/results/cubelike-cospectrality}},

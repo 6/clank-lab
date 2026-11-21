@@ -36,7 +36,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamCd13UniversalDynamics2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Faithful local dynamics on every finite acyclic graph}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/cd13-universal-dynamics-v1/results/cd13-universal-dynamics}},

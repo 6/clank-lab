@@ -38,7 +38,7 @@ The proof tracks configurations excluded by the moves and uses elementary finite
 
 ```bibtex
 @misc{GrahamSpinningSwitches2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A classification of solvable spinning-switches puzzles}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/spinning-switches-v1/results/spinning-switches}},

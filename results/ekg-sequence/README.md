@@ -106,7 +106,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamEkgSequence2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{The second-order asymptotic of the EKG sequence}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/ekg-sequence-v7/results/ekg-sequence}},

@@ -43,7 +43,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamStanleyClassSumSnf2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{Smith normal form of the n-cycle class sum}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-class-sum-snf-v4/results/stanley-class-sum-snf}},

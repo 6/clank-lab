@@ -36,7 +36,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamStsBrokenSpectrum2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{A Steiner triple system with a broken chromatic spectrum}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/sts-broken-spectrum-v1/results/sts-broken-spectrum}},

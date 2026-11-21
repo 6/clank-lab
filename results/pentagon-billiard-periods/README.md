@@ -45,7 +45,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamPentagonBilliardPeriods2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{Combinatorial periods of asymmetric billiard trajectories in the regular pentagon}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/pentagon-billiard-periods-v1/results/pentagon-billiard-periods}},

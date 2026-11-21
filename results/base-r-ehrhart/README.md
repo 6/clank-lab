@@ -38,7 +38,7 @@ Apache-2.0 (see the repository's LICENSE).
 
 ```bibtex
 @misc{GrahamBaseREhrhart2026,
-  author = {Graham, P.},
+  author = {Graham, Peter},
   title = {{A base-r simplex that is not Ehrhart positive}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/base-r-ehrhart-v1/results/base-r-ehrhart}}

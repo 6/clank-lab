@@ -37,7 +37,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 
 ```bibtex
 @misc{GrahamPentagonTetrads2026,
-  author       = {Graham, P.},
+  author       = {Graham, Peter},
   title        = {{No holeless tetrad of four congruent pentagons}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/pentagon-tetrads-v1/results/pentagon-tetrads}}

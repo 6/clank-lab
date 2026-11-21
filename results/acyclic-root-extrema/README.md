@@ -12,7 +12,7 @@ Checked in Lean from the definitions; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23862351](https://doi.org/10.5281/zenodo.23862351)
+Archived on Zenodo: [doi:10.5281/zenodo.24412633](https://doi.org/10.5281/zenodo.24412633)
 
 ## Abstract
 
@@ -46,6 +46,6 @@ The proof uses elementary counting, the intermediate value theorem and the trian
   title = {{A counterexample to two questions on acyclic polynomial roots}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/acyclic-root-extrema-v1/results/acyclic-root-extrema}},
-  doi          = {10.5281/zenodo.23862351}
+  doi          = {10.5281/zenodo.24412633}
 }
 ```

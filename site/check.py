@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check a generated paper site against its manifest (Python 3.9+)."""
+"""Check a generated paper site against its manifest and Zenodo (Python 3.9+)."""
 
 import argparse
 from collections import defaultdict
@@ -17,9 +17,11 @@ import unicodedata
 from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
 
+from build import AI_CREDIT, DOI_BASE, PDF_LINK_LABEL, displayed_versions, fetch, paper_abstract, public_papers, version_date, versions_of
 from figures import FIGURES, FIGURE_FILE, verify_figure
-from maths import has_math
+from maths import has_math, split_math
 from releases import paper_release_links
+from summaries import paper_summaries
 
 MAX_PDF = 5_000_000
 BASE_URL = "https://clanklab.org/"
@@ -46,6 +48,10 @@ class Page(HTMLParser):
         self.meta = defaultdict(list)
         self.links = []
         self.dates = []
+        self.version_dates = []
+        self.version_entry = None
+        self.paper_sections = []
+        self.paper_section = None
         self.body = []
         self.text = []
         self.attributes = []
@@ -67,7 +73,8 @@ class Page(HTMLParser):
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
         classes = attributes.get("class", "").split()
-        self.stack.append((tag, self.in_math, self.in_annotation, self.literal_dollar, self.hidden))
+        self.stack.append((tag, self.in_math, self.in_annotation, self.literal_dollar, self.hidden,
+                           self.version_entry, self.paper_section))
         if tag == "math":
             self.in_math = True
             self.math_count += 1
@@ -91,8 +98,30 @@ class Page(HTMLParser):
             self.meta[attributes.get("name", "")].append(attributes.get("content", ""))
         if tag == "a" and self.in_body:
             self.links.append(attributes.get("href", ""))
+        if tag == "p" and self.in_body and not self.hidden and {"publication-date", "update-date"}.intersection(classes):
+            self.version_entry = dict(classes=classes, dates=[], text="")
+            self.version_dates.append(self.version_entry)
+        if self.in_body and not self.hidden:
+            section = None
+            if tag == "h2":
+                section = {"paper-summary-heading": "summary heading",
+                           "paper-abstract-heading": "abstract heading"}.get(attributes.get("id"))
+            elif tag == "p" and "summary-text" in classes:
+                section = "summary"
+            elif tag == "a" and "paper-pdf" in classes:
+                section = "PDF link"
+            elif tag == "a" and "paper-doi" in classes:
+                section = "DOI link"
+            elif tag == "div" and "abstract-text" in classes:
+                section = "abstract"
+            if section:
+                self.paper_section = (section, [])
+                self.paper_sections.append(self.paper_section)
         if tag == "time":
-            self.dates.append(attributes.get("datetime", ""))
+            value = attributes.get("datetime", "")
+            self.dates.append(value)
+            if self.version_entry is not None and not self.hidden:
+                self.version_entry["dates"].append(value)
         self.styles += tag == "style"
         if tag == "img":
             self.unsafe |= (not self.in_body or self.hidden or not any(item[0] == "figure" for item in self.stack)
@@ -111,7 +140,8 @@ class Page(HTMLParser):
     def handle_endtag(self, tag):
         for index in range(len(self.stack) - 1, -1, -1):
             if self.stack[index][0] == tag:
-                _, self.in_math, self.in_annotation, self.literal_dollar, self.hidden = self.stack[index]
+                (_, self.in_math, self.in_annotation, self.literal_dollar, self.hidden,
+                 self.version_entry, self.paper_section) = self.stack[index]
                 del self.stack[index:]
                 break
         if tag == "head":
@@ -133,8 +163,12 @@ class Page(HTMLParser):
                 self.body.append(semantic)
             if self.in_heading:
                 self.headings[-1] += semantic
+            if self.paper_section and not self.hidden:
+                self.paper_section[1].append(semantic)
         if self.in_body and not (self.in_math or self.literal_dollar or self.hidden):
             self.visible.append(text)
+            if self.version_entry is not None:
+                self.version_entry["text"] += text
 
 
 def check_page(page, label):
@@ -146,6 +180,43 @@ def check_page(page, label):
         if name.startswith("citation_"):
             require(all(not re.search(r"</?[A-Za-z][^>]*>", value) for value in values),
                     "HTML in " + name + " in " + label)
+
+
+def check_versions(page, versions, label):
+    require(len(page.version_dates) == len(versions), "Incorrect number of version date lines in " + label)
+    for role, version, line in zip(("publication", "update"), versions, page.version_dates):
+        day = version["date"]
+        action = "Published" if role == "publication" else "Updated"
+        expected_text = f"{action} {version_date(day)}"
+        if len(versions) > 1:
+            expected_text += f' (version {version["number"]})'
+        require(f"{role}-date" in line["classes"] and line["dates"] == [day]
+                and " ".join(line["text"].split()) == expected_text, f"Incorrect {role} date line in {label}")
+    require(page.dates == [version["date"] for version in versions], "Incorrect dates in " + label)
+
+
+def source_text(nodes):
+    # The page parser recovers TeX from MathML annotations, without the original delimiters.
+    return "".join(raw if tex is None else tex for node in nodes for raw, tex, _ in split_math(node))
+
+
+def check_paper_content(page, summary, zenodo_abstract, label):
+    expected_sections = ["PDF link", "DOI link", "summary heading", "summary", "abstract heading", "abstract"]
+    require([name for name, _ in page.paper_sections] == expected_sections,
+            "Missing or misplaced DOI link, PDF link, summary, or abstract in " + label)
+    pdf_link, doi_link, summary_heading, shown_summary, abstract_heading, shown_abstract = (
+        " ".join("".join(parts).split()) for _, parts in page.paper_sections
+    )
+    require(summary_heading == "In short" and abstract_heading == "Abstract",
+            "Incorrect summary or abstract heading in " + label)
+    require(shown_summary == " ".join(source_text([summary]).split()),
+            "Summary differs from source in " + label)
+    require(doi_link == "DOI", "Incorrect DOI link label in " + label)
+    require(pdf_link == PDF_LINK_LABEL, "Incorrect PDF link label in " + label)
+    expected_abstract, kept_credit = paper_abstract(zenodo_abstract)
+    require(shown_abstract == " ".join(source_text(Page(expected_abstract).text).split()),
+            "Abstract or AI credit differs from Zenodo in " + label)
+    return kept_credit
 
 
 def normal(text):
@@ -207,6 +278,7 @@ def check(output, base_url, manifest, screenshots=None, deny=(), checkout=None):
     require(len(set(slugs)) == len(slugs), "Duplicate manifest slug")
     require(len({p["concept_doi"] for p in papers}) == len(papers), "Duplicate concept DOI")
     release_links = paper_release_links(checkout, slugs)
+    summaries = paper_summaries(checkout, slugs)
     expected_pages = {"index.html"} | {f"papers/{slug}/index.html" for slug in slugs}
     expected_pdfs = {f"papers/{slug}/{slug}.pdf" for slug in slugs}
     expected_files = expected_pages | expected_pdfs | {"robots.txt", "sitemap.xml"}
@@ -231,12 +303,17 @@ def check(output, base_url, manifest, screenshots=None, deny=(), checkout=None):
             pages[label] = page
     index = pages["index.html"]
     require(not index.images and not index.captions, "Unexpected figure on index")
+    require(AI_CREDIT in index.visible, "Missing AI credit on the index")
     ordered = sorted(papers, key=lambda p: (p["first_version_date"], p["slug"]), reverse=True)
     links = [link for p in ordered for link in (f"papers/{p['slug']}/", "https://doi.org/" + p["concept_doi"],
                                                 f"papers/{p['slug']}/{p['slug']}.pdf")]
     require(index.links == links, "Index title, DOI, or PDF links missing or not newest first")
     require(index.dates == [p["first_version_date"] for p in ordered], "Incorrect index dates")
     largest = (0, "")
+    live = {record["conceptdoi"]: record for record in public_papers()}
+    require(live.keys() == {p["concept_doi"] for p in papers}, "Manifest paper inventory differs from Zenodo")
+    concept_targets = []
+    credits = 0
     for paper in papers:
         slug, title = paper["slug"], paper["title"]
         label = f"papers/{slug}/index.html"
@@ -244,6 +321,10 @@ def check(output, base_url, manifest, screenshots=None, deny=(), checkout=None):
         doi_match = re.fullmatch(r"10\.5281/zenodo\.(\d+)", paper["concept_doi"])
         require(doi_match, "Invalid Zenodo concept DOI")
         day = date.fromisoformat(paper["first_version_date"]).isoformat()
+        record = live[paper["concept_doi"]]
+        versions = displayed_versions(record, versions_of(record))
+        require(record["id"] == paper["latest_record_id"] and versions[0]["date"] == day,
+                "Manifest latest record or first date differs from Zenodo for " + slug)
         page_url = base_url + f"papers/{slug}/"
         pdf_url = page_url + slug + ".pdf"
         page = pages[label]
@@ -255,7 +336,10 @@ def check(output, base_url, manifest, screenshots=None, deny=(), checkout=None):
         for name, values in wanted.items():
             require(page.meta[name] == values, f"Incorrect {name} in {label}")
         require(len(page.headings) == 1 and normal(page.headings[0]) == normal(title), "Incorrect visible title in " + label)
-        require(page.dates == [day], "Incorrect visible date in " + label)
+        check_versions(page, versions, label)
+        credits += check_paper_content(page, summaries[slug], record["metadata"]["description"], label)
+        doi_url = DOI_BASE + paper["concept_doi"]
+        concept_targets.append((doi_url, versions[-1]["record_id"]))
         if page.images or page.captions:
             entry = FIGURES.get(slug)
             require(entry is not None, "Unlisted figure in " + label)
@@ -270,15 +354,10 @@ def check(output, base_url, manifest, screenshots=None, deny=(), checkout=None):
             expected_files.add(relative_figure)
         visible = normal(" ".join(page.body))
         require(all(normal(author) in visible for author in paper["authors"]), "Missing visible author in " + label)
-        abstract = normal(" ".join(Page(paper["abstract"]).text))
-        require(bool(abstract) and abstract in visible, "Incomplete abstract in " + label)
-        doi_url = "https://doi.org/" + paper["concept_doi"]
-        expected_links = ["../../", doi_url, slug + ".pdf"]
+        expected_links = ["../../", slug + ".pdf", doi_url]
         if slug in release_links:
             expected_links.append(release_links[slug])
         require(page.links == expected_links, "Incorrect navigation, DOI, PDF, or release link in " + label)
-        require(doi_url in page.links and paper["concept_doi"] in " ".join(page.body), "Missing visible DOI in " + label)
-        require(slug + ".pdf" in page.links, "Missing visible PDF link in " + label)
         parsed = urlsplit(page.meta["citation_pdf_url"][0])
         require(parsed.scheme == base.scheme and parsed.netloc == base.netloc
                 and parsed.path.rsplit("/", 1)[0] == urlsplit(page_url).path.rstrip("/")
@@ -306,6 +385,10 @@ def check(output, base_url, manifest, screenshots=None, deny=(), checkout=None):
     robots = (output / "robots.txt").read_text(encoding="utf-8")
     require(robots == f"User-agent: *\nAllow: /\nSitemap: {base_url}sitemap.xml\n",
             "robots.txt must allow all crawling and advertise the sitemap")
+    for doi_url, latest_record_id in concept_targets:
+        fetch(doi_url, landing_record=latest_record_id)
+    print(f"Zenodo PASS: {len(papers)} version histories match; {len(concept_targets)} concept DOIs resolve to the latest record")
+    print(f"Content PASS: {len(papers)} summaries match their source; standalone AI credit: {credits} kept, {len(papers) - credits} omitted")
     if screenshots is not None:
         require(output.resolve() != screenshots.resolve() and output.resolve() not in screenshots.resolve().parents,
                 "Save screenshots outside the generated site")

@@ -7,6 +7,7 @@ Zenodo records.
 ## thomson-10 v12 (November 20, 2026)
 
 - Correction: clarify the dates of Katherine Xie's independent proof and Jingxing Huang's ten-point stationarity continuation relative to this work's first release. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24410698](https://doi.org/10.5281/zenodo.24410698)
 
 ## pluto-prediscovery v2 (November 19, 2026)
 

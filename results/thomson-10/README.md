@@ -14,7 +14,7 @@ Checked in Lean from the definitions; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.24382573](https://doi.org/10.5281/zenodo.24382573)
+Archived on Zenodo: [doi:10.5281/zenodo.24410698](https://doi.org/10.5281/zenodo.24410698)
 
 ## Abstract
 
@@ -52,6 +52,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{The Thomson problem for N = 10}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/thomson-10-v8/results/thomson-10}},
-  doi          = {10.5281/zenodo.24382573}
+  doi          = {10.5281/zenodo.24410698}
 }
 ```

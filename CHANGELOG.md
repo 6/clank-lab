@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## thomson-10 v12 (November 20, 2026)
+
+- Correction: clarify the dates of Katherine Xie's independent proof and Jingxing Huang's ten-point stationarity continuation relative to this work's first release. The theorem and its checks are unchanged.
+
 ## pluto-prediscovery v2 (November 19, 2026)
 
 - Correction: presentation, answering an outside review. The paper assesses the February 1909 pair, the December 1908 plate and their combination separately: the February pair cannot confirm December. The random-offset counts are per-trial counts of specific events, not significance levels. The centroid rule is stated exactly, and the limits cite a 1914 Harvard image later judged a grain enhancement.

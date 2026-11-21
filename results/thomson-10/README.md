@@ -12,11 +12,15 @@ The new inputs are the ten-point energy, interval-classification and Hessian cer
 
 Checked in Lean from the definitions; not yet reviewed by experts.
 
-The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.24382573](https://doi.org/10.5281/zenodo.24382573)
+
+## Abstract
+
+For ten distinct points on the unit sphere, we prove that the bicapped square antiprism uniquely minimizes Coulomb energy, up to orthogonal transformations and relabeling. We build on the Lean proof directed by Aravind Karthigeyan of the tricapped trigonal prism's nine-point optimality and uniqueness. We use the three-point positivity method of Bachoc and Vallentin and of Cohn and Woo. A three-point semidefinite bound confines every competitor of no greater energy to short intervals around the candidate's inner products. Gram-determinant tests determine their assignment to pairs; orthogonal alignment and a quantitative local energy inequality then force congruence. The candidate's height is the unique critical point in a rational interval. We formalize the argument in Lean.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 ## Check it
 
@@ -34,7 +38,7 @@ The Python checker independently implements checks of the same rational certific
 
 ## Credits
 
-Aravind Karthigeyan's [thomson-n9-lean](https://github.com/aravindkarthigeyan/thomson-n9-lean) supplies most of the MIT-licensed Lean code and the proof design. Jingxing Huang's [Thomson n=9 proof and manuscript](https://doi.org/10.5281/zenodo.23573472) is related nine-point work. L. Föppl's [Stabile Anordnungen von Elektronen im Atom](https://doi.org/10.1515/crll.1912.141.251) records the candidate's history. Two cited works are later work, first posted after this result's first public release on October 22, 2026 (tag [`thomson-10-v1`](<https://github.com/6/clank-lab/tree/thomson-10-v1/results/thomson-10>) and [Zenodo version 1](https://doi.org/10.5281/zenodo.23552642)): Katherine Xie's [preprint](https://doi.org/10.5281/zenodo.23899873), posted on November 2, 2026, independently proves the nine- and ten-point cases, and Huang's [ten-point stationarity continuation](https://github.com/Stickerbug/thomson-n9-proof/blob/fce398ce69c369a8de5b10d194af137cf33edd54/proof_work/publication_validation/formal/ThomsonCertificate/N10StationarityRightTerm3Final.lean), first committed on October 23, 2026, proves the related endpoint-sign theorem `d4dStationarity_right_endpoint_positive`.
+Aravind Karthigeyan's [thomson-n9-lean](https://github.com/aravindkarthigeyan/thomson-n9-lean) supplies most of the MIT-licensed Lean code and the proof design. Jingxing Huang's [Thomson n=9 proof and manuscript](https://doi.org/10.5281/zenodo.23573472) is related nine-point work. L. Föppl's [Stabile Anordnungen von Elektronen im Atom](https://doi.org/10.1515/crll.1912.141.251) records the candidate's history. Katherine Xie's [preprint](https://doi.org/10.5281/zenodo.23899873), posted on November 2, 2026, after the [first version of this work](https://doi.org/10.5281/zenodo.23552642) (October 22, 2026), independently proves the nine- and ten-point cases. Huang's [ten-point stationarity continuation](https://github.com/Stickerbug/thomson-n9-proof/blob/fce398ce69c369a8de5b10d194af137cf33edd54/proof_work/publication_validation/formal/ThomsonCertificate/N10StationarityRightTerm3Final.lean), first recorded on [October 23, 2026](https://github.com/Stickerbug/thomson-n9-proof/commit/d8b5e25f939a5fddf80f53cc1ea0c85fb4999063), after the first version of this work, proves the related endpoint-sign theorem `d4dStationarity_right_endpoint_positive`.
 
 The bound framework builds on P. Delsarte, J. M. Goethals and J. J. Seidel's [Spherical codes and designs](https://doi.org/10.1007/BF03187604), C. Bachoc and F. Vallentin's [New upper bounds for kissing numbers from semidefinite programming](https://arxiv.org/abs/math/0608426), and H. Cohn and J. Woo's [Three-point bounds for energy minimization](https://arxiv.org/abs/1103.0485). V. A. Yudin's [Minimum potential energy of a point system of charges](https://doi.org/10.1515/dma.1993.3.1.75) provides energy-bound background. The full work-by-work list, including preceding exact cases, numerical configurations and concurrent results, is in [Further credits](checks/README.md#further-credits).
 

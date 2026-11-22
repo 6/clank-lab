@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## steinberg-c4-c9 v8 (November 21, 2026)
+
+- Correction: wording of credits and of what Lean checks; the status line now reads written proof with Lean and computer checks, and the abstract states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.
+
 ## acyclic-root-extrema v2 (November 20, 2026)
 
 - Correction: add credit to Yuran Xiu's two earlier preprints on stability and coefficient unimodality of acyclic polynomials. The theorem and its checks are unchanged.

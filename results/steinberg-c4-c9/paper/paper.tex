@@ -12,31 +12,35 @@
 \usepackage[title]{appendix}
 \geometry{margin=1in}
 \setlength{\emergencystretch}{3em}
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={A planar graph without four- or nine-cycles that is not three-colorable},pdfauthor={P. Graham},pdfsubject={Computer-assisted graph coloring counterexample},pdfkeywords={planar graph, proper coloring, forbidden cycles}}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={A planar graph without four- or nine-cycles that is not three-colorable},pdfauthor={Peter Graham},pdfsubject={Computer-assisted graph coloring counterexample},pdfkeywords={planar graph, proper coloring, forbidden cycles}}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newcommand{\file}[1]{\texttt{\detokenize{#1}}}
 \title{A planar graph without four- or nine-cycles\texorpdfstring{\\}{ }that is not three-colorable}
-\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 25, 2026}
+\author{Peter Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 22, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-Lu, Wang, Wang, Bu, Montassier and Raspaud asked which cycle lengths, together with length four, force
-proper three-colorability of planar graphs, as recorded by Kang, Jin and
-Wang. Cohen-Addad, Hebdige, Král',
-Li and Salgado disproved Steinberg's conjecture for lengths four and five.
-Kostochka and Yancey proved a sharp general lower bound on the number
-of edges of a four-critical graph. We give an 82-vertex planar graph
-without cycles of length four or nine that is four-critical and attains
-that bound, answering the length-nine case of that question.
-The graph is obtained by Dirac--Haj\'os--Gallai--Ore compositions of complete four-vertex graphs.
-Its non-three-colorability follows by induction on this construction;
-a rotation system, cycle enumeration and three-colorings after edge deletion establish
-the remaining properties. Lean verifies the rotation certificate, the
-exclusion of four- and nine-cycles, and non-three-colorability of the
-same graph.
+We give an 82-vertex planar graph without cycles of length four or nine
+that is not three-colorable. Steinberg conjectured in 1976 that planar
+graphs without cycles of length four or five are three-colorable;
+Cohen-Addad, Hebdige, Kr\'al', Li and Salgado disproved this, and their
+graph contains a nine-cycle. Lu, Wang, Wang, Bu, Montassier and Raspaud
+asked, as recorded by Kang, Jin and Wang, for which lengths from five to
+nine every planar graph without cycles of that length or of length four
+is three-colorable. Our graph answers the length-nine case negatively.
+It is built from 27 complete graphs on four vertices by Ore
+compositions, the edge-deletion and vertex-splitting operation of Dirac,
+Haj\'os, Gallai and Ore. It is four-critical: every proper subgraph is
+three-colorable. Its 136 edges attain Kostochka and Yancey's lower bound,
+so no four-critical graph on 82 vertices has fewer edges. Lean checks planarity, the exclusion of four- and
+nine-cycles, and non-three-colorability; criticality and the edge
+minimum rest on the written proof.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 \end{abstract}
+\medskip
 
 \section{Introduction}
 All graphs in this paper are finite and simple. A proper three-coloring
@@ -46,104 +50,83 @@ length $k$, denoted $C_k$, forbids cycles with chords as well.
 
 A graph is \emph{four-critical} if it has chromatic number four and
 every proper subgraph is three-colorable.
-Ore composition is the edge deletion and vertex splitting operation defined
-in Section~\ref{sec:ore}. A graph obtained from copies of $K_4$ by Ore
-compositions is called a \emph{four-Ore graph}~\cite[Section 1]{ky}.
-A rotation system specifies the cyclic order of the neighbors at each vertex.
+An \emph{Ore composition} glues two graphs by deleting an edge $xy$ of
+one and splitting a vertex $z$ of the other into two vertices identified
+with $x$ and $y$; Section~\ref{sec:ore} gives the precise definition. A
+graph obtained from copies of $K_4$ by Ore compositions is called a
+\emph{four-Ore graph}~\cite[Section 1]{ky}.
 For a graph $G$, write $\chi(G)$ for its chromatic number and $G-e$ for
 the graph obtained by deleting edge $e$.
 
 Steinberg conjectured in 1976 that every planar graph without $C_4$ or
-$C_5$ is properly three-colorable; see the account in~\cite[opening paragraph]{steinberg}.
+$C_5$ is three-colorable; see Steinberg's account~\cite{steinbergoriginal} and the disproof~\cite[opening paragraph]{steinberg}.
+Gr\"otzsch's theorem~\cite{grotzsch} gives three-colorability of planar
+graphs without triangles; see the short proof in~\cite{kyfour}. For the
+relaxation attributed to Erd\H{o}s in~\cite{kjw}, Borodin, Glebov,
+Raspaud and Salavatipour prove three-colorability when cycles of lengths
+four through seven are excluded~\cite{bgrs}; earlier bounds by Abbott
+and Zhou, by Borodin, and by Sanders and Zhao are recorded
+in~\cite[Section~1]{kjw}.
 
 \begin{theorem}\label{thm:main}
-There exists an 82-vertex planar graph with 136 edges, without cycles of
-length four or nine, that is four-critical and is not properly three-colorable.
-It is a four-Ore graph and has the fewest edges among all 82-vertex
-four-critical graphs.
+There exists an 82-vertex planar four-Ore graph with 136 edges, without cycles of
+length four or nine. Consequently it is four-critical and has the fewest
+edges among all 82-vertex four-critical graphs.
 \end{theorem}
 
-The theorem gives a negative answer to the $i=9$ case of Kang, Jin and Wang's
-Problem 1.2~\cite{kjw}, which asks which $i\in\{5,6,7,8,9\}$
-make every planar graph without $C_4$ or $C_i$ properly three-colorable.
-Kang, Jin and Wang write that a more general problem ``was formulated
-also in [7]''~\cite[Section 1, immediately before Problem 1.2]{kjw}; their
-reference [7] is Lu, Wang, Wang, Bu, Montassier and Raspaud~\cite{lu}. Cohen-Addad, Hebdige, Král', Li and Salgado's
-counterexample to Steinberg's conjecture concerns $C_4,C_5$~\cite[Theorem 3]{steinberg};
-its Figure 1 contains the nine-cycle described below.
-Our graph answers the $C_4,C_9$ question using Ore composition and attains
-Kostochka and Yancey's edge bound~\cite[Theorem 3]{kybound}.
-The contribution is the explicit graph for the length-nine case; the
-Ore-composition argument and the critical-graph edge bound are the tools.
-The difficult construction step was to choose identifications between small
-planar pieces that make their possible proper three-colorings incompatible
-without creating the forbidden cycles. The restrictions of a piece's
-three-colorings to the vertices to be identified form a finite list of
-color patterns. Composing these lists determines which identifications
-are incompatible with three-colorability; the cycle restrictions must
-also hold for the resulting graph. The identifications were found by a
-computer search: small planar pieces were classified by these color patterns,
-and their compositions were continued until no coloring pattern remained.
-For the resulting
-graph, Ore composition gives the short proof of non-three-colorability
-below; the rotation and exhaustive cycle enumeration establish planarity
-and the cycle exclusions. Section~\ref{sec:ore} illustrates
-the first composition and gives the proof; the complete construction is
-printed in Appendix~\ref{app:ore}.
-
-\paragraph{Related coloring results.}\label{app:scope}
-Nearby results on proper, list and defective coloring put the forbidden-pair question in context.
-
-We observe that the $G_1$ component in Figure 1 of Cohen-Addad and
-coauthors~\cite{steinberg} contains the nine-cycle
-$a,f,k,n,m,j,i,h,g,a$ in the paper's own labels. This component is retained
-in the published construction~\cite[Lemma 2 and proof of Theorem 3]{steinberg}.
-
-
-Here DP-coloring means correspondence coloring~\cite[Section 1]{kjz}.
-
-Kang, Jin and Wang prove proper three-colorability when $C_6$ is also
-excluded~\cite[Theorem 1.4]{kjw}. The $\{C_4,C_7,C_9\}$-free class is properly three-colorable by Lu and
-coauthors, as also recorded in~\cite[Section 1, paragraph following Problem 1.3]{kjw}; Kang, Jin and Zhu prove
-DP-3-colorability of that class~\cite[Theorem 1.1]{kjz}.
-Their Corollary 1.2 states that these graphs are
-``3-choosable (and hence 3-colorable)''~\cite{kjz}.
-
-
-Defective colorings are a different
-notion: a $(d_1,d_2,d_3)$-coloring permits each color class to induce
-maximum degree at most $d_j$.
-Related work includes Jin, Kang, Liu and Wang on $(1,0,0)$-colorability~\cite[Theorem 1.4]{jklw}.
-For the four-and-nine pair, Dai, Wang and Xu's title is
-``Every planar graph without cycles of length 4 or 9 is $(1,1,0)$-colorable''~\cite{dai},
-while Chen, Dai, Nie, Wang and Yu study $(2,0,0)$-colorability~\cite[Theorem 1.4]{nie}.
-Xiao and Huang's article is entitled
-``A weak DP-coloring of planar graphs without 4- and 9-cycles''~\cite{xiao}.
-Jin, Kang, Liu and Wang described the cases $i\in\{6,7,8,9\}$ as
+The theorem answers the $i=9$ case of the question of Lu, Wang, Wang,
+Bu, Montassier and Raspaud~\cite{lu}, as attributed and reproduced by
+Kang, Jin and Wang~\cite[Section~1, Problem~1.2]{kjw}:
+which $i\in\{5,6,7,8,9\}$ make every planar graph without $C_4$ or
+$C_i$ properly three-colorable? Cohen-Addad, Hebdige, Kr\'al', Li and
+Salgado's counterexample to Steinberg's conjecture answers $i=5$
+negatively~\cite[Theorem 3]{steinberg}. We observe that the $G_1$
+component in their Figure~1 contains the nine-cycle
+$a,f,k,n,m,j,i,h,g,a$ in that paper's own labels. This component is
+retained in the published construction~\cite[Lemma 2 and proof of
+Theorem 3]{steinberg}; hence that graph does not settle the case $i=9$.
+Kang, Jin, Liu and Wang described the cases $i\in\{6,7,8,9\}$ as
 ``still unsettled''~\cite[paragraph following Problem 1.2]{jklw}.
-For further bibliographic context see Ang and Leo~\cite{ang}, Bu, Wang
-and Wang~\cite{survey}, and Li, Niu and Tian~\cite{bordeaux}.
+Theorem~\ref{thm:main} answers the case $i=9$ negatively; the cases
+$i=6,7,8$ are not addressed here. On the positive side, Kang, Jin and
+Wang prove three-colorability when $C_6$ is also
+excluded~\cite[Theorem 1.4]{kjw}, and the $\{C_4,C_7,C_9\}$-free class is
+three-colorable by Lu and coauthors~\cite{lu}, as also recorded
+in~\cite[Section 1, paragraph following Problem 1.3]{kjw}.
+Appendix~\ref{app:scope} collects list, DP and defective coloring results
+for these classes.
 
-The proof depends on finite computations described in
-Section~\ref{sec:checks}, together with the written arguments below.
-The proofs, the Lean formalization, the search code, the certificate checkers
-and the text were produced by AI models (from OpenAI and Anthropic), working
-under the author's direction. This paper is computer-assisted and has not
-yet been reviewed by experts.
+Our contribution is an explicit graph for the $C_4,C_9$ question, built
+by Ore composition and attaining Kostochka and Yancey's edge
+bound~\cite[Theorem 3]{kybound}; see also~\cite{kyfour}.
+An Ore composition of two non-three-colorable graphs is never
+three-colorable (Lemma~\ref{lem:ore}), but it can create four- or
+nine-cycles and destroy planarity. The difficulty is choosing the 26
+identifications between planar pieces so that neither happens; the
+earlier counterexample does not meet these restrictions. The proof
+checks the resulting graph directly: Ore composition gives the short
+proof of non-three-colorability, and a rotation system and exhaustive
+cycle enumeration establish planarity and the cycle exclusions.
+Section~\ref{sec:ore} illustrates the first composition and gives the
+proof; the complete construction is printed in Appendix~\ref{app:ore}.
+The proof also depends on the finite computations described in
+Section~\ref{sec:checks}.
 
 \section{Construction and proof}\label{sec:ore}
-The graph $G$ has vertex set $\{0,\ldots,81\}$. We prove
-non-three-colorability by constructing $G$ from copies of $K_4$ by Ore
-composition. A rotation system proves planarity, and enumeration excludes
-the forbidden cycles. Proper three-colorings of $G-e$ for every edge $e$ establish four-criticality;
-the number of edges then gives equality in the cited lower bound.
-
-
+The graph $G$ has vertex set $\{0,\ldots,81\}$. This section builds $G$
+by Ore composition, which proves non-three-colorability;
+Sections~\ref{app:embedding} and~\ref{sec:cycles} prove planarity and the
+cycle exclusions, and Section~\ref{sec:crit} completes the proof of
+Theorem~\ref{thm:main}.
 
 \Needspace{9\baselineskip}
 For a graph $B$, $N_B(z)$ denotes the set of neighbors of vertex $z$.
-We use the name Ore composition for the operation called
-DHGO-composition in Kostochka and Yancey's Section 1~\cite{ky}.
+We use the name Ore composition for the operation defined below.
+Kostochka and Yancey trace it to Dirac~\cite{dirac}, Gallai~\cite{gallai},
+Haj\'os~\cite{hajos} and Ore~\cite{ore}~\cite[Section~1]{ky}. Gallai
+presents the corresponding criticality statement (2.7) as a theorem of
+Dirac, and its special case (2.9) as Haj\'os's
+construction~\cite[Section~2, (2.7)--(2.9)]{gallai}.
 
 \begin{samepage}
 Take vertex-disjoint graphs $A$ and $B$, an edge $xy$ of $A$, and a
@@ -165,27 +148,27 @@ non-three-colorability. The cycle restrictions are established separately
 for the resulting graph by the two complete enumerations in
 Appendix~\ref{app:cycles}.
 
-Appendix~\ref{app:ore} represents the construction as a rooted tree of compositions.
-Tree-node numbers index construction instructions; vertex labels name the
-vertices in their operands. These are distinct columns of the construction
-table. Labels at least 82 are temporary split vertices;
-none survives at the root, node 52.
-The first composition in the construction uses copies of $K_4$ on
+The construction is a binary tree with 27 leaves, each a copy of $K_4$,
+and 26 internal nodes, each an Ore composition. The nodes are numbered
+0 to 52, with root 52; write $J_t$ for the graph at node $t$. Node
+numbers are distinct from vertex labels.
+The first composition uses copies of $K_4$ on
 $\{12,60,62,84\}$ and $\{13,61,63,85\}$. It deletes the edge $62\,84$,
 splits vertex $85$, and assigns neighbor $63$ to $62$ and neighbors $13,61$
-to $84$. Figure~\ref{fig:ore-step} shows this operation. This is the first internal
-row of the tree in Appendix~\ref{app:ore}; its later rows specify every
-subsequent identification. Write $J_t$ for the graph specified at node $t$ of that table. The last
+to $84$ (Figure~\ref{fig:ore-step}). The last
 composition deletes edge $0\,7$ from $J_{28}$ and splits vertex 82 of
 $J_{51}$: neighbors $2,3,4,5$ are attached to 0 and neighbors $8,9,10,11$
 to 7. Its two operands are obtained from $J_4,J_{27}$ and $J_{47},J_{50}$,
-respectively, as shown in Figure~\ref{fig:ore-tree}. These are construction
-indices, distinct from vertex labels. Figure~\ref{fig:graph} in
-Appendix~\ref{app:rotation} shows the full graph.
+respectively (Figure~\ref{fig:ore-tree}). Vertex labels 82 and above are
+temporary: each such vertex is split at a later node, so none survives
+at the root. Appendix~\ref{app:ore} lists every node, and
+Figure~\ref{fig:graph} in Appendix~\ref{app:rotation} shows the full graph.
 
+\begingroup
+\setlength{\intextsep}{6pt}
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=.90,every node/.style={font=\small},
+\begin{tikzpicture}[scale=.80,every node/.style={font=\small},
  orevertex/.style={circle,draw,fill=white,inner sep=1.5pt},
  orex/.style={orevertex,draw=red!70!black,very thick},
  orey/.style={orevertex,draw=blue!70!black,very thick}]
@@ -207,14 +190,14 @@ Appendix~\ref{app:rotation} shows the full graph.
 \node at (3.6,-1.9) {vertex 85 split};
 \end{tikzpicture}
 \caption{The first composition. Left: edge $62\,84$ is deleted (dashed).
-Right: vertex 85 is split. Matching colors indicate the identifications
+Right: vertex 85 is split. Matching outline styles (red, blue) mark the identifications
 $85_x=62$ and $85_y=84$.}
 \label{fig:ore-step}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[every node/.style={draw,rounded corners,inner sep=3pt,font=\small}]
+\begin{tikzpicture}[y=.7cm,every node/.style={draw,rounded corners,inner sep=3pt,font=\small}]
 \node (root) at (0,0) {$G=J_{52}$};
 \node (left) at (-2,-.85) {$J_{28}$};
 \node (right) at (2,-.85) {$J_{51}$};
@@ -230,11 +213,11 @@ left graph supplies the deleted edge and the right graph the split vertex.
 The complete table in Appendix~\ref{app:ore} specifies all 26 compositions.}
 \label{fig:ore-tree}
 \end{figure}
+\endgroup
 
 \begin{samepage}
-The operation is the classical construction discussed by Kostochka and
-Yancey~\cite[Section 1]{ky}; the following argument gives its
-non-colorability property in the form used here.
+The following lemma gives the non-colorability property of Ore
+composition in the form used here.
 
 \begin{lemma}\label{lem:ore}
 If neither $A$ nor $B$ is three-colorable, their Ore composition is not
@@ -252,27 +235,30 @@ contradiction.
 \end{proof}
 \end{samepage}
 
-
 The graph $K_4$ is not three-colorable: four pairwise adjacent vertices
 need four distinct colors. Inducting over this explicit tree with
 Lemma~\ref{lem:ore} proves that $G$ is not three-colorable. Starting with 27 copies of
-$K_4$, each join reduces the sum of orders and the sum of sizes by one,
+$K_4$, each composition reduces the sum of orders and the sum of sizes by one,
 so the root has $27\cdot4-26=82$ vertices and
 $27\cdot6-26=136$ edges.
-Appendix~\ref{app:decomposition} verifies that the root is exactly $G$;
+The archived checker verifies that the root listed in
+Appendix~\ref{app:decomposition} is exactly $G$;
 Appendices~\ref{app:graph} and~\ref{app:ore} give its edges, rotation
 and complete construction tree.
 
-
 \subsection{Planarity}\label{app:embedding}
-The rotation system yields planarity by an orientable-surface argument.
+A rotation system specifies the cyclic order of the neighbors at each
+vertex; the one used here is printed in Appendix~\ref{app:graph}. It
+yields planarity by an orientable-surface argument.
 Let $D=\{(u,v):uv\in E(G)\}$ be the darts. Write
 $\rho_v(u)$ for the neighbor following $u$ in the cyclic order at $v$.
-Let $F$ be the set of face-permutation orbits. The face permutation is
+The face permutation is
 \[
-   \phi(u,v)=(v,\rho_v(u)).
+   \phi(u,v)=(v,\rho_v(u)),
 \]
-The face permutation has 56 orbits. To justify this test,
+and $F$ denotes the set of its orbits.
+The graph is connected, and the face permutation has 56 orbits.
+To construct the embedding,
 place an oriented disk at every vertex, attach an untwisted band for
 each edge according to the cyclic orders, and cap each boundary walk
 with a disk. The result is a connected closed orientable surface with
@@ -284,7 +270,6 @@ orbits of $\phi$, so its Euler characteristic is
 By the classification of closed orientable surfaces this surface is the
 sphere. Deleting a point outside the embedded graph gives a plane
 embedding. This proves planarity.
-
 
 \subsection{Cycle exclusion}\label{sec:cycles}
 Two independent complete enumerations of simple cycles give the counts in
@@ -298,12 +283,26 @@ this last test. Thus each cycle is counted once.
 Appendix~\ref{app:cycles} gives the second enumeration and the counts.
 
 \Needspace{22\baselineskip}
-\subsection{Criticality and the edge bound}
-The deletion colorings establish criticality, and the cited lower bound
-then gives the stated edge minimum.
+\subsection{Criticality and the edge bound}\label{sec:crit}
+Kostochka and Yancey record the classical observation that an Ore
+composition of two $k$-critical graphs is $k$-critical when the second
+graph is not $k$-critical after $z$ has been
+split~\cite[Section~1]{ky}; Gallai's (2.7)\,b) requires instead that the
+split graph be $(k-1)$-colorable~\cite[Section~2]{gallai}. Kostochka and
+Yancey verify this hypothesis for compositions of $k$-extremal graphs
+($k$-critical graphs attaining their edge bound) using that
+bound~\cite[Theorem~4]{ky}, and conclude that every $k$-Ore graph is
+$k$-extremal, hence $k$-critical~\cite[Section~1, paragraphs before
+Theorem~6]{ky}. The proof below establishes the criticality of $G$
+directly from the deletion colorings in Appendix~\ref{app:decomposition}.
+The edge bound is Kostochka and Yancey's~\cite[Theorem~3]{kybound}: every
+four-critical graph $H$ satisfies
+$|E(H)|\geq\lceil(5|V(H)|-2)/3\rceil$. We now prove
+Theorem~\ref{thm:main}.
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
+The verified construction tree shows that $G$ is a four-Ore graph.
 Induction from $K_4$ using Lemma~\ref{lem:ore} proves that $G$ is not
-three-colorable and is a four-Ore graph. The rotation system has 56 faces,
+three-colorable. The rotation system has 56 faces,
 so $82-136+56=2$; the orientable-surface argument in
 Section~\ref{app:embedding} proves planarity. The enumerations in
 Section~\ref{sec:cycles} and Appendix~\ref{app:cycles} find no simple four- or nine-cycle.
@@ -316,13 +315,9 @@ $\chi(G)=4$. The graph has no isolated vertices. Any proper subgraph
 omits some edge of $G$, even if it omits a vertex, and is therefore a
 subgraph of some $G-e$. Restricting that deletion coloring proves its
 three-colorability. Consequently $G$ is four-critical.
-Finally Kostochka and Yancey's bound gives
-$|E(H)|\geq\lceil(5|V(H)|-2)/3\rceil$ for every four-critical graph $H$,
-and $136=(5\cdot82-2)/3$ proves the edge minimum at order 82.
+Finally $136=(5\cdot82-2)/3$, so Kostochka and Yancey's bound proves the
+edge minimum at order 82.
 \end{proof}
-
-
-
 
 \section{Computational verification}\label{sec:checks}
 The computations used above establish the face orbits of the rotation,
@@ -355,21 +350,28 @@ the planar counterexample to the length-nine question directly from
 these definitions.
 
 The formal theorem has no hypotheses and is checked by Lean's kernel
-using only its standard axioms. The exact axiom inventory, pinned versions
-and build commands are in the accompanying
+using only the standard axioms \texttt{propext}, \texttt{Classical.choice}
+and \texttt{Quot.sound}, without compiled-code evaluation. A second
+theorem, also with no hypotheses,
+\texttt{Steinberg.counterexample}, proves the same cycle and coloring
+assertions with the spherical rotation predicate in place of
+\texttt{RationalPlanar}. Build commands and versions are in the accompanying
 \href{https://raw.githubusercontent.com/6/clank-lab/main/results/steinberg-c4-c9/checks/README.md}{checking notes}.
 Appendix~\ref{sec:replay} describes the formal non-colorability argument.
 The remaining assertions of Theorem~\ref{thm:main}---Ore membership,
 criticality and the edge minimum---use the written arguments in
 Section~\ref{sec:ore}; the last uses Kostochka and Yancey's theorem.
 The Ore construction, deletion colorings and other cycle counts also
-have independent executable checks.
+have independent executable checks. The mathematical data and checking
+programs are archived at \url{https://doi.org/10.5281/zenodo.23491270},
+the archive's concept record, which resolves to its latest version.
 
 \clearpage\begin{appendices}
 \section{The embedding certificate}\label{app:rotation}
 Appendix~\ref{app:graph} gives the edge list and cyclic neighbor orders.
-Tracing the face permutation of Section~\ref{app:embedding} gives 56 orbits,
-after checking simplicity, the neighbor orders and connectedness.
+A checker verifies that the graph is simple and connected and that each
+vertex's cyclic order lists exactly its neighbors, then traces the face
+permutation of Section~\ref{app:embedding} and finds 56 orbits.
 
 \begin{figure}[H]
 \centering
@@ -467,8 +469,9 @@ data in Appendix~\ref{app:graph}; its rational coordinates are also checked in L
 \end{figure}
 
 \paragraph{Drawing.} The figure is obtained by applying Tutte's barycentric
-method to a triangulation of the bounded faces, using temporary centers,
-and then omitting the added vertices and edges. For background see Tutte's
+method to the triangulation obtained by adding a new vertex inside each
+bounded face that is not a triangle, joined to the face's boundary
+vertices, and then omitting the added vertices and edges. For background see Tutte's
 ``How to Draw a Graph''~\cite{tutte}. The finite-decimal coordinates are exact
 rationals, checked in Lean as described in Section~\ref{sec:checks}.
 
@@ -511,18 +514,13 @@ proof of Theorem~\ref{thm:main}; the checking notes specify their location
 and verification.
 \subsection{Edge count and other cycle lengths}
 The tree proves that $G$ is a four-Ore graph.
-The bound used in the main proof is Kostochka and Yancey's
-Theorem 3~\cite{kybound}, also stated as Theorem 4 in~\cite{ky}. Every four-critical graph $H$ satisfies
-\[
- |E(H)|\geq\left\lceil\frac{5|V(H)|-2}{3}\right\rceil.
-\]
-For the graph in this paper,
-\[
- 136=\frac{5\cdot82-2}{3}.
-\]
-The general four-Ore construction and its edge count are discussed in
-Kostochka and Yancey's Section 1~\cite{ky}. Thus the edge minimum in
-Theorem~\ref{thm:main} is at fixed order 82, among all four-critical graphs.
+The edge bound of Section~\ref{sec:crit} is also stated as Theorem~4
+in~\cite{ky}, and the edge count of four-Ore graphs is discussed in
+Kostochka and Yancey's Section~1~\cite{ky}.
+Kostochka and Yancey's equality characterization identifies the extremal
+graphs as the four-Ore graphs \cite[Theorem~6]{ky}. The edge minimum here
+follows from the composition count and their lower bound, rather than
+being a separate new bound.
 The cycle table also gives the exclusion of $C_{10}$ and the presence of
 $C_5,C_6,C_7,C_8$.
 
@@ -590,7 +588,11 @@ are given in the checking notes.
 
 \section{Formal verification}\label{sec:replay}
 The formal proof certifies non-three-colorability by deducing a
-contradiction from the coloring clauses. Its coloring formula has the
+contradiction from the coloring clauses. Lean checks its own clausal
+refutation of the coloring formula, in which every added clause follows
+by reverse unit propagation (RUP); this certificate is separate from the
+DRAT proof of Appendix~\ref{app:additional}, which Lean does not check.
+Its coloring formula has the
 edge and vertex clauses of Appendix~\ref{app:additional}, without units
 that prescribe a color for an individual vertex. The formal
 reduction proves that a proper coloring would satisfy this formula.
@@ -606,6 +608,10 @@ implication and applies it to every addition. Hints specify the clauses
 used in these deductions. Deletion instructions leave earlier clauses
 available; every such clause remains entailed by the original input.
 The final empty clause proves unsatisfiability of that input.
+The checker uses no general RAT steps. It does not check deletions; this
+is sound because every retained clause is entailed.
+The executable DRAT-trim check instead reads the symmetry-breaking
+formula and its text DRAT proof described above.
 
 The use of hints follows Cruz-Filipe, Heule, Hunt, Kaufmann and
 Schneider-Kamp~\cite[abstract]{lrat}, whose format extends DRAT, a
@@ -635,6 +641,35 @@ in the notation of Section~\ref{sec:ore}. Operands are disjoint at every
 composition. The root graph is $G$, with the identity correspondence on
 $0,\ldots,81$.
 \input{../data/ore-tree-table.tex}
+
+\section{Related coloring results}\label{app:scope}
+DP-coloring is correspondence coloring, introduced by Dvo\v{r}\'ak and
+Postle~\cite{dvorakpostle}; see also~\cite[Section 1]{kjz}.
+Kang, Jin and Zhu prove DP-3-colorability of the $\{C_4,C_7,C_9\}$-free
+class of planar graphs~\cite[Theorem 1.1]{kjz}. Their Corollary 1.2 states
+that these graphs are ``3-choosable (and hence 3-colorable)''~\cite{kjz}.
+
+Liu, Loeb, Rolek, Yin and Yu prove that planar graphs without cycles of
+lengths $4,a,b,9$, for distinct $a,b\in\{6,7,8\}$, are
+DP-3-colorable~\cite[Theorem 1.3]{llryy}. This extends the
+three-choosability results of Wang, Lu and Chen~\cite{wangluchen},
+Shen and Wang~\cite{shenwang}, and Wang, Wu and Shen~\cite{wangwushen},
+which are summarized in~\cite[Theorem 1.2]{llryy}. These results impose two
+additional cycle exclusions beyond the pair considered here.
+
+Defective colorings are a different notion: in a
+$(d_1,d_2,d_3)$-coloring, color class $j$ induces a graph of maximum
+degree at most $d_j$.
+Related work includes Kang, Jin, Liu and Wang on $(1,0,0)$-colorability~\cite[Theorem 1.4]{jklw}.
+For the four-and-nine pair, Dai, Wang and Xu prove that ``Every planar
+graph without cycles of length 4 or 9 is $(1,1,0)$-colorable''~\cite{dai},
+while Chen, Dai, Nie, Wang and Yu prove $(2,0,0)$-colorability
+\cite[Theorem~1.4]{nie}. Xiao and Huang prove weak DP-$(\mathcal F_2,\mathcal F_2,
+\mathcal F_0)$-colorability \cite[Corollary~1.2]{xiao}, where $\mathcal F_d$
+is the class of forests of maximum degree at most $d$. These conclusions
+allow defects or impose forest conditions, unlike proper three-colorability.
+For further bibliographic context see Ang and Leo~\cite{ang}, Bu, Wang
+and Wang~\cite{survey}, and Li, Niu and Tian~\cite{bordeaux}.
 \end{appendices}
 
 \section*{Acknowledgments}
@@ -648,8 +683,8 @@ the forbidden-cycle questions, and Cohen-Addad and coauthors for their
 disproof of Steinberg's conjecture. The formalization uses
 \href{https://github.com/leanprover/lean4}{Lean 4 and its standard library}
 and \href{https://github.com/leanprover-community/mathlib4}{Mathlib},
-developed by their contributors. The SAT certificate was generated with CaDiCaL~\cite{cadical}
-and checked with Heule and Wetzler's DRAT-trim~\cite{drat}.
+developed by their contributors~\cite{leanfour,mathlib}. The SAT certificate was generated with CaDiCaL~\cite{cadical}
+and checked with Wetzler, Heule and Hunt's DRAT-trim~\cite{drat}.
 \clearpage
 \begin{thebibliography}{99}
 \bibitem{lu} H. Lu, Y. Wang, W. Wang, Y. Bu, M. Montassier and A. Raspaud.
@@ -659,6 +694,7 @@ On the 3-colorability of planar graphs without 4-, 7- and 9-cycles.
 \bibitem{kjw} Y. Kang, L. Jin and Y. Wang.
 The 3-colorability of planar graphs without cycles of length 4, 6 and 9.
 \emph{Discrete Math.} 339 (2016), 299--307.
+\href{https://doi.org/10.1016/j.disc.2015.08.023}{doi:10.1016/j.disc.2015.08.023};
 \href{https://arxiv.org/abs/1506.04629v1}{arXiv:1506.04629} version 1 (2015), Problem 1.2 and Theorem 1.4.
 \bibitem{jklw} Y. Kang, L. Jin, P. Liu and Y. Wang.
 $(1,0,0)$-colorability of planar graphs without cycles of length 4 or 6.
@@ -668,6 +704,7 @@ $(1,0,0)$-colorability of planar graphs without cycles of length 4 or 6.
 \bibitem{steinberg} V. Cohen-Addad, M. Hebdige, D. Král', Z. Li and E. Salgado.
 Steinberg's conjecture is false.
 \emph{J. Combin. Theory Ser. B} 122 (2017), 452--456.
+\href{https://doi.org/10.1016/j.jctb.2016.07.006}{doi:10.1016/j.jctb.2016.07.006};
 \href{https://arxiv.org/abs/1604.05108v2}{arXiv:1604.05108} version 2 (2016), Theorem 3 and Figure 1.
 \bibitem{kjz} Y. Kang, L. Jin and X. Zhu.
 Planar graphs having no cycle of length 4, 7, or 9 are DP-3-colorable.
@@ -676,6 +713,13 @@ Planar graphs having no cycle of length 4, 7, or 9 are DP-3-colorable.
 \href{https://arxiv.org/abs/2303.04657v1}{arXiv:2303.04657} version 1 (2023),
 entitled ``DP-3-colorability of planar graphs without cycles of length 4, 7 or 9'',
 Theorem 1.1 and Corollary 1.2.
+\bibitem{llryy} R. Liu, S. Loeb, M. Rolek, Y. Yin and G. Yu.
+DP-3-Coloring of Planar Graphs Without $4,9$-Cycles and Cycles of Two Lengths
+from $\{6,7,8\}$. \emph{Graphs and Combinatorics} 35 (2019), 695--705.
+\href{https://doi.org/10.1007/s00373-019-02025-2}{doi:10.1007/s00373-019-02025-2}.
+\href{https://arxiv.org/abs/1809.07445v1}{arXiv:1809.07445v1} (2018),
+entitled ``DP-3-coloring of planar graphs without $4,9$-cycles and two cycles
+from $\{5,6,7,8\}$''. Theorems 1.2 and 1.3 refer to that version.
 \bibitem{dai} L. Dai, Y. Wang and J. Xu.
 Every planar graph without cycles of length 4 or 9 is $(1,1,0)$-colorable.
 \emph{Discrete Math.} 340 (2017), 2108--2122.
@@ -705,13 +749,14 @@ On the strong Bordeaux Conjecture.
 \bibitem{kybound} A. Kostochka and M. Yancey.
 Ore's Conjecture on color-critical graphs is almost true.
 \emph{J. Combin. Theory Ser. B} 109 (2014), 73--101.
-\href{https://arxiv.org/abs/1209.1050v1}{arXiv:1209.1050v1} (2012), Theorem 3;
+\href{https://arxiv.org/abs/1209.1050v1}{arXiv:1209.1050v1} (2012), Theorem 3 in that version;
 \href{https://doi.org/10.1016/j.jctb.2014.05.002}{doi:10.1016/j.jctb.2014.05.002}.
 \bibitem{ky} A. Kostochka and M. Yancey.
 A Brooks-type result for sparse critical graphs.
 \emph{Combinatorica} 38 (2018), 887--934.
+\href{https://doi.org/10.1007/s00493-017-3068-3}{doi:10.1007/s00493-017-3068-3};
 \href{https://arxiv.org/abs/1408.0846v3}{arXiv:1408.0846}, version 3 (2017),
-Theorem 4 and DHGO-composition and four-Ore graphs.
+Theorems 4 and 6; DHGO-composition and four-Ore graphs.
 \bibitem{drat} N. Wetzler, M. J. H. Heule and W. A. Hunt, Jr.
 DRAT-trim: Efficient checking and trimming using expressive clausal proofs.
 \emph{SAT 2014}, LNCS 8561, 422--429.
@@ -730,6 +775,75 @@ Efficient Certified RAT Verification.
 \bibitem{tutte} W. T. Tutte. How to Draw a Graph.
 \emph{Proc. London Math. Soc.} (3) 13 (1963), 743--767.
 \href{https://doi.org/10.1112/plms/s3-13.1.743}{doi:10.1112/plms/s3-13.1.743}.
+\bibitem{steinbergoriginal} R. Steinberg.
+The state of the three color problem.
+\emph{Ann. Discrete Math.} 55 (1993), 211--248.
+\href{https://doi.org/10.1016/S0167-5060(08)70391-1}{doi:10.1016/S0167-5060(08)70391-1}.
+
+\bibitem{dvorakpostle} Z. Dvo\v{r}\'ak and L. Postle.
+Correspondence coloring and its application to list-coloring planar graphs
+without cycles of lengths 4 to 8.
+\emph{J. Combin. Theory Ser. B} 129 (2018), 38--54.
+\href{https://doi.org/10.1016/j.jctb.2017.09.001}{doi:10.1016/j.jctb.2017.09.001}.
+
+\bibitem{kyfour} A. Kostochka and M. Yancey.
+Ore's conjecture for $k=4$ and Gr\"otzsch's theorem.
+\emph{Combinatorica} 34 (2014), 323--329.
+\href{https://doi.org/10.1007/s00493-014-3020-x}{doi:10.1007/s00493-014-3020-x}.
+
+\bibitem{gallai} T. Gallai. Kritische Graphen I.
+\emph{Publ. Math. Inst. Hungar. Acad. Sci.} 8 (1963), 165--192.
+\url{https://real.mtak.hu/201435/}.
+
+\bibitem{dirac} G. A. Dirac.
+On the structure of 5- and 6-chromatic abstract graphs.
+\emph{J. Reine Angew. Math.} 214/215 (1964), 43--52.
+\href{https://doi.org/10.1515/crll.1964.214-215.43}{doi:10.1515/crll.1964.214-215.43}.
+
+\bibitem{hajos} G. Haj\'os.
+\"Uber eine Konstruktion nicht $n$-f\"arbbarer Graphen.
+\emph{Wiss. Z. Martin-Luther-Univ. Halle-Wittenberg Math.-Natur. Reihe}
+10 (1961), 116--117.
+
+\bibitem{ore} O. Ore.
+\emph{The Four Color Problem}. Academic Press, New York, 1967.
+
+\bibitem{grotzsch} H. Gr\"otzsch.
+Zur Theorie der diskreten Gebilde. VII. Ein Dreifarbensatz f\"ur
+dreikreisfreie Netze auf der Kugel.
+\emph{Wiss. Z. Martin-Luther-Univ. Halle-Wittenberg Math.-Natur. Reihe}
+8 (1958/1959), 109--120.
+
+\bibitem{wangluchen} Y. Wang, H. Lu and M. Chen.
+A note on 3-choosability of planar graphs.
+\emph{Inform. Process. Lett.} 105 (2008), 206--211.
+\href{https://doi.org/10.1016/j.ipl.2007.08.027}{doi:10.1016/j.ipl.2007.08.027}.
+
+\bibitem{shenwang} L. Shen and Y. Wang.
+A sufficient condition for a planar graph to be 3-choosable.
+\emph{Inform. Process. Lett.} 104 (2007), 146--151.
+\href{https://doi.org/10.1016/j.ipl.2007.06.005}{doi:10.1016/j.ipl.2007.06.005}.
+
+\bibitem{wangwushen} Y. Wang, Q. Wu and L. Shen.
+Planar graphs without cycles of length 4, 7, 8, or 9 are 3-choosable.
+\emph{Discrete Appl. Math.} 159 (2011), 232--239.
+\href{https://doi.org/10.1016/j.dam.2010.11.002}{doi:10.1016/j.dam.2010.11.002}.
+
+\bibitem{bgrs} O. V. Borodin, A. N. Glebov, A. Raspaud and M. R. Salavatipour.
+Planar graphs without cycles of length from 4 to 7 are 3-colorable.
+\emph{J. Combin. Theory Ser. B} 93 (2005), 303--311.
+\href{https://doi.org/10.1016/j.jctb.2004.11.001}{doi:10.1016/j.jctb.2004.11.001}.
+
+\bibitem{leanfour} L. de Moura and S. Ullrich.
+The Lean 4 theorem prover and programming language.
+\emph{CADE 2021}, LNCS 12699, 625--635.
+\href{https://doi.org/10.1007/978-3-030-79876-5_37}{doi:10.1007/978-3-030-79876-5\_37}.
+
+\bibitem{mathlib} The mathlib Community.
+The Lean mathematical library.
+\emph{CPP 2020}, 367--381.
+\href{https://doi.org/10.1145/3372885.3373824}{doi:10.1145/3372885.3373824}.
+
 \end{thebibliography}
 
 \end{document}

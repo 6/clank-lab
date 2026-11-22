@@ -47,6 +47,18 @@ edition:
   through its title and bibliographic metadata only; nothing about its
   content is asserted here.
 
+The publisher's title page and English byline of doi:10.1360/N012018-00129
+list Min Chen, Lifeng Dai, Jingfang Nie, Yingqian Wang and Weiqiang Yu,
+in that order. The title-page citation and final-page English abstract
+agree with this order. Index metadata with Nie first conflicts with the
+primary document and is not used for the byline.
+
+For the critical-graph edge bound the paper cites Theorem 3 in
+[arXiv:1209.1050v1](https://arxiv.org/abs/1209.1050v1), page 3, the exact
+version read. The published journal citation is retained, but its theorem
+number was not verified from the journal full text. The same bound is
+Theorem 4 in [arXiv:1408.0846v3](https://arxiv.org/abs/1408.0846v3).
+
 The historical status statement is Problem 1.2 and its following paragraph
 in Jin, Kang, Liu and Wang, [arXiv:2001.00166v1](https://arxiv.org/abs/2001.00166v1)
 (2020); this is not a claim about current status of the other cases.

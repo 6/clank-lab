@@ -29,37 +29,45 @@
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\Cay}{\operatorname{Cay}}
 \newcommand{\supp}{\operatorname{supp}}
-\title{Strongly cospectral sets in seven-dimensional cubelike graphs}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 25, 2026}
+\date{November 22, 2026}
 \begin{document}
+\title{Strongly cospectral sets in seven-dimensional cubelike graphs}
 \maketitle
 \begin{abstract}
 Every set of pairwise strongly cospectral vertices in a cubelike graph
 on $128$ vertices has at most four elements, and a connected graph
-attains four. Vertices are strongly cospectral if their orthogonal
+attains four. A cubelike graph is a Cayley graph of $\mathbb{F}_2^d$,
+here $d=7$; vertices are strongly cospectral if their orthogonal
 projections onto each adjacency eigenspace agree up to sign.
-This gives a negative answer to \'Arnad\'ottir and Godsil's question
-whether their upper bound is tight in every dimension: in dimension
-seven their bound gives eight. They proved the general bound,
-attained it in dimensions three through six, and supplied the connected
-construction attaining four used here. Our upper bound combines their
-abelian character criterion, building on Sin and Sorci's normal-Cayley
-criterion, with congruences, a second-moment bound and an exact finite
-inequality certified by linear programming duality. The universal upper
-bound, including the certificate checks, is formalized in Lean;
-exact computations also verify the attaining graph. Sin's construction gives arbitrarily
-large strongly cospectral classes as the dimension grows.
+\'Arnad\'ottir and Godsil proved the bound $2^{\lceil d/2\rceil-1}$ for
+$d\geq3$, attained it for $3\leq d\leq6$, supplied the connected
+construction used here, and asked whether it is tight in every
+dimension. For $d=7$ it is eight, so the answer is negative; Sin's
+construction gives arbitrarily large sets as $d$ grows. By
+\'Arnad\'ottir and Godsil's character criterion, building on one of Sin
+and Sorci, a class of eight would split the $128$ eigenvalues into eight
+groups of sixteen that share no value, each with a prescribed mean and
+residue modulo four. An exact finite inequality, certified by
+linear-programming duality, shows that their sum of squares would then
+exceed what Parseval's identity allows. The upper bound, including the
+certificate checks, is formalized in Lean; exact computations verify the
+attaining graph.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 \end{abstract}
+\medskip
 
 \section{Introduction}
-A \emph{cubelike graph} is a Cayley graph $\Cay(\F_2^d,S)$, where
-$S\subseteq\F_2^d\setminus\{0\}$: vertices $x$ and $y$ are adjacent when
+A \emph{cubelike graph} is a Cayley graph $\Cay(\F_2^d,S)$ with
+\emph{connection set} $S\subseteq\F_2^d\setminus\{0\}$: vertices $x$ and $y$ are adjacent when
 $x+y\in S$. For its adjacency matrix $A$, let $E_\theta$ be the orthogonal
 projection onto the eigenspace with eigenvalue $\theta$, and let $e_x$ be
 the coordinate vector at $x$. Vertices $x,y$ are \emph{strongly cospectral}
 when $E_\theta e_x=\pm E_\theta e_y$ for every eigenvalue $\theta$, with
-the sign allowed to depend on $\theta$.
+the sign allowed to depend on $\theta$. Strong cospectrality is a
+necessary condition for perfect and pretty good state transfer in
+continuous-time quantum walks \cite{GodsilStateTransfer,GodsilSmith}.
 
 \begin{theorem}\label{thm:main}
 Let $S\subseteq\F_2^7\setminus\{0\}$. Every set of pairwise strongly
@@ -79,41 +87,51 @@ In Section~11~\cite{AG} they asked:
 ``Is the upper bound on the size of strongly cospectral sets in cubelike
 graphs tight in all dimensions?''
 \end{quote}
+They add: ``Despite some effort, we did not find any cubelike graphs with
+strongly cospectral sets of size eight''~\cite[Section~11]{AG}.
+\'Arnad\'ottir's thesis~\cite[Corollary~5.6.6 and Table~5.1]{ArnadottirThesis}
+records the same bound, lists dimension seven as open, and repeats the
+question~\cite[Section~7.1]{ArnadottirThesis}.
 At $d=7$ their bound is eight. Theorem~\ref{thm:main} reduces it to four,
 and hence answers their question negatively.
+Monterde~\cite[Section~3, paragraph after Theorem~3.11]{Monterde} raises
+a separate question: whether their normal-Cayley
+bound~\cite[Theorem~6.1]{AG} extends to other graph classes and to
+weighted graphs.
 
 The contribution here is the upper bound four in dimension seven.
-The character criterion used below is the specialization of
-\'Arnad\'ottir--Godsil's Theorem~10.1 to an elementary abelian $2$-group,
-building on the normal-Cayley character criterion of Peter Sin and
-Julien Sorci~\cite[Theorems~2.3 and~2.4]{SinSorci}, as credited in
-\'Arnad\'ottir--Godsil's Theorem~5.2.
+The character criterion, Lemma~\ref{lem:criterion}, is the case
+$G=\F_2^7$ of \'Arnad\'ottir and Godsil's Theorem~10.1, which
+specializes a criterion of Peter Sin and Julien
+Sorci~\cite[Theorem~5.2]{AG}, \cite[Theorems~2.3--2.4]{SinSorci}.
 The attaining connected example is \'Arnad\'ottir--Godsil's Theorem~10.2.
 Their bound follows from eigenvalue multiplicities and a global
-second-moment argument~\cite[Theorems~6.1 and~8.2]{AG}. Here the hardest step is a stronger finite
-inequality, certified by linear programming duality. It combines
-disjointness of the eigenvalue values on eight character cosets with
-their individual means, their residues modulo four, and Parseval's
-identity. The earlier multiplicity bound does not impose these
-coset restrictions together.
+second-moment argument~\cite[Lemma~7.2 and Theorems~6.1 and~8.2]{AG}.
+Here the hardest step is a stronger finite inequality. A class of eight
+would split the $128$ character eigenvalues into eight groups of sixteen
+that share no value, each with a prescribed mean and residue modulo
+four; an exact finite inequality, certified by linear programming
+duality, shows that their squares then sum to more than Parseval's
+identity allows. The earlier multiplicity bound does not impose these
+restrictions together.
 
 Peter Sin~\cite[Theorem~4.4]{Sin}, in work first posted in 2022,
 constructed cubelike graphs with arbitrarily large strongly cospectral
 classes. The maximum in dimensions eight and higher is not determined
-here. The computational examples and Sage code of \'Arnad\'ottir and
-Godsil, and Gordon Royle's cubelike graph lists credited by them,
-are prior work~\cite[Appendices~A--B and Acknowledgments]{AG}.
+here. \'Arnad\'ottir and Godsil computed examples in Sage, with complete
+lists of cubelike graphs on $32$ and $64$ vertices provided by Gordon
+Royle~\cite[Appendices~A--B and Acknowledgments]{AG}.
 
 The upper bound is proved in Lean, including the exact finite inequality;
 Section~\ref{sec:formal} describes its relation to the written proof.
 
-Computer-assisted; not yet reviewed by experts.
-The proofs, the Lean formalization, the certificate checkers and the text
-were produced by AI models (from OpenAI and Anthropic), working under the
-author's direction.
-
 \section{Proof overview}\label{sec:overview}
-The proof rules out a strongly cospectral class of size eight.
+Strongly cospectral classes are cosets of a subspace $K(S)$
+(Lemma~\ref{lem:criterion}), so their sizes are powers of two and a set
+of more than four gives $|K(S)|\geq8$; the proof rules that out.
+The multiplicity argument behind their
+bound~\cite[Theorems~6.1 and~8.2]{AG} permits eight; the gain comes from imposing the
+per-coset means, residues and disjointness below together.
 Write $V=\F_2^7$. For a character indexed by $a\in V$, the corresponding
 adjacency eigenvalue is
 \[
@@ -127,16 +145,16 @@ The sum $\sigma=\sum_{s\in S}s$ also belongs to $K(S)$.
 Consequently, if $|K(S)|\geq8$, a change of basis places a
 three-dimensional subspace $H$ inside $K(S)$ with $\sigma\in H$.
 
-The eight cosets of the orthogonal complement $H^\perp$ then have disjoint sets of eigenvalue
-values. All values in a given coset have a prescribed residue modulo
+No eigenvalue occurs on two of the eight cosets of the orthogonal
+complement $H^\perp$. All values in a given coset have a prescribed residue modulo
 four. Their full coset means depend only on $B=S\cap H$, which has at
 most seven elements. After removing the trivial character from the
 zero coset, its remaining mean also depends on $n=|S|$.
 The sum of all squared eigenvalues is fixed by Parseval's
-identity: it is $128|S|$.
+identity: it is $128|S|$~\cite[Lemma~7.2]{AG}.
 
-For each coset, retain only the nearest eigenvalue values on either side
-of its mean. These two endpoints give a lower bound for that coset's
+For each coset, retain only the eigenvalues nearest to its mean on either
+side. These two endpoints give a lower bound for that coset's
 sum of squares. They must satisfy the residue restriction and must avoid
 the endpoints chosen by every other coset. The eigenvalue $|S|$ at the
 trivial character is treated separately. This leaves a finite question
@@ -198,11 +216,20 @@ $\sigma\in K(S)$, and for every $a\in V$,
 Here elements of $\F_2$ in integer congruences are represented by $0,1$.
 \end{lemma}
 \begin{proof}
-The parity of $n_a$ is $\sum_{s\in S}a\cdot s=a\cdot\sigma$.
+As in~\cite[Section~4.1]{Sin}, the parity of $n_a$ is
+$\sum_{s\in S}a\cdot s=a\cdot\sigma$.
 Equality of two eigenvalues implies equality of the corresponding
 $n_a$, so it implies equality of the dot products with $\sigma$.
 The second congruence follows from $\lambda_a=n-2n_a$.
 \end{proof}
+
+That $\sigma\in K(S)$ also follows from
+Bernasconi, Godsil and Severini's perfect-state-transfer result
+\cite[Theorem~1]{BGS}, also proved by Cheung and Godsil
+\cite[Theorem~2.3, arXiv version]{CheungGodsil}, and the implication
+from perfect state transfer to strong cospectrality~\cite[Corollary~2.2]{GodsilStateTransfer}.
+Sin states this observation, with the argument above,
+explicitly~\cite[Section~4.1]{Sin}.
 
 Let $e_1,\ldots,e_7$ denote the standard basis of $V$, and put
 $H=\langle e_1,e_2,e_3\rangle$.
@@ -268,7 +295,9 @@ If $u\ne w$, some $e_i\in H$, $1\leq i\leq3$, has different dot
 products with $a\in C_u$ and $b\in C_w$. Since $e_i\in K(S)$,
 their eigenvalues cannot be equal.
 The range and trivial eigenvalue follow from~\eqref{eq:lambda}; the
-congruence is~\eqref{eq:residue}, because $\sigma=t\in H$.
+range and parity are noted in~\cite[Section~7]{AG}, and the
+congruence modulo four, which refines them, is~\eqref{eq:residue},
+because $\sigma=t\in H$.
 
 For the coset sum, write $a=(u,v)$ and $s=(h,y)$ according to
 $V=\F_2^3\oplus\F_2^4$. Character orthogonality gives
@@ -278,7 +307,7 @@ $V=\F_2^3\oplus\F_2^4$. Character orthogonality gives
                  \sum_{v\in\F_2^4}(-1)^{v\cdot y}
  =16\sum_{h\in B}(-1)^{u\cdot h}.
 \]
-Similarly,
+Similarly, as in~\cite[Lemma~7.2]{AG},
 \[
  \sum_{a\in V}\lambda_a^2
  =\sum_{s,s'\in S}\sum_{a\in V}(-1)^{a\cdot(s+s')}
@@ -364,7 +393,7 @@ at most $128|S|$.
 For $u\ne0$, apply Lemma~\ref{lem:two} to the $16$ values on $C_u$;
 for $u=0$, apply it to the $15$ values on $C_0\setminus\{0\}$.
 Their means are exactly~\eqref{eq:means} by Lemma~\ref{lem:cosets}.
-Take the resulting observed endpoints $\alpha_u,\beta_u$.
+Take the endpoints $\alpha_u,\beta_u$ given by Lemma~\ref{lem:two}.
 The range, the equality case, and the residues give conditions 1--3.
 Condition~4 holds because $n=\lambda_0$ occurs on $C_0$ and cannot
 occur on another coset. The same separation gives condition~5.
@@ -415,57 +444,16 @@ one. No linear programming solver is part of the verification:
 nonnegative weights with $L(w)>128n$ suffice. If some $J_u$ is empty,
 there can be no admissible assignment and no weights are needed.
 
-\subsection{The finite computation}
-We now specify the finite arithmetic assertion used to finish the proof.
-A case can share its certificate with any case having the same
-\emph{case key}
-\begin{equation}\label{eq:key}
- \left(n,m,\text{the sorted list of }(\mu_u,r_u)\text{ for }1\leq u\leq7\right).
-\end{equation}
-These data determine $J_0$ and its cost, and determine the other seven
-bracket lists and costs up to permutation. Such a permutation preserves
-disjointness and total cost.
-
-There are
-\[
- 8\sum_{B\subseteq\{1,\ldots,7\}}(128-|B|)
- =8(128\cdot128-7\cdot64)=127{,}488
-\]
-cases.
-Forming~\eqref{eq:key} for every
-case~\eqref{eq:case} gives $3{,}984$ distinct keys.
-
-A \emph{certificate entry} consists of a case key together with either
-an assertion that a bracket list is empty or nonnegative integer weights
-$W_v$ representing $w_v=W_v/15000$. Unlisted weights are zero.
-For a weight entry, the required inequality is
-\begin{equation}\label{eq:scaleddual}
- \sum_{u=0}^7\min_{(\alpha,\beta)\in J_u}
- \bigl(15000c_u(\alpha,\beta)+W_\alpha+
-                  \mathbf1_{\beta\ne\alpha}W_\beta\bigr)
-       -\sum_v W_v > 1{,}920{,}000n.
-\end{equation}
-Here $\mathbf1_{\beta\ne\alpha}$ is one when the endpoints differ and
-zero when they agree. All operations are integer operations.
-The sets $J_u$ are formed by ranging $\alpha,\beta$ over the integers
-in $[-n,n]$ and applying conditions 1--4; comparisons with
-$M_0$ are made after multiplication by $15$.
-
-The finite assertion established by the supplied data is that every
-entry has either a genuinely empty $J_u$ or nonnegative weights
-satisfying~\eqref{eq:scaleddual}, and that the entries cover all cases.
-To \emph{cover} means that every case's key occurs among the entries
-with the correct coset data. Both parts of this assertion are checked
-exactly, in Lean and by the separate integer checker described in
-Section~\ref{sec:formal}.
-The certificate weights were obtained from a floating-point linear
-programming dual and converted to rational numbers. The complete weight
-tables accompany the paper; Appendix~\ref{app:certificates} gives a
-worked instance and the routine certificate counts.
-
+There are $127{,}488$ cases. For each of them, either some $J_u$ is
+empty, or explicit nonnegative rational weights $w$ satisfy
+$L(w)>128n$. This is checked exactly, in Lean and by a separate integer
+checker (Section~\ref{sec:formal}). Appendix~\ref{app:certificates}
+gives the reduction to $3{,}984$ case keys, the integer form of the
+inequality, a worked instance and the certificate counts.
 
 \begin{proof}[Proof of Lemma~\ref{lem:finite}]
-Each case is covered by a checked entry. An empty bracket list excludes
+Each case is covered by a checked certificate entry
+(Appendix~\ref{app:certificates}). An empty bracket list excludes
 an admissible assignment. Otherwise, the checked nonnegative weights
 satisfy~\eqref{eq:scaleddual}, which is $15000L(w)>15000\cdot128n$.
 Lemma~\ref{lem:dual} therefore puts every admissible assignment's cost
@@ -474,10 +462,14 @@ strictly above $128n$.
 
 \begin{proof}[Proof of the upper bound in Theorem~\ref{thm:main}]
 If a pairwise strongly cospectral set has more than four vertices,
-Lemmas~\ref{lem:criterion} and~\ref{lem:normal} put its connection set
-in the position required by Lemma~\ref{lem:extraction}.
-That lemma produces an admissible assignment of cost at most $128n$,
-contradicting Lemma~\ref{lem:finite}.
+then $|K(S)|\geq8$ by Lemma~\ref{lem:criterion}, since $|K(S)|$ is a
+power of two. By Lemma~\ref{lem:normal} we may replace $S$ by its image $TS$
+under an invertible linear map $T$,
+which is again a connection set, with $|TS|=|S|$ and
+$|K(TS)|=|K(S)|$, and which satisfies $H\subseteq K(TS)$ and
+$\sigma(TS)\in H$. Lemma~\ref{lem:extraction} applied to $TS$ gives an
+admissible assignment of cost at most $128|S|$, contradicting
+Lemma~\ref{lem:finite}.
 \end{proof}
 
 \section{The connected example attaining four}\label{sec:example}
@@ -533,7 +525,6 @@ example. Each sign is constant over the entire indicated fiber.}
 \label{tab:signs}
 \end{table}
 
-
 For each displayed $g$, the value $\chi_a(g)$ is therefore constant as
 $a$ ranges over an eigenvalue fiber, as required by Lemma~\ref{lem:criterion}.
 The upper bound already proved excludes any further vertices from this
@@ -542,7 +533,7 @@ Theorem~\ref{thm:main}.
 
 \begin{figure}[tbp]
 \centering
-\resizebox{\linewidth}{!}{%
+\resizebox{0.5\linewidth}{!}{%
 % BEGIN EXAMPLE FIGURE
 \begin{tikzpicture}[x=2.35cm,y=2.35cm]
 \definecolor{graphblue}{RGB}{7,94,172}
@@ -2095,9 +2086,7 @@ Theorem~\ref{thm:main}.
 \caption{The connected $20$-regular cubelike graph of
 \'Arnad\'ottir and Godsil on $128$ vertices. All edges are shown in gray;
 the four vertices $0,7,120,127$ of one strongly cospectral class are
-highlighted. The circular layout places these four vertices at the
-cardinal points to show the class within the full graph. The drawing
-is generated from the displayed connection set.}
+highlighted.}
 \label{fig:example}
 \end{figure}
 
@@ -2106,11 +2095,13 @@ is generated from the displayed connection set.}
 The universal upper bound is formalized in Lean and mathlib.
 The formal theorem is named \texttt{CubelikeSC.endpoint\_sc}:
 
-\begin{verbatim}
-theorem endpoint_sc : EndpointSC
-\end{verbatim}
-The source states its expanded quantifiers; the displayed form uses
-the definition \texttt{EndpointSC}, the universal statement
+\begin{lstlisting}
+theorem endpoint_sc : ∀ S : Finset V, (0 : V) ∉ S → ∀ P : Finset V,
+    (∀ u ∈ P, ∀ v ∈ P, StronglyCospectral S u v) → P.card ≤ 4
+\end{lstlisting}
+Here \texttt{V = Fin 7 -> ZMod 2}; \texttt{StronglyCospectral} is defined in the
+file \texttt{Statement.lean}, and the theorem is the universal
+assertion \texttt{EndpointSC}
 \[
  \forall S\subseteq V,\quad 0\notin S\ \Longrightarrow\
  \forall P\subseteq V,\quad
@@ -2126,18 +2117,71 @@ the projections of the two coordinate vectors must agree or be negatives
 of each other. The sign can depend on $\theta$. Thus the formal assertion is precisely the upper bound
 of Theorem~\ref{thm:main}, with no connectivity hypothesis.
 The formal proof includes the spectral reduction, the exact inequalities
-on the supplied weights and coverage of every case. Independent integer
-calculations check the same inequalities directly for every original case.
+on the certificate weights and coverage of every case. A separate exact
+checker, not using the case-key reduction, recomputes the bracket lists
+for each of the $127{,}488$ cases and checks the same inequalities.
 
 The converse character criterion and the attaining construction remain
 outside Lean. The written argument and the published construction give
 the lower bound, with independent exact computations of the character
-sums and adjacency spectral projections. The accompanying checking guide
-gives reproduction instructions, full formal definitions and logical
-dependencies.
+sums and adjacency spectral projections. The formal development uses Lean 4.32.2 and mathlib's matching revision.
+The upper-bound theorem depends on exactly \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}. The certificates
+and Lean source, unchanged since version~2 of this paper, are archived
+with the checkers at \url{https://doi.org/10.5281/zenodo.23636896}; the
+archive's README files give the commands to reproduce each check and the
+full formal definitions.
 
 \begin{appendices}
 \section{Certificate details}\label{app:certificates}
+\subsection{The finite computation}
+This subsection specifies the finite arithmetic assertion used in the
+proof of Lemma~\ref{lem:finite}.
+A case can share its certificate with any case having the same
+\emph{case key}
+\begin{equation}\label{eq:key}
+ \left(n,m,\text{the sorted list of }(\mu_u,r_u)\text{ for }1\leq u\leq7\right).
+\end{equation}
+These data determine $J_0$ and its cost, and determine the other seven
+bracket lists and costs up to permutation. Such a permutation preserves
+disjointness and total cost.
+
+There are
+\[
+ 8\sum_{B\subseteq\{1,\ldots,7\}}(128-|B|)
+ =8(128\cdot128-7\cdot64)=127{,}488
+\]
+cases.
+Forming~\eqref{eq:key} for every
+case~\eqref{eq:case} gives $3{,}984$ distinct keys.
+
+A \emph{certificate entry} consists of a case key together with either
+an assertion that a bracket list is empty or nonnegative integer weights
+$W_v$ representing $w_v=W_v/15000$. Unlisted weights are zero.
+For a weight entry, the required inequality is
+\begin{equation}\label{eq:scaleddual}
+ \sum_{u=0}^7\min_{(\alpha,\beta)\in J_u}
+ \bigl(15000c_u(\alpha,\beta)+W_\alpha+
+                  \mathbf1_{\beta\ne\alpha}W_\beta\bigr)
+       -\sum_v W_v > 1{,}920{,}000n.
+\end{equation}
+Here $\mathbf1_{\beta\ne\alpha}$ is one when the endpoints differ and
+zero when they agree. All operations are integer operations.
+The sets $J_u$ are formed by ranging $\alpha,\beta$ over the integers
+in $[-n,n]$ and applying conditions 1--4; comparisons with
+$M_0$ are made after multiplication by $15$.
+
+The finite assertion is that every
+entry has either a genuinely empty $J_u$ or nonnegative weights
+satisfying~\eqref{eq:scaleddual}, and that the entries cover all cases.
+To \emph{cover} means that every case's key occurs among the entries
+with the correct coset data. Both parts of this assertion are checked
+exactly, in Lean and by the separate integer checker described in
+Section~\ref{sec:formal}.
+The certificate weights were obtained from a floating-point linear
+programming dual and converted to rational numbers. The complete weight
+tables are in the archive cited in Section~\ref{sec:formal}.
+
 \subsection{A worked certificate}
 The case $n=12$, $B=\{1,2\}$, $t=4$ illustrates how the weights exclude
 an assignment. In unscaled cost units, its certificate has the nonzero
@@ -2194,14 +2238,13 @@ cases; these are counts of keys, not counts of connection sets or cases.}
 \label{tab:certificates}
 \end{table}
 The $58$ empty-list entries have $n=0,1,2,3,4,5,6$, with respectively
-$2,5,9,15,16,9,2$ keys. Together they represent $1{,}628$ original cases.
+$2,5,9,15,16,9,2$ keys. Together they represent $1{,}628$ cases.
 For each entry, forming the relevant $J_u$ verifies that no integer pair
 satisfies conditions 1--4. For example, at $n=0$ the only possible endpoint
 is zero, which condition~4 forbids on a nonzero coset.
 A separate exact Python checker forms each case's own eight bracket
 lists and checks the matching certificate on those lists, without
 assuming the key-sharing argument.
-
 
 \end{appendices}
 
@@ -2216,7 +2259,7 @@ work on the problem. Peter Sin's construction establishes unboundedness
 as the dimension varies. The formalization uses Lean and mathlib.
 
 {\small
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \bibitem{AG}
 A.~S.~\'Arnad\'ottir and C.~Godsil,
 \emph{Strongly cospectral vertices in normal Cayley graphs},
@@ -2225,6 +2268,12 @@ Discrete Mathematics \textbf{346} (2023), no.~5, Article 113341.
 Preprint first posted September 15, 2021;
 \href{https://arxiv.org/abs/2109.07568}{arXiv:2109.07568}.
 Theorem numbers follow arXiv version~2.
+
+\bibitem{ArnadottirThesis}
+A.~S.~\'Arnad\'ottir,
+\emph{State Transfer \& Strong Cospectrality in Cayley Graphs},
+PhD thesis, University of Waterloo, 2022.
+\href{http://hdl.handle.net/10012/18494}{hdl:10012/18494}.
 
 \bibitem{Sin}
 P.~Sin, \emph{Large sets of Strongly Cospectral Vertices in Cayley Graphs},
@@ -2241,6 +2290,37 @@ Algebraic Combinatorics \textbf{5} (2022), no.~4, 699--714.
 \href{https://doi.org/10.5802/alco.237}{doi:10.5802/alco.237}.
 Preprint first posted November 15, 2020;
 \href{https://arxiv.org/abs/2011.07566}{arXiv:2011.07566}.
+
+\bibitem{Monterde}
+H.~Monterde, \emph{Strong cospectrality and twin vertices in weighted graphs},
+Electronic Journal of Linear Algebra \textbf{38} (2022), 494--518.
+\href{https://doi.org/10.13001/ela.2022.6721}{doi:10.13001/ela.2022.6721}.
+Preprint first posted November 1, 2021;
+\href{https://arxiv.org/abs/2111.01265v2}{arXiv:2111.01265v2}, version~2 (September 15, 2022).
+The cited paragraph follows Theorem~3.11 in that version.
+\bibitem{BGS}
+A.~Bernasconi, C.~Godsil and S.~Severini,
+\emph{Quantum networks on cubelike graphs},
+Physical Review A \textbf{78} (2008), 052320.
+\href{https://doi.org/10.1103/PhysRevA.78.052320}{doi:10.1103/PhysRevA.78.052320}.
+
+\bibitem{CheungGodsil}
+W.-C.~Cheung and C.~Godsil,
+\emph{Perfect state transfer in cubelike graphs},
+Linear Algebra and its Applications \textbf{435} (2011), 2468--2474.
+\href{https://doi.org/10.1016/j.laa.2011.04.022}{doi:10.1016/j.laa.2011.04.022};
+\href{https://arxiv.org/abs/1010.4721v2}{arXiv:1010.4721v2}.
+
+\bibitem{GodsilStateTransfer}
+C.~Godsil, \emph{State transfer on graphs},
+Discrete Mathematics \textbf{312} (2012), 129--147.
+\href{https://doi.org/10.1016/j.disc.2011.06.032}{doi:10.1016/j.disc.2011.06.032}.
+
+\bibitem{GodsilSmith}
+C.~Godsil and J.~Smith, \emph{Strongly cospectral vertices},
+Australasian Journal of Combinatorics \textbf{88} (2024), 1--21.
+\url{https://ajc.maths.uq.edu.au/pdf/88/ajc_v88_p001.pdf}.
+
 \end{thebibliography}
 }
 \end{document}

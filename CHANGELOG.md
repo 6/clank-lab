@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## noncrossing-symmetric-chains v4 (November 22, 2026)
+
+- Correction: the byline now reads Peter Graham. The theorem and its checks are unchanged.
+
 ## cubelike-cospectrality v4 (November 22, 2026)
 
 - Correction: the byline now reads Peter Graham. The theorem and its checks are unchanged.

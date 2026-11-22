@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## stanley-class-sum-snf v5 (November 21, 2026)
+
+- Correction: wording of credits and of the result's scope (the n-cycle class sum on the center); the abstract now states the review status and AI assistance. The theorem and its checks are unchanged.
+
 ## steinberg-c4-c9 v8 (November 21, 2026)
 
 - Correction: wording of credits and of what Lean checks; the status line now reads written proof with Lean and computer checks, and the abstract states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.

@@ -7,6 +7,7 @@ Zenodo records.
 ## weak-parking v2 (November 21, 2026)
 
 - Correction: wording of credits, and the stated scope narrowed to finite real reflection groups; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.
+- Zenodo: [10.5281/zenodo.24432630](https://doi.org/10.5281/zenodo.24432630)
 
 ## difference-set-243 v5 (November 21, 2026)
 

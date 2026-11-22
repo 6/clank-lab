@@ -10,7 +10,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.24432244](https://doi.org/10.5281/zenodo.24432244)
+Archived on Zenodo: [doi:10.5281/zenodo.24434879](https://doi.org/10.5281/zenodo.24434879)
 
 ## Abstract
 
@@ -81,6 +81,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Strongly cospectral sets in seven-dimensional cubelike graphs}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/cubelike-cospectrality-v3/results/cubelike-cospectrality}},
-  doi          = {10.5281/zenodo.24432244}
+  doi          = {10.5281/zenodo.24434879}
 }
 ```

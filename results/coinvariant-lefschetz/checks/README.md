@@ -140,3 +140,11 @@ invariant degrees and the earlier strong Lefschetz theorems are cited
 literature premises. In particular, the computation here does not reprove
 Wachi's result for the G33 coinvariant algebra. There is no Lean proof of the
 whole theorem in this package.
+
+## Further credits
+
+Chris McDaniel proved the real-reflection result; the earlier history includes Borel's flag-variety identification, Richard Stanley's applications of hard Lefschetz to Weyl groups, and work of [Toshiaki Maeno, Yasuhide Numata and Wachi (arXiv:0809.3558)](https://arxiv.org/abs/0809.3558) and [Numata and Wachi (arXiv:math/0703003)](https://arxiv.org/abs/math/0703003) on the noncrystallographic cases. Sachiko Yoshida studied Lefschetz elements for related rank-two groups. Shephard and Todd classified the groups.
+
+The [BIRS 2016 report](https://archive.birs.ca/files/2016/16w5114/report16w5114.pdf) (§4.4, p. 10) credits a McDaniel–Smith–Wachi breakout lemma for the strong Lefschetz property of a Leray–Hirsch base, used by Smith for $G_{25}$ and $G_{26}$; Wachi's 2013 Lemma 36 already covered $G_{24}$ through $G_{27}$. This is an earlier strategy close to the free-extension step here. McDaniel and Smith's 2021 Proposition 5.9 shows that a Bott–Samelson embedding need not have the inheritance property, even when both rings have the strong Lefschetz property; it does not disprove Smith's announced $G_{34}$ conclusion.
+
+The paper gives exact references and discusses nearby work by Watanabe, Kriebel, Boij–Migliore–Miró-Roig–Nagel (2026), Nagaoka–Wachi (2024), and Gui–Sun–Wang–Zhu (2024). Nothing from the latter three works is used here. Wachi's 2014 meeting abstract is in the [abstract collection](https://www.mathsoc.jp/meeting/gakushuin14mar/program/summary14mar_ja_20140303.pdf).

@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## coinvariant-lefschetz v4 (November 21, 2026)
+
+- Correction: credits and presentation. The paper credits Chris McDaniel's relative-coinvariant free-extension strategy, which the proof follows, and quotes Larry Smith's 2016 announcement, whose scope includes $G_{34}$, and Akihito Wachi's statements on $G_{34}$. The byline now reads Peter Graham. The theorem and its checks are unchanged.
+- The proof now spells out two identifications it used without argument: the subgroup $G(3,3,4)$ and the $G_{33}$ fiber. Routine verifications move to appendices.
+
 ## weak-parking v2 (November 21, 2026)
 
 - Correction: wording of credits, and the stated scope narrowed to finite real reflection groups; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.

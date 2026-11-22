@@ -7,6 +7,7 @@ Zenodo records.
 ## steinberg-c4-c9 v8 (November 21, 2026)
 
 - Correction: wording of credits and of what Lean checks; the status line now reads written proof with Lean and computer checks, and the abstract states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.
+- Zenodo: [10.5281/zenodo.24431799](https://doi.org/10.5281/zenodo.24431799)
 
 ## acyclic-root-extrema v2 (November 20, 2026)
 

@@ -10,7 +10,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23639462](https://doi.org/10.5281/zenodo.23639462)
+Archived on Zenodo: [doi:10.5281/zenodo.24432181](https://doi.org/10.5281/zenodo.24432181)
 
 ## Abstract
 
@@ -44,6 +44,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Symmetric chains in noncrossing partition lattices}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/noncrossing-symmetric-chains-v3/results/noncrossing-symmetric-chains}},
-  doi          = {10.5281/zenodo.23639462}
+  doi          = {10.5281/zenodo.24432181}
 }
 ```

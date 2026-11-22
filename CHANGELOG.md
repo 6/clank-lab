@@ -7,6 +7,7 @@ Zenodo records.
 ## cubelike-cospectrality v3 (November 21, 2026)
 
 - Correction: wording of credits; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24432244](https://doi.org/10.5281/zenodo.24432244)
 
 ## noncrossing-symmetric-chains v3 (November 21, 2026)
 

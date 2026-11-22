@@ -163,3 +163,89 @@ files are not part of the public source bundle.
 
 Third-party dependency and data license details are in
 [THIRD_PARTY.md](../THIRD_PARTY.md).
+
+## Sources used during development
+
+The following notes retain the earlier credit and literature-check qualifications; the main README now gives the short credit list.
+
+Keita Baba proved this theorem first. Baba's SAT proof uses multiplier 61,
+99 orbits and all 49 cyclic quotients; Baba also solved the instances for all
+864 possible images in $G/3G$. Baba's repository describes the work as written
+with AI assistance from Anthropic. Our proof was obtained independently.
+
+Daniel M. Gordon maintained the La Jolla repository, singled out this exact
+case and connected it to the earlier literature. A. Vera López and M. A.
+García Sánchez recorded it as unresolved in their 1997 systematic study and
+used multiplier searches for related cases. Hall, Menon and Turyn developed
+the multiplier and character methods underlying the reduction. Arasu and Ma,
+Lander, Leung and Schmidt supplied earlier nonexistence results and
+field-descent theory; Miller's explicit restatement helps distinguish their
+hypotheses from this case. Paley's construction and Lehmer's historical work
+supply the neighboring positive case. Recent related work is credited and
+its scope distinguished in the paper. Lean, mathlib and their library
+contributors supplied the formal-development infrastructure.
+
+The literature check also considered Xiang's [Recent progress in algebraic design theory](https://doi.org/10.1016/j.ffa.2005.06.003),
+Arasu and Ma's [Abelian Difference Sets Without Self-conjugacy](https://doi.org/10.1023/A:1008323907194),
+Schmidt's [Cyclotomic Integers and Finite Geometry](https://doi.org/10.1090/S0894-0347-99-00298-2)
+and [Characters and Cyclotomic Fields in Finite Geometry](https://doi.org/10.1007/b84213),
+and the Arasu–Burkett–Linger conference precursor
+[Existence Status of Some Previously Open Abelian Difference Sets](<https://doi.org/10.1016/S1571-0653(04)00514-1>).
+The check also listed María Asunción García Sánchez's
+*Nuevas aportaciones a la teoría de grupos finitos sobre conjuntos de diferencias y p-grupos de clase maximal* (UPV/EHU thesis, 1998, Teseo 66860).
+These sources are named as background considered during the literature check;
+no additional result from them is used in this proof.
+
+Other historical references include Hall's [Cyclic projective planes](https://doi.org/10.1215/S0012-7094-47-01482-8),
+Menon's [Difference sets in Abelian groups](https://doi.org/10.1090/S0002-9939-1960-0117169-3),
+Baumert's [Cyclic Difference Sets](https://doi.org/10.1007/BFb0061260),
+and Yamamoto's [Decomposition fields of difference sets](https://doi.org/10.2140/pjm.1963.13.337).
+The literature check listed both handbooks edited by Colbourn and Dinitz:
+[The CRC Handbook of Combinatorial Designs](https://documents.uow.edu.au/~jennie/WEBPDF/1996_01.pdf)
+and [Handbook of Combinatorial Designs, Second Edition](https://doi.org/10.1201/9781420010541),
+including the latter's “Difference Sets” chapter by Jungnickel, Pott and Smith.
+The check also considered Gordon and Schmidt's [A survey of the multiplier conjecture](https://doi.org/10.1007/s10623-015-0153-8),
+Leung, Ma and Schmidt's [A multiplier theorem](https://doi.org/10.1016/j.jcta.2014.02.001),
+Peifer's [An algorithm for enumerating difference sets](https://doi.org/10.2140/jsag.2019.9.35),
+and Trout's *Difference sets in abelian groups and their generalizations* (University of Delaware thesis, 2017).
+These bibliographic additions do not change the proof dependencies or imply
+that every original source was read in full.
+
+The [edition checking notes](edition-notes.md) retain the conventions, source-access qualifications and recorded formal checks.
+
+This DOI identifies version 4.
+
+## Further credits
+
+- Keita Baba, [No (243,121,60) difference set in Z3 × Z9 × Z9](https://github.com/kei825/open-questions-2026/tree/d40fc3a3ac538e08e1bc31cf45b5d1204a2c34c8/space/difference-set-243) — first proves this theorem.
+- Daniel M. Gordon, [La Jolla Difference Sets Repository](https://doi.org/10.5281/zenodo.19740740) — records this exact case and connects it to earlier literature.
+- Daniel M. Gordon, [The La Jolla Difference Set Repository](https://web.archive.org/web/20240502201448/https://cargo.wlu.ca/ArasuFest/ArasuFest_talks/Dan_Gordon.pdf#page=49) — singles out the smallest open case.
+- A. Vera López and M. A. García Sánchez, [On the existence of abelian difference sets with 100 < k ≤ 150](https://combinatorialpress.com/jcmcc-articles/volume-023/on-the-existence-of-abelian-difference-sets-with-100-k-leq-150/) — records the unresolved case and multiplier searches for related cases.
+- Marshall Hall Jr., [A Survey of Difference Sets](https://doi.org/10.1090/S0002-9939-1956-0082502-7) — provides multiplier-method background.
+- P. K. Menon, [Difference sets in Abelian groups](https://doi.org/10.1090/S0002-9939-1960-0117169-3) — provides multiplier-method background.
+- R. J. Turyn, [Character sums and difference sets](https://doi.org/10.2140/pjm.1965.15.319) — provides the character methods underlying the reduction.
+- K. T. Arasu and S. L. Ma, [A nonexistence result on difference sets, partial difference sets and divisible difference sets](https://doi.org/10.1016/S0378-3758(00)00278-0) — provides earlier nonexistence results.
+- E. S. Lander, [Symmetric Designs: An Algebraic Approach](https://doi.org/10.1017/CBO9780511662164) — provides earlier nonexistence theory.
+- K. H. Leung, S. L. Ma and B. Schmidt, [Nonexistence of abelian difference sets: Lander’s conjecture for prime power orders](https://doi.org/10.1090/S0002-9947-03-03365-8) — provides earlier nonexistence results.
+- K. H. Leung and B. Schmidt, [The Field Descent Method](https://doi.org/10.1007/s10623-004-1703-7) — provides field-descent theory.
+- Niklas Miller, [Forbidden multipliers in abelian difference sets](https://arxiv.org/abs/2511.10231v1) — restates hypotheses distinguished from this case.
+- R. E. A. C. Paley, [On Orthogonal Matrices](https://doi.org/10.1002/sapm1933121311) — supplies the neighboring positive construction.
+- Emma Lehmer, [On residue difference sets](https://doi.org/10.4153/CJM-1953-047-3) — provides historical context for the neighboring positive case.
+- Q. Xiang, [Recent progress in algebraic design theory](https://doi.org/10.1016/j.ffa.2005.06.003) — provides literature-check background.
+- K. T. Arasu and S. L. Ma, [Abelian Difference Sets Without Self-conjugacy](https://doi.org/10.1023/A:1008323907194) — provides literature-check background.
+- B. Schmidt, [Cyclotomic Integers and Finite Geometry](https://doi.org/10.1090/S0894-0347-99-00298-2) — provides literature-check background.
+- B. Schmidt, [Characters and Cyclotomic Fields in Finite Geometry](https://doi.org/10.1007/b84213) — provides literature-check background.
+- Arasu, Burkett and Linger, [Existence Status of Some Previously Open Abelian Difference Sets](https://doi.org/10.1016/S1571-0653(04)00514-1) — provides the conference-precursor background.
+- María Asunción García Sánchez, [Nuevas aportaciones a la teoría de grupos finitos sobre conjuntos de diferencias y p-grupos de clase maximal](https://ekoizpen-zientifikoa.ehu.eus/documentos/5e57ae102999527d991a3834) — provides literature-check background.
+- Marshall Hall Jr., [Cyclic projective planes](https://doi.org/10.1215/S0012-7094-47-01482-8) — provides historical background.
+- L. D. Baumert, [Cyclic Difference Sets](https://doi.org/10.1007/BFb0061260) — provides historical background.
+- K. Yamamoto, [Decomposition fields of difference sets](https://doi.org/10.2140/pjm.1963.13.337) — provides historical background.
+- C. J. Colbourn and J. H. Dinitz, editors, [The CRC Handbook of Combinatorial Designs](https://documents.uow.edu.au/~jennie/WEBPDF/1996_01.pdf) — provides literature-check background.
+- C. J. Colbourn and J. H. Dinitz, editors, [Handbook of Combinatorial Designs, Second Edition](https://doi.org/10.1201/9781420010541) — provides literature-check background.
+- D. Jungnickel, A. Pott and K. W. Smith, [Difference Sets](https://doi.org/10.1201/9781420010541) — provides the second handbook’s chapter on the subject.
+- D. M. Gordon and B. Schmidt, [A survey of the multiplier conjecture](https://doi.org/10.1007/s10623-015-0153-8) — provides literature-check background.
+- K. H. Leung, S. L. Ma and B. Schmidt, [A multiplier theorem](https://doi.org/10.1016/j.jcta.2014.02.001) — provides literature-check background.
+- Peifer, [An algorithm for enumerating difference sets](https://doi.org/10.2140/jsag.2019.9.35) — provides enumeration background.
+- Trout, [Difference sets in abelian groups and their generalizations](http://udspace.udel.edu/handle/19716/23092) — provides literature-check background.
+- Lean contributors, [Lean 4](https://github.com/leanprover/lean4) — supplies the proof assistant.
+- mathlib contributors, [mathlib](https://github.com/leanprover-community/mathlib4) — supplies the formal-development libraries.

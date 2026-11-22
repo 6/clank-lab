@@ -7,7 +7,7 @@ differences represent every nonzero group element equally often.
 [Gordon's La Jolla Difference Set Repository](https://dmgordon.org/difference-sets/)
 [listed](https://doi.org/10.5281/zenodo.19740740) the question whether 121 points
 in $C_3 \times C_9 \times C_9$ can represent each nonzero element exactly 60 times as open in its April 24, 2026 archive;
-Gordon called it the “Smallest Open Case” in his
+Gordon called it the “Smallest Open Case” in the
 [August 3, 2019 presentation, slide 38](https://web.archive.org/web/20240502201448/https://cargo.wlu.ca/ArasuFest/ArasuFest_talks/Dan_Gordon.pdf#page=49).
 It was already unresolved in Vera López and García Sánchez's 1997 table.
 [Keita Baba first proved that no such set exists on October 4, 2026](https://github.com/kei825/open-questions-2026/tree/d40fc3a3ac538e08e1bc31cf45b5d1204a2c34c8/space/difference-set-243),
@@ -18,11 +18,15 @@ concerns these parameters in this group only.
 
 Computer-assisted; not yet reviewed by experts.
 
-The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23647301](https://doi.org/10.5281/zenodo.23647301)
+
+## Abstract
+
+A $(243,121,60)$ difference set in $C_3\times C_9\times C_9$ would be a 121-element subset whose ordered differences represent every nonzero element exactly 60 times; we prove that none exists. Vera López and García Sánchez recorded this case as unresolved, and Gordon singled it out in a presentation on the La Jolla Difference Set Repository. Keita Baba proved this first, by a SAT computation with a certificate accepted by a formally verified checker; we give an independent proof by a different method. It builds on the fixed-translate theorem of McFarland and Rice, the multiplier and character methods of Hall, Menon and Turyn, and the multiplier searches of Vera López and García Sánchez. Using the multiplier 61, we reduce any such set, up to symmetry, to eight explicit patterns of coset sizes; an exhaustive search shows that none extends to a difference set. Lean proves the whole reduction; the formal nonexistence theorem assumes only the search results, which independent programs establish outside Lean.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 ## Check it
 
@@ -69,27 +73,14 @@ The final Lean nonexistence theorem assumes the 1,038 semantic assertions
 not infer these assertions from digest strings or verify C++ execution.
 The conditional boundary and the complete separately written third kernel
 are explained in the paper and [checking details](checks/README.md).
-The [edition checking notes](checks/edition-notes.md) retain the conventions,
-source-access qualifications and recorded formal checks.
 
 ## Credits
 
-Keita Baba proved this theorem first. Baba's SAT proof uses multiplier 61,
-99 orbits and all 49 cyclic quotients; Baba also solved the instances for all
-864 possible images in $G/3G$. Baba's repository describes the work as written
-with AI assistance from Anthropic. Our proof was obtained independently.
+Keita Baba's [No (243,121,60) difference set in Z3 × Z9 × Z9](https://github.com/kei825/open-questions-2026/tree/d40fc3a3ac538e08e1bc31cf45b5d1204a2c34c8/space/difference-set-243) is the first proof of this theorem; the present work is an independent confirmation by a different method. Daniel M. Gordon's [La Jolla Difference Sets Repository](https://doi.org/10.5281/zenodo.19740740) records the exact case and connects it to earlier literature. Gordon's [The La Jolla Difference Set Repository](https://web.archive.org/web/20240502201448/https://cargo.wlu.ca/ArasuFest/ArasuFest_talks/Dan_Gordon.pdf#page=49) singles it out as the smallest open case.
 
-Daniel M. Gordon maintained the La Jolla repository, singled out this exact
-case and connected it to the earlier literature. A. Vera López and M. A.
-García Sánchez recorded it as unresolved in their 1997 systematic study and
-used multiplier searches for related cases. Hall, Menon and Turyn developed
-the multiplier and character methods underlying the reduction. Arasu and Ma,
-Lander, Leung and Schmidt supplied earlier nonexistence results and
-field-descent theory; Miller's explicit restatement helps distinguish their
-hypotheses from this case. Paley's construction and Lehmer's historical work
-supply the neighboring positive case. Recent related work is credited and
-its scope distinguished in the paper. Lean, mathlib and their library
-contributors supplied the formal-development infrastructure.
+Marshall Hall Jr.'s [A Survey of Difference Sets](https://doi.org/10.1090/S0002-9939-1956-0082502-7) and P. K. Menon's [Difference sets in Abelian groups](https://doi.org/10.1090/S0002-9939-1960-0117169-3) provide multiplier-method background. R. L. McFarland and B. F. Rice's [Translates and multipliers of abelian difference sets](https://doi.org/10.1090/S0002-9939-1978-0462976-4) supplies the fixed translate used in the first step. R. J. Turyn's [Character sums and difference sets](https://doi.org/10.2140/pjm.1965.15.319) provides the character methods underlying the reduction. The Lean contributors' [Lean 4](https://github.com/leanprover/lean4) and the mathlib contributors' [mathlib](https://github.com/leanprover-community/mathlib4) supply the proof assistant and formal-development libraries.
+
+The checking documentation also gives further credits and source notes.
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -100,7 +91,7 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   author       = {Graham, Peter},
   title        = {{Nonexistence of (243,121,60) difference sets in C3 × C9 × C9}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v4/results/difference-set-243}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v5/results/difference-set-243}},
   doi          = {10.5281/zenodo.23647301}
 }
 ```

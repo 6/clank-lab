@@ -29,7 +29,7 @@ was asked.
 
 Gordon's La Jolla Difference Set Repository has made such group-specific
 questions accessible and maintained their connection with the
-literature. In his presentation of August~3, 2019, Gordon singled out
+literature. In the presentation of August~3, 2019, Gordon singled out
 the present case as the ``Smallest Open Case''~\cite[slide~38]{Gordon2019}.
 Here slide~38 is physical PDF page~49. The repository's archived
 version~1.3, dated April~24, 2026, also records the exact entry

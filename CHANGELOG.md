@@ -7,6 +7,7 @@ Zenodo records.
 ## stanley-class-sum-snf v6 (November 22, 2026)
 
 - Correction: the byline now reads Peter Graham. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24434705](https://doi.org/10.5281/zenodo.24434705)
 
 ## scattering-coefficients v6 (November 21, 2026)
 

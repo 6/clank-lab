@@ -34,7 +34,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23605084](https://doi.org/10.5281/zenodo.23605084)
+Archived on Zenodo: [doi:10.5281/zenodo.24432630](https://doi.org/10.5281/zenodo.24432630)
 
 ## Abstract
 
@@ -101,6 +101,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{The weak parking-space conjecture}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/weak-parking-v2/results/weak-parking}},
-  doi          = {10.5281/zenodo.23605084}
+  doi          = {10.5281/zenodo.24432630}
 }
 ```

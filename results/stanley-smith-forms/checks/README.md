@@ -206,3 +206,19 @@ those written arguments; [its documentation](../lean/README.md) says which.
 forms for every $\lambda$ with $n \leq 8$ and every $k$ (`data/census-n8.json`) and
 compared other readings of the conjecture. They need third-party packages,
 are not part of the check, and the certificates do not depend on them.
+
+## Sources used during development
+
+Stanley reports computations through $n \le 7$; the modifications of the formula we tested, against every case with $n \le 8$, all fail. These tested alternatives are development history. [Supplementary notes](context.tex) give source pinpoints, the census, alternative readings and detailed check scope.
+
+The DOI identifies the deposited v3. The URL is prepared for v4 and is not live yet.
+
+The DOI above and the DOI in Cite archive v3; the v4 correction has no DOI yet.
+
+## Further credits
+
+- Richard P. Stanley, [Smith normal form in combinatorics](https://arxiv.org/abs/1602.00166v2) — poses Conjecture 7.4 on Grinberg’s computations through n ≤ 7.
+- Darij Grinberg, [Comments on “Conjectures on Smith Normal Form for Jucys-Murphy elements (Stanley, Grinberg) — status and generalisations?”](https://mathoverflow.net/questions/484782#comment1262855_484782) — fixes the lattice on which the conjecture is read.
+- Alexander Chervov, [Conjectures on Smith Normal Form for Jucys-Murphy elements (Stanley, Grinberg) — status and generalisations?](https://mathoverflow.net/questions/484782) — asks for the conjecture’s status.
+- Lean contributors, [Lean 4](https://github.com/leanprover/lean4) — supplies the proof assistant.
+- Mathlib contributors, [Mathlib](https://github.com/leanprover-community/mathlib4) — supplies the formal-proof libraries.

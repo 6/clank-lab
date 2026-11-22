@@ -20,7 +20,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23647301](https://doi.org/10.5281/zenodo.23647301)
+Archived on Zenodo: [doi:10.5281/zenodo.24432580](https://doi.org/10.5281/zenodo.24432580)
 
 ## Abstract
 
@@ -92,6 +92,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Nonexistence of (243,121,60) difference sets in C3 × C9 × C9}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/difference-set-243-v5/results/difference-set-243}},
-  doi          = {10.5281/zenodo.23647301}
+  doi          = {10.5281/zenodo.24432580}
 }
 ```

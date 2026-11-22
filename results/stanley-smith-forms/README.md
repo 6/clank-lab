@@ -53,7 +53,7 @@ Written proof, with Lean and computer checks; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23635828](https://doi.org/10.5281/zenodo.23635828)
+Archived on Zenodo: [doi:10.5281/zenodo.24432275](https://doi.org/10.5281/zenodo.24432275)
 
 ## Abstract
 
@@ -117,6 +117,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{A counterexample to Stanley's conjecture on Smith forms of Jucys--Murphy elements}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/stanley-smith-forms-v4/results/stanley-smith-forms}},
-  doi          = {10.5281/zenodo.23635828}
+  doi          = {10.5281/zenodo.24432275}
 }
 ```

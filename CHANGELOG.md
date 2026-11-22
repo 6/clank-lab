@@ -7,6 +7,7 @@ Zenodo records.
 ## stanley-smith-forms v4 (November 21, 2026)
 
 - Correction: wording of credits; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.
+- Zenodo: [10.5281/zenodo.24432275](https://doi.org/10.5281/zenodo.24432275)
 
 ## multitwist-exceptions v4 (November 21, 2026)
 

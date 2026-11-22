@@ -4,7 +4,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,array,tikz}
 \usepackage[title]{appendix}
-\usepackage{float,needspace}
 \usepackage[hyphens]{url}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \newtheorem{theorem}{Theorem}[section]
@@ -22,36 +21,87 @@
 \clubpenalty=10000
 \title{Symmetric chains in noncrossing partition lattices}
 \author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 25, 2026}
+\date{November 22, 2026}
 \hypersetup{pdfauthor={P. Graham},pdftitle={Symmetric chains in noncrossing partition lattices}}
 \begin{document}
 \maketitle
 \begin{abstract}
 Every noncrossing partition lattice of a finite well-generated complex
-reflection group admits a symmetric chain decomposition. We give a
-computer-assisted proof for the exceptional types $H_4$, $G_{33}$,
-$G_{34}$, $E_6$, $E_7$, and $E_8$, completing the saturated-chain
-assertion asked by Henri M\"uhle. Simion and Ullman, Reiner, Bessis
-and Corran, and M\"uhle established the other irreducible cases.
-Explicit chain certificates are checked against exact reflection-group
-models; exhaustive rank descent certifies that their graphs are the full
-absolute-order intervals. Reflection-preserving automorphisms and a
-constructive product decomposition give every Coxeter element and every
-reducible group. Lean verifies the general interval-closure, product,
-and transfer lemmas. The finite group calculations and the published
-classification and decomposition results remain external inputs.
-\end{abstract}
+reflection group admits a symmetric chain decomposition: a partition
+into saturated chains whose bottom and top ranks sum to the rank of the
+lattice. This answers the chain part of a question of Henri M\"uhle,
+who proved symmetric Boolean decompositions for the groups $G(d,d,n)$,
+symmetric chain decompositions for the exceptional types of rank at
+most four other than $H_4$, and the strong Sperner property for every
+well-generated group. With the theorems of Simion and Ullman for the
+symmetric groups and of Reiner for type $B$, and the isomorphism of
+Bessis and Corran between the lattices of $G(d,1,n)$ and of type $B$, six
+exceptional types remained: $H_4$, $G_{33}$, $G_{34}$, $E_6$, $E_7$
+and $E_8$. For these, computer-found chains are checked exactly, and a
+finite criterion proves that each checked graph is the whole interval.
+Reflection
+automorphisms of Reiner, Ripoll and Stump carry the chains to every
+Coxeter element; a product construction treats reducible groups. Lean
+checks the abstract walk criterion, the product construction and the
+transfer along order isomorphisms, but not the group computations or
+the cited results.
 
+This work has not yet been reviewed by experts. The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
+\end{abstract}
+\medskip
 
 \section{Introduction}
 A noncrossing partition of a circularly ordered set groups its points
-into blocks whose convex hulls do not cross. Ordering these partitions
-by refinement gives the classical noncrossing partition lattice. Its
-generalization to reflection groups replaces refinement by absolute
-order: an element lies below another when a shortest reflection
-factorization can be extended to one for the latter. We prove the
-following statement; the terminology is made precise below.
-The partition it describes is a symmetric chain decomposition.
+into blocks whose convex hulls do not cross. Ordered by refinement,
+these partitions form the classical noncrossing partition lattice,
+introduced by Kreweras~\cite{Kreweras}. Biane and Brady treated
+noncrossing partitions inside the symmetric group \cite{Biane,Brady},
+and Brady--Watt and Bessis extended the construction to reflection
+groups \cite{BW,BessisDual}. There refinement is replaced by absolute
+order, in which an element lies below another when a shortest
+factorization of the first into reflections extends to one of the
+second, and the noncrossing partitions are the interval below a
+Coxeter element. This interval is a lattice for every well-generated
+group \cite[introduction, first paragraph]{Muhle}. For groups generated
+by involutive reflections, the standing assumption of Bessis's
+Section~8, this is Bessis's Lemma~8.6 \cite[pp.~848 and~851]{Bessis},
+whose proof combines \cite{BessisDual}, Brady and Watt's case-free proof
+\cite{BW2008}, Bessis and Corran's treatment of $G(e,e,r)$ \cite{BC} and
+computer checks. The lattice property is not used below.
+
+A graded poset of rank $n$ has a \emph{symmetric chain decomposition}
+if its elements can be partitioned into saturated chains whose bottom
+and top ranks sum to $n$ (Section~\ref{sec:overview}). Such a
+decomposition implies the strong Sperner property
+\cite[remark after Question~1.2]{Muhle}.
+\begin{samepage}
+Henri M\"uhle asks \cite[Question~1.1]{Muhle}:
+\begin{quote}
+Does the lattice of $W$-noncrossing partitions always admit a symmetric
+decomposition into saturated chains or Boolean lattices for every
+well-generated complex reflection group $W$?
+\end{quote}
+\end{samepage}
+Theorem~\ref{thm:main} below answers its chain part. The Boolean part
+is not settled here.
+
+Rodica Simion and Daniel Ullman constructed symmetric decompositions
+for classical noncrossing partitions \cite{SU}. Victor Reiner proved
+the type-$B$ chain assertion \cite[Theorem~13]{Reiner}; Patricia Hersh's
+local symmetric-group actions give the stronger Boolean decomposition
+in type $B$ \cite[Theorems~5 and~7]{Hersh}. Work of David Bessis and
+Ruth Corran identifies the $G(d,1,m)$ lattices with type $B$ for
+$d\geq2$ \cite{BC}; see Section~\ref{sec:reduction}. M\"uhle proves the Boolean assertion for
+$G(d,d,m)$ and the chain assertion for the exceptional types of rank
+at most four other than $H_4$
+\cite[Theorem~1.3 and Proposition~4.2]{Muhle}.
+Christos A.~Athanasiadis and Victor Reiner attribute a type-$D$ symmetric
+chain decomposition to Eleni Tzanaki, citing a private communication
+\cite[author manuscript, Section~7, item~4]{AR}; M\"uhle also records this
+attribution \cite[introduction, after Theorem~1.3]{Muhle}.
+This left six exceptional types: $H_4$, $G_{33}$, $G_{34}$, $E_6$,
+$E_7$ and $E_8$. We prove the following; the terminology is made
+precise in Section~\ref{sec:overview}.
 
 \begin{theorem}\label{thm:main}
 Let $W$ be a finite well-generated complex reflection group of essential
@@ -62,84 +112,48 @@ bottom and top ranks sum to $n$. The trivial group, of rank zero, is
 included.
 \end{theorem}
 
-The new contribution is the chain decomposition for the six exceptional
-types named in the abstract. The main difficulty is the compatibility
-of chains across every rank: rank symmetry, unimodality, and the strong
-Sperner property do not supply such chains. M\"uhle's work already
-established those properties for all well-generated groups
-\cite[Theorem~1.4]{Muhle}. Here explicit partitions supply the missing
-chain decompositions. Their discovery uses Griggs's matching
-construction, iterated from the middle ranks as in Tomon's work
-\cite{Griggs,Tomon}. Their verification also establishes the complete
-interval and its covers, rather than relying on a graph with the
-expected number of vertices.
+Here a Coxeter element is any regular element of order $h$, in the
+broader sense of Reiner, Ripoll and Stump; Section~\ref{sec:overview}
+compares it with the classical notion.
 
-\begin{samepage}
-\subsection*{The question and earlier work}
-Henri M\"uhle asks \cite[Question~1.1]{Muhle}:
-\begin{quote}
-Does the lattice of $W$-noncrossing partitions always admit a symmetric
-decomposition into saturated chains or Boolean lattices for every
-well-generated complex reflection group $W$?
-\end{quote}
-\end{samepage}
-Theorem~\ref{thm:main} answers its chain part. The Boolean part is
-not settled here.
+M\"uhle proved that these lattices are rank-symmetric, rank-unimodal
+and strongly Sperner \cite[Theorem~1.4]{Muhle}. By a theorem of Griggs
+\cite{Griggs}, the LYM (equivalently, normalized matching) property
+together with rank symmetry and unimodality implies a symmetric chain
+decomposition; see \cite[Theorem~4.1]{Muhle}. M\"uhle used GAP and Sage
+to verify these hypotheses for the exceptional types of rank at most
+four other than $H_4$ \cite[Proposition~4.2]{Muhle}; the six types above
+were not covered. We construct their chains by iterating Griggs's
+matching trick, as used by Tomon \cite{Griggs}\cite[\mbox{\S\S3--4}]{Tomon},
+and verify the chains and the whole interval directly. We do not test
+normalized matching.
 
-Rodica Simion and Daniel Ullman constructed symmetric decompositions
-for classical noncrossing partitions \cite{SU}. Victor Reiner proved
-the type-$B$ chain assertion \cite[Theorem~13]{Reiner}; Patricia Hersh's
-local symmetric-group actions give the stronger Boolean decomposition
-in type $B$ \cite[Theorems~5 and~7]{Hersh}. David Bessis and Ruth Corran
-identify the $G(d,1,m)$ intervals with type $B$ for $d\geq2$ \cite{BC}.
-M\"uhle proves the Boolean assertion for $G(d,d,m)$ and the chain
-assertion for the small exceptional types, leaving the six treated here
-\cite[Theorem~1.3 and Proposition~4.2]{Muhle}. He also records an earlier
-unpublished type-$D$ chain construction by Eleni Tzanaki
-\cite[introduction, after Theorem~1.3]{Muhle}.
-
-The reduction uses the classification of Geoffrey Shephard and John
-Todd \cite{ST}. The exact models use the Coxeter representations
-described by Drew Armstrong \cite{Armstrong}, the invariant degrees
-tabulated by David Bessis \cite{Bessis}, and the Coxeter--Todd root
-coordinates and named generators described by Manabu Oura and Jiro
-Sekiguchi \cite{OS}, building on John Conway and Neil Sloane \cite{CS}.
-The passage between all choices of Coxeter element uses the theorem of
-Victor Reiner, Vivien Ripoll, and Christian Stump \cite{RRS}.
-
-Recent related work includes Michael Dougherty and Gina Root's
-symmetric chain results under conditions on planar hull configurations
-\cite[Theorem~A]{DR}, and Alice Gao, Xin-Bei Liu, Arthur Yang, and James Zhao's
-interlacing symmetric decompositions of order-complex $h$-polynomials
-\cite[Theorem~1.5]{GLYZ}. The former concerns a geometric class of partition
-lattices; the latter decomposes polynomials rather than the elements
-of an absolute-order interval. These results address different
-extensions of classical noncrossing-partition structure.
-For general graded posets, Nate Harman, Rylan Rosas, Charles
-Troutman~III, and Chris Wu introduce strong $\mathfrak{sl}_2$-actions
-and conjecture their equivalence with symmetric chain decompositions
-\cite[Definition~1.1 and Conjecture~1.2]{HRTW}. The certificates here give the chains directly and do
-not require that conjecture.
-
-The proof combines exact finite computations with the general lemmas
-checked in Lean; Section~\ref{sec:checking} describes their relation.
-
-The proofs, the Lean formalization, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction. This computer-assisted work has not yet been reviewed by experts.
+The reduction uses the classification of Shephard and Todd \cite{ST},
+the exact models build on work of Armstrong, Bessis, Coxeter and Todd,
+Oura and Sekiguchi, and Conway and Sloane (Appendix~\ref{app:models}),
+and the passage between Coxeter elements uses the theorem of Reiner,
+Ripoll and Stump \cite{RRS}. The proof combines exact finite
+computations with general lemmas checked in Lean;
+Section~\ref{sec:checking} says what each covers.
 
 \section{Definitions and proof overview}\label{sec:overview}
-We recall the conventions and then describe the argument.
-
 A \emph{complex reflection} on a finite-dimensional complex vector
 space $V$ is a nonidentity finite-order linear transformation fixing
 a hyperplane pointwise. A finite complex reflection group is a finite subgroup of $\operatorname{GL}(V)$
 generated by reflections. Its \emph{essential rank} is
 $\dim V-\dim\Fix(W)$. It is \emph{well-generated} if it can be generated
-by that many reflections. A fixed summand can be removed without
-changing any reflection length below.
+by that many reflections. Restricting $W$ to a $W$-stable complement
+of $\Fix(W)$ gives an isomorphic reflection group of the same essential
+rank, with the same reflections, reflection lengths and values of
+$\rank(I-w)$. We therefore allow models with a fixed subspace, as for
+$G_{33}$ in Appendix~\ref{app:models}.
 
 Let $T$ be the set of all reflections in $W$. It is closed under
 inversion and conjugation. The \emph{reflection length} $\ell_T(w)$ is
 the smallest number of factors from $T$ in a product equal to $w$.
+A \emph{reflection word} of length $k$ for $w$ is a factorization
+$w=t_1\cdots t_k$ with all $t_i\in T$; it is \emph{reduced} if
+$k=\ell_T(w)$.
 The \emph{absolute order} and its interval below $c$ are
 \begin{align*}
  u\leq_T v&\quad\Longleftrightarrow\quad
@@ -148,7 +162,9 @@ The \emph{absolute order} and its interval below $c$ are
 \end{align*}
 The rank of an element in this interval is $\ell_T(w)$.
 
-For the essential rank-$n$ representation, the algebra of invariant
+By the Chevalley--Shephard--Todd theorem
+\cite[Theorem~5.1]{ST}\cite[Theorem~(A)]{Chevalley}, for the essential
+rank-$n$ representation the algebra of invariant
 polynomials $\C[V]^W$ is a polynomial algebra on $n$ homogeneous
 generators. Their degrees $d_1\leq\cdots\leq d_n$ are independent
 of the choice of homogeneous generators and are called the
@@ -157,9 +173,12 @@ be the largest invariant degree. A vector
 is \emph{regular} if it lies outside every reflecting hyperplane. A
 \emph{Coxeter element} here means a regular element of order $h$: it
 has an eigenvector that is regular, with eigenvalue of order $h$.
-This includes every regular element of order $h$, not just one
-conjugacy class. For a reducible group the choice is componentwise,
-as in Theorem~\ref{thm:main}.
+This is the definition of Reiner, Ripoll and Stump
+\cite[Definition~1.1 and the paragraph after it]{RRS}; the classical definition requires the
+eigenvalue $e^{2\pi i/h}$, and for real groups gives the products of
+the simple reflections. The regular elements of order $h$ need not form
+a single conjugacy class. For a reducible group the choice is made in
+each irreducible factor, as in Theorem~\ref{thm:main}.
 
 For example, $\NC(S_3,(123))$ has rank sizes $1,3,1$. A maximal chain
 $1<(12)<(123)$, together with the two singleton chains $(13)$ and
@@ -175,10 +194,13 @@ saturated chains.
 \end{definition}
 
 The proof has three parts. First, published decompositions leave only
-six irreducible types. For one Coxeter element in each type, the supplied
-certificates list the chains by exact matrix labels. Second, a complete
-reflection census and exhaustive downward reflection steps identify the
-certified graph with $[1,c]_T$. The key observation is that, on a
+six irreducible types. For one Coxeter element in each, a
+\emph{certificate} is a finite data file listing elements of $W$ by
+exact labels that determine their matrices (Appendix~\ref{app:models}),
+the downward reflection steps between them, and a partition of them
+into chains. Second, the list of all reflections and all downward
+reflection steps from the listed elements show that the listed graph is
+all of $[1,c]_T$. The key observation is that, on a
 reflection walk of length $n$ from $c$ to $1$ with
 $\rank(I-c)=n$, the quantity $\rank(I-w)$ must drop at every step.
 This turns interval completeness into a finite closure check.
@@ -192,7 +214,7 @@ equality only for the certified interval.
 
 \section{Absolute-order intervals}\label{sec:finite}
 The finite criterion below applies in any faithful finite-dimensional
-representation.
+representation in which $\rank(I-t)=1$ for every $t\in T$.
 
 Put $q(w)=\rank(I-w)$. The identity
 \[
@@ -204,7 +226,8 @@ implies $q(uv)\leq q(u)+q(v)$. In particular
 \end{equation}
 The second inequality follows by applying subadditivity to
 $w=(wt)t^{-1}$. A \emph{reflection walk} has steps
-$w\longmapsto wt$ with $t\in T$.
+$w\longmapsto wt$ with $t\in T$; its \emph{vertices} are the elements
+it visits.
 
 \begin{lemma}\label{lem:walk}
 Suppose $q(c)=n$ and $c$ has a reflection word of length $n$.
@@ -264,72 +287,31 @@ If $y<_T x$ is a cover, there can therefore be only one added
 reflection. This is precisely a downward reflection step of rank one.
 \end{proof}
 
-The criterion certifies vertices and covers together. Checking only
-cardinality, or checking chains on two copies of the same incomplete
-graph, would not establish either conclusion.
+Thus the criterion proves that the computed graph is the whole
+interval with its cover relations, not just a subposet of it.
 
 \section{The exceptional cases}\label{sec:models}
 The six certificates use the exact reflection-group models specified
-in Appendix~\ref{app:models}. We explain why their checks establish
-Proposition~\ref{prop:criterion}.
-The complete chain partitions and reflection words are in the
-\href{https://doi.org/10.5281/zenodo.23605555}{archived verification package}.
+in Appendix~\ref{app:models}.
+The complete chain partitions and interval graphs are in the
+earlier archived verification package~\cite{Archive},
+\url{https://doi.org/10.5281/zenodo.23605555}.
 
-The chains use Griggs's matching construction \cite{Griggs} in the
-iterative form described by Tomon \cite[\S\S3--4]{Tomon}. It starts
-with singleton chains in the middle rank when the total rank is
-even, or a perfect matching between the two middle ranks when it
-is odd. At each
-stage, a bipartite perfect matching either extends a chain at both
-ends by one cover or leaves it finished. Two copies of each active
-chain, joined by an identity edge, allow these choices in a single
-matching problem.
+The chains were found by extending chains outward from the middle
+ranks, one rank at a time, by bipartite perfect matchings, iterating
+Griggs's matching trick \cite{Griggs} as used by
+Tomon~\cite[\mbox{\S\S3--4}]{Tomon}. How they were found plays no role in the
+proof: the final certificates are checked directly for disjointness,
+coverage, saturation and endpoint symmetry.
 
-\subsection{Reflections and Coxeter elements}
-The root formulas provide a candidate reflection set. Its completeness
-is checked independently of the formula: the checker computes all
-conjugacy classes of the generated group, tests $\rank(I-g)$ on every
-class representative, and requires every member of every rank-one class
-to occur in the candidate set. Rank is constant on a conjugacy class.
-The class sizes must sum to the group order. Thus this step establishes
-the entire reflection set, subject to the exact group algorithms
-described in Section~\ref{sec:checking}. In these six groups the
-reflections are involutions; no such restriction is imposed on the
-published family inputs.
-
-The selected element $c$ is supplied as a word in $n$ reflections.
-The checker verifies $q(c)=n$, its order $h$, and an exact eigenvector
-for $e^{2\pi i/h}$ that is fixed by none of the reflections. This last
-test puts the eigenvector outside every reflecting hyperplane, so
-establishes regularity. The invariant degrees, and hence the relevant
-values of $h$, are taken from \cite[Table~2]{Bessis}; they are not
-inferred from an observed group order. Table~\ref{tab:finite} records
-the parameters and sizes of the certificates.
-
-
-
-\subsection{Interval and chain verification}
-For each group the interval generator starts from $c$ and tests every
-right multiplication by a reflection, retaining exactly the rank
-descents. It does not read the chain partition. A separately written
-semantic checker reconstructs the supplied vertices and computes ranks
-by its own exact row elimination. For every vertex $x$ and every
-reflection $t$, it checks the downward-closure condition and requires
-that the recorded edges are exactly all resulting pairs.
-
-The checker also verifies paths from $c$ to every vertex and from every
-vertex to $1$. Every edge lowers $q$ by one, so these paths have
-total length $n$. Strictly decreasing ranks make the path verification
-noncircular. All hypotheses of Proposition~\ref{prop:criterion} are
-therefore checked. The resulting graph is the full absolute-order
-interval with its actual covers.
-
-The chain files use the same exact basis-image labels. Two independent
-chain checkers, written in Python and JavaScript, require each chain to
-be nonempty, every vertex to occur exactly once, consecutive vertices
-to be recorded covers of successive ranks, and endpoint ranks to sum
-to $n$. These conditions are the definition of a symmetric chain
-decomposition.
+For each of the six types, the checks detailed in
+Appendix~\ref{app:checks} establish that the candidate reflections are
+exactly the elements $t$ of the group with $\rank(I-t)=1$; that $c$ is
+a product of $n$ reflections, regular of order $h$, with $q(c)=n$;
+that the listed graph satisfies both conditions of
+Proposition~\ref{prop:criterion}, so it is $[1,c]_T$ with its covers;
+and that the chains form a symmetric chain decomposition of it.
+Table~\ref{tab:finite} records the sizes.
 
 \begin{proposition}\label{prop:six}
 For each of $H_4,G_{33},G_{34},E_6,E_7,E_8$, the supplied certificates
@@ -337,11 +319,30 @@ give a symmetric chain decomposition of $\NC(W,c)$ for the chosen
 Coxeter element $c$.
 \end{proposition}
 \begin{proof}
-The exact checks just described establish the hypotheses of
+The exact checks of Appendix~\ref{app:checks} establish the hypotheses of
 Proposition~\ref{prop:criterion} and every condition in the definition
 of a symmetric chain decomposition. All six certificates pass these
 checks.
 \end{proof}
+
+\begin{table}[ht]
+\centering
+\caption{The new finite chain certificates. Counts describe the checked
+data; they are not assumptions in the interval-completeness argument.}
+\label{tab:finite}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Type & Rank $n$ & $h$ & Vertices & Covers & Chains\\
+\midrule
+$H_4=G_{30}$ &4&30&280&1,050&158\\
+$G_{33}$ &5&18&308&1,365&123\\
+$G_{34}$ &6&42&1,584&8,932&700\\
+$E_6=G_{35}$ &6&12&833&4,284&351\\
+$E_7=G_{36}$ &7&18&4,160&26,208&1,470\\
+$E_8=G_{37}$ &8&30&25,080&188,100&9,518\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{From six types to all groups}\label{sec:reduction}
 We assemble the finite inputs with the published cases, and prove the
@@ -350,47 +351,65 @@ two elementary transfer steps needed for the full statement.
 \subsection{Irreducible groups}
 Write $G(r,p,m)$ for the monomial group whose nonzero entries are
 $r$th roots of unity and whose product of nonzero entries is an
-$(r/p)$th root of unity, where $p\mid r$. The well-generated filter
-of the Shephard--Todd classification \cite{ST}, as stated in
-\cite[\S2.2]{Muhle}, leaves the families and exceptional types below.
-The classification and filter are published inputs, not consequences
-of the certificate computations.
-
-The family $G(1,1,m)$ is $S_m$, with essential rank $m-1$ in its
-permutation representation. Its noncrossing interval is the classical
-lattice, and the result is Simion--Ullman's theorem \cite[Theorem~2]{SU},
-restated in \cite[Theorem~3.6 and Corollary~3.7]{Muhle}.
-For $d\geq2$, Bessis--Corran's remark at the end of \S7 and their
-paragraph after Corollary~8.2 identify $\NC(G(d,1,m))$ with the
-type-$B$ interval \cite{BC}. Reiner's Theorem~13 supplies its chain
-decomposition \cite{Reiner}. For $d,m\geq2$, the
-$G(d,d,m)$ case is \cite[Theorem~1.3]{Muhle}.
-The reducible parameter $G(2,2,2)$ is also covered by the product
-argument below.
-A symmetric Boolean piece is refined into symmetric chains by the
-product construction of Lemma~\ref{lem:product}; this explains the
-Boolean-to-chain implication used in the cited family cases
-\cite[Proposition~2.1]{Muhle}.
-
-There are $26$ exceptional well-generated types, with indices
+$(r/p)$th root of unity, where $p\mid r$. The Shephard--Todd
+classification \cite{ST}, as summarized in \cite[\S2.2]{Muhle} (which
+credits Orlik and Solomon's Table~2 \cite{OS1980}), gives the list of
+irreducible well-generated groups below.
+Each group in the list has a symmetric chain decomposition of
+$\NC(W,c)$ for one Coxeter element $c$, as follows.
+\begin{itemize}
+\item $G(1,1,m)=S_m$, of essential rank $m-1$ in its permutation
+  representation. Its noncrossing interval is the classical
+  lattice~\cite[Section~4.1]{BessisDual}, and the decomposition is
+  Simion--Ullman's theorem \cite[Theorem~2]{SU}, restated in
+  \cite[Theorem~3.6 and Corollary~3.7]{Muhle}.
+\item $G(d,1,m)$ with $d\geq2$. Bessis and Corran's poset of
+  noncrossing partitions of type $(d,1,m)$ \cite[Definition~1.11]{BC}
+  is isomorphic to the one for $d=2$ (their paragraph after
+  Corollary~8.2) and is the lattice of simple elements of a Garside
+  structure for the braid group of $G(d,1,m)$ (their remark at the end
+  of \S7). M\"uhle states the resulting
+  isomorphism $\NC(G(2,1,m))\cong\NC(G(d,1,m))$ for all $d\geq2$,
+  crediting Bessis and Corran
+  \cite[introduction, paragraph before Theorem~1.3]{Muhle}. For the
+  identification of the type-$B$ interval with Reiner's centrally
+  symmetric partitions see \cite[Theorem~4.9]{BW},
+  \cite[Section~4.2]{BessisDual} and
+  \cite[Section~1.4, after Lemma~1.12]{BC}. Reiner's Theorem~13
+  supplies the chain decomposition \cite{Reiner}.
+\item $G(d,d,m)$ with $d,m\geq2$: \cite[Theorem~1.3]{Muhle}. The group
+  $G(2,2,2)$ is reducible, a product of two groups of order two, and is
+  also covered by Lemma~\ref{lem:product}.
+\item Rank one: the group is cyclic, all its nonidentity elements are
+  reflections, and the interval is the single chain $1<c$.
+\item The $26$ exceptional types, with indices
 \[
  4,5,6,8,9,10,14,16,17,18,20,21,23,24,25,26,27,28,29,30,
  32,33,34,35,36,37.
 \]
-Of these, Proposition~4.2 of \cite{Muhle} covers the twenty types
+Proposition~4.2 of \cite{Muhle} covers those of rank at most four
+other than $G_{30}=H_4$. From the classification, these are the twenty
+types
 \[
- 4,5,6,8,9,10,14,16,17,18,20,21,23,24,25,26,27,28,29,32.
+ 4,5,6,8,9,10,14,16,17,18,20,21,23,24,25,26,27,28,29,32;
 \]
-The remaining six are exactly those in Proposition~\ref{prop:six}.
-In particular $G_{32}$ has rank four and belongs to the cited cases.
-This proves the chain assertion for one Coxeter element in every
-irreducible type. Rank-one groups are cyclic; all their nonidentity
-elements are reflections, and their interval is the single chain
-$1<c$. The rank-zero interval is a singleton.
+in particular $G_{32}$ has rank four. The remaining six are exactly
+those in Proposition~\ref{prop:six}.
+\end{itemize}
+The rank-zero interval is a singleton.
+
+M\"uhle's Theorem~1.3 gives a \emph{symmetric Boolean decomposition}:
+a partition into intervals isomorphic to Boolean lattices whose bottom
+and top ranks sum to the rank of the whole. Each such interval is a
+product of two-element chains, so the product construction of
+Lemma~\ref{lem:product} refines it into symmetric chains; this is the
+Boolean-to-chain implication used in the cited family cases
+\cite[Observation~10]{Petersen}, as credited in
+\cite[Proposition~2.1]{Muhle}.
 
 \subsection{Every choice of Coxeter element}
 Theorem~\ref{thm:main} allows all Coxeter elements in the regular-element
-sense. By Reiner--Ripoll--Stump \cite[Proposition~1.4 and Corollary~1.5]{RRS},
+sense. By Reiner--Ripoll--Stump \cite[Proposition~1.4]{RRS},
 for any two Coxeter elements $c,c'$ of an irreducible well-generated
 group there is a group automorphism $\phi$ with
 $\phi(T)=T$ and $\phi(c)=c'$. Applying $\phi$ to a shortest
@@ -403,17 +422,33 @@ The defining equality for absolute order now gives
  u\leq_T v\ \Longleftrightarrow\ \phi(u)\leq_T\phi(v).
 \]
 Thus $\phi$ restricts to a rank-preserving order isomorphism
-$[1,c]_T\to[1,c']_T$. An order isomorphism preserves covers,
+$[1,c]_T\to[1,c']_T$, as in \cite[Corollary~1.5]{RRS}.
+An order isomorphism preserves covers,
 partitions, and endpoint ranks; it carries a symmetric chain
-decomposition to one for $c'$. This uses a reflection-preserving
-automorphism, not an assertion that all Coxeter elements are conjugate
-inside $W$.
+decomposition to one for $c'$.
 
 \subsection{Products of groups and chains}
-For the essential product representation $W=W_1\times W_2$,
-fixed-space codimensions add. A reflection of $W$ is consequently
-exactly $(t,1)$ or $(1,u)$ with $t$ or $u$ a reflection in its
-factor. Projecting any reflection word and concatenating shortest
+A finite complex reflection group is the direct product of irreducible
+reflection groups acting on the summands of a decomposition of $V$
+into irreducible representations \cite[\S1, p.~817]{Bessis}; by
+Section~\ref{sec:overview} the trivial summand $\Fix(W)$ may be
+dropped. It therefore suffices to treat $W=W_1\times W_2$ acting on
+$V_1\oplus V_2$ with $\Fix(W_i)=0$, and to induct on the number of
+factors. For this essential product representation, fixed-space
+codimensions add. A reflection of $W$ is consequently exactly $(t,1)$
+or $(1,u)$ with $t$ or $u$ a reflection in its factor.
+
+The factors of a well-generated group are well-generated. Let $n_i$
+be the essential rank of $W_i$, and suppose $W$ is generated by
+$n_1+n_2$ reflections. Each generator lies in one factor, so the
+generators in $W_i$ generate $W_i$. A group generated by $k$
+reflections fixes pointwise the intersection of their reflecting
+hyperplanes in $V_i$, which has codimension at most $k$; since
+$\Fix(W_i)=0$ has codimension $n_i$, at least $n_i$ generators lie in
+$W_i$. The split is therefore exactly
+$n_1$ and $n_2$, and each factor is well-generated.
+
+ Projecting any reflection word and concatenating shortest
 factor words give the two inequalities proving
 \begin{equation}\label{eq:productlength}
  \ell_T((x,y))=\ell_{T_1}(x)+\ell_{T_2}(y).
@@ -432,7 +467,7 @@ their absolute order is coordinatewise. Hence
 as ranked posets, with ranks added.
 
 The standard product construction is due to de Bruijn, van Ebbenhorst
-Tengbergen, and Kruyswijk \cite{BTK}; see also Srinivasan's account
+Tengbergen, and Kruyswijk \cite{BTK}; see also Srinivasan's mention
 \cite[\S1]{Srinivasan}.
 
 \begin{lemma}\label{lem:product}
@@ -495,7 +530,8 @@ coordinates rather than putting equal ranks on horizontal lines.}
 \end{figure}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
-The classification reduction, Proposition~\ref{prop:six}, and the
+Every irreducible factor of $W$ is well-generated. The classification
+reduction, Proposition~\ref{prop:six}, and the
 automorphism argument give the assertion for every irreducible factor
 and every Coxeter choice. Equations~\eqref{eq:productlength}
 and~\eqref{eq:intervalproduct} identify a reducible group's interval
@@ -506,8 +542,12 @@ is symmetric.
 \end{proof}
 
 \section{Computational verification}\label{sec:checking}
-The formal interval lemma expresses the closure argument: rank-decreasing
-edges and word witnesses identify the whole interval.
+The finite group calculations used GAP 4.15.1 \cite{GAP}, with
+SmallGrp 1.5.4 \cite{SmallGrp}. Arithmetic is exact in the rational and
+cyclotomic fields specified in Appendix~\ref{app:models}. The interval
+generation and the reflection and interval checks of
+Section~\ref{sec:models} are GAP programs; the two chain checkers are
+written in Python and JavaScript.
 
 The Lean theorem \texttt{IntervalCertificate.exact\_interval} proves
 the interval equality in the following exact form. Let $E$ be a relation
@@ -537,27 +577,28 @@ $[1,c]_T$; the two certificate conditions in
 Proposition~\ref{prop:criterion} supply the word witnesses and closure.
 The cover argument remains the written proof of that proposition.
 
-Lean also checks the product and transport constructions, the
-exceptional-type table partition, and finite products including the
-empty product. The statement of Theorem~\ref{thm:main} is also recorded as
-a definition, using reflection length and actual order-theoretic covers.
-Its two predicates require finite well-generated complex reflection
-data and componentwise regular elements of largest invariant degree,
-as defined in Section~\ref{sec:overview}. The theorem combines the
-Lean lemmas, finite computations and published inputs through the
-written reduction above. Reproduction commands and the arithmetic,
-group algorithms, certificate tests and formal dependencies are
-described in the companion verification package.
+Appendix~\ref{app:lean} lists the other Lean lemmas. The link with
+reflection groups is stated in Lean but not proved there; the six
+group computations are checked in GAP, and the classification and
+family results are cited, not formalized.
 
 \begin{appendices}
 \section{Exact reflection-group models}\label{app:models}
-The coordinates below specify the representations used for the finite checks.
+The coordinates below specify the representations used for the finite
+checks. They use the Coxeter representations described by Drew
+Armstrong \cite{Armstrong}, the invariant degrees tabulated by David
+Bessis \cite[Table~2]{Bessis}, and the Coxeter--Todd root coordinates
+\cite{CT1953} with the named generators described by Manabu Oura and
+Jiro Sekiguchi \cite{OS}, building on John Conway and Neil Sloane
+\cite{CS}.
 
 For $H_4$, $E_6$, $E_7$, and $E_8$ we use their geometric Coxeter
 representations \cite[\S2.1 and Figure~2.1]{Armstrong}. Let $s_i$
 be the simple reflection corresponding to a simple root $\alpha_i$.
-For $i\ne j$, the Coxeter parameter $m_{ij}$ is the order of
-$s_is_j$; set $m_{ii}=1$. The form has
+For $i\ne j$, the Coxeter parameter $m_{ij}$ is the label of the
+Coxeter diagram: $2$ for nonadjacent nodes, $3$ for an unlabeled edge,
+and the edge label otherwise; set $m_{ii}=1$. The order of $s_is_j$
+then equals $m_{ij}$. The form has
 $B(\alpha_i,\alpha_j)=-\cos(\pi/m_{ij})$, in particular
 $B(\alpha_i,\alpha_i)=1$, and the simple reflection
 is $v\mapsto v-2B(\alpha_i,v)\alpha_i$. The $H_4$ diagram is the
@@ -577,13 +618,14 @@ of
  \qquad \sum_i a_i\equiv0\pmod3,
 \]
 where all exponents lie in $\{0,1,2\}$. These are the
-Coxeter--Todd coordinates of \cite[\S2]{OS}, originating in
-Conway--Sloane \cite{CS}. Each vector $v$ has squared norm $6$.
+Coxeter--Todd coordinates presented in \cite[\S2]{OS} and
+\cite[\S2.3, Table~2]{CS}. Each vector $v$ has squared norm $6$.
 In row-vector convention its reflection matrix is
 \[
                   s_v=I-\frac{\overline v^{\,t}v}{3}.
 \]
-The six named reflections $P_1,P_2,P_3,Q_1,R_1,R_2$ generate
+Shephard--Todd's six named reflections~\cite[p.~298]{ST},
+$P_1,P_2,P_3,Q_1,R_1,R_2$, generate
 $G_{34}$; omitting $P_3$ gives $G_{33}$
 \cite[\S2 and \S6.1]{OS}. The fixed hyperplanes, in this order, are
 \[
@@ -597,33 +639,105 @@ five. This fixed summand changes neither $q$ nor reflection length.
 
 Each model acts by permutations of its exact root list. A vertex label
 is the list of images of an ordered spanning basis, expressed as root
-indices. It determines a unique matrix. The semantic checker reconstructs
+indices. It determines a unique matrix. The second checker of Appendix~\ref{app:checks} reconstructs
 that matrix, checks the action on every root, and verifies membership in
 the generated permutation group.
 
+\section{Details of the exceptional checks}\label{app:checks}
+\subsection*{Reflections and Coxeter elements}
+The root formulas provide a candidate reflection set. Its completeness
+is checked independently of the formula: the checker computes all
+conjugacy classes of the generated group, tests $\rank(I-g)$ on every
+class representative, and requires every member of every rank-one class
+to occur in the candidate set. Rank is constant on a conjugacy class,
+and the class sizes must sum to the group order. Conversely, it checks
+that each candidate is a distinct element of the group of order two
+with $\rank(I-t)=1$, and that the number of candidates equals the total
+size of the rank-one classes. Thus this step establishes
+the entire reflection set, subject to the exact group algorithms
+described in Section~\ref{sec:checking}. In these six groups the
+reflections are involutions; no such restriction is imposed on the
+published family inputs.
 
-\Needspace{18\baselineskip}
-\section{Exceptional interval sizes}\label{app:sizes}
-Table~\ref{tab:finite} lists the sizes of the six verified decompositions.
+The selected element $c$ is given as a word in $n$ reflections.
+The checker verifies $q(c)=n$, its order $h$, and an exact eigenvector
+for $e^{2\pi i/h}$ that is fixed by none of the reflections. This last
+test puts the eigenvector outside every reflecting hyperplane, so
+establishes regularity. The invariant degrees, and hence the relevant
+values of $h$, are taken from \cite[Table~2]{Bessis}; they are not
+inferred from an observed group order.
 
-\begin{table}[H]
-\centering
-\caption{The new finite chain certificates. Counts describe the checked
-data; they are not assumptions in the interval-completeness argument.}
-\label{tab:finite}
-\begin{tabular}{@{}lrrrrr@{}}
-\toprule
-Type & Rank $n$ & $h$ & Vertices & Covers & Chains\\
-\midrule
-$H_4=G_{30}$ &4&30&280&1,050&158\\
-$G_{33}$ &5&18&308&1,365&123\\
-$G_{34}$ &6&42&1,584&8,932&700\\
-$E_6=G_{35}$ &6&12&833&4,284&351\\
-$E_7=G_{36}$ &7&18&4,160&26,208&1,470\\
-$E_8=G_{37}$ &8&30&25,080&188,100&9,518\\
-\bottomrule
-\end{tabular}
-\end{table}
+\subsection*{Interval and chain verification}
+For each group, one program starts from $c$ and tests every right
+multiplication by a reflection, retaining exactly the steps that lower
+$q$ by one; it does not read the chain partition. A second, separately
+written checker reconstructs the listed elements from their labels and
+computes ranks by its own exact row elimination. For every vertex $x$ and every
+reflection $t$, it checks the downward-closure condition and requires
+that the recorded edges are exactly all resulting pairs.
+
+The checker also verifies paths from $c$ to every vertex and from every
+vertex to $1$. Every edge lowers $q$ by one, so these paths have
+total length $n$. All hypotheses of Proposition~\ref{prop:criterion} are
+therefore checked. The resulting graph is the full absolute-order
+interval with its actual covers.
+
+Two further, separately written chain checkers read the chains and
+the interval graphs just verified. They require nonempty chains, every
+vertex exactly once, recorded covers between successive ranks, and
+endpoint ranks summing to $n$: precisely a symmetric chain
+decomposition. Section~\ref{sec:checking} names the software.
+
+\section{Scope of the Lean development}\label{app:lean}
+Besides \texttt{IntervalCertificate.exact\_interval}
+(Section~\ref{sec:checking}), the Lean development, which uses only
+Lean's standard library, covers the following.
+\begin{enumerate}
+\item Lean proves, for abstract posets and groups: the grid construction
+  of Lemma~\ref{lem:product}; that a bijection preserving ranks and
+  covers carries a symmetric chain decomposition to one; that a
+  reflection-preserving group isomorphism preserves reflection length
+  and absolute order; the additivity \eqref{eq:productlength} for a
+  product whose reflections lie in one factor; the split of the $26$
+  exceptional indices into the twenty cited types and the six certified
+  ones; and the one-element empty product.
+\item Lean states, but does not prove, the link with reflection groups:
+  the overall statement is written as a specification with the
+  hypotheses of Section~\ref{sec:overview}.
+\item The six group computations are checked in GAP, not in Lean, and
+  the classification and family results are cited, not formalized.
+\end{enumerate}
+
+\section{Further related work}
+Two related questions are not addressed here. Drew Armstrong asked
+whether $\NC^{(k)}(W)$ is strongly Sperner for every finite Coxeter
+group $W$ and positive integer $k$
+\cite[Section~3.5, Open Problem~3.5.12]{Armstrong}; for $k=1$ this is
+M\"uhle's Theorem~1.4, and the chains here concern only $k=1$. Nate
+Harman, Rylan Rosas, Charles Troutman~III, and Chris Wu introduce
+strong $\mathfrak{sl}_2$-actions and conjecture their equivalence with
+symmetric chain decompositions
+\cite[Definition~1.1 and Conjecture~1.2]{HRTW}; the chains here are
+constructed directly.
+
+Recent related work includes Michael Dougherty and Gina Root's
+symmetric chain results under conditions on planar hull configurations
+\cite[Theorem~A]{DR}, and Alice Gao, Xin-Bei Liu, Arthur Yang, and James Zhao's
+real-rooted symmetric decompositions of the $h$-polynomials of order
+complexes of ordinary and Fuss noncrossing partition posets for finite
+Coxeter groups (interlacing for Fuss parameter at least two)
+\cite[Theorem~1.5]{GLYZ}. The former concerns a geometric class of partition
+lattices; the latter decomposes polynomials rather than the elements
+of an absolute-order interval. These results address different
+extensions of classical noncrossing-partition structure.
+
+Further neighboring work on noncrossing partitions and absolute order
+includes Christian Gaetz and Yibo Gao (2020)
+on the Sperner property of the absolute order \cite{GG2020}; Colin Defant
+and Nathan Williams (2026) on full-twist and noncrossing models
+\cite{DW2026}; Thomas Gobet (2026) on absolute moved spaces
+\cite{Gobet2026}; and Eugenio Cainelli, Giovanni Paolini and Riccardo
+Zaccaria (2026) on quasi-Coxeter intervals \cite{CPZ2026}.
 \end{appendices}
 
 \begin{thebibliography}{99}
@@ -632,6 +746,13 @@ D.~Armstrong, \emph{Generalized noncrossing partitions and combinatorics
 of Coxeter groups}, Memoirs of the American Mathematical Society
 \textbf{202} (2009), no.~949.
 \href{https://arxiv.org/abs/math/0611106v2}{arXiv:math/0611106v2}.
+
+\bibitem{AR}
+C.~A.~Athanasiadis and V.~Reiner, \emph{Noncrossing partitions for the
+group $D_n$}, SIAM Journal on Discrete Mathematics \textbf{18} (2004),
+397--417. Manuscript July 24, 2003; revised April 19, 2004.
+\href{https://doi.org/10.1137/S0895480103432192}{doi:10.1137/S0895480103432192};
+\href{https://www-users.cse.umn.edu/~reiner/Papers/ncd.pdf}{author manuscript}.
 
 \bibitem{Bessis}
 D.~Bessis, \emph{Finite complex reflection arrangements are
@@ -643,11 +764,32 @@ D.~Bessis and R.~Corran, \emph{Non-crossing partitions of type
 $(e,e,r)$}, Advances in Mathematics \textbf{202} (2006), 1--49.
 \href{https://arxiv.org/abs/math/0403400v2}{arXiv:math/0403400v2}.
 
+\bibitem{Biane}
+P.~Biane, \emph{Some properties of crossings and partitions},
+Discrete Mathematics \textbf{175} (1997), 41--53.
+\href{https://doi.org/10.1016/S0012-365X(96)00139-2}{doi:10.1016/S0012-365X(96)00139-2}.
+
+\bibitem{Brady}
+T.~Brady, \emph{A partial order on the symmetric group and new
+$K(\pi,1)$'s for the braid groups}, Advances in Mathematics
+\textbf{161} (2001), 20--40.
+\href{https://doi.org/10.1006/aima.2001.1986}{doi:10.1006/aima.2001.1986}.
+
+\bibitem{Petersen}
+T.~K.~Petersen, \emph{On the shard intersection order of a Coxeter group},
+SIAM Journal on Discrete Mathematics \textbf{27} (2013), 1880--1912.
+\href{https://arxiv.org/abs/1108.5761v2}{arXiv:1108.5761v2}.
+
 \bibitem{BTK}
 N.~G.~de Bruijn, C.~van Ebbenhorst Tengbergen, and D.~Kruyswijk,
 \emph{On the set of divisors of a number}, Nieuw Archief voor
 Wiskunde (2) \textbf{23} (1951), 191--193.
 \href{https://research.tue.nl/en/publications/on-the-set-of-divisors-of-a-number/}{University publication record}.
+
+\bibitem{CT1953}
+H.~S.~M.~Coxeter and J.~A.~Todd, \emph{An Extreme Duodenary Form},
+Canadian Journal of Mathematics \textbf{5} (1953), 384--392.
+\href{https://doi.org/10.4153/CJM-1953-043-4}{doi:10.4153/CJM-1953-043-4}.
 
 \bibitem{CS}
 J.~H.~Conway and N.~J.~A.~Sloane, \emph{The Coxeter-Todd lattice, the
@@ -687,6 +829,11 @@ Combinatorics \textbf{45} (2017), 745--775.
 \href{https://doi.org/10.1007/s10801-016-0723-5}{doi:10.1007/s10801-016-0723-5}.
 \href{https://arxiv.org/abs/1509.06942v2}{arXiv:1509.06942v2}; first
 posted September~23, 2015. Numbered statements refer to version~2.
+
+\bibitem{OS1980}
+P.~Orlik and L.~Solomon, \emph{Unitary reflection groups and cohomology},
+Inventiones mathematicae \textbf{59} (1980), 77--94.
+\href{https://doi.org/10.1007/BF01390316}{doi:10.1007/BF01390316}.
 
 \bibitem{OS}
 M.~Oura and J.~Sekiguchi, \emph{Basic Invariants of the Complex
@@ -729,5 +876,69 @@ noncrossing partitions}, Discrete Mathematics \textbf{98} (1991),
 \bibitem{Tomon}
 I.~Tomon, \emph{The number of symmetric chain decompositions},
 \href{https://arxiv.org/abs/2405.09322v1}{arXiv:2405.09322v1} (2024).
+\bibitem{GAP}
+The GAP Group, \emph{GAP---Groups, Algorithms, and Programming},
+Version 4.15.1. \url{https://www.gap-system.org/}.
+
+\bibitem{SmallGrp}
+H.~U. Besche, B.~Eick, and E.~A. O'Brien,
+\emph{SmallGrp---The GAP Small Groups Library},
+Version 1.5.4 (2024), GAP package.
+\url{https://gap-packages.github.io/smallgrp/}.
+
+\bibitem{BW}
+T.~Brady and C.~Watt, \emph{$K(\pi,1)$'s for Artin groups of finite type},
+Geometriae Dedicata \textbf{94} (2002), 225--250.
+\href{https://arxiv.org/abs/math/0102078v2}{arXiv:math/0102078v2}.
+
+\bibitem{BW2008}
+T.~Brady and C.~Watt, \emph{Non-crossing partition lattices in finite real
+reflection groups}, Transactions of the American Mathematical Society
+\textbf{360} (2008), 1983--2005.
+\href{https://doi.org/10.1090/S0002-9947-07-04282-1}{doi:10.1090/S0002-9947-07-04282-1}.
+
+\bibitem{BessisDual}
+D.~Bessis, \emph{The dual braid monoid},
+Annales scientifiques de l'\'Ecole normale sup\'erieure (4)
+\textbf{36} (2003), 647--683.
+\href{https://doi.org/10.1016/j.ansens.2003.01.001}{doi:10.1016/j.ansens.2003.01.001}.
+
+\bibitem{Chevalley}
+C.~Chevalley, \emph{Invariants of finite groups generated by reflections},
+American Journal of Mathematics \textbf{77} (1955), 778--782.
+\href{https://doi.org/10.2307/2372597}{doi:10.2307/2372597}.
+
+\bibitem{Kreweras}
+G.~Kreweras, \emph{Sur les partitions non croisees d'un cycle},
+Discrete Mathematics \textbf{1} (1972), 333--350.
+\href{https://doi.org/10.1016/0012-365X(72)90041-6}{doi:10.1016/0012-365X(72)90041-6}.
+
+\bibitem{Archive}
+P.~Graham, \emph{Symmetric chains in noncrossing partition lattices},
+verification archive, version~1 (2026).
+\href{https://doi.org/10.5281/zenodo.23605555}{doi:10.5281/zenodo.23605555}.
+
+\bibitem{GG2020}
+C.~Gaetz and Y.~Gao,
+\emph{On the Sperner property for the absolute order on complex reflection groups},
+Algebraic Combinatorics \textbf{3} (2020), 791--800.
+\href{https://doi.org/10.5802/alco.114}{doi:10.5802/alco.114};
+\href{https://arxiv.org/abs/1903.02033v2}{arXiv:1903.02033v2}, first posted March 5, 2019, revised October 31, 2020.
+
+\bibitem{DW2026}
+C.~Defant and N.~Williams,
+\emph{Noncrossing Combinatorics, the Full Twist, and Decategorification of Knot Invariants},
+\href{https://arxiv.org/abs/2608.06225v1}{arXiv:2608.06225v1}, first posted August 6, 2026.
+
+\bibitem{Gobet2026}
+T.~Gobet,
+\emph{Absolute moved spaces and noncrossing partition posets in arbitrary Coxeter groups},
+\href{https://arxiv.org/abs/2609.37867v1}{arXiv:2609.37867v1}, first posted September 29, 2026.
+
+\bibitem{CPZ2026}
+E.~Cainelli, G.~Paolini and R.~Zaccaria,
+\emph{Noncrossing combinatorics of quasi-Coxeter elements},
+\href{https://arxiv.org/abs/2610.11728v1}{arXiv:2610.11728v1}, first posted October 8, 2026.
+
 \end{thebibliography}
 \end{document}

@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: credits and presentation. The paper corrects its description of a related 2026 manuscript's results, quoting what it proves and noting that it states no formula for these coefficients, and adds credit to earlier sources: Gross and Pandharipande for Kontsevich's algebraicity question and Gräfnitz and Luo for the change of lattice. The theorem and its checks are unchanged.
 - The abstract, introduction and proof outline are rewritten for readability, and an appendix reproduces the formal definitions. The byline now reads Peter Graham.
+- Zenodo: [10.5281/zenodo.24433538](https://doi.org/10.5281/zenodo.24433538)
 
 ## coinvariant-lefschetz v4 (November 21, 2026)
 

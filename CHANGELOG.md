@@ -7,6 +7,7 @@ Zenodo records.
 ## noncrossing-symmetric-chains v4 (November 22, 2026)
 
 - Correction: the byline now reads Peter Graham. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24435030](https://doi.org/10.5281/zenodo.24435030)
 
 ## cubelike-cospectrality v4 (November 22, 2026)
 

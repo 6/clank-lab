@@ -8,6 +8,7 @@ Zenodo records.
 
 - Correction: credits and presentation. The paper credits Chris McDaniel's relative-coinvariant free-extension strategy, which the proof follows, and quotes Larry Smith's 2016 announcement, whose scope includes $G_{34}$, and Akihito Wachi's statements on $G_{34}$. The byline now reads Peter Graham. The theorem and its checks are unchanged.
 - The proof now spells out two identifications it used without argument: the subgroup $G(3,3,4)$ and the $G_{33}$ fiber. Routine verifications move to appendices.
+- Zenodo: [10.5281/zenodo.24433066](https://doi.org/10.5281/zenodo.24433066)
 
 ## weak-parking v2 (November 21, 2026)
 

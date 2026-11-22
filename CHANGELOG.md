@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## stanley-class-sum-snf v6 (November 22, 2026)
+
+- Correction: the byline now reads Peter Graham. The theorem and its checks are unchanged.
+
 ## scattering-coefficients v6 (November 21, 2026)
 
 - Correction: credits and presentation. The paper corrects its description of a related 2026 manuscript's results, quoting what it proves and noting that it states no formula for these coefficients, and adds credit to earlier sources: Gross and Pandharipande for Kontsevich's algebraicity question and Gräfnitz and Luo for the change of lattice. The theorem and its checks are unchanged.

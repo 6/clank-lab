@@ -42,37 +42,42 @@
 \DeclareUnicodeCharacter{2192}{\ensuremath{\to}}
 \DeclareUnicodeCharacter{2211}{\ensuremath{\sum}}
 \DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
+\DeclareUnicodeCharacter{2115}{\ensuremath{\mathbb{N}}}
+\DeclareUnicodeCharacter{2113}{\ensuremath{\ell}}
+\DeclareUnicodeCharacter{03C6}{\ensuremath{\varphi}}
+\DeclareUnicodeCharacter{2218}{\ensuremath{\circ}}
+\DeclareUnicodeCharacter{22A4}{\ensuremath{\top}}
+\DeclareUnicodeCharacter{02E2}{\ensuremath{^{\mathrm{s}}}}
+\DeclareUnicodeCharacter{207B}{\ensuremath{^{-}}}
+\DeclareUnicodeCharacter{2080}{\ensuremath{_0}}
+\DeclareUnicodeCharacter{2081}{\ensuremath{_1}}
+\DeclareUnicodeCharacter{2082}{\ensuremath{_2}}
 \setlength{\emergencystretch}{2em}
 \raggedbottom
 \title{A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}
-\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 27, 2026}
-\hypersetup{pdfauthor={P. Graham},pdftitle={A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}}
+\author{Peter Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 22, 2026}
+\hypersetup{pdfauthor={Peter Graham},pdftitle={A conjecture of Elgin, Reading and Stella on rank-two scattering coefficients}}
 \begin{document}
 \maketitle
 \begin{abstract}
-For the rank-two cluster scattering diagram with initial walls $1+x$
-and $1+y^5$, we prove
+In the rank-two cluster scattering diagram with initial walls $1+x$ and
+$1+y^5$, the ray through $(2,5)$ carries the series
+$1+\sum_{j\geq1}\tau^{1,5}(2j,j)(x^2y^5)^j$. We prove that
 $\tau^{1,5}(2j,j)=\frac1j\sum_{\ell}\binom{\ell}{j-\ell+1}\binom{j+\ell-1}{\ell}$
-for every $j\geq1$, in the convention of Burcroff and coauthors and of
-Elgin, Reading and Stella's table and code. This proves Elgin, Reading
-and Stella's Conjecture~13. Elgin, Reading and Stella provided extensive computations and stated
-eighteen conjectures on rank-two cluster scattering coefficients. Burcroff, Lee, Mou,
-Musiker and Reineke proved Conjectures~1--3, 5--10 and 14--18, leaving
-Conjecture~13 unresolved and ``mysterious from both the quiver moduli and
-tight grading points of view.'' Kontsevich and Soibelman provided ordered
-factorization, and Gross, Hacking, Keel and Kontsevich provided the
-change of lattice used here. The binomial sum was already recorded by
-Vladimir Kruchinin, with functional equations by Paul D. Hanna;
-Burcroff and coauthors identified its algebraicity and growth rate
-conditionally on the conjecture. We identify these numbers
-with the scattering coefficients. We observe that OpenAI's closely related
-quantum scattering framework admits the same five-and-one incoming multiplicities; whether it implies the
-coefficient formula or cubic remains unresolved. After a change of lattice and a
-monomial substitution, the fifth power of the wall function becomes the
-diagonal factor of an explicit Poisson automorphism. A grading separates
-that factor from the other walls and yields a differential equation
-with a unique algebraic solution. The coefficient identity is formalized
+for every $j\geq1$, as Elgin, Reading and Stella conjectured (their
+Conjecture~13). Burcroff, Lee, Mou, Musiker and Reineke proved
+Conjectures~1--3, 5--10 and 14--18 and called Conjecture~13 ``mysterious
+from both the quiver moduli and tight grading points of view.'' The
+binomial sum was already recorded in the OEIS by Vladimir Kruchinin, with
+a functional equation by Paul D. Hanna. Using Kontsevich and Soibelman's
+ordered factorization and the change of lattice of Gross, Hacking, Keel
+and Kontsevich, we reduce the problem to factoring the fifth power of an
+explicit automorphism of $\Q[[u,w]]$; a grading separates the diagonal
+wall from all others and yields a differential equation whose unique
+solution is algebraic. OpenAI's earlier, closely related quantum
+scattering framework admits the same incoming multiplicities but states
+no formula for these coefficients. The coefficient identity is formalized
 in Lean from the definitions.
 
 This work has not yet been reviewed by experts.
@@ -81,11 +86,15 @@ formalization and the text were produced by AI models (from OpenAI and
 Anthropic), working under the author's direction.
 \end{abstract}
 \section{Introduction}\label{sec:intro}
-For positive integers $b,c$, let $\mathfrak D(1+x^b,1+y^c)$ be the
-consistent rank-two scattering diagram. A wall carries a power series.
-Following \cite[(2.2)]{BLMMR}, $\tau^{b,c}(kd,ke)$ is its coefficient
-of $x^{kdb}y^{kec}$ on the ray proportional to $(db,ec)$, for coprime
-$d,e\geq1$; Section~\ref{sec:defs} gives the precise definitions.
+A rank-two scattering diagram is a collection of rays in the positive
+quadrant, each carrying a power series in one monomial; it is consistent
+when the ordered product of the associated automorphisms of $\ps{x,y}$
+around the origin is the identity. For positive integers $b,c$, the two
+axis walls $1+x^b$ and $1+y^c$ have exactly one consistent completion
+$\mathfrak D(1+x^b,1+y^c)$, by Kontsevich and Soibelman's factorization.
+Following \cite[(2.2)]{BLMMR}, for coprime $d,e\geq1$, $\tau^{b,c}(kd,ke)$
+is the coefficient of $(x^{db}y^{ec})^k$ in the series on the ray through
+$(db,ec)$; Section~\ref{sec:defs} gives the precise definitions.
 Put $S(t)=1+\sum_{j\geq1}\tau^{1,5}(2j,j)t^j\in\ps{t}$.
 Thus the function on the ray $(2,5)$ is $S(x^2y^5)$.
 \begin{theorem}\label{thm:main}
@@ -103,88 +112,83 @@ $S$ is the unique power series with constant term $1$ satisfying
 \end{theorem}
 
 This proves Elgin, Reading and Stella's Conjecture~13
-\cite[Conjecture~13]{ERS}, posed in their first preprint on April~17, 2024.
-We follow their table and code \cite{scatcoef}, as does
+\cite[Conjecture~13]{ERS}, posed in their first preprint (2024); they
+supplied the conjectures, high-degree symbolic computations, data and
+code \cite{scatcoef}. Amanda Burcroff, Kyungyong Lee, Lang Mou, Gregg
+Musiker and Markus Reineke \cite[Theorem~1.4]{BLMMR} proved Conjectures~1--3, 5--10 and
+14--18 of \cite{ERS}, using the change of lattice between
+$\mathfrak{D}(1+x^b,1+y^c)$ and $\mathfrak{D}((1+x)^c,(1+y)^b)$,
+Euler characteristics of quiver moduli through
+the refined GW/Kronecker correspondence of Reineke and Weist \cite{RW},
+and Burcroff, Lee and Mou's tight gradings \cite{BLM,BLM25}. They listed
+Conjectures~4, 12 and~13 as unsolved and~13 as ``mysterious from both
+the quiver moduli and tight grading points of view'' \cite[\S1.3]{BLMMR}. Ryota Akagi \cite[Proposition~1.3]{Akagi} proved Conjectures~1, 2, 3, 5, 6, 11 and~15 (proof of~11 due to Burcroff, Lee and Mou \cite[Remark~1.4]{Akagi}), with results related to 14 and 16--18.
+The theorem also answers, for one ray, Kontsevich's question whether
+wall functions are algebraic \cite[\S1.4]{GP10}: by \eqref{eq:cubic},
+$S(x^2y^5)$ is algebraic, as Burcroff and coauthors deduced conditionally
+on the conjecture \cite[\S9.3]{BLMMR} (Remark~\ref{rem:algebraic}).
+
+Our proof uses neither quiver moduli nor tight gradings. After a change
+of lattice, a grading by exponent difference separates the diagonal wall
+of the fifth iterate of an explicit automorphism from all other walls,
+and the Poisson property gives a differential equation for that wall
+alone (Section~\ref{sec:overview}). Scattering diagrams were introduced
+by Kontsevich and Soibelman \cite{KS06} and by Gross and Siebert
+\cite{GS11}; we use the ordered factorization \cite[Theorem~6]{KS06},
+\cite[Factorization Property]{KS08} in the formulation of Gross,
+Pandharipande and Siebert \cite[\S1.3]{GPS}, and the pentagon identity.
+We follow the table and code of \cite{ERS}, as does
 \cite[(2.2)]{BLMMR}; Remark~\ref{rem:reading} quotes the printed
 definition and explains the convention.
 
+The binomial sum in \eqref{eq:ers} is $-\mathrm{A217596}(j+1)$ in Vladimir
+Kruchinin's OEIS entry \cite{OEIS}, whose cubic, from Paul D. Hanna's
+functional equation, Burcroff and coauthors used for algebraicity
+\cite[\S9.3]{BLMMR}; Appendix~\ref{rem:sequence} gives the details.
 
-OpenAI's closely related quantum scattering framework includes the case in which ``simple incoming data
-are replaced by allowed products of elementary units'' \cite[Proposition~4.2]{OpenAI}.
-Its elementary units include $D_p=E_{p,-1}=\prod_{k\geq0}(1+v^{-1-2k}X_p)$
-for a simple lattice root $p$, with quantum parameter $v$ and torus monomial $X_p$
-\cite[(3.2), Theorem~3.1 and \S4.1]{OpenAI}.
-``Occurrences, including repeated units, are counted separately'' \cite[\S4.2]{OpenAI}.
-Five $D_{e_1}$ and one $D_{e_2}$ match the multiplicities of our
-changed-lattice incoming data $(1+t)^5,1+t$.
-The manuscript is dated September~24, 2026; our first version is dated
-October~22, 2026\footnote{The public tag
-\href{https://github.com/6/clank-lab/tree/scattering-coefficients-v1/results/scattering-coefficients}{scattering-coefficients-v1}
-identifies our October~22 first version.}.
-The classical passage remains unverified; implication of our all-$j$ formula
-or cubic remains unresolved.
-
-Thomas Elgin, Nathan Reading and Salvatore Stella \cite{ERS} supplied
-the conjectures, high-degree symbolic computations, data and code \cite{scatcoef}. Amanda Burcroff, Kyungyong Lee, Lang Mou, Gregg
-Musiker and Markus Reineke \cite[Theorem~1.4]{BLMMR} proved Conjectures~1--3, 5--10 and
-14--18 of \cite{ERS}, using the change of lattice between
-$\mathfrak{D}(1+x^b,1+y^c)$ and $\mathfrak{D}((1+x)^c,(1+y)^b)$ (from
-\cite[Example~1.15]{GHKK}), Euler characteristics of quiver moduli through
-the refined GW/Kronecker correspondence of Reineke and Weist \cite{RW},
-and Burcroff, Lee and Mou's tight gradings \cite{BLM}. They listed
-Conjectures~4, 12 and~13 as unsolved and~13 as ``mysterious from both
-the quiver moduli and tight grading points of view'' \cite[\S1.3]{BLMMR}. Ryota Akagi \cite[Proposition~1.3]{Akagi} proved Conjectures~1, 2, 3, 5, 6, 11 and~15 (proof of~11 due to Burcroff, Lee and Mou \cite[Remark~1.4]{Akagi}), with results related to 14 and 16--18. Akagi's earlier low-degree forms
-\cite{Akagi23} (first posted September~27, 2023) and Amanda Burcroff and
-Kyungyong Lee's \emph{Broken lines and compatible pairs for rank 2 quantum
-cluster algebras} \cite{BL} are nearby work; nothing from either is used here. The ordered factorization is due to Kontsevich and
-Soibelman \cite[Theorem~6]{KS06}, \cite[Factorization Property]{KS08}; we use the formulation of Gross,
-Pandharipande and Siebert \cite[\S1.3]{GPS}.
-
-Vladimir Kruchinin's OEIS entry A217596 (March~19, 2013) lists the
-binomial sum in \eqref{eq:ers} as $-\mathrm{A217596}(j+1)$ \cite{OEIS}.
-Its generating function is $A=1-t\Sst$, where
-$\Sst=(1+\xi)/(1-\xi-\xi^2)$ for the series $\xi$ in Theorem~\ref{thm:main}.
-Paul D. Hanna's functional equation (March~19, 2013)
-$A=1-t/A-t^2/A^2$ gives $A^3=A^2-tA-t^2$, which Burcroff, Lee, Mou,
-Musiker and Reineke used to deduce algebraicity \cite[\S9.3]{BLMMR};
-substituting $A=1-tS$ gives \eqref{eq:cubic}.
-Muhammed Sefa Saydam's polygon-dissection interpretation (January~27, 2025)
-is described in Appendix~\ref{rem:sequence}; nothing from it is used here.
-Theorem~\ref{thm:main} identifies these numbers with the scattering coefficients.
-The entry also credits Bala's 2015 recurrence
-(Appendix~\ref{sec:formal-details}).
-Scattering diagrams were introduced by Kontsevich and Soibelman
-\cite{KS06} and by Gross and Siebert \cite{GS11}; Gross, Hacking, Keel
-and Kontsevich provided the cluster-algebra construction \cite{GHKK}.
-The change of lattice used here is theirs
-\cite[Example~1.15 and Appendix~C]{GHKK}. We reuse the Kontsevich--Soibelman factorization,
-the change of lattice (which we reprove in the form needed) and the
-pentagon identity.
-
-
-The coefficient theorem is formalized in Lean (Section~\ref{sec:lean}).  
+OpenAI's manuscript \emph{Elementary positivity of chromatic quasisymmetric
+functions} \cite{OpenAI}, dated September~24, 2026 and first posted on
+GitHub on October~6, 2026, develops a closely related quantum scattering
+framework. Its Proposition~4.2 gives positive factors on every wall, also
+when ``the simple incoming data are replaced by allowed products of
+elementary units'', counted with repetition \cite[\S\S4.1--4.2]{OpenAI};
+five units on $e_1$ and one on $e_2$ match the multiplicities of our
+changed-lattice incoming data $(1+t)^5,1+t$. Its Lemma~4.3 makes
+coefficients ``effectively computable at every fixed energy'' with the
+simple data. It states no formula for $\tau^{1,5}(2j,j)$ and no algebraic
+equation for the wall function. Akagi's low-degree forms \cite{Akagi23},
+Burcroff and Lee's broken lines \cite{BL} and Treffinger's scattering
+diagrams for Artin algebras \cite{Treffinger} are nearby work not used
+here. The coefficient theorem is formalized in Lean
+(Section~\ref{sec:lean}).
 
 \section{Outline of the proof}\label{sec:overview}
-To identify the sequence with the scattering coefficients, the hardest
-step is to obtain a closed equation for one wall function without knowing
-the other walls. A change of lattice
-and a monomial substitution identify $S^5$ with the wall function on
-$(1,1)$ in the ordered factorization of the fifth iterate of the
-automorphism $T$ of $\ps{u,w}$, where
+The hardest step is to obtain a closed equation for one wall function
+without knowing the other walls. A change of lattice and a monomial
+substitution identify $S^5$ with the function $F$ on the ray $(1,1)$ in
+the ordered factorization of the fifth iterate of the automorphism $T$ of
+$\ps{u,w}$, where
 \[
 T(u)=\frac{u(1+u+w)}{1+u},\qquad T(w)=\frac{w}{1+u}.
 \]
-Since $T$ fixes $u+w$, grading by exponent difference isolates three
-components of the transformed sum (Section~\ref{sec:filtration}). Factoring
-this expression and comparing logarithms yields two auxiliary series
-(Section~\ref{sec:split}).
-The Poisson bracket gives a differential equation; its unique solution
-and Lagrange inversion give the coefficients.
+Write $T^5=\gl\circ\theta_F\circ\gr$, grouping the walls below the
+diagonal in $\gl$ and those above it in $\gr$ (Section~\ref{sec:filtration}).
+Since $T$ fixes $s=u+w$, the series $P=\gl^{-1}(s)=\theta_F\gr(s)$ can be
+computed from either side, and grading by $h(u^pw^q)=q-p$ shows that
+$P=uF(t)+\beta(t)+w$ with $t=uw$ (Lemma~\ref{lem:extract}). Factoring
+$1+P=(1+u\delta)\rho(1+w/\rho)$ and comparing the parts of logarithms
+with $h=0$ gives $F^2=\rho^5$ and $\delta^2=\rho^3$
+(Proposition~\ref{prop:E}). The Poisson property of $\gl$ then gives the
+differential equation \eqref{eq:ode} for $\rho$ (Section~\ref{sec:string});
+its unique solution and Lagrange inversion give the coefficients
+(Section~\ref{sec:solution}). The off-diagonal walls are never computed:
+only the sign of $h$ on their monomials is used.
 
 \section{Scattering diagrams and the coefficients \texorpdfstring{$\tau$}{tau}}\label{sec:defs}
 
-We set up the diagram and factorization used below. We write \emph{wall} for its wall-crossing automorphism, retaining the
-supporting ray and attached series. Routine algebraic verifications are
+We set up the diagram and factorization used below. We identify a wall
+with its wall-crossing automorphism $\theta_{r,f}$, which records both
+the ray $r$ and the series $f$. Routine algebraic verifications are
 collected in Appendix~\ref{sec:factor-details}.
 
 \subsection{Walls and ordered products}
@@ -310,8 +314,9 @@ consistent family.
 The change of lattice relates the ray $(2,5)$ of $\mathfrak{D}(1+t,1+t^5)$ to the
 ray $(2,1)$ of $\mathfrak{D}_5=\mathfrak{D}((1+t)^5,1+t)$. The general
 statement is the change of lattice of \cite[Proposition~2.5]{BLMMR},
-going back to \cite[Example~1.15 and Appendix~C]{GHKK}; we prove the case
-needed by a forward substitution.
+going back to \cite[Example~1.15 and Appendix~C]{GHKK}, with a detailed
+proof in \cite[Proposition~1.12]{GL}; we prove the case needed by a
+forward substitution.
 
 Let $\mathfrak{D}_5$ live on $\ps{X,Y}$ and $\mathfrak{D}(1+t,1+t^5)$ on
 $\ps{x,y}$, and let $\kappa\colon\ps{X,Y}\to\ps{x,y}$ be the injective
@@ -346,9 +351,9 @@ applied to each wall, and continuity of $\kappa$,
 $\kappa\circ\asc\theta_{\rho,G_\rho}=\asc\theta_{v,f'_v}\circ\kappa$. The
 initial walls behave the same way: $(1,0)$ goes to $(1,0)$ with
 $((1+t)^5)^{1/5}=1+t$, and $(0,1)$ goes to $(0,1)$ with $1+t^5$. Hence,
-with $\Phi=\theta_{(0,1),1+t^5}\theta_{(1,0),1+t}$ on $\ps{x,y}$, the
-consistency of $G$ gives $\Phi\circ\kappa=\asc\theta_{v,f'_v}\circ\kappa$.
-So $\Phi$ and $\Pi=\asc\theta_{v,f'_v}$ agree on $x$ and on $y^5$. Both
+with $\Theta=\theta_{(0,1),1+t^5}\theta_{(1,0),1+t}$ on $\ps{x,y}$, the
+consistency of $G$ gives $\Theta\circ\kappa=\asc\theta_{v,f'_v}\circ\kappa$.
+So $\Theta$ and $\Pi=\asc\theta_{v,f'_v}$ agree on $x$ and on $y^5$. Both
 send $y$ into $y(1+\m)$, and a fifth root of unity in $1+\m$ is $1$, so
 they also agree on $y$. Thus $f'$ is consistent for
 $\mathfrak{D}(1+t,1+t^5)$, and $f=f'$ by Proposition~\ref{prop:KS}. In
@@ -447,7 +452,7 @@ $(0,1)$), and let $\theta_F=\theta_{(1,1),F}$, so that
 \end{equation}
 The automorphisms $\gl$ and $\gr$ are Poisson, by Lemma~\ref{lem:walls}.
 We show that $\gl^{-1}(s)$ has only three graded components.
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.75,
   low/.style={blue!70!black,thin},high/.style={red!65!black,thin},diag/.style={black,very thick}]
@@ -488,12 +493,11 @@ We show that $\gl^{-1}(s)$ has only three graded components.
 \end{tikzpicture}
 \caption{The rays $r=(p,q)$ whose function in the ascending factorization
 of $T^5$ has a nonzero coefficient in total degree at most $12$ (that is,
-$[t^j]\varphi_r\neq0$ for some $j\geq1$ with $j|r|\leq12$), computed by
-the construction in the proof of Proposition~\ref{prop:KS}. Blue: slope
-below $1$, the factors of $\gl$ ($h<0$). Red: slope above $1$, the
-factors of $\gr$ ($h>0$). Thick black: the diagonal, whose function is
-$F$. Each ray is drawn from radius $0.9$ to $4.2$ for legibility.
-The proof uses only the sign of $h$ on each side of the diagonal.}
+$[t^j]\varphi_r\neq0$ for some $j\geq1$ with $j|r|\leq12$). Blue: slope
+below $1$, the walls below the diagonal, grouped in $\gl$. Red: slope
+above $1$, the walls above the diagonal, grouped in $\gr$. Thick black:
+the diagonal, whose function is $F$. The proof uses only on which side of
+the diagonal each ray lies.}
 \label{fig:rays}
 \end{figure}
 
@@ -651,8 +655,7 @@ Lemma~\ref{lem:euler} says that $\phi$ shifts $\log(u/w)$ by
 $\log\mu_\phi$; the lemma makes this precise without logarithms of $u$
 and $w$.
 
-The following Poisson identity, called the string equation here, relates
-the Euler derivation to the bracket.
+The following Poisson identity relates the Euler derivation to the bracket.
 \begin{proposition}[String equation]\label{prop:string}
 Under the hypotheses of Theorem~\ref{thm:mainlemma}, with $P$ as in
 Lemma~\ref{lem:extract} and $\delta$ as in Lemma~\ref{lem:quadratic},
@@ -781,20 +784,21 @@ $G_1,G_2\in\Lambda$ and $G_1^5=G_2^5$, then $G_1/G_2\in\Lambda$ is a fifth root 
 unity with constant term $1$, hence $G_1/G_2=1$), so $S=\Sst$.
 Lemma~\ref{lem:lagrange} gives \eqref{eq:ers}; the term with index $\ell$
 vanishes unless $0\leq j+1-\ell\leq\ell$, that is,
-$\lceil(j+1)/2\rceil\leq\ell\leq j+1$. Lemma~\ref{lem:solution} gives
+$\lceil(j+1)/2\rceil\leq\ell\leq j+1$, and for $j\geq1$ both binomial
+coefficients are positive in that range. Lemma~\ref{lem:solution} gives
 \eqref{eq:cubic} and its uniqueness.
 \end{proof}
 \section{Formal verification}\label{sec:lean}
-Lean checks the coefficient theorem for the following formal definitions.
+Lean checks the coefficient theorem for the formal definitions reproduced
+in Appendix~\ref{sec:lean-defs}.
 Here \texttt{Slope} is $\mathbb Q_{\geq0}$ with a top element for the
 vertical ray; $5/2$ represents $(2,5)$. A family assigns a series in
 $\ps{t}$ to each slope. The predicate \texttt{IsConsistentFamily}
 requires constant term $1$ and Definition~\ref{def:consistent}'s
 ascending-product identity on both generators in every finite total
-degree.
-The expression \texttt{ersCoeff j} is the finite sum \eqref{eq:ers}
-over $\ell\leq j+1$, with natural-number subtraction: none truncates for
-$j\geq1$, and later terms vanish.
+degree. The expression \texttt{ersCoeff j} is the sum \eqref{eq:ers} over
+$\ell\leq j+1$; in this range the natural-number subtractions need no
+truncation.
 \begin{samepage}
 The formal theorem \texttt{ErsConj13.ers\_conjecture\_13} states:
 {\scriptsize
@@ -806,18 +810,18 @@ theorem ers_conjecture_13 :
 \end{verbatim}
 }
 \end{samepage}
-The first conjunct gives existence; the second is
-Theorem~\ref{thm:main}'s coefficient assertion for every consistent family
-and $j\geq1$, in Definition~\ref{def:tau}'s convention. Lean also proves the cubic identity
-and intermediate factorizations; the $\xi$-parametrization, uniqueness
-of the series in \eqref{eq:cubic} and Lagrange inversion are written arguments
-(Appendix~\ref{sec:formal-details}).
-
-The Lean proof uses Bala's recurrence in place of the written proof's
-Lagrange inversion. The public Lean guide, linked from the result's README,
-gives the logical dependencies, axiom list and build instructions. The scattering-diagram
-interpretation and convention comparison are outside Lean, as is
-Remark~\ref{rem:general}.
+The first conjunct gives existence; the second is formula \eqref{eq:ers}
+for every consistent family and every $j\geq1$, in
+Definition~\ref{def:tau}'s convention. Lean also proves that the binomial
+series satisfies \eqref{eq:cubic}. The $\xi$-parametrization in
+Theorem~\ref{thm:main}, the uniqueness in \eqref{eq:cubic},
+Lagrange inversion and Remark~\ref{rem:general} are proved only on paper.
+The formal proof follows Sections~\ref{sec:lattice}--\ref{sec:string} but
+replaces the logarithm comparison and Lagrange inversion by the steps in
+Appendix~\ref{sec:formal-details}. The file \texttt{lean/README.md} in the
+result's repository folder gives the dependencies, axioms and build
+instructions. The scattering-diagram interpretation and the convention
+comparison are outside Lean.
 Checking relies on Lean's kernel and Mathlib.
 
 \begin{appendices}
@@ -869,10 +873,10 @@ limit factors $\phi$.
 \begin{proof}[Proof of Lemma~\ref{lem:kappa}]
 Both sides are continuous ring homomorphisms, so it suffices to compare
 them on $X$ and $Y$. If $5\nmid d$, then $v=(d,5e)$,
-$z^{v}=\kappa(X^dY^e)$ and $h=G^{1/5}$ give
-$\theta_{v,h}(x)=x\,h(z^v)^{5e}=\kappa\big(X\,G(X^dY^e)^e\big)$ and
-$\theta_{v,h}(y^5)=y^5h(z^v)^{-5d}=\kappa\big(Y\,G(X^dY^e)^{-d}\big)$. If
-$5\mid d$, then $v=(d/5,e)$, $(z^v)^5=\kappa(X^dY^e)$ and $h(t)=G(t^5)$
+$z^{v}=\kappa(X^dY^e)$ and $g=G^{1/5}$ give
+$\theta_{v,g}(x)=x\,g(z^v)^{5e}=\kappa\big(X\,G(X^dY^e)^e\big)$ and
+$\theta_{v,g}(y^5)=y^5g(z^v)^{-5d}=\kappa\big(Y\,G(X^dY^e)^{-d}\big)$. If
+$5\mid d$, then $v=(d/5,e)$, $(z^v)^5=\kappa(X^dY^e)$ and $g(t)=G(t^5)$
 give the same two values.
 \end{proof}
 
@@ -965,20 +969,20 @@ conjecture. Vladimir Kruchinin's OEIS entry A217596 (March 19, 2013), the
 expansion of $x/\mathrm{reversion}(x-x^2-x^3)$, lists exactly this
 binomial sum, so that the right side of \eqref{eq:ers} is
 $-\mathrm{A217596}(j+1)$ \cite{OEIS}; in our notation its generating
-function is $1-t\Sst$, where $\Sst=(1+\xi)/(1-\xi-\xi^2)$ for the
-series $\xi$ in Theorem~\ref{thm:main}.
-The same day Paul D. Hanna added functional equations for this
-generating function $A$, the first being $A=1-t/A-t^2/A^2$; clearing
-denominators gives the cubic $A^3=A^2-tA-t^2$, which Burcroff, Lee, Mou,
-Musiker and Reineke used to note that the conjectured wall function is
-algebraic \cite[\S9.3]{BLMMR}, and which is equivalent to
-\eqref{eq:cubic} under $A=1-tS$. According to a comment of Muhammed
+function is $K=1-t\Sst$, with $\Sst$ as in Theorem~\ref{thm:mainlemma}.
+The same day Paul D. Hanna added functional equations for $K$, the first
+being $K=1-t/K-t^2/K^2$; clearing denominators gives the cubic
+$K^3=K^2-tK-t^2$, which Burcroff, Lee, Mou, Musiker and Reineke used to
+note that the conjectured wall function is algebraic
+\cite[\S9.3]{BLMMR}, and which is equivalent to \eqref{eq:cubic} under
+$K=1-tS$. According to a comment of Muhammed
 Sefa Saydam on the entry (January 27, 2025), $-\mathrm{A217596}(n)$ counts
 the dissections of a convex $(n+2)$-gon into triangles and
 quadrilaterals by noncrossing diagonals none of which passes through a
 chosen vertex; so $\tau^{1,5}(2j,j)$ is this count for a $(j+3)$-gon
 (for example $2$ for a square and $5$ for a pentagon). We do not use
-this interpretation.
+this interpretation. The entry also records Peter Bala's 2015 recurrence,
+used in Appendix~\ref{sec:formal-details}.
 \section{Further consequences}\label{sec:consequences}
 The coefficient formula has the following consequences.
 
@@ -1032,11 +1036,54 @@ equivalent to the $\m$-adic one, and the ray of slope $5/2$ is $(2,5)$
 in Definition~\ref{def:tau}. The identification with the coefficients
 in \cite{ERS} is the reading explained in Remark~\ref{rem:reading}.
 
-\end{appendices}
+\section{The formal definitions}\label{sec:lean-defs}
+These are the definitions of \texttt{ErsConj13/ScatDefs.lean} (namespace
+\texttt{ErsConj13.Scat}, comments omitted) and the definition of
+\texttt{ersCoeff} in \texttt{ErsConj13/Defs.lean}, on which the theorem
+quoted in Section~\ref{sec:lean} depends. The rays with $r_1+r_2<N$ are
+composed in ascending order of slope, the smallest slope leftmost, and
+compared modulo $\m^N$ on both generators.
+{\scriptsize
+\begin{verbatim}
+abbrev B := MvPowerSeries (Fin 2) ℚ
 
-\paragraph{Nearby work.}
-Hipolito Treffinger \cite{Treffinger} studies scattering diagrams for
-Artin algebras; nothing from that work is used here.
+abbrev Slope := WithTop ℚ≥0
+
+def ray (s : Slope) : ℕ × ℕ := WithTop.recTopCoe (0, 1) (fun q => (q.den, q.num)) s
+
+def rayMono (s : Slope) : B :=
+  MvPowerSeries.monomial (Finsupp.single 0 (ray s).1 + Finsupp.single 1 (ray s).2) 1
+
+def rayEval (s : Slope) (f : PowerSeries ℚ) : B := PowerSeries.subst (rayMono s) f
+
+def wall (s : Slope) (f : PowerSeries ℚ) : B → B :=
+  MvPowerSeries.subst ![MvPowerSeries.X 0 * rayEval s f ^ (ray s).2,
+    MvPowerSeries.X 1 * (rayEval s f ^ (ray s).1)⁻¹]
+
+def slopeOf (p q : ℕ) : Slope := if p = 0 then ⊤ else (((q : ℚ≥0) / p : ℚ≥0) : Slope)
+
+def slopesBelow (N : ℕ) : Finset Slope :=
+  ((Finset.range N ×ˢ Finset.range N).filter
+    (fun pq => Nat.Coprime pq.1 pq.2 ∧ pq.1 + pq.2 < N)).image (fun pq => slopeOf pq.1 pq.2)
+
+def orderedProd (f : Slope → PowerSeries ℚ) (N : ℕ) : B → B :=
+  ((slopesBelow N).sort (· ≤ ·)).foldr (fun s φ => wall s (f s) ∘ φ) id
+
+def EqMod (N : ℕ) (f g : B) : Prop :=
+  ∀ e : Fin 2 →₀ ℕ, e 0 + e 1 < N → MvPowerSeries.coeff e f = MvPowerSeries.coeff e g
+
+def IsConsistentFamily (P₁ P₂ : PowerSeries ℚ) (f : Slope → PowerSeries ℚ) : Prop :=
+  (∀ s, PowerSeries.constantCoeff (f s) = 1) ∧
+  ∀ N : ℕ, ∀ i : Fin 2,
+    EqMod N (orderedProd f N (MvPowerSeries.X i))
+      (wall ⊤ P₂ (wall (0 : ℚ≥0) P₁ (MvPowerSeries.X i)))
+
+def ersCoeff (j : ℕ) : ℚ :=
+  (1 / (j : ℚ)) * ∑ ℓ ∈ Finset.range (j + 2),
+    ((Nat.choose ℓ (j + 1 - ℓ) * Nat.choose (j + ℓ - 1) ℓ : ℕ) : ℚ)
+\end{verbatim}
+}
+\end{appendices}
 
 \begin{thebibliography}{99}
 
@@ -1064,6 +1111,14 @@ Selecta Math. (N.S.) \textbf{32} (2026), no.~4, Paper No.~81.
 A.~Burcroff, K.~Lee and L.~Mou,
 \emph{Scattering diagrams, tight gradings, and generalized positivity},
 Proc. Natl. Acad. Sci. USA \textbf{122} (2025), no.~18, e2422893122.
+\href{https://doi.org/10.1073/pnas.2422893122}{doi:10.1073/pnas.2422893122};
+\href{https://arxiv.org/abs/2409.15235}{arXiv:2409.15235}.
+
+\bibitem{BLM25}
+A.~Burcroff, K.~Lee and L.~Mou,
+\emph{Positivity of generalized cluster scattering diagrams},
+preprint, 2025.
+\href{https://arxiv.org/abs/2503.03719}{arXiv:2503.03719}.
 
 \bibitem{BLMMR}
 A.~Burcroff, K.~Lee, L.~Mou, G.~Musiker and M.~Reineke,
@@ -1084,7 +1139,9 @@ Section numbers refer to arXiv version~4.
 \bibitem{scatcoef}
 T.~Elgin, N.~Reading and S.~Stella,
 \emph{scatcoef}, computer code accompanying \cite{ERS},
-\url{https://github.com/Etn40ff/scatcoef}.
+\url{https://github.com/Etn40ff/scatcoef}, commit
+\href{https://github.com/Etn40ff/scatcoef/tree/ddbab34b41904c2d296fe943e7d45e9c2ca25f65}{ddbab34}
+(July~7, 2025).
 
 \bibitem{Gessel}
 I.~M.~Gessel,
@@ -1093,12 +1150,25 @@ J. Combin. Theory Ser. A \textbf{144} (2016), 212--249.
 \href{https://doi.org/10.1016/j.jcta.2016.06.018}{doi:10.1016/j.jcta.2016.06.018};
 \href{https://arxiv.org/abs/1609.05988}{arXiv:1609.05988}.
 
+\bibitem{GL}
+T.~Gr\"afnitz and P.~Luo,
+\emph{Scattering diagrams: polynomiality and the dense region},
+preprint, 2023.
+\href{https://arxiv.org/abs/2312.13990}{arXiv:2312.13990}.
+
 \bibitem{GHKK}
 M.~Gross, P.~Hacking, S.~Keel and M.~Kontsevich,
 \emph{Canonical bases for cluster algebras},
 J. Amer. Math. Soc. \textbf{31} (2018), no.~2, 497--608.
 \href{https://doi.org/10.1090/jams/890}{doi:10.1090/jams/890};
 \href{https://arxiv.org/abs/1411.1394}{arXiv:1411.1394}.
+
+\bibitem{GP10}
+M.~Gross and R.~Pandharipande,
+\emph{Quivers, curves, and the tropical vertex},
+Port. Math. \textbf{67} (2010), no.~2, 211--259.
+\href{https://doi.org/10.4171/pm/1865}{doi:10.4171/pm/1865};
+\href{https://arxiv.org/abs/0909.5153}{arXiv:0909.5153}.
 
 \bibitem{GPS}
 M.~Gross, R.~Pandharipande and B.~Siebert,
@@ -1138,8 +1208,9 @@ revision~63 (July~29, 2025), accessed October~27, 2026,
 \bibitem{OpenAI}
 OpenAI,
 \emph{Elementary positivity of chromatic quasisymmetric functions},
-manuscript dated September 24, 2026.
-\href{https://github.com/openai/math/tree/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/Elementary-Positivity-of-Chromatic-Quasisymmetric-Functions-September-24-2026}{Pinned manuscript and source}.
+OpenAI Math Release preprint, dated September~24, 2026; first posted on
+GitHub on October~6, 2026, in the repository \texttt{openai/math},
+\href{https://github.com/openai/math/tree/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/Elementary-Positivity-of-Chromatic-Quasisymmetric-Functions-September-24-2026}{commit 7ef5c0cc}.
 
 \bibitem{RW}
 M.~Reineke and T.~Weist,

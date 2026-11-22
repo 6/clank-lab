@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## scattering-coefficients v6 (November 21, 2026)
+
+- Correction: credits and presentation. The paper corrects its description of a related 2026 manuscript's results, quoting what it proves and noting that it states no formula for these coefficients, and adds credit to earlier sources: Gross and Pandharipande for Kontsevich's algebraicity question and Gräfnitz and Luo for the change of lattice. The theorem and its checks are unchanged.
+- The abstract, introduction and proof outline are rewritten for readability, and an appendix reproduces the formal definitions. The byline now reads Peter Graham.
+
 ## coinvariant-lefschetz v4 (November 21, 2026)
 
 - Correction: credits and presentation. The paper credits Chris McDaniel's relative-coinvariant free-extension strategy, which the proof follows, and quotes Larry Smith's 2016 announcement, whose scope includes $G_{34}$, and Akihito Wachi's statements on $G_{34}$. The byline now reads Peter Graham. The theorem and its checks are unchanged.

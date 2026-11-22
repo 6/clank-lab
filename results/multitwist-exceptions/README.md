@@ -53,7 +53,7 @@ Written proof, with Lean and computer checks; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.23639372](https://doi.org/10.5281/zenodo.23639372)
+Archived on Zenodo: [doi:10.5281/zenodo.24432262](https://doi.org/10.5281/zenodo.24432262)
 
 ## Abstract
 
@@ -175,6 +175,6 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
   title        = {{Multitwist exceptions on the five-holed sphere}},
   year         = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v4/results/multitwist-exceptions}},
-  doi          = {10.5281/zenodo.23639372}
+  doi          = {10.5281/zenodo.24432262}
 }
 ```

@@ -7,6 +7,7 @@ Zenodo records.
 ## multitwist-exceptions v4 (November 21, 2026)
 
 - Correction: wording of credits, a title and summary that name the five-holed sphere, and the finite-check summary's conjugacy statement; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.
+- Zenodo: [10.5281/zenodo.24432262](https://doi.org/10.5281/zenodo.24432262)
 
 ## cubelike-cospectrality v3 (November 21, 2026)
 

@@ -7,6 +7,7 @@ Zenodo records.
 ## stanley-class-sum-snf v5 (November 21, 2026)
 
 - Correction: wording of credits and of the result's scope (the n-cycle class sum on the center); the abstract now states the review status and AI assistance. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24431867](https://doi.org/10.5281/zenodo.24431867)
 
 ## steinberg-c4-c9 v8 (November 21, 2026)
 

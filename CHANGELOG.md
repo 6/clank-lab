@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## cubelike-cospectrality v3 (November 21, 2026)
+
+- Correction: wording of credits; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged.
+
 ## noncrossing-symmetric-chains v3 (November 21, 2026)
 
 - Correction: wording of credits and of what the Lean formalization checks; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged.

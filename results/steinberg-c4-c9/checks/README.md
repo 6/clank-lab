@@ -255,3 +255,30 @@ The graph, certificates and programs are archived with version 5 at
 
 The graph and its preexisting finite certificates are unchanged from the
 [archived version 6](https://doi.org/10.5281/zenodo.23631783).
+
+## Sources used during development
+
+The earlier credit note retained these source qualifications: Lu and coauthors are credited for the question through Kang, Jin and Wang’s Problem 1.2; arXiv:2001.00166v1 has Jin first. Liu, Loeb, Rolek, Yin and Yu’s Theorem 1.3 proves DP-3-colorability without cycles of lengths 4, a, b, 9 for distinct a, b in {6, 7, 8}. It extends the 3-choosability results of Wang, Lu and Chen; Shen and Wang; and Wang, Wu and Shen (Theorem 1.2 abbreviates the last credit as Wang and Shen). These results impose two additional cycle exclusions. [Context and reading limits](context.md) records incomplete source coverage.
+
+This DOI archives version 7; the linked corrected edition is version 8. The mathematical data and checks are unchanged.
+
+## Further credits
+
+- A. Kostochka and M. Yancey, [A Brooks-type result for sparse critical graphs](https://arxiv.org/abs/1408.0846v3) — supplies the Ore composition used in the construction.
+- H. Lu, Y. Wang, W. Wang, Y. Bu, M. Montassier and A. Raspaud, [On the 3-colorability of planar graphs without 4-, 7- and 9-cycles](https://doi.org/10.1016/j.disc.2009.02.030) — poses the question attributed through Kang, Jin and Wang.
+- Y. Kang, L. Jin and Y. Wang, [The 3-colorability of planar graphs without cycles of length 4, 6 and 9](https://arxiv.org/abs/1506.04629v1) — records the question as Problem 1.2.
+- L. Jin, Y. Kang, P. Liu and Y. Wang, [(1,0,0)-colorability of planar graphs without cycles of length 4 or 6](https://arxiv.org/abs/2001.00166v1) — also records the question as Problem 1.2.
+- V. Cohen-Addad, M. Hebdige, D. Král’, Z. Li and E. Salgado, [Steinberg’s conjecture is false](https://arxiv.org/abs/1604.05108v2) — supplies the contrasting cycle-pair result in Theorem 3.
+- Y. Kang, L. Jin and X. Zhu, [Planar graphs having no cycle of length 4, 7, or 9 are DP-3-colorable](https://doi.org/10.1002/jgt.23123) — provides related coloring context.
+- L. Dai, Y. Wang and J. Xu, [Every planar graph without cycles of length 4 or 9 is (1,1,0)-colorable](https://doi.org/10.1016/j.disc.2017.04.006) — provides related defective-coloring context.
+- M. Chen, L. Dai, J. Nie, Y. Wang and W. Yu, [Planar graphs without cycles of length 4 or 9 are (2,0,0)-colorable](https://doi.org/10.1360/N012018-00129) — provides related defective-coloring context.
+- Y. Xiao and M. Huang, [A weak DP-coloring of planar graphs without 4- and 9-cycles](https://doi.org/10.1016/j.dam.2023.10.004) — provides related weak-coloring context.
+- R. Liu, S. Loeb, M. Rolek, Y. Yin and G. Yu, [DP-3-coloring of planar graphs without 4,9-cycles and two cycles from {5,6,7,8}](https://arxiv.org/abs/1809.07445v1) — supplies Theorem 1.3 with two additional cycle exclusions.
+- Y. Wang, H. Lu and M. Chen, [A note on 3-choosability of planar graphs](https://doi.org/10.1016/j.ipl.2007.08.027) — is an earlier 3-choosability result extended by Liu and coauthors.
+- L. Shen and Y. Wang, [A sufficient condition for a planar graph to be 3-choosable](https://doi.org/10.1016/j.ipl.2007.06.005) — is an earlier 3-choosability result extended by Liu and coauthors.
+- Y. Wang, Q. Wu and L. Shen, [Planar graphs without cycles of length 4, 7, 8, or 9 are 3-choosable](https://doi.org/10.1016/j.dam.2010.11.002) — is an earlier 3-choosability result extended by Liu and coauthors.
+- Marijn Heule and Nathan Wetzler, [drat-trim](https://github.com/marijnheule/drat-trim) — checks the SAT certificate.
+- Armin Biere and collaborators, [CaDiCaL](https://github.com/arminbiere/cadical) — generates the SAT certificate.
+- L. Cruz-Filipe, M. Heule, W. Hunt, M. Kaufmann and P. Schneider-Kamp, [Efficient Certified RAT Verification](https://doi.org/10.1007/978-3-319-63046-5_14) — supplies the LRAT verification methodology.
+- Lean contributors, [Lean 4](https://github.com/leanprover/lean4) — supplies the proof assistant.
+- Mathlib contributors, [Mathlib](https://github.com/leanprover-community/mathlib4) — supplies the formal-proof libraries.

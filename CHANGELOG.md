@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## difference-set-243 v5 (November 21, 2026)
+
+- Correction: wording of credits, with further credits in the checking notes; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.
+
 ## stanley-smith-forms v4 (November 21, 2026)
 
 - Correction: wording of credits; the abstract now states the review status and AI assistance. The theorem and its checks are unchanged. The byline now reads Peter Graham.

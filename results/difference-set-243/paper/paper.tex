@@ -10,45 +10,37 @@
 \geometry{margin=1in}
 \AtBeginDocument{\setlength{\abovedisplayskip}{6pt plus 2pt minus 2pt}%
   \setlength{\belowdisplayskip}{6pt plus 2pt minus 2pt}}
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={Nonexistence of (243,121,60) difference sets in C3 × C9 × C9},pdfauthor={P. Graham},pdfsubject={Computer-assisted nonexistence in one finite abelian group},pdfkeywords={difference set, multiplier, exhaustive search, Lean}}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={Nonexistence of (243,121,60) difference sets in C3 × C9 × C9},pdfauthor={Peter Graham},pdfsubject={Computer-assisted nonexistence in one finite abelian group},pdfkeywords={difference set, multiplier, exhaustive search, Lean}}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \title{Nonexistence of $(243,121,60)$ difference sets\\ in $C_3$ $\times$ $C_9$ $\times$ $C_9$}
-\author{P. Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
-\date{October 25, 2026}
+\author{Peter Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 22, 2026}
 \begin{document}
 \maketitle
 
-
 \begin{abstract}
-We prove, by exhaustive computation, that no $(243,121,60)$ difference
-set exists in $C_3\times C_9\times C_9$. Keita Baba settled this case first
-on October~4, 2026, by a SAT computation with a certificate accepted by a
-formally verified checker. We give an independent proof by a different
-method: a lifting search with the reduction checked in Lean.
-A difference set with these
-parameters is a 121-element subset whose ordered differences represent
-every nonzero group element exactly 60 times. Vera L\'opez and Garc\'ia
-S\'anchez recorded this group-specific case as unresolved, and Gordon
-singled it out in his presentation on the La Jolla Difference Set Repository.
-The reduction builds on the classical multiplier and character methods
-of Hall, Menon and Turyn and the multiplier searches of Vera L\'opez
-and Garc\'ia S\'anchez. A multiplier-fixed translate has thirteen points
-in the subgroup of elements annihilated by three. Moment identities,
-singleton congruences and affine normalizations reduce the problem to
-eight quotient multiplicity arrays. Complete ternary lifting searches
-exclude all eight. Lean proves the algebraic reduction, normalization,
-lifting coverage and pruning lemmas; the final formal nonexistence
-theorem assumes the search assertions established by the external
-integer computations.
+A $(243,121,60)$ difference set in $C_3\times C_9\times C_9$ would be a
+121-element subset whose ordered differences represent every nonzero
+element exactly 60 times; we prove that none exists. Vera L\'opez and
+Garc\'ia S\'anchez recorded this case as unresolved, and Gordon singled
+it out in a presentation on the La Jolla Difference Set Repository.
+Keita Baba proved this first, by a SAT computation with a certificate
+accepted by a formally verified checker; we give an independent proof
+by a different method. It builds on the fixed-translate theorem of
+McFarland and Rice, the multiplier and character methods of Hall, Menon
+and Turyn, and the multiplier searches of Vera L\'opez and Garc\'ia
+S\'anchez. Using the multiplier 61, we reduce any such set, up to
+symmetry, to eight explicit patterns of coset sizes; an exhaustive
+search shows that none extends to a difference set. Lean proves the
+whole reduction; the formal nonexistence theorem assumes only the
+search results, which independent programs establish outside Lean.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 \end{abstract}
+\medskip
 
 \section{Introduction}
-
-Keita Baba settled this case first on October~4, 2026, by a SAT computation
-with a certificate accepted by a formally verified checker~\cite{Baba2026}.
-The present paper gives an independent proof by a different method:
-a lifting search with the reduction checked in Lean.
 
 Write $C_m=\mathbb Z/m\mathbb Z$ additively. For a subset $P$ of an
 abelian group, put
@@ -70,50 +62,50 @@ $|D|=121$ and
 Vera L\'opez and Garc\'ia S\'anchez record these parameters in this
 group as unresolved in their Table~1, p.~105 of~\cite{VeraGarcia1997}, with
 the question-mark convention of p.~101. Gordon singles out this case
-in~\cite[slide~38]{Gordon2019}; his repository's archived version~1.3
+in~\cite[slide~38]{Gordon2019}; the repository's archived version~1.3
 also lists $\operatorname{DS}(243,121,60,[3,9,9])$ as
 Open~\cite{GordonData}. The neighboring abelian groups and the relevant
 published restrictions are reviewed in Appendix~\ref{sec:context}.
 
-Baba's proof uses multiplier~61, its 99 orbits, and a SAT encoding over
-all 49 cyclic quotients with 64,940 variables~\cite[Steps~1--5 and~8(a)]{Baba2026}.
-The CaDiCaL refutation was accepted by cake\_lpr, a formally verified
-checker, and by lrat-check. A second route uses the 864 possible images
-in $G/3G$: one representative has a checked certificate, and all 864
-instances were also solved separately, without individual
-certificates~\cite[Steps~6--8 and VERIFY, Sections~4--5]{Baba2026}.
-Baba describes the work as written with AI assistance from
-Anthropic~\cite[repository README, Caveats]{Baba2026}.
+Keita Baba proved Theorem~\ref{thm:main} first, on October~4, 2026, by
+encoding the orbit structure of multiplier~61 as a SAT instance whose
+refutation was accepted by a formally verified proof
+checker~\cite[Steps~1--5 and~8(a)]{Baba2026}; Appendix~\ref{sec:context}
+describes that proof in more detail. The present paper gives a second,
+independent proof. It shares no code or encoding with Baba's. Its
+reduction of the problem to eight explicit cases is a short written
+argument, and every step of that reduction, including the multiplier
+theorem, is proved in Lean from the definitions. Only the final
+exhaustive search lies outside Lean, so the two proofs rest on different
+computations and different software.
 
-Our independent proof uses a complete finite reduction and lifting
-exhaustion. A translate fixed by the multiplier still
-has many possible unions of orbits; the difficult step is to reduce
-these possibilities far enough that all lifts can be tested.
-Section~\ref{sec:multiplier} first obtains a fixed translate and the
-coset moment identities. Section~\ref{sec:singletons} uses those
-identities to find its thirteen fixed points and the congruences they
-satisfy. A finite classification shows that all such thirteen-point
-sets lie in one orbit under the affine maps of
-Section~\ref{sec:symmetry}. Section~\ref{sec:quotient} then recovers
-the quotient multiplicities from the sums on its hyperplanes and
-reduces them to eight cases. Finally,
-Section~\ref{sec:lifting} lifts each case by choosing orbits of length
-three in its cosets, pruning a partial choice whenever an ordered
-difference count exceeds 60. The proof depends on the external integer
-computations described in Section~\ref{sec:formal}; the finite
-classification and the complete lifting search are computational steps.
+A translate fixed by the multiplier still has many possible unions of
+orbits; the difficult step is to reduce these possibilities far enough
+that all lifts can be tested. Section~\ref{sec:multiplier} obtains a
+fixed translate and the coset moment identities, and
+Section~\ref{sec:symmetry} gives the affine maps that preserve
+differences and fixedness. Section~\ref{sec:singletons} shows that the
+fixed translate meets the subgroup of elements of order dividing three in
+thirteen points, and a finite classification shows that all such
+thirteen-point sets lie in one orbit under the affine maps.
+Section~\ref{sec:quotient} recovers the intersection numbers with the
+cosets of $3G$ from sums over hyperplanes and reduces them to eight
+cases. Section~\ref{sec:lifting} lifts each case by choosing orbits of
+length three in its cosets, pruning a partial choice whenever an ordered
+difference count exceeds 60. The finite classifications are computations
+carried out inside Lean; the lifting search is an external computation.
+Section~\ref{sec:formal} states exactly what each part establishes.
 
-The work uses the classical multiplier and character methods developed
-by Hall~\cite{Hall1956}, Menon, Turyn, and others~\cite[Theorem~5]{Miller2025},~\cite{Turyn1965}, and the systematic multiplier searches
-of Vera L\'opez and Garc\'ia S\'anchez. It also benefits from the later
-nonexistence and field-descent theory of Arasu, Ma, Leung, Schmidt, and
-Miller~\cite{ArasuMa2001,LeungMaSchmidt2004,LeungSchmidt2005,Miller2025}. These contributions supply both the historical question and
-the algebraic framework for reducing it to a finite computation.
-The contributors to Lean, mathlib, and the declared library dependencies
-are also acknowledged for the formal-development infrastructure.
-
-The proofs, the Lean formalization, the search code, the certificate checkers and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-The result is computer-assisted and has not yet been reviewed by experts.
+The work uses the fixed-translate theorem of McFarland and
+Rice~\cite{McFarlandRice1978}, the classical multiplier and character
+methods developed by Hall~\cite{Hall1956}, Menon
+(see~\cite[Theorem~5]{Miller2025}), Turyn~\cite{Turyn1965}, and others,
+and the systematic multiplier searches of Vera L\'opez and Garc\'ia
+S\'anchez. It also benefits from the later nonexistence and
+field-descent theory of Arasu, Ma, Leung, Schmidt, and
+Miller~\cite{ArasuMa2001,LeungMaSchmidt2004,LeungSchmidt2005,Miller2025}.
+These contributions supply both the historical question and the
+algebraic framework for reducing it to a finite computation.
 
 \section{Multiplier fixedness and quotient moments}\label{sec:multiplier}
 
@@ -128,8 +120,7 @@ Use coordinates $G=C_3\times C_9\times C_9$ and put
 \end{split}
 \]
 Thus $|H|=27$, $|K|=9$, and
-$Q=G/K\cong C_3^3$. In particular, $H$ and $K$ are different
-subgroups.
+$Q=G/K\cong C_3^3$.
 
 Set
 \[
@@ -142,6 +133,10 @@ If $D$ is a difference set as in Theorem~\ref{thm:main}, then a
 translate $D_0$ satisfies $61D_0=D_0$.
 \end{lemma}
 \begin{proof}
+This is the theorem of McFarland and Rice~\cite{McFarlandRice1978} that
+every abelian difference set has a translate fixed by all numerical
+multipliers, specialized to this group; for completeness we give the
+short argument here.
 The first multiplier theorem applies because $G$ is abelian,
 $n=61$ is prime, $61>\lambda=60$, and $\gcd(61,243)=1$.
 It gives $61D=D+g$ for some $g\in G$. This is also the
@@ -158,14 +153,17 @@ For $u=7s$ we therefore have $60u=g$, whence
 Take $D_0=D-u$.
 \end{proof}
 
-In what follows, fixed means fixed by multiplication by~61, and a
-singleton is an orbit of this action having one point.
+In what follows, a subset $P\subseteq G$ is fixed, or scalar-fixed, if
+$61P=P$. The scalar orbits are the orbits of $p\mapsto61p$; a singleton
+is a scalar orbit with one point and a triple is one with three points.
+Multiplication by $61$, equivalently by $7$ modulo $9$, has order
+three and fixed subgroup exactly $H$, so there are 27 singletons and 72
+triples, and every fixed subset is a union of scalar orbits. Since
+$61\equiv1\pmod3$, multiplication by 61 fixes the image of every point
+in $G/K=Q$, so every $K$-coset is a union of scalar orbits.
 The initial translating element $u$ can be anywhere in $G$.
 Subsequent normalizing translations will lie in $H$.
-Multiplication by $61$, equivalently by $7$ modulo $9$, has order
-three and fixed subgroup exactly $H$. Its scalar orbits consist of
-27 singletons and 72 triples. Every fixed subset is a union of
-these orbits. A group automorphism commutes with scalar
+A group automorphism commutes with scalar
 multiplication, and translation by $t\in H$ preserves fixedness
 because $60t=0$.
 
@@ -176,57 +174,106 @@ $D_0$ are exactly $D_0+H$: fixedness of $D_0+t$ implies that
 $60t$ is a period, hence $60t=0$, whose solution set in $G$ is $H$.
 
 For later use, let $U\leq G$ and
-$r_U(a+U)=|D\cap(a+U)|$. Counting ordered pairs whose
-difference lies in $U$ gives
+$r_U(a+U)=|D\cap(a+U)|$. For $b\in G$, the number of ordered pairs in
+$D\times D$ whose difference lies in $b+U$ is
+\begin{equation}\label{eq:autocorr}
+ \sum_{a+U}r_U(a+U)\,r_U(a+b+U)=
+ \begin{cases}121+60(|U|-1),&b\in U,\\60|U|,&b\notin U,\end{cases}
+\end{equation}
+since 121 pairs have difference zero and every nonzero element is the
+difference of 60 pairs. Together with $|D|=121$, the case $b\in U$ gives
 \begin{equation}\label{eq:moment}
  \sum_{a+U}r_U(a+U)=121,\qquad
  \sum_{a+U}r_U(a+U)^2=121+60(|U|-1).
 \end{equation}
-Projected autocorrelation counts ordered differences after passage to
-the quotient, with coset multiplicities retained. More generally, projected autocorrelation equals
-$121+60(|U|-1)$ at zero and $60|U|$ elsewhere.
 For an index-three subgroup, the three coset counts consequently
 satisfy
 \begin{equation}\label{eq:triples}
- t_0+t_1+t_2=121,\qquad
- t_0^2+t_1^2+t_2^2=4921,\qquad0\leq t_i\leq81.
+ \nu_0+\nu_1+\nu_2=121,\qquad
+ \nu_0^2+\nu_1^2+\nu_2^2=4921,\qquad0\leq \nu_i\leq81.
 \end{equation}
 The complete integer solutions are the six permutations of
-$(36,40,45)$. This small finite assertion is checked both in
-the finite enumerations and in Lean.
+$(36,40,45)$.
+
+\section{Affine normalization}\label{sec:symmetry}
+
+The normalizations must preserve both differences and fixedness under
+the multiplier. We give the coordinate maps and show why they do so.
+
+Use $F=A+t$ with $t=(t_0,3t_1,3t_2)\in H$, where
+\begin{equation}\label{eq:affine}
+\begin{split}
+ F(x,y,z)=\bigl(&\alpha x+\beta y+\gamma z+t_0\pmod3,\\
+              &3\delta_1x+b_{11}y+b_{12}z+3t_1\pmod9,\\
+              &3\delta_2x+b_{21}y+b_{22}z+3t_2\pmod9\bigr).
+\end{split}
+\end{equation}
+Here $\alpha\ne0\pmod3$ and the matrix $B=(b_{ij})$ is invertible
+modulo three. The parameters $\alpha,\beta,\gamma,\delta_j,t_j$ are
+taken modulo three; the entries of $B$ have chosen lifts modulo nine.
+We call the maps \eqref{eq:affine} legal: their linear parts are
+automorphisms, as shown next, and their translations lie in $H$.
+
+The coordinate orders make $A$ additive. Its induced map on
+$G/3G$ has block upper-triangular matrix with diagonal blocks
+$\alpha$ and $B\pmod3$, so is invertible. If $A(p)=0$, it follows
+that $p\in3G=K$. On $K$, the map is again given by
+$B\pmod3$, which is invertible; hence $p=0$.
+Thus $A$ is an automorphism. Translation preserves differences,
+and $60t=0$ gives $F(61p)=61F(p)$. Consequently $F$ preserves
+the difference-set property and scalar fixedness.
+
+The restriction of a legal map to $H$ does not depend on $\beta$ and
+$\gamma$, since $\beta y$ and $\gamma z$ vanish modulo three on $H$.
+Writing the last two coordinates of a point of $H$ as a vector
+$\boldsymbol u\in C_3^2$, these restrictions are
+\[
+ (x,\boldsymbol u)\longmapsto
+ (\alpha x+t_0,B\boldsymbol u+\boldsymbol\delta x+\boldsymbol t),
+\]
+with $B$ reduced modulo three, $\boldsymbol\delta=(\delta_1,\delta_2)$
+and $\boldsymbol t=(t_1,t_2)$.
+They form a group of order
+$2\cdot3\cdot48\cdot9\cdot9=23{,}328$; the factors count
+$\alpha,t_0,B,\boldsymbol\delta,\boldsymbol t$, respectively.
+Each of these maps on $H$ extends to a legal map on $G$.
 
 \section{The thirteen singleton points}\label{sec:singletons}
 
 The fixed points of the multiplier form $H$. We determine how a fixed
 difference set can meet $H$, then classify the resulting subsets under
-the affine maps specified in Section~\ref{sec:symmetry}. The word legal
-below refers to those maps, whose linear parts are automorphisms and
-whose translations lie in $H$.
+the legal maps.
 
 Assume from now on that $D_0$ is fixed, and put $S=D_0\cap H$.
-There are four projective nonzero linear forms on
-$(\bar y,\bar z)\in C_3^2$. For each, the two nonzero fibers
-contain only scalar triples, so their intersection counts with
-$D_0$ are divisible by three. Of $36,40,45$, only $40$ is not
-divisible by three; thus the zero-fiber count is~40.
-Every point of $H$ lies in all four zero fibers, and every point
-outside $H$ lies in exactly one. Hence
+Let $\bar y,\bar z$ denote $y,z$ modulo three, so that
+$(x,y,z)\mapsto(\bar y,\bar z)$ identifies $G/H$ with $C_3^2$.
+Each of the four nonzero linear forms $\ell$ on $C_3^2$, taken up to
+sign, gives a homomorphism $p\mapsto\ell(\bar y,\bar z)$ from $G$ onto
+$C_3$, whose kernel $U_\ell\supseteq H$ has index three. By
+\eqref{eq:triples}, the three cosets of $U_\ell$ meet $D_0$ in 36, 40
+and 45 points in some order. The two cosets outside $U_\ell$ contain no
+point of $H$ and are unions of $K$-cosets, so they are unions of
+triples and their counts are divisible by three. Of $36,40,45$, only
+$40$ is not divisible by three; thus $|D_0\cap U_\ell|=40$.
+Every point of $H$ lies in all four kernels, and every point
+outside $H$ lies in exactly one. Counting incidences gives
 \[
- 4\cdot40=4|S|+(121-|S|),\qquad |S|=13.
+ 4\cdot40=4|S|+(121-|S|),\qquad\text{hence}\quad|S|=13.
 \]
 
-Let $a,b,c$ be the sizes of $S$ in the three $x$-layers of $H$.
-They satisfy $a+b+c=13$ and $0\leq a,b,c\leq9$.
-On $Q=G/K$, the three special cells $(x,0,0)$ contain only
-singleton points and have multiplicities $a,b,c$. Every other
-cell contains three scalar triples, so its multiplicity lies
+Let $\mu_0,\mu_1,\mu_2$ be the sizes of $S$ in the three $x$-layers of $H$.
+They satisfy $\mu_0+\mu_1+\mu_2=13$ and $0\leq\mu_0,\mu_1,\mu_2\leq9$.
+Call a $K$-coset a cell, indexed by its image in $Q$; the three
+special cells, indexed by $(x,0,0)$, make up $H$. They contain only
+singleton points and meet $D_0$ in $\mu_0,\mu_1,\mu_2$ points. Every other
+cell contains three triples, so its multiplicity lies
 in $\{0,3,6,9\}$. The $U=K$ instance of
 \eqref{eq:moment} gives
 \[
- a^2+b^2+c^2\equiv601\equiv7\pmod9.
+ \mu_0^2+\mu_1^2+\mu_2^2\equiv601\equiv7\pmod9.
 \]
-The $x$-quotient in \eqref{eq:triples} forces the residues of
-$(a,b,c)$ modulo three to be a permutation of $(1,0,0)$.
+Applied to the subgroup $\{x=0\}$, \eqref{eq:triples} forces the
+residues of $(\mu_0,\mu_1,\mu_2)$ modulo three to be a permutation of $(1,0,0)$.
 The complete list of layer triples satisfying these conditions
 consists of the permutations of $(4,0,9)$ and $(4,3,6)$.
 
@@ -241,153 +288,83 @@ length three. Therefore
 A $(4,0,9)$ layer pattern has intersection four with its
 translate by $(1,0,0)$, so cannot satisfy \eqref{eq:congruence}.
 
-A mask here is simply an encoding of a subset of $H$.
 The layer conditions above describe exactly
 \begin{equation}\label{eq:maskcount}
  6\left[\binom94+\binom94\binom93\binom96\right]
  =5{,}335{,}092
 \end{equation}
-distinct subsets of $H$. For each candidate subset, the test evaluates $|S\cap(S+h)|$ for
-every $h\in H\setminus\{0\}$; these are the 26 congruences in
-\eqref{eq:congruence}. The factor six in \eqref{eq:maskcount} orders
-the three distinct layer sizes, and the binomial factors choose the
-points in each layer of nine points. The retained subsets are then
-compared as a set with the affine orbit of the specified representative.
-Exhaustive testing of all 26 congruences leaves exactly 7,776
-masks. An enumeration scanning every one of the
-$\binom{27}{13}=20{,}058{,}300$ thirteen-point subsets
-independently reproduces both counts.
+distinct subsets of $H$: the factor six orders the three distinct layer
+sizes, and the binomial factors choose the points in each layer of nine
+points. Exhaustive enumeration shows that exactly 7,776 of these
+subsets satisfy all 26 congruences \eqref{eq:congruence}, and that they
+form exactly the orbit of the set $S_0$ of Appendix~\ref{app:finite}
+under the group of order 23,328 of Section~\ref{sec:symmetry}. The layer
+conditions are a hand-checkable restriction that the classification
+does not need: among all $\binom{27}{13}=20{,}058{,}300$ thirteen-point
+subsets of $H$, the congruences alone leave the same 7,776, and this is
+the form of the classification proved in Lean. Thus every hypothetical
+difference set has a fixed legal image with $H$-part exactly $S_0$.
 
-
-The surviving set of masks is exactly the orbit of
-$S_0$, specified in Appendix~\ref{app:finite},
-under the legal affine maps described below. Equality of these
-two finite sets, with normalization witnesses, establishes
-normalization; agreement of their cardinalities alone would
-not do so. Thus every hypothetical difference set has a fixed
-legal image with $H$-part exactly $S_0$.
-
-\section{Affine normalization}\label{sec:symmetry}
-
-The normalizations must preserve both differences and fixedness under
-the multiplier. We give the coordinate maps and show why they do so.
-The letters $a,b,c$ in this section are coefficients of a map;
-the three layer sizes used in Section~\ref{sec:singletons} are fixed
-when the representative $S_0$ is chosen.
-
-Use $F=A+t$ with $t=(t_0,3t_1,3t_2)\in H$, where
-\begin{equation}\label{eq:affine}
-\begin{split}
- F(x,y,z)=\bigl(&ax+by+cz+t_0\pmod3,\\
-              &3dx+ey+fz+3t_1\pmod9,\\
-              &3gx+hy+iz+3t_2\pmod9\bigr).
-\end{split}
-\end{equation}
-Here $a\ne0\pmod3$ and
-$B=\left(\begin{smallmatrix}e&f\\h&i\end{smallmatrix}\right)$
-is invertible modulo three. The parameters in the first
-coordinate and $d,g,t_j$ are taken modulo three; entries of
-$B$ have chosen lifts modulo nine.
-
-The coordinate orders make $A$ additive. Its induced map on
-$G/3G$ has block upper-triangular matrix with diagonal blocks
-$a$ and $B\pmod3$, so is invertible. If $A(p)=0$, it follows
-that $p\in3G=K$. On $K$, the map is again given by
-$B\pmod3$, which is invertible; hence $p=0$.
-Thus $A$ is an automorphism. Translation preserves differences,
-and $60t=0$ gives $F(61p)=61F(p)$. Consequently $F$ preserves
-the difference-set property and scalar fixedness.
-
-For $b=c=0$, the induced $H$-actions, writing its last two
-coordinates as a vector $\boldsymbol u\in C_3^2$, are
+The orbit of $S_0$ has 7,776 elements, so its stabilizer in the group
+of order 23,328 has order three. Since the three layer sizes of $S_0$
+are distinct, each stabilizing map has $\alpha=1$ and $t_0=0$. Its
+three elements have
+$B\equiv I$, $\left(\begin{smallmatrix}0&1\\2&2\end{smallmatrix}\right)$
+and $\left(\begin{smallmatrix}2&2\\1&0\end{smallmatrix}\right)$
+modulo three, the last two with $\boldsymbol\delta=(0,1)$ and $(1,0)$,
+respectively, and $\boldsymbol t=0$. A legal map extending one of them
+acts on $Q$ by
 \[
- (x,\boldsymbol u)\longmapsto
- (ax+t_0,B\boldsymbol u+\boldsymbol d x+\boldsymbol t).
+ (x,\bar y,\bar z)\longmapsto\bigl(x+\beta\bar y+\gamma\bar z,\,
+ B(\bar y,\bar z)\bigr),
 \]
-They form a group of order
-$2\cdot3\cdot48\cdot9\cdot9=23{,}328$.
-The factors count $a,t_0,B,\boldsymbol d,\boldsymbol t$, respectively.
-Each has an explicit full-$G$ lift of \eqref{eq:affine}.
-Here a lift extends the displayed action on $H$ to the whole group $G$.
-
-
-The orbit of $S_0$ has size 7,776, so its stabilizer in this
-$H$-action group has order three.
-
-Since the three layer sizes of $S_0$ are distinct, an
-$S_0$-stabilizing $H$-action has $a=1,t_0=0$. Each of its
-three possibilities has nine $(b,c)$ extensions. These induce
-27 distinct permutations on $Q$, forming a group of order~27.
-
+which depends only on $\beta,\gamma$ and $B$ modulo three. Since the
+three matrices are distinct, these maps induce 27 distinct permutations
+of $Q$, forming a group of order~27.
 
 \section{Quotient multiplicities}\label{sec:quotient}
 
-The sums over the thirteen projective families of hyperplanes determine
-all the intersection numbers with $K$-cosets. In this section a cell
-means a $K$-coset, indexed by its image in $Q$. The three special cells
-are those indexed by $(x,0,0)$.
+For the normalized fixed image $D_0$, with $H$-part $S_0$, define
+$r(q)=|D_0\cap(q+K)|$ for $q\in Q$. Its special entries
+$r(x,0,0)$ are $(4,3,6)$; each of the other 24
+entries is one of $0,3,6,9$.
 
-Normalize $S$ to $S_0$ and define
-\[
- r(q)=|D_0\cap(q+K)|\qquad(q\in Q).
-\]
-The notation now refers to the normalized fixed image of $D_0$.
-Its special entries
-$r(x,0,0)$ are $(4,3,6)$; initially each of the other 24
-entries may be any of $0,3,6,9$.
-
-Choose one representative of each of the 13 projective
-nonzero forms $L:Q\to C_3$, by requiring its first nonzero
+The key point is that sums of $r$ over hyperplanes determine $r$.
+Choose one representative of each of the 13 nonzero linear forms
+$L:Q\to C_3$ up to sign, by requiring its first nonzero
 coefficient to be~1, and put
 \[
- t_L(j)=\sum_{L(q)=j}r(q).
+ \nu_L(j)=\sum_{L(q)=j}r(q).
 \]
 If $L$ ignores $x$, its zero fiber contains all thirteen
 singleton points; otherwise it contains the four points of
-the $x=0$ singleton layer. Thus $t_L(0)\equiv1\pmod3$ in
+the $x=0$ singleton layer. Thus $\nu_L(0)\equiv1\pmod3$ in
 both cases. Equation~\eqref{eq:triples} forces
 \begin{equation}\label{eq:lines}
- t_L(0)=40,\qquad \{t_L(1),t_L(2)\}=\{36,45\}.
+ \nu_L(0)=40,\qquad \{\nu_L(1),\nu_L(2)\}=\{36,45\}.
 \end{equation}
 
 For $p,q\in Q$, exactly thirteen of the forms have
 $L(p)=L(q)$ when $p=q$, and exactly four when $p\ne q$.
 Therefore
 \begin{equation}\label{eq:inversion}
- \sum_Lt_L(L(q))=13r(q)+4(121-r(q))=484+9r(q).
+ \sum_L\nu_L(L(q))=13r(q)+4(121-r(q))=484+9r(q).
 \end{equation}
-The coefficient of $r(q)$ in \eqref{eq:inversion} is nine, so the
-prescribed hyperplane sums determine $r(q)$ uniquely.
-The incidence inversion mentioned in the final proof is the recovery
-of $r$ from these hyperplane sums. This identity proves completeness of the following finite
-procedure. Enumerate all $2^{13}=8192$ ways of ordering
-$(36,45)$ in \eqref{eq:lines}; recover $r(q)$ from
-\eqref{eq:inversion}; retain integer coefficients between
-zero and nine, the special entries $(4,3,6)$, and nonspecial
-entries divisible by three. Every possible quotient array
-must occur, since its line assignments occur and the
-inversion recovers it uniquely.
+The coefficient of $r(q)$ is nine, so the hyperplane sums $\nu_L$
+determine $r$, and every possible array solves \eqref{eq:inversion}
+for one of the $2^{13}=8192$ orderings of $(36,45)$ in
+\eqref{eq:lines}. Enumerating these orderings and keeping the solutions with integer entries between zero and nine,
+special entries $(4,3,6)$ and nonspecial entries divisible by three,
+gives exactly 144 arrays. Each has twelve nonspecial entries
+equal to three and twelve equal to six, and each satisfies
+\eqref{eq:autocorr} for $U=K$, with value 601 at $b\in K$ and 540
+elsewhere.
 
-Exactly 144 arrays survive. Each has projected
-autocorrelation 601 at zero and 540 at every nonzero
-element of $Q$, as required by \eqref{eq:moment} and its
-nonzero counterpart. Each has twelve nonspecial entries
-equal to three and twelve equal to six.
-
-The divisibility condition in the finite procedure is the
-union-of-triples condition from Section~\ref{sec:singletons}.
-The group of 27 induced $S_0$-stabilizing quotient
-permutations partitions these arrays into eight orbits.
-
-
-Their orbits are disjoint and their union is the full
-144-array set. Each nine-digit string lists
-$r(x,\bar y,\bar z)$ for fixed $x$, with
-$3\bar y+\bar z=0,\ldots,8$ in increasing order.
-
-For each array an explicit legal map sends it to its
-representative while preserving $S_0$.
-These maps are part of the finite normalization witnesses.
+The group of order 27 from Section~\ref{sec:singletons} partitions
+these arrays into eight orbits, of sizes 27, 27, 9, 9, 27, 27, 9, 9.
+Their representatives are listed in Table~\ref{tab:cases}
+(Appendix~\ref{app:finite}). For each array an explicit legal map
+fixing $S_0$ sends it to its representative.
 
 \section{Lifting and the proof of nonexistence}\label{sec:lifting}
 
@@ -403,16 +380,12 @@ exactly two. In either case there are exactly three
 choices, namely all members of the appropriate
 $\binom31$ or $\binom32$ family.
 
-Points and quotient cells are ordered lexicographically by their
-least nonnegative coordinate representatives. Number a cell's triples $0,1,2$ by their least encoded
-point. A digit $j$ in a multiplicity-three cell selects
-triple $j$; in a multiplicity-six cell it omits triple
-$j$. Order the cells by placing the twelve six-cells
-first in increasing $Q$-index, followed by the twelve
-three-cells in increasing $Q$-index. Denote the resulting
-set for a case $c$ and digit word
-$\boldsymbol d\in\{0,1,2\}^{24}$ by
-$\mathcal L(c,\boldsymbol d)$.
+Number the triples of each cell $0,1,2$ and order the 24 nonspecial
+cells as in Appendix~\ref{app:computation}. A digit $j$ in a
+multiplicity-three cell selects triple $j$; in a multiplicity-six cell
+it omits triple $j$. Denote the resulting set for a case $c$ and digit
+word $\boldsymbol d\in\{0,1,2\}^{24}$ by $\mathcal L(c,\boldsymbol d)$,
+and call it a leaf of case $c$.
 
 \begin{lemma}\label{lem:lifting}
 For a fixed case, the map $\boldsymbol d\mapsto
@@ -437,98 +410,120 @@ length~24 in three digits. Its first twelve digits determine a subtree,
 whose completions are all possible twelve-digit tails. Every full word
 has exactly one such prefix, so the subtrees partition the eight
 lifting families. Appendix~\ref{app:computation} records their numerical
-indexing and the intervals $I_r$ used to collect consecutive prefixes.
+indexing and the intervals $I_\rho$ used to collect consecutive prefixes.
 
 If $P\subseteq P'$, then $d_P(g)\leq d_{P'}(g)$
 for every $g$. Thus a partial set for which some
 nonzero difference count exceeds 60 has no
-difference-set extension. This is the only
-difference-count rejection needed by the search.
-At a complete 121-point leaf,
+difference-set extension. At a leaf,
 \[
  \sum_{g\ne0}d_P(g)=121\cdot120=242\cdot60.
 \]
 Consequently all counts being at most 60 is equivalent
 to every count being exactly 60.
 
-For every prefix, depth-first search tries all
-three digits at each remaining position, unless
-the monotone rejection rule applies.
-
-The exhaustive computations give zero difference-set leaves in each
-of the eight cases. Two searches using different difference-count
-representations agree, and a separately written third lifting program
-exhausts all the same ranges. The common finite inputs are checked by
-independent enumerations and by the formal coverage proof. The recorded
-counts and the certificate comparisons are in
-Appendix~\ref{app:computation} and the checking notes.
+For every prefix, a depth-first search tries all three digits at each
+remaining position, unless this rejection rule applies. In each of the
+eight cases it finds no leaf that is a difference set.
+Section~\ref{sec:formal} describes how this exhaustion is checked.
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
 Suppose $D$ were such a difference set.
-Lemma~\ref{lem:fixed} gives a fixed translate.
-The singleton conditions and complete
-classification send its $H$-part legally to
-$S_0$. The incidence inversion places its
-quotient in the complete 144-array set, and a
-legal $S_0$-stabilizing map sends that array
-to Table~\ref{tab:cases}. By
-Lemma~\ref{lem:lifting}, the resulting
-difference set is a leaf of that case. Its
-prefix lies in exactly one interval
-\eqref{eq:ranges}. Exhaustion rejects every
-leaf under that interval by tests that
+Lemma~\ref{lem:fixed} gives a fixed translate $D_0$.
+By the classification of Section~\ref{sec:singletons}, a legal map
+sends $D_0$ to a fixed difference set with $H$-part $S_0$.
+By \eqref{eq:inversion}, its quotient array is one of the 144 arrays of
+Section~\ref{sec:quotient}, and a legal map fixing $S_0$ sends that
+array to a representative in Table~\ref{tab:cases}. By
+Lemma~\ref{lem:lifting}, the resulting difference set is a leaf of that
+case. Its prefix lies in exactly one interval \eqref{eq:ranges}. The
+exhaustion of that interval rejects every leaf below it by tests that
 reject no difference set, a contradiction.
 \end{proof}
 
 \section{Computational verification}\label{sec:formal}
 
-The computation excludes every lift, while the formal proof establishes
-that every hypothetical difference set is one of these lifts. The
-following statements describe precisely how the two parts fit together.
+The computation excludes every leaf, while the formal proof shows that
+every hypothetical difference set, after a translation and a legal map,
+is one of these leaves. The steps divide as follows.
 
-The Lean definition of the
-group is the product of the
-three residue groups of
-moduli $3,9,9$. Its
-\texttt{IsDiffSet} predicate
-is exactly cardinality~121
-and ordered-difference
-count~60 at every nonzero
-element. The singleton and quotient classifications are proved in Lean using
-finite tables; the programs separately enumerate the subsets and
-multiplicity arrays. For the final implication, each
-$\operatorname{RangeClear}(r)$ asserts that every lift with a prefix in
-the interval $I_r$ fails to be a difference set. The intervals cover the
-prefix subtrees described in Section~\ref{sec:lifting}; their exact
-indexing and the full coverage statement are given in
-Appendix~\ref{app:computation}.
+\begin{enumerate}
+\item Proved in Lean from the definitions: the multiplier theorem and
+Lemma~\ref{lem:fixed}; the instances of \eqref{eq:moment} used here and
+the solutions of \eqref{eq:triples}; $|S|=13$ and the congruences
+\eqref{eq:congruence}; the classification of
+Section~\ref{sec:singletons}; the reduction to the eight arrays of
+Table~\ref{tab:cases} through \eqref{eq:inversion};
+the part of Lemma~\ref{lem:lifting} used in the proof, that every such
+set is a leaf, and the coverage statement \eqref{eq:coverage};
+the partition into the intervals \eqref{eq:ranges}; and soundness of the
+rejection rule. The finite classifications are computations checked
+inside Lean.
+\item Assumed by the Lean theorem as hypotheses: the 1,038 statements
+$\operatorname{RangeClear}(\rho)$, $\rho<1038$, each saying that no leaf whose
+prefix lies in $I_\rho$ is a difference set (precise form
+\eqref{eq:clear} in Appendix~\ref{app:computation}).
+\item Established only by programs outside Lean: these 1,038
+statements, by the searches of Section~\ref{sec:lifting}, and the
+agreement of the cell options used by the search programs with the
+leaves defined in Lean, checked outside Lean by comparing every option
+with independently written definitions. Independent programs also recompute the finite
+classifications of the first item.
+\end{enumerate}
 
-In the equivalent range-assertion formulation checked in the formal
-development,\newline
-\texttt{DS243.no\_difference\_set} states
+The Lean group is the product of the residue groups of moduli $3,9,9$,
+and its predicate $\texttt{IsDiffSet}(D)$ says exactly that $|D|=121$
+and that the ordered-difference count is 60 at every nonzero element.
+The theorem \texttt{DS243.no\_difference\_set} states
 \[
- \left(\forall r<1038,\
-   \operatorname{RangeClear}(r)\right)
+ \left(\forall \rho<1038,\
+   \operatorname{RangeClear}(\rho)\right)
  \ \Longrightarrow\
- \neg\exists D\subseteq G,\ \operatorname{IsDiffSet}(D).
+ \neg\exists D\subseteq G,\ \operatorname{IsDiffSet}(D),
 \]
-The conclusion is exactly
-Theorem~\ref{thm:main}: the product of residue groups is $G$, and
-$\operatorname{IsDiffSet}$ uses the cardinality and ordered differences
-in that theorem. The correspondence between the formal leaf table and the executable
-options, and the exhaustive range assertions, are external checks.
-The \href{../checks/edition-notes.md}{checking notes} in the accompanying
-\href{https://github.com/6/clank-lab/tree/difference-set-243-v4/results/difference-set-243}{source bundle} identify the exact formal statement types, the logical
-axioms and the reproduction commands.
+whose conclusion is exactly Theorem~\ref{thm:main}. In the Lean source
+each hypothesis is written as a value of a structure whose only field is
+$\operatorname{RangeClear}(\rho)$, labeled by the digest of range~$\rho$; the
+label has no logical content, so the two forms are equivalent. The
+formal proofs use only the axioms \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}.
+
+The lifting exhaustion is an uncertified computation: it produces no
+certificate that a proof checker or Lean verifies, and its correctness
+rests on the agreement of independent programs. Two search programs,
+which store the difference counts in different ways, and a separately
+written third program each exhaust all 1,038 intervals. For every
+interval they agree on the number of prefixes, the number of search
+nodes (partial choices of the tail that pass the rejection rule,
+counting the empty tail), the number of difference-set leaves, which is zero, and the
+SHA-256 digest of the list of these per-prefix counts. Each complete
+pass visits 108,733,222,341 nodes; a replay of all three passes takes
+hundreds of CPU-hours.
+
+The README and checks folder of the
+\href{https://github.com/6/clank-lab/tree/difference-set-243-v5/results/difference-set-243}{source bundle}
+give the commands that build the Lean development and replay the
+searches, and its checking notes, \texttt{checks/edition-notes.md},
+identify the exact formal statement types and axioms. The contributors
+to Lean, mathlib, and the declared library dependencies are acknowledged
+for the formal-development infrastructure.
 
 \begin{appendices}
 
-\section{Known nonexistence criteria}\label{sec:context}
+\section{Prior proof and known nonexistence criteria}\label{sec:context}
 
-These sources also put the question in perspective. For the same
-parameters, the other six abelian groups of order $243$ are already
-recorded as follows; this is historical context, not a new proof of
-those entries:
+Baba's proof uses multiplier~61, its 99 orbits, and a SAT encoding over
+all 49 cyclic quotients with 64,940 variables~\cite[Steps~1--5 and~8(a); VERIFY, Section~5]{Baba2026}.
+The CaDiCaL refutation was accepted by cake\_lpr, a formally verified
+checker, and by lrat-check. A second route uses the 864 possible images
+in $G/3G$: one representative has a checked certificate, and all 864
+instances were also solved separately, without individual
+certificates~\cite[Steps~6--8 and VERIFY, Sections~3--4]{Baba2026}.
+Baba describes the work as written with AI assistance from
+Anthropic~\cite[repository README, Caveats]{Baba2026}.
+
+For the same parameters, the six other abelian groups of order $243$
+are recorded as follows:
 \[
 \begin{array}{c|c|l}
 \text{group}&\text{recorded answer}&\text{attribution}\\\hline
@@ -547,13 +542,13 @@ and reformatted from Daniel M. Gordon's repository data, copyright
 \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
 Group notation and presentation are changed; the source status
 values are unchanged. No endorsement is implied.}
-For $C_3\times C_{81}$ the two records give different attributions;
-the displayed table follows Gordon, while the following description
-follows the 1997 table. The 1997 table credits the negative entry for $C_{243}$ to
+The 1997 table credits the negative entry for $C_{243}$ to
 Lander's Theorem~4.38~\cite{Lander1983} with $q=3$ (its reference~10). For
-$C_3\times C_{81}$, $C_3^2\times C_{27}$, and $C_3^3\times C_9$,
-it uses method~21, multiplier-orbit enumeration with multiplier~61.
-Here 21 is the table marker used in the source for that enumeration.
+$C_3\times C_{81}$,\footnote{For $C_3\times C_{81}$ the two records give
+different attributions; the table above follows Gordon, and this
+paragraph follows the 1997 table.} $C_3^2\times C_{27}$, and
+$C_3^3\times C_9$, it uses its method~21, multiplier-orbit enumeration
+with multiplier~61.
 Arasu and
 Ma~\cite{ArasuMa2001} subsequently resolved $C_9\times C_{27}$.
 For $C_3^5$, Paley's quadratic-residue construction~\cite{Paley1933}
@@ -567,19 +562,18 @@ Bruck--Ryser--Chowla equation $61x^2-60y^2=z^2$ has the nonzero
 solution $x=y=z=1$. These elementary necessary conditions do not
 exclude the parameters.
 
-Turyn's character restrictions~\cite{Turyn1965} allow this application:
-$\operatorname{ord}_3(61)=1$ is odd. At the nontrivial character
-orders $3$ and $9$, the prime $61$ is not self-conjugate. Indeed, its
-powers modulo $3$ equal $1$, and modulo $9$ cycle through $7,4,1$,
-never $-1$. Obstructions requiring a common prime divisor of $n$ and
+Turyn's self-conjugacy criterion~\cite{Turyn1965} does not exclude
+these parameters: at the nontrivial character orders $3$ and $9$, the
+prime $61$ is not self-conjugate, since its powers are $1$ modulo $3$
+and cycle through $7,4,1$ modulo $9$, never $-1$. Obstructions requiring
+a common prime divisor of $n$ and
 $v$ have no such prime here; in particular that ingredient of the
 Lander-type restrictions in Leung--Ma--Schmidt~\cite{LeungMaSchmidt2004}
 is absent.
 
-In the following paragraph $F$ denotes the published field-descent
-function, rather than an affine map. For the field-descent function of Leung and
-Schmidt~\cite[Definition~2.6]{LeungSchmidt2005}, one obtains
-$F(9,61)=3$. Here $\operatorname{ord}_3(61)=1$ and
+Write $F_{\mathrm{LS}}$ for the field-descent function $F$ of Leung and
+Schmidt~\cite[Definition~2.6]{LeungSchmidt2005}. One obtains
+$F_{\mathrm{LS}}(9,61)=3$. Here $\operatorname{ord}_3(61)=1$ and
 $61\not\equiv1\pmod9$, so the exponent $b_3=1$ is permitted in
 that definition. Taking their factor $A$ to be the entire group and
 the complementary factor trivial, Theorem~4.3 gives
@@ -599,11 +593,11 @@ extended by Miller~\cite[Theorems~1 and~3]{Miller2025}, assumes
  G=C_{p^e}\times J,\qquad e\geq2,\qquad
  \exp(\operatorname{Syl}_p J)<p^e.
 \]
-The displayed group hypothesis is from Miller's Theorem~1; his
+The displayed group hypothesis is from Miller's Theorem~1; Miller's
 Theorem~3 gives the subsequent multiplier bound. Splitting off $C_9$ in the present group leaves another $C_9$, so
 the strict exponent inequality fails. The forbidden-multiplier
-congruences would demand both $t\equiv4\pmod9$ and
-$t\equiv1\pmod9$. Although the older numerical condition
+congruences would demand both $\sigma\equiv4\pmod9$ and
+$\sigma\equiv1\pmod9$. Although the older numerical condition
 $4(p-1)n=488>243$ holds, it cannot repair the failed group
 hypothesis.
 
@@ -614,19 +608,14 @@ The present parameters do not supply this hypothesis. Consequently
 a skew-only exponent bound cannot be applied to the ordinary
 difference-set question.
 
-For the following comparison the defect is $d=v-k$, the notation of
-He and Wu\cite[Theorem~4.7]{HeWu2026}.
 Recent work on signed difference sets by He and
 Wu~\cite{HeWu2026} includes ordinary difference sets but does not
 yield this exclusion by the criteria considered here. Their
 Theorem~3.2 has the same failed self-conjugacy test for~61;
 Theorem~4.2 requires even $v$; Theorem~4.4 requires $k=v-1$;
-and Theorem~4.7 requires an elementary abelian group and a defect
-bound, whereas this group is not elementary abelian and the defect
-is $d=122>5$.
-
-Source-access qualifications for these historical comparisons are recorded
-in the accompanying checking notes.
+and Theorem~4.7 requires an elementary abelian group and a bound on
+the defect $v-k$, whereas this group is not elementary abelian and the
+defect is $v-k=122>5$.
 
 \section{Finite classification data}\label{app:finite}
 
@@ -637,7 +626,7 @@ For an explicit finite encoding, the point $(x,3u,3w)\in H$
 has mask bit $9x+3u+w$, with bit zero the least significant bit.
 \begin{equation}\label{eq:mask}
  S_0:\quad\text{mask }24909666,
- \qquad (a,b,c)=(4,3,6),
+ \qquad (\mu_0,\mu_1,\mu_2)=(4,3,6),
 \end{equation}
 
 A separate depth-first
@@ -660,19 +649,19 @@ case $c$&orbit size&$x=0$&$x=1$&$x=2$\\\hline
 6&9 &\texttt{463666333}&\texttt{366366663}&\texttt{633363633}\\
 7&9 &\texttt{463636336}&\texttt{366336666}&\texttt{633333636}
 \end{tabular}
-\caption{The eight quotient multiplicity representatives.}
+\caption{The eight quotient multiplicity representatives. Each
+nine-digit string lists $r(x,\bar y,\bar z)$ for the fixed $x$, with
+$3\bar y+\bar z=0,\ldots,8$ in increasing order.}
 \label{tab:cases}
 \end{table}
 
+Their stabilizers in the induced 27-element group have orders
+$1,1,3,3,1,1,3,3$.
 
-The orbit sizes are
-\[27,27,9,9,27,27,9,9;\]
-their stabilizers in the induced
-27-element group have orders $1,1,3,3,1,1,3,3$.
+\subsection{A coset invariant}\label{sec:invariant}
 
-\subsection{A centered coset invariant}\label{sec:invariant}
-
-For the centered fixed translate, let
+The following invariant is not used in the proof; it gives a hand check
+on the 144 arrays. For a fixed translate $D_0$, let
 \[
  m(v)=|D_0\cap(v+H)|\qquad(v\in G/H\cong C_3^2).
 \]
@@ -685,7 +674,7 @@ After singleton normalization, $m(v)=\sum_xr(x,v)$.
 The complete quotient classification gives
 $m(v)\in\{9,12,15,18\}$ for $v\ne0$.
 Legal normalizations induce an invertible linear map on
-$G/H$, so these statements transfer back to the centered
+$G/H$, so these statements transfer back to the original
 fixed translate. Each opposite pair is consequently
 $\{9,18\}$ or $\{12,15\}$.
 
@@ -705,12 +694,18 @@ Thus $j=1$: the eight off-$H$ cosets have multiplicities
 with one opposite pair $\{9,18\}$ and three
 $\{12,15\}$. All 144 arrays satisfy this invariant.
 
-
 \section{Search data and indexing}\label{app:computation}\label{sec:search}
+
+Points and quotient cells are ordered lexicographically by their
+least nonnegative coordinate representatives. The triples of a cell are
+numbered $0,1,2$ by their least encoded point. The 24 nonspecial cells
+are ordered with the twelve multiplicity-six cells first, in increasing
+$Q$-index, followed by the twelve multiplicity-three cells in increasing
+$Q$-index.
 
 Split each 24-digit word after twelve digits. With
 leading zeroes retained, give its first half the
-big-endian rank
+base-three rank, most significant digit first,
 \[
  p=\sum_{j=0}^{11}d_j3^{11-j},\qquad
  \operatorname{id}=c\,3^{12}+p.
@@ -721,62 +716,58 @@ The complete ID domain has size
 \]
 and is partitioned into 1,038 intervals
 \begin{equation}\label{eq:ranges}
- I_r=[4096r,\min(4096(r+1),N)),\qquad0\leq r<1038.
+ I_\rho=[4096\rho,\min(4096(\rho+1),N)),\qquad0\leq \rho<1038.
 \end{equation}
 Each ID specifies the full cylinder of all $3^{12}$
 possible tails. Different prefixes define disjoint
 cylinders and every full digit word has exactly one
 prefix, so these cylinders partition all eight trees.
 
-
-
-In $\operatorname{digits}(\operatorname{id},\boldsymbol t)$, the
+In $\operatorname{digits}(\operatorname{id},\boldsymbol\tau)$, the
 first twelve entries and the tail are concatenated.
 Here the first twelve digits
 are the leading-zero-preserving
 base-three expansion of
 $\operatorname{id}\bmod531441$
 and the last twelve are
-$\boldsymbol t$.
-
+$\boldsymbol\tau$.
 
 The formal coverage implication says: if $D$ is a
 difference set, then there
 exist $u\in G$, a word $w$
 of legal affine maps, an
-integer $r<1038$, an
-$\operatorname{id}\in I_r$,
+integer $\rho<1038$, an
+$\operatorname{id}\in I_\rho$,
 and a twelve-digit tail
-$\boldsymbol t$ such that
+$\boldsymbol\tau$ such that
 \begin{equation}\label{eq:coverage}
  F_w(D-u)=\mathcal L\left(
  \left\lfloor\frac{\operatorname{id}}{531441}\right\rfloor,
- \operatorname{digits}(\operatorname{id},\boldsymbol t)
+ \operatorname{digits}(\operatorname{id},\boldsymbol\tau)
  \right).
 \end{equation}
 The map
 $F_w$ is an additive
 automorphism followed by a
 translation in $H$.
-For an interval $I_r$,
-define the semantic
-assertion
+For an interval $I_\rho$,
+define the statement
 \begin{equation}\label{eq:clear}
 \begin{split}
- \operatorname{RangeClear}(r):\quad
- &\text{for every }\operatorname{id}\in I_r
- \text{ and every twelve-digit tail }\boldsymbol t,\\
+ \operatorname{RangeClear}(\rho):\quad
+ &\text{for every }\operatorname{id}\in I_\rho
+ \text{ and every twelve-digit tail }\boldsymbol\tau,\\
  &\mathcal L\left(
  \left\lfloor\frac{\operatorname{id}}{531441}\right\rfloor,
- \operatorname{digits}(\operatorname{id},\boldsymbol t)
+ \operatorname{digits}(\operatorname{id},\boldsymbol\tau)
  \right)\text{ is not a difference set.}
 \end{split}
 \end{equation}
 The formal nonexistence result
 is conditional on the family
 \[
- \forall r<1038,\qquad
- \operatorname{RangeClear}(r).
+ \forall \rho<1038,\qquad
+ \operatorname{RangeClear}(\rho).
 \]
 
 The recorded exhaustive searches have the following totals.
@@ -787,7 +778,6 @@ The recorded exhaustive searches have the following totals.
 \text{difference-set leaves}&0.
 \end{array}
 \]
-
 
 \end{appendices}
 
@@ -818,8 +808,8 @@ Designs, Codes and Cryptography \textbf{4} (1994), 313--317.
 \bibitem{Gordon2019}
 Daniel M. Gordon,
 \emph{The La Jolla Difference Set Repository},
-presentation, August~3, 2019, slides~11 and~38
-(slide~38 is physical PDF page~49).
+presentation, August~3, 2019, slide~38
+(physical PDF page~49).
 Wayback Machine snapshot, May~2, 2024:
 \url{https://web.archive.org/web/20240502201448/https://cargo.wlu.ca/ArasuFest/ArasuFest_talks/Dan_Gordon.pdf}.
 
@@ -871,6 +861,15 @@ K. H. Leung and B. Schmidt,
 \emph{The Field Descent Method},
 Designs, Codes and Cryptography \textbf{36} (2005), 171--188.
 \href{https://doi.org/10.1007/s10623-004-1703-7}{doi:10.1007/s10623-004-1703-7}.
+Authors' copy:
+\url{https://personal.ntu.edu.sg/bernhard/Publications/pub/field.pdf}.
+
+\bibitem{McFarlandRice1978}
+R. L. McFarland and B. F. Rice,
+\emph{Translates and multipliers of abelian difference sets},
+Proceedings of the American Mathematical Society
+\textbf{68} (1978), 375--379.
+\href{https://doi.org/10.1090/S0002-9939-1978-0462976-4}{doi:10.1090/S0002-9939-1978-0462976-4}.
 
 \bibitem{Miller2025}
 Niklas Miller,

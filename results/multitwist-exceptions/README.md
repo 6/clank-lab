@@ -1,4 +1,4 @@
-# Fathi's consecutive-integers bound does not extend to multitwists
+# Multitwist exceptions on the five-holed sphere
 
 [![Checks](https://github.com/6/clank-lab/actions/workflows/multitwist-exceptions.yml/badge.svg)](https://github.com/6/clank-lab/actions/workflows/multitwist-exceptions.yml)
 
@@ -11,7 +11,7 @@ the generic elements of the
 In 1987 Albert Fathi proved, for a closed surface, that if the orbit of
 $\gamma$ under a mapping class $f$ fills the surface, then $T_\gamma^n f$ is
 pseudo-Anosov except for at most 7 consecutive values of $n$. Fathi
-presents his paper as generalizing a 1986 theorem of D. D. Long and H. R.
+presents Fathi's paper as generalizing a 1986 theorem of D. D. Long and H. R.
 Morton, who had shown, for pseudo-Anosov $f$, that only finitely many $n$
 are exceptions; Yohsuke Watanabe
 ([2016, §1.1](https://arxiv.org/abs/1611.05119)) describes Fathi's theorem
@@ -21,12 +21,12 @@ Wiest ([2017, Theorem 3](https://arxiv.org/abs/1703.05044)) state it for
 any mapping class.
 
 Nikolai V. Ivanov asked, as
-[Problem 5](https://arxiv.org/abs/math/0608325) of his 2006 list and of an
-earlier problem list dated 1994–1998 on his website, whether
+[Problem 5](https://arxiv.org/abs/math/0608325) of Ivanov's 2006 list and of an
+earlier problem list dated 1994–1998 on Ivanov's website, whether
 Fathi's theorem extends to a multitwist $t$: if the orbits under $f$ of all
 the curves of $t$ together fill the surface $S$, must the integers $j$ with
 $t^j \circ f$ not pseudo-Anosov lie among $N_S$ consecutive integers, for a
-constant $N_S$ depending only on $S$? He noted that Fathi's theorem gives
+constant $N_S$ depending only on $S$? Ivanov noted that Fathi's theorem gives
 $N_S = 7$ for a single twist, and separately called a weaker version, which
 bounds only the number of exceptions, "still interesting".
 
@@ -51,11 +51,15 @@ arguments.
 
 Written proof, with Lean and computer checks; not yet reviewed by experts.
 
-The proofs, the Lean formalization, the checking programs and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
-
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
 Archived on Zenodo: [doi:10.5281/zenodo.23639372](https://doi.org/10.5281/zenodo.23639372)
+
+## Abstract
+
+Fathi proved that if the orbit of a simple closed curve $\gamma$ under a mapping class $f$ fills a closed surface, then $T_\gamma^nf$, where $T_\gamma$ is the Dehn twist about $\gamma$, is pseudo-Anosov for all but at most seven consecutive integers $n$; for pseudo-Anosov $f$, Long and Morton had shown that the exceptions are finite in number. In a 2006 problem list, Ivanov asked whether this extends to a multitwist $t$, a product of twists about disjoint curves: if the orbits under $f$ of all the curves of $t$ together fill a surface $S$, must the integers $j$ for which $t^jf$ is not pseudo-Anosov lie among $N_S$ consecutive integers, for a constant $N_S$ depending only on $S$? We show that no such constant exists on the sphere with five boundary components. For each $k\ge1$ we give a pseudo-Anosov class $g_k$ such that the fixed multitwist $t=T_aT_c$ of two left twists satisfies Ivanov's filling hypothesis, while $tg_k$ and $t^{k+1}g_k$ each fix an essential curve; reducible bases give the same conclusion. Penner's construction proves that $g_k$ is pseudo-Anosov, and a pants decomposition proves filling. The group identities are checked in Lean and the finite curve calculations by independent programs. The examples settle neither finiteness nor Ivanov's weaker question bounding the number of exceptions.
+
+This work has not yet been reviewed by experts. The proofs, the Lean formalization, the checking programs and the text were produced by AI models (from OpenAI and Anthropic), working under the author's direction.
 
 ## Check it
 
@@ -119,22 +123,38 @@ retain the detailed background and checking descriptions.
 Nikolai V. Ivanov posed the question, with the weaker count version, as
 Problem 5 of
 [Fifteen problems about the mapping class groups](https://arxiv.org/abs/math/0608325)
-(2006) and of his earlier *Ten problems on the mapping class groups*,
-headed "1994–1998, 2014" on his website. Albert Fathi's theorem
+(2006) and of Ivanov's earlier *Ten problems on the mapping class groups*,
+headed "1994–1998, 2014" on Ivanov's website. Albert Fathi's theorem
 ([Invent. Math. 1987](https://doi.org/10.1007/BF01389156)) is the
-single-twist case the question extends, and D. D. Long and H. R. Morton's
+single-twist case the question extends; its Theorem 0.2 treats several
+curves whose orbits are distinct and together fill a closed surface,
+giving a pseudo-Anosov class once every exponent is large, with no
+window for the exceptions. D. D. Long and H. R. Morton's
 finiteness theorem
 ([Topology 1986](https://doi.org/10.1016/0040-9383(86)90033-9)) preceded
-it; S. Boyer, C. McA. Gordon and X. Zhang later improved Fathi's 7 to 6.
-Their abstract states this refinement for a pseudo-Anosov base.
+it; S. Boyer, C. McA. Gordon and X. Zhang later improved Fathi's 7 to 6,
+for a pseudo-Anosov base (their Theorem 1.3) and whenever the twisting
+curve's orbit fills (their Theorem 2.6).
 Yohsuke Watanabe restated the question in
-[2016](https://arxiv.org/abs/1611.05119). Chaohui Zhang discussed the
+[2016](https://arxiv.org/abs/1611.05119). Watanabe's
+[Theorem 1.3, version 2](https://arxiv.org/abs/1611.05119v2) gives
+pseudo-Anosov compositions $\phi^j f$ when $|j|$ exceeds an explicit
+constant depending only on $S$, provided $d_S(a,f(a))>4$ and the
+nonidentity pure mapping class $\phi$ fixes $a$ and has a loxodromic domain
+outside a finite set depending on $f,a$. Here $d_S$ is curve-graph distance.
+At both twisting curves $a,c$, the reducible bases $f_k$ and the
+pseudo-Anosov bases $g_k$ have distance at most 2; the paper gives the
+intervening disjoint curves. These examples lie outside that distance
+hypothesis at both twisting curves. Chaohui Zhang discussed the
 multitwist extension, citing Ivanov's 1998 manuscript *Mapping class
 groups*, in a
 [2007 preprint](https://arxiv.org/abs/0708.0804v1), since withdrawn, which
 claimed that no exceptions occur for a special class of pseudo-Anosov maps,
-and proved related positive results for pseudo-Anosov maps in
-[Kodai Math. J. 2011](https://doi.org/10.2996/kmj/1320935547). Mark Bell's
+returned to Ivanov's multitwist question in
+[J. Aust. Math. Soc. 2010](https://doi.org/10.1017/S1446788710000078)
+(pp. 415–416), and proved related positive results for pseudo-Anosov maps in
+[Kodai Math. J. 2011](https://doi.org/10.2996/kmj/1320935547) (Theorem A and
+the Remark following it). Mark Bell's
 programs [flipper](https://github.com/MarkCBell/flipper) and
 [curver](https://github.com/MarkCBell/curver) were used for preliminary
 checks of the example; neither the proof nor the final checkers depend on
@@ -142,7 +162,7 @@ them. Checker B uses I. A. Dynnikov's
 coordinates, with the update rules of Toby Hall and S. Öykü Yurttaş and
 the intersection formula of Yurttaş and Hall. Robert C. Penner's
 [construction](https://doi.org/10.1090/S0002-9947-1988-0930079-9)
-provides the pseudo-Anosov bases in the strengthening. Lean, Mathlib and
+provides the pseudo-Anosov bases in the strengthening. [Lean](https://github.com/leanprover/lean4), [Mathlib](https://github.com/leanprover-community/mathlib4) and
 their contributors supplied the formal-proof infrastructure.
 
 Apache-2.0 (see the repository's LICENSE), except the third-party material listed in [THIRD_PARTY.md](THIRD_PARTY.md).
@@ -152,9 +172,9 @@ Apache-2.0 (see the repository's LICENSE), except the third-party material liste
 ```bibtex
 @misc{GrahamMultitwistExceptions2026,
   author       = {Graham, Peter},
-  title        = {{Fathi's consecutive-integers bound does not extend to multitwists}},
+  title        = {{Multitwist exceptions on the five-holed sphere}},
   year         = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v3/results/multitwist-exceptions}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/multitwist-exceptions-v4/results/multitwist-exceptions}},
   doi          = {10.5281/zenodo.23639372}
 }
 ```

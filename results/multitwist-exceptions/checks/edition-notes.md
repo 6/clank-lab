@@ -47,13 +47,13 @@ constant depending only on the surface  [Ivanov94,Ivanov06]. Let $`t`$ be
 a Dehn multitwist $`T_{\alpha_1}^{\pm1}\cdots T_{\alpha_n}^{\pm1}`$ about disjoint
 curves $`\alpha_1,\dots,\alpha_n`$, and suppose that the curves $`f^m(\alpha_i)`$,
 $`1\le i\le n`$, $`m\in\mathbb{Z}`$, together fill $`S`$, that is, every essential curve
-has nonzero geometric intersection number with one of them. His *consecutive-integers*
+has nonzero geometric intersection number with one of them. Ivanov's *consecutive-integers*
 question asks whether the $`j`$ with $`t^j\circ f`$ not pseudo-Anosov always lie
 among $`N_S`$ consecutive integers, for a constant $`N_S`$ depending only on
 $`S`$; for a single twist on a closed surface this is Fathi's theorem with
-$`N_S=7`$. His weaker *count* question asks only that at most $`N_S`$ of
+$`N_S=7`$. Ivanov's weaker *count* question asks only that at most $`N_S`$ of
 the $`t^j\circ f`$ fail to be pseudo-Anosov. Both were posed as Problem 5
-of his 2006 list and of an earlier list  [Ivanov94], for compact
+of Ivanov's 2006 list and of an earlier list  [Ivanov94], for compact
 orientable surfaces possibly with boundary; the full question is quoted below. We answer the first question, for one surface,
 and say nothing about the second. All curves below are essential in the
 usual sense (the paper, Conventions and standard facts).
@@ -64,7 +64,7 @@ Ivanov's list concerns a compact orientable surface, possibly with
 boundary, with $`\mathrm{Mod}_S=\pi_0(\mathrm{Diff}(S))`$ including
 orientation-reversing classes  [Ivanov06 , p. 1]. We quote Problem 5
 exactly, from the arXiv version  [Ivanov06 , pp. 4–5] (version 1,
-posted August 14, 2006, the only version). He writes $`t_\alpha`$ for the
+posted August 14, 2006, the only version). Ivanov writes $`t_\alpha`$ for the
 left Dehn twist along $`\alpha`$.
 
 
@@ -82,7 +82,7 @@ summary of it. Ivanov goes on to call Fathi's paper one of the deepest and the
 most underappreciated works in the theory of the mapping class groups and
 adds: The above question may be considered as a test of our
 understanding of Fathi's ideas  [Ivanov06 , p. 5]. The question already
-appears, in essentially the same words, as Problem 5 of his earlier
+appears, in essentially the same words, as Problem 5 of Ivanov's earlier
 list  [Ivanov94], which also states the weaker version. That list is
 headed 1994–1998, 2014; Ivanov writes there that its original version
 was written in early 1994 and that updates were added until 1998, marked

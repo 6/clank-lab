@@ -15,6 +15,11 @@ and Mathlib's graph, coloring and walk APIs. The local deletion-erased RUP
 checker and its soundness proof were written for this formalization. Prior
 LRAT verification methodology is credited in the paper.
 
+The supplemental Lean project fetches Stefan Szeider's
+[LRAT-Catcher](https://github.com/leansolving/lrat-catcher/tree/cbc980a934cfcfbd942462c7b6db2e88750e4874),
+distributed upstream under MIT. Its kernel elaborator checks the individual
+RUP additions. The bundle includes the proof that calls it.
+
 The source retains this full notice (including its updated copyright line):
 
 ```text

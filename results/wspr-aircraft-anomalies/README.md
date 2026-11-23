@@ -10,7 +10,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.24459621](https://doi.org/10.5281/zenodo.24459621)
+Archived on Zenodo: [doi:10.5281/zenodo.24478386](https://doi.org/10.5281/zenodo.24478386)
 
 ## Abstract
 
@@ -44,6 +44,6 @@ The WSPR reports come from the WSPRnet community through the wspr.live mirror, a
   title = {{A placebo-controlled test of WSPR signal anomalies on radio paths crossed by tracked aircraft}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/wspr-aircraft-anomalies-v2/results/wspr-aircraft-anomalies}},
-  doi          = {10.5281/zenodo.24459621}
+  doi          = {10.5281/zenodo.24478386}
 }
 ```

@@ -7,6 +7,7 @@ Zenodo records.
 ## supercentenarian-birth-years v2 (November 23, 2026)
 
 - Correction: clarify the state-dependent birth-year cutoffs and what the shuffle shows about the reported early share. The analysis and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24478981](https://doi.org/10.5281/zenodo.24478981)
 
 ## wspr-aircraft-anomalies v2 (November 23, 2026)
 

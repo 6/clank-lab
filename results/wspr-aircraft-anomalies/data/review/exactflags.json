@@ -1,0 +1,2121 @@
+{
+ "dates": 72,
+ "units": 45033331,
+ "max_abs_freq_offset_hz": 4294967376,
+ "total": {
+  "snr_real": {
+   "differ": 0,
+   "ties": 5633,
+   "flagged_exact": 19495231,
+   "flagged_stored": 19495231
+  },
+  "freq_real": {
+   "differ": 0,
+   "ties": 20631,
+   "flagged_exact": 18756136,
+   "flagged_stored": 18756136
+  },
+  "snr_planted": {
+   "differ": 0,
+   "ties": 5350,
+   "flagged_exact": 20261848,
+   "flagged_stored": 20261848
+  },
+  "freq_planted": {
+   "differ": 0,
+   "ties": 20631,
+   "flagged_exact": 18756136,
+   "flagged_stored": 18756136
+  }
+ },
+ "per_date": {
+  "2020-08-01": {
+   "day": "2020-08-01",
+   "units": 191461,
+   "max_abs_freq_offset": 205397,
+   "snr_real": {
+    "differ": 0,
+    "ties": 23,
+    "flagged_exact": 87096,
+    "flagged_stored": 87096
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 127,
+    "flagged_exact": 66088,
+    "flagged_stored": 66088
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 23,
+    "flagged_exact": 89224,
+    "flagged_stored": 89224
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 127,
+    "flagged_exact": 66088,
+    "flagged_stored": 66088
+   }
+  },
+  "2020-10-01": {
+   "day": "2020-10-01",
+   "units": 198416,
+   "max_abs_freq_offset": 138402,
+   "snr_real": {
+    "differ": 0,
+    "ties": 22,
+    "flagged_exact": 87741,
+    "flagged_stored": 87741
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 133,
+    "flagged_exact": 67245,
+    "flagged_stored": 67245
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 16,
+    "flagged_exact": 90370,
+    "flagged_stored": 90370
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 133,
+    "flagged_exact": 67245,
+    "flagged_stored": 67245
+   }
+  },
+  "2020-11-01": {
+   "day": "2020-11-01",
+   "units": 322731,
+   "max_abs_freq_offset": 103700,
+   "snr_real": {
+    "differ": 0,
+    "ties": 32,
+    "flagged_exact": 143257,
+    "flagged_stored": 143257
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 212,
+    "flagged_exact": 109769,
+    "flagged_stored": 109769
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 29,
+    "flagged_exact": 147360,
+    "flagged_stored": 147360
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 212,
+    "flagged_exact": 109769,
+    "flagged_stored": 109769
+   }
+  },
+  "2021-02-01": {
+   "day": "2021-02-01",
+   "units": 295754,
+   "max_abs_freq_offset": 246461,
+   "snr_real": {
+    "differ": 0,
+    "ties": 37,
+    "flagged_exact": 131240,
+    "flagged_stored": 131240
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 286,
+    "flagged_exact": 99096,
+    "flagged_stored": 99096
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 38,
+    "flagged_exact": 134869,
+    "flagged_stored": 134869
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 286,
+    "flagged_exact": 99096,
+    "flagged_stored": 99096
+   }
+  },
+  "2021-03-01": {
+   "day": "2021-03-01",
+   "units": 281146,
+   "max_abs_freq_offset": 289000,
+   "snr_real": {
+    "differ": 0,
+    "ties": 38,
+    "flagged_exact": 122813,
+    "flagged_stored": 122813
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 203,
+    "flagged_exact": 101628,
+    "flagged_stored": 101628
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 35,
+    "flagged_exact": 126547,
+    "flagged_stored": 126547
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 203,
+    "flagged_exact": 101628,
+    "flagged_stored": 101628
+   }
+  },
+  "2021-04-01": {
+   "day": "2021-04-01",
+   "units": 297112,
+   "max_abs_freq_offset": 388995,
+   "snr_real": {
+    "differ": 0,
+    "ties": 42,
+    "flagged_exact": 131326,
+    "flagged_stored": 131326
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 168,
+    "flagged_exact": 109750,
+    "flagged_stored": 109750
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 30,
+    "flagged_exact": 135335,
+    "flagged_stored": 135335
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 168,
+    "flagged_exact": 109750,
+    "flagged_stored": 109750
+   }
+  },
+  "2021-05-01": {
+   "day": "2021-05-01",
+   "units": 378658,
+   "max_abs_freq_offset": 300538,
+   "snr_real": {
+    "differ": 0,
+    "ties": 34,
+    "flagged_exact": 166456,
+    "flagged_stored": 166456
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 225,
+    "flagged_exact": 139820,
+    "flagged_stored": 139820
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 34,
+    "flagged_exact": 171040,
+    "flagged_stored": 171040
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 225,
+    "flagged_exact": 139820,
+    "flagged_stored": 139820
+   }
+  },
+  "2021-06-01": {
+   "day": "2021-06-01",
+   "units": 416796,
+   "max_abs_freq_offset": 119395,
+   "snr_real": {
+    "differ": 0,
+    "ties": 47,
+    "flagged_exact": 183637,
+    "flagged_stored": 183637
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 206,
+    "flagged_exact": 160182,
+    "flagged_stored": 160182
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 35,
+    "flagged_exact": 189024,
+    "flagged_stored": 189024
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 206,
+    "flagged_exact": 160182,
+    "flagged_stored": 160182
+   }
+  },
+  "2021-07-01": {
+   "day": "2021-07-01",
+   "units": 350249,
+   "max_abs_freq_offset": 580209,
+   "snr_real": {
+    "differ": 0,
+    "ties": 35,
+    "flagged_exact": 155721,
+    "flagged_stored": 155721
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 190,
+    "flagged_exact": 134544,
+    "flagged_stored": 134544
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 41,
+    "flagged_exact": 160176,
+    "flagged_stored": 160176
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 190,
+    "flagged_exact": 134544,
+    "flagged_stored": 134544
+   }
+  },
+  "2021-08-01": {
+   "day": "2021-08-01",
+   "units": 425125,
+   "max_abs_freq_offset": 201335,
+   "snr_real": {
+    "differ": 0,
+    "ties": 58,
+    "flagged_exact": 189692,
+    "flagged_stored": 189692
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 234,
+    "flagged_exact": 166561,
+    "flagged_stored": 166561
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 46,
+    "flagged_exact": 195681,
+    "flagged_stored": 195681
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 234,
+    "flagged_exact": 166561,
+    "flagged_stored": 166561
+   }
+  },
+  "2021-09-01": {
+   "day": "2021-09-01",
+   "units": 359029,
+   "max_abs_freq_offset": 369159,
+   "snr_real": {
+    "differ": 0,
+    "ties": 39,
+    "flagged_exact": 159946,
+    "flagged_stored": 159946
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 226,
+    "flagged_exact": 134875,
+    "flagged_stored": 134875
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 28,
+    "flagged_exact": 164736,
+    "flagged_stored": 164736
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 226,
+    "flagged_exact": 134875,
+    "flagged_stored": 134875
+   }
+  },
+  "2021-10-01": {
+   "day": "2021-10-01",
+   "units": 466122,
+   "max_abs_freq_offset": 169000,
+   "snr_real": {
+    "differ": 0,
+    "ties": 54,
+    "flagged_exact": 202425,
+    "flagged_stored": 202425
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 188,
+    "flagged_exact": 179646,
+    "flagged_stored": 179646
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 62,
+    "flagged_exact": 210070,
+    "flagged_stored": 210070
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 188,
+    "flagged_exact": 179646,
+    "flagged_stored": 179646
+   }
+  },
+  "2021-11-01": {
+   "day": "2021-11-01",
+   "units": 509246,
+   "max_abs_freq_offset": 775400,
+   "snr_real": {
+    "differ": 0,
+    "ties": 66,
+    "flagged_exact": 220308,
+    "flagged_stored": 220308
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 318,
+    "flagged_exact": 193432,
+    "flagged_stored": 193432
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 62,
+    "flagged_exact": 228535,
+    "flagged_stored": 228535
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 318,
+    "flagged_exact": 193432,
+    "flagged_stored": 193432
+   }
+  },
+  "2021-12-01": {
+   "day": "2021-12-01",
+   "units": 418401,
+   "max_abs_freq_offset": 250413,
+   "snr_real": {
+    "differ": 0,
+    "ties": 43,
+    "flagged_exact": 183602,
+    "flagged_stored": 183602
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 258,
+    "flagged_exact": 163525,
+    "flagged_stored": 163525
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 50,
+    "flagged_exact": 190530,
+    "flagged_stored": 190530
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 258,
+    "flagged_exact": 163525,
+    "flagged_stored": 163525
+   }
+  },
+  "2022-01-01": {
+   "day": "2022-01-01",
+   "units": 457594,
+   "max_abs_freq_offset": 388994,
+   "snr_real": {
+    "differ": 0,
+    "ties": 59,
+    "flagged_exact": 199269,
+    "flagged_stored": 199269
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 271,
+    "flagged_exact": 165342,
+    "flagged_stored": 165342
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 48,
+    "flagged_exact": 205969,
+    "flagged_stored": 205969
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 271,
+    "flagged_exact": 165342,
+    "flagged_stored": 165342
+   }
+  },
+  "2022-02-01": {
+   "day": "2022-02-01",
+   "units": 422187,
+   "max_abs_freq_offset": 94777,
+   "snr_real": {
+    "differ": 0,
+    "ties": 57,
+    "flagged_exact": 185315,
+    "flagged_stored": 185315
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 250,
+    "flagged_exact": 160622,
+    "flagged_stored": 160622
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 60,
+    "flagged_exact": 192020,
+    "flagged_stored": 192020
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 250,
+    "flagged_exact": 160622,
+    "flagged_stored": 160622
+   }
+  },
+  "2022-03-01": {
+   "day": "2022-03-01",
+   "units": 528542,
+   "max_abs_freq_offset": 211400,
+   "snr_real": {
+    "differ": 0,
+    "ties": 69,
+    "flagged_exact": 228348,
+    "flagged_stored": 228348
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 300,
+    "flagged_exact": 210703,
+    "flagged_stored": 210703
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 64,
+    "flagged_exact": 237547,
+    "flagged_stored": 237547
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 300,
+    "flagged_exact": 210703,
+    "flagged_stored": 210703
+   }
+  },
+  "2022-04-01": {
+   "day": "2022-04-01",
+   "units": 450468,
+   "max_abs_freq_offset": 246601,
+   "snr_real": {
+    "differ": 0,
+    "ties": 74,
+    "flagged_exact": 195395,
+    "flagged_stored": 195395
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 273,
+    "flagged_exact": 179276,
+    "flagged_stored": 179276
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 75,
+    "flagged_exact": 202331,
+    "flagged_stored": 202331
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 273,
+    "flagged_exact": 179276,
+    "flagged_stored": 179276
+   }
+  },
+  "2022-05-01": {
+   "day": "2022-05-01",
+   "units": 545265,
+   "max_abs_freq_offset": 137509,
+   "snr_real": {
+    "differ": 0,
+    "ties": 61,
+    "flagged_exact": 235866,
+    "flagged_stored": 235866
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 358,
+    "flagged_exact": 216569,
+    "flagged_stored": 216569
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 58,
+    "flagged_exact": 244292,
+    "flagged_stored": 244292
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 358,
+    "flagged_exact": 216569,
+    "flagged_stored": 216569
+   }
+  },
+  "2022-06-01": {
+   "day": "2022-06-01",
+   "units": 425730,
+   "max_abs_freq_offset": 77592,
+   "snr_real": {
+    "differ": 0,
+    "ties": 44,
+    "flagged_exact": 188926,
+    "flagged_stored": 188926
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 272,
+    "flagged_exact": 166940,
+    "flagged_stored": 166940
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 39,
+    "flagged_exact": 195024,
+    "flagged_stored": 195024
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 272,
+    "flagged_exact": 166940,
+    "flagged_stored": 166940
+   }
+  },
+  "2022-07-01": {
+   "day": "2022-07-01",
+   "units": 419902,
+   "max_abs_freq_offset": 77557,
+   "snr_real": {
+    "differ": 0,
+    "ties": 58,
+    "flagged_exact": 183336,
+    "flagged_stored": 183336
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 221,
+    "flagged_exact": 167815,
+    "flagged_stored": 167815
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 58,
+    "flagged_exact": 190024,
+    "flagged_stored": 190024
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 221,
+    "flagged_exact": 167815,
+    "flagged_stored": 167815
+   }
+  },
+  "2022-08-01": {
+   "day": "2022-08-01",
+   "units": 482250,
+   "max_abs_freq_offset": 667010,
+   "snr_real": {
+    "differ": 0,
+    "ties": 48,
+    "flagged_exact": 213406,
+    "flagged_stored": 213406
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 225,
+    "flagged_exact": 190926,
+    "flagged_stored": 190926
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 52,
+    "flagged_exact": 221013,
+    "flagged_stored": 221013
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 225,
+    "flagged_exact": 190926,
+    "flagged_stored": 190926
+   }
+  },
+  "2022-09-01": {
+   "day": "2022-09-01",
+   "units": 521618,
+   "max_abs_freq_offset": 77587,
+   "snr_real": {
+    "differ": 0,
+    "ties": 71,
+    "flagged_exact": 232232,
+    "flagged_stored": 232232
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 248,
+    "flagged_exact": 206122,
+    "flagged_stored": 206122
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 74,
+    "flagged_exact": 240625,
+    "flagged_stored": 240625
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 248,
+    "flagged_exact": 206122,
+    "flagged_stored": 206122
+   }
+  },
+  "2022-10-01": {
+   "day": "2022-10-01",
+   "units": 636320,
+   "max_abs_freq_offset": 475411,
+   "snr_real": {
+    "differ": 0,
+    "ties": 84,
+    "flagged_exact": 272344,
+    "flagged_stored": 272344
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 369,
+    "flagged_exact": 266585,
+    "flagged_stored": 266585
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 82,
+    "flagged_exact": 283876,
+    "flagged_stored": 283876
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 369,
+    "flagged_exact": 266585,
+    "flagged_stored": 266585
+   }
+  },
+  "2022-11-01": {
+   "day": "2022-11-01",
+   "units": 611849,
+   "max_abs_freq_offset": 106617,
+   "snr_real": {
+    "differ": 0,
+    "ties": 96,
+    "flagged_exact": 265366,
+    "flagged_stored": 265366
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 278,
+    "flagged_exact": 254958,
+    "flagged_stored": 254958
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 94,
+    "flagged_exact": 276110,
+    "flagged_stored": 276110
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 278,
+    "flagged_exact": 254958,
+    "flagged_stored": 254958
+   }
+  },
+  "2022-12-01": {
+   "day": "2022-12-01",
+   "units": 520827,
+   "max_abs_freq_offset": 376992,
+   "snr_real": {
+    "differ": 0,
+    "ties": 70,
+    "flagged_exact": 227605,
+    "flagged_stored": 227605
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 199,
+    "flagged_exact": 218036,
+    "flagged_stored": 218036
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 59,
+    "flagged_exact": 236408,
+    "flagged_stored": 236408
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 199,
+    "flagged_exact": 218036,
+    "flagged_stored": 218036
+   }
+  },
+  "2023-01-01": {
+   "day": "2023-01-01",
+   "units": 456095,
+   "max_abs_freq_offset": 77605,
+   "snr_real": {
+    "differ": 0,
+    "ties": 55,
+    "flagged_exact": 202368,
+    "flagged_stored": 202368
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 193,
+    "flagged_exact": 192704,
+    "flagged_stored": 192704
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 64,
+    "flagged_exact": 208628,
+    "flagged_stored": 208628
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 193,
+    "flagged_exact": 192704,
+    "flagged_stored": 192704
+   }
+  },
+  "2023-02-01": {
+   "day": "2023-02-01",
+   "units": 600910,
+   "max_abs_freq_offset": 191400,
+   "snr_real": {
+    "differ": 0,
+    "ties": 82,
+    "flagged_exact": 258690,
+    "flagged_stored": 258690
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 262,
+    "flagged_exact": 256416,
+    "flagged_stored": 256416
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 79,
+    "flagged_exact": 269817,
+    "flagged_stored": 269817
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 262,
+    "flagged_exact": 256416,
+    "flagged_stored": 256416
+   }
+  },
+  "2023-03-01": {
+   "day": "2023-03-01",
+   "units": 632926,
+   "max_abs_freq_offset": 345131,
+   "snr_real": {
+    "differ": 0,
+    "ties": 92,
+    "flagged_exact": 269007,
+    "flagged_stored": 269007
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 327,
+    "flagged_exact": 268443,
+    "flagged_stored": 268443
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 77,
+    "flagged_exact": 280954,
+    "flagged_stored": 280954
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 327,
+    "flagged_exact": 268443,
+    "flagged_stored": 268443
+   }
+  },
+  "2023-04-01": {
+   "day": "2023-04-01",
+   "units": 585287,
+   "max_abs_freq_offset": 289070,
+   "snr_real": {
+    "differ": 0,
+    "ties": 71,
+    "flagged_exact": 248327,
+    "flagged_stored": 248327
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 296,
+    "flagged_exact": 254034,
+    "flagged_stored": 254034
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 58,
+    "flagged_exact": 259346,
+    "flagged_stored": 259346
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 296,
+    "flagged_exact": 254034,
+    "flagged_stored": 254034
+   }
+  },
+  "2023-05-01": {
+   "day": "2023-05-01",
+   "units": 652858,
+   "max_abs_freq_offset": 77648,
+   "snr_real": {
+    "differ": 0,
+    "ties": 83,
+    "flagged_exact": 272304,
+    "flagged_stored": 272304
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 281,
+    "flagged_exact": 282542,
+    "flagged_stored": 282542
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 74,
+    "flagged_exact": 284480,
+    "flagged_stored": 284480
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 281,
+    "flagged_exact": 282542,
+    "flagged_stored": 282542
+   }
+  },
+  "2023-06-01": {
+   "day": "2023-06-01",
+   "units": 532132,
+   "max_abs_freq_offset": 116464,
+   "snr_real": {
+    "differ": 0,
+    "ties": 79,
+    "flagged_exact": 235929,
+    "flagged_stored": 235929
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 191,
+    "flagged_exact": 228521,
+    "flagged_stored": 228521
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 64,
+    "flagged_exact": 244053,
+    "flagged_stored": 244053
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 191,
+    "flagged_exact": 228521,
+    "flagged_stored": 228521
+   }
+  },
+  "2023-07-01": {
+   "day": "2023-07-01",
+   "units": 563984,
+   "max_abs_freq_offset": 285379,
+   "snr_real": {
+    "differ": 0,
+    "ties": 60,
+    "flagged_exact": 248151,
+    "flagged_stored": 248151
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 312,
+    "flagged_exact": 236518,
+    "flagged_stored": 236518
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 58,
+    "flagged_exact": 257030,
+    "flagged_stored": 257030
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 312,
+    "flagged_exact": 236518,
+    "flagged_stored": 236518
+   }
+  },
+  "2023-08-01": {
+   "day": "2023-08-01",
+   "units": 497117,
+   "max_abs_freq_offset": 95399,
+   "snr_real": {
+    "differ": 0,
+    "ties": 61,
+    "flagged_exact": 220926,
+    "flagged_stored": 220926
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 219,
+    "flagged_exact": 212363,
+    "flagged_stored": 212363
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 56,
+    "flagged_exact": 228359,
+    "flagged_stored": 228359
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 219,
+    "flagged_exact": 212363,
+    "flagged_stored": 212363
+   }
+  },
+  "2023-09-01": {
+   "day": "2023-09-01",
+   "units": 553466,
+   "max_abs_freq_offset": 77514,
+   "snr_real": {
+    "differ": 0,
+    "ties": 54,
+    "flagged_exact": 239370,
+    "flagged_stored": 239370
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 223,
+    "flagged_exact": 245122,
+    "flagged_stored": 245122
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 46,
+    "flagged_exact": 249340,
+    "flagged_stored": 249340
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 223,
+    "flagged_exact": 245122,
+    "flagged_stored": 245122
+   }
+  },
+  "2023-10-01": {
+   "day": "2023-10-01",
+   "units": 708005,
+   "max_abs_freq_offset": 805759,
+   "snr_real": {
+    "differ": 0,
+    "ties": 97,
+    "flagged_exact": 301125,
+    "flagged_stored": 301125
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 331,
+    "flagged_exact": 306679,
+    "flagged_stored": 306679
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 93,
+    "flagged_exact": 313927,
+    "flagged_stored": 313927
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 331,
+    "flagged_exact": 306679,
+    "flagged_stored": 306679
+   }
+  },
+  "2023-11-01": {
+   "day": "2023-11-01",
+   "units": 626480,
+   "max_abs_freq_offset": 77525,
+   "snr_real": {
+    "differ": 0,
+    "ties": 78,
+    "flagged_exact": 269622,
+    "flagged_stored": 269622
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 300,
+    "flagged_exact": 269757,
+    "flagged_stored": 269757
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 83,
+    "flagged_exact": 281253,
+    "flagged_stored": 281253
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 300,
+    "flagged_exact": 269757,
+    "flagged_stored": 269757
+   }
+  },
+  "2024-01-01": {
+   "day": "2024-01-01",
+   "units": 638824,
+   "max_abs_freq_offset": 77559,
+   "snr_real": {
+    "differ": 0,
+    "ties": 102,
+    "flagged_exact": 278408,
+    "flagged_stored": 278408
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 295,
+    "flagged_exact": 276080,
+    "flagged_stored": 276080
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 104,
+    "flagged_exact": 288907,
+    "flagged_stored": 288907
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 295,
+    "flagged_exact": 276080,
+    "flagged_stored": 276080
+   }
+  },
+  "2024-02-01": {
+   "day": "2024-02-01",
+   "units": 666266,
+   "max_abs_freq_offset": 405423,
+   "snr_real": {
+    "differ": 0,
+    "ties": 88,
+    "flagged_exact": 288641,
+    "flagged_stored": 288641
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 276,
+    "flagged_exact": 280417,
+    "flagged_stored": 280417
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 84,
+    "flagged_exact": 300737,
+    "flagged_stored": 300737
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 276,
+    "flagged_exact": 280417,
+    "flagged_stored": 280417
+   }
+  },
+  "2024-03-01": {
+   "day": "2024-03-01",
+   "units": 805348,
+   "max_abs_freq_offset": 305374,
+   "snr_real": {
+    "differ": 0,
+    "ties": 117,
+    "flagged_exact": 341822,
+    "flagged_stored": 341822
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 323,
+    "flagged_exact": 356342,
+    "flagged_stored": 356342
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 113,
+    "flagged_exact": 358589,
+    "flagged_stored": 358589
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 323,
+    "flagged_exact": 356342,
+    "flagged_stored": 356342
+   }
+  },
+  "2024-04-01": {
+   "day": "2024-04-01",
+   "units": 701144,
+   "max_abs_freq_offset": 77524,
+   "snr_real": {
+    "differ": 0,
+    "ties": 94,
+    "flagged_exact": 296609,
+    "flagged_stored": 296609
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 321,
+    "flagged_exact": 301675,
+    "flagged_stored": 301675
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 88,
+    "flagged_exact": 310095,
+    "flagged_stored": 310095
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 321,
+    "flagged_exact": 301675,
+    "flagged_stored": 301675
+   }
+  },
+  "2024-05-01": {
+   "day": "2024-05-01",
+   "units": 522768,
+   "max_abs_freq_offset": 389000,
+   "snr_real": {
+    "differ": 0,
+    "ties": 67,
+    "flagged_exact": 225704,
+    "flagged_stored": 225704
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 245,
+    "flagged_exact": 227386,
+    "flagged_stored": 227386
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 70,
+    "flagged_exact": 234457,
+    "flagged_stored": 234457
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 245,
+    "flagged_exact": 227386,
+    "flagged_stored": 227386
+   }
+  },
+  "2024-06-01": {
+   "day": "2024-06-01",
+   "units": 567935,
+   "max_abs_freq_offset": 167408,
+   "snr_real": {
+    "differ": 0,
+    "ties": 70,
+    "flagged_exact": 250188,
+    "flagged_stored": 250188
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 271,
+    "flagged_exact": 245335,
+    "flagged_stored": 245335
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 62,
+    "flagged_exact": 259385,
+    "flagged_stored": 259385
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 271,
+    "flagged_exact": 245335,
+    "flagged_stored": 245335
+   }
+  },
+  "2024-07-01": {
+   "day": "2024-07-01",
+   "units": 522258,
+   "max_abs_freq_offset": 77560,
+   "snr_real": {
+    "differ": 0,
+    "ties": 66,
+    "flagged_exact": 227643,
+    "flagged_stored": 227643
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 243,
+    "flagged_exact": 223707,
+    "flagged_stored": 223707
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 71,
+    "flagged_exact": 236376,
+    "flagged_stored": 236376
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 243,
+    "flagged_exact": 223707,
+    "flagged_stored": 223707
+   }
+  },
+  "2024-08-01": {
+   "day": "2024-08-01",
+   "units": 438110,
+   "max_abs_freq_offset": 77536,
+   "snr_real": {
+    "differ": 0,
+    "ties": 48,
+    "flagged_exact": 194996,
+    "flagged_stored": 194996
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 186,
+    "flagged_exact": 190951,
+    "flagged_stored": 190951
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 39,
+    "flagged_exact": 201120,
+    "flagged_stored": 201120
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 186,
+    "flagged_exact": 190951,
+    "flagged_stored": 190951
+   }
+  },
+  "2024-09-01": {
+   "day": "2024-09-01",
+   "units": 400209,
+   "max_abs_freq_offset": 346553,
+   "snr_real": {
+    "differ": 0,
+    "ties": 53,
+    "flagged_exact": 174320,
+    "flagged_stored": 174320
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 187,
+    "flagged_exact": 178258,
+    "flagged_stored": 178258
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 56,
+    "flagged_exact": 181053,
+    "flagged_stored": 181053
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 187,
+    "flagged_exact": 178258,
+    "flagged_stored": 178258
+   }
+  },
+  "2024-10-01": {
+   "day": "2024-10-01",
+   "units": 748651,
+   "max_abs_freq_offset": 270331,
+   "snr_real": {
+    "differ": 0,
+    "ties": 98,
+    "flagged_exact": 314222,
+    "flagged_stored": 314222
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 261,
+    "flagged_exact": 329047,
+    "flagged_stored": 329047
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 92,
+    "flagged_exact": 328666,
+    "flagged_stored": 328666
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 261,
+    "flagged_exact": 329047,
+    "flagged_stored": 329047
+   }
+  },
+  "2024-11-01": {
+   "day": "2024-11-01",
+   "units": 796297,
+   "max_abs_freq_offset": 295398,
+   "snr_real": {
+    "differ": 0,
+    "ties": 117,
+    "flagged_exact": 337769,
+    "flagged_stored": 337769
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 375,
+    "flagged_exact": 340529,
+    "flagged_stored": 340529
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 106,
+    "flagged_exact": 352822,
+    "flagged_stored": 352822
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 375,
+    "flagged_exact": 340529,
+    "flagged_stored": 340529
+   }
+  },
+  "2024-12-01": {
+   "day": "2024-12-01",
+   "units": 763918,
+   "max_abs_freq_offset": 89685,
+   "snr_real": {
+    "differ": 0,
+    "ties": 98,
+    "flagged_exact": 329549,
+    "flagged_stored": 329549
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 308,
+    "flagged_exact": 317345,
+    "flagged_stored": 317345
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 110,
+    "flagged_exact": 343629,
+    "flagged_stored": 343629
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 308,
+    "flagged_exact": 317345,
+    "flagged_stored": 317345
+   }
+  },
+  "2025-01-01": {
+   "day": "2025-01-01",
+   "units": 666223,
+   "max_abs_freq_offset": 77531,
+   "snr_real": {
+    "differ": 0,
+    "ties": 74,
+    "flagged_exact": 291358,
+    "flagged_stored": 291358
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 241,
+    "flagged_exact": 293806,
+    "flagged_stored": 293806
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 62,
+    "flagged_exact": 302536,
+    "flagged_stored": 302536
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 241,
+    "flagged_exact": 293806,
+    "flagged_stored": 293806
+   }
+  },
+  "2025-02-01": {
+   "day": "2025-02-01",
+   "units": 966654,
+   "max_abs_freq_offset": 289000,
+   "snr_real": {
+    "differ": 0,
+    "ties": 135,
+    "flagged_exact": 417956,
+    "flagged_stored": 417956
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 338,
+    "flagged_exact": 440158,
+    "flagged_stored": 440158
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 134,
+    "flagged_exact": 435229,
+    "flagged_stored": 435229
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 338,
+    "flagged_exact": 440158,
+    "flagged_stored": 440158
+   }
+  },
+  "2025-03-01": {
+   "day": "2025-03-01",
+   "units": 974110,
+   "max_abs_freq_offset": 388999,
+   "snr_real": {
+    "differ": 0,
+    "ties": 107,
+    "flagged_exact": 407109,
+    "flagged_stored": 407109
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 423,
+    "flagged_exact": 414804,
+    "flagged_stored": 414804
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 102,
+    "flagged_exact": 426528,
+    "flagged_stored": 426528
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 423,
+    "flagged_exact": 414804,
+    "flagged_stored": 414804
+   }
+  },
+  "2025-04-01": {
+   "day": "2025-04-01",
+   "units": 1057333,
+   "max_abs_freq_offset": 77522,
+   "snr_real": {
+    "differ": 0,
+    "ties": 137,
+    "flagged_exact": 440459,
+    "flagged_stored": 440459
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 412,
+    "flagged_exact": 439412,
+    "flagged_stored": 439412
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 123,
+    "flagged_exact": 462460,
+    "flagged_stored": 462460
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 412,
+    "flagged_exact": 439412,
+    "flagged_stored": 439412
+   }
+  },
+  "2025-05-01": {
+   "day": "2025-05-01",
+   "units": 722620,
+   "max_abs_freq_offset": 77549,
+   "snr_real": {
+    "differ": 0,
+    "ties": 83,
+    "flagged_exact": 308303,
+    "flagged_stored": 308303
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 344,
+    "flagged_exact": 317436,
+    "flagged_stored": 317436
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 84,
+    "flagged_exact": 321302,
+    "flagged_stored": 321302
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 344,
+    "flagged_exact": 317436,
+    "flagged_stored": 317436
+   }
+  },
+  "2025-06-01": {
+   "day": "2025-06-01",
+   "units": 578458,
+   "max_abs_freq_offset": 4294967376,
+   "snr_real": {
+    "differ": 0,
+    "ties": 64,
+    "flagged_exact": 252663,
+    "flagged_stored": 252663
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 190,
+    "flagged_exact": 248189,
+    "flagged_stored": 248189
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 52,
+    "flagged_exact": 261240,
+    "flagged_stored": 261240
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 190,
+    "flagged_exact": 248189,
+    "flagged_stored": 248189
+   }
+  },
+  "2025-07-01": {
+   "day": "2025-07-01",
+   "units": 639850,
+   "max_abs_freq_offset": 77511,
+   "snr_real": {
+    "differ": 0,
+    "ties": 70,
+    "flagged_exact": 281232,
+    "flagged_stored": 281232
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 261,
+    "flagged_exact": 265716,
+    "flagged_stored": 265716
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 62,
+    "flagged_exact": 291395,
+    "flagged_stored": 291395
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 261,
+    "flagged_exact": 265716,
+    "flagged_stored": 265716
+   }
+  },
+  "2025-08-01": {
+   "day": "2025-08-01",
+   "units": 794606,
+   "max_abs_freq_offset": 4294967352,
+   "snr_real": {
+    "differ": 0,
+    "ties": 73,
+    "flagged_exact": 351804,
+    "flagged_stored": 351804
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 377,
+    "flagged_exact": 316685,
+    "flagged_stored": 316685
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 84,
+    "flagged_exact": 363435,
+    "flagged_stored": 363435
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 377,
+    "flagged_exact": 316685,
+    "flagged_stored": 316685
+   }
+  },
+  "2025-09-01": {
+   "day": "2025-09-01",
+   "units": 956487,
+   "max_abs_freq_offset": 4294967345,
+   "snr_real": {
+    "differ": 0,
+    "ties": 143,
+    "flagged_exact": 408710,
+    "flagged_stored": 408710
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 426,
+    "flagged_exact": 409645,
+    "flagged_stored": 409645
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 127,
+    "flagged_exact": 425663,
+    "flagged_stored": 425663
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 426,
+    "flagged_exact": 409645,
+    "flagged_stored": 409645
+   }
+  },
+  "2025-10-01": {
+   "day": "2025-10-01",
+   "units": 661708,
+   "max_abs_freq_offset": 4294967239,
+   "snr_real": {
+    "differ": 0,
+    "ties": 96,
+    "flagged_exact": 282510,
+    "flagged_stored": 282510
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 276,
+    "flagged_exact": 290900,
+    "flagged_stored": 290900
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 88,
+    "flagged_exact": 294498,
+    "flagged_stored": 294498
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 276,
+    "flagged_exact": 290900,
+    "flagged_stored": 290900
+   }
+  },
+  "2025-11-01": {
+   "day": "2025-11-01",
+   "units": 942279,
+   "max_abs_freq_offset": 77505,
+   "snr_real": {
+    "differ": 0,
+    "ties": 104,
+    "flagged_exact": 402509,
+    "flagged_stored": 402509
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 372,
+    "flagged_exact": 394442,
+    "flagged_stored": 394442
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 106,
+    "flagged_exact": 419934,
+    "flagged_stored": 419934
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 372,
+    "flagged_exact": 394442,
+    "flagged_stored": 394442
+   }
+  },
+  "2025-12-01": {
+   "day": "2025-12-01",
+   "units": 844738,
+   "max_abs_freq_offset": 289000,
+   "snr_real": {
+    "differ": 0,
+    "ties": 107,
+    "flagged_exact": 366510,
+    "flagged_stored": 366510
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 365,
+    "flagged_exact": 345649,
+    "flagged_stored": 345649
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 103,
+    "flagged_exact": 381759,
+    "flagged_stored": 381759
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 365,
+    "flagged_exact": 345649,
+    "flagged_stored": 345649
+   }
+  },
+  "2026-01-01": {
+   "day": "2026-01-01",
+   "units": 1023208,
+   "max_abs_freq_offset": 234000,
+   "snr_real": {
+    "differ": 0,
+    "ties": 136,
+    "flagged_exact": 445412,
+    "flagged_stored": 445412
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 386,
+    "flagged_exact": 434104,
+    "flagged_stored": 434104
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 106,
+    "flagged_exact": 463724,
+    "flagged_stored": 463724
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 386,
+    "flagged_exact": 434104,
+    "flagged_stored": 434104
+   }
+  },
+  "2026-02-01": {
+   "day": "2026-02-01",
+   "units": 878857,
+   "max_abs_freq_offset": 332219,
+   "snr_real": {
+    "differ": 0,
+    "ties": 114,
+    "flagged_exact": 389575,
+    "flagged_stored": 389575
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 360,
+    "flagged_exact": 359859,
+    "flagged_stored": 359859
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 104,
+    "flagged_exact": 402906,
+    "flagged_stored": 402906
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 360,
+    "flagged_exact": 359859,
+    "flagged_stored": 359859
+   }
+  },
+  "2026-03-01": {
+   "day": "2026-03-01",
+   "units": 1248685,
+   "max_abs_freq_offset": 142528,
+   "snr_real": {
+    "differ": 0,
+    "ties": 140,
+    "flagged_exact": 527367,
+    "flagged_stored": 527367
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 547,
+    "flagged_exact": 521374,
+    "flagged_stored": 521374
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 153,
+    "flagged_exact": 551575,
+    "flagged_stored": 551575
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 547,
+    "flagged_exact": 521374,
+    "flagged_stored": 521374
+   }
+  },
+  "2026-04-01": {
+   "day": "2026-04-01",
+   "units": 1096521,
+   "max_abs_freq_offset": 151793,
+   "snr_real": {
+    "differ": 0,
+    "ties": 147,
+    "flagged_exact": 462364,
+    "flagged_stored": 462364
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 535,
+    "flagged_exact": 465854,
+    "flagged_stored": 465854
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 139,
+    "flagged_exact": 483905,
+    "flagged_stored": 483905
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 535,
+    "flagged_exact": 465854,
+    "flagged_stored": 465854
+   }
+  },
+  "2026-05-01": {
+   "day": "2026-05-01",
+   "units": 832976,
+   "max_abs_freq_offset": 77601,
+   "snr_real": {
+    "differ": 0,
+    "ties": 103,
+    "flagged_exact": 361003,
+    "flagged_stored": 361003
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 315,
+    "flagged_exact": 339694,
+    "flagged_stored": 339694
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 97,
+    "flagged_exact": 374886,
+    "flagged_stored": 374886
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 315,
+    "flagged_exact": 339694,
+    "flagged_stored": 339694
+   }
+  },
+  "2026-06-01": {
+   "day": "2026-06-01",
+   "units": 922971,
+   "max_abs_freq_offset": 77526,
+   "snr_real": {
+    "differ": 0,
+    "ties": 80,
+    "flagged_exact": 405194,
+    "flagged_stored": 405194
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 451,
+    "flagged_exact": 379426,
+    "flagged_stored": 379426
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 85,
+    "flagged_exact": 418996,
+    "flagged_stored": 418996
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 451,
+    "flagged_exact": 379426,
+    "flagged_stored": 379426
+   }
+  },
+  "2026-07-01": {
+   "day": "2026-07-01",
+   "units": 859967,
+   "max_abs_freq_offset": 77528,
+   "snr_real": {
+    "differ": 0,
+    "ties": 109,
+    "flagged_exact": 376824,
+    "flagged_stored": 376824
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 270,
+    "flagged_exact": 375814,
+    "flagged_stored": 375814
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 98,
+    "flagged_exact": 390299,
+    "flagged_stored": 390299
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 270,
+    "flagged_exact": 375814,
+    "flagged_stored": 375814
+   }
+  },
+  "2026-08-01": {
+   "day": "2026-08-01",
+   "units": 957695,
+   "max_abs_freq_offset": 196505,
+   "snr_real": {
+    "differ": 0,
+    "ties": 109,
+    "flagged_exact": 417785,
+    "flagged_stored": 417785
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 402,
+    "flagged_exact": 415374,
+    "flagged_stored": 415374
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 126,
+    "flagged_exact": 433566,
+    "flagged_stored": 433566
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 402,
+    "flagged_exact": 415374,
+    "flagged_stored": 415374
+   }
+  },
+  "2026-09-01": {
+   "day": "2026-09-01",
+   "units": 727424,
+   "max_abs_freq_offset": 204150,
+   "snr_real": {
+    "differ": 0,
+    "ties": 91,
+    "flagged_exact": 314643,
+    "flagged_stored": 314643
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 234,
+    "flagged_exact": 305803,
+    "flagged_stored": 305803
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 91,
+    "flagged_exact": 326854,
+    "flagged_stored": 326854
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 234,
+    "flagged_exact": 305803,
+    "flagged_stored": 305803
+   }
+  },
+  "2026-10-01": {
+   "day": "2026-10-01",
+   "units": 872119,
+   "max_abs_freq_offset": 171400,
+   "snr_real": {
+    "differ": 0,
+    "ties": 116,
+    "flagged_exact": 375545,
+    "flagged_stored": 375545
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 293,
+    "flagged_exact": 362836,
+    "flagged_stored": 362836
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 103,
+    "flagged_exact": 391438,
+    "flagged_stored": 391438
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 293,
+    "flagged_exact": 362836,
+    "flagged_stored": 362836
+   }
+  },
+  "2026-11-01": {
+   "day": "2026-11-01",
+   "units": 894056,
+   "max_abs_freq_offset": 156528,
+   "snr_real": {
+    "differ": 0,
+    "ties": 104,
+    "flagged_exact": 390038,
+    "flagged_stored": 390038
+   },
+   "freq_real": {
+    "differ": 0,
+    "ties": 349,
+    "flagged_exact": 368930,
+    "flagged_stored": 368930
+   },
+   "snr_planted": {
+    "differ": 0,
+    "ties": 82,
+    "flagged_exact": 405961,
+    "flagged_stored": 405961
+   },
+   "freq_planted": {
+    "differ": 0,
+    "ties": 349,
+    "flagged_exact": 368930,
+    "flagged_stored": 368930
+   }
+  }
+ }
+}

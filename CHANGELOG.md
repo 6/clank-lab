@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## wspr-aircraft-anomalies v1 (November 23, 2026)
+
+- On 72 days of public WSPR reports and ADS-B aircraft positions, a test fixed in advance finds no detectable increase in an adapted version of Godfrey's anomaly flag on matched paths near tracked aircraft: the placebo-adjusted excess stays below 2 per 100 in both designs, also when any single date is removed. An association, not a causal estimate.
+- Includes the paper, the frozen protocol and its addendum for the second sample of 36 days, the recorded results and scripts that download the public data and replay the test.
+
 ## supercentenarian-birth-years v1 (November 23, 2026)
 
 - The reported US early share of 82.6% falls inside the central 95% of 10,000 shuffles that preserve the historical roster's state counts and birth years. A common registration window gives the same inclusion decision.

@@ -1,0 +1,72 @@
+{
+ "units": 960,
+ "dates": [
+  "2022-12-01",
+  "2023-02-01",
+  "2024-03-01",
+  "2024-06-01",
+  "2024-08-01",
+  "2025-09-01"
+ ],
+ "classes": {
+  "control": {
+   "n": 240,
+   "label_changes": 1,
+   "max_abs_dh_km": 7.301,
+   "max_abs_da_km": 3.583
+  },
+  "near25_h": {
+   "n": 240,
+   "label_changes": 1,
+   "max_abs_dh_km": 0.007,
+   "max_abs_da_km": 22.786
+  },
+  "near5_a": {
+   "n": 240,
+   "label_changes": 1,
+   "max_abs_dh_km": 2.798,
+   "max_abs_da_km": 2.818
+  },
+  "near5_h": {
+   "n": 240,
+   "label_changes": 0,
+   "max_abs_dh_km": 0.057,
+   "max_abs_da_km": 0.069
+  }
+ },
+ "label_changes": [
+  {
+   "day": "2025-09-01",
+   "class": "control",
+   "unit": 937863,
+   "dh": 26.32217618784418,
+   "ref_dh": 19.02082959914463,
+   "da": 22.603640171753856,
+   "ref_da": 19.02082959914463,
+   "label": "control",
+   "ref_label": "neither"
+  },
+  {
+   "day": "2022-12-01",
+   "class": "near25_h",
+   "unit": 134714,
+   "dh": 25.159761675745212,
+   "ref_dh": 25.160219835662346,
+   "da": 23.780101331447483,
+   "ref_da": 0.9943607767206752,
+   "label": "control",
+   "ref_label": "neither"
+  },
+  {
+   "day": "2024-08-01",
+   "class": "near5_a",
+   "unit": 65057,
+   "dh": 4.987552373070918,
+   "ref_dh": 7.785609727320108,
+   "da": 4.987552373070918,
+   "ref_da": 2.1693182684742824,
+   "label": "crossed",
+   "ref_label": "neither"
+  }
+ ]
+}

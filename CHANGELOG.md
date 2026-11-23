@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## steinberg-c4-c9 v9 (November 23, 2026)
+
+- Lean now checks the original published coloring certificate and proves that fixing the three colors on a triangle preserves the coloring question. A second Lean replay uses LRAT-Catcher.
+
 ## wspr-aircraft-anomalies v1 (November 23, 2026)
 
 - On 72 days of public WSPR reports and ADS-B aircraft positions, a test fixed in advance finds no detectable increase in an adapted version of Godfrey's anomaly flag on matched paths near tracked aircraft: the placebo-adjusted excess stays below 2 per 100 in both designs, also when any single date is removed. An association, not a causal estimate.

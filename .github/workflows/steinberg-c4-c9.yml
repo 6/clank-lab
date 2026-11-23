@@ -68,6 +68,12 @@ jobs:
       - name: Build proof and check its axioms
         run: lake build
 
+      - name: Replay the published certificate with LRAT-Catcher
+        working-directory: results/steinberg-c4-c9/lean/catcher
+        run: |
+          lake build
+          lake env leanchecker --fresh PublishedCatcher
+
   checks:
     name: Check steinberg-c4-c9
     runs-on: ubuntu-latest

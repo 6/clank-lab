@@ -1,5 +1,5 @@
 name = "Steinberg"
-defaultTargets = ["Check"]
+defaultTargets = ["Challenge"]
 moreLeanArgs = ["-j6"]
 
 [leanOptions]
@@ -19,3 +19,9 @@ name = "Steinberg"
 
 [[lean_lib]]
 name = "Check"
+
+[[lean_lib]]
+name = "PublishedInput"
+
+[[lean_lib]]
+name = "Challenge"

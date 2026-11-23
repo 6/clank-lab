@@ -1,0 +1,16 @@
+{"version": "1.2.0",
+ "packagesDir": ".lake/packages",
+ "packages":
+ [{"url": "https://github.com/leansolving/lrat-catcher.git",
+   "type": "git",
+   "subDir": null,
+   "scope": "",
+   "rev": "cbc980a934cfcfbd942462c7b6db2e88750e4874",
+   "name": "LRATCatcher",
+   "manifestFile": "lake-manifest.json",
+   "inputRev": "cbc980a934cfcfbd942462c7b6db2e88750e4874",
+   "inherited": false,
+   "configFile": "lakefile.toml"}],
+ "name": "SteinbergCatcher",
+ "lakeDir": ".lake",
+ "fixedToolchain": false}

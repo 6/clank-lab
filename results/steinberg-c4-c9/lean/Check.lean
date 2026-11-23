@@ -1,6 +1,7 @@
 import Steinberg.RotationControls
 import Steinberg.Cycles
 import Steinberg.Noncolorable
+import Steinberg.PublishedColoring
 import Steinberg.DrawingControls
 
 namespace Steinberg
@@ -23,7 +24,7 @@ theorem planar_counterexample :
     RationalPlanar graph ∧
     (∀ v (p : graph.Walk v v), p.IsCycle → p.length ≠ 4 ∧ p.length ≠ 9) ∧
     IsEmpty (graph.Coloring (Fin 3)) :=
-  ⟨rational_planar, no_forbidden_cycles, not_three_colorable⟩
+  ⟨rational_planar, no_forbidden_cycles, not_three_colorable_from_published⟩
 
 /-- info: 'Steinberg.planar_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in

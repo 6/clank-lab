@@ -13,6 +13,7 @@ The toolchain and Mathlib dependency are pinned in `lean-toolchain`,
 Only dependency artifacts come from the Mathlib cache; Lake checks the local
 proof sources.
 
+[Challenge.lean](Challenge.lean) states the existence theorem.
 [Check.lean](Check.lean) states `Steinberg.planar_counterexample`:
 
 ```lean
@@ -76,6 +77,12 @@ Both endpoint theorems concern this same graph. The retained components are:
   nine for every Mathlib closed walk satisfying `IsCycle`, including cycles
   with chords. The bounded search has a general soundness proof and checks
   every possible starting vertex against the parsed adjacency relation.
+- [PublishedColoring.lean](Steinberg/PublishedColoring.lean) computes the 739
+  clauses of the [published CNF](../data/col3.cnf) from the graph, including
+  the three units fixing the colors at vertices 0, 1 and 6. Every coloring
+  can be relabeled to satisfy those units because the three vertices form a
+  triangle. [PublishedTrace.lean](LocalRup/PublishedTrace.lean) checks the
+  52 RUP additions from the normalized LRAT refutation of those clauses.
 - [Noncolorable.lean](Steinberg/Noncolorable.lean) proves soundness of a
   generic coloring-to-CNF reduction and equality of its computed formula
   to the certificate input: 246 variables and 736 clauses, with no symmetry
@@ -102,3 +109,21 @@ The retained executable checks are documented [separately](../checks/README.md).
 Four-criticality, the Ore decomposition, the sharp edge bound and exclusion
 of ten-cycles keep their written and executable proofs; the Lean theorem above
 does not assert those additional properties.
+
+## LRAT-Catcher replay
+
+From this directory, run the supplemental Lake project:
+
+```sh
+cd catcher
+lake build
+lake env leanchecker --fresh PublishedCatcher
+```
+
+It pins Lean 4.30.0 and Stefan Szeider's [LRAT-Catcher](https://github.com/leansolving/lrat-catcher)
+at commit `cbc980a934cfcfbd942462c7b6db2e88750e4874`.
+[PublishedCatcher.lean](catcher/PublishedCatcher.lean) uses Catcher's kernel
+elaborator on each of the same 52 RUP additions. It combines those proofs
+and checks `bound_to_fixture : PublishedInput.cnf.Unsat` against the same
+[clauses](PublishedInput.lean) used in the graph proof. Its axiom guard
+checks exactly `propext`, `Classical.choice` and `Quot.sound`.

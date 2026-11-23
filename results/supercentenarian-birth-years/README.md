@@ -8,7 +8,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.24459608](https://doi.org/10.5281/zenodo.24459608)
+Archived on Zenodo: [doi:10.5281/zenodo.24478981](https://doi.org/10.5281/zenodo.24478981)
 
 ## Abstract
 
@@ -46,6 +46,6 @@ In August 2019, Young pointed out delays in validating and releasing cases. Newm
   title = {{The US supercentenarian birth-registration statistic is typical after shuffling birth years}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/supercentenarian-birth-years-v2/results/supercentenarian-birth-years}},
-  doi          = {10.5281/zenodo.24459608}
+  doi          = {10.5281/zenodo.24478981}
 }
 ```

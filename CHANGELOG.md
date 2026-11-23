@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## wspr-aircraft-anomalies v2 (November 23, 2026)
+
+- Correction: credit the DSTA-hosted student study that examined aircraft detection with WSPRnet and explained why apparent matches can occur by chance. The analysis and its checks are unchanged.
+
 ## steinberg-c4-c9 v9 (November 23, 2026)
 
 - Lean now checks the original published coloring certificate and proves that fixing the three colors on a triangle preserves the coloring question. A second Lean replay uses LRAT-Catcher.

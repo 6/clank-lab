@@ -43,7 +43,7 @@ The WSPR reports come from the WSPRnet community through the wspr.live mirror, a
   author = {Graham, Peter},
   title = {{A placebo-controlled test of WSPR signal anomalies on radio paths crossed by tracked aircraft}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/wspr-aircraft-anomalies-v1/results/wspr-aircraft-anomalies}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/wspr-aircraft-anomalies-v2/results/wspr-aircraft-anomalies}},
   doi          = {10.5281/zenodo.24459621}
 }
 ```

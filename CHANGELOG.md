@@ -7,6 +7,7 @@ Zenodo records.
 ## steinberg-c4-c9 v9 (November 23, 2026)
 
 - Lean now checks the original published coloring certificate and proves that fixing the three colors on a triangle preserves the coloring question. A second Lean replay uses LRAT-Catcher.
+- Zenodo: [10.5281/zenodo.24467489](https://doi.org/10.5281/zenodo.24467489)
 
 ## wspr-aircraft-anomalies v1 (November 23, 2026)
 

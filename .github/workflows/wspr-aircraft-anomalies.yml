@@ -1,0 +1,50 @@
+name: Wspr-aircraft-anomalies checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/wspr-aircraft-anomalies/**'
+      - '.github/workflows/wspr-aircraft-anomalies.yml'
+  pull_request:
+    paths:
+      - 'results/wspr-aircraft-anomalies/**'
+      - '.github/workflows/wspr-aircraft-anomalies.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wspr-aircraft-anomalies-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: Check wspr-aircraft-anomalies
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/wspr-aircraft-anomalies
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Install Python requirements
+        run: python3 -m pip install -r checks/requirements.txt
+
+      - name: Quick check of the rule, the geometry and the recorded verdict
+        run: python3 checks/selftest.py data/results.json
+
+      - name: Quick check of the second sample's recorded verdict
+        run: python3 checks/selftest.py data/second-sample/results.json
+
+      - name: Quick check of the pooled recorded verdict
+        run: python3 checks/selftest.py data/pooled/results.json

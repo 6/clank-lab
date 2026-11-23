@@ -1,0 +1,308 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage[title]{appendix}
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+  pdftitle={A placebo-controlled test of WSPR signal anomalies on radio paths crossed by tracked aircraft},pdfauthor={Peter Graham}}
+\title{A placebo-controlled test of WSPR signal anomalies on radio paths crossed by tracked aircraft}
+\author{Peter Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 23, 2026}
+\pagestyle{plain}
+\begin{document}
+\maketitle
+\begin{abstract}
+Pooled over a first sample of 36 dates and a follow-up of 36 chosen after the first result and before its data were downloaded, the placebo-adjusted excess of a prespecified adaptation of Godfrey's 2024 WSPR anomaly flag is $+0.21$ per 100 for same-link matching (95\% nominal interval $-0.53$ to $0.95$) and $+0.35$ for shared-station matching ($-0.46$ to $1.17$). These are matched records on covered paths whose surface arc between the stations' locator centers passes within 5~km of a modeled high-altitude (at least 20{,}000~ft) aircraft track, 0.3\% of all such records. WSPR is an amateur-radio network reporting decoded weak signals; with ADS-B, aircraft broadcast their positions. Godfrey and colleagues proposed that aircraft near a transmitter--receiver path raise the anomaly rate, and used anomalies to propose a path for flight MH370. Controls are matched records near no tracked aircraft; the same comparison with other days' aircraft is subtracted. A simulated 6~dB SNR increase on 10\% of such records, drawn before coverage filtering and matching, is detected. The adjusted flag rate shows no detectable increase on matched covered paths: both upper limits stay below the pre-set 2 per 100, also without any one date.
+
+This work has not yet been reviewed by experts.
+The analysis, the code and the text were produced by AI models from OpenAI and Anthropic, working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textbf{Keywords:} WSPR, amateur radio, ADS-B, aircraft scatter, MH370, placebo control, pre-specified analysis.
+
+\section{Introduction}
+
+\subsection{Main result}
+
+Pooled over the first and the follow-up sample of 36 dates each, neither matched comparison finds a detectable increase in anomalous WSPR records on covered radio paths whose surface arc between the stations' locator centers passes near a high track: the modeled track of an aircraft that reports at least 20{,}000 feet in any of the three one-minute snapshots of a two-minute slot, which then counts as high for the whole slot (box below).
+
+WSPR (Weak Signal Propagation Reporter) is an amateur-radio protocol for very weak transmissions~\cite{taylor}. A transmission lasts just under two minutes, ``nominally starting one second into an even UTC minute''~\cite{taylor}, and receiving stations set up to upload send what they decode to the WSPRnet database. A record gives the time, both stations' call signs (station identifiers) and Maidenhead locators (grid codes for their positions), the band, the received frequency, the signal-to-noise ratio (SNR) and the drift (the change of frequency during the transmission). ADS-B is the system by which aircraft broadcast their own positions; ADS-B Exchange archives what its receivers record~\cite{adsbx}. A \emph{link} is one transmitter--receiver--band combination, and a \emph{link-slot} is one reception record of a link in a two-minute slot (Appendix~\ref{app:defs} gives the exact keys).
+
+Each link-slot gets a flag (1 or 0) from an adapted anomaly rule; Section~\ref{sec:method} defines the placebo-differenced excess $\Delta$ of crossed over matched uncrossed link-slots.
+
+\begin{quote}
+\textbf{Result.} On 72 sampled days and on covered paths, $\Delta$ is $+0.21$ flagged link-slots per 100 matched crossed link-slots with same-link matching (74{,}736 cases; 95\% nominal day-bootstrap interval $-0.53$ to $0.95$) and $+0.35$ with shared-station matching (67{,}253 cases; $-0.46$ to $1.17$). The cases are about 0.3\% of the 25.7 million crossed link-slots. A simulated increase, 6~dB of SNR added with probability 10\% to every link-slot crossed under the real positions before coverage filtering and matching (Section~\ref{sec:method}), gives $+2.96$ ($2.19$ to $3.70$) and $+2.68$ ($1.77$ to $3.60$). These intervals meet the pre-set rule for the outcome labeled \emph{negative} (Section~\ref{sec:method}): no detectable increase, both upper limits below 2 per 100, and the simulated increase detected in both designs. They still meet it when any one date is removed, with or without its aircraft, and with block resampling.
+\end{quote}
+
+Before matching, 67.6\% of crossed and 63.7\% of eligible uncrossed link-slots carry a flag. Of the 26{,}692{,}421 scored link-slots on covered paths, 25{,}741{,}283 (96.4\%) are crossed and 96{,}589 (0.36\%) eligible uncrossed. Counting each link-slot once, crossed ones have a median path length of 958~km and uncrossed ones 197~km (\texttt{tallies.py}, Appendix~\ref{app:checks}). A plain comparison of crossed with uncrossed would compare different paths; matching and shifted days address this.
+
+\subsection{Prior work}\label{sec:prior}
+
+The closest earlier analysis is Anderson's. In 2021 Anderson compared one day of ADS-B positions of aircraft at or above 20{,}000~ft with WSPR paths, binning frequency offsets by aircraft-to-path distance after an earlier drift comparison, and wrote: ``Acquiring more than one day of ADS-B dataset would be the next step. \ldots\ Sadly, it's another negative result for now''~\cite{anderson}. We keep that altitude cutoff and extend the comparison to 72 days, a composite flag, matched controls and shifted-day placebos.
+
+Westphal proposed using archived WSPR data to investigate MH370 and reported WSPR detections of individual aircraft between Antarctica and New Zealand, against Flightradar24 positions~\cite{westphal2021}. The OE-FGR case study states the hypothesis that WSPR links ``show statistically significant anomalies when an aircraft is on the great circle path''~\cite{oefgr}; Godfrey and Coetzee's report compares links near the aircraft with the same links two, four or six minutes away (area under the ROC curve 59\% over 183 observations)~\cite{oefgrpdf}. For QTR901, Godfrey, Coetzee and Maskell compared links within 1~nautical mile of the estimated position (our sensitivity radius) with WSPR data six minutes later at the same position, taken as a presumed absence, and with nearby links, inside and outside ADS-B range; their ROC pools all phases, so it mixes ADS-B positions with positions estimated outside ADS-B range (58\% over 244)~\cite{qtr901pdf}. The same authors report nine flights near one 252~km link~\cite{wsprradar,shortdist}, apply the 0.75-SD, $\pm3$-hour rule to SNR, frequency and drift along flight THY161's ADS-B track with owner-supplied antenna coordinates~\cite{thy161}, and present 67 positions on a proposed MH370 path~\cite{mh370fpa}. Their 2025 report on 48 flights is the closest controlled comparison: a link within 2~km of the aircraft's two-minute track is a hit, WSPR data six minutes later with no other aircraft within 2~km are the absence case, and the area under the ROC curve is 55.6\% over 1{,}078 observations~\cite{gpr}. We differ in using all tracked traffic on sampled days, matched uncrossed paths and other days' aircraft as controls, and a rule and decision fixed in advance. The University of Liverpool described the hypothesis as ``an aircraft passing between the transmitter and receiver causes an increase in the rate at which anomalies are detected''~\cite{liverpool}; the 2025 report describes that team's larger study as under way~\cite{gpr}, and we found no public result from it.
+
+Critics argue on physical grounds against it. Kent's link-budget analysis concludes that ``the strength of the scattered signal is far too weak to have been detected''~\cite{kent}. Iannello quoted the protocol's author, Joe Taylor: ``I do not believe that historical data from the WSPR network can provide any information useful for aircraft tracking,'' and in the comments Gilbert checked a blind test's indicated positions against ADS-B data~\cite{iannello2021}.
+
+\section{Data and method}\label{sec:method}
+
+The protocol was frozen before the first sample's outcome was computed and an addendum before the second sample's data were downloaded; both are released. Appendices~\ref{app:defs} and~\ref{app:dates} give exact definitions and dates.
+
+\paragraph{Data.}\label{sec:data} WSPR records come from the wspr.live mirror of WSPRnet~\cite{wsprlive}, from 21:00 UTC on the day before each sampled date to 01:00 UTC on the day after. ADS-B Exchange publishes free samples only for the first day of each month, one snapshot a minute~\cite{adsbx}. We use the first hour of each of the eight three-hour periods starting at 00, 03, \ldots, 21 UTC, giving 30 two-minute test slots per period. The first sample is 36 first-of-month dates from December 2022 to December 2025. The second, fixed after the first sample's outcome and before its data were downloaded, is the 36 most recent unused first-of-month dates with complete snapshots, from August 2020 to November 2026.
+
+\paragraph{The anomaly rule.}\label{sec:rule} We test an adaptation of Godfrey's 2024 statement~\cite{oefgr}; Appendix~\ref{app:rule} maps each phrase. A record is flagged when its SNR or frequency lies more than 0.75 sample standard deviations from the mean of the same link's records within $\pm3$~hours of it, or when its drift is nonzero and fewer than half of those records drift. Records are grouped by transmitter, receiver and band, where Godfrey's triple uses frequency. A record with fewer than five records in its window gets no flag at all and is not scored; Godfrey instead extends sparse windows up to $\pm3$~days. Stations with a slash in the call sign, balloon-telemetry call signs, or more than one locator string among all downloaded records are dropped as possibly mobile, before only six-character locators are kept. Paths shorter than 100~km are dropped.
+
+\paragraph{Crossings.} Aircraft tracks over a slot come from the snapshots at its nominal start, $+60$~s and $+120$~s, interpolated between reports and projected up to 60~s beyond them. A track is high for the whole slot if any of its three snapshots reports a barometric altitude of at least 20{,}000~ft, and its distance to the surface arc between the two locator centers is sampled every 5~s; a change of side between the stations counts as distance zero (Appendix~\ref{app:defs}). A link-slot is \emph{crossed} when some high track comes to 5~km or less from the arc, and \emph{eligible uncrossed} when every high track stays at least 25~km away and every airborne track at least 5~km away (both bounds inclusive); otherwise it is neither. A link-slot is used only on a covered path: every $1^\circ\times1^\circ$ cell along its arc holds aircraft reports, airborne or on the ground, in at least a quarter of that period's snapshots. The mask is a traffic proxy, not proof that every aircraft present was recorded, so ``uncrossed'' means that no recorded track came near.
+
+\paragraph{Designs, placebos and uncertainty.} \emph{Same-link matching} (design~W) takes as controls the same link's eligible uncrossed link-slots on the same date with report times within 30 minutes of the case. \emph{Shared-station matching} (design~M) takes eligible uncrossed link-slots with the same report time and band, on another link sharing the case's transmitter or its receiver in the same role, with path length 0.8 to 1.25 times the case's. Matching in time and by station is meant to reduce, not remove, differences in propagation conditions. For each case, $d$ is its flag minus the share of its controls that are flagged, and $E$ is the mean of $d$ over the cases; a flagged case with four controls, one of them flagged, gives $d=1-\tfrac14=0.75$. We then replace the aircraft positions by those of the next and of the previous date of the same sample at the same UTC times, wrapping from the last date to the first, keep the radio records as they are, and redo the labels, the matching and $E$; each $E$ has its own cases. The primary statistic is
+\[
+  \Delta \;=\; E_{\text{real}}-\tfrac12\bigl(E_{\text{next}}+E_{\text{prev}}\bigr).
+\]
+The shifted positions keep the daily pattern of traffic but break the timing between a record and the recorded aircraft, so the shifted $E$ values show how large an excess the selection and matching produce without that timing. Section~\ref{sec:limits} states what an aircraft-effect reading would need. Intervals are percentiles of 10{,}000 resamples of whole sampled dates (seed 20261121), each date's real and shifted sums resampled together. Dates share aircraft data through the shifted positions, so the intervals are nominal.
+
+\paragraph{Simulated increase.} In a copy of the records, each link-slot crossed under the real positions gets $+6$~dB of SNR with probability 10\%, before coverage filtering and matching (pooled, 4{,}128{,}269 of 41{,}301{,}615; 2{,}572{,}854 of them crossed and covered). Every record's SNR flag is recomputed on the copy, so neighboring records' windows change too, and the real and shifted analyses are rerun on it.
+
+\paragraph{Decision rule.} In order: if either simulated-increase lower limit is not above zero, the outcome is inconclusive; if both primary lower limits are above zero, it is positive; if both primary upper limits are below 2 per 100, it is negative; otherwise it is inconclusive. The threshold of 2 per 100 was fixed in advance: against flag rates near 65\%, the protocol treated a $\Delta$ under 2 percentage points as too small to matter for this test. It is a decision threshold, not an established limit on any tracking method.
+
+\section{Results}\label{sec:results}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{llrrrl}
+\toprule
+Sample & Design & cases & $E_{\text{real}}$ & $E_{\text{next}}$, $E_{\text{prev}}$ & $\Delta$ (95\% nominal interval) \\
+\midrule
+First 36 days & W & 36{,}359 & $+0.47$ & $-0.19$, $-0.37$ & $+0.75$ ($-0.37$, $1.85$) \\
+ & M & 32{,}371 & $+0.69$ & $+0.06$, $+0.89$ & $+0.22$ ($-0.95$, $1.29$) \\
+Second 36 days & W & 38{,}377 & $-0.24$ & $-0.02$, $+0.14$ & $-0.29$ ($-1.22$, $0.65$) \\
+ & M & 34{,}882 & $+0.31$ & $+0.08$, $-0.38$ & $+0.46$ ($-0.64$, $1.65$) \\
+Pooled 72 days & W & 74{,}736 & $+0.11$ & $-0.10$, $-0.10$ & $+0.21$ ($-0.53$, $0.95$) \\
+ & M & 67{,}253 & $+0.49$ & $+0.07$, $+0.21$ & $+0.35$ ($-0.46$, $1.17$) \\
+\midrule
+Simulated, pooled & W & & & & $+2.96$ ($2.19$, $3.70$) \\
+ & M & & & & $+2.68$ ($1.77$, $3.60$) \\
+\bottomrule
+\end{tabular}
+\caption{$E$ and $\Delta$ in flagged link-slots per 100 matched crossed link-slots, for each sample and pooled. Cases are crossed link-slots with at least one control under the real positions. The simulated-increase rows are $\Delta$ after adding 6~dB of SNR with probability 10\% to every link-slot crossed under the real positions, before coverage filtering and matching (Section~\ref{sec:method}); for each sample alone they are in Appendix~\ref{app:variants}.}\label{tab:main}
+\end{table}
+
+Each sample's intervals meet the rule for a negative outcome, and so do the pooled ones (Table~\ref{tab:main}).
+
+\paragraph{Why a second sample was added.} On the first 36 dates alone, design~W's upper limit was 1.85. Removing December 1, 2025 raised it to 2.01, past the threshold; on that date design~W's real excess is $-2.61$ per 100 over 1{,}441 cases, against $+0.39$ and $+0.82$ with its shifted positions. Because one date decided the outcome, the second sample (Section~\ref{sec:data}) and a robustness condition were fixed before its data were downloaded: the negative outcome counts as robust only if the pooled intervals meet the rule under every single-date deletion and every block length below.
+
+\paragraph{Robustness.} The prespecified deletion removes one date's sums and keeps every other label and match, including shifted labels made from that date's aircraft; a fuller deletion, added in review, also replaces those by the same dates' other shifted labels. Pooled, all 72 deletions of either kind meet the rule; the largest upper limits are $1.02$ (W) and $1.25$ (M), or $1.06$ and $1.35$ with the aircraft removed, and the smallest simulated-increase lower limit is $1.60$. The fuller deletion makes the first sample alone more fragile: 7 of its 36 deletions put design~W's upper limit between 2.00 and 2.16. On the second sample alone all 36 meet the rule (largest upper limits $0.88$ and $2.00$, just below the threshold). Resampling blocks of 2, 3, 4 and 6 successive dates in date order keeps some of the dependence from reused aircraft, not all, since shifted positions wrap within each sample; the widest pooled intervals are $-0.58$ to $0.99$ (W) and $-0.48$ to $1.15$ (M). Matching on two-minute slot starts, dropping records not timed on an even minute at the matching stage only (this removes the odd-minute record whose label the geometry audit below changes, and keeps every other record's precomputed distances, coverage and flag windows), strict control cutoffs, and the three together change $\Delta$ by at most 0.02 per 100, and every outcome stays negative. A script error found in review had made the combined run equal to slot keys alone; corrected, it equals the odd-minute run (Appendix~\ref{app:variants}).
+
+\paragraph{Variants fixed in advance.} None decides the outcome (Appendix~\ref{app:variants}). Pooled, the 22 upper limits of the binary-flag variants are below 2 per 100 (the largest $1.56$), and none of the 24 variant intervals excludes zero. In each sample alone a different one excludes zero: the drift flag in design~W in the first sample ($+0.43$, $0.07$ to $0.80$) and the SNR flag in design~M in the second ($+1.21$, $0.05$ to $2.36$). We treat both as exploratory.
+
+\paragraph{Crossing geometry.} On 960 sampled first-sample link-slots near the cutoffs or used as controls, a reference calculation using every aircraft in the raw snapshots changes three labels, one of them on the odd-minute record above, and otherwise agrees within 0.5~km (Appendix~\ref{app:checks}).
+
+\section{Scope and interpretation}\label{sec:limits}
+
+\paragraph{What is bounded.} Neither design found a detectable increase. Among the matched crossed link-slots on covered paths, about 0.3\% of all crossed link-slots, on 72 sampled dates and for one adapted flag, the nominal upper limits for $\Delta$ are 0.95 (same-link) and 1.17 (shared-station) flagged link-slots per 100, below the prespecified threshold of 2 per 100. $\Delta$ is a placebo-differenced association, not a causal estimate: that reading would need the selection component to be equal with real and shifted positions, and the controls to share the cases' propagation conditions, and neither is shown. It does not exclude smaller differences, larger ones in subgroups, or associations with aircraft that ADS-B Exchange did not record.
+
+\paragraph{Coverage and geometry.} The mask keeps only paths whose cells have recorded traffic, so the result says nothing about paths it removes, many of them over oceans. The geometry is that of locator centers and surface arcs; the radio signal travels by the ionosphere and can follow a different route.
+
+\paragraph{Analysis.} The intervals are nominal, since dates share aircraft data; the block and deletion runs (Section~\ref{sec:results}) probe this dependence without resolving it. The second sample was fixed before its data were downloaded, but the decision to extend and pool followed the first sample's outcome (Sections~\ref{sec:data} and~\ref{sec:results}). The simulated increase checks that one injected change is detected; it is not a power curve.
+
+\paragraph{Hypotheses for experts.} Two hypotheses are offered for experts; neither is a conclusion of this test. First, the flags of this rule carry little information about tracked aircraft near a path. Second, because 96\% of covered, scored records are crossed in this record-weighted tally, finding a tracked aircraft near an anomalous link may often be coincidence.
+
+\section{Verification and reproducibility}\label{sec:verify}
+
+A second reimplementation, written from the protocol and addendum alone, without the code or results, ran all 72 dates and met every criterion fixed before it started: the same outcomes (pooled $\Delta=+0.21$ and $+0.32$), every deletion and block length meeting the rule, and case and control counts 2--5\% above ours.
+
+A first reimplementation, on the first sample, reached the same outcome ($\Delta=+0.54$ and $-0.09$) but matched 21--26\% more cases and controls, outside its 5\% criterion. On one date its locator filter keeps 27\% more records than ours, so that filter is a likely contributor; other differences were not harmonized.
+
+An independent spot checker, which recomputes flags and distances for sampled link-slots from the raw files (scope in Appendix~\ref{app:checks}), found one error after the first outcome had been seen: floating-point running sums lost the variance of small windows on 4 of the 36 days. The fix (exact integer window sums) changed 439{,}157 frequency scores and no SNR score, and moved $\Delta$ by 0.02 (W $+0.73$ to $+0.75$; M $+0.20$ to $+0.22$).
+
+In review, the threshold was rechecked in exact integer arithmetic for the SNR and frequency scores of all 45{,}033{,}331 scored link-slots, with the real and the simulated SNR. No flag differs from the recorded run; the 5{,}633 SNR and 20{,}631 frequency scores exactly at $|z|=0.75$ are, as the rule requires, not flagged.
+
+Code, recorded results, protocol, addendum and replay scripts are released as version~1 at
+\begin{center}\small\url{https://github.com/6/clank-lab/tree/wspr-aircraft-anomalies-v1/results/wspr-aircraft-anomalies}\end{center}
+The data are not redistributed; the scripts download them.
+
+\section*{Acknowledgments}
+The hypothesis and the anomaly rule are Richard Godfrey's. The OE-FGR report is by Godfrey and Hannes Coetzee, and the QTR901, THY161, short-distance, MH370 and global passive radar reports by Godfrey, Coetzee and Simon Maskell. Robert Westphal first proposed using archived WSPR data for MH370. The University of Liverpool team (Simon Maskell, Alberto Acuto, Paul Horridge and Shashi Lakra) announced their larger study. The critiques of Victor Iannello, Steve Kent, Mick Gilbert and others, and Ed Anderson's one-day comparison, shaped the controls. The data are from the WSPRnet community through wspr.live and from ADS-B Exchange.
+
+\begin{thebibliography}{99}
+\bibitem{adsbx} ADS-B Exchange, sample data, \texttt{readsb-hist} snapshots, \url{https://samples.adsbexchange.com/}.
+\bibitem{anderson} E.~Anderson (370Location), comment of December 28, 2021 on~\cite{iannello2021}, \url{https://mh370.radiantphysics.com/2021/12/19/wspr-cant-find-mh370/#comment-32855}.
+\bibitem{gpr} R.~Godfrey, H.~Coetzee and S.~Maskell, A proposed global passive radar, January 1, 2025, \url{https://www.dropbox.com/scl/fi/8q54o5btw9mfkc6io30ye/Global-Passive-Radar-01JAN2025.pdf?rlkey=kk4xbt04c8tlojs3j294lpljw&dl=0}, linked from \url{https://www.mh370search.com/2025/01/01/new-technology/}; pp.~2, 6 and 16.
+\bibitem{mh370fpa} R.~Godfrey, H.~Coetzee and S.~Maskell, MH370 flight path analysis: case study, August 31, 2023, \url{https://www.dropbox.com/scl/fi/nn3eedtd9ew15f81n2xx7/MH370-Flight-Path-Analysis-31st-August-2023.pdf?rlkey=c72bo3kc2vv74swr3wll3e4j9&dl=0}, listed at \url{https://www.mh370search.com/archive/}; \S\S6 and 9.
+\bibitem{shortdist} R.~Godfrey, H.~Coetzee and S.~Maskell, How does WSPR detect aircraft over short distances? Technical paper, December 17, 2023, \url{https://www.dropbox.com/scl/fi/8uz3l31ayfpbjjo7q3vwu/How-Does-WSPR-Detect-Aircraft-over-Short-Distances-17DEC2023.pdf?rlkey=bk2enssvhdv58xa0viuzpupv0&dl=0}; pp.~1 and 61.
+\bibitem{thy161} R.~Godfrey, H.~Coetzee and S.~Maskell, How does WSPR detect aircraft over long distances? Technical paper, February 15, 2024, \url{https://pedrocarvalho.es/docs/How%20Does%20WSPR%20Detect%20Aircraft%20over%20Long%20Distances%20-%2015FEB2024.pdf}; pp.~1--2, 5, 10 and 14--16.
+\bibitem{oefgrpdf} R.~Godfrey and H.~Coetzee, Flight OE-FGR GDTAAA WSPRnet analysis: case study, October 28, 2022 (updated October 30, 2022), \url{https://www.dropbox.com/s/hlfi1amubynkjvo/Flight%20OE-FGR%20GDTAAA%20WSPRnet%20Analysis%20-%20Case%20Study%20-%2030th%20October%202022.pdf?dl=0}; pp.~9--10.
+\bibitem{qtr901pdf} R.~Godfrey, H.~Coetzee and S.~Maskell, Flight QTR901 GDTAAA WSPRnet analysis: case study, June 8, 2023, \url{https://www.dropbox.com/s/224qont4xrgv54u/Boeing%20777-300ER%20QTR901%20PER%20DOH%2001NOV2022%20Detection%20and%20Tracking%20-%208th%20June%202023.pdf?dl=0}; pp.~10, 17, 27 and 32.
+\bibitem{oefgr} R.~Godfrey, OE-FGR case study, \emph{The Search for MH370}, October 28, 2022, author's comments of May 18 and July 9, 2024, \url{https://www.mh370search.com/2022/10/28/oe-fgr-case-study/}.
+\bibitem{wsprradar} R.~Godfrey, WSPR as radar, \emph{The Search for MH370}, December 18, 2023, \url{https://www.mh370search.com/2023/12/18/wspr-as-radar/}.
+\bibitem{iannello2021} V.~Iannello, WSPR can't find MH370, \emph{MH370 and Other Investigations}, December 19, 2021, with comments by M.~Gilbert (December 21, 2021) and others, \url{https://mh370.radiantphysics.com/2021/12/19/wspr-cant-find-mh370/}.
+\bibitem{kent} S.~Kent (signed sk999), WSPR (Weak Signal Propagation Reporting) and MH370: theory, April 11, 2021, updated September 14, 2021, \url{https://www.dropbox.com/scl/fi/oh0z7y6qipagrfr0b5142/Steve-Kent-WSPR-Paper.pdf?rlkey=3nl5lrt0yjos51ai8f1cl7x6k&dl=0}; p.~19.
+\bibitem{liverpool} University of Liverpool, Researchers provide statistical expertise to help locate missing flight MH370, March 6, 2024, \url{https://news.liverpool.ac.uk/2024/03/06/university-researchers-provide-statistical-expertise-to-help-locate-mh370/}.
+\bibitem{taylor} J.~Taylor and B.~Walker, WSPRing around the world, \emph{QST}, November 2010, 30--32, \url{https://wsjt.sourceforge.io/WSPR_QST_Nov_2010.pdf}.
+\bibitem{westphal2021} R.~Westphal, ``Geocaching'' in the ionosphere, HamSCI Workshop 2021, March 2021, \url{https://hamsci.org/publications/2021/geocaching-in-the-ionosphere}; Introduction.
+\bibitem{wsprlive} wspr.live, a public mirror of the WSPRnet database, \url{https://wspr.live/}.
+\end{thebibliography}
+
+\begin{appendices}
+\section{Exact definitions}\label{app:defs}
+
+\paragraph{Records and keys.} Exact duplicate records are dropped first. A record is then keyed by its reported time (to the second), band, transmitter and receiver; a key with several differing records is dropped entirely. One remaining record is one link-slot. Its slot is the two-minute interval of its period that contains the reported time, so a record timed on an odd minute falls in the slot that contains it. A link-slot is scored when it lies in a test slot, both locators have six characters, the path is at least 100~km long and its window holds at least five records.
+
+\paragraph{Crossing labels.} The three snapshots of a slot are those at its nominal start and one and two minutes later. A snapshot position's age is the snapshot time minus the aircraft's last position time; positions older than 60~s are dropped, and a stale report seen in two snapshots counts once. Between two reports a position is interpolated on the sphere; outside them it is projected along the reported ground speed and track for up to 60~s, or held for up to 15~s without them. Tracks reported only on the ground are excluded; a track counts as high (at least 20{,}000~ft barometric, FL200) for the whole slot if any of its three snapshots reports that, and a track with unknown altitude counts as airborne but not high. Positions are evaluated at $\tau=1,6,\ldots,111$~s after the first selected record time of the slot (which can be odd-minute). A candidate screen keeps tracks whose middle position (else any defined one) lies within 90~km of the arc's corridor. At each $\tau$ the distance is the perpendicular distance to the minor arc when the foot point lies between the stations, else the distance to the nearer station; a change of sign of the signed perpendicular distance (which side of the arc) between successive $\tau$, at a point between the stations and with an along-arc step under 0.1~rad, sets the distance to zero. Distances are capped at 30~km. Crossed: high-track distance $\le5$~km. Eligible uncrossed: high-track distance $\ge25$~km and any-airborne distance $\ge5$~km. Both require labels (all three snapshots present) and a covered path.
+
+\paragraph{Coverage.} For each period, a $1^\circ\times1^\circ$ cell is covered when some aircraft report, airborne or on the ground, falls in it in at least a quarter of the period's available snapshots. A path is covered when every cell containing one of its arc points, sampled at most 10~km apart with the ends included, is covered. Each label set uses the coverage of its own snapshots.
+
+\paragraph{Designs.} Same-link matching: controls are eligible uncrossed link-slots of the same transmitter, receiver and band on the same date with $|t_{\text{control}}-t_{\text{case}}|\le1{,}800$~s in reported time. Shared-station matching: controls are eligible uncrossed link-slots with the same reported time and band that share the case's transmitter (as transmitter) or its receiver (as receiver), are not the same link, and have path length in $[0.8,1.25]$ times the case's. For each case, $d$ is its flag minus the mean flag of its controls; each $E$ is the sum of $d$ over its cases divided by its number of cases. All three label sets are matched separately.
+
+\paragraph{Simulated increase.} For each date, independently with probability 0.10 and a seed fixed per date, each link-slot that is crossed under the real labels (inside the mask or not) gets 6~dB added to its SNR in a copy of the records. The SNR scores of every record are recomputed from the copy; frequency and drift scores are unchanged. The copy is analyzed with the real and the shifted labels.
+
+\paragraph{Resampling and deletions.} The day bootstrap draws the dates with replacement, 10{,}000 times (seed 20261121), and recomputes each $E$ from the drawn dates' sums. The block runs draw $\lceil n/L\rceil$ starting dates and take $L$ successive dates in date order from each, wrapping at the end, keeping the first $n$ (seed $20261121+L$). The prespecified deletion drops one date's sums; the fuller one also replaces, for the two dates whose shifted positions came from the deleted date, that shifted label's sums by the date's other shifted label's.
+
+\section{The anomaly rule as implemented}\label{app:rule}
+Each line pairs a phrase of Godfrey's statement~\cite{oefgr} with what the code does. In the right column $t$ is the record's time, $n$ the number of records in its window, $x$ its SNR (dB) or frequency (Hz), $\bar x$ the window mean and $s$ the window's sample standard deviation.
+
+\begin{center}
+\small
+\begin{tabular}{p{0.44\textwidth}p{0.48\textwidth}}
+\toprule
+Published rule & Implementation \\
+\midrule
+``a specific transmitterID-receiverID-frequency triple for a $\pm3$ hour analysis window'' & transmitter call sign, receiver call sign and band; the triple's records with time in $[t-3\,\mathrm{h},t+3\,\mathrm{h}]$, the record itself included \\
+mean and standard deviation & $\bar x$ and $s$ (divisor $n-1$) \\
+SNR or frequency ``not more than 0.75 standard deviation from the mean'' is discarded & $|x-\bar x|>0.75\,s$ flags; $s=0$ gives no flag; frequency in Hz \\
+``green for non-zero drift''; ``discard drift anomalies where there is a continual drift'' & nonzero drift, and fewer than half the window's records with nonzero drift \\
+``discard candidate SNR or Frequency anomalies based on a small count''; ``If the count is below five we extend up to $\pm3$ days'' & a record with $n<5$ gets no flag and is not scored; the $\pm3$-day extension is not implemented \\
+mobile stations ``detected from their call signs or the fact that the Maidenhead Grid locator changes'' & records with a slash in a call sign, a transmitter call starting 0, 1 or Q, or a call sign with more than one locator string among all 28 downloaded hours (four- and six-character strings counted as different) are dropped \\
+antenna positions from a separate database & centers of six-character locators (error up to about 5~km); four-character locators dropped \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A link-slot is flagged when any of its SNR, frequency or drift flags is set.
+
+\section{Variants and sensitivity runs}\label{app:variants}
+Each entry is $\Delta$ in flagged link-slots per 100 matched crossed link-slots, with its 95\% nominal day-bootstrap interval, except the mean-$|z|$ row: it is 100 times the same placebo-differenced matched contrast computed for the absolute standardized SNR score $|z|$ instead of the flag, so the 2-per-100 threshold does not apply to it. FL200+ means a barometric altitude of at least 20{,}000~ft. The distance rows are half-open bins $[a,b)$ of the high-track distance, with the primary controls. In each table the upper block repeats the variants fixed in the protocol and the lower block holds the sensitivity runs added after the first sample's frozen run; ``slot keys'' means matching on the two-minute slot start instead of the reported time. Under the decision rule only the primary and simulated-increase rows decide the outcome; the robustness condition is in Section~\ref{sec:results}. The per-date deletion results of each sample are under \texttt{leave\_one\_out} in the release's \texttt{data/sens.json} (first), \texttt{data/second-sample/sens.json} (second) and \texttt{data/pooled/sens.json} (pooled), and the fuller deletions in \texttt{data/review/loo-withheld-*.json}. The block intervals resample dates in date order; the other intervals use the frozen resampling order, so pooled limits from the two schemes can differ by 0.01 to 0.02.
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+Pooled, 72 days & Design W & Design M \\
+\midrule
+Primary (0.75 SD, FL200+, 5 km) & $+0.21$ ($-0.53$, $0.95$) & $+0.35$ ($-0.46$, $1.17$) \\
+1.0 SD tier & $+0.33$ ($-0.60$, $1.19$) & $+0.22$ ($-0.69$, $1.10$) \\
+SNR flag only & $+0.28$ ($-0.56$, $1.14$) & $+0.71$ ($-0.12$, $1.55$) \\
+Frequency flag only & $-0.17$ ($-1.00$, $0.61$) & $-0.29$ ($-1.09$, $0.53$) \\
+Drift flag only & $+0.25$ ($-0.00$, $0.49$) & $-0.14$ ($-0.53$, $0.23$) \\
+Radius 1 nautical mile & $+0.26$ ($-0.48$, $0.98$) & $+0.46$ ($-0.48$, $1.38$) \\
+Any airborne aircraft & $+0.25$ ($-0.45$, $0.92$) & $+0.16$ ($-0.64$, $0.95$) \\
+No coverage mask & $-0.10$ ($-0.49$, $0.28$) & $-0.08$ ($-0.36$, $0.18$) \\
+Distance 0--2 km & $+0.29$ ($-0.43$, $1.01$) & $+0.43$ ($-0.48$, $1.33$) \\
+Distance 2--5 km & $-0.13$ ($-1.56$, $1.25$) & $+0.02$ ($-1.49$, $1.56$) \\
+Distance 5--10 km & $+0.15$ ($-0.96$, $1.28$) & $-0.33$ ($-1.66$, $1.02$) \\
+Distance 10--25 km & $+0.10$ ($-0.78$, $0.93$) & $+0.09$ ($-1.02$, $1.16$) \\
+Mean $|z|$ of SNR, $\times100$ & $-0.11$ ($-1.10$, $0.82$) & $+0.04$ ($-1.13$, $1.24$) \\
+Simulated $+6$~dB SNR, $p=0.10$ & $+2.96$ ($2.19$, $3.70$) & $+2.68$ ($1.77$, $3.60$) \\
+\midrule
+Two-minute slot keys for matching & $+0.21$ ($-0.52$, $0.94$) & $+0.35$ ($-0.43$, $1.15$) \\
+Odd-minute records dropped at matching & $+0.22$ ($-0.51$, $0.96$) & $+0.35$ ($-0.43$, $1.15$) \\
+Strict control cutoffs & $+0.21$ ($-0.52$, $0.94$) & $+0.35$ ($-0.43$, $1.15$) \\
+All three together & $+0.22$ ($-0.51$, $0.96$) & $+0.35$ ($-0.43$, $1.15$) \\
+Blocks of 2 dates & $+0.21$ ($-0.56$, $0.99$) & $+0.35$ ($-0.48$, $1.15$) \\
+Blocks of 3 dates & $+0.21$ ($-0.58$, $0.99$) & $+0.35$ ($-0.45$, $1.13$) \\
+Blocks of 4 dates & $+0.21$ ($-0.55$, $0.96$) & $+0.35$ ($-0.39$, $1.05$) \\
+Blocks of 6 dates & $+0.21$ ($-0.51$, $0.92$) & $+0.35$ ($-0.38$, $1.02$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+Second sample, 36 days & Design W & Design M \\
+\midrule
+Primary (0.75 SD, FL200+, 5 km) & $-0.29$ ($-1.22$, $0.65$) & $+0.46$ ($-0.64$, $1.65$) \\
+1.0 SD tier & $-0.37$ ($-1.50$, $0.70$) & $+0.10$ ($-1.18$, $1.44$) \\
+SNR flag only & $-0.58$ ($-1.48$, $0.28$) & $+1.21$ ($0.05$, $2.36$) \\
+Frequency flag only & $-0.04$ ($-1.27$, $1.05$) & $-0.23$ ($-1.34$, $1.00$) \\
+Drift flag only & $+0.07$ ($-0.26$, $0.38$) & $-0.06$ ($-0.66$, $0.47$) \\
+Radius 1 nautical mile & $-0.30$ ($-1.21$, $0.57$) & $+0.41$ ($-0.85$, $1.72$) \\
+Any airborne aircraft & $+0.20$ ($-0.67$, $1.02$) & $+0.14$ ($-0.95$, $1.28$) \\
+No coverage mask & $-0.23$ ($-0.68$, $0.20$) & $+0.02$ ($-0.38$, $0.38$) \\
+Distance 0--2 km & $-0.17$ ($-1.08$, $0.69$) & $+0.36$ ($-0.87$, $1.63$) \\
+Distance 2--5 km & $-0.79$ ($-2.69$, $1.12$) & $+0.92$ ($-1.24$, $3.18$) \\
+Distance 5--10 km & $-0.30$ ($-1.72$, $1.14$) & $+0.49$ ($-1.21$, $2.28$) \\
+Distance 10--25 km & $+0.11$ ($-1.22$, $1.42$) & $+0.46$ ($-1.01$, $1.98$) \\
+Mean $|z|$ of SNR, $\times100$ & $-0.93$ ($-2.13$, $0.19$) & $+0.47$ ($-1.18$, $2.05$) \\
+Simulated $+6$~dB SNR, $p=0.10$ & $+2.29$ ($1.35$, $3.22$) & $+2.96$ ($1.75$, $4.25$) \\
+\midrule
+Two-minute slot keys for matching & $-0.29$ ($-1.22$, $0.65$) & $+0.46$ ($-0.64$, $1.65$) \\
+Odd-minute records dropped at matching & $-0.29$ ($-1.21$, $0.66$) & $+0.45$ ($-0.65$, $1.64$) \\
+Strict control cutoffs & $-0.29$ ($-1.22$, $0.65$) & $+0.46$ ($-0.64$, $1.65$) \\
+All three together & $-0.29$ ($-1.21$, $0.66$) & $+0.45$ ($-0.65$, $1.64$) \\
+Blocks of 2 dates & $-0.29$ ($-1.21$, $0.62$) & $+0.46$ ($-0.68$, $1.57$) \\
+Blocks of 3 dates & $-0.29$ ($-1.23$, $0.59$) & $+0.46$ ($-0.66$, $1.51$) \\
+Blocks of 4 dates & $-0.29$ ($-1.23$, $0.50$) & $+0.46$ ($-0.53$, $1.45$) \\
+Blocks of 6 dates & $-0.29$ ($-1.23$, $0.42$) & $+0.46$ ($-0.43$, $1.37$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+First sample, 36 days & Design W & Design M \\
+\midrule
+Primary (0.75 SD, FL200+, 5 km) & $+0.75$ ($-0.37$, $1.85$) & $+0.22$ ($-0.95$, $1.29$) \\
+1.0 SD tier & $+1.08$ ($-0.26$, $2.33$) & $+0.34$ ($-0.86$, $1.37$) \\
+SNR flag only & $+1.21$ ($-0.19$, $2.53$) & $+0.17$ ($-1.00$, $1.37$) \\
+Frequency flag only & $-0.32$ ($-1.40$, $0.75$) & $-0.40$ ($-1.59$, $0.77$) \\
+Drift flag only & $+0.43$ ($0.07$, $0.80$) & $-0.22$ ($-0.73$, $0.28$) \\
+Radius 1 nautical mile & $+0.86$ ($-0.28$, $2.01$) & $+0.49$ ($-0.89$, $1.80$) \\
+Any airborne aircraft & $+0.31$ ($-0.79$, $1.36$) & $+0.18$ ($-1.00$, $1.25$) \\
+No coverage mask & $+0.04$ ($-0.62$, $0.72$) & $-0.20$ ($-0.57$, $0.17$) \\
+Distance 0--2 km & $+0.79$ ($-0.36$, $1.94$) & $+0.48$ ($-0.86$, $1.74$) \\
+Distance 2--5 km & $+0.57$ ($-1.51$, $2.60$) & $-0.98$ ($-3.07$, $0.97$) \\
+Distance 5--10 km & $+0.63$ ($-1.12$, $2.37$) & $-1.23$ ($-3.27$, $0.67$) \\
+Distance 10--25 km & $+0.08$ ($-1.01$, $1.15$) & $-0.31$ ($-2.01$, $1.26$) \\
+Mean $|z|$ of SNR, $\times100$ & $+0.77$ ($-0.71$, $2.20$) & $-0.42$ ($-2.07$, $1.31$) \\
+Simulated $+6$~dB SNR, $p=0.10$ & $+3.68$ ($2.52$, $4.82$) & $+2.34$ ($0.93$, $3.62$) \\
+\midrule
+Two-minute slot keys for matching & $+0.75$ ($-0.37$, $1.85$) & $+0.21$ ($-0.95$, $1.29$) \\
+Odd-minute records dropped at matching & $+0.77$ ($-0.34$, $1.87$) & $+0.22$ ($-0.94$, $1.30$) \\
+Strict control cutoffs & $+0.75$ ($-0.37$, $1.85$) & $+0.22$ ($-0.95$, $1.29$) \\
+All three together & $+0.77$ ($-0.34$, $1.87$) & $+0.22$ ($-0.94$, $1.30$) \\
+Blocks of 2 dates & $+0.75$ ($-0.45$, $1.95$) & $+0.22$ ($-1.07$, $1.35$) \\
+Blocks of 3 dates & $+0.75$ ($-0.49$, $1.97$) & $+0.22$ ($-1.04$, $1.34$) \\
+Blocks of 4 dates & $+0.75$ ($-0.40$, $1.92$) & $+0.22$ ($-0.95$, $1.31$) \\
+Blocks of 6 dates & $+0.75$ ($-0.32$, $1.81$) & $+0.22$ ($-1.01$, $1.22$) \\
+Without December 1, 2025 (prespecified deletion) & $+0.91$ ($-0.18$, $2.01$) & $+0.24$ ($-0.96$, $1.35$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The strict-cutoff runs return the same statistics as the primary ones in every sample. Without odd-minute records design~W has 36{,}237 (first sample), 38{,}323 (second) and 74{,}560 (pooled) cases and design~M 32{,}347, 34{,}868 and 67{,}215; with slot keys design~M has 32{,}372, 34{,}882 and 67{,}254. Once odd-minute records are dropped, slot keys change no remaining time, so the three together equal the odd-minute run. Every lower-block run keeps both simulated-increase lower limits above zero. Over the prespecified single-date deletions the smallest is 0.72 (first sample), 1.16 (second) and 1.62 (pooled), and over the fuller deletions 0.56, 0.91 and 1.60.
+\section{Sample dates}\label{app:dates}
+\emph{First sample} (36 dates): December 1, 2022, and the first of each month from January 2023 to December 2025 except December 2023. A one-day pilot on December 1, 2023 (with November 1, 2023 as its shifted date), whose outcome statistic was not computed, set the design before the freeze: under a first draft, with ``uncrossed'' meaning no aircraft within 50~km, only 41 of 175{,}839 covered link-slots were uncrossed.
+
+\emph{Second sample} (36 dates): the 36 most recent first-of-month dates not used before, counting back from November 1, 2026, with a date missing any of its 488 ADS-B snapshots replaced by the next earlier unused complete date. December 1, 2020 (1 snapshot missing) and January 1, 2021 (4 missing) were replaced by October 1, 2020 and August 1, 2020; September 1, 2020 also lacked two. The sample is August, October and November 2020, February 2021 to November 2022, and January to November 2026.
+
+In the second sample 96.0\% of covered link-slots are crossed and 48{,}557 are eligible uncrossed, against 96.8\% and 48{,}032 in the first. In each sample a date's shifted positions come from the next and the previous date of that sample, in date order, the last date wrapping to the first.
+\section{Checks}\label{app:checks}
+\paragraph{Spot checker.} The spot checker imports nothing from the pipeline. It recomputes, for sampled link-slots (half crossed, half eligible uncrossed by their real labels), the window size and the SNR, frequency and drift scores from the raw WSPR files, and the two aircraft distances from re-downloaded snapshots with different formulas and 1-second sampling, accepting distances within 1.5~km of the stored ones, or both at least 29.5~km (the 30~km cap). It does not check coverage, shifted labels, simulated scores or the estimators; it detects a distance changed to 30~km and an SNR score shifted by 3. After the fix it found no mismatch in 140 link-slots on 7 first-sample dates and in 60 on 3 second-sample dates.
+
+\paragraph{Crossing geometry.} On 6 randomly drawn first-sample dates, a reference calculation that considers every aircraft in the raw snapshots and samples positions every second was compared with the main one for 960 link-slots near the cutoffs or used as controls. Three crossing or control labels change when the reference replaces the main calculation: two controls next to aircraft whose reported positions jump hundreds of kilometers in about a minute, and one record timed on an odd minute, whose sampling times differ between the two. On the other 957 the distances agree within 0.5~km. This tests agreement on sampled records only.
+
+\paragraph{Tallies.} The coverage, crossing and simulated-increase counts and the path-length medians of Section~\ref{sec:method} and the introduction come from \texttt{checks/tallies.py}, run on the units files; its output is \texttt{data/review/tallies.json}.
+
+\paragraph{Exact flags.} \texttt{exactflags.py} recomputes, for every record of each date, the window sums in unbounded integers and flags $|z|>0.75$ by the exact comparison $16(nx-S_1)^2(n-1)>9n(nS_2-S_1^2)$, with no flag when $nS_2-S_1^2=0$, for the real and the simulated SNR and for the frequency offset. Over 45{,}033{,}331 scored link-slots no flag differs from the recorded run. On four dates (June, August, September and October 2025) a malformed report puts a frequency about $2^{32}$~Hz from its link's first value, beyond what 64-bit squares hold; the exact check covers these dates too.
+
+\end{appendices}
+\end{document}

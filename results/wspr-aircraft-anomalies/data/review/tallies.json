@@ -1,0 +1,737 @@
+{
+ "total": {
+  "scored": 45033331,
+  "labeled": 45033331,
+  "covered": 26692421,
+  "crossed": 25741283,
+  "uncrossed": 96589,
+  "crossed_labeled": 41301615,
+  "planted": 4128269,
+  "planted_covered_crossed": 2572854,
+  "median_length_crossed_km": 957.6,
+  "median_length_uncrossed_km": 197.1,
+  "planted_share_of_crossed_labeled": 0.09995
+ },
+ "per_date": {
+  "2020-08-01": {
+   "scored": 191461,
+   "labeled": 191461,
+   "covered": 86741,
+   "crossed": 81556,
+   "uncrossed": 482,
+   "crossed_labeled": 156575,
+   "planted": 15880,
+   "planted_covered_crossed": 8308
+  },
+  "2020-10-01": {
+   "scored": 198416,
+   "labeled": 198416,
+   "covered": 102206,
+   "crossed": 96031,
+   "uncrossed": 618,
+   "crossed_labeled": 173139,
+   "planted": 17335,
+   "planted_covered_crossed": 9550
+  },
+  "2020-11-01": {
+   "scored": 322731,
+   "labeled": 322731,
+   "covered": 148822,
+   "crossed": 137577,
+   "uncrossed": 1272,
+   "crossed_labeled": 248611,
+   "planted": 24610,
+   "planted_covered_crossed": 13515
+  },
+  "2021-02-01": {
+   "scored": 295754,
+   "labeled": 295754,
+   "covered": 108728,
+   "crossed": 94552,
+   "uncrossed": 1551,
+   "crossed_labeled": 223409,
+   "planted": 22152,
+   "planted_covered_crossed": 9429
+  },
+  "2021-03-01": {
+   "scored": 281146,
+   "labeled": 281146,
+   "covered": 124459,
+   "crossed": 110137,
+   "uncrossed": 1263,
+   "crossed_labeled": 218775,
+   "planted": 21968,
+   "planted_covered_crossed": 11070
+  },
+  "2021-04-01": {
+   "scored": 297112,
+   "labeled": 297112,
+   "covered": 132915,
+   "crossed": 121642,
+   "uncrossed": 1003,
+   "crossed_labeled": 249645,
+   "planted": 25140,
+   "planted_covered_crossed": 12291
+  },
+  "2021-05-01": {
+   "scored": 378658,
+   "labeled": 378658,
+   "covered": 147005,
+   "crossed": 131339,
+   "uncrossed": 1822,
+   "crossed_labeled": 290233,
+   "planted": 29056,
+   "planted_covered_crossed": 13316
+  },
+  "2021-06-01": {
+   "scored": 416796,
+   "labeled": 416796,
+   "covered": 206911,
+   "crossed": 188842,
+   "uncrossed": 1192,
+   "crossed_labeled": 340797,
+   "planted": 34122,
+   "planted_covered_crossed": 18985
+  },
+  "2021-07-01": {
+   "scored": 350249,
+   "labeled": 350249,
+   "covered": 178884,
+   "crossed": 169580,
+   "uncrossed": 683,
+   "crossed_labeled": 305225,
+   "planted": 30375,
+   "planted_covered_crossed": 16960
+  },
+  "2021-08-01": {
+   "scored": 425125,
+   "labeled": 425125,
+   "covered": 244376,
+   "crossed": 233464,
+   "uncrossed": 1134,
+   "crossed_labeled": 376484,
+   "planted": 37578,
+   "planted_covered_crossed": 23205
+  },
+  "2021-09-01": {
+   "scored": 359029,
+   "labeled": 359029,
+   "covered": 194417,
+   "crossed": 184833,
+   "uncrossed": 1061,
+   "crossed_labeled": 315953,
+   "planted": 31775,
+   "planted_covered_crossed": 18658
+  },
+  "2021-10-01": {
+   "scored": 466122,
+   "labeled": 466122,
+   "covered": 244888,
+   "crossed": 235190,
+   "uncrossed": 835,
+   "crossed_labeled": 422318,
+   "planted": 42305,
+   "planted_covered_crossed": 23568
+  },
+  "2021-11-01": {
+   "scored": 509246,
+   "labeled": 509246,
+   "covered": 289832,
+   "crossed": 277394,
+   "uncrossed": 1234,
+   "crossed_labeled": 461974,
+   "planted": 45742,
+   "planted_covered_crossed": 27531
+  },
+  "2021-12-01": {
+   "scored": 418401,
+   "labeled": 418401,
+   "covered": 227883,
+   "crossed": 216812,
+   "uncrossed": 1122,
+   "crossed_labeled": 374027,
+   "planted": 37514,
+   "planted_covered_crossed": 21715
+  },
+  "2022-01-01": {
+   "scored": 457594,
+   "labeled": 457594,
+   "covered": 238706,
+   "crossed": 226556,
+   "uncrossed": 1081,
+   "crossed_labeled": 379159,
+   "planted": 37631,
+   "planted_covered_crossed": 22447
+  },
+  "2022-02-01": {
+   "scored": 422187,
+   "labeled": 422187,
+   "covered": 227146,
+   "crossed": 211454,
+   "uncrossed": 1690,
+   "crossed_labeled": 367937,
+   "planted": 37000,
+   "planted_covered_crossed": 21142
+  },
+  "2022-03-01": {
+   "scored": 528542,
+   "labeled": 528542,
+   "covered": 297321,
+   "crossed": 281183,
+   "uncrossed": 1816,
+   "crossed_labeled": 476185,
+   "planted": 47604,
+   "planted_covered_crossed": 28057
+  },
+  "2022-04-01": {
+   "scored": 450468,
+   "labeled": 450468,
+   "covered": 234501,
+   "crossed": 226328,
+   "uncrossed": 996,
+   "crossed_labeled": 414396,
+   "planted": 41065,
+   "planted_covered_crossed": 22554
+  },
+  "2022-05-01": {
+   "scored": 545265,
+   "labeled": 545265,
+   "covered": 282991,
+   "crossed": 270700,
+   "uncrossed": 1384,
+   "crossed_labeled": 492983,
+   "planted": 49045,
+   "planted_covered_crossed": 26910
+  },
+  "2022-06-01": {
+   "scored": 425730,
+   "labeled": 425730,
+   "covered": 229217,
+   "crossed": 222555,
+   "uncrossed": 720,
+   "crossed_labeled": 394000,
+   "planted": 38918,
+   "planted_covered_crossed": 21903
+  },
+  "2022-07-01": {
+   "scored": 419902,
+   "labeled": 419902,
+   "covered": 225380,
+   "crossed": 218789,
+   "uncrossed": 614,
+   "crossed_labeled": 392542,
+   "planted": 39391,
+   "planted_covered_crossed": 21970
+  },
+  "2022-08-01": {
+   "scored": 482250,
+   "labeled": 482250,
+   "covered": 293066,
+   "crossed": 283727,
+   "uncrossed": 845,
+   "crossed_labeled": 448752,
+   "planted": 45039,
+   "planted_covered_crossed": 28529
+  },
+  "2022-09-01": {
+   "scored": 521618,
+   "labeled": 521618,
+   "covered": 343860,
+   "crossed": 332413,
+   "uncrossed": 958,
+   "crossed_labeled": 491603,
+   "planted": 49060,
+   "planted_covered_crossed": 33181
+  },
+  "2022-10-01": {
+   "scored": 636320,
+   "labeled": 636320,
+   "covered": 374097,
+   "crossed": 359493,
+   "uncrossed": 1472,
+   "crossed_labeled": 588309,
+   "planted": 58810,
+   "planted_covered_crossed": 35907
+  },
+  "2022-11-01": {
+   "scored": 611849,
+   "labeled": 611849,
+   "covered": 377274,
+   "crossed": 363703,
+   "uncrossed": 1199,
+   "crossed_labeled": 568466,
+   "planted": 57009,
+   "planted_covered_crossed": 36518
+  },
+  "2026-01-01": {
+   "scored": 1023208,
+   "labeled": 1023208,
+   "covered": 613956,
+   "crossed": 593397,
+   "uncrossed": 2700,
+   "crossed_labeled": 935974,
+   "planted": 93385,
+   "planted_covered_crossed": 59426
+  },
+  "2026-02-01": {
+   "scored": 878857,
+   "labeled": 878857,
+   "covered": 570415,
+   "crossed": 552991,
+   "uncrossed": 2158,
+   "crossed_labeled": 802037,
+   "planted": 80541,
+   "planted_covered_crossed": 55589
+  },
+  "2026-03-01": {
+   "scored": 1248685,
+   "labeled": 1248685,
+   "covered": 805316,
+   "crossed": 783042,
+   "uncrossed": 2479,
+   "crossed_labeled": 1158987,
+   "planted": 116243,
+   "planted_covered_crossed": 78562
+  },
+  "2026-04-01": {
+   "scored": 1096521,
+   "labeled": 1096521,
+   "covered": 655286,
+   "crossed": 635769,
+   "uncrossed": 1929,
+   "crossed_labeled": 1025550,
+   "planted": 102319,
+   "planted_covered_crossed": 63184
+  },
+  "2026-05-01": {
+   "scored": 832976,
+   "labeled": 832976,
+   "covered": 499777,
+   "crossed": 485785,
+   "uncrossed": 1560,
+   "crossed_labeled": 774408,
+   "planted": 77731,
+   "planted_covered_crossed": 48730
+  },
+  "2026-06-01": {
+   "scored": 922971,
+   "labeled": 922971,
+   "covered": 552750,
+   "crossed": 536413,
+   "uncrossed": 1629,
+   "crossed_labeled": 863270,
+   "planted": 86271,
+   "planted_covered_crossed": 53751
+  },
+  "2026-07-01": {
+   "scored": 859967,
+   "labeled": 859967,
+   "covered": 515844,
+   "crossed": 496708,
+   "uncrossed": 1803,
+   "crossed_labeled": 798289,
+   "planted": 80046,
+   "planted_covered_crossed": 49720
+  },
+  "2026-08-01": {
+   "scored": 957695,
+   "labeled": 957695,
+   "covered": 587222,
+   "crossed": 568782,
+   "uncrossed": 1459,
+   "crossed_labeled": 901794,
+   "planted": 90222,
+   "planted_covered_crossed": 56899
+  },
+  "2026-09-01": {
+   "scored": 727424,
+   "labeled": 727424,
+   "covered": 447026,
+   "crossed": 433120,
+   "uncrossed": 1500,
+   "crossed_labeled": 683374,
+   "planted": 68471,
+   "planted_covered_crossed": 43103
+  },
+  "2026-10-01": {
+   "scored": 872119,
+   "labeled": 872119,
+   "covered": 544736,
+   "crossed": 528775,
+   "uncrossed": 1837,
+   "crossed_labeled": 815898,
+   "planted": 81814,
+   "planted_covered_crossed": 52819
+  },
+  "2026-11-01": {
+   "scored": 894056,
+   "labeled": 894056,
+   "covered": 594818,
+   "crossed": 581009,
+   "uncrossed": 1456,
+   "crossed_labeled": 832770,
+   "planted": 83578,
+   "planted_covered_crossed": 58294
+  },
+  "2022-12-01": {
+   "scored": 520827,
+   "labeled": 520827,
+   "covered": 329887,
+   "crossed": 318366,
+   "uncrossed": 1195,
+   "crossed_labeled": 482534,
+   "planted": 48364,
+   "planted_covered_crossed": 31867
+  },
+  "2023-01-01": {
+   "scored": 456095,
+   "labeled": 456095,
+   "covered": 280190,
+   "crossed": 268747,
+   "uncrossed": 1417,
+   "crossed_labeled": 402416,
+   "planted": 40091,
+   "planted_covered_crossed": 26871
+  },
+  "2023-02-01": {
+   "scored": 600910,
+   "labeled": 600910,
+   "covered": 333107,
+   "crossed": 319323,
+   "uncrossed": 1492,
+   "crossed_labeled": 551198,
+   "planted": 55079,
+   "planted_covered_crossed": 31859
+  },
+  "2023-03-01": {
+   "scored": 632926,
+   "labeled": 632926,
+   "covered": 411437,
+   "crossed": 396412,
+   "uncrossed": 1571,
+   "crossed_labeled": 586810,
+   "planted": 58463,
+   "planted_covered_crossed": 39387
+  },
+  "2023-04-01": {
+   "scored": 585287,
+   "labeled": 585287,
+   "covered": 340639,
+   "crossed": 329389,
+   "uncrossed": 1143,
+   "crossed_labeled": 543457,
+   "planted": 54414,
+   "planted_covered_crossed": 32997
+  },
+  "2023-05-01": {
+   "scored": 652858,
+   "labeled": 652858,
+   "covered": 354545,
+   "crossed": 342105,
+   "uncrossed": 1400,
+   "crossed_labeled": 598790,
+   "planted": 59887,
+   "planted_covered_crossed": 33917
+  },
+  "2023-06-01": {
+   "scored": 532132,
+   "labeled": 532132,
+   "covered": 321338,
+   "crossed": 309776,
+   "uncrossed": 1280,
+   "crossed_labeled": 492516,
+   "planted": 49378,
+   "planted_covered_crossed": 30969
+  },
+  "2023-07-01": {
+   "scored": 563984,
+   "labeled": 563984,
+   "covered": 330616,
+   "crossed": 319125,
+   "uncrossed": 1068,
+   "crossed_labeled": 523742,
+   "planted": 52359,
+   "planted_covered_crossed": 31955
+  },
+  "2023-08-01": {
+   "scored": 497117,
+   "labeled": 497117,
+   "covered": 277324,
+   "crossed": 268556,
+   "uncrossed": 721,
+   "crossed_labeled": 461500,
+   "planted": 46209,
+   "planted_covered_crossed": 26780
+  },
+  "2023-09-01": {
+   "scored": 553466,
+   "labeled": 553466,
+   "covered": 333190,
+   "crossed": 323066,
+   "uncrossed": 1178,
+   "crossed_labeled": 514041,
+   "planted": 51132,
+   "planted_covered_crossed": 32219
+  },
+  "2023-10-01": {
+   "scored": 708005,
+   "labeled": 708005,
+   "covered": 456686,
+   "crossed": 443818,
+   "uncrossed": 1132,
+   "crossed_labeled": 660513,
+   "planted": 65919,
+   "planted_covered_crossed": 44447
+  },
+  "2023-11-01": {
+   "scored": 626480,
+   "labeled": 626480,
+   "covered": 380102,
+   "crossed": 368692,
+   "uncrossed": 1083,
+   "crossed_labeled": 580782,
+   "planted": 58031,
+   "planted_covered_crossed": 36733
+  },
+  "2024-01-01": {
+   "scored": 638824,
+   "labeled": 638824,
+   "covered": 371746,
+   "crossed": 360489,
+   "uncrossed": 1501,
+   "crossed_labeled": 563787,
+   "planted": 55928,
+   "planted_covered_crossed": 35739
+  },
+  "2024-02-01": {
+   "scored": 666266,
+   "labeled": 666266,
+   "covered": 390458,
+   "crossed": 374984,
+   "uncrossed": 1828,
+   "crossed_labeled": 608022,
+   "planted": 60228,
+   "planted_covered_crossed": 37273
+  },
+  "2024-03-01": {
+   "scored": 805348,
+   "labeled": 805348,
+   "covered": 469183,
+   "crossed": 456219,
+   "uncrossed": 1180,
+   "crossed_labeled": 754684,
+   "planted": 75641,
+   "planted_covered_crossed": 45456
+  },
+  "2024-04-01": {
+   "scored": 701144,
+   "labeled": 701144,
+   "covered": 380328,
+   "crossed": 368672,
+   "uncrossed": 1429,
+   "crossed_labeled": 645953,
+   "planted": 64336,
+   "planted_covered_crossed": 36586
+  },
+  "2024-05-01": {
+   "scored": 522768,
+   "labeled": 522768,
+   "covered": 267924,
+   "crossed": 257332,
+   "uncrossed": 1138,
+   "crossed_labeled": 468262,
+   "planted": 46736,
+   "planted_covered_crossed": 25560
+  },
+  "2024-06-01": {
+   "scored": 567935,
+   "labeled": 567935,
+   "covered": 309038,
+   "crossed": 297540,
+   "uncrossed": 1124,
+   "crossed_labeled": 517372,
+   "planted": 52084,
+   "planted_covered_crossed": 29784
+  },
+  "2024-07-01": {
+   "scored": 522258,
+   "labeled": 522258,
+   "covered": 303491,
+   "crossed": 293489,
+   "uncrossed": 944,
+   "crossed_labeled": 490477,
+   "planted": 49223,
+   "planted_covered_crossed": 29459
+  },
+  "2024-08-01": {
+   "scored": 438110,
+   "labeled": 438110,
+   "covered": 258192,
+   "crossed": 250330,
+   "uncrossed": 677,
+   "crossed_labeled": 408265,
+   "planted": 40939,
+   "planted_covered_crossed": 25219
+  },
+  "2024-09-01": {
+   "scored": 400209,
+   "labeled": 400209,
+   "covered": 248809,
+   "crossed": 241245,
+   "uncrossed": 511,
+   "crossed_labeled": 371458,
+   "planted": 37280,
+   "planted_covered_crossed": 24324
+  },
+  "2024-10-01": {
+   "scored": 748651,
+   "labeled": 748651,
+   "covered": 460971,
+   "crossed": 446681,
+   "uncrossed": 1192,
+   "crossed_labeled": 698465,
+   "planted": 69833,
+   "planted_covered_crossed": 44704
+  },
+  "2024-11-01": {
+   "scored": 796297,
+   "labeled": 796297,
+   "covered": 488692,
+   "crossed": 472867,
+   "uncrossed": 1238,
+   "crossed_labeled": 747370,
+   "planted": 74753,
+   "planted_covered_crossed": 47334
+  },
+  "2024-12-01": {
+   "scored": 763918,
+   "labeled": 763918,
+   "covered": 510647,
+   "crossed": 498567,
+   "uncrossed": 1140,
+   "crossed_labeled": 718638,
+   "planted": 71652,
+   "planted_covered_crossed": 49742
+  },
+  "2025-01-01": {
+   "scored": 666223,
+   "labeled": 666223,
+   "covered": 435480,
+   "crossed": 422328,
+   "uncrossed": 1458,
+   "crossed_labeled": 607766,
+   "planted": 61025,
+   "planted_covered_crossed": 42477
+  },
+  "2025-02-01": {
+   "scored": 966654,
+   "labeled": 966654,
+   "covered": 594385,
+   "crossed": 574704,
+   "uncrossed": 2093,
+   "crossed_labeled": 891559,
+   "planted": 88992,
+   "planted_covered_crossed": 57553
+  },
+  "2025-03-01": {
+   "scored": 974110,
+   "labeled": 974110,
+   "covered": 639383,
+   "crossed": 621078,
+   "uncrossed": 2183,
+   "crossed_labeled": 906595,
+   "planted": 90899,
+   "planted_covered_crossed": 62517
+  },
+  "2025-04-01": {
+   "scored": 1057333,
+   "labeled": 1057333,
+   "covered": 630219,
+   "crossed": 608880,
+   "uncrossed": 1856,
+   "crossed_labeled": 986093,
+   "planted": 98149,
+   "planted_covered_crossed": 60405
+  },
+  "2025-05-01": {
+   "scored": 722620,
+   "labeled": 722620,
+   "covered": 401526,
+   "crossed": 387883,
+   "uncrossed": 1360,
+   "crossed_labeled": 671748,
+   "planted": 67265,
+   "planted_covered_crossed": 38888
+  },
+  "2025-06-01": {
+   "scored": 578458,
+   "labeled": 578458,
+   "covered": 393363,
+   "crossed": 380524,
+   "uncrossed": 1318,
+   "crossed_labeled": 536932,
+   "planted": 53508,
+   "planted_covered_crossed": 38022
+  },
+  "2025-07-01": {
+   "scored": 639850,
+   "labeled": 639850,
+   "covered": 379519,
+   "crossed": 368412,
+   "uncrossed": 999,
+   "crossed_labeled": 602448,
+   "planted": 59941,
+   "planted_covered_crossed": 36554
+  },
+  "2025-08-01": {
+   "scored": 794606,
+   "labeled": 794606,
+   "covered": 492301,
+   "crossed": 477236,
+   "uncrossed": 995,
+   "crossed_labeled": 754306,
+   "planted": 75616,
+   "planted_covered_crossed": 47847
+  },
+  "2025-09-01": {
+   "scored": 956487,
+   "labeled": 956487,
+   "covered": 548124,
+   "crossed": 526988,
+   "uncrossed": 2073,
+   "crossed_labeled": 887701,
+   "planted": 88528,
+   "planted_covered_crossed": 52595
+  },
+  "2025-10-01": {
+   "scored": 661708,
+   "labeled": 661708,
+   "covered": 454219,
+   "crossed": 441747,
+   "uncrossed": 1442,
+   "crossed_labeled": 622250,
+   "planted": 61725,
+   "planted_covered_crossed": 43847
+  },
+  "2025-11-01": {
+   "scored": 942279,
+   "labeled": 942279,
+   "covered": 614394,
+   "crossed": 596379,
+   "uncrossed": 1914,
+   "crossed_labeled": 884114,
+   "planted": 88487,
+   "planted_covered_crossed": 59955
+  },
+  "2025-12-01": {
+   "scored": 844738,
+   "labeled": 844738,
+   "covered": 552196,
+   "crossed": 537693,
+   "uncrossed": 1759,
+   "crossed_labeled": 795203,
+   "planted": 79430,
+   "planted_covered_crossed": 53717
+  }
+ }
+}

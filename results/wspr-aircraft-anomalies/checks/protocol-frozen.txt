@@ -1,0 +1,153 @@
+# Frozen protocol: WSPR anomalies on aircraft-crossed links
+
+Written and frozen before any outcome on the sample days was computed. The
+code in `code/` implements this text; where they differ, this text governs
+and the difference is reported as a deviation.
+
+## 1. Question
+
+Do WSPR spots whose transmitter–receiver great-circle path is crossed by an
+ADS-B-tracked aircraft during the transmission carry the published GDTAAA
+"anomaly" flags more often than matched spots whose paths no tracked
+aircraft came near?
+
+The claim under test is the one the GDTAAA authors state: "WSPRnet links show
+statistically significant anomalies when an aircraft is on the great circle
+path between the transmitter and receiver" (Godfrey, in reply to a commenter, OE-FGR case
+study page, 18 May 2024; [sources](SOURCES.md)). Whether WSPR can locate
+aircraft, and so MH370, is an interpretation for experts and is not tested.
+
+## 2. Data
+
+- **WSPR:** every spot in the public wspr.live mirror of the WSPRnet
+  database (`wspr.rx`: time, band, tx_sign, tx_loc, rx_sign, rx_loc,
+  frequency, snr, drift), from 21:00 UTC on the day before each sample day
+  to 01:00 UTC on the day after, queried hour by hour.
+- **ADS-B:** ADS-B Exchange's free first-of-month `readsb-hist` snapshots
+  at HH:MM:00Z for minutes 0–60 of eight one-hour blocks starting 00, 03,
+  …, 21 UTC (61 snapshots per block). Each aircraft's position time is
+  the snapshot's `now` minus its `seen_pos`. Positions older than 60 s are
+  dropped.
+- **Sample days:** the first of each month, January 2023 to December 2025
+  (36 days), except 1 December 2023 (the pilot), which is replaced by
+  1 December 2022. **Test slots:** the 30 two-minute WSPR slots in each block,
+  so 240 per day and 8,640 in all.
+- **Pilot:** 1 December 2023 (outside the sample), with 1 November 2023 as its
+  placebo day, used only for mechanics: counts, timing, memory and the planted
+  control's shift. Its excess was not displayed. The pilot changed the design
+  before this freeze. Under the first draft (uncrossed = no aircraft within
+  50 km) only 41 of 175,839 covered link-slots were uncrossed and 167,730 were
+  crossed, because an airliner sweeps across nearly every path over 100 km in
+  110 s. Hence the control arm in section 4, the larger sample and the
+  placebo-differenced statistic in section 5.
+
+## 3. Anomaly rule (GDTAAA, mapped before any outcome)
+
+The source passages are quoted in [SOURCES.md](SOURCES.md). The rule maps to code like this:
+
+| Published rule | Code |
+| --- | --- |
+| Baseline from "a specific transmitterID-receiverID-frequency triple for a ±3 hour analysis window (centred on the test datum)" | triple = (tx call sign, rx call sign, band); window = the triple's spots with time in [t−3 h, t+3 h], the test spot included |
+| Mean and standard deviation over the window | sample mean and sample SD (n−1), as MATLAB's `std` |
+| SNR anomaly "more than 0.75 standard deviation from the mean" (current setting, 2024) | \|SNR − mean\| > 0.75 SD; SD 0 gives no anomaly |
+| Frequency anomaly, same limit | \|received frequency − mean\| > 0.75 SD, in Hz |
+| "green for non-zero drift"; "discard drift anomalies where there is a continual drift during this analysis timeframe" | drift ≠ 0 at the spot, and under half the window's spots have drift ≠ 0 |
+| "discard candidate SNR or Frequency anomalies based on a small count"; "If the count is below five we extend up to ±3 days" | spots with fewer than 5 window spots are not scored. **Deviation:** the ±3-day extension is not implemented. It only removes sparse links from the sample and cannot create an association. |
+| Mobile stations "discounted"; "detected from their call signs or the fact that the Maidenhead Grid locator changes" | spots with a call sign containing "/", a transmitter call starting 0, 1 or Q (balloon telemetry), or a call sign reported with more than one locator in the downloaded day, are dropped |
+| Antenna positions from a private database | **Deviation:** 6-character Maidenhead locators (centre of the sub-square, error up to about 5 km). 4-character locators are dropped. This is why the crossing radius is 5 km, not the 1 nmi of the authors' ROC labels (1 nmi is a sensitivity run) |
+
+**Anomaly flag A** is an SNR, frequency or drift anomaly (the union). Exact
+duplicate rows are dropped first. A link-slot with several differing spots
+is dropped. Links shorter than 100 km are dropped.
+
+## 4. Crossing labels
+
+- Aircraft tracks over a slot come from the snapshots at slot start, +60 s
+  and +120 s. Positions are interpolated linearly between an aircraft's
+  reports. Outside them the code dead-reckons up to 60 s from ground speed
+  and track, or holds a report up to 15 s old when speed or track is missing.
+  Positions are sampled at 1, 6, …, 111 s, which covers the 110.6-s
+  transmission starting at second 1.
+- Distance is to the **minor great-circle arc** between the locator centres
+  on a 6,371-km sphere, minimised over the samples. A sign change of the
+  cross-track distance inside the arc between two samples counts as
+  distance 0.
+- **Crossed:** an aircraft reporting barometric altitude ≥ 20,000 ft
+  (FL200) comes within **5 km** of the arc.
+- **Uncrossed:** no FL200+ aircraft comes within **25 km**, and no airborne
+  aircraft (any altitude, or altitude unknown; aircraft reporting only
+  "ground" excluded) within **5 km**. Link-slots between the two are in
+  neither group.
+- **Coverage mask:** a 1°×1° cell is covered in a block when at least one
+  aircraft is reported in it in at least 25% of the block's snapshots. A
+  link-slot is used only when every cell along its arc (sampled every
+  10 km or less) is covered. This makes "uncrossed" mean "no aircraft where
+  ADS-B Exchange sees aircraft".
+
+## 5. Designs and estimator
+
+- **Design W (same link):** controls for a crossed link-slot are the
+  uncrossed slots of the same (tx, rx, band) link within ±30 minutes. This
+  holds the link, station hardware and propagation regime fixed.
+- **Design M (matched links):** controls are uncrossed link-slots in the
+  same two-minute slot and band, sharing the transmitter or the receiver,
+  not the same link, with path length within a factor 0.8–1.25. This holds
+  the slot, band and one station fixed.
+- For each crossed link-slot with at least one control:
+  d = A − mean(A over its controls). The **excess** E is the mean of d,
+  read as excess anomalies per crossed link-slot (×100 for per 100).
+- E is computed three times on the same WSPR units: with the real labels,
+  and with the labels from each of the two placebo days (section 6). The
+  **primary statistic** is Δ = E_real − (E_placebo1 + E_placebo2)/2. Matching
+  that leaves the "quiet" control link-slots systematically different from
+  crossed ones gives the same excess under the placebo labels, so Δ removes
+  it.
+- **Uncertainty:** day-clustered bootstrap (whole sample days resampled with
+  replacement, 10,000 resamples, seed 20261121), with a percentile 95%
+  interval. A day is the conservative cluster: flights, receivers and
+  propagation events are shared within a day.
+
+## 6. Controls
+
+- **Placebos:** the same labels computed from the ADS-B of the *next* and
+  of the *previous* sample day at the same UTC times, cyclically over the
+  sorted sample (the first day's previous is the last). This keeps the
+  time-of-day traffic pattern and route geometry but breaks the physical
+  coincidence. E_placebo and its interval are reported for each.
+- **Planted (positive control):** in a copy of the WSPR data, 10% of the
+  crossed link-slots (seed 20261121 + date) get +6 dB SNR, and the anomaly
+  rule is recomputed. The test must detect this.
+
+## 7. Outcome rule (applied in this order, `analyze.py: verdict`)
+
+All bounds are on Δ (day-bootstrap percentile 95% interval).
+
+1. If the planted control's Δ lower bound is not above 0 in both designs:
+   **INCONCLUSIVE** (the test cannot see a planted effect).
+2. If the primary Δ lower bound is above 0 in both designs: **POSITIVE**,
+   with its size.
+3. If the primary Δ upper bound is below 2 per 100 crossed link-slots in
+   both designs: **NEGATIVE**, stated as "aircraft crossings raise the
+   anomaly rate by less than 2 per 100 link-slots".
+4. Otherwise **INCONCLUSIVE**.
+
+The bound U = 2 per 100 is fixed here. At the published base rates (tens of
+percent of links anomalous), a lift under 2 points gives a likelihood
+ratio near 1, useless for locating an aircraft.
+
+## 8. Reported but not decisive
+
+These runs are all listed in `analyze.py: VARIANTS`: the 1.0-SD tier; SNR,
+frequency and drift flags separately; a crossing radius of 1 nmi; crossing by
+any airborne aircraft; no coverage mask; the mean |z| of SNR in place of the
+flag (in z units, not per 100); a dose–response over aircraft distance bins
+0–2, 2–5, 5–10 and 10–25 km against the same uncrossed controls; and
+the operating point (anomaly rate among crossed and uncrossed link-slots).
+
+## 9. Scope of the conclusion
+
+The result is stated for: spots on WSPRnet as mirrored by wspr.live;
+aircraft seen by ADS-B Exchange; paths in covered cells; the GDTAAA rule
+above with 6-character locators; the 36 sample days. It says nothing about
+aircraft that ADS-B does not see, about other anomaly rules, or about
+methods using data beyond the WSPRnet spot fields.

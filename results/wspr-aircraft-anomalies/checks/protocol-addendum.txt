@@ -1,0 +1,103 @@
+# Protocol addendum: a second, unseen sample of 36 dates
+
+Written and committed on November 22, 2026, on the owner's instruction,
+before any data for the new dates was downloaded or labeled. It adds a
+replication sample and a pooled analysis. Everything in
+[PROTOCOL.md](PROTOCOL.md) stays as frozen; the code in `code/` runs
+unchanged, except that the date list comes from `code/days_new.py` instead
+of `code/days.py`.
+
+## Why
+
+On the first 36 dates the frozen outcome is NEGATIVE, but leaving out one
+date (2025-12-01) raises design W's upper limit to 2.01 (NOTE.md, Sensitivity
+runs). The owner asked for a fresh set of dates the analysis has never seen,
+doubling the sample, analyzed with the frozen designs, bar, placebos and
+planted control.
+
+## 1. New dates
+
+ADS-B Exchange publishes its free `readsb-hist` samples only for the first
+day of each month. On November 22, 2026 they exist from July 1, 2016 to
+November 1, 2026, except October 1, 2017 (checked by requesting each month's
+00:00:00Z snapshot). The dates used before are the 36 sample dates and the
+pilot date, December 1, 2023 (PROTOCOL.md section 2).
+
+The new sample is fixed by one rule: **the 36 most recent first-of-month
+dates not used before, counting back from November 1, 2026.** That is
+January 1 to November 1, 2026 (11 dates) and November 1, 2020 to
+November 1, 2022 (25 dates). `code/days_new.py` lists them.
+
+If a new date's downloads are incomplete (any of the 488 snapshots missing,
+or any WSPR hour failing after the fetcher's retries), it is reported and
+replaced by the next earlier unused first-of-month date, in order. No date is
+replaced for any other reason.
+
+## 2. Analysis
+
+- **Units:** `code/fetch.py` and `code/prep.py`, unchanged, on each new date.
+- **Placebos:** the next and previous date of the *new* sample, cyclically
+  over the sorted new sample (PROTOCOL.md section 5, applied to the new
+  list). The first 36 dates keep their recorded units and placebos.
+- **New dates alone:** `code/analyze.py` on the 36 new units files, with
+  its frozen designs, statistic, day bootstrap (10,000 draws, seed
+  20261121), variants, planted control and decision rule.
+- **Pooled:** `code/analyze.py` on all 72 units files (old and new), with
+  the same settings. Days are the resampling units, as before.
+- **Dependence on single dates:** `code/sens.py` on the 72 files (leave one
+  date out, cyclic block bootstraps of 2, 3, 4 and 6 dates over the
+  date-sorted pooled sample, and its matching variants), and on the 36 new
+  files.
+- **Spot check:** `code/check.py` on 20 random units of three new dates
+  drawn with `random.Random(20261122)`; any mismatch is reported and
+  traced before the outcome is used.
+
+## 3. Decision, fixed now
+
+The pooled analysis decides; the new dates alone are reported beside it
+and do not change the reading.
+
+- **Robust negative:** the pooled verdict under the frozen rule is NEGATIVE
+  (both pooled upper limits below 2 per 100, both planted lower limits above
+  0), **and** it stays NEGATIVE in each of the 72 single-date deletions and
+  at each block length 2, 3, 4 and 6. The paper then states the negative as
+  robust to these checks.
+- **Otherwise:** the claim becomes "inconclusive at this sensitivity",
+  stated plainly, with the pooled estimates and intervals, and the pooled
+  verdict under the frozen rule reported as it falls. A pooled POSITIVE
+  under the frozen rule is reported as POSITIVE.
+
+## 4. Estimate, written before the run
+
+From the first run's receipts (NOTE.md, Attempts): fetch about 42 CPU-s
+per date, prep about 0.31 CPU-hours per date at a peak of 8.2–8.5 GB, the
+36-date analysis 0.67 CPU-hours at 6.1 GB. For the new sample: fetch 0.4,
+prep 11.2, analysis of the new dates 0.7, pooled analysis about 1.4 (about
+12 GB peak, under 80% of the 17 GB sandbox), `sens.py` on 36 and 72 dates
+about 1.5, checks 0.2: about 15.4 CPU-hours, and at most 23 with a factor
+of 1.5. Data: about 0.5 GB per date after reduction, about 18 GB in all,
+in scratch. Two prep workers fit in memory, so the wall time is about
+6 to 8 hours. A timed piece of one new date is run before the batch.
+
+## 5. Timed piece and revised estimate (added before the batch)
+
+One new date drawn with `random.Random(20261122)`, 2026-08-01, with its
+placebo dates: three fetches took 50 to 54 CPU-s each (3.5 to 3.8 minutes
+wall, at most 0.17 GB); `prep.py` took 1,593 CPU-s (0.44 CPU-hours, 27
+minutes wall) at a peak of 8.29 GB, on 9.3 million WSPR rows. Priced at that
+piece for every date, prep is 16 CPU-hours and the batch about 19, at most 28
+with a factor of 1.5. Two 8.3 GB workers would pass 80% of the lead's 16 GB
+sandbox, so the batch runs `run-new.sh` unchanged on a 96 GB, 12-core
+compute sandbox with 9 prep workers and 3 downloads at a time.
+
+## 6. Replacements (after the downloads, before any labeling)
+
+The downloads found missing ADS-B snapshots on two new dates: 2020-12-01
+(1 of 488, 00:05) and 2021-01-01 (4 of 488: 18:00, 18:11, 18:12, 19:00). By
+section 1 each is replaced by the next earlier unused first-of-month date
+with every snapshot present. 2020-10-01 has all 488. 2020-09-01 lacks two
+(21:17 and 21:18), so the second replacement is 2020-08-01, which has all
+488 (checked by requesting each snapshot on November 22, 2026). The new
+sample is now 2020-08-01, 2020-10-01, 2020-11-01, 2021-02-01 to
+2022-11-01, and 2026-01-01 to 2026-11-01. No units file or outcome had been
+computed for any new date except the timed piece's 2026-08-01 labels.

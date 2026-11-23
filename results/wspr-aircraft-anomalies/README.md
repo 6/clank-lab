@@ -10,6 +10,8 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24459621](https://doi.org/10.5281/zenodo.24459621)
+
 ## Abstract
 
 Pooled over a first sample of 36 dates and a follow-up of 36 chosen after the first result and before its data were downloaded, the placebo-adjusted excess of a prespecified adaptation of Godfrey's 2024 WSPR anomaly flag is $+0.21$ per 100 for same-link matching (95% nominal interval $-0.53$ to $0.95$) and $+0.35$ for shared-station matching ($-0.46$ to $1.17$). These are matched records on covered paths whose surface arc between the stations' locator centers passes within 5 km of a modeled high-altitude (at least 20,000 ft) aircraft track, 0.3% of all such records. WSPR is an amateur-radio network reporting decoded weak signals; with ADS-B, aircraft broadcast their positions. Godfrey and colleagues proposed that aircraft near a transmitter–receiver path raise the anomaly rate, and used anomalies to propose a path for flight MH370. Controls are matched records near no tracked aircraft; the same comparison with other days' aircraft is subtracted. A simulated 6 dB SNR increase on 10% of such records, drawn before coverage filtering and matching, is detected. The adjusted flag rate shows no detectable increase on matched covered paths: both upper limits stay below the pre-set 2 per 100, also without any one date.
@@ -41,6 +43,7 @@ The WSPR reports come from the WSPRnet community through the wspr.live mirror, a
   author = {Graham, Peter},
   title = {{A placebo-controlled test of WSPR signal anomalies on radio paths crossed by tracked aircraft}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/wspr-aircraft-anomalies-v1/results/wspr-aircraft-anomalies}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/wspr-aircraft-anomalies-v1/results/wspr-aircraft-anomalies}},
+  doi          = {10.5281/zenodo.24459621}
 }
 ```

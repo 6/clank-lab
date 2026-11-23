@@ -7,6 +7,7 @@ Zenodo records.
 ## wspr-aircraft-anomalies v2 (November 23, 2026)
 
 - Correction: credit the DSTA-hosted student study that examined aircraft detection with WSPRnet and explained why apparent matches can occur by chance. The analysis and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24478386](https://doi.org/10.5281/zenodo.24478386)
 
 ## steinberg-c4-c9 v9 (November 23, 2026)
 

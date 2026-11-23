@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## supercentenarian-birth-years v2 (November 23, 2026)
+
+- Correction: clarify the state-dependent birth-year cutoffs and what the shuffle shows about the reported early share. The analysis and its checks are unchanged.
+
 ## wspr-aircraft-anomalies v2 (November 23, 2026)
 
 - Correction: credit the DSTA-hosted student study that examined aircraft detection with WSPRnet and explained why apparent matches can occur by chance. The analysis and its checks are unchanged.

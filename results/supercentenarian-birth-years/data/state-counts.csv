@@ -1,0 +1,46 @@
+state,records,s1_before,s1_after,aligned_before,aligned_after,aligned_outside
+Alabama,21,21,0,21,0,0
+Arkansas,15,15,0,15,0,0
+California,12,12,0,12,0,0
+Colorado,3,3,0,3,0,0
+Connecticut,6,5,1,6,0,0
+Delaware,2,0,2,0,2,0
+District of Columbia,3,0,3,0,3,0
+Florida,5,4,1,5,0,0
+Georgia,29,29,0,29,0,0
+Idaho,1,1,0,1,0,0
+Illinois,41,41,0,40,0,1
+Indiana,28,28,0,28,0,0
+Iowa,39,4,35,7,32,0
+Kansas,19,19,0,19,0,0
+Kentucky,14,14,0,14,0,0
+Louisiana,16,16,0,16,0,0
+Maine,10,7,3,7,3,0
+Maryland,7,7,0,7,0,0
+Massachusetts,25,0,25,0,24,1
+Michigan,19,0,19,0,19,0
+Minnesota,24,22,2,23,1,0
+Mississippi,17,17,0,17,0,0
+Missouri,20,20,0,20,0,0
+Montana,2,2,0,2,0,0
+Nebraska,21,21,0,21,0,0
+New Hampshire,8,0,8,0,8,0
+New Jersey,8,0,8,0,8,0
+New Mexico,2,2,0,2,0,0
+New York,44,0,0,13,29,2
+North Carolina,23,23,0,23,0,0
+North Dakota,3,3,0,3,0,0
+Ohio,34,34,0,34,0,0
+Oregon,5,5,0,5,0,0
+Pennsylvania,43,43,0,43,0,0
+Rhode Island,4,0,4,0,4,0
+South Carolina,13,13,0,13,0,0
+South Dakota,5,5,0,5,0,0
+Tennessee,15,15,0,15,0,0
+Texas,35,35,0,35,0,0
+Utah,2,2,0,2,0,0
+Vermont,1,0,1,0,1,0
+Virginia,18,18,0,18,0,0
+Washington,4,4,0,4,0,0
+West Virginia,6,6,0,6,0,0
+Wisconsin,18,18,0,18,0,0

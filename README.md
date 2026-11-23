@@ -85,3 +85,4 @@ Each addresses one specific case of a problem that remains open in general.
 | Study | Finding |
 |---|---|
 | [**Candidate images of Pluto**](results/pluto-prediscovery/) | Three plates from Harvard and Heidelberg, exposed in 1908 and 1909, show faint images near Pluto’s predicted position. [Schaefer, Buie and Smith](https://arxiv.org/abs/0805.2097v1) describe earlier searches of the Harvard plates. The identification is a hypothesis. |
+| [**The US supercentenarian birth-registration statistic is typical after shuffling birth years**](results/supercentenarian-birth-years/) | Among US-born people listed as reaching 110, [Newman (2019)](https://doi.org/10.1101/704080) counted 82.6% as born before statewide birth registration and took that as a sign of age errors. We show that share is typical for when and where they were born, so on its own it is no such sign. |

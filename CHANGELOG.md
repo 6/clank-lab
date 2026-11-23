@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## supercentenarian-birth-years v1 (November 23, 2026)
+
+- The reported US early share of 82.6% falls inside the central 95% of 10,000 shuffles that preserve the historical roster's state counts and birth years. A common registration window gives the same inclusion decision.
+- Includes the paper, derived counts and code for reproducing both comparisons.
+
 ## noncrossing-symmetric-chains v4 (November 22, 2026)
 
 - Correction: the byline now reads Peter Graham. The theorem and its checks are unchanged.

@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,booktabs}
+\usepackage[title]{appendix}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdfauthor={Peter Graham},pdftitle={The US supercentenarian birth-registration statistic is typical after shuffling birth years}}
+\title{The US supercentenarian birth-registration statistic is typical after shuffling birth years}
+\author{Peter Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 22, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Saul Justin Newman's preprint reports that 82\% of US entries in a historical roster of people aged 110 or older predate statewide birth registration. The R supplement prints 82.6\%. Newman took the decline in recorded cases after registration as evidence that better documentation exposed errors in extreme-age records. We ask how often the same early share arises simply from the years and birthplaces represented in the roster. We randomly reassigned its 697 US birth years, keeping each state's number of entries. Newman's published R script counts 646 entries and uses a slightly different cutoff by state. It gives 534 early births (82.66\%) on our reconstruction. Across 10,000 shuffles the middle 95\% of shares ran from 81.73\% to 83.90\%. The roster's birth years and state mix alone typically produce an early share like Newman's. A common 60-year window on either side of registration, including New York, counts 552 of 686 entries as early (80.47\%), within its shuffled range of 78.75\% to 81.14\%. These comparisons tell us about the roster's composition. They cannot tell us which ages were correct.
+
+This work has not yet been reviewed by experts. The computations, code and text were produced by AI models from OpenAI and Anthropic, working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\textit{Keywords:} supercentenarians, birth registration, permutation distribution
+
+\section{Introduction}
+Saul Justin Newman argued that the fall in recorded US supercentenarians after states introduced birth registration was evidence that better documentation exposed errors in reported ages~\cite{newman,morbid}. Version 4 reports with Fig.~2, “In total, 82\% of supercentenarian records from the USA predate state-wide birth certification.” The accompanying R script (Supplementary Information S1) prints 82.6\% beside its US all-years calculation. We examine that percentage. The Gerontology Research Group (GRG) roster closed in January 2015. Someone born in 1880 could have reached 110 by then, while someone born in 1910 could not. States also began registering births statewide in different years. If a roster contains many early birth years and many entries from late-registering states, pairing years with states at random will place many births before registration. How many in this roster?
+
+\begin{quote}
+\textbf{Shuffling the roster's 697 US birth years while keeping each state's number of entries typically gives an early share like Newman's 82.6\%: the middle 95\% of shuffled shares ran from 81.73\% to 83.90\%.}
+\end{quote}
+Each shuffle is a uniform random permutation of all 697 birth years among the entries. It preserves exactly how often each birth year occurs. The reference date is the first year with birth records on file for the entire state~\cite{nchs}. Some places kept earlier records, and the date alone cannot establish who had a birth certificate. We call the two sides of Newman's calculation \emph{early} and \emph{late} because the precise boundary differs by state.
+
+\subsection*{Related work}
+In the discussion of version 1, a commenter signing as Z saw the counts falling “even before ‘complete birth registration’” (August 6, 2019). Robert Young of the GRG pointed to “backlogs in data information gathering and case processing” (August 7). Newman reported that censoring deaths after 2000 or 2010 “made no difference to the result” and described using the 1890--1910 US census populations (August 8)~\cite{discussion}. The GRG notes called the 1890s “much earlier in its discovery cycle” than the 1880s~\cite{table-notes}.
+
+In chapter 5 of \emph{Morbid}, Newman aligned each state's rate with the introduction of birth certificates and described a “roughly 80 percent reduction in the number of 110-plus-year-olds being born in the country”~\cite[p.~61]{morbid}. That is a decline in a rate. Our quantity is the fraction of entries on the early side of the split. Michael Easter's interview account said “Eighty-two percent of all American supercentenarians were born before statewide birth certification”~\cite{easter}. Echeverry Raad and Sturmberg described “an 80\% decrease in the number of recorded supercentenarians”~\cite{redzones}. Here we take the national birth years and state counts as given and ask where the published share falls among random pairings.
+
+\section{Two ways to count the roster}
+S1 dates the GRG download to June 2, 2019. We reconstructed the input from a November 5, 2018 archive capture whose Table A header gives January 1, 2015 as the update date~\cite{grg}. Louis Epstein, Robert Young, L. Stephen Coles and fellow GRG contributors compiled and validated the roster. The Internet Archive preserved this edition. Our checks establish agreement in the dated header and column layout. They also establish that the relevant expressions from S1 run unmodified on the reconstructed inputs. The counts apply to this archive capture. Byte identity with the June 2019 CSV is unverified. Of 1,739 records, 697 give a US birthplace. Three lack a state and four give Oklahoma Territory. Federal Table 1.01 supplies a statewide registration year for the other 690, across 44 states and the District of Columbia~\cite{nchs}.
+
+\paragraph{The published split.}
+The script counts each of 646 entries in 43 states and DC exactly once. Its two positional row exclusions remove New York and Oklahoma Territory. Two New York births in 1814 and 1815 extend the shared year axis even though the script drops New York's row. For each area the script combines those national birth years, measured from the area's registration date, with a grid from $-60$ through $+60$. It lines up rows by position and counts the first 62 positions as early. The result has 123 columns. R repeats cells from shorter rows and issues 17 warnings, but the repeated cells are empty for every possible assignment of the roster's birth years. The last early position falls three years before registration in four areas, two years before in seven, one year before in 26 and one year after in seven. The observed tally is 534 early and 112 late. The resulting 82.66\% rounds to 82.7\%. The printed 82.6\% could reflect truncation or a difference in the input.
+
+\paragraph{The common window.}
+We also used the same grid in all 45 areas, including New York. A birth from 60 years before through one year after registration counts as early, and a birth from two through 60 years after counts as late. This makes the first 62 positions of the nominal grid early. Its cutoff matches the published split in just seven of the 44 areas that split retains. Four of the 690 mapped births fall outside the window, leaving 552 early and 134 late.
+
+\section{Where the observed shares fall}
+Before fixing the analysis, we ran an exploratory common-window shuffle and saw that the observed share fell inside its interval. We then fixed the printed 82.6\% as the primary comparison and the common window as a diagnostic before drawing the 10,000 reported shuffles. Even entries that cannot score receive a birth year. In each draw we divide the early count by the number counted under that rule and rank the resulting shares.
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+Rule & Observed & Shuffle median & Middle 95\% & Percentile\\
+\midrule
+Published split & 534/646 (82.66\%) & 82.82\% & 81.73--83.90\% & 42.99\\
+Common window & 552/686 (80.47\%) & 79.94\% & 78.75--81.14\% & 79.60\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The percentile counts draws strictly below the observed share plus half the ties. The reconstructed published share is near the middle. The common-window share is near the 80th percentile, with about one draw in five higher. The 250th and 9,750th ordered draws give the interval endpoints. For the published split these were 528/646 and 542/646, with 646 counted in every draw. For the common window they were 541/687 and 555/684, with 682 to 690 counted across draws.
+
+Sampling variation affects both endpoints. Marginal 95\% binomial rank intervals for the lower and upper quantiles, respectively, give 81.58--81.73\% and 83.75--83.90\% for the published split, and 78.72--78.78\% and 81.10--81.20\% for the common window. Each interval covers one endpoint separately. An independent replay with fresh draws moved the upper endpoint of the published split by one entry, from 542/646 to 541/646.
+
+We also checked two common-window cutoffs chosen after the primary analysis, using the same draws and window. Counting only births strictly before registration gives 545/686 (79.45\%), against 77.29--79.74\% in the middle of the shuffles (93.0th percentile). Counting the registration year as early gives 548/686 (79.88\%), against 78.02--80.44\% (85.4th percentile). The choice changes how far up the distribution the observation lies.
+
+\section{What this comparison can tell us}
+The birth years and state mix of this roster typically produce a share like the reported 82.6\%. Fixing each state's number of entries makes any effect of registration on that number invisible. Only five of 44 areas in the published split and four of 45 in the common window have observed births on both sides, so the roster provides little within-state information on timing. A state observed only on one side can still receive years on either side in a shuffle. Actual cohort sizes, survival, access to records and delays in validation could all affect who enters the roster. The shuffle cannot distinguish those explanations, assess any individual's age, or settle Newman's separate comparisons of population rates and geography.
+
+With each area's entry count and each birth year's frequency held fixed, the common-window share can range from 71.09\% to 94.50\% over all assignments (Appendix~\ref{app:bounds}). The much narrower middle of the shuffle distribution tells us which shares are typical under random assignment.
+
+\paragraph{Reproduction.}
+Run \texttt{python3 checks/check.py} from the result folder to recalculate the shares, intervals and percentiles from the released counts. Run \texttt{python3 checks/reproduce.py} to reconstruct the roster from the three pinned source files, replay the published expressions and check the distribution of shuffled early and eligible counts against the aggregate files. An independent implementation starting from the public sources obtained the same observed counts and placed each observed share inside its interval using fresh permutations. The bundle distributes derived counts and analysis code. Source URLs, hashes, seeds and software versions accompany the scripts.
+
+\begin{thebibliography}{10}
+\bibitem{newman} S. J. Newman, \emph{Supercentenarian and remarkable age records exhibit patterns indicative of clerical errors and pension fraud}, bioRxiv, July 2019, version 4, November 3, 2025. Results, paragraph accompanying Fig.~2. \href{https://doi.org/10.1101/704080}{doi:10.1101/704080}. Supplementary Information S1, US all-years split, lines 248--255 and 273--277.
+\bibitem{grg} Gerontology Research Group, \emph{Table A}, January 1, 2015. \href{https://web.archive.org/web/20181105195239id_/http://www.grg.org/Adams/A_files/sheet001.htm}{Archived table, November 5, 2018}.
+\bibitem{table-notes} Gerontology Research Group, \href{https://grg.org/SC/SCListsTables.html}{historical table notes}, Table B, birth cohorts of the 1880s and 1890s, accessed November 22, 2026.
+\bibitem{nchs} National Center for Health Statistics, \href{https://ftp.cdc.gov/pub/health_Statistics/nchs/publications/DVD/DVD_3/Misc/usvss.pdf}{\emph{U.S. Vital Statistics System: Major Activities and Developments, 1950--95}}, Hyattsville, MD, 1997. Appendix II, “History and Organization of the Vital Statistics System,” Table 1.01, p.~58, “Records on file for entire area,” Births.
+\bibitem{discussion} R. Young, S. J. Newman, and Z, comments on A. Gelman, \href{https://statmodeling.stat.columbia.edu/2019/08/06/are-supercentenarians-mostly-superfrauds/}{“Are supercentenarians mostly superfrauds?”}, August 2019.
+\bibitem{morbid} S. J. Newman, \href{https://doi.org/10.7551/mitpress/16097.001.0001}{\emph{Morbid: Debunking Modern Longevity Science}}, MIT Press, 2026.
+\bibitem{easter} M. Easter, \href{https://www.twopct.com/p/the-blue-zones-arent-real}{“The Blue Zones Are Bad Data,”} \emph{Two Percent}, August 3, 2026.
+\bibitem{redzones} J. Echeverry Raad and J. P. Sturmberg, \href{https://doi.org/10.15446/rsap.v27n3.119673}{“Red zones: the true color behind the myth of blue zones geographic longevity,”} \emph{Revista de Salud Pública} 27(3), pp.~1--7, May 1, 2025.
+\end{thebibliography}
+\begin{appendices}
+\section{Attainable limits for the common window}\label{app:bounds}
+For each birth year, use its recorded frequency as the supply of labels. For each registration date, use the number of roster entries with that date as the demand for labels. Areas with the same date score every year identically, so any assignment to their pooled slots can be divided among them in their original sizes. Seven slots lack a matched date and score zero.
+
+For a year assigned to a slot, let $e$ be 1 if the birth is early and 0 otherwise, and let $w$ be 1 if it falls in the window and 0 otherwise. An integer flow matching supplies to demands is a reassignment. Minimizing and maximizing total $e$ gives 487 to 636 early births. Doing the same for $w$ gives 668 to 690 eligible births. To check a candidate extreme share $p/q$, assign each pairing the cost $qe-pw$. A minimum total cost of zero proves that every attainable share is at least $p/q$ and that one assignment gives equality. A maximum of zero proves the upper bound in the same way. The respective witnesses give 487/685 and 636/673. Run the reproduction script with \texttt{--bounds} to check all six extrema.
+\end{appendices}
+\end{document}

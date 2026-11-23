@@ -1,0 +1,50 @@
+name: Supercentenarian birth year checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/supercentenarian-birth-years/**'
+      - '.github/workflows/supercentenarian-birth-years.yml'
+  pull_request:
+    paths:
+      - 'results/supercentenarian-birth-years/**'
+      - '.github/workflows/supercentenarian-birth-years.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supercentenarian-birth-years-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: Check supercentenarian-birth-years
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: results/supercentenarian-birth-years
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7.0.1
+
+      - name: Check aggregate counts and intervals
+        run: python3 checks/check.py
+
+      - name: Set up Pixi
+        uses: prefix-dev/setup-pixi@82d477f15f3a381dbcc8adc1206ce643fe110fb7 # v0.9.3
+        with:
+          pixi-version: v0.55.0
+          run-install: false
+          cache: false
+
+      - name: Reproduce both histograms and the sharp bounds from their pinned sources
+        run: >-
+          pixi exec --channel conda-forge
+          --spec 'python=3.12' --spec 'networkx=3.2.1'
+          --spec 'r-base=4.5.2' --spec poppler
+          -- python3 checks/reproduce.py --bounds

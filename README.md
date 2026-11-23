@@ -1,12 +1,12 @@
 # Clank Lab
 
-Proposed solutions to open problems in math.
+Proposed solutions to open problems in mathematics and findings from public data.
 
 Not yet reviewed by experts. Corrections are welcome as pull requests or issues.
 
 Produced by AI models under the author's direction.
 
-Each result is labeled with how it is checked. **Proved in Lean** means the Lean proof assistant checks the main theorem from the definitions; the others are computer-assisted or written proofs, often with parts checked in Lean.
+In the maths tables, **Proved in Lean** means the Lean proof assistant checks the main theorem from the definitions. Other entries describe computer-assisted or written proofs, often with parts checked in Lean. The [public-data studies](#studies-using-public-data) describe what was measured or counted.
 
 ## Results on conjectures and questions
 
@@ -67,7 +67,6 @@ Proofs and counterexamples for published conjectures and questions.
 | [**The Heawood family is not the complete list of excluded minors for Colin de Verdière invariant at most 5**](results/heawood-family-mu5/)<br>*Computer-assisted* | Whether the 78 Heawood-family graphs are all the excluded minors for Colin de Verdière invariant $\mu \le 5$, as [van der Holst (2006)](https://doi.org/10.1016/j.jctb.2005.09.004) proposed and [Mattman and Pavelescu (2026)](https://arxiv.org/abs/2607.01414) state as Conjecture 4; [Georgakopoulos and Winter (2024)](https://arxiv.org/abs/2408.12681) proved each is an excluded minor for 4-flatness. We show two 23-edge graphs have $\mu = 6$ and no Heawood-family minor. | November 11, 2026 |
 | [**The Heawood family is not the complete list of excluded minors for 4-flat graphs**](results/heawood-family-four-flat/)<br>*Computer-assisted* | Whether the 78 [Heawood-family graphs](https://en.wikipedia.org/wiki/Heawood_family) are all the excluded minors for 4-flatness, stated in [Georgakopoulos–Winter Conjecture 1.1 (2024)](https://arxiv.org/abs/2408.12681v1). Its completeness clause is implicit in two conjectures of van der Holst (2006). They proved each family member is an excluded minor. We show a known 11-vertex graph is a further excluded minor, disproving completeness. | November 11, 2026 |
 | [**Monotone classes of bounded game chromatic number have bounded arboricity**](results/game-chromatic-arboricity/)<br>*Written proof, partly in Lean* | Whether a class of graphs closed under subgraphs with bounded game chromatic number has bounded arboricity, [Zhu's Question 3 (1999)](https://doi.org/10.1006/jctb.1998.1878). For the game coloring number in place of the arboricity, his Question 2, [Kierstead and Trotter's Example 6.1 (2001)](https://doi.org/10.37236/1611) with a bound of Dinski and Zhu gives a negative answer. We prove that it does. | November 19, 2026 |
-| [**Candidate images of Pluto on archival plates from 1908 and 1909**](results/pluto-prediscovery/)<br>*Computer-assisted* | Whether [Pluto](https://en.wikipedia.org/wiki/Pluto) appears on plates older than its accepted prediscovery images of January 1914. Amateurs reported Yerkes images of August 1909, and two searches of the Harvard plates found nothing earlier ([Schaefer, Buie and Smith 2008](https://arxiv.org/abs/0805.2097v1)). We report candidate images on plates of December 1908 and February 1909, as a hypothesis for experts. | November 19, 2026 |
 
 ## Results on individual cases
 
@@ -80,3 +79,9 @@ Each addresses one specific case of a problem that remains open in general.
 | [**The three-color Ramsey number of the 10-vertex path**](results/path-ramsey/)<br>*Proved in Lean, with compiled checking* | The three-color [Ramsey number](https://en.wikipedia.org/wiki/Ramsey%27s_theorem) $R(P_{10}, P_{10}, P_{10})$ of the [path](https://mathworld.wolfram.com/PathGraph.html) on 10 vertices, suggested by Faudree–Schelp (1975) to be 18 and [stated as a conjecture by Dybizbański–Dzido–Radziszowski (2012)](https://arxiv.org/abs/1207.5851). Paths up to 9 vertices were settled by 2016, leaving 10 as the first open case in [Radziszowski's survey](https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS1). We give a computer-assisted proof that it is 18. | October 21, 2026 |
 | [**The Thomson problem for N = 10**](results/thomson-10/)<br>*Proved in Lean* | The lowest-energy arrangement of N = 10 charges on a sphere, the next open case of the [Thomson problem](https://en.wikipedia.org/wiki/Thomson_problem) (1904) following Karthigeyan’s AI-generated nine-point Lean proof and Jingxing Huang’s separate nine-point proof candidate (conditional independent Python check). We give a computer-assisted proof, checked in Lean, that the bicapped square antiprism is the only minimizer up to orthogonal maps and relabeling. | October 22, 2026 |
 | [**Nonexistence of Williamson matrices of order 65**](results/williamson-order-65/)<br>*Computer-assisted* | Whether [Williamson matrices](https://en.wikipedia.org/wiki/Williamson_conjecture) exist at order 65, described by [Bright in 2019](https://cs.curtisbright.com/extended-research-statement.pdf) as “currently the smallest order for which it is unknown” whether they exist; 67 remains open. A computer-assisted search finds none. The CPU search is replayable, with receipts and two coverage and accounting checkers. | October 22, 2026 |
+
+## Studies using public data
+
+| Study | Finding |
+|---|---|
+| [**Candidate images of Pluto**](results/pluto-prediscovery/) | Three plates from Harvard and Heidelberg, exposed in 1908 and 1909, show faint images near Pluto’s predicted position. [Schaefer, Buie and Smith](https://arxiv.org/abs/0805.2097v1) describe earlier searches of the Harvard plates. The identification is a hypothesis. |

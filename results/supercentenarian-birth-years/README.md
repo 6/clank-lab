@@ -8,6 +8,8 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24459608](https://doi.org/10.5281/zenodo.24459608)
+
 ## Abstract
 
 Saul Justin Newman's preprint reports that 82% of US entries in a historical roster of people aged 110 or older predate statewide birth registration. The R supplement prints 82.6%. Newman took the decline in recorded cases after registration as evidence that better documentation exposed errors in extreme-age records. We ask how often the same early share arises simply from the years and birthplaces represented in the roster. We randomly reassigned its 697 US birth years, keeping each state's number of entries. Newman's published R script counts 646 entries and uses a slightly different cutoff by state. It gives 534 early births (82.66%) on our reconstruction. Across 10,000 shuffles the middle 95% of shares ran from 81.73% to 83.90%. The roster's birth years and state mix alone typically produce an early share like Newman's. A common 60-year window on either side of registration, including New York, counts 552 of 686 entries as early (80.47%), within its shuffled range of 78.75% to 81.14%. These comparisons tell us about the roster's composition. They cannot tell us which ages were correct.
@@ -43,6 +45,7 @@ In August 2019, Young pointed out delays in validating and releasing cases. Newm
   author = {Graham, Peter},
   title = {{The US supercentenarian birth-registration statistic is typical after shuffling birth years}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/supercentenarian-birth-years-v1/results/supercentenarian-birth-years}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/supercentenarian-birth-years-v1/results/supercentenarian-birth-years}},
+  doi          = {10.5281/zenodo.24459608}
 }
 ```

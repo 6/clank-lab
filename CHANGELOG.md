@@ -8,6 +8,7 @@ Zenodo records.
 
 - The reported US early share of 82.6% falls inside the central 95% of 10,000 shuffles that preserve the historical roster's state counts and birth years. A common registration window gives the same inclusion decision.
 - Includes the paper, derived counts and code for reproducing both comparisons.
+- Zenodo: [10.5281/zenodo.24459608](https://doi.org/10.5281/zenodo.24459608)
 
 ## noncrossing-symmetric-chains v4 (November 22, 2026)
 

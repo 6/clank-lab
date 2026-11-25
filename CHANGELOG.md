@@ -4,6 +4,12 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## wspr-aircraft-anomalies v3 (November 25, 2026)
+
+- Correction: the README now names the authors of the DSTA-hosted study and credits their caution about chance matches.
+- The archive notes identify the one-day comparison that supplied the altitude threshold for the 72-day study.
+- The paper and README now credit Ben Marten’s two-flight localization test. The analysis and its checks are unchanged. The paper distinguishes the two resampling orders, reports the limits nearest the two-point threshold to three decimals, and explains the evidence for the protocol timing and the earlier studies’ control comparisons.
+
 ## supercentenarian-birth-years v2 (November 23, 2026)
 
 - Correction: clarify the state-dependent birth-year cutoffs and what the shuffle shows about the reported early share. The analysis and its checks are unchanged.

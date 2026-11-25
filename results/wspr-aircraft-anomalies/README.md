@@ -10,7 +10,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.24478386](https://doi.org/10.5281/zenodo.24478386)
+Archived on Zenodo: [doi:10.5281/zenodo.24544838](https://doi.org/10.5281/zenodo.24544838)
 
 ## Abstract
 
@@ -44,6 +44,6 @@ Loi Yi Yang Caden, Neo Jun Hui Gavin, Zhang Rui Xue and Ng Yuting cautioned in t
   title = {{A placebo-controlled test of WSPR signal anomalies on radio paths crossed by tracked aircraft}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/wspr-aircraft-anomalies-v3/results/wspr-aircraft-anomalies}},
-  doi          = {10.5281/zenodo.24478386}
+  doi          = {10.5281/zenodo.24544838}
 }
 ```

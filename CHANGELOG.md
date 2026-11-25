@@ -9,6 +9,7 @@ Zenodo records.
 - Correction: the README now names the authors of the DSTA-hosted study and credits their caution about chance matches.
 - The archive notes identify the one-day comparison that supplied the altitude threshold for the 72-day study.
 - The paper and README now credit Ben Marten’s two-flight localization test. The analysis and its checks are unchanged. The paper distinguishes the two resampling orders, reports the limits nearest the two-point threshold to three decimals, and explains the evidence for the protocol timing and the earlier studies’ control comparisons.
+- Zenodo: [10.5281/zenodo.24544838](https://doi.org/10.5281/zenodo.24544838)
 
 ## supercentenarian-birth-years v2 (November 23, 2026)
 

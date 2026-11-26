@@ -8,6 +8,7 @@ Zenodo records.
 
 - Certificates establish nonvanishing for 16 of 18 rank-two triples. Two searches remain inconclusive.
 - Assuming Fornea and Gehrmann’s Theorem 3.3 at the augmentation prime, six unit moments give the index bound and the strict exponent for 817a1 over the field of discriminant −7 at 19 is one. The conductor-109 example independently reproduces the published witness.
+- Zenodo: [10.5281/zenodo.24573130](https://doi.org/10.5281/zenodo.24573130)
 
 ## wspr-aircraft-anomalies v3 (November 25, 2026)
 

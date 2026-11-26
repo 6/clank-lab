@@ -1,0 +1,233 @@
+\documentclass[11pt]{article}
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage[title]{appendix}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={Peter Graham}]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{plectic}{Corollary (Plectic Heegner classes)}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\F}{\mathbb F}
+\title{Numerical nonvanishing of mock plectic invariants}
+\author{Peter Graham\\ \small\url{https://orcid.org/0009-0007-8493-1505}}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We certify nonvanishing of the mock plectic invariant for sixteen of eighteen triples consisting of a rational elliptic curve, an imaginary quadratic field and an inert prime of multiplicative reduction. In this cost-selected cohort the curve has rational rank two and its quadratic twist has rank zero. Fornea and Gehrmann related the invariant to the first anticyclotomic derivative of a Heegner class. Their explicit reciprocity law turns a nonzero linear coefficient of a finite theta element into a witness. We compute the coefficients by evaluating a residual quaternionic eigenfunction on ring-class orbits. Two searches remain inconclusive. The public cosmosgeek0/BSD archive gave the finite-moment criterion and a witness at conductor 109, which we reproduce independently. A second table gives six nonvanishing certificates, five beyond the cohort. Assuming the divisor inequality of Fornea and Gehrmann's Theorem 3.3 at the augmentation prime, the six unit coefficients give an index bound. Under the same hypothesis, for their conductor-817 example the strict Selmer characteristic ideal has one exceptional factor fewer than the square of the Heegner index, and the extended Selmer group realizes the square. Under Fornea's comparison theorem the six coefficients also detect plectic Heegner classes.
+
+This work has not yet been reviewed by experts. The proofs, computations, code and text were produced by AI models from OpenAI and Anthropic, working under the author's direction.
+\end{abstract}
+\medskip
+\noindent\small 2020 Mathematics Subject Classification: 11G05, 11G18, 11R23.
+\quad Keywords: elliptic curves, Heegner classes, anticyclotomic Iwasawa theory.\normalsize
+
+\section{Introduction}
+Let $E/\Q$ be an elliptic curve, $K$ an imaginary quadratic field, and $p$ an inert prime of multiplicative reduction. Write $V=T_pE\otimes\Q_p$, and let $K_p$ denote the completion. Fornea and Gehrmann's trivial-character invariant $Q_K$ lies in $H^1(K,V)\otimes H^1_f(K_p,V)^{-a_p}$, where the superscript denotes the local Galois eigenspace \cite[(13), Proposition 2.11]{FG}. Its global factor makes direct numerical evaluation difficult. A localization at one auxiliary prime can nevertheless detect the tensor.
+
+\begin{theorem}\label{main}
+For the sixteen triples with a nonzero entry in Table~\ref{cohort}, $Q_K\ne0$. Each curve has rank two over $\Q$, its twist by the discriminant $D$ of $K$ has rank zero, and $E$ has nonsplit multiplicative reduction at $p$. The searches for $(1001\mathrm c1,-24,13)$ and $(2735\mathrm c1,-43,5)$ are inconclusive. In addition, $Q_K\ne0$ for every triple of Table~\ref{six}. Five of those six triples lie outside the cohort.
+\end{theorem}
+
+Fornea and Gehrmann's Conjecture 2.13 predicts, at central value zero and trivial character, that $Q_K\ne0$ exactly when $\max(r^++\delta_p^+,r^-+\delta_p^-)=2$. Here $r^\pm$ are the ranks of $E$ and its quadratic twist, and $\delta_p^\pm$ records split multiplicative reduction on the corresponding curve. Each positive row of Table~\ref{cohort} verifies the predicted equivalence for that triple. For their Example 1.7, the curve $y^2+y=x^3+x^2+x+6$ over $\Q(\sqrt{-7})$ gives the coefficient $17\bmod19$ at $\ell=269$. The invariant itself has no scalar value specified by this computation.
+
+Darmon and Fornea formulated the precursor in \cite[Conjecture 3.12]{DF}. The closest numerical work is the public \texttt{cosmosgeek0/BSD} archive. On November 24, 2026, record 04, \S\S227--228, gave a witness for Fornea and Gehrmann's Example 1.6, at conductor 109 \cite{record}. The archive's manuscript \emph{Finite Augmentation Moments and Mock Plectic Invariants} gives the finite-moment criterion and, in \S6 of its November 26 snapshot, the index theorem for unit moments \cite{criterion,current}. We apply its index argument under Fornea and Gehrmann's Theorem 3.3 at the augmentation prime $(T)$. Our computations certify their Example 1.5 ($37\mathrm a1$, $D=-8$) and Example 1.7 ($817\mathrm a1$, $D=-7$), and give a replay of both tables from the curve equations. The numerical examples of Fornea, Guitart and Masdeu \cite[\S7]{FGM} concern a plectic invariant over a real quadratic base with two primes above $p$. The conductor-109 calculation below is an independent recomputation of the published witness.
+
+\paragraph{Choice of inputs.}
+The census takes one curve per rational rank-two isogeny class of conductor below 5,000 and fundamental $D<0$ with $|D|\le43$. The arithmetic conditions leave 816 nonsplit, inert triples with twist rank zero. The implemented quaternion algebra requires $N^-=1$, leaving 676. We took every remaining triple with $p\le19$ whose least positive-sign admissible $\ell$ satisfied $\ell\le271$ and required at most 4,000 flags before quotient by units. A flag chooses a maximal right-ideal class and a cyclic level structure on it (Section~4). This gives fifteen triples. We added 817a1 (the proposed example), 1664n1 (tame level $2^7$), and 2117a1 (unresolved at the initial cyclotomic precision). Within the cohort we searched at most three sign-matched primes $\ell\le271$ per triple, allowed up to 24,000 raw flags per prime, and stopped upon a nonzero coefficient. The resulting fraction measures detection in this cohort. The 798 other eligible triples received no theta verdict in this experiment.
+
+\section{A certificate for nonvanishing}
+Write $\Lambda=\Z_p[[T]]$, $T=\gamma-1$ for a generator of the anticyclotomic $\Z_p$-extension of $K$. We use \cite[Assumptions 1.1--1.2]{FG}: $D$ is prime to the conductor $N$, $D\ne-3,-4$, $N=pN^+N^-$, the primes of $N^+$ split and $N^-$ is a squarefree product of evenly many inert primes. Also $p\ge5$, the Galois action on $E[p]$ has image $\mathrm{GL}_2(\F_p)$, and it is ramified at every $q\mid N^-$ with $q^2\equiv1\bmod p$. In both tables $N^-=1$. The program checks the arithmetic hypotheses and uses exact modular symbols to establish central vanishing. At a good inert prime $\ell\nmid pND$ we require $\ell^2\not\equiv1\bmod p$ and $a_\ell\equiv\varepsilon_\ell(1+\ell)\bmod p$, where $\varepsilon_\ell=\pm1$. Reciprocity holds for either sign. We search only $\varepsilon_\ell=\eta$, where $\eta=-a_p\varepsilon(E/\Q)$ and $\varepsilon(E/\Q)$ is the root number. Indeed the global first derivative has conjugation sign $\eta$ \cite[Corollary 2.9 and proof of Theorem 3.4]{FG}. On the unramified residual line $E[p]/(F^2-1)E[p]$ at $K_\ell$, rational Frobenius $F$ acts as conjugation with sign $\varepsilon_\ell$: its eigenvalues are $\varepsilon_\ell$ and $\ell\varepsilon_\ell$, and $\ell^2\not\equiv1\bmod p$. Localization therefore kills the derivative for the opposite sign.
+
+Write $\lambda_\ell\in\Lambda/p\Lambda$ for the theta element $\lambda_m$ of \cite[Definition 3.14]{FG} with $m=\ell$ and precision $k=1$. Write $\sum_{j=0}^{p-1}c_j\gamma^j$ for its image in $\F_p[C_p]$, where $C_p=\Gamma/\Gamma^p$ is the first quotient of order $p$ of the tower group $\Gamma$. Its augmentation and first moment are
+\[
+ A=\sum_j c_j,\qquad B=\sum_j j c_j\pmod p .
+\]
+Indeed $\gamma^j=(1+T)^j\equiv1+jT\bmod T^2$. A common translation changes $B$ by a multiple of $A$, and a different generator or primitive eigenfunction scales a nonzero $B$ by a unit.
+
+\begin{proof}[Proof of Theorem~\ref{main}]
+Let $M=T_pE\otimes\Lambda$ with the induced action of \cite[\S3.0.1]{FG}, and let $\kappa^\infty$ denote the normalized big Heegner class. A prime dividing $D$ ramifies in $K$ and is unramified in the residual torsion field. Thus $K$ is disjoint from that field and $E(K)[p]=0$. It follows that $H^1(K,T_pE)$ injects into $H^1(K,V)$. The multiplication-by-$T$ sequence for $M$ identifies the kernel of augmentation on $H^1(K,M)$ with $TH^1(K,M)$. The constant term vanishes by \cite[Lemma 3.12]{FG}, and the identification preceding \cite[Lemma 3.12]{FG} sends the local factor to the augmentation line. The congruence (22) there identifies the first jet of $\kappa^\infty$ with the image of $v_p(q_E)Q_K$. Applying the injection at each of these two steps shows that $Q_K=0$ would give $\kappa^\infty\in T^2H^1(K,M)$ integrally.
+
+The place over $\ell$ splits completely in the anticyclotomic tower since its Frobenius is fixed by inversion. Inertia acts trivially on $M/p$ there. Multiplication by $T$ is injective on the continuous homomorphisms from inertia into $M/p$. The local class after division by $T^2$ therefore remains unramified modulo $p$. Fornea and Gehrmann's second reciprocity law \cite[Theorem 3.16]{FG} at $m=k=1$ carries localization to $\lambda_\ell$ by a $\Lambda/p$-linear isomorphism. Thus $Q_K=0$ forces $B=0$. This is the precision-one implication of \cite[\S\S1--2]{criterion}. The computation below gives $A=0$ at each evaluated prime and $B\ne0$ for sixteen triples in Table~\ref{cohort} and all six in Table~\ref{six}.
+\end{proof}
+
+\section{The conditional index and Heegner class}
+Write $\mathcal S$ for the compact ordinary Selmer module over the anticyclotomic tower and $\mathcal X$ for the ordinary Selmer dual in \cite[\S3.1]{FG}. Write $r_p(E/K)$ for the classical Selmer corank.
+
+\paragraph{Hypothesis (H): FG Theorem 3.3 at $(T)$.}
+For the triple in question, when $\kappa^\infty\ne0$, assume the single inequality
+\[
+ \tag{H}\operatorname{ord}_{(T)}\operatorname{char}_\Lambda(\mathcal X_{\rm tors})
+ \ \le\ 2\operatorname{length}_{\Lambda_{(T)}}((\mathcal S/\Lambda\kappa^\infty)_{(T)}).
+\]
+Here $\mathcal X$ uses FG's strict ordinary condition. Theorem~\ref{main} uses only the derivative and reciprocity laws.
+
+Fornea and Gehrmann refer to Howard's Theorem 3.2.3 \cite{How06}. Its specialization argument (Proposition 3.3.1 there) invokes the bounded local control error of \cite[Lemma 2.2.7]{How04}. For 817a1 over $\Q(\sqrt{-7})$ at 19, the Tate quotient $\mathcal A^-$ of $\mathcal A=E[19^\infty]$ is trivial over $K_v$, and $H^0(K_v,\mathcal A^-)=\Q_{19}/\Z_{19}$. In the approximations $P_m=(T+19^m)$ the corresponding twisted invariant group has length $m$. Thus the cited control estimate supplies no uniform bound at $(T)$ in this example. This leaves (H) as a hypothesis. FG's proof of Theorem 3.4 (Theorem 1.3 in their introduction) uses precisely this inequality at $(T)$ to bound the rank of the coinvariants. Its application to the vanishing control in Section~4 requires (H) for that control as well.
+
+\paragraph{Remark on FG Theorem 3.3 away from augmentation.}
+We apply \cite[Theorem 3.3]{FG} as published at height-one primes $P\ne(T)$. In the applications below $p\nmid h_K$, so the unique prime above $p$ is totally ramified in the tower: an unramified initial layer would give an unramified cyclic extension of degree $p$. For a height-one prime $(f)\ne(T),(p)$, Howard's approximations by $f+p^m$ give bounded local invariant lengths at this place, since $v_p(f(0)+p^m)$ stabilizes. For $(p)$ the approximations $T^m+p$ have constant term $p$. The length in question comes from taking the quotient of the specialization by $\gamma-1$ on the trivial Tate quotient. Thus the exceptional local term remains bounded in these specializations. For a nonzero big class we use the generic rank-one conclusion of Howard's Theorem 3.2.3, the freeness argument of FG Theorem 3.3, and the remaining specialization inputs from \cite[Theorem 3.2.3 and Proposition 3.3.1]{How06} and \cite[Theorem 3.3]{FG}.
+
+\begin{proposition}\label{index}
+Assume (H), the arithmetic hypotheses of Section~2, $N^-=1$ and $p\nmid h_K$. If for some $1$-admissible prime $\ell$ as in Section~2 the first moment $B$ of $\lambda_\ell$ is nonzero modulo $p$, and $r_p(E/K)\ge2$, then $\operatorname{rank}_\Lambda\mathcal X=1$ and
+\[
+ \mathcal S/\Lambda\kappa^\infty\simeq\Lambda/(T),\qquad
+ \operatorname{char}_\Lambda(\mathcal X_{\rm tors})=(T^e),
+ \quad 1\le e\le2,\qquad \mu(\mathcal X_{\rm tors})=0.
+\]
+\end{proposition}
+\begin{proof}
+The augmentation $A=0$ follows from the vanishing constant term of $\kappa^\infty$ \cite[Lemma 3.12]{FG} and reciprocity. We use the index argument of \cite[\S6, $h=1$]{current}. Reciprocity gives $\kappa^\infty\ne0$ in the bipartite Euler system of \cite[Corollary 3.17]{FG}. By the rank and freeness conclusions just recalled, $\mathcal S=\Lambda s$, $\mathcal X$ has rank one, and for $\kappa^\infty=fs$ the characteristic divisor of $\mathcal X_{\rm tors}$ is bounded by twice the divisor of $f$, using (H) at $(T)$ and the proved inequalities elsewhere. By ordinary control \cite[Lemma 3.1]{FG}, the coinvariants of $\mathcal X$ have rank at least two. Localization at $(T)$ therefore gives $T\mid\operatorname{char}(\mathcal X_{\rm tors})$ and $T\mid f$. In the residual unramified local module reciprocity gives $\lambda_\ell=\bar f g$ in $\F_p[[T]]$. Writing $f=Th$, the unit linear coefficient forces $\bar h(0)g(0)\ne0$. Thus $h$ is a unit of $\Lambda$. The divisor bound at every height-one prime gives the asserted ideal and $\mu=0$.
+
+\end{proof}
+
+Table~\ref{six} gives six applications of Proposition~\ref{index} under (H). The rank pairs $(1,1)$ at conductor 37, $(0,2)$ at 109 and $(2,0)$ at 817 give the corank lower bound by Kummer. For the four fields at conductor 817, the sign conditions $(D/19)=-1$, $(D/43)=1$ exhaust the fundamental discriminants with $|D|\le100$ prime to 817.
+
+We give the comparison for the six triples for which we also compute the index. The cohort nonvanishing theorem uses the FG invariant directly. In particular, the row $1664\mathrm n1$ has $2^7\parallel N^+$, outside Fornea's Assumption 1.5.
+\begin{plectic}
+For every triple in Table~\ref{six}, the trivial-character plectic Heegner class of Fornea is nonzero.
+\end{plectic}
+\begin{proof}
+Fornea's Assumptions 1.1, 1.4 and 1.5 hold for these entries: over $\Q$ the inert part in his notation is $p$, the tame factor is $1$ or the split prime 43 to exponent one, and the residual image is surjective. With $S=\{p\}$ the comparison in \cite[Theorem B]{F} sends the plectic class to $Q_K$ by the local operator $1-a_p\sigma_p$, after identifying the trivial-character component and ordering the tensor factors. The image is nonzero by Theorem~\ref{main}, independently of (H).
+\end{proof}
+
+\begin{corollary}[The exceptional factor at conductor 817]\label{exact}
+Let $E=817\mathrm a1$, $K=\Q(\sqrt{-7})$ and $p=19$. Assume (H), the divisor inequality of FG Theorem 3.3 at $(T)$. Write $R=\Lambda_{(T)}$ and let $Y$ be the dual of Nekov\'a\v r's extended discrete Selmer group. Then $\mathcal X_{(T)}\simeq R\oplus R/(T)$ and
+\[
+\operatorname{char}_\Lambda(\mathcal X_{\rm tors})=(T),\qquad
+\operatorname{char}_\Lambda(\mathcal S/\Lambda\kappa^\infty)^2=(T^2).
+\]
+Thus for FG's strict Selmer group the equality with the square of the Heegner index fails by exactly one exceptional factor $(T)$. For the extended Selmer group the equality
+$\operatorname{char}_\Lambda(Y_{\rm tors})=\operatorname{char}_\Lambda(\mathcal S/\Lambda\kappa^\infty)^2$ holds.
+\end{corollary}
+\begin{proof}
+Put $\Bbbk=R/TR=\Q_{19}$ and $\mathcal A=E[19^\infty]$. Superscripts $\pm$ on $\Bbbk$ denote the action of complex conjugation $\tau$. There is one prime above 19 throughout the tower since $K$ has class number one. Reduction at the split prime 2 gives $\#E(\F_2)=3$, so $E(K)[19]=0$; if $E[19](K_\infty)$ were nonzero, the finite $19$-group through which $\Gamma$ acts on it would fix a nonzero vector. Hence $\mathcal A(K_\infty)=0$.
+
+We spell out the local conditions for \cite[10.3.5.1.1--5, 10.7.11.1--7]{Nek}. The tower is dihedral over $\Q$. Both $T_{19}E$ and its perfect alternating Weil pairing descend to $\Q$, with ramification confined to $S^+=\{\infty,19,43\}$. The Greenberg filtration is specified at $\Sigma^+=\{19\}$, and $\Sigma'$ consists of the two primes over 43, both unramified in $K/\Q$. The archimedean primes contribute no Tate cohomology at odd $p$.
+
+At 19, write $\psi$ for the unramified quadratic character of $\Q_{19}$. Tate uniformization gives the saturated line $\Z_{19}(1)\otimes\psi$ with quotient $\Z_{19}\otimes\psi$. The inclusion descends to $\Q_{19}$ and the line is its own exact annihilator under the Weil pairing. Writing $\mathcal A^+$ for the corresponding divisible line, the Greenberg image of $H^1(K_v,\mathcal A^+)$ is FG's ordinary local condition. Over $K_v$ the quotient $\mathcal A^-=\mathcal A/\mathcal A^+$ is trivial. Its invariants throughout the tower are $\Q_{19}/\Z_{19}$ with negative conjugation sign.
+
+At both primes above 43 the unramified local condition is its own annihilator, as verified in Appendix~\ref{tame}. At $(T)$, $2$ is invertible, $\Delta$ is trivial, $R$ has dimension and depth one, and $(T)\cap\Z_{19}=(0)$ is minimal. In the numbering of \cite[10.7.11]{Nek}, the dihedral tower gives .1. The descended alternating self-duality and the local annihilators at 19 and 43 give .2 and the perfect pairing in .7. The DVR $R$ gives .3 and .6, its minimal contraction gives .4, and invertibility of 2 gives .5.
+
+In the comparison of extended and strict discrete Selmer groups, the extra kernel is the sum of the local degree-zero quotients modulo the image of global invariants \cite[Lemma 9.6.3 and (9.6.5.1)]{Nek}. The latter vanish. At 43 the unramified local complex already accounts for all invariants. Only $H^0(K_{\infty,v},\mathcal A^-)$ at 19 remains. Dualizing and localizing gives
+\[
+0\longrightarrow\mathcal X_R\longrightarrow Y_R\xrightarrow{\pi}\Bbbk^-\longrightarrow0 .
+\]
+
+By Iwasawa duality \cite[8.9.6.2, degree two]{Nek} and the Weil pairing, $\widetilde H^2_{f,\mathrm{Iw}}(K_\infty/K,T_{19}E)$ is the inversion twist $Y^\iota$ of the extended Selmer dual. Proposition 10.7.12(i) there gives a square on its torsion localized at $(T)$. Transferring by $\iota$, which fixes $(T)$ and acts trivially on $\Bbbk$, gives $\mathcal N=(Y_R)_{\rm tors}\simeq U\oplus U$. The length of $\mathcal N$ equals $e+\dim_\Bbbk\pi(\mathcal N)$, which lies between one and three by Proposition~\ref{index}. Its evenness forces $\mathcal N\simeq \Bbbk^2$. The pairing on $\mathcal N$ takes values in $T^{-1}R/R$, on which inversion $\gamma\mapsto\gamma^{-1}$ acts by $-1$. Simultaneous conjugation of its arguments acts on the value by inversion \cite[10.3.5.7--8, 10.6.6--8]{Nek}. Each sign space therefore pairs perfectly with the opposite sign space, giving $\mathcal N\simeq \Bbbk^+\oplus \Bbbk^-$ as a space with conjugation.
+
+The quotient $Y_R/\mathcal N$ is free of rank one, so $\mathcal N$ injects into the three-dimensional space $Y_R/TY_R$. Extended control \cite[Proposition 8.10.14(ii)]{Nek} identifies the discrete group at $K$ with the $\Gamma$-invariants in the tower, equivariantly for conjugation: the local conditions are in degree zero at the coefficient level and $\widetilde H_f^0(K,\mathcal A)=0$. Since $V^{G_K}=0$, \cite[Corollary 9.6.4]{Nek} identifies the resulting corank with the dimension of the extended rational group. At the base the exceptional $\Bbbk^-$ injects into extended cohomology with quotient $H^1_f(K,V)$, since Tate uniformization identifies the ordinary rational local condition with the Kummer image. Thus $\dim_\Bbbk H^1_f(K,V)=\dim_\Bbbk(Y_R/TY_R)-1=3-1=2$. The Kummer images of two independent rational points span this space and both have positive sign. Hence $Y_R/TY_R$ has two positive directions and one negative direction. Its quotient by $\mathcal N$ has positive sign, so it cannot surject onto $\Bbbk^-$. It follows that $\pi(\mathcal N)=\Bbbk^-$ and $e=2-1=1$. The strict torsion at $(T)$ is therefore $R/(T)$ and the rank-one quotient splits over $R$. Before localization the exceptional quotient is $\Z_{19}^-$ with trivial $\Gamma$-action, so strict and extended duals agree at all other height-one primes. Proposition~\ref{index} controls those primes, giving the two global characteristic ideals.
+\end{proof}
+
+\paragraph{Scope of the equality.}
+Perrin-Riou's Conjecture B assumes good ordinary reduction and the classical Heegner hypothesis \cite{PR}. Here 19 is inert and multiplicative, so the corollary gives neither an instance of nor a counterexample to her conjecture. FG Remark 3.5 attributes the obstacle to the full Heegner point main conjecture in their setting to an exceptional zero of the Burungale--Castella--Kim $p$-adic $L$-function. Under FG Theorem 3.3 at $(T)$ the corollary locates the Selmer-side factor for this example.
+
+\paragraph{A weaker bound suffices.}
+Retain the generic rank-one conclusion obtained from the nonzero big class. Independently, $\operatorname{Sha}(E/K)[19^\infty]$ is finite. For $E/\Q$ the cyclotomic $19$-adic series has quadratic coefficient $2\bmod19$ and order two, equal to the rank, so \cite[\S8.2, Algorithm 11.1(3)]{SW} gives finiteness. The $-7$ twist has analytic rank zero, giving finiteness by Kolyvagin. Taking the two eigenspaces over $K$ proves the assertion. Extended control now gives signs $(2+,1-)$ on $Y_R/TY_R$, independently of the exponent bound. Since $Y_R/\mathcal N$ is free of rank one, $\mathcal N/T\mathcal N$ has dimension $3-1=2$. Writing $\mathcal N=U\oplus U$ gives $\dim_\Bbbk U/TU=1$. Hence $U$ is cyclic and nonzero, so $\mathcal N\simeq(R/T^aR)^2$ for some $a\ge1$. Put $\delta=\dim_\Bbbk\pi(\mathcal N)$. By \cite[Lemmas 10.6.6 and 10.6.8(i), $j=a$]{Nek}, the determinant of conjugation on $\mathcal N/T\mathcal N$ is $(-1)^a$. If $\delta=0$, the free quotient maps onto $\Bbbk^-$, so both signs on $\mathcal N/T\mathcal N$ are positive, $a$ is even, and $e=2a$. If $\delta=1$, $\mathcal N/T\mathcal N$ contains the unique negative direction and one positive direction, so $a$ is odd and $e=2a-1$. Thus $e\in\{1,4,5,8,9,\ldots\}$, and any version of FG Theorem 3.3 at $(T)$ giving $e\le3$ still forces $e=1$.
+
+\paragraph{An open height comparison.}
+The height comparison of \cite[Theorem 11.4.6]{Nek} remains open here because its surjectivity assumption 11.4.1.7 fails: the Tate period belongs to $\Q_{19}^{\times}$ and its anticyclotomic projection is zero by inversion.
+
+\section{Computational verification}
+For an auxiliary prime $\ell$, let $S_\ell$ be the definite quaternionic Shimura set of discriminant $\ell$ and level $pN^+=N$. To represent a point, choose a maximal right-ideal class and, at each $q^a\parallel N$, a rank-one direct summand in $(\Z/q^a)^2$ (a primitive column modulo multiplication by a unit). This tuple is a raw flag. The units of the left order identify flags representing the same point. Functions on the resulting finite set form the Brandt module. The checker counts ideal neighbors, verifies local transports by lattice indices, and compares multiplicities with independent Hom-lattice norm counts.
+
+On this function space we isolate a line over $\F_p$ with the eigenvalues in \cite[(18)]{FG}: $T_q=a_q(E)$ for $q\nmid N\ell$, $U_q=a_q(E)$ for $q\mid N$, and $U_\ell=\varepsilon_\ell$. Existence follows from \cite[\S3.3.1 and proof of Theorem 3.16]{FG}, and multiplicity one from their Corollary 3.9. We impose enough operators to obtain dimension one and normalize the first nonzero value to one. At squarefree level, reversing the oriented $q$-edge multiplies the new eigenfunction by $-a_q(E)$. To use this rule the checker deletes the $q$-structure and verifies that the matching Hecke eigenspace at level $N/q$ is zero, for each $q\mid N$. At nonsquarefree level it acts on the oriented segments directly, including those at $2^7$.
+
+For an optimal embedding of the quadratic order, the two stable directions at each split tame $q^a$ are the two direct summands fixed by the split Cartan. At $p$ the rays to conductor $p^2$ are indexed by $\mathbf P^1(\Z/p^2)$, of size $p(p+1)$. A terminal oriented edge, together with the tame directions, specifies a point of $S_\ell$. Translate it by the ring-class group of conductor $p^2$ to obtain the CM orbit. Evaluate the eigenfunction at each translate, multiply by $a_p^{-2}\operatorname{ord}_p(q_E)=a_p^{-2}v_p(\Delta_{\min})$ as in \cite[(24) and Definition 3.14]{FG}, and add the value to the coefficient indexed by the image of the translating class in $C_p$.
+When $h_K>1$, quadratic-form composition places the cosets in a common coordinate. Here $p\nmid h_K$, so a second check raises a representative ideal to its $h_K$th power and divides its local logarithm by $h_K\bmod p$. The checks compare full vectors under the allowed changes of coordinates. A wrong class offset can preserve both $A$ and $B$.
+
+Run \texttt{python checks/replay.py} from the bundle with its SageMath environment active. From each equation it reconstructs the arithmetic gates, flags, eigenline and projected coefficients, checks the local choices, and compares the full search record. A separate implementation reproduced the vectors up to the stated coordinate changes for fifteen of the sixteen positive triples. For 1664n1 the tame prime occurs to exponent seven. Its check uses segment correspondences in the original implementation. For the five additional Table~\ref{six} rows the separate implementation also matched the full vectors up to translation, generator and unit scale: four choices each at conductors 37 and 109, and eight in each of the three additional conductor-817 fields.
+
+For a control outside the tables, take $817\mathrm a1$ over $\Q(\sqrt{-67})$ with $p=43$. The curve has rational rank two, so Kolyvagin's analytic-rank-zero theorem \cite{Kol} gives $L(E,1)=0$ and hence $L(E/K,1)=0$. The discriminant $-67$ is prime to 817, with 43 inert and 19 split, so $N^-=1$. For the residual image at 43, $a_5=-2$ gives Frobenius discriminant $-16$, a nonsquare modulo 43. Thus $E[43]$ is irreducible. Tate inertia at 19 contains a transvection since $v_{19}(\Delta_{\min})=2$. An irreducible subgroup containing a transvection contains $\mathrm{SL}_2(\F_{43})$ (conjugate transvections with distinct fixed lines generate it), and the cyclotomic determinant is surjective. This verifies FG Assumptions 1.1--1.2. Reduction at 43 is split multiplicative, so $r_p(E/\Q)+\delta_p^+\ge3$. Assuming (H) for this triple, \cite[Theorem 1.3, proved as Theorem 3.4]{FG} gives $Q_K=0$. Here the Tate quotient is already trivial over $\Q_{43}$.
+
+\clearpage
+\begin{appendices}
+\section{Numerical records}
+
+\begin{table}[!ht]
+\centering
+\caption{Rank-$(2,0)$ cohort. For each Cremona label and field discriminant $D$, the entries in the last two columns correspond in order. A dash means the flag cap prevented evaluation. Every computed augmentation is zero. $^\dagger$The segment correspondences for this row were checked by a single implementation.}\label{cohort}
+\begin{tabular}{lrrrr}
+\toprule
+$E$ & $D$ & $p$ & $\ell$ & $B\bmod p$\\
+\midrule
+655a1 & $-23$ & 5 & 17 & 1\\
+655a1 & $-8$ & 5 & 23, 47 & 0, 4\\
+707a1 & $-43$ & 7 & 37, 131 & 0, 5\\
+707a1 & $-23$ & 7 & 37, 107 & 0, 2\\
+817a1 & $-7$ & 19 & 269 & 17\\
+1001c1 & $-43$ & 7 & 3 & 5\\
+1001c1 & $-24$ & 13 & 17, 257 & 0, ---\\
+1070a1 & $-7$ & 5 & 17 & 4\\
+1477a1 & $-39$ & 7 & 19 & 5\\
+1477a1 & $-8$ & 7 & 5 & 1\\
+1664n1$^\dagger$ & $-7$ & 13 & 19 & 4\\
+1738a1 & $-15$ & 11 & 7 & 9\\
+2051a1 & $-43$ & 7 & 3 & 3\\
+2117a1 & $-20$ & 73 & 71 & 39\\
+2343c1 & $-23$ & 11 & 7 & 1\\
+2445a1 & $-8$ & 5 & 13 & 1\\
+2735c1 & $-43$ & 5 & 2, 163 & 0, ---\\
+2785a1 & $-43$ & 5 & 2 & 3\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Six nonvanishing certificates, five beyond Table~\ref{cohort}. The entry for $817\mathrm a1$, $D=-7$, occurs in both tables. Here $\eta$ is the level-raising sign. The index bound in Proposition~\ref{index} assumes (H). The conductor-109 entry independently reproduces the nonvanishing in \cite[\S\S227--228]{record}.}\label{six}
+\begin{tabular}{lrrrrrr}
+\toprule
+$E$ & $D$ & $p$ & $\eta$ & $\ell$ & $a_\ell$ & $B\bmod p$\\
+\midrule
+37a1 & $-8$ & 37 & $-1$ & 613 & 15 & 24\\
+109a1 & $-8$ & 109 & $-1$ & 1783 & $-40$ & 69\\
+817a1 & $-7$ & 19 & $+1$ & 269 & $-15$ & 17\\
+817a1 & $-20$ & 19 & $+1$ & 359 & $-1$ & 16\\
+817a1 & $-39$ & 19 & $+1$ & 269 & $-15$ & 13\\
+817a1 & $-55$ & 19 & $+1$ & 359 & $-1$ & 5\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For $109\mathrm a1$ over $\Q(\sqrt{-2})$, record 04 gives the integer sums
+$5886$ and $314519$, hence $A=0$, $B=54\bmod109$. Our coordinates give
+$A=0$, $B=69\bmod109$ at the same $\ell=1783$. A change of coordinates can
+scale the first moment by a unit. The archived computation already gives
+nonvanishing and record 05, \S234, gives the index application.
+
+\section{The local condition above 43}\label{tame}
+At either prime over 43 the condition is unramified: a cocycle must restrict trivially to inertia. The minimal discriminant $-19^2\cdot43$ gives split multiplicative type $I_1$ and Tamagawa number $c_{43}=1$. In the Tate representation inertia acts unipotently with monodromy coefficient $v_{43}(q_E)=1$. Thus its image on the lattice is saturated, and taking inertia invariants commutes with reduction modulo $19^n$. For the finite self-dual module $E[19^n]$ the unramified subgroup is isotropic (the residue field has cohomological dimension one). Its order equals that of $H^0$ by the Frobenius coinvariant formula, while the local Euler characteristic and Tate duality give $|H^1|=|H^0|^2$. It is therefore its own annihilator. Passing to the lattice and divisible limits gives the unramified dual conditions used by both authors.
+\end{appendices}
+\begin{thebibliography}{99}
+\bibitem{DF} H. Darmon and M. Fornea, \emph{Mock plectic points},
+\href{https://arxiv.org/abs/2310.16758}{arXiv:2310.16758}, 2023.
+\bibitem{FG} M. Fornea and L. Gehrmann, \emph{Iwasawa theory and mock plectic points},
+\href{https://arxiv.org/abs/2311.03100v2}{arXiv:2311.03100v2}, 2024.
+\bibitem{F} M. Fornea, \emph{Plectic Heegner classes},
+\href{https://arxiv.org/abs/2603.28327v2}{arXiv:2603.28327v2}, 2026.
+\bibitem{FGM} M. Fornea, X. Guitart and M. Masdeu, \emph{Plectic $p$-adic invariants},
+\href{https://arxiv.org/abs/2104.12566}{arXiv:2104.12566}, 2021.
+\bibitem{How06} B. Howard, \emph{Bipartite Euler systems},
+\href{https://arxiv.org/abs/1202.6353}{J. Reine Angew. Math. 597} (2006).
+\bibitem{How04} B. Howard, \emph{The Heegner point Kolyvagin system},
+\href{https://arxiv.org/abs/1202.6340}{Compos. Math. 140} (2004).
+\bibitem{Kol} V. A. Kolyvagin, \emph{Finiteness of $E(\Q)$ and the Tate--Shafarevich group for a subclass of Weil curves},
+\href{https://doi.org/10.1070/IM1989v032n03ABEH000779}{Math. USSR-Izv. 32} (1989), 523--541.
+\bibitem{PR} B. Perrin-Riou, \emph{Fonctions $L$ $p$-adiques, th\'eorie d'Iwasawa et points de Heegner},
+\href{https://www.numdam.org/article/BSMF_1987__115__399_0.pdf}{Bull. Soc. Math. France 115} (1987).
+\bibitem{SW} W. Stein and C. Wuthrich, \emph{Algorithms for the arithmetic of elliptic curves using Iwasawa theory},
+\href{https://wstein.org/papers/shark/shark.pdf}{Math. Comp. 82} (2013).
+\bibitem{Nek} J. Nekov\'a\v r, \emph{Selmer complexes},
+\href{https://www.numdam.org/item/AST_2006__310__R1_0/}{Ast\'erisque 310}, 2006.
+\bibitem{record} cosmosgeek0/BSD, \emph{BSD research history},
+\href{https://github.com/cosmosgeek0/BSD/blob/ed9c8ab32e5b30b4818ab2f0c3004022183f297d/bsd-research-history.zip}{record 04, \S\S227--228, November 24, 2026};
+\href{https://github.com/cosmosgeek0/BSD/blob/a126723992b9be0c02b3b7a56dc245781b6c0d30/bsd-research-history.zip}{record 05, \S234, November 26 snapshot}.
+\bibitem{criterion} cosmosgeek0/BSD, \emph{Finite Augmentation Moments and Mock Plectic Invariants},
+\href{https://github.com/cosmosgeek0/BSD/blob/8f077506c503207a2ff675f8a5bcbba63398c911/finite-selmer-certificate.tex}{November 24, 2026 version}.
+\bibitem{current} cosmosgeek0/BSD, \emph{Finite Augmentation Moments and Mock Plectic Invariants},
+\href{https://github.com/cosmosgeek0/BSD/blob/a126723992b9be0c02b3b7a56dc245781b6c0d30/finite-selmer-certificate.tex}{November 26, 2026 snapshot}, \S6.
+\end{thebibliography}
+\end{document}

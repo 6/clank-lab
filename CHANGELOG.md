@@ -4,6 +4,11 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## mock-plectic-invariants v1 (November 26, 2026)
+
+- Certificates establish nonvanishing for 16 of 18 rank-two triples. Two searches remain inconclusive.
+- Assuming Fornea and Gehrmann’s Theorem 3.3 at the augmentation prime, six unit moments give the index bound and the strict exponent for 817a1 over the field of discriminant −7 at 19 is one. The conductor-109 example independently reproduces the published witness.
+
 ## wspr-aircraft-anomalies v3 (November 25, 2026)
 
 - Correction: the README now names the authors of the DSTA-hosted study and credits their caution about chance matches.

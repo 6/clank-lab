@@ -1,0 +1,6 @@
+name: mock-plectic
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - sagelib=10.8

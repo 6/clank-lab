@@ -8,6 +8,8 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
+Archived on Zenodo: [doi:10.5281/zenodo.24573130](https://doi.org/10.5281/zenodo.24573130)
+
 ## Abstract
 
 We certify nonvanishing of the mock plectic invariant for sixteen of eighteen triples consisting of a rational elliptic curve, an imaginary quadratic field and an inert prime of multiplicative reduction. In this cost-selected cohort the curve has rational rank two and its quadratic twist has rank zero. Fornea and Gehrmann related the invariant to the first anticyclotomic derivative of a Heegner class. Their explicit reciprocity law turns a nonzero linear coefficient of a finite theta element into a witness. We compute the coefficients by evaluating a residual quaternionic eigenfunction on ring-class orbits. Two searches remain inconclusive. The public cosmosgeek0/BSD archive gave the finite-moment criterion and a witness at conductor 109, which we reproduce independently. A second table gives six nonvanishing certificates, five beyond the cohort. Assuming the divisor inequality of Fornea and Gehrmann's Theorem 3.3 at the augmentation prime, the six unit coefficients give an index bound. Under the same hypothesis, for their conductor-817 example the strict Selmer characteristic ideal has one exceptional factor fewer than the square of the Heegner index, and the extended Selmer group realizes the square. Under Fornea's comparison theorem the six coefficients also detect plectic Heegner classes.
@@ -45,6 +47,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, Peter},
   title = {{Numerical nonvanishing of mock plectic invariants}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/mock-plectic-invariants-v1/results/mock-plectic-invariants}}
+  howpublished = {\url{https://github.com/6/clank-lab/tree/mock-plectic-invariants-v1/results/mock-plectic-invariants}},
+  doi          = {10.5281/zenodo.24573130}
 }
 ```

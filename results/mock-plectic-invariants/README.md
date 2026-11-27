@@ -28,9 +28,13 @@ The two tables contain 23 distinct triples. One further stored record, for 389a1
 
 The weaker exponent bound in Section 3 uses the model of 817a1. In SageMath, the coefficient of degree two in `EllipticCurve([0,1,1,1,6]).padic_lseries(19).series(3)` reduces to 2 modulo 19. For the open height comparison, in PARI/GP set `E=ellinit([0,1,1,1,6])`. For each of `P=[-3/4,15/8]` and `P=[4,9]`, the command `valuation(ellpadiclog(E,19,8,ellmul(E,P,40)),19)` returns 1. The application of the height formula remains open.
 
-### Novelty and cohort
+### Cohort selection
 
-Of 816 eligible triples, 676 meet the implementation’s tame splitting requirement. Fifteen satisfy the cost rule in the paper. Three further triples test a named example, a repeated tame prime, and a curve beyond an initial precision bound. The literature and public archive searches located no earlier nonvanishing computation for a triple in this table. The archive already gives the conductor-109 witness and the general index bound, which we apply assuming FG Theorem 3.3 at the augmentation prime. Its November 26 snapshot contains no witness located for the remaining five unit applications or an exact exponent for 817a1 over the field of discriminant −7. [Archive manuscript, §6](https://github.com/cosmosgeek0/BSD/blob/a126723992b9be0c02b3b7a56dc245781b6c0d30/finite-selmer-certificate.tex)
+From this folder, run `conda run -n mock-plectic python checks/census_select.py` to download the pinned Cremona data and compare the regenerated list with the archive. Expect 816 eligible triples, 676 supported ($N^-=1$), and 15 cost-selected. These have $p\le19$ and a least positive-sign admissible prime $\ell\le271$ with at most 4,000 raw flags. The CSV marks the three explicitly added cases separately. A blank prime means none qualified through 271. Add `--output candidates.csv` to write a fresh copy, or use `--dataset FILE` for a local copy of the input. [Candidate list](data/candidates.csv) · [Selection script](checks/census_select.py)
+
+### Novelty
+
+The literature and public archive searches located no earlier nonvanishing computation for a triple in this table. The archive already gives the conductor-109 witness and the general index bound, which we apply assuming FG Theorem 3.3 at the augmentation prime. Its November 26 snapshot contains no witness located for the remaining five unit applications or an exact exponent for 817a1 over the field of discriminant −7. [Archive manuscript, §6](https://github.com/cosmosgeek0/BSD/blob/a126723992b9be0c02b3b7a56dc245781b6c0d30/finite-selmer-certificate.tex)
 
 ## Credits
 
@@ -47,7 +51,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, Peter},
   title = {{Numerical nonvanishing of mock plectic invariants}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/mock-plectic-invariants-v2/results/mock-plectic-invariants}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/mock-plectic-invariants-v3/results/mock-plectic-invariants}},
   doi          = {10.5281/zenodo.24573848}
 }
 ```

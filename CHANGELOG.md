@@ -7,6 +7,7 @@ Zenodo records.
 ## mock-plectic-invariants v3 (November 26, 2026)
 
 - Correction: the archive now includes the census script and complete candidate list used to select the fifteen cost-bounded triples. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24576819](https://doi.org/10.5281/zenodo.24576819)
 
 ## mock-plectic-invariants v2 (November 26, 2026)
 

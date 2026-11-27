@@ -4,6 +4,10 @@ Each result is versioned on its own and tagged `NAME-vN`. A new version never
 replaces an old one: earlier versions stay available through their tags and
 Zenodo records.
 
+## mock-plectic-invariants v2 (November 26, 2026)
+
+- Correction: the bibliography now gives the journal title of Kolyvagin’s article and the November 24 title of the finite-moment manuscript. The theorem and its checks are unchanged.
+
 ## mock-plectic-invariants v1 (November 26, 2026)
 
 - Certificates establish nonvanishing for 16 of 18 rank-two triples. Two searches remain inconclusive.

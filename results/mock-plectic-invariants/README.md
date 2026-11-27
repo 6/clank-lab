@@ -47,7 +47,7 @@ Apache-2.0 (see the repository's LICENSE).
   author = {Graham, Peter},
   title = {{Numerical nonvanishing of mock plectic invariants}},
   year = {2026},
-  howpublished = {\url{https://github.com/6/clank-lab/tree/mock-plectic-invariants-v1/results/mock-plectic-invariants}},
+  howpublished = {\url{https://github.com/6/clank-lab/tree/mock-plectic-invariants-v2/results/mock-plectic-invariants}},
   doi          = {10.5281/zenodo.24573130}
 }
 ```

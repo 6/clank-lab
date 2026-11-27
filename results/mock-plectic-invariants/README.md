@@ -8,7 +8,7 @@ Computer-assisted; not yet reviewed by experts.
 
 [Read the paper](paper/paper.pdf) · [LaTeX source](paper/paper.tex)
 
-Archived on Zenodo: [doi:10.5281/zenodo.24573130](https://doi.org/10.5281/zenodo.24573130)
+Archived on Zenodo: [doi:10.5281/zenodo.24573848](https://doi.org/10.5281/zenodo.24573848)
 
 ## Abstract
 
@@ -48,6 +48,6 @@ Apache-2.0 (see the repository's LICENSE).
   title = {{Numerical nonvanishing of mock plectic invariants}},
   year = {2026},
   howpublished = {\url{https://github.com/6/clank-lab/tree/mock-plectic-invariants-v2/results/mock-plectic-invariants}},
-  doi          = {10.5281/zenodo.24573130}
+  doi          = {10.5281/zenodo.24573848}
 }
 ```

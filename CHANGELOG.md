@@ -7,6 +7,7 @@ Zenodo records.
 ## mock-plectic-invariants v2 (November 26, 2026)
 
 - Correction: the bibliography now gives the journal title of Kolyvagin’s article and the November 24 title of the finite-moment manuscript. The theorem and its checks are unchanged.
+- Zenodo: [10.5281/zenodo.24573848](https://doi.org/10.5281/zenodo.24573848)
 
 ## mock-plectic-invariants v1 (November 26, 2026)
 
